@@ -964,6 +964,316 @@
       "at": "2026-11-03T08:45:29.224847+00:00",
       "event": "settled",
       "id": "35ea2dbee26f41f0a54c14b804278366"
+    },
+    {
+      "at": "2026-11-03T08:47:12.174172+00:00",
+      "event": "settled",
+      "id": "driver-904e8911088e4e98a5c0ff05414010d4"
+    },
+    {
+      "at": "2026-11-03T09:05:24.852291+00:00",
+      "event": "reserved",
+      "id": "driver-f6c6ad59636d48aaa19e75e29cfe7150"
+    },
+    {
+      "at": "2026-11-03T09:05:44.868529+00:00",
+      "event": "reserved",
+      "id": "478e268cf56d47788d71fae815f2c846"
+    },
+    {
+      "at": "2026-11-03T09:05:56.402634+00:00",
+      "event": "reserved",
+      "id": "6baf1b531a6f4640a6e99fc1c60384a5"
+    },
+    {
+      "at": "2026-11-03T09:05:58.086967+00:00",
+      "event": "settled",
+      "id": "478e268cf56d47788d71fae815f2c846"
+    },
+    {
+      "at": "2026-11-03T09:06:12.909656+00:00",
+      "event": "reserved",
+      "id": "2803de04e52b450184ae17651a74332c"
+    },
+    {
+      "at": "2026-11-03T09:06:39.560635+00:00",
+      "event": "settled",
+      "id": "2803de04e52b450184ae17651a74332c"
+    },
+    {
+      "at": "2026-11-03T09:06:42.736823+00:00",
+      "event": "reserved",
+      "id": "ffd9aab4c1534da2a2f40c6d32afe05f"
+    },
+    {
+      "at": "2026-11-03T09:06:56.404780+00:00",
+      "event": "reserved",
+      "id": "59c60b3e50794b31bd6fd68e6089521a"
+    },
+    {
+      "at": "2026-11-03T09:06:57.746849+00:00",
+      "event": "settled",
+      "id": "6baf1b531a6f4640a6e99fc1c60384a5"
+    },
+    {
+      "at": "2026-11-03T09:06:58.470122+00:00",
+      "event": "settled",
+      "id": "ffd9aab4c1534da2a2f40c6d32afe05f"
+    },
+    {
+      "at": "2026-11-03T09:07:04.616241+00:00",
+      "event": "reserved",
+      "id": "4718076d330b4a0a85ecd3149ad89d31"
+    },
+    {
+      "at": "2026-11-03T09:07:25.970735+00:00",
+      "event": "settled",
+      "id": "4718076d330b4a0a85ecd3149ad89d31"
+    },
+    {
+      "at": "2026-11-03T09:07:29.347973+00:00",
+      "event": "reserved",
+      "id": "f90e8c20470540b8a20a7e6be2a44155"
+    },
+    {
+      "at": "2026-11-03T09:07:44.861818+00:00",
+      "event": "settled",
+      "id": "f90e8c20470540b8a20a7e6be2a44155"
+    },
+    {
+      "at": "2026-11-03T09:07:49.631795+00:00",
+      "event": "reserved",
+      "id": "3d6175e22be34e78945576e9b948a5c0"
+    },
+    {
+      "at": "2026-11-03T09:07:56.405695+00:00",
+      "event": "reserved",
+      "id": "d5ba7c67ec4242688348b5dd6ac98dfb"
+    },
+    {
+      "at": "2026-11-03T09:07:57.696394+00:00",
+      "event": "settled",
+      "id": "59c60b3e50794b31bd6fd68e6089521a"
+    },
+    {
+      "at": "2026-11-03T09:08:12.174586+00:00",
+      "event": "settled",
+      "id": "3d6175e22be34e78945576e9b948a5c0"
+    },
+    {
+      "at": "2026-11-03T09:08:19.780331+00:00",
+      "event": "reserved",
+      "id": "490adc47ada040ca85bf1648d8c82b81"
+    },
+    {
+      "at": "2026-11-03T09:08:56.406803+00:00",
+      "event": "reserved",
+      "id": "444f9269184e491d99f3abfac39ddabc"
+    },
+    {
+      "at": "2026-11-03T09:08:57.999253+00:00",
+      "event": "settled",
+      "id": "d5ba7c67ec4242688348b5dd6ac98dfb"
+    },
+    {
+      "at": "2026-11-03T09:09:56.406705+00:00",
+      "event": "reserved",
+      "id": "4d85b019edbc415ba3e36e3f437b01b9"
+    },
+    {
+      "at": "2026-11-03T09:09:57.552177+00:00",
+      "event": "settled",
+      "id": "444f9269184e491d99f3abfac39ddabc"
+    },
+    {
+      "at": "2026-11-03T09:10:56.407853+00:00",
+      "event": "reserved",
+      "id": "164de7478bac4305ab713c4ff5d6cd08"
+    },
+    {
+      "at": "2026-11-03T09:10:58.274054+00:00",
+      "event": "settled",
+      "id": "4d85b019edbc415ba3e36e3f437b01b9"
+    },
+    {
+      "at": "2026-11-03T09:11:56.408305+00:00",
+      "event": "reserved",
+      "id": "14b4be7d0085413092e477081d488905"
+    },
+    {
+      "at": "2026-11-03T09:11:57.726233+00:00",
+      "event": "settled",
+      "id": "164de7478bac4305ab713c4ff5d6cd08"
+    },
+    {
+      "at": "2026-11-03T09:12:56.430449+00:00",
+      "event": "reserved",
+      "id": "40f6c35c6d2141bbb7e2ba4969200c7e"
+    },
+    {
+      "at": "2026-11-03T09:12:58.403658+00:00",
+      "event": "settled",
+      "id": "14b4be7d0085413092e477081d488905"
+    },
+    {
+      "at": "2026-11-03T09:13:21.847496+00:00",
+      "event": "settled",
+      "id": "490adc47ada040ca85bf1648d8c82b81"
+    },
+    {
+      "at": "2026-11-03T09:13:23.036679+00:00",
+      "event": "reserved",
+      "id": "e120b51db8904451bbc2b6afbda755c1"
+    },
+    {
+      "at": "2026-11-03T09:13:24.020110+00:00",
+      "event": "settled",
+      "id": "40f6c35c6d2141bbb7e2ba4969200c7e"
+    },
+    {
+      "at": "2026-11-03T09:13:26.341891+00:00",
+      "event": "settled",
+      "id": "e120b51db8904451bbc2b6afbda755c1"
+    },
+    {
+      "at": "2026-11-03T09:17:03.577551+00:00",
+      "event": "settled",
+      "id": "driver-f6c6ad59636d48aaa19e75e29cfe7150"
+    },
+    {
+      "at": "2026-11-03T09:36:48.545275+00:00",
+      "event": "reserved",
+      "id": "driver-6e838d8f270e4e499e87a429f4a6d5dc"
+    },
+    {
+      "at": "2026-11-03T09:37:10.992480+00:00",
+      "event": "reserved",
+      "id": "185fa3002a854fee92b38586badb2d1f"
+    },
+    {
+      "at": "2026-11-03T09:37:23.719752+00:00",
+      "event": "reserved",
+      "id": "02080af1441c4e758e345e1ff78d6119"
+    },
+    {
+      "at": "2026-11-03T09:37:25.175157+00:00",
+      "event": "settled",
+      "id": "185fa3002a854fee92b38586badb2d1f"
+    },
+    {
+      "at": "2026-11-03T09:37:28.967172+00:00",
+      "event": "reserved",
+      "id": "d1cafac439b7458985a338a58fd99277"
+    },
+    {
+      "at": "2026-11-03T09:37:53.359219+00:00",
+      "event": "settled",
+      "id": "d1cafac439b7458985a338a58fd99277"
+    },
+    {
+      "at": "2026-11-03T09:37:58.508040+00:00",
+      "event": "reserved",
+      "id": "modal-job-0d5b3656da4b72f4de4b65df465d0927d14a2618628b3824541cd385de0bfb76"
+    },
+    {
+      "at": "2026-11-03T09:38:23.751059+00:00",
+      "event": "reserved",
+      "id": "285758eefa4a4367902af0fcd4b7ca88"
+    },
+    {
+      "at": "2026-11-03T09:38:25.307206+00:00",
+      "event": "settled",
+      "id": "02080af1441c4e758e345e1ff78d6119"
+    },
+    {
+      "at": "2026-11-03T09:38:41.617744+00:00",
+      "event": "settled",
+      "id": "modal-job-0d5b3656da4b72f4de4b65df465d0927d14a2618628b3824541cd385de0bfb76"
+    },
+    {
+      "at": "2026-11-03T09:39:23.728498+00:00",
+      "event": "reserved",
+      "id": "ee55ce914b7f44959f29083799a33ccf"
+    },
+    {
+      "at": "2026-11-03T09:39:24.929384+00:00",
+      "event": "settled",
+      "id": "285758eefa4a4367902af0fcd4b7ca88"
+    },
+    {
+      "at": "2026-11-03T09:39:41.830290+00:00",
+      "event": "reserved",
+      "id": "f84dbda9bb1443d28637211b05926af4"
+    },
+    {
+      "at": "2026-11-03T09:39:58.261662+00:00",
+      "event": "settled",
+      "id": "f84dbda9bb1443d28637211b05926af4"
+    },
+    {
+      "at": "2026-11-03T09:40:04.166029+00:00",
+      "event": "reserved",
+      "id": "442caf0057ef4607b4cffe1a28f42358"
+    },
+    {
+      "at": "2026-11-03T09:40:23.729208+00:00",
+      "event": "reserved",
+      "id": "31b43e933dd0466f8bfb3db78cbcfc60"
+    },
+    {
+      "at": "2026-11-03T09:40:25.303829+00:00",
+      "event": "settled",
+      "id": "ee55ce914b7f44959f29083799a33ccf"
+    },
+    {
+      "at": "2026-11-03T09:41:23.729995+00:00",
+      "event": "reserved",
+      "id": "a8f07611b3db440eb8e3f8d8bfc3d3c1"
+    },
+    {
+      "at": "2026-11-03T09:41:24.918719+00:00",
+      "event": "settled",
+      "id": "31b43e933dd0466f8bfb3db78cbcfc60"
+    },
+    {
+      "at": "2026-11-03T09:42:23.730874+00:00",
+      "event": "reserved",
+      "id": "44c85abb4afc44a489a580db80d8c097"
+    },
+    {
+      "at": "2026-11-03T09:42:24.931767+00:00",
+      "event": "settled",
+      "id": "a8f07611b3db440eb8e3f8d8bfc3d3c1"
+    },
+    {
+      "at": "2026-11-03T09:43:23.731276+00:00",
+      "event": "reserved",
+      "id": "312c713ce1524b1da4a548a863ccfd18"
+    },
+    {
+      "at": "2026-11-03T09:43:25.025191+00:00",
+      "event": "settled",
+      "id": "44c85abb4afc44a489a580db80d8c097"
+    },
+    {
+      "at": "2026-11-03T09:44:23.733984+00:00",
+      "event": "reserved",
+      "id": "92e9783d9fa3404d9724d897f6b05fb8"
+    },
+    {
+      "at": "2026-11-03T09:44:24.968307+00:00",
+      "event": "settled",
+      "id": "312c713ce1524b1da4a548a863ccfd18"
+    },
+    {
+      "at": "2026-11-03T09:45:23.734874+00:00",
+      "event": "reserved",
+      "id": "ecaf4994cd6e4c13bd02c3f6cae70ce1"
+    },
+    {
+      "at": "2026-11-03T09:45:25.082828+00:00",
+      "event": "settled",
+      "id": "92e9783d9fa3404d9724d897f6b05fb8"
     }
   ],
   "halted": false,
@@ -1006,6 +1316,34 @@
         "sandbox_id": "sb-01M6G5ACEGJWQZ16VPRG9PF6W1"
       },
       "seconds": 9.652614019000112,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "02080af1441c4e758e345e1ff78d6119": {
+      "actual_usd": "0.04313556096223700718833333333",
+      "completed_at": "2026-11-03T09:38:25.307179+00:00",
+      "created_at": "2026-11-03T09:37:23.719731+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
+      },
+      "seconds": 60.00773609400001,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -1249,6 +1587,90 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "14b4be7d0085413092e477081d488905": {
+      "actual_usd": "0.04314562043019815947833333333",
+      "completed_at": "2026-11-03T09:12:58.403628+00:00",
+      "created_at": "2026-11-03T09:11:56.408277+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GAGKAVT717P85V4RNWYT50"
+      },
+      "seconds": 60.02173025299999,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "164de7478bac4305ab713c4ff5d6cd08": {
+      "actual_usd": "0.04313038965726617026083333333",
+      "completed_at": "2026-11-03T09:11:57.726208+00:00",
+      "created_at": "2026-11-03T09:10:56.407831+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GAGKAVT717P85V4RNWYT50"
+      },
+      "seconds": 60.000542069000005,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "185fa3002a854fee92b38586badb2d1f": {
+      "actual_usd": "0.009148429264862",
+      "completed_at": "2026-11-03T09:37:25.175119+00:00",
+      "created_at": "2026-11-03T09:37:10.992457+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
+      },
+      "seconds": 12.726773844,
+      "stage": "sandbox:startup",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "19657e8648774eef8247ffac7ac31896": {
       "actual_usd": "0.054115",
       "completed_at": "2026-11-03T08:35:07.538308+00:00",
@@ -1396,6 +1818,69 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "2803de04e52b450184ae17651a74332c": {
+      "actual_usd": "0.165605",
+      "completed_at": "2026-11-03T09:06:39.560604+00:00",
+      "created_at": "2026-11-03T09:06:12.909631+00:00",
+      "kind": "editor",
+      "metadata": {
+        "conversation_id": "7a208b1866ac4b90ac783f944df56721",
+        "input_token_bound": 14971,
+        "max_output_tokens": 32768
+      },
+      "receipt_metadata": {
+        "model": "gpt-6-astra",
+        "response_id": "resp_05e27016f3ef07b8006ae9a408152487d2ae47ddc7c08accd1"
+      },
+      "seconds": 25.972148656845093,
+      "stage": "editor:t006",
+      "status": "settled",
+      "upper_bound_usd": "1.8255375",
+      "usage": {
+        "input_tokens": 10261,
+        "input_tokens_details": {
+          "cache_write_tokens": 10258,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 10258
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 747,
+        "output_tokens_details": {
+          "reasoning_tokens": 119
+        },
+        "total_tokens": 11008
+      }
+    },
+    "285758eefa4a4367902af0fcd4b7ca88": {
+      "actual_usd": "0.043130400751739830458",
+      "completed_at": "2026-11-03T09:39:24.929356+00:00",
+      "created_at": "2026-11-03T09:38:23.751037+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
+      },
+      "seconds": 60.000557502999996,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "2a3e823366c241d8a1ec27d0f0851127": {
       "actual_usd": "0.043130718803142308893",
       "completed_at": "2026-11-03T08:14:36.573948+00:00",
@@ -1480,6 +1965,62 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "312c713ce1524b1da4a548a863ccfd18": {
+      "actual_usd": "0.0431316485213295",
+      "completed_at": "2026-11-03T09:44:24.968286+00:00",
+      "created_at": "2026-11-03T09:43:23.731256+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
+      },
+      "seconds": 60.002293329,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "31b43e933dd0466f8bfb3db78cbcfc60": {
+      "actual_usd": "0.04313061500576552875333333333",
+      "completed_at": "2026-11-03T09:41:24.918690+00:00",
+      "created_at": "2026-11-03T09:40:23.729187+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
+      },
+      "seconds": 60.00085556100004,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "35ea2dbee26f41f0a54c14b804278366": {
       "actual_usd": "0.004947604332940417334166666667",
       "completed_at": "2026-11-03T08:45:29.224820+00:00",
@@ -1536,6 +2077,69 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "3d6175e22be34e78945576e9b948a5c0": {
+      "actual_usd": "0.0970765",
+      "completed_at": "2026-11-03T09:08:12.174556+00:00",
+      "created_at": "2026-11-03T09:07:49.631770+00:00",
+      "kind": "editor",
+      "metadata": {
+        "conversation_id": "7a208b1866ac4b90ac783f944df56721",
+        "input_token_bound": 28471,
+        "max_output_tokens": 32768
+      },
+      "receipt_metadata": {
+        "model": "gpt-6-astra",
+        "response_id": "resp_05e27016f3ef07b8006ae9a466e49887d2926f0480ec7405cb"
+      },
+      "seconds": 22.239113330841064,
+      "stage": "editor:t010",
+      "status": "settled",
+      "upper_bound_usd": "1.9942875",
+      "usage": {
+        "input_tokens": 17529,
+        "input_tokens_details": {
+          "cache_write_tokens": 4167,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 4167
+          },
+          "cached_tokens": 13359
+        },
+        "output_tokens": 632,
+        "output_tokens_details": {
+          "reasoning_tokens": 60
+        },
+        "total_tokens": 18161
+      }
+    },
+    "40f6c35c6d2141bbb7e2ba4969200c7e": {
+      "actual_usd": "0.019126051212048326145",
+      "completed_at": "2026-11-03T09:13:24.020082+00:00",
+      "created_at": "2026-11-03T09:12:56.430426+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GAGKAVT717P85V4RNWYT50"
+      },
+      "seconds": 26.60707332999999,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "42aaf6b81e314df3b36af5fde662b5da": {
       "actual_usd": "0.043130709313823474122",
       "completed_at": "2026-11-03T08:24:35.202873+00:00",
@@ -1564,6 +2168,46 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "442caf0057ef4607b4cffe1a28f42358": {
+      "created_at": "2026-11-03T09:40:04.166010+00:00",
+      "kind": "editor",
+      "metadata": {
+        "conversation_id": "7a208b1866ac4b90ac783f944df56721",
+        "input_token_bound": 61478,
+        "max_output_tokens": 128000
+      },
+      "stage": "editor:t014",
+      "status": "reserved",
+      "upper_bound_usd": "7.168475"
+    },
+    "444f9269184e491d99f3abfac39ddabc": {
+      "actual_usd": "0.04313009717835949281166666667",
+      "completed_at": "2026-11-03T09:09:57.552150+00:00",
+      "created_at": "2026-11-03T09:08:56.406778+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GAGKAVT717P85V4RNWYT50"
+      },
+      "seconds": 60.00013518899999,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "44a41fcc337d4036bc681734cd2ccd14": {
       "actual_usd": "0.043131446163276673855",
       "completed_at": "2026-11-03T07:55:14.746352+00:00",
@@ -1587,6 +2231,160 @@
         "sandbox_id": "sb-01M6G5ACEGJWQZ16VPRG9PF6W1"
       },
       "seconds": 60.00201182000001,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "44c85abb4afc44a489a580db80d8c097": {
+      "actual_usd": "0.04313040914124368104333333333",
+      "completed_at": "2026-11-03T09:43:25.025150+00:00",
+      "created_at": "2026-11-03T09:42:23.730853+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
+      },
+      "seconds": 60.00056917400002,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "4718076d330b4a0a85ecd3149ad89d31": {
+      "actual_usd": "0.063122",
+      "completed_at": "2026-11-03T09:07:25.970706+00:00",
+      "created_at": "2026-11-03T09:07:04.616219+00:00",
+      "kind": "editor",
+      "metadata": {
+        "conversation_id": "7a208b1866ac4b90ac783f944df56721",
+        "input_token_bound": 18558,
+        "max_output_tokens": 32768
+      },
+      "receipt_metadata": {
+        "model": "gpt-6-astra",
+        "response_id": "resp_05e27016f3ef07b8006ae9a439e89487d2abd8718c7c227753"
+      },
+      "seconds": 20.920483350753784,
+      "stage": "editor:t008",
+      "status": "settled",
+      "upper_bound_usd": "1.870375",
+      "usage": {
+        "input_tokens": 12738,
+        "input_tokens_details": {
+          "cache_write_tokens": 1718,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 1718
+          },
+          "cached_tokens": 11017
+        },
+        "output_tokens": 612,
+        "output_tokens_details": {
+          "reasoning_tokens": 38
+        },
+        "total_tokens": 13350
+      }
+    },
+    "478e268cf56d47788d71fae815f2c846": {
+      "actual_usd": "0.008290602436084",
+      "completed_at": "2026-11-03T09:05:58.086935+00:00",
+      "created_at": "2026-11-03T09:05:44.868503+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GAGKAVT717P85V4RNWYT50"
+      },
+      "seconds": 11.533414008,
+      "stage": "sandbox:startup",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "490adc47ada040ca85bf1648d8c82b81": {
+      "actual_usd": "1.683131",
+      "completed_at": "2026-11-03T09:13:21.847454+00:00",
+      "created_at": "2026-11-03T09:08:19.780297+00:00",
+      "kind": "editor",
+      "metadata": {
+        "conversation_id": "7a208b1866ac4b90ac783f944df56721",
+        "input_token_bound": 25069,
+        "max_output_tokens": 32768
+      },
+      "receipt_metadata": {
+        "model": "gpt-6-astra",
+        "response_id": "resp_05e27016f3ef07b8006ae9a485842c87d2b45330e540cf2cb0"
+      },
+      "seconds": 301.65199041366577,
+      "stage": "editor:t011",
+      "status": "settled",
+      "upper_bound_usd": "1.9517625",
+      "usage": {
+        "input_tokens": 19703,
+        "input_tokens_details": {
+          "cache_write_tokens": 2174,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 2174
+          },
+          "cached_tokens": 17526
+        },
+        "output_tokens": 32768,
+        "output_tokens_details": {
+          "reasoning_tokens": 1034
+        },
+        "total_tokens": 52471
+      }
+    },
+    "4d85b019edbc415ba3e36e3f437b01b9": {
+      "actual_usd": "0.04313051295874782902033333333",
+      "completed_at": "2026-11-03T09:10:58.274025+00:00",
+      "created_at": "2026-11-03T09:09:56.406681+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GAGKAVT717P85V4RNWYT50"
+      },
+      "seconds": 60.000713598999994,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -1760,6 +2558,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "59c60b3e50794b31bd6fd68e6089521a": {
+      "actual_usd": "0.04313081501970282973916666667",
+      "completed_at": "2026-11-03T09:07:57.696362+00:00",
+      "created_at": "2026-11-03T09:06:56.404758+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GAGKAVT717P85V4RNWYT50"
+      },
+      "seconds": 60.001133808999995,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "5b33c88820d841af91c3514f9d741bda": {
       "actual_usd": "0.04313038037856535910866666667",
       "completed_at": "2026-11-03T08:35:35.294837+00:00",
@@ -1895,6 +2721,34 @@
         "sandbox_id": "sb-01M6G6WG94FWM92Z8W9PKQD5R5"
       },
       "seconds": 50.116791665000164,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "6baf1b531a6f4640a6e99fc1c60384a5": {
+      "actual_usd": "0.04313146739617566666666666667",
+      "completed_at": "2026-11-03T09:06:57.746821+00:00",
+      "created_at": "2026-11-03T09:05:56.402614+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GAGKAVT717P85V4RNWYT50"
+      },
+      "seconds": 60.002041358,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -2391,6 +3245,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "92e9783d9fa3404d9724d897f6b05fb8": {
+      "actual_usd": "0.04313044899264480458",
+      "completed_at": "2026-11-03T09:45:25.082805+00:00",
+      "created_at": "2026-11-03T09:44:23.733960+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
+      },
+      "seconds": 60.00062461299996,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "93c6762c0b62422f916b0c74724e2c11": {
       "actual_usd": "0.04313011998837888365166666667",
       "completed_at": "2026-11-03T08:39:35.101154+00:00",
@@ -2533,6 +3415,34 @@
         "sandbox_id": "sb-01M6G5ACEGJWQZ16VPRG9PF6W1"
       },
       "seconds": 60.000886949000005,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "a8f07611b3db440eb8e3f8d8bfc3d3c1": {
+      "actual_usd": "0.04313068700339331895666666667",
+      "completed_at": "2026-11-03T09:42:24.931736+00:00",
+      "created_at": "2026-11-03T09:41:23.729972+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
+      },
+      "seconds": 60.00095571999998,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -2817,6 +3727,41 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "d1cafac439b7458985a338a58fd99277": {
+      "actual_usd": "0.7089925",
+      "completed_at": "2026-11-03T09:37:53.359194+00:00",
+      "created_at": "2026-11-03T09:37:28.967146+00:00",
+      "kind": "editor",
+      "metadata": {
+        "conversation_id": "7a208b1866ac4b90ac783f944df56721",
+        "input_token_bound": 56905,
+        "max_output_tokens": 128000
+      },
+      "receipt_metadata": {
+        "model": "gpt-6-astra",
+        "response_id": "resp_05e27016f3ef07b8006ae9ab5c453087d2a9efdda6f8ebd1a9"
+      },
+      "seconds": 23.971823692321777,
+      "stage": "editor:t012",
+      "status": "settled",
+      "upper_bound_usd": "7.1113125",
+      "usage": {
+        "input_tokens": 52520,
+        "input_tokens_details": {
+          "cache_write_tokens": 52517,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 52517
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 1050,
+        "output_tokens_details": {
+          "reasoning_tokens": 131
+        },
+        "total_tokens": 53570
+      }
+    },
     "d23ce8412704478e8843f49b6cc7c42d": {
       "actual_usd": "0.043130083023093478435",
       "completed_at": "2026-11-03T08:10:35.067428+00:00",
@@ -2840,6 +3785,34 @@
         "sandbox_id": "sb-01M6G6WG94FWM92Z8W9PKQD5R5"
       },
       "seconds": 60.00011549699997,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "d5ba7c67ec4242688348b5dd6ac98dfb": {
+      "actual_usd": "0.04313076854065833764633333333",
+      "completed_at": "2026-11-03T09:08:57.999218+00:00",
+      "created_at": "2026-11-03T09:07:56.405669+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GAGKAVT717P85V4RNWYT50"
+      },
+      "seconds": 60.001069150000006,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -3015,6 +3988,31 @@
       "upper_bound_usd": "1.905953472222222222222222222",
       "usage": null
     },
+    "driver-6e838d8f270e4e499e87a429f4a6d5dc": {
+      "created_at": "2026-11-03T09:36:48.545255+00:00",
+      "kind": "modal",
+      "metadata": {
+        "driver_claimed_at": 1793698616.6528878,
+        "driver_owner_id": "fc-01M6GC9HWAFHZTMEWBB811B23D",
+        "driver_ticket": {
+          "cpu_cores": 1,
+          "memory_gib": 4,
+          "prepared_at": 1793698608.1972063,
+          "reservation_id": "driver-6e838d8f270e4e499e87a429f4a6d5dc",
+          "scaledown_seconds": 5,
+          "schema_version": 1,
+          "stage": "all",
+          "startup_seconds": 120,
+          "timeout_seconds": 86400,
+          "upper_bound_usd": "1.905953472222222222222222222"
+        },
+        "invoice": false,
+        "kind": "driver_resource_upper_bound"
+      },
+      "stage": "all",
+      "status": "reserved",
+      "upper_bound_usd": "1.905953472222222222222222222"
+    },
     "driver-866cb8b6cf5d43ecb5d7620b9b8706f0": {
       "actual_usd": "0.03897209020531839812222222222",
       "completed_at": "2026-11-03T08:01:54.205328+00:00",
@@ -3074,10 +4072,21 @@
       "usage": null
     },
     "driver-904e8911088e4e98a5c0ff05414010d4": {
+      "actual_usd": "0.06244949693122837363333333333",
+      "completed_at": "2026-11-03T08:47:12.174145+00:00",
       "created_at": "2026-11-03T08:01:55.136928+00:00",
       "kind": "modal",
       "metadata": {
         "driver_claimed_at": 1793692920.5880692,
+        "driver_finish_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 2617.4210782530004,
+          "observed_subtotal_usd": "0.06040944208485081436666666667",
+          "owner_id": "fc-01M6G6VP8MG500BV4QCYY9J8N6",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-904e8911088e4e98a5c0ff05414010d4",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        },
         "driver_owner_id": "fc-01M6G6VP8MG500BV4QCYY9J8N6",
         "driver_ticket": {
           "cpu_cores": 1,
@@ -3094,9 +4103,31 @@
         "invoice": false,
         "kind": "driver_resource_upper_bound"
       },
+      "receipt_metadata": {
+        "billing_basis": "driver_resource_upper_bound_not_invoice",
+        "invoice": false,
+        "provider_completion_evidence": {
+          "elapsed_seconds_bound": 2710.0339086055756,
+          "observed_at": "2026-11-03T08:47:05.591692+00:00",
+          "provider_call_id": "fc-01M6G6VP8MG500BV4QCYY9J8N6",
+          "provider_terminal_state": "failed",
+          "source": "modal.FunctionCall.get"
+        },
+        "worker_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 2617.4210782530004,
+          "observed_subtotal_usd": "0.06040944208485081436666666667",
+          "owner_id": "fc-01M6G6VP8MG500BV4QCYY9J8N6",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-904e8911088e4e98a5c0ff05414010d4",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        }
+      },
+      "seconds": 2835.0339086055756,
       "stage": "all",
-      "status": "reserved",
-      "upper_bound_usd": "1.905953472222222222222222222"
+      "status": "settled",
+      "upper_bound_usd": "1.905953472222222222222222222",
+      "usage": null
     },
     "driver-9e22f7411e4e486c8cfebce8a39a4ffd": {
       "actual_usd": "0.071814487843367789",
@@ -3156,6 +4187,64 @@
       "upper_bound_usd": "1.905953472222222222222222222",
       "usage": null
     },
+    "driver-f6c6ad59636d48aaa19e75e29cfe7150": {
+      "actual_usd": "0.01793714204190174770833333333",
+      "completed_at": "2026-11-03T09:17:03.577528+00:00",
+      "created_at": "2026-11-03T09:05:24.852270+00:00",
+      "kind": "modal",
+      "metadata": {
+        "driver_claimed_at": 1793696732.5574203,
+        "driver_finish_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 477.81962131299997,
+          "observed_subtotal_usd": "0.01327877665836691666666666667",
+          "owner_id": "fc-01M6GAG2QE40WXX8DYS8WNFDC1",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-f6c6ad59636d48aaa19e75e29cfe7150",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        },
+        "driver_owner_id": "fc-01M6GAG2QE40WXX8DYS8WNFDC1",
+        "driver_ticket": {
+          "cpu_cores": 1,
+          "memory_gib": 4,
+          "prepared_at": 1793696724.4571617,
+          "reservation_id": "driver-f6c6ad59636d48aaa19e75e29cfe7150",
+          "scaledown_seconds": 5,
+          "schema_version": 1,
+          "stage": "all",
+          "startup_seconds": 120,
+          "timeout_seconds": 86400,
+          "upper_bound_usd": "1.905953472222222222222222222"
+        },
+        "invoice": false,
+        "kind": "driver_resource_upper_bound"
+      },
+      "receipt_metadata": {
+        "billing_basis": "driver_resource_upper_bound_not_invoice",
+        "invoice": false,
+        "provider_completion_evidence": {
+          "elapsed_seconds_bound": 689.2964861392975,
+          "observed_at": "2026-11-03T09:16:55.903344+00:00",
+          "provider_call_id": "fc-01M6GAG2QE40WXX8DYS8WNFDC1",
+          "provider_terminal_state": "failed",
+          "source": "modal.FunctionCall.get"
+        },
+        "worker_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 477.81962131299997,
+          "observed_subtotal_usd": "0.01327877665836691666666666667",
+          "owner_id": "fc-01M6GAG2QE40WXX8DYS8WNFDC1",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-f6c6ad59636d48aaa19e75e29cfe7150",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        }
+      },
+      "seconds": 814.2964861392975,
+      "stage": "all",
+      "status": "settled",
+      "upper_bound_usd": "1.905953472222222222222222222",
+      "usage": null
+    },
     "e0998f221bb64048a98d55dffb25a928": {
       "actual_usd": "0.04313049901913183333333333333",
       "completed_at": "2026-11-03T08:03:35.197203+00:00",
@@ -3179,6 +4268,34 @@
         "sandbox_id": "sb-01M6G6WG94FWM92Z8W9PKQD5R5"
       },
       "seconds": 60.000694207,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "e120b51db8904451bbc2b6afbda755c1": {
+      "actual_usd": "0.002375870178868847566233333333",
+      "completed_at": "2026-11-03T09:13:26.341862+00:00",
+      "created_at": "2026-11-03T09:13:23.036654+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "termination_tail_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GAGKAVT717P85V4RNWYT50"
+      },
+      "seconds": 3.3051753010000198,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -3263,6 +4380,50 @@
         "sandbox_id": "sb-01M6G5ACEGJWQZ16VPRG9PF6W1"
       },
       "seconds": 60.00225734099999,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "ecaf4994cd6e4c13bd02c3f6cae70ce1": {
+      "created_at": "2026-11-03T09:45:23.734849+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "stage": "sandbox:heartbeat",
+      "status": "reserved",
+      "upper_bound_usd": "0.215650"
+    },
+    "ee55ce914b7f44959f29083799a33ccf": {
+      "actual_usd": "0.043130742247172656603",
+      "completed_at": "2026-11-03T09:40:25.303801+00:00",
+      "created_at": "2026-11-03T09:39:23.728474+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
+      },
+      "seconds": 60.001032571999986,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -3380,6 +4541,76 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "f84dbda9bb1443d28637211b05926af4": {
+      "actual_usd": "0.1077095",
+      "completed_at": "2026-11-03T09:39:58.261637+00:00",
+      "created_at": "2026-11-03T09:39:41.830271+00:00",
+      "kind": "editor",
+      "metadata": {
+        "conversation_id": "7a208b1866ac4b90ac783f944df56721",
+        "input_token_bound": 60100,
+        "max_output_tokens": 128000
+      },
+      "receipt_metadata": {
+        "model": "gpt-6-astra",
+        "response_id": "resp_05e27016f3ef07b8006ae9abdf7f4c87d2a69487c01490fef4"
+      },
+      "seconds": 16.10280466079712,
+      "stage": "editor:t013",
+      "status": "settled",
+      "upper_bound_usd": "7.15125",
+      "usage": {
+        "input_tokens": 54629,
+        "input_tokens_details": {
+          "cache_write_tokens": 2109,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 2109
+          },
+          "cached_tokens": 52517
+        },
+        "output_tokens": 576,
+        "output_tokens_details": {
+          "reasoning_tokens": 80
+        },
+        "total_tokens": 55205
+      }
+    },
+    "f90e8c20470540b8a20a7e6be2a44155": {
+      "actual_usd": "0.047215",
+      "completed_at": "2026-11-03T09:07:44.861788+00:00",
+      "created_at": "2026-11-03T09:07:29.347952+00:00",
+      "kind": "editor",
+      "metadata": {
+        "conversation_id": "7a208b1866ac4b90ac783f944df56721",
+        "input_token_bound": 17605,
+        "max_output_tokens": 32768
+      },
+      "receipt_metadata": {
+        "model": "gpt-6-astra",
+        "response_id": "resp_05e27016f3ef07b8006ae9a452d0a087d2bdc7ea18276ea577"
+      },
+      "seconds": 15.142287731170654,
+      "stage": "editor:t009",
+      "status": "settled",
+      "upper_bound_usd": "1.8584625",
+      "usage": {
+        "input_tokens": 13362,
+        "input_tokens_details": {
+          "cache_write_tokens": 624,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 624
+          },
+          "cached_tokens": 12735
+        },
+        "output_tokens": 533,
+        "output_tokens_details": {
+          "reasoning_tokens": 27
+        },
+        "total_tokens": 13895
+      }
+    },
     "f9913573b5af4c3ba3927c23cad84133": {
       "actual_usd": "0.04313155263327584052166666667",
       "completed_at": "2026-11-03T07:45:14.317122+00:00",
@@ -3436,6 +4667,41 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "ffd9aab4c1534da2a2f40c6d32afe05f": {
+      "actual_usd": "0.0546255",
+      "completed_at": "2026-11-03T09:06:58.470091+00:00",
+      "created_at": "2026-11-03T09:06:42.736798+00:00",
+      "kind": "editor",
+      "metadata": {
+        "conversation_id": "7a208b1866ac4b90ac783f944df56721",
+        "input_token_bound": 15263,
+        "max_output_tokens": 32768
+      },
+      "receipt_metadata": {
+        "model": "gpt-6-astra",
+        "response_id": "resp_05e27016f3ef07b8006ae9a424181c87d2972f18aa0b7ec637"
+      },
+      "seconds": 15.150693416595459,
+      "stage": "editor:t007",
+      "status": "settled",
+      "upper_bound_usd": "1.8291875",
+      "usage": {
+        "input_tokens": 11020,
+        "input_tokens_details": {
+          "cache_write_tokens": 759,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 759
+          },
+          "cached_tokens": 10258
+        },
+        "output_tokens": 697,
+        "output_tokens_details": {
+          "reasoning_tokens": 69
+        },
+        "total_tokens": 11717
+      }
+    },
     "infrastructure-headroom": {
       "created_at": "2026-11-03T07:24:05.389163+00:00",
       "kind": "modal",
@@ -3445,6 +4711,46 @@
       "stage": "infrastructure",
       "status": "reserved",
       "upper_bound_usd": "2"
+    },
+    "modal-job-0d5b3656da4b72f4de4b65df465d0927d14a2618628b3824541cd385de0bfb76": {
+      "actual_usd": "0.1744872885358586666666666667",
+      "completed_at": "2026-11-03T09:38:41.617713+00:00",
+      "created_at": "2026-11-03T09:37:58.508014+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "7099d5f57c335ef39d585d2a98a4016e421d08f7aeeb712662c91cc5215beedb"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1744872885358586666666666667",
+        "call_id": "fc-01M6GCBK1M78YK3KN3MX29J5Y1",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/fwd_3/teacher_forced/openwsp-gpu:b6202365b5ed47d4b1ca30464e94ab27:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 147.205249046,
+        "startup_seconds": 120.0,
+        "usage_seconds": 25.205249046000002
+      },
+      "seconds": 147.205249046,
+      "stage": "live/fwd_3/teacher_forced/openwsp-gpu:b6202365b5ed47d4b1ca30464e94ab27:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
     },
     "modal-job-0efa7b8985c8fbfdaaf7542a1e67199a7462d4fb317414a1d06afbbcbe4fba00": {
       "actual_usd": "0.3677001694865146666666666667",

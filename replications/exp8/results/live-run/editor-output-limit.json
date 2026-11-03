@@ -1,5 +1,5 @@
 {
-  "status": "repair_tested_resume_pending",
+  "status": "recovered",
   "turn": 11,
   "provider_status": "incomplete",
   "reason": "max_output_tokens",
@@ -40,5 +40,31 @@
     "editor_and_live_recovery_tests_passed": 25,
     "reporting_and_publication_tests_passed": 40,
     "log_path": "logs/tests-editor-limit-full.log"
-  }
+  },
+  "repair_commit": "4ae2bff5b12d8780920806bff5d174173a8f5ca1",
+  "resume_call_id": "fc-01M6GC9HWAFHZTMEWBB811B23D",
+  "recovery_observed_at": "2026-11-03T09:45:00Z",
+  "recovery": {
+    "incomplete_turn_executed": false,
+    "same_receipt_cost_usd": "1.683131",
+    "next_turn": 12,
+    "next_previous_response_id": "resp_05e27016f3ef07b8006ae9a485842c87d2b45330e540cf2cb0",
+    "next_output_token_ceiling": 128000,
+    "next_reasoning": {
+      "effort": "max"
+    },
+    "next_tools": [],
+    "turn_after_recovery": 13,
+    "passes_after_recovery": 2,
+    "counted_requests_after_recovery": [
+      2,
+      3
+    ]
+  },
+  "recovery_sources": [
+    "logs/t011-incomplete-event.json",
+    "logs/t012-resumed-request.json",
+    "logs/live-state-0945.json",
+    "logs/editor-limit-launch-receipt.json"
+  ]
 }

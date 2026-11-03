@@ -1,12 +1,25 @@
 {
   "current": {
+    "call_id": "fc-01M6GC9HWAFHZTMEWBB811B23D",
+    "config": {},
+    "created_at": 1793698604.5312808,
+    "dispatched_at": 1793698611.2091756,
+    "fingerprint": "b8af3916e33fdca49d89f3ce031e4440cb2684502985bd1db3bb99538c64d67b",
+    "phase": "running",
+    "reservation_id": "driver-6e838d8f270e4e499e87a429f4a6d5dc",
     "stage": "all",
-    "phase": "blocked",
-    "call_id": "fc-01M6GAG2QE40WXX8DYS8WNFDC1",
-    "reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
-    "error_type": "EditorError",
-    "terminal_at": 1793697415.9033444,
-    "terminal_state": "failed"
+    "ticket": {
+      "cpu_cores": 1,
+      "memory_gib": 4,
+      "prepared_at": 1793698608.1972063,
+      "reservation_id": "driver-6e838d8f270e4e499e87a429f4a6d5dc",
+      "scaledown_seconds": 5,
+      "schema_version": 1,
+      "stage": "all",
+      "startup_seconds": 120,
+      "timeout_seconds": 86400,
+      "upper_bound_usd": "1.905953472222222222222222222"
+    }
   },
   "restart_counts": {
     "live": 1
@@ -14,20 +27,176 @@
   "history": [
     {
       "call_id": "fc-01M6G1PPP266WAAV5S8J975H8H",
-      "phase": "complete"
+      "completed_at": 1793690646.344117,
+      "config": {},
+      "created_at": 1793687507.8590407,
+      "dispatched_at": 1793687509.1263978,
+      "fingerprint": "99f75bce87f9b5328fa3bf1719ccee97278393921b93893dd8e0de6e638e0a90",
+      "phase": "complete",
+      "reservation_id": "driver-9e22f7411e4e486c8cfebce8a39a4ffd",
+      "result_status": "stage_done",
+      "stage": "calibration",
+      "terminal_at": 1793690644.3049128,
+      "terminal_state": "completed",
+      "ticket": {
+        "cpu_cores": 1,
+        "memory_gib": 4,
+        "prepared_at": 1793687508.6238885,
+        "reservation_id": "driver-9e22f7411e4e486c8cfebce8a39a4ffd",
+        "scaledown_seconds": 5,
+        "schema_version": 1,
+        "stage": "calibration",
+        "startup_seconds": 120,
+        "timeout_seconds": 86400,
+        "upper_bound_usd": "1.905953472222222222222222222"
+      }
     },
     {
       "call_id": "fc-01M6G4PFQQDTK55MZ0K0MPT21B",
-      "phase": "complete"
+      "completed_at": 1793691265.9426954,
+      "config": {},
+      "created_at": 1793690646.7702522,
+      "dispatched_at": 1793690647.7171357,
+      "fingerprint": "e2283897e0d9e50d6159da7554f4fa6e3980a1f0e685fda8d7fb1ca9ab98727b",
+      "phase": "complete",
+      "reservation_id": "driver-1ca050cdac614601bd57d890789c272c",
+      "result_status": "stage_done",
+      "stage": "kernel",
+      "terminal_at": 1793691262.4184046,
+      "terminal_state": "completed",
+      "ticket": {
+        "cpu_cores": 1,
+        "memory_gib": 4,
+        "prepared_at": 1793690647.2565773,
+        "reservation_id": "driver-1ca050cdac614601bd57d890789c272c",
+        "scaledown_seconds": 5,
+        "schema_version": 1,
+        "stage": "kernel",
+        "startup_seconds": 120,
+        "timeout_seconds": 86400,
+        "upper_bound_usd": "1.905953472222222222222222222"
+      }
     },
     {
       "call_id": "fc-01M6G59ENT446AAG7KGZ611VJW",
-      "phase": "terminal"
+      "config": {},
+      "created_at": 1793691266.802394,
+      "dispatched_at": 1793691269.0165246,
+      "error_type": "DriverLeaseError",
+      "fingerprint": "b8af3916e33fdca49d89f3ce031e4440cb2684502985bd1db3bb99538c64d67b",
+      "phase": "terminal",
+      "reservation_id": "driver-866cb8b6cf5d43ecb5d7620b9b8706f0",
+      "result_status": null,
+      "stage": "all",
+      "terminal_at": 1793692913.2413006,
+      "terminal_state": "failed",
+      "ticket": {
+        "cpu_cores": 1,
+        "memory_gib": 4,
+        "prepared_at": 1793691267.8745487,
+        "reservation_id": "driver-866cb8b6cf5d43ecb5d7620b9b8706f0",
+        "scaledown_seconds": 5,
+        "schema_version": 1,
+        "stage": "all",
+        "startup_seconds": 120,
+        "timeout_seconds": 86400,
+        "upper_bound_usd": "1.905953472222222222222222222"
+      }
     },
     {
       "call_id": "fc-01M6G6VP8MG500BV4QCYY9J8N6",
+      "config": {},
+      "created_at": 1793692914.606936,
+      "dispatched_at": 1793692915.5577838,
+      "error_type": "ConflictError",
+      "fingerprint": "b8af3916e33fdca49d89f3ce031e4440cb2684502985bd1db3bb99538c64d67b",
+      "manual_resume": {
+        "config": {},
+        "fingerprint": "b8af3916e33fdca49d89f3ce031e4440cb2684502985bd1db3bb99538c64d67b",
+        "reason": "Global sandbox volume reload failed on open files after both request2 GPU jobs succeeded. Replaced result delivery with bounded hash-verified atomic file publication; reuse saved receipts. Previous driver confirmed terminal.",
+        "stage": "all"
+      },
       "phase": "terminal",
-      "error_type": "ConflictError"
+      "reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+      "reservation_id": "driver-904e8911088e4e98a5c0ff05414010d4",
+      "result_status": null,
+      "stage": "all",
+      "terminal_at": 1793696715.2681975,
+      "terminal_state": "failed",
+      "ticket": {
+        "cpu_cores": 1,
+        "memory_gib": 4,
+        "prepared_at": 1793692915.0771978,
+        "reservation_id": "driver-904e8911088e4e98a5c0ff05414010d4",
+        "scaledown_seconds": 5,
+        "schema_version": 1,
+        "stage": "all",
+        "startup_seconds": 120,
+        "timeout_seconds": 86400,
+        "upper_bound_usd": "1.905953472222222222222222222"
+      }
+    },
+    {
+      "call_id": "fc-01M6GAG2QE40WXX8DYS8WNFDC1",
+      "config": {},
+      "created_at": 1793696720.7346363,
+      "dispatched_at": 1793696726.6068583,
+      "error_type": "EditorError",
+      "fingerprint": "b8af3916e33fdca49d89f3ce031e4440cb2684502985bd1db3bb99538c64d67b",
+      "manual_resume": {
+        "config": {},
+        "fingerprint": "b8af3916e33fdca49d89f3ce031e4440cb2684502985bd1db3bb99538c64d67b",
+        "reason": "Recorded terminal t011 max_output_tokens response is settled and never executed. Typed incomplete-turn handling preserves its response lineage, reports only the API failure, and uses the documented128000 future output ceiling. Transcript whitespace publication issue is fixed. Previous driver confirmed terminal; no failed key is resampled.",
+        "stage": "all"
+      },
+      "phase": "terminal",
+      "reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+      "reservation_id": "driver-f6c6ad59636d48aaa19e75e29cfe7150",
+      "result_status": null,
+      "stage": "all",
+      "terminal_at": 1793698599.588238,
+      "terminal_state": "failed",
+      "ticket": {
+        "cpu_cores": 1,
+        "memory_gib": 4,
+        "prepared_at": 1793696724.4571617,
+        "reservation_id": "driver-f6c6ad59636d48aaa19e75e29cfe7150",
+        "scaledown_seconds": 5,
+        "schema_version": 1,
+        "stage": "all",
+        "startup_seconds": 120,
+        "timeout_seconds": 86400,
+        "upper_bound_usd": "1.905953472222222222222222222"
+      }
+    }
+  ],
+  "manual_resumes": [
+    {
+      "at": 1793687507.351445,
+      "previous_call_id": null,
+      "previous_coordinator_reason": null,
+      "previous_state_error": "ModuleNotFoundError: No module named 'mcqa'",
+      "previous_state_status": "blocked",
+      "reason": "Missing grading-independent mcqa import repaired with fail-closed compatibility shim; real extraction/math-verify CPU regression passed. Reuse saved GPU receipt.",
+      "stage": "calibration"
+    },
+    {
+      "at": 1793696711.7389603,
+      "previous_call_id": "fc-01M6G6VP8MG500BV4QCYY9J8N6",
+      "previous_coordinator_reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+      "previous_state_error": "ConflictError: there are open files preventing the operation",
+      "previous_state_status": "blocked",
+      "reason": "Global sandbox volume reload failed on open files after both request2 GPU jobs succeeded. Replaced result delivery with bounded hash-verified atomic file publication; reuse saved receipts. Previous driver confirmed terminal.",
+      "stage": "all"
+    },
+    {
+      "at": 1793698595.8444192,
+      "previous_call_id": "fc-01M6GAG2QE40WXX8DYS8WNFDC1",
+      "previous_coordinator_reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+      "previous_state_error": "EditorError: Editor response status incomplete; inspect the saved response before continuing",
+      "previous_state_status": "blocked",
+      "reason": "Recorded terminal t011 max_output_tokens response is settled and never executed. Typed incomplete-turn handling preserves its response lineage, reports only the API failure, and uses the documented128000 future output ceiling. Transcript whitespace publication issue is fixed. Previous driver confirmed terminal; no failed key is resampled.",
+      "stage": "all"
     }
   ]
 }

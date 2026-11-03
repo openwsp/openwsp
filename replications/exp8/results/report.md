@@ -2,10 +2,8 @@
 
 | Recorded component | State | Evidence |
 | --- | --- | --- |
-| Pipeline | [blocked](pipeline-state.json) | [live](pipeline-state.json) |
-| Recorded blocker | [EditorError: Editor response status incomplete; inspect the saved response before continuing](pipeline-state.json) | See source record. |
-| Driver recovery | [blocked](coordinator.json) | [all](coordinator.json) |
-| Recorded blocker | [Pipeline blocked; previous owner reconciled and automatic restart disabled](coordinator.json) | See source record. |
+| Pipeline | [running](pipeline-state.json) | [live](pipeline-state.json) |
+| Driver recovery | [running](coordinator.json) | [all](coordinator.json) |
 | Calibration prompt audit | [passed](calibration-prompt-audit.json) | [calibration-prompt-audit.json](calibration-prompt-audit.json) |
 | Calibration comparison | [passed](calibration-check.json) | [calibration-check.json](calibration-check.json) |
 | Tensor hashes | [passed](kernel/hash-verification.json) | [kernel/hash-verification.json](kernel/hash-verification.json) |
@@ -13,7 +11,7 @@
 | Forward service | [passed](kernel/forward-verification.json) | [kernel/forward-verification.json](kernel/forward-verification.json) |
 | Weight swap check | [fallback](kernel/weight-swap.json) | [kernel/weight-swap.json](kernel/weight-swap.json) |
 | Recorded diagnostic | [Engine does not expose a compatible weight-reload contract](kernel/weight-swap.json) | See source record. |
-| Live editor | [incomplete](live-run/state.json) | passes: [1](live-run/state.json); turn: [10](live-run/state.json); runs: [5](live-run/state.json) |
+| Live editor | [incomplete](live-run/state.json) | passes: [2](live-run/state.json); turn: [13](live-run/state.json); runs: [6](live-run/state.json) |
 
 States are recorded snapshots; use `openwsp status` to check current liveness.
 
@@ -60,9 +58,10 @@ Budget ledger: [source](costs.json). Reservations are retained bounds, not charg
 
 | Budget / stage / operation | State | Receipts | Recorded hours | Settled amount (USD) | Reserved bound (USD) | Basis |
 | --- | --- | --- | --- | --- | --- | --- |
-| editor / editor turns | [settled](costs.json) | [5](costs.json) | [0.039](costs.json) | [0.4280](costs.json) | pending | [API usage and recorded token rates](costs.json) |
+| editor / editor turns | [reserved](costs.json) | [1](costs.json) | pending | pending | [7.1685](costs.json) | [API usage and recorded token rates](costs.json) |
+| editor / editor turns | [settled](costs.json) | [13](costs.json) | [0.161](costs.json) | [3.3555](costs.json) | pending | [API usage and recorded token rates](costs.json) |
 | modal / all | [reserved](costs.json) | [1](costs.json) | pending | pending | [1.9060](costs.json) | [resource estimate; not invoice](costs.json) |
-| modal / all | [settled](costs.json) | [1](costs.json) | [0.491](costs.json) | [0.0390](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
+| modal / all | [settled](costs.json) | [3](costs.json) | [1.505](costs.json) | [0.1194](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
 | modal / calibration | [settled](costs.json) | [1](costs.json) | [0.906](costs.json) | [0.0718](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
 | modal / calibration_base | [settled](costs.json) | [1](costs.json) | [0.499](costs.json) | [2.1280](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / calibration_base_smoke | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.2758](costs.json) | [resource estimate; not invoice](costs.json) |
@@ -76,10 +75,12 @@ Budget ledger: [source](costs.json). Reservations are retained bounds, not charg
 | modal / live / activation extraction / original | [settled](costs.json) | [1](costs.json) | [0.700](costs.json) | [2.9870](costs.json) | pending | [failed job upper bound; not invoice](costs.json) |
 | modal / live / activation extraction / original | [settled](costs.json) | [1](costs.json) | [0.071](costs.json) | [0.3049](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / live / generation / original | [settled](costs.json) | [2](costs.json) | [0.539](costs.json) | [2.3013](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / live / teacher-forced | [settled](costs.json) | [1](costs.json) | [0.041](costs.json) | [0.1745](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / prepare | [settled](costs.json) | [1](costs.json) | [0.010](costs.json) | [0.0016](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / prepare-v2 | [settled](costs.json) | [1](costs.json) | [0.038](costs.json) | [0.0060](costs.json) | pending | [resource estimate; not invoice](costs.json) |
-| modal / sandbox:heartbeat | [settled](costs.json) | [68](costs.json) | [1.100](costs.json) | [2.8455](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
-| modal / sandbox:startup | [settled](costs.json) | [2](costs.json) | [0.009](costs.json) | [0.0226](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
+| modal / sandbox:heartbeat | [reserved](costs.json) | [1](costs.json) | pending | pending | [0.2157](costs.json) | [resource estimate; not invoice](costs.json) |
+| modal / sandbox:heartbeat | [settled](costs.json) | [85](costs.json) | [1.358](costs.json) | [3.5139](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
+| modal / sandbox:startup | [settled](costs.json) | [4](costs.json) | [0.015](costs.json) | [0.0400](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
 | modal / verify / attention | [settled](costs.json) | [1](costs.json) | [0.038](costs.json) | [0.1626](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / verify / fresh-reference | [settled](costs.json) | [1](costs.json) | [0.086](costs.json) | [0.3677](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / verify / native-swap | [settled](costs.json) | [1](costs.json) | [0.097](costs.json) | [0.4123](costs.json) | pending | [resource estimate; not invoice](costs.json) |
