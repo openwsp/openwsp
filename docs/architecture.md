@@ -149,6 +149,8 @@ openwsp --tiny --work-dir /absolute/path/work forward '{"inputs": [[1.0, 0.0]], 
 
 ## Tests and persistence
 
+`openwsp status exp8` shows a compact snapshot of the stage, live counters, budgets, heartbeat and any recorded error. It omits verbose stage records and kernel output. `openwsp status exp8 --json` returns the complete state for monitoring scripts and saved evidence; `openwsp.replication.status()` continues to return that same complete object. A recorded `running` state is not proof of current liveness, and the last publication may contain partial or blocked results.
+
 Run `uv sync --locked --extra dev`, then `uv run pytest -q`. CI uses CPU dependencies and requires no API keys or GPU. A tiny network checks that the CLI, SDK and MCP server agree on reads, code execution, forward execution and edit round trips.
 
 Remote run state and full generation text belong on the compute volume. Git keeps source, compact edit diffs and per-sample evaluation records. State transitions, budget reservations and heartbeat recovery must refer to durable artifacts so a restart can continue from evidence rather than memory.

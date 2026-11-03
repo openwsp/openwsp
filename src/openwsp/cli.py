@@ -3,6 +3,11 @@
 from __future__ import annotations
 
 import json
+import math
+import shutil
+import textwrap
+import time
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Annotated, Any
 
@@ -20,6 +25,58 @@ def _json(value: str) -> Any:
         return json.loads(Path(value[1:]).read_text() if value.startswith("@") else value)
     except (ValueError, OSError) as exc:
         raise typer.BadParameter(f"Expected JSON or @path/to/file.json: {exc}") from exc
+
+
+def _status_text(experiment: str, state: dict[str, Any]) -> str:
+    """Show bounded, recorded progress without changing the SDK state."""
+    width = min(100, max(40, shutil.get_terminal_size(fallback=(80, 24)).columns))
+
+    def amount(value):
+        try:
+            number = float(value)
+        except (TypeError, ValueError):
+            return "pending"
+        return f"${number:.4f}" if not isinstance(value, bool) and math.isfinite(number) else "pending"
+
+    status = state.get("status", state.get("state", "unknown"))
+    stage = state.get("active_stage", state.get("stage", "not recorded"))
+    lines = [f"{experiment}: {status} | stage: {stage}"]
+    live = state.get("live")
+    if isinstance(live, dict) and live:
+        counts = " | ".join(f"{key} {live.get(key, 'pending')}" for key in ("turn", "passes", "runs", "requests"))
+        submitted = "yes" if live.get("done") is True else "no" if live.get("done") is False else "pending"
+        lines.append(f"Live: {counts} | submitted {submitted}")
+    else:
+        lines.append("Live: not recorded")
+    budgets = state.get("budget") or {}
+    for kind in ("modal", "editor"):
+        budget = budgets.get(kind) if isinstance(budgets, dict) else None
+        values = " | ".join(f"{label} {amount(budget.get(key))}" for label, key in (
+            ("spent", "spent_usd"), ("reserved", "reserved_usd"), ("available", "available_usd"),
+        )) if isinstance(budget, dict) else "not recorded"
+        lines.append(f"{kind.title()} USD: {values}")
+    heartbeat = state.get("heartbeat")
+    try:
+        if isinstance(heartbeat, bool):
+            raise TypeError("A boolean is not a heartbeat")
+        timestamp = float(heartbeat)
+        utc = datetime.fromtimestamp(timestamp, tz=UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
+        age = time.time() - timestamp
+        elapsed = f"{age:.0f}s ago" if age >= 0 else f"{-age:.0f}s ahead of local clock"
+        lines.append(f"Heartbeat: {utc} ({elapsed})")
+    except (TypeError, ValueError, OverflowError, OSError):
+        lines.append("Heartbeat: not recorded or invalid")
+    if state.get("error") or state.get("error_type"):
+        lines.append(f"Last error: {state.get('error') or state['error_type']}")
+    if state.get("controls_deferred"):
+        lines.append(f"Controls note: {state['controls_deferred']}")
+    publication = state.get("publication")
+    if isinstance(publication, dict) and publication:
+        lines.append(f"Last publication: {publication.get('status', 'unknown')}")
+    lines.extend(("Recorded snapshot; 'running' does not confirm current liveness.",
+                  f"Full state: openwsp status {experiment} --json"))
+    return "\n".join(textwrap.shorten("".join(char if char.isprintable() else " " for char in line),
+                                     width=width, placeholder="...") for line in lines)
 
 
 @app.callback()
@@ -131,11 +188,15 @@ def replicate(
 
 
 @app.command("status")
-def status(experiment: Annotated[str, typer.Argument()] = "exp8") -> None:
-    """Show current replication progress and budget."""
+def status(
+    experiment: Annotated[str, typer.Argument()] = "exp8",
+    json_output: Annotated[bool, typer.Option("--json", help="Print the complete machine-readable state.")] = False,
+) -> None:
+    """Show replication progress on one screen; use --json for full details."""
     from .replication import status as get_status
 
-    _emit(get_status(experiment))
+    state = get_status(experiment)
+    _emit(state if json_output else _status_text(experiment, state))
 
 
 @app.command("report")
