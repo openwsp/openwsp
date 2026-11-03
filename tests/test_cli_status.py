@@ -5,6 +5,7 @@ import json
 import os
 
 import pytest
+from click import unstyle
 from typer.testing import CliRunner
 
 from openwsp import cli, replication
@@ -81,5 +82,6 @@ def test_future_heartbeat_is_clock_skew_not_negative_elapsed(status_state):
 def test_status_help_explains_full_json_mode():
     result = CliRunner().invoke(cli.app, ["status", "--help"])
     assert result.exit_code == 0
-    assert "--json" in result.output
-    assert "complete machine-readable state" in result.output
+    visible = unstyle(result.output)
+    assert "--json" in visible
+    assert "complete machine-readable state" in visible
