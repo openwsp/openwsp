@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "source_commit": "8a3b9f3ddff5855796ff014620d350e8ec11a952",
+  "recorded_at": "2026-11-03T19:59:57.295782+00:00",
+  "command": "PYTHONPATH=<frozen-checkout>/src python -m pytest -q",
+  "passed": 1139,
+  "skipped": 3,
+  "skipped_scope": "Optional JAX scorer tests; source-network and new car scoring ran in a separate pinned CPU environment.",
+  "seconds": 74.88,
+  "log": "logs/tests-steering-final-8a3b9f3.log",
+  "scope": "CPU and MCP test suite; no model benchmark or live-run completion claimed."
+}

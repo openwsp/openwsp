@@ -51,6 +51,15 @@ uv run python -m replications.exp8.damage reduce --manifest /private/logits-mani
 
 It computes token-weighted `KL(base || edited)` in nats from hashed logits and an already aligned boolean mask. It does not launch inference. Synthetic fixtures are labeled explicitly; a production manifest identifies the fixed neutral reference set, checkpoint/edit hashes and continuation-only scope. Empty selections have an undefined mean. The teacher-forced backend performs the causal next-token mask shift exactly once before reduction.
 
+The accounted GPU stage is available after the faithful submission, its complete final evaluations, control 4 and every preregistered grid cell. For a subscription attempt, retain its existing configuration and local worker identity:
+
+```sh
+uv run openwsp replicate exp8 --stage damage \
+  --config /path/completed-codex-run.json --foreground
+```
+
+The stage verifies exact sample coverage before dispatch, then freezes the first 256 GSM8K and 256 MATH practice reference solutions with their original text, token masks and hashes. Each edit comparison uses an excluded four-reference identity smoke in the same container. Results distinguish the versioned edit address from the exported bundle hash; the legacy p50c edit has no versioned address. [CPU validation](../replications/exp8/results/damage_cpu_validation/summary.json) is published; actual model KL remains pending until this stage completes.
+
 The implemented inspection command can audit a built edit on CPU:
 
 ```sh
