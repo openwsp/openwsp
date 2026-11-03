@@ -117,13 +117,21 @@ These records establish the stated CPU measurements or implementation checks. Th
 
 Mechanical repair builds:
 
-| Variant | Coefficient | Column rule | Build | Changed entries | Evaluation | Accuracy |
-| --- | --- | --- | --- | --- | --- | --- |
-| 2a | [1.0](replications/exp8/results/repair/summary.json) | [all](replications/exp8/results/repair/summary.json) | [built](replications/exp8/results/repair/summary.json) | [6289541](replications/exp8/results/repair/summary.json) | [pending](replications/exp8/results/repair/summary.json) | pending |
-| 2b | [6.0](replications/exp8/results/repair/summary.json) | [all](replications/exp8/results/repair/summary.json) | [built](replications/exp8/results/repair/summary.json) | [7077322](replications/exp8/results/repair/summary.json) | [pending](replications/exp8/results/repair/summary.json) | pending |
-| 2c | [6.0](replications/exp8/results/repair/summary.json) | [topk](replications/exp8/results/repair/summary.json) | [unavailable_input_statistics](replications/exp8/results/repair/summary.json) | pending | [pending](replications/exp8/results/repair/summary.json) | pending |
+| Variant | Coefficient | Column rule | Build | Changed entries | Evaluation | Accuracy | Finished accuracy | Hit token limit | Finished samples |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2a | [1.0](replications/exp8/results/repair/summary.json) | [all](replications/exp8/results/repair/summary.json) | [built](replications/exp8/results/repair/summary.json) | [6289541](replications/exp8/results/repair/summary.json) | [pending](replications/exp8/results/repair/summary.json) | pending | pending | pending | pending |
+| 2b | [6.0](replications/exp8/results/repair/summary.json) | [all](replications/exp8/results/repair/summary.json) | [built](replications/exp8/results/repair/summary.json) | [7077322](replications/exp8/results/repair/summary.json) | [pending](replications/exp8/results/repair/summary.json) | pending | pending | pending | pending |
+| 2c | [6.0](replications/exp8/results/repair/summary.json) | [topk](replications/exp8/results/repair/summary.json) | [unavailable_input_statistics](replications/exp8/results/repair/summary.json) | pending | [pending](replications/exp8/results/repair/summary.json) | pending | pending | pending | pending |
 
 Building an edit does not establish its benchmark effect. Unavailable inputs and unrun evaluations remain explicit.
+
+### Per-edit neutral-reference KL
+
+| Record | Edit | Measurement scope | KL(base ∥ edited), nats/token | Scored tokens | Reference sequences | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| [damage_cpu_validation](replications/exp8/results/damage_cpu_validation/summary.json) | [synthetic arrays](replications/exp8/results/damage_cpu_validation/summary.json) | [Synthetic CPU validation; not a model measurement](replications/exp8/results/damage_cpu_validation/summary.json) | [0.23280366](replications/exp8/results/damage_cpu_validation/summary.json) | [2](replications/exp8/results/damage_cpu_validation/summary.json) | pending | [validated](replications/exp8/results/damage_cpu_validation/summary.json) |
+
+KL is the sum of base-to-edited token divergences divided by scored tokens, in nats. The registered neutral-reference measurement excludes prompt and padding positions and its identity smoke. Different attempts, edits and reference sets remain separate. Synthetic CPU values validate the reducer only; missing model measurements remain pending.
 
 ### Independent results
 
@@ -199,7 +207,7 @@ These controls were added for this replication. They answer alternative explanat
 | Is the baseline broken by the thinking setup? | Base model with thinking off and the model card's recommended non-thinking sampling. | `control1_nothink` in the [generated results](#results). |
 | Is it a mechanical direction removal? | Difference of mean MLP outputs for looping versus finished base answers, removed from the same layers and columns in the same form as the published p50c edit. | `control2_mechanical` in the [generated results](#results). |
 | Is it a decoding fix? | Base model with repetition penalty [1.1](docs/TASK.md), everything else unchanged. | `control3_repetition` in the [generated results](#results). |
-| Does the direction matter? | Published p50c edit with a random unit vector replacing its direction. | Optional; no result published. |
+| Does the direction matter? | Published p50c edit with a random unit vector replacing its direction. | Queued after the faithful run and final evaluation; no result published. |
 | Is looping specific to vLLM? | Base model in another engine with the same sampling on the prescribed subset. | Optional; no result published. |
 
 The mechanical control constructs its direction from calibration generations on the same benchmark. Its [method record](replications/exp8/results/control2_mechanical/method.json) documents that reuse. It is a diagnostic comparison, not a held-out discovery experiment.
@@ -433,7 +441,7 @@ These are prompt-faithful replications with disclosed execution differences. Ast
 
 This replication does not train the model or compute gradients. The live editor receives no benchmark data, reference edit or control outcomes, and its final edit is not selected by an operator. The original API attempt was not relabeled as a completed run when the subscription attempt began.
 
-The raw-weight experiments retain every Astra outcome above; the Fable comparison remains blocked on native credentials, with its authorized budget unused. Experiments [3](replications/exp3), [6](replications/exp6) and [7](replications/exp7) remain layout only. There is no hosted service, web UI, package-registry release or Hugging Face publication of a new live edit. The expanded [evaluation grid](replications/exp8/eval_grid_configs) has CPU implementation checks, not measured GPU results. Optional controls and additional editor comparisons remain separate from the active Experiment 8 attempt.
+The raw-weight experiments retain every Astra outcome above; the Fable comparison remains blocked on native credentials, with its authorized budget unused. Experiments [3](replications/exp3), [6](replications/exp6) and [7](replications/exp7) remain layout only. There is no hosted service, web UI, package-registry release or Hugging Face publication of a new live edit. The expanded [evaluation grid](replications/exp8/eval_grid_configs) has CPU implementation checks, not measured GPU results. The random-direction control follows the faithful evaluation; the second-engine control remains optional. Additional editor comparisons remain separate from the active Experiment 8 attempt.
 
 ## Add a result
 

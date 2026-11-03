@@ -4,7 +4,7 @@ Read [docs/TASK.md](docs/TASK.md) and [steering update 2](docs/STEERING_UPDATE_2
 
 ## Current action
 
-The same **codex-20261103** subscription attempt is running under driver **fc-01M6HJFWKABFATSH2NKQKVB6FN**, local worker **PID50018/exec26031**, frozen source **7542fe5** at `/tmp/openwsp-notice-resume-7542fe5-17_b8pae`. Latest verified snapshot at17:46:39 America/Buenos_Aires: **turn51,14/50passes,22requests,27runs,one handoff**, editor turn52 pending. Sandbox **sb-01M6HJGHTRF1G3N5F4PQRQCWZ9**. Do not launch another worker or driver. Log `logs/modal-codex-notice-resume.log`; frozen `.openwsp/launch.json` retains its call ID. The stage-all pipeline evaluates the actual final submission and publishes automatically; the local subscription worker must remain running.
+The same **codex-20261103** subscription attempt is running under driver **fc-01M6HJFWKABFATSH2NKQKVB6FN**, local worker **PID50018/exec26031**, frozen source **7542fe5** at `/tmp/openwsp-notice-resume-7542fe5-17_b8pae`. Latest status snapshot at17:56:19 America/Buenos_Aires: **turn51,14/50passes,23requests,27runs,one handoff**, forward request23 pending. Sandbox **sb-01M6HJGHTRF1G3N5F4PQRQCWZ9**. Do not launch another worker or driver. Log `logs/modal-codex-notice-resume.log`; frozen `.openwsp/launch.json` retains its call ID. The stage-all pipeline evaluates the actual final submission and publishes automatically; the local subscription worker must remain running.
 
 The previous driver failed while writing the prescribed turn51 eval_prompt_format.txt, before editor admission. Historical stderr was not retained; no root cause or OOM claim is established. The bounded SHA-verified atomic transfer fix is **verified on the actual resumed turn51**: the482-byte file exactly matches its pinned SHA256, the prescribed notice appears once in state and prompt, and the editor completed its next Python action. Normal recovery reported the recreated kernel and lost variables neutrally; conversation, saved edits, files, counters and costs remain. [Resume evidence](replications/exp8/results/live-runs/codex-20261103/resume-text-transfer-20261103.json), [incident](replications/exp8/results/live-runs/codex-20261103/text-transfer-incident.json). Source7542fe5 passed1166tests with3optional-JAXskips locally and both Python3.11/3.12 CI: https://github.com/openwsp/openwsp/actions/runs/41715172623.
 
@@ -12,11 +12,11 @@ The earlier ordinary-generation integration failure is fixed and verified on act
 
 ## Funding and editor transport
 
-Latest ledger: **$65.94244142822026 Modal spent,$18.345603472222223 reserved,$65.66195509955752 available** under the **$150 total task cap**. These are conservative accounting values, not invoices. Automatic-top-up authorization `operator-auto-topups-20261103-steering2` supersedes the old$42 gate. No provider dashboard increase is claimed. This notice failure is not a budget block. Preserve all costs and reservations; the serialized resume reconciled the terminal driver owner.
+Latest ledger: **$66.37377651104427 Modal spent,$21.332643472222223 reserved,$62.2435800167335 available** under the **$150 total task cap**. These are conservative accounting values, not invoices. Automatic-top-up authorization `operator-auto-topups-20261103-steering2` supersedes the old$42 gate. No provider dashboard increase is claimed. This notice failure is not a budget block. Preserve all costs and reservations; the serialized resume reconciled the terminal driver owner.
 
 Subscription Astra remains primary. Codex0.163.0, model gpt-6-astra, effortmax, native tools disabled, credentials local only. `.openwsp/codex-subscription` holds private authentication; `.openwsp/codex-workers/codex-20261103` holds immutable worker identity and response journals. Never print or send credentials to Modal. Do not replay an admitted request or combine subscription and API attempts.
 
-Historical API spend **$78.292765**, remote cap100, reserved0. The authorized additional$160.85 allocation remains unapplied; the separate **$160.85 PlanB reserve is protected**. No API fallback or new paid probe. Native Fable has a separate **$20 total cap** for CPU experiments, but its credential is absent; the earlier async configuration question remains pending. No Fable calls have been made.
+Historical API spend **$78.292765**, remote cap100, reserved0. The authorized additional$160.85 allocation remains unapplied; the separate **$160.85 PlanB reserve is protected**. No API fallback or new paid probe. The read-only subscription quota RPC at17:49 America/Buenos_Aires showed72% remaining and one available reset credit; none redeemed (`logs/codex-subscription-quota-latest.json`). Native Fable has a separate **$20 total cap** for CPU experiments, but its credential is absent; the earlier async configuration question remains pending. No Fable calls have been made.
 
 ## Completed work
 
@@ -30,7 +30,7 @@ Inspect CLI/SDK/MCP, actual CPU geometry, finished-only metrics,11 grid definiti
 
 ## Long CPU extraction
 
-Variant2c input extraction is **PID39594**, two threads, projected about13.5hours; latest snapshot38/484 examples. All484 original control2 examples are required. Logs `.openwsp/repair-inputs/full-extraction.{pid,log,exit}`; receipts `.openwsp/repair-input-means`. Single continuation **PID44670** waits for that exact process and verifies all receipts before building2c and seven dose bundles. Logs `.openwsp/repair-inputs/completion.{pid,log,exit}`. No duplicate process, partial contrast, GPU scoring or automatic push. Environment refreshes can discard exec-session handles while both PIDs survive.
+Variant2c input extraction is **PID39594**, two threads, projected about13.5hours; latest snapshot45/484 examples. All484 original control2 examples are required. Logs `.openwsp/repair-inputs/full-extraction.{pid,log,exit}`; receipts `.openwsp/repair-input-means`. Single continuation **PID44670** waits for that exact process and verifies all receipts before building2c and seven dose bundles. Logs `.openwsp/repair-inputs/completion.{pid,log,exit}`. No duplicate process, partial contrast, GPU scoring or automatic push. Environment refreshes can discard exec-session handles while both PIDs survive.
 
 ## Remaining order
 
@@ -39,3 +39,5 @@ Variant2c input extraction is **PID39594**, two threads, projected about13.5hour
 3. Publish final evidence and report, meet remaining done criteria and tag only when warranted. Run2 requires fresh operator confirmation. No optional repair-scoring GPU work before the required priority order.
 
 Frozen8a3b9f3 passed1139tests,3optional-JAXskips. Completion revision2bb69da passed Python3.11/3.12 CI at https://github.com/openwsp/openwsp/actions/runs/41709165531. The current notice-transfer fix passed1166tests with3optional-JAXskips and both CI jobs; actual turn51 recovery is verified. All prior history remains in Git and DECISIONS.md.
+
+The reporting audit adds a per-edit KL table with explicit synthetic/supplied-logit/GPU scope and finished-only columns for repair scores. Focused196-test validation passed (`logs/tests-kl-reporting-focused.log`); independent review found one count/scope validation gap, now fixed with regressions. This reporter update deploys with post-faithful stages; the running driver remains frozen at7542fe5. Raw CPU instructions now include the exact pinned source checkout. P1 already batches32problems per job from its sequence cap; retain existing deadlines and real four-problem smoke rather than changing unmeasured runtime settings.

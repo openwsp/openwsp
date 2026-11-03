@@ -336,9 +336,10 @@ def _cpu_evidence_table(records: list[tuple[Path, dict]], relative_to: Path) -> 
         repairs = [(path, path.parent.name, data) for path, data in records if data.get("format") == "openwsp.repair.summary"]
     if repairs:
         lines += ["", "Mechanical repair builds:", "",
-                  "| Variant | Coefficient | Column rule | Build | Changed entries | Evaluation | Accuracy |",
-                  "| --- | --- | --- | --- | --- | --- | --- |"]
+                  "| Variant | Coefficient | Column rule | Build | Changed entries | Evaluation | Accuracy | Finished accuracy | Hit token limit | Finished samples |",
+                  "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
         for path, name, row in repairs:
+            _validate_summary(row, path)
             lines.append("| " + " | ".join((
                 _text(name), _metric(row.get("alpha"), path, relative_to),
                 _recorded(row.get("column_rule"), path, relative_to),
@@ -346,8 +347,75 @@ def _cpu_evidence_table(records: list[tuple[Path, dict]], relative_to: Path) -> 
                 _metric(row.get("changed_entries_total"), path, relative_to, digits=0),
                 _recorded(row.get("evaluation_status"), path, relative_to),
                 _metric(row.get("accuracy"), path, relative_to, percent=True),
+                _finished_accuracy(row, path, relative_to),
+                _metric(row.get("cut_share"), path, relative_to, percent=True),
+                _metric(row.get("finished_n"), path, relative_to, digits=0),
             )) + " |")
         lines += ["", "Building an edit does not establish its benchmark effect. Unavailable inputs and unrun evaluations remain explicit."]
+    return "\n".join(lines)
+
+
+def _damage_table(records: list[tuple[Path, dict]], results: Path, relative_to: Path) -> str:
+    """Render declared KL evidence without treating synthetic arrays as model measurements."""
+    lines = ["### Per-edit neutral-reference KL", "",
+             "| Record | Edit | Measurement scope | KL(base ∥ edited), nats/token | Scored tokens | Reference sequences | Status |",
+             "| --- | --- | --- | --- | --- | --- | --- |"]
+    for path, data in records:
+        provenance = data.get("provenance") or {}
+        synthetic = provenance.get("synthetic") is True
+        metrics = data.get("fixture", data) if synthetic else data
+        if not isinstance(metrics, dict) or data.get("units") != "nats":
+            raise ValueError(f"Invalid KL units or metrics in {path}")
+        for key in ("token_count", "sequence_count", "scored_sequence_count"):
+            value = metrics.get(key)
+            if value is not None and (type(value) is not int or value < 0):
+                raise ValueError(f"Invalid KL {key} in {path}")
+        for key in ("kl_sum", "kl_mean"):
+            value = metrics.get(key)
+            if value is not None and (not _number(value) or value < 0):
+                raise ValueError(f"Invalid {key} in {path}")
+        count, total, mean = (metrics.get(key) for key in ("token_count", "kl_sum", "kl_mean"))
+        if count == 0 and (mean is not None or total not in (None, 0)):
+            raise ValueError(f"KL is undefined without scored tokens in {path}")
+        if mean is not None and (not count or total is None or not math.isclose(mean, total / count, rel_tol=1e-12, abs_tol=1e-15)):
+            raise ValueError(f"KL mean disagrees with its token-weighted sum in {path}")
+        sequences = metrics.get("scored_sequence_count", metrics.get("sequence_count"))
+        if (metrics.get("sequence_count") is not None and sequences is not None
+                and sequences > metrics["sequence_count"]):
+            raise ValueError(f"Scored KL sequences exceed supplied sequences in {path}")
+        scored = metrics.get("scored_sequence_count")
+        if scored is not None and count is not None and (scored > count or (count > 0 and scored == 0)):
+            raise ValueError(f"Scored KL sequences contradict the token count in {path}")
+        if synthetic:
+            scope = "Synthetic CPU validation; not a model measurement"
+            edit = "synthetic arrays"
+        elif data.get("status") == "measured_from_supplied_logits":
+            scope = "Supplied-logit reduction; model/reference identities declared, not reverified"
+            edit = data.get("edit") or provenance.get("edit_sha256") or "unspecified edit"
+        elif provenance.get("gpu") and data.get("status") == "done" and count and mean is not None:
+            dataset_scope = (provenance.get("dataset") or {}).get("scope") or {}
+            neutral = (dataset_scope.get("selection") == "source_order_256_gsm8k_then_256_math"
+                       and dataset_scope.get("scoring") == "reference_continuation_only"
+                       and metrics.get("sequence_count") == 512 and scored == 512)
+            kind = "GPU neutral-reference measurement" if neutral else "GPU measurement; reference scope unverified"
+            smoke = "identity smoke excluded" if (data.get("smoke") or {}).get("included_in_measurement") is False else "smoke accounting unrecorded"
+            scope = f"{kind} ({provenance['gpu']}); {smoke}"
+            edit = data.get("edit", "unspecified edit")
+        else:
+            scope = "Model measurement pending or execution provenance unavailable"
+            edit = data.get("edit", "unspecified edit")
+        kl = (_recorded("undefined (no scored tokens)", path, relative_to) if count == 0
+              else _recorded(f"{mean:.8g}", path, relative_to) if mean is not None else "pending")
+        lines.append("| " + " | ".join((
+            _recorded(path.parent.relative_to(results).as_posix(), path, relative_to),
+            _recorded(edit, path, relative_to), _recorded(scope, path, relative_to), kl,
+            _metric(count, path, relative_to, digits=0), _metric(sequences, path, relative_to, digits=0),
+            _recorded(data.get("status"), path, relative_to),
+        )) + " |")
+    lines += ["", ("KL is the sum of base-to-edited token divergences divided by scored tokens, in nats. "
+              "The registered neutral-reference measurement excludes prompt and padding positions and its identity smoke. "
+              "Different attempts, edits and reference sets remain separate. Synthetic CPU values validate the reducer only; "
+              "missing model measurements remain pending.")]
     return "\n".join(lines)
 
 
@@ -738,8 +806,13 @@ def generate_report(repo_root: str | Path, results_dir: str | Path) -> dict[str,
     cpu_records = [(path, data) for path, data in summaries
                    if data.get("format") in {"openwsp.inspect.summary", "openwsp.repair.summary", "openwsp.repair.variants"}
                    or (data.get("provenance") or {}).get("synthetic") is True]
+    damage_records = [(path, data) for path, data in summaries if data.get("metric") == "kl_base_to_edited"]
+    cpu_records = [(path, data) for path, data in cpu_records
+                   if data.get("metric") != "kl_base_to_edited" or "checks" in data]
     cpu_paths = {path for path, _ in cpu_records}
-    evaluations = [(path, data) for path, data in summaries if path not in cpu_paths]
+    damage_paths = {path for path, _ in damage_records}
+    evaluations = [(path, data) for path, data in summaries if path not in cpu_paths | damage_paths]
+    model_damage = [(path, data) for path, data in damage_records if (data.get("provenance") or {}).get("synthetic") is not True]
     bank_path = results / "forward-bank-cpu.json"
     if bank_path.exists():
         if not bank_path.resolve().is_relative_to(results):
@@ -751,6 +824,8 @@ def generate_report(repo_root: str | Path, results_dir: str | Path) -> dict[str,
                     _calibration_table(evidence, relative_to), _runtime_table(evaluations, relative_to)]
         if cpu_records:
             sections.append(_cpu_evidence_table(cpu_records, relative_to))
+        if damage_records:
+            sections.append(_damage_table(damage_records, results, relative_to))
         if include_status:
             sections.insert(0, status_body(relative_to))
         if "independent-results.json" in analysis:
@@ -761,7 +836,7 @@ def generate_report(repo_root: str | Path, results_dir: str | Path) -> dict[str,
     def status_body(relative_to):
         return _status_table(evidence, relative_to, pointer=pointer, attempts=attempts, summaries=summaries)
     def cost_body(relative_to):
-        return _costs_table(evaluations + extra_costs, relative_to, ledgers)
+        return _costs_table(evaluations + model_damage + extra_costs, relative_to, ledgers)
     readme_path = repo / "README.md"
     readme = readme_path.read_text() if readme_path.exists() else "# OpenWSP\n"
     standalone_status = "<!-- OPENWSP:STATUS:" in readme

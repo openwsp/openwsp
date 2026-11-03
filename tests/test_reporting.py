@@ -809,3 +809,119 @@ def test_repair_cpu_builds_never_become_measured_benchmark_rows(tmp_path):
     assert 'does not establish its benchmark effect' in repair
     assert 'repair/2a/summary.json' not in text.split('### CPU analysis')[0]
     assert str(aggregate) in {row['path'] for row in generated['sources']}
+
+
+def test_repair_scores_keep_finished_denominators_and_pending_builds_distinct(tmp_path):
+    results = setup_repo(tmp_path)
+    path = results / 'repair/summary.json'
+    write_json(path, {'format': 'openwsp.repair.variants', 'variants': {
+        'measured': {'build_status': 'built', 'evaluation_status': 'done', 'n': 5, 'correct': 3,
+                     'accuracy': 0.6, 'finished_n': 2, 'finished_correct': 1, 'accuracy_finished': 0.5, 'cut_share': 0.6},
+        'built_only': {'build_status': 'built', 'evaluation_status': 'pending', 'accuracy': None},
+        'all_cut': {'build_status': 'built', 'evaluation_status': 'done', 'finished_n': 0,
+                    'finished_correct': 0, 'accuracy_finished': None, 'cut_share': 1},
+    }})
+    generate_report(tmp_path, results)
+    text = (tmp_path / 'README.md').read_text().split('Mechanical repair builds:')[1]
+    assert 'Accuracy | Finished accuracy | Hit token limit | Finished samples' in text
+    measured = next(line for line in text.splitlines() if line.startswith('| measured |'))
+    assert '[50.0%](replications/exp8/results/repair/summary.json)' in measured
+    assert '[2](replications/exp8/results/repair/summary.json)' in measured
+    pending = next(line for line in text.splitlines() if line.startswith('| built_only |'))
+    assert pending.endswith('| pending | pending | pending | pending |') and '[0.0%]' not in pending
+    assert '[undefined (no finished samples)]' in text
+
+
+def test_damage_records_keep_edit_identity_cpu_scope_and_source_linked_kl(tmp_path):
+    from replications.exp8.damage import validate_cpu
+
+    results = setup_repo(tmp_path)
+    cpu = results / 'damage_cpu_validation/summary.json'
+    write_json(cpu, validate_cpu())
+    for attempt, edit, mean in [('first', 'p50c', 0.125), ('first', 'live', 1e-12), ('second', 'live', 0.25)]:
+        write_json(results / f'damage/live-runs/{attempt}/{edit}/summary.json', {
+            'stage': 'damage', 'status': 'done', 'edit': edit, 'metric': 'kl_base_to_edited', 'units': 'nats',
+            'token_count': 2048, 'kl_sum': mean * 2048, 'kl_mean': mean, 'sequence_count': 512,
+            'scored_sequence_count': 512, 'seconds': 3600, 'cost_usd': 0.3,
+            'smoke': {'included_in_measurement': False},
+            'provenance': {'gpu': 'H100', 'dataset_sha256': attempt, 'edit_sha256': edit,
+                           'dataset': {'scope': {'selection': 'source_order_256_gsm8k_then_256_math',
+                                                 'scoring': 'reference_continuation_only'}}},
+        })
+    pending = results / 'damage/live-runs/second/random/summary.json'
+    write_json(pending, {'stage': 'damage', 'status': 'pending', 'edit': 'random',
+                         'metric': 'kl_base_to_edited', 'units': 'nats', 'kl_mean': None})
+    generated = generate_report(tmp_path, results)
+    text = (tmp_path / 'README.md').read_text()
+    table = text.split('### Per-edit neutral-reference KL')[1].split('<!-- OPENWSP:RESULTS:END -->')[0]
+    assert '[0.23280366](replications/exp8/results/damage_cpu_validation/summary.json)' in table
+    assert 'Synthetic CPU validation; not a model measurement' in table
+    assert 'GPU neutral-reference measurement (H100); identity smoke excluded' in table
+    assert '[0.125](replications/exp8/results/damage/live-runs/first/p50c/summary.json)' in table
+    assert '[1e-12](replications/exp8/results/damage/live-runs/first/live/summary.json)' in table
+    assert '[0.25](replications/exp8/results/damage/live-runs/second/live/summary.json)' in table
+    assert '[512](replications/exp8/results/damage/live-runs/first/p50c/summary.json)' in table
+    row = next(line for line in table.splitlines() if '/second/random/summary.json)' in line)
+    assert '| pending | pending | pending |' in row and '[0]' not in row
+    assert 'damage/live-runs/' not in text.split('### Per-edit neutral-reference KL')[0]
+    assert '[0.3000](replications/exp8/results/damage/live-runs/first/p50c/summary.json)' in text
+    standalone = (results / 'report.md').read_text()
+    assert '[1e-12](damage/live-runs/first/live/summary.json)' in standalone
+    assert str(cpu) in {item['path'] for item in generated['sources']}
+    assert all(line.count('|') == 8 for line in table.splitlines() if line.startswith('|'))
+
+
+@pytest.mark.parametrize('metrics', [
+    {'token_count': True, 'kl_sum': 1, 'kl_mean': 1},
+    {'token_count': 2.5, 'kl_sum': 1, 'kl_mean': 0.4},
+    {'token_count': 0, 'kl_sum': 0, 'kl_mean': 0},
+    {'token_count': 2, 'kl_sum': 1, 'kl_mean': 0.25},
+    {'token_count': 2, 'kl_mean': 0.5},
+    {'token_count': 2, 'kl_sum': -1, 'kl_mean': -0.5},
+    {'token_count': 2, 'kl_sum': float('inf'), 'kl_mean': float('inf')},
+    {'token_count': 2, 'kl_sum': 1, 'kl_mean': 0.5, 'sequence_count': 1, 'scored_sequence_count': 2},
+    {'token_count': 2, 'kl_sum': 1, 'kl_mean': 0.5, 'sequence_count': 1, 'scored_sequence_count': 0},
+    {'token_count': 2, 'kl_sum': 1, 'kl_mean': 0.5, 'sequence_count': 3, 'scored_sequence_count': 3},
+    {'token_count': 0, 'kl_sum': 0, 'kl_mean': None, 'sequence_count': 1, 'scored_sequence_count': 1},
+])
+def test_invalid_damage_metrics_fail_before_any_report_write(tmp_path, metrics):
+    results = setup_repo(tmp_path)
+    write_json(results / 'damage/live/summary.json', {'stage': 'damage', 'metric': 'kl_base_to_edited',
+                                                    'units': 'nats', **metrics})
+    before = (tmp_path / 'README.md').read_bytes()
+    with pytest.raises(ValueError, match='KL|kl_'):
+        generate_report(tmp_path, results)
+    assert (tmp_path / 'README.md').read_bytes() == before and not (results / 'report.md').exists()
+
+
+def test_supplied_logits_and_empty_masks_are_not_promoted_to_gpu_measurements(tmp_path):
+    results = setup_repo(tmp_path)
+    path = results / 'supplied/summary.json'
+    write_json(path, {'stage': 'damage', 'status': 'measured_from_supplied_logits', 'metric': 'kl_base_to_edited',
+                      'units': 'nats', 'token_count': 0, 'kl_sum': 0, 'kl_mean': None,
+                      'provenance': {'synthetic': False, 'edit_sha256': 'declared-edit'}})
+    generate_report(tmp_path, results)
+    text = (tmp_path / 'README.md').read_text()
+    assert '[declared-edit](replications/exp8/results/supplied/summary.json)' in text
+    assert '[undefined (no scored tokens)](replications/exp8/results/supplied/summary.json)' in text
+    assert 'Supplied-logit reduction; model/reference identities declared, not reverified' in text
+    assert 'GPU neutral-reference measurement' not in text
+
+
+@pytest.mark.parametrize('declared_scope', [False, True])
+def test_gpu_label_does_not_invent_neutral_reference_or_smoke_scope(tmp_path, declared_scope):
+    results = setup_repo(tmp_path)
+    provenance = {'gpu': 'H100'}
+    if declared_scope:
+        provenance['dataset'] = {'scope': {'selection': 'source_order_256_gsm8k_then_256_math',
+                                          'scoring': 'reference_continuation_only'}}
+    write_json(results / 'damage/live/summary.json', {
+        'stage': 'damage', 'status': 'done', 'edit': 'live', 'metric': 'kl_base_to_edited', 'units': 'nats',
+        'token_count': 3, 'kl_sum': 0, 'kl_mean': 0, 'sequence_count': 1,
+        'scored_sequence_count': 1, 'provenance': provenance,
+    })
+    generate_report(tmp_path, results)
+    text = (tmp_path / 'README.md').read_text()
+    assert 'GPU measurement; reference scope unverified' in text and 'smoke accounting unrecorded' in text
+    assert 'GPU neutral-reference measurement (H100); identity smoke excluded' not in text
+    assert '[0](replications/exp8/results/damage/live/summary.json)' in text

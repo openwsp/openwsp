@@ -77,13 +77,21 @@ These records establish the stated CPU measurements or implementation checks. Th
 
 Mechanical repair builds:
 
-| Variant | Coefficient | Column rule | Build | Changed entries | Evaluation | Accuracy |
-| --- | --- | --- | --- | --- | --- | --- |
-| 2a | [1.0](repair/summary.json) | [all](repair/summary.json) | [built](repair/summary.json) | [6289541](repair/summary.json) | [pending](repair/summary.json) | pending |
-| 2b | [6.0](repair/summary.json) | [all](repair/summary.json) | [built](repair/summary.json) | [7077322](repair/summary.json) | [pending](repair/summary.json) | pending |
-| 2c | [6.0](repair/summary.json) | [topk](repair/summary.json) | [unavailable_input_statistics](repair/summary.json) | pending | [pending](repair/summary.json) | pending |
+| Variant | Coefficient | Column rule | Build | Changed entries | Evaluation | Accuracy | Finished accuracy | Hit token limit | Finished samples |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2a | [1.0](repair/summary.json) | [all](repair/summary.json) | [built](repair/summary.json) | [6289541](repair/summary.json) | [pending](repair/summary.json) | pending | pending | pending | pending |
+| 2b | [6.0](repair/summary.json) | [all](repair/summary.json) | [built](repair/summary.json) | [7077322](repair/summary.json) | [pending](repair/summary.json) | pending | pending | pending | pending |
+| 2c | [6.0](repair/summary.json) | [topk](repair/summary.json) | [unavailable_input_statistics](repair/summary.json) | pending | [pending](repair/summary.json) | pending | pending | pending | pending |
 
 Building an edit does not establish its benchmark effect. Unavailable inputs and unrun evaluations remain explicit.
+
+### Per-edit neutral-reference KL
+
+| Record | Edit | Measurement scope | KL(base ∥ edited), nats/token | Scored tokens | Reference sequences | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| [damage_cpu_validation](damage_cpu_validation/summary.json) | [synthetic arrays](damage_cpu_validation/summary.json) | [Synthetic CPU validation; not a model measurement](damage_cpu_validation/summary.json) | [0.23280366](damage_cpu_validation/summary.json) | [2](damage_cpu_validation/summary.json) | pending | [validated](damage_cpu_validation/summary.json) |
+
+KL is the sum of base-to-edited token divergences divided by scored tokens, in nats. The registered neutral-reference measurement excludes prompt and padding positions and its identity smoke. Different attempts, edits and reference sets remain separate. Synthetic CPU values validate the reducer only; missing model measurements remain pending.
 
 ### Independent results
 

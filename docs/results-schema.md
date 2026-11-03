@@ -43,6 +43,28 @@ The published summaries record the helper, termination convention and compact sa
 
 Record problem coverage as well as sample count in provenance. Multiple samples of the same problem are not independent problems: report the uncertainty method and preserve the per-problem grouping. An exact ratio with no uncertainty method is insufficient for a calibration claim.
 
+## Per-edit damage measurement
+
+Damage records use a separate generated KL table. They are not accuracy measurements. The accounted stage writes one `summary.json` per attempt and edit under `damage/live-runs/<run-id>/<edit>/`; the original attempt uses its own distinct path. The table retains each record's source link, edit label, status and measurement scope. The ordinary cost table still includes recorded damage costs.
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `stage` | string | `damage` for a measurement; `damage_cpu_validation` for the analytic implementation check. |
+| `edit` | string | Condition such as `p50c`, `mechanical`, `random` or `live`. |
+| `metric`, `units` | strings | `kl_base_to_edited` and `nats`. The direction is base to edited. |
+| `token_count` | integer | Total scored continuation positions after the causal mask shift, excluding prompt and padding. |
+| `kl_sum` | number | Sum of the per-token divergences, accumulated in float64. |
+| `kl_mean` | number or null | `kl_sum / token_count`, not an average of per-example means; null when no tokens are scored. |
+| `sequence_count`, `scored_sequence_count` | integers | Supplied reference sequences and sequences containing scored positions. |
+| `smoke` | object | Identity-check result and `included_in_measurement: false`; never add its tokens to the measured denominator. |
+| `provenance` | object | Manifest and dataset hashes, ordered reference IDs/text hashes, tokenization and mask scope, checkpoint identities, edit identity, engine settings, hardware and accounting basis. |
+
+The registered model measurement uses the saved first 256 GSM8K and 256 MATH practice references, unchanged solutions, and continuation-only scoring. Its provenance records this selection under `dataset.scope`. The reporter labels a GPU record as a neutral-reference measurement only when that scope and 512 supplied/scored sequences are recorded; partial or missing scope and missing smoke accounting stay explicitly unverified. Contradictory scored-sequence and token counts block report generation. The versioned `edit_sha256` and byte-level `edit_bundle_sha256` identify different things. The authors' legacy bundle has a null versioned address and an explicit `edit_address_format`.
+
+Synthetic CPU validation records require `provenance.synthetic: true`. The analytic check stores its numeric result under `fixture` and leaves `model_measurement` pending. Its table row says synthetic CPU validation, not a model measurement. The standalone supplied-logit reducer uses `status: "measured_from_supplied_logits"`; its declared checkpoint/reference identities are not presented as independently verified GPU inference. Missing metrics remain pending, zero scored tokens have an undefined mean, and a recorded mean inconsistent with its token-weighted sum blocks report generation. The reporter reads compact records only, never raw logits or reference text.
+
+Mechanical repair rows retain build and evaluation states separately. Their accuracy, finished accuracy, cap-hit rate and finished count stay pending until scoring records them; a CPU-built edit is not a measured improvement.
+
 ## Per-sample record
 
 Use JSON Lines, one object for every scored sample:
