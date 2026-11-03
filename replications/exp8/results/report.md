@@ -2,6 +2,10 @@
 
 | Recorded component | State | Evidence |
 | --- | --- | --- |
+| Required live run | [blocked](live-run/blocker.json) | [live goal unmet](live-run/blocker.json); [editor_budget_admission](live-run/blocker.json) |
+| Live pass requirement | [4](live-run/blocker.json) / [50](live-run/blocker.json) | Recorded turn: [26](live-run/blocker.json) |
+| Live final evaluation | [not_started_no_completed_50_pass_submission](live-run/blocker.json) | See live-run record. |
+| Recorded live blocker | [BudgetExceeded: editor stage editor:t027: reserve $30.478625, only $21.7072350 available](live-run/blocker.json) | See live-run record. |
 | Pipeline | [blocked](pipeline-state.json) | [live](pipeline-state.json) |
 | Recorded blocker | [BudgetExceeded: editor stage editor:t027: reserve $30.478625, only $21.7072350 available](pipeline-state.json) | See source record. |
 | Driver recovery | [blocked](coordinator.json) | [all](coordinator.json) |
@@ -14,6 +18,8 @@
 | Weight swap check | [fallback](kernel/weight-swap.json) | [kernel/weight-swap.json](kernel/weight-swap.json) |
 | Recorded diagnostic | [Engine does not expose a compatible weight-reload contract](kernel/weight-swap.json) | See source record. |
 | Live editor | [incomplete](live-run/state.json) | passes: [4](live-run/state.json); turn: [26](live-run/state.json); runs: [10](live-run/state.json) |
+
+Completed controls or publication do not satisfy the blocked live-run goal.
 
 States are recorded snapshots; use `openwsp status` to check current liveness.
 

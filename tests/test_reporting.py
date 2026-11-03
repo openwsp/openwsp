@@ -136,6 +136,49 @@ def test_coordinator_block_reason_is_retained(tmp_path):
     assert "[Provider outcome remains uncertain](replications/exp8/results/coordinator.json)" in text
 
 
+@pytest.mark.parametrize("stage,status", [("controls", "stage_done"), ("publication", "complete")])
+def test_later_stage_success_cannot_hide_recorded_live_blocker(tmp_path, stage, status):
+    results = setup_repo(tmp_path)
+    readme = tmp_path / "README.md"
+    readme.write_text("<!-- OPENWSP:STATUS:START -->\nstale status\n<!-- OPENWSP:STATUS:END -->\n" + readme.read_text())
+    write_json(results / "pipeline-state.json", {"status": status, "active_stage": stage})
+    write_json(results / "coordinator.json", {"current": {"phase": "complete", "stage": stage}})
+    write_json(results / "live-run/state.json", {"done": False, "passes": 4, "turn": 26, "runs": 10})
+    blocker = results / "live-run/blocker.json"
+    write_json(blocker, {
+        "status": "blocked", "reason": "editor_budget_admission", "error": "Next response exceeds remaining allowance",
+        "live": {"passes": 4, "turn": 26, "done": False, "submission": None}, "required_live_passes": 50,
+        "final_evaluation_status": "not_started_no_completed_50_pass_submission", "publication": {"status": "pushed"},
+    })
+    write_json(results / "control1_nothink/math500/summary.json", {
+        "stage": "control1_nothink", "benchmark": "math500", "status": "done", "n": 10, "correct": 4, "accuracy": 0.4,
+    })
+    generated = generate_report(tmp_path, results)
+    text = readme.read_text()
+    top = text.split("<!-- OPENWSP:STATUS:START -->", 1)[1].split("<!-- OPENWSP:STATUS:END -->", 1)[0]
+    source = "replications/exp8/results/live-run/blocker.json"
+    assert f"| Required live run | [blocked]({source}) | [live goal unmet]({source})" in top
+    assert f"[4]({source}) / [50]({source})" in top
+    assert f"[not_started_no_completed_50_pass_submission]({source})" in top
+    assert f"[{status}](replications/exp8/results/pipeline-state.json)" in top
+    assert top.index("Required live run") < top.index("| Pipeline |")
+    assert "Completed controls or publication do not satisfy the blocked live-run goal" in top
+    assert "[40.0%]" in text  # Completed controls still appear as their own result.
+    report = (results / "report.md").read_text()
+    assert "[blocked](live-run/blocker.json)" in report and "live goal unmet" in report
+    assert str(blocker) in {item["path"] for item in generated["sources"]}
+
+
+def test_explicitly_resolved_live_blocker_is_not_reported_as_unmet_goal(tmp_path):
+    results = setup_repo(tmp_path)
+    write_json(results / "live-run/blocker.json", {"status": "resolved", "reason": "resolved in recorded follow-up"})
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "[resolved](replications/exp8/results/live-run/blocker.json)" in text
+    assert "live goal unmet" not in text
+    assert "Completed controls or publication do not satisfy" not in text
+
+
 def test_calibration_gap_audit_and_runtime_are_source_linked(tmp_path):
     results = setup_repo(tmp_path)
     write_json(results / "calibration-check.json", {

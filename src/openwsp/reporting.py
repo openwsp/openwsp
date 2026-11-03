@@ -18,7 +18,7 @@ _COMPARATORS = {"calibration_base": "unedited", "calibration_p50c": "p50c", "liv
 _SECRET = re.compile(r"(?:sk-|hf_|ak-|as-|ghp_|github_pat_)[A-Za-z0-9_-]{16,}")
 _BEARER = re.compile(r"(?i)(authorization[\"'\s:]+bearer\s+)[A-Za-z0-9._~+/-]+")
 _STATE_FILES = (
-    "pipeline-state.json", "coordinator.json", "live-run/state.json", "calibration-check.json", "calibration-prompt-audit.json",
+    "pipeline-state.json", "coordinator.json", "live-run/state.json", "live-run/blocker.json", "calibration-check.json", "calibration-prompt-audit.json",
     "calibration-gap-audit.json", "kernel/hash-verification.json", "kernel/sandbox-verification.json",
     "kernel/forward-verification.json", "kernel/weight-swap.json",
 )
@@ -69,6 +69,24 @@ def _recorded(value: Any, path: Path, relative_to: Path) -> str:
 
 def _status_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path) -> str:
     lines = ["| Recorded component | State | Evidence |", "| --- | --- | --- |"]
+    live_blocker = evidence.get("live-run/blocker.json")
+    if live_blocker:
+        path, data = live_blocker
+        state = data.get("status")
+        details = _recorded(data.get("reason"), path, relative_to)
+        if state == "blocked":
+            details = _recorded("live goal unmet", path, relative_to) + "; " + details
+        lines.append(f"| Required live run | {_recorded(state, path, relative_to)} | {details} |")
+        live = data.get("live") or {}
+        passes = _metric(live.get("passes"), path, relative_to, digits=0)
+        required = _metric(data.get("required_live_passes"), path, relative_to, digits=0)
+        turn = _metric(live.get("turn"), path, relative_to, digits=0)
+        lines.append(f"| Live pass requirement | {passes} / {required} | Recorded turn: {turn} |")
+        if data.get("final_evaluation_status") is not None:
+            lines.append(f"| Live final evaluation | {_recorded(data['final_evaluation_status'], path, relative_to)} | See live-run record. |")
+        if data.get("error"):
+            label = "Recorded live blocker" if state == "blocked" else "Recorded live diagnostic"
+            lines.append(f"| {label} | {_recorded(str(data['error'])[:500], path, relative_to)} | See live-run record. |")
     labels = {
         "pipeline-state.json": "Pipeline", "coordinator.json": "Driver recovery",
         "calibration-prompt-audit.json": "Calibration prompt audit",
@@ -105,6 +123,8 @@ def _status_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path) -> 
         lines.append("| Pipeline | pending: no published state record | No completion claim. |")
     elif pipeline is None:
         lines.append("| Pipeline | pending: no published pipeline state | Component checks do not establish overall completion. |")
+    if live_blocker and live_blocker[1].get("status") == "blocked":
+        lines += ["", "Completed controls or publication do not satisfy the blocked live-run goal."]
     return "\n".join(lines) + "\n\nStates are recorded snapshots; use `openwsp status` to check current liveness."
 
 
