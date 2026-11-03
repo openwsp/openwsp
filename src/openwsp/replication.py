@@ -22,7 +22,7 @@ def repository():
 
 def replicate(experiment, *, stage="all", detach=True, config=None):
     if experiment != "exp8":
-        raise ValueError("Only exp8 is implemented; experiments 1–7 are layout only")
+        raise ValueError("This Modal entry point supports exp8; CPU experiments 1, 2, 4 and 5 use python -m replications.raw_weights.runner")
     settings = json.loads(Path(config).read_text()) if config else {}
     from openwsp.backends.codex_worker import CodexWorker, split_codex_settings
     settings, local = split_codex_settings(settings, detach=detach)

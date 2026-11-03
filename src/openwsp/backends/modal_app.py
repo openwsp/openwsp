@@ -262,6 +262,32 @@ class TransformerReader:
                                     "sampling": result["sampling"]}}
 
     @modal.method()
+    def damage(self, manifest_path, manifest_sha256):
+        """Private paired KL: identity smoke and one full reference comparison."""
+        if self.load_error:
+            raise RuntimeError(self.load_error)
+        if self.eager:
+            raise ValueError("The registered damage measurement requires sdpa attention")
+        import torch
+        import transformers
+        from transformers import Qwen3_5ForConditionalGeneration
+
+        from replications.exp8.damage_stage import measure_manifest
+
+        start = time.monotonic()
+
+        def load_edited(checkpoint):
+            return Qwen3_5ForConditionalGeneration.from_pretrained(
+                checkpoint, dtype=torch.bfloat16, attn_implementation="sdpa",
+                local_files_only=True).to(self.model.device).eval()
+
+        result = measure_manifest(self.model, self.tokenizer, manifest_path, manifest_sha256,
+                                  base_checkpoint=self.checkpoint, load_edited=load_edited)
+        return {**result, "measurement_seconds": time.monotonic() - start,
+                "container_seconds": self._seconds(), "gpu": self.gpu_kind,
+                "engine": "transformers==" + transformers.__version__, "transformers": transformers.__version__}
+
+    @modal.method()
     def read(self, request, directory):
         if self.load_error:
             raise RuntimeError(self.load_error)
