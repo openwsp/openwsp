@@ -29,7 +29,11 @@ Actual execution is explicit; the existing subscription login stays local:
 
 `--experiment exp1 --item breakout` selects one released item without modifying its prompt. Reuse the same state/output roots for every item and recovery. Fable replaces `--editor` with `fable_native_anthropic` and requires `--fable-limits /absolute/verified-limits.json`; its SDK reads `ANTHROPIC_API_KEY` normally. No credential appears in config or results. Each limits entry is keyed by `exp1/breakout` (and similarly for the other items), with `prompt_sha256`, positive `max_input_tokens`, the fixed `max_output_tokens`, and `count_evidence` containing the native counting provenance. `--rollout` enables the CPU MinAtar scorer. For deferred scoring, replace `--execute` with `--score-only --rollout`: this path requires saved hash-verified answers and never constructs an editor or reads credentials. It preserves the original answer and receipt.
 
-Regenerate the [new-outcome inventory](results/summary.json) from saved files with `.venv/bin/python -m replications.raw_weights.report --output-root replications/raw_weights/results`. It distinguishes missing replies, saved replies awaiting rollout scoring, and completed scores; it never substitutes the authors' reference outcomes.
+Astra completed [all eleven replies and scores](results/summary.json). Fable remains [unstarted pending native credentials](results/fable-blocker.json); its authorized $20 cap has not been used.
+
+The [completed-run verification](results/astra-verification.json) checks eleven distinct conversations, one completed turn per item, no native tool calls, and source/answer hashes. CPU scoring uses float32 parsed tensors. The generic version-1 edit exports round to bfloat16 and are not the exact scored networks. The verification record preserves each scored float32 tensor's shape and hash; the immutable answer, shown base and pinned parser reconstruct those tensors. Full weights stay outside git.
+
+Regenerate the [new-outcome inventory](results/summary.json), [comparison](results/comparison.md) and marked main README tables from saved files with `.venv/bin/python -m replications.raw_weights.report --output-root replications/raw_weights/results --update-readme`. It distinguishes missing replies, saved replies awaiting rollout scoring, and completed scores; it never substitutes the authors' reference outcomes.
 
 ## Reconstructed scoring
 

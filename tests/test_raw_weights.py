@@ -227,8 +227,11 @@ def test_report_preserves_pending_and_verifies_answer_bytes(tmp_path, monkeypatc
     binding = {"source_revision": "pinned", "prompt_sha256": "prompt-hash", "instructions_sha256": "instructions-hash",
                "editor": "astra_subscription", "experiment": "exp1", "item_id": "pong"}
     (target / "result.json").write_text(json.dumps({"binding": binding, "status": "completed",
+        "receipt": {"usage": {"input_tokens": 10, "output_tokens": 3, "service_tier": "standard", "cache_creation": {"nested": 2}}},
         "answer_sha256": hashlib.sha256(answer).hexdigest(), "score": {"correct": True, "predicted": ["pong"]}}))
-    rows = report.generate(tmp_path)["items"]
+    summary = report.generate(tmp_path)
+    rows = summary["items"]
+    assert summary["editors"]["astra_subscription"]["usage_totals"] == {"input_tokens": 10, "output_tokens": 3}
     assert rows[0]["correct"] is True and "cost_usd" not in rows[0]
     assert rows[1]["reply_status"] == "pending" and "correct" not in rows[1]
     (target / "answer.md").write_text("Changed answer")
@@ -269,6 +272,38 @@ def test_fable_limits_count_exact_messages_without_generation(tmp_path, monkeypa
     assert calls[0]["output_config"] == {"effort": "xhigh"}
     assert result["exp5/asterix"]["max_input_tokens"] == 2074
     assert result["exp5/asterix"]["max_output_tokens"] == 32768
+
+
+def test_ppo_reference_uses_every_declared_seed_without_selection():
+    from replications.raw_weights.report import ppo_reference_summary
+    result = ppo_reference_summary()
+    assert len(result["rows"]) == 6
+    for row in result["rows"]:
+        means = list(row["individual_means"].values())
+        assert len(means) == row["seed_count"] == len(row["seed_names"])
+        assert row["episodes_per_seed"] == 1000
+        assert row["mean_of_seed_means"] == pytest.approx(sum(means) / len(means))
+        assert row["mean_of_seed_means"] < row["maximum_seed_mean"]
+
+
+def test_comparison_table_uses_current_grades_and_keeps_missing_editor_pending():
+    from replications.raw_weights.report import comparison_markdown
+    from replications.raw_weights.runner import inventory
+    manifest = inventory()
+    rows = [{"editor": editor, "experiment": item["experiment"], "item_id": item["item_id"],
+             "score_status": "pending"} for editor in manifest["editors"] for item in manifest["items"]]
+    for row in rows:
+        if row["editor"] == "astra_subscription" and row["experiment"] == "exp1":
+            row.update(score_status="completed", correct=False)
+    table = comparison_markdown({"items": rows})
+    game_row = next(line for line in table.splitlines() if "1: identify the game" in line)
+    assert "[0/4]" in game_row.split("|")[3]
+    assert "fable-blocker.json" in game_row.split("|")[4]
+    for row in rows:
+        if "correct" in row:
+            row["correct"] = True
+    changed = next(line for line in comparison_markdown({"items": rows}).splitlines() if "1: identify the game" in line)
+    assert "[4/4]" in changed.split("|")[3]
 
 
 def test_minatar_input_channels_and_seeded_rollouts():

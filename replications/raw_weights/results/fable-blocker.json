@@ -1,0 +1,23 @@
+{
+  "authorized_entire_set_cap_usd": 20,
+  "completed_items": 0,
+  "credential_readiness": {
+    "ANTHROPIC_API_KEY": false,
+    "source": "Current execution environment readiness; credential values are neither recorded nor printed"
+  },
+  "generation_requests": 0,
+  "model": "claude-fable-5-1",
+  "no_fallback": true,
+  "observed_at": "2026-11-03T20:18:17.673795+00:00",
+  "planned_items": 11,
+  "reason": "Native Anthropic credentials are not configured; the authorized budget has not been used. The earlier credential-configuration question remains pending.",
+  "resume_commands": [
+    ".venv/bin/python -m replications.raw_weights.fable_limits --source-root .openwsp/upstream --output .openwsp/raw-weights/fable-limits.json --count-native-tokens",
+    ".venv/bin/python -m replications.raw_weights.runner --editor fable_native_anthropic --state-root .openwsp/raw-weights --output-root replications/raw_weights/results --fable-limits .openwsp/raw-weights/fable-limits.json --execute",
+    ".venv/bin/python -m replications.raw_weights.runner --editor fable_native_anthropic --state-root .openwsp/raw-weights --output-root replications/raw_weights/results --score-only --rollout",
+    ".venv/bin/python -m replications.raw_weights.report --output-root replications/raw_weights/results"
+  ],
+  "schema_version": 1,
+  "status": "pending_credentials",
+  "transport": "anthropic_messages"
+}

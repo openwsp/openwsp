@@ -1,0 +1,7120 @@
+{
+  "answer_bytes": 5606,
+  "answer_sha256": "a79e096e616da48ec6cf9ae40ec4a375bdde643d3af64250095088ffb173e72c",
+  "binding": {
+    "editor": "astra_subscription",
+    "experiment": "exp5",
+    "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+    "item_id": "asterix",
+    "prompt_sha256": "9e8243d5545956e42b8bd130bceba6ed90ecb807768be3ae0f498f765197f5da",
+    "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f"
+  },
+  "editor_contract": {
+    "effort": "xhigh",
+    "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+    "reasoning_summary": "detailed",
+    "transport": "codex_cli_chatgpt",
+    "verbosity": "low"
+  },
+  "receipt": {
+    "billing": "chatgpt_subscription_no_api_price_inferred",
+    "event_file": "5674a2c1b08648ebb6646baa7e565853/events.jsonl",
+    "exit": {
+      "reason": null,
+      "returncode": 0,
+      "seconds": 727.5285226640008,
+      "violation": null
+    },
+    "final_file": "5674a2c1b08648ebb6646baa7e565853/final.txt",
+    "input_sha256": "36debdbd969efbb611bb52f493424e6449b92d1f1104ee176f3d12bcaf37c24b",
+    "profile": {
+      "auto_compact_token_limit": 1000000,
+      "catalog_path": "/workspace/openwsp/src/openwsp/editors/data/codex-models-0.163.0.json",
+      "catalog_sha256": "05723cac0f7da85c31f710f602bb0c47a5588d8bdf68aad24e9dd6ac951c7705",
+      "cli_version": "0.163.0",
+      "context_window": 872000,
+      "effort": "xhigh",
+      "instructions": "Answer the user's request.\n",
+      "model": "gpt-6-astra",
+      "name": "astra-exp5-authors",
+      "reasoning_summary": "detailed",
+      "transport": "codex_cli_chatgpt",
+      "verbosity": "low"
+    },
+    "recorded_at": 1793735212.3661525,
+    "request_key": "raw-weights:6d5d3a336bc001c7142d4df1d6ba833ece202c10684c58fe510bbfadf1e5ec9a",
+    "response_id": "5674a2c1b08648ebb6646baa7e565853",
+    "runaway": null,
+    "schema_version": 1,
+    "settings": {
+      "catalog_sha256": "05723cac0f7da85c31f710f602bb0c47a5588d8bdf68aad24e9dd6ac951c7705",
+      "cli_version": "0.163.0",
+      "codex_home": "/workspace/openwsp/.openwsp/codex-subscription",
+      "effort": "xhigh",
+      "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+      "model": "gpt-6-astra",
+      "reasoning_summary": "detailed",
+      "verbosity": "low",
+      "work_dir": "/tmp/openwsp-raw-f30da208324e650e479155c8"
+    },
+    "status": "completed",
+    "text": "I use a conservative central-column policy: stay at column 5, pursue incoming treasure vertically, and wait on its row. First-layer units encode row-conditioned danger along repeated-action paths and trail-filtered treasure locations. Second-layer units decode treasure direction and impose strong collision penalties, with additional caution for sticky actions.\n\n```edits\n# First-layer units 0:24: row-conditioned risks for no-op, up, down.\nb1[0:24] = -43\nW1[60:120:6, 0:24:8] = 40\nW1[120:180:6, 1:24:8] = 40\nW1[180:240:6, 2:24:8] = 40\nW1[240:300:6, 3:24:8] = 40\nW1[300:360:6, 4:24:8] = 40\nW1[360:420:6, 5:24:8] = 40\nW1[420:480:6, 6:24:8] = 40\nW1[480:540:6, 7:24:8] = 40\n\n# Stationary danger: progressively discounted five-step horizon.\nW1[61:121:6, 0] = [0.5, 1.25, 3, 5, 15, 15, 15, 5, 3, 1.25]\nW1[121:181:6, 1] = [0.5, 1.25, 3, 5, 15, 15, 15, 5, 3, 1.25]\nW1[181:241:6, 2] = [0.5, 1.25, 3, 5, 15, 15, 15, 5, 3, 1.25]\nW1[241:301:6, 3] = [0.5, 1.25, 3, 5, 15, 15, 15, 5, 3, 1.25]\nW1[301:361:6, 4] = [0.5, 1.25, 3, 5, 15, 15, 15, 5, 3, 1.25]\nW1[361:421:6, 5] = [0.5, 1.25, 3, 5, 15, 15, 15, 5, 3, 1.25]\nW1[421:481:6, 6] = [0.5, 1.25, 3, 5, 15, 15, 15, 5, 3, 1.25]\nW1[481:541:6, 7] = [0.5, 1.25, 3, 5, 15, 15, 15, 5, 3, 1.25]\n\n# Up: immediate destination.\nW1[85:103:6, 8:10] += 10\nW1[145:163:6, 10] += 10\nW1[205:223:6, 11] += 10\nW1[265:283:6, 12] += 10\nW1[325:343:6, 13] += 10\nW1[385:403:6, 14] += 10\nW1[445:463:6, 15] += 10\n\n# Up: second repeated-action destination.\nW1[79:109:6, 8:11] += 2\nW1[139:169:6, 11] += 2\nW1[199:229:6, 12] += 2\nW1[259:289:6, 13] += 2\nW1[319:349:6, 14] += 2\nW1[379:409:6, 15] += 2\n\n# Up: third repeated-action destination.\nW1[73:115:6, 8:12] += 1.75\nW1[133:175:6, 12] += 1.75\nW1[193:235:6, 13] += 1.75\nW1[253:295:6, 14] += 1.75\nW1[313:355:6, 15] += 1.75\n\n# Up: fourth repeated-action destination.\nW1[67:121:6, 8:13] += 0.75\nW1[127:181:6, 13] += 0.75\nW1[187:241:6, 14] += 0.75\nW1[247:301:6, 15] += 0.75\n\n# Up: fifth repeated-action destination.\nW1[61:121:6, 8:14] += 0.5\nW1[121:181:6, 14] += 0.5\nW1[181:241:6, 15] += 0.5\n\n# Down: immediate destination.\nW1[145:163:6, 16] += 10\nW1[205:223:6, 17] += 10\nW1[265:283:6, 18] += 10\nW1[325:343:6, 19] += 10\nW1[385:403:6, 20] += 10\nW1[445:463:6, 21] += 10\nW1[505:523:6, 22:24] += 10\n\n# Down: second repeated-action destination.\nW1[199:229:6, 16] += 2\nW1[259:289:6, 17] += 2\nW1[319:349:6, 18] += 2\nW1[379:409:6, 19] += 2\nW1[439:469:6, 20] += 2\nW1[499:529:6, 21:24] += 2\n\n# Down: third repeated-action destination.\nW1[253:295:6, 16] += 1.75\nW1[313:355:6, 17] += 1.75\nW1[373:415:6, 18] += 1.75\nW1[433:475:6, 19] += 1.75\nW1[493:535:6, 20:24] += 1.75\n\n# Down: fourth repeated-action destination.\nW1[307:361:6, 16] += 0.75\nW1[367:421:6, 17] += 0.75\nW1[427:481:6, 18] += 0.75\nW1[487:541:6, 19:24] += 0.75\n\n# Down: fifth repeated-action destination.\nW1[361:421:6, 16] += 0.5\nW1[421:481:6, 17] += 0.5\nW1[481:541:6, 18:24] += 0.5\n\n# First-layer units 24:32: incoming treasure and relative player row.\nb1[24:32] = -8\nW1[60:120:6, 24:32] = 0.22\nW1[120:180:6, 24:32] = 0.44\nW1[180:240:6, 24:32] = 0.66\nW1[240:300:6, 24:32] = 0.88\nW1[300:360:6, 24:32] = 1.10\nW1[360:420:6, 24:32] = 1.32\nW1[420:480:6, 24:32] = 1.54\nW1[480:540:6, 24:32] = 1.76\nW1[0:600:6, 24] -= 0.22\nW1[0:600:6, 25] -= 0.44\nW1[0:600:6, 26] -= 0.66\nW1[0:600:6, 27] -= 0.88\nW1[0:600:6, 28] -= 1.10\nW1[0:600:6, 29] -= 1.32\nW1[0:600:6, 30] -= 1.54\nW1[0:600:6, 31] -= 1.76\n\n# Treasure plus trail sums to 8 when approaching column 5.\n# Treasure that has passed column 5 is suppressed.\nW1[62:122:6, 24] = [8, 8, 14, 20, 26, 32, 26, 20, 14, 8]\nW1[64:124:6, 24] = [0, -6, -12, -18, -24, -30, -24, -18, -12, -6]\nW1[122:182:6, 25] = [8, 8, 14, 20, 26, 32, 26, 20, 14, 8]\nW1[124:184:6, 25] = [0, -6, -12, -18, -24, -30, -24, -18, -12, -6]\nW1[182:242:6, 26] = [8, 8, 14, 20, 26, 32, 26, 20, 14, 8]\nW1[184:244:6, 26] = [0, -6, -12, -18, -24, -30, -24, -18, -12, -6]\nW1[242:302:6, 27] = [8, 8, 14, 20, 26, 32, 26, 20, 14, 8]\nW1[244:304:6, 27] = [0, -6, -12, -18, -24, -30, -24, -18, -12, -6]\nW1[302:362:6, 28] = [8, 8, 14, 20, 26, 32, 26, 20, 14, 8]\nW1[304:364:6, 28] = [0, -6, -12, -18, -24, -30, -24, -18, -12, -6]\nW1[362:422:6, 29] = [8, 8, 14, 20, 26, 32, 26, 20, 14, 8]\nW1[364:424:6, 29] = [0, -6, -12, -18, -24, -30, -24, -18, -12, -6]\nW1[422:482:6, 30] = [8, 8, 14, 20, 26, 32, 26, 20, 14, 8]\nW1[424:484:6, 30] = [0, -6, -12, -18, -24, -30, -24, -18, -12, -6]\nW1[482:542:6, 31] = [8, 8, 14, 20, 26, 32, 26, 20, 14, 8]\nW1[484:544:6, 31] = [0, -6, -12, -18, -24, -30, -24, -18, -12, -6]\n\n# Second layer: treasure-presence thresholds.\nb2[0:8] = 96\nW2[24, 0] = 100\nW2[25, 1] = 100\nW2[26, 2] = 100\nW2[27, 3] = 100\nW2[28, 4] = 100\nW2[29, 5] = 100\nW2[30, 6] = 100\nW2[31, 7] = 100\n\n# Lower relative-row thresholds.\nb2[8:16] = 3\nW2[24, 8] = 30\nW2[25, 9] = 30\nW2[26, 10] = 30\nW2[27, 11] = 30\nW2[28, 12] = 30\nW2[29, 13] = 30\nW2[30, 14] = 30\nW2[31, 15] = 30\n\n# Upper relative-row thresholds.\nb2[16:24] = -3\nW2[24, 16] = 30\nW2[25, 17] = 30\nW2[26, 18] = 30\nW2[27, 19] = 30\nW2[28, 20] = 30\nW2[29, 21] = 30\nW2[30, 22] = 30\nW2[31, 23] = 30\n\n# Smooth risk aggregation.\nW2[0:8, 24] = 1\nW2[8:16, 25] = 1\nW2[16:24, 26] = 1\nb2[24:27] = 7\n\n# Additional immediate-collision thresholds.\nW2[0:8, 27] = 200\nW2[8:16, 28] = 200\nW2[16:24, 29] = 200\nb2[27:30] = 1202\n\n# Treasure pursuit and same-row waiting.\nW3[0:8, 4] = 4\nW3[8:16, 4] = -4\nW3[8:16, 0] = 32\nW3[16:24, 2] = 4\nW3[16:24, 0] = -32\n\n# Safety penalties.\nW3[24, 0] = -300\nW3[25, 2] = -300\nW3[26, 4] = -300\nW3[27, 0] = -300\nW3[28, 2] = -300\nW3[29, 4] = -300\n\n# Preserve column 5; prefer waiting when otherwise indifferent.\nb3[0:6] = [4, -1000, 32, -1000, 0, -1000]\n```",
+    "thread_id": "01a1a2e8-23a8-7672-91a1-0b874330afb8",
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 2696,
+      "output_tokens": 22150,
+      "reasoning_output_tokens": 18839
+    },
+    "usage_snapshot": {
+      "basis": "new_thread_total",
+      "cumulative": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 2696,
+        "output_tokens": 22150,
+        "reasoning_output_tokens": 18839
+      },
+      "delta": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 2696,
+        "output_tokens": 22150,
+        "reasoning_output_tokens": 18839
+      }
+    }
+  },
+  "request_key": "raw-weights:6d5d3a336bc001c7142d4df1d6ba833ece202c10684c58fe510bbfadf1e5ec9a",
+  "scientific_replies_requested": 1,
+  "score": {
+    "changed_parameters": 1733,
+    "edit_path": "/workspace/openwsp/replications/raw_weights/results/astra_subscription/exp5/asterix/edit",
+    "evaluation": {
+      "environment_class_sha256": "bc704b4acc3ef2871632bef770d3bb8168d0a9ba7faa0022e4c76227480cf73a",
+      "episodes": 1000,
+      "game": "asterix",
+      "max_steps": 10000,
+      "mean": 39.709,
+      "mean_steps": 883.629,
+      "minatar_version": "1.0.15",
+      "records": [
+        {
+          "episode": 0,
+          "finish_reason": "terminated",
+          "score": 46.0,
+          "seed": 20261103,
+          "steps": 1026
+        },
+        {
+          "episode": 1,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261104,
+          "steps": 973
+        },
+        {
+          "episode": 2,
+          "finish_reason": "terminated",
+          "score": 57.0,
+          "seed": 20261105,
+          "steps": 1064
+        },
+        {
+          "episode": 3,
+          "finish_reason": "terminated",
+          "score": 14.0,
+          "seed": 20261106,
+          "steps": 566
+        },
+        {
+          "episode": 4,
+          "finish_reason": "terminated",
+          "score": 36.0,
+          "seed": 20261107,
+          "steps": 1011
+        },
+        {
+          "episode": 5,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261108,
+          "steps": 940
+        },
+        {
+          "episode": 6,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261109,
+          "steps": 1023
+        },
+        {
+          "episode": 7,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261110,
+          "steps": 974
+        },
+        {
+          "episode": 8,
+          "finish_reason": "terminated",
+          "score": 29.0,
+          "seed": 20261111,
+          "steps": 821
+        },
+        {
+          "episode": 9,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261112,
+          "steps": 932
+        },
+        {
+          "episode": 10,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261113,
+          "steps": 954
+        },
+        {
+          "episode": 11,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261114,
+          "steps": 596
+        },
+        {
+          "episode": 12,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261115,
+          "steps": 950
+        },
+        {
+          "episode": 13,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261116,
+          "steps": 936
+        },
+        {
+          "episode": 14,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261117,
+          "steps": 857
+        },
+        {
+          "episode": 15,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261118,
+          "steps": 752
+        },
+        {
+          "episode": 16,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261119,
+          "steps": 946
+        },
+        {
+          "episode": 17,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261120,
+          "steps": 995
+        },
+        {
+          "episode": 18,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261121,
+          "steps": 987
+        },
+        {
+          "episode": 19,
+          "finish_reason": "terminated",
+          "score": 19.0,
+          "seed": 20261122,
+          "steps": 696
+        },
+        {
+          "episode": 20,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261123,
+          "steps": 986
+        },
+        {
+          "episode": 21,
+          "finish_reason": "terminated",
+          "score": 4.0,
+          "seed": 20261124,
+          "steps": 146
+        },
+        {
+          "episode": 22,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261125,
+          "steps": 944
+        },
+        {
+          "episode": 23,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261126,
+          "steps": 1084
+        },
+        {
+          "episode": 24,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261127,
+          "steps": 939
+        },
+        {
+          "episode": 25,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20261128,
+          "steps": 1094
+        },
+        {
+          "episode": 26,
+          "finish_reason": "terminated",
+          "score": 81.0,
+          "seed": 20261129,
+          "steps": 1264
+        },
+        {
+          "episode": 27,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261130,
+          "steps": 1065
+        },
+        {
+          "episode": 28,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261131,
+          "steps": 955
+        },
+        {
+          "episode": 29,
+          "finish_reason": "terminated",
+          "score": 60.0,
+          "seed": 20261132,
+          "steps": 1182
+        },
+        {
+          "episode": 30,
+          "finish_reason": "terminated",
+          "score": 59.0,
+          "seed": 20261133,
+          "steps": 1119
+        },
+        {
+          "episode": 31,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261134,
+          "steps": 927
+        },
+        {
+          "episode": 32,
+          "finish_reason": "terminated",
+          "score": 3.0,
+          "seed": 20261135,
+          "steps": 128
+        },
+        {
+          "episode": 33,
+          "finish_reason": "terminated",
+          "score": 57.0,
+          "seed": 20261136,
+          "steps": 1063
+        },
+        {
+          "episode": 34,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261137,
+          "steps": 831
+        },
+        {
+          "episode": 35,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20261138,
+          "steps": 782
+        },
+        {
+          "episode": 36,
+          "finish_reason": "terminated",
+          "score": 3.0,
+          "seed": 20261139,
+          "steps": 383
+        },
+        {
+          "episode": 37,
+          "finish_reason": "terminated",
+          "score": 29.0,
+          "seed": 20261140,
+          "steps": 808
+        },
+        {
+          "episode": 38,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261141,
+          "steps": 596
+        },
+        {
+          "episode": 39,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261142,
+          "steps": 1048
+        },
+        {
+          "episode": 40,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261143,
+          "steps": 950
+        },
+        {
+          "episode": 41,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261144,
+          "steps": 920
+        },
+        {
+          "episode": 42,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261145,
+          "steps": 945
+        },
+        {
+          "episode": 43,
+          "finish_reason": "terminated",
+          "score": 57.0,
+          "seed": 20261146,
+          "steps": 1075
+        },
+        {
+          "episode": 44,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261147,
+          "steps": 995
+        },
+        {
+          "episode": 45,
+          "finish_reason": "terminated",
+          "score": 0.0,
+          "seed": 20261148,
+          "steps": 96
+        },
+        {
+          "episode": 46,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261149,
+          "steps": 986
+        },
+        {
+          "episode": 47,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20261150,
+          "steps": 656
+        },
+        {
+          "episode": 48,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261151,
+          "steps": 1033
+        },
+        {
+          "episode": 49,
+          "finish_reason": "terminated",
+          "score": 91.0,
+          "seed": 20261152,
+          "steps": 1299
+        },
+        {
+          "episode": 50,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261153,
+          "steps": 954
+        },
+        {
+          "episode": 51,
+          "finish_reason": "terminated",
+          "score": 54.0,
+          "seed": 20261154,
+          "steps": 979
+        },
+        {
+          "episode": 52,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261155,
+          "steps": 382
+        },
+        {
+          "episode": 53,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261156,
+          "steps": 938
+        },
+        {
+          "episode": 54,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261157,
+          "steps": 819
+        },
+        {
+          "episode": 55,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261158,
+          "steps": 1095
+        },
+        {
+          "episode": 56,
+          "finish_reason": "terminated",
+          "score": 41.0,
+          "seed": 20261159,
+          "steps": 928
+        },
+        {
+          "episode": 57,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261160,
+          "steps": 926
+        },
+        {
+          "episode": 58,
+          "finish_reason": "terminated",
+          "score": 66.0,
+          "seed": 20261161,
+          "steps": 1258
+        },
+        {
+          "episode": 59,
+          "finish_reason": "terminated",
+          "score": 1.0,
+          "seed": 20261162,
+          "steps": 126
+        },
+        {
+          "episode": 60,
+          "finish_reason": "terminated",
+          "score": 23.0,
+          "seed": 20261163,
+          "steps": 773
+        },
+        {
+          "episode": 61,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261164,
+          "steps": 993
+        },
+        {
+          "episode": 62,
+          "finish_reason": "terminated",
+          "score": 3.0,
+          "seed": 20261165,
+          "steps": 270
+        },
+        {
+          "episode": 63,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261166,
+          "steps": 933
+        },
+        {
+          "episode": 64,
+          "finish_reason": "terminated",
+          "score": 54.0,
+          "seed": 20261167,
+          "steps": 1054
+        },
+        {
+          "episode": 65,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261168,
+          "steps": 926
+        },
+        {
+          "episode": 66,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261169,
+          "steps": 870
+        },
+        {
+          "episode": 67,
+          "finish_reason": "terminated",
+          "score": 77.0,
+          "seed": 20261170,
+          "steps": 1175
+        },
+        {
+          "episode": 68,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261171,
+          "steps": 961
+        },
+        {
+          "episode": 69,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261172,
+          "steps": 938
+        },
+        {
+          "episode": 70,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261173,
+          "steps": 972
+        },
+        {
+          "episode": 71,
+          "finish_reason": "terminated",
+          "score": 68.0,
+          "seed": 20261174,
+          "steps": 1116
+        },
+        {
+          "episode": 72,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261175,
+          "steps": 926
+        },
+        {
+          "episode": 73,
+          "finish_reason": "terminated",
+          "score": 41.0,
+          "seed": 20261176,
+          "steps": 1001
+        },
+        {
+          "episode": 74,
+          "finish_reason": "terminated",
+          "score": 60.0,
+          "seed": 20261177,
+          "steps": 1007
+        },
+        {
+          "episode": 75,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261178,
+          "steps": 1040
+        },
+        {
+          "episode": 76,
+          "finish_reason": "terminated",
+          "score": 3.0,
+          "seed": 20261179,
+          "steps": 123
+        },
+        {
+          "episode": 77,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261180,
+          "steps": 1005
+        },
+        {
+          "episode": 78,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261181,
+          "steps": 992
+        },
+        {
+          "episode": 79,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261182,
+          "steps": 1046
+        },
+        {
+          "episode": 80,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261183,
+          "steps": 930
+        },
+        {
+          "episode": 81,
+          "finish_reason": "terminated",
+          "score": 3.0,
+          "seed": 20261184,
+          "steps": 270
+        },
+        {
+          "episode": 82,
+          "finish_reason": "terminated",
+          "score": 69.0,
+          "seed": 20261185,
+          "steps": 1139
+        },
+        {
+          "episode": 83,
+          "finish_reason": "terminated",
+          "score": 23.0,
+          "seed": 20261186,
+          "steps": 817
+        },
+        {
+          "episode": 84,
+          "finish_reason": "terminated",
+          "score": 29.0,
+          "seed": 20261187,
+          "steps": 819
+        },
+        {
+          "episode": 85,
+          "finish_reason": "terminated",
+          "score": 26.0,
+          "seed": 20261188,
+          "steps": 798
+        },
+        {
+          "episode": 86,
+          "finish_reason": "terminated",
+          "score": 82.0,
+          "seed": 20261189,
+          "steps": 1248
+        },
+        {
+          "episode": 87,
+          "finish_reason": "terminated",
+          "score": 2.0,
+          "seed": 20261190,
+          "steps": 163
+        },
+        {
+          "episode": 88,
+          "finish_reason": "terminated",
+          "score": 23.0,
+          "seed": 20261191,
+          "steps": 652
+        },
+        {
+          "episode": 89,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261192,
+          "steps": 1151
+        },
+        {
+          "episode": 90,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261193,
+          "steps": 298
+        },
+        {
+          "episode": 91,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261194,
+          "steps": 957
+        },
+        {
+          "episode": 92,
+          "finish_reason": "terminated",
+          "score": 71.0,
+          "seed": 20261195,
+          "steps": 1106
+        },
+        {
+          "episode": 93,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20261196,
+          "steps": 694
+        },
+        {
+          "episode": 94,
+          "finish_reason": "terminated",
+          "score": 9.0,
+          "seed": 20261197,
+          "steps": 595
+        },
+        {
+          "episode": 95,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261198,
+          "steps": 978
+        },
+        {
+          "episode": 96,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261199,
+          "steps": 786
+        },
+        {
+          "episode": 97,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261200,
+          "steps": 930
+        },
+        {
+          "episode": 98,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261201,
+          "steps": 886
+        },
+        {
+          "episode": 99,
+          "finish_reason": "terminated",
+          "score": 89.0,
+          "seed": 20261202,
+          "steps": 1368
+        },
+        {
+          "episode": 100,
+          "finish_reason": "terminated",
+          "score": 36.0,
+          "seed": 20261203,
+          "steps": 932
+        },
+        {
+          "episode": 101,
+          "finish_reason": "terminated",
+          "score": 41.0,
+          "seed": 20261204,
+          "steps": 944
+        },
+        {
+          "episode": 102,
+          "finish_reason": "terminated",
+          "score": 2.0,
+          "seed": 20261205,
+          "steps": 121
+        },
+        {
+          "episode": 103,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261206,
+          "steps": 928
+        },
+        {
+          "episode": 104,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261207,
+          "steps": 959
+        },
+        {
+          "episode": 105,
+          "finish_reason": "terminated",
+          "score": 16.0,
+          "seed": 20261208,
+          "steps": 548
+        },
+        {
+          "episode": 106,
+          "finish_reason": "terminated",
+          "score": 9.0,
+          "seed": 20261209,
+          "steps": 410
+        },
+        {
+          "episode": 107,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261210,
+          "steps": 1138
+        },
+        {
+          "episode": 108,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261211,
+          "steps": 1062
+        },
+        {
+          "episode": 109,
+          "finish_reason": "terminated",
+          "score": 16.0,
+          "seed": 20261212,
+          "steps": 593
+        },
+        {
+          "episode": 110,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261213,
+          "steps": 968
+        },
+        {
+          "episode": 111,
+          "finish_reason": "terminated",
+          "score": 18.0,
+          "seed": 20261214,
+          "steps": 644
+        },
+        {
+          "episode": 112,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261215,
+          "steps": 951
+        },
+        {
+          "episode": 113,
+          "finish_reason": "terminated",
+          "score": 46.0,
+          "seed": 20261216,
+          "steps": 992
+        },
+        {
+          "episode": 114,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261217,
+          "steps": 840
+        },
+        {
+          "episode": 115,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261218,
+          "steps": 616
+        },
+        {
+          "episode": 116,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261219,
+          "steps": 964
+        },
+        {
+          "episode": 117,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261220,
+          "steps": 951
+        },
+        {
+          "episode": 118,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261221,
+          "steps": 990
+        },
+        {
+          "episode": 119,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261222,
+          "steps": 976
+        },
+        {
+          "episode": 120,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261223,
+          "steps": 929
+        },
+        {
+          "episode": 121,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261224,
+          "steps": 954
+        },
+        {
+          "episode": 122,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261225,
+          "steps": 978
+        },
+        {
+          "episode": 123,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261226,
+          "steps": 938
+        },
+        {
+          "episode": 124,
+          "finish_reason": "terminated",
+          "score": 22.0,
+          "seed": 20261227,
+          "steps": 704
+        },
+        {
+          "episode": 125,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261228,
+          "steps": 1079
+        },
+        {
+          "episode": 126,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261229,
+          "steps": 938
+        },
+        {
+          "episode": 127,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261230,
+          "steps": 616
+        },
+        {
+          "episode": 128,
+          "finish_reason": "terminated",
+          "score": 3.0,
+          "seed": 20261231,
+          "steps": 121
+        },
+        {
+          "episode": 129,
+          "finish_reason": "terminated",
+          "score": 60.0,
+          "seed": 20261232,
+          "steps": 1103
+        },
+        {
+          "episode": 130,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261233,
+          "steps": 874
+        },
+        {
+          "episode": 131,
+          "finish_reason": "terminated",
+          "score": 70.0,
+          "seed": 20261234,
+          "steps": 1121
+        },
+        {
+          "episode": 132,
+          "finish_reason": "terminated",
+          "score": 19.0,
+          "seed": 20261235,
+          "steps": 652
+        },
+        {
+          "episode": 133,
+          "finish_reason": "terminated",
+          "score": 66.0,
+          "seed": 20261236,
+          "steps": 1131
+        },
+        {
+          "episode": 134,
+          "finish_reason": "terminated",
+          "score": 87.0,
+          "seed": 20261237,
+          "steps": 1265
+        },
+        {
+          "episode": 135,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261238,
+          "steps": 581
+        },
+        {
+          "episode": 136,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261239,
+          "steps": 948
+        },
+        {
+          "episode": 137,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261240,
+          "steps": 975
+        },
+        {
+          "episode": 138,
+          "finish_reason": "terminated",
+          "score": 9.0,
+          "seed": 20261241,
+          "steps": 410
+        },
+        {
+          "episode": 139,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261242,
+          "steps": 954
+        },
+        {
+          "episode": 140,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261243,
+          "steps": 630
+        },
+        {
+          "episode": 141,
+          "finish_reason": "terminated",
+          "score": 68.0,
+          "seed": 20261244,
+          "steps": 1136
+        },
+        {
+          "episode": 142,
+          "finish_reason": "terminated",
+          "score": 23.0,
+          "seed": 20261245,
+          "steps": 740
+        },
+        {
+          "episode": 143,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261246,
+          "steps": 750
+        },
+        {
+          "episode": 144,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261247,
+          "steps": 980
+        },
+        {
+          "episode": 145,
+          "finish_reason": "terminated",
+          "score": 36.0,
+          "seed": 20261248,
+          "steps": 963
+        },
+        {
+          "episode": 146,
+          "finish_reason": "terminated",
+          "score": 18.0,
+          "seed": 20261249,
+          "steps": 670
+        },
+        {
+          "episode": 147,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261250,
+          "steps": 988
+        },
+        {
+          "episode": 148,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261251,
+          "steps": 765
+        },
+        {
+          "episode": 149,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261252,
+          "steps": 761
+        },
+        {
+          "episode": 150,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261253,
+          "steps": 812
+        },
+        {
+          "episode": 151,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261254,
+          "steps": 970
+        },
+        {
+          "episode": 152,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20261255,
+          "steps": 802
+        },
+        {
+          "episode": 153,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261256,
+          "steps": 999
+        },
+        {
+          "episode": 154,
+          "finish_reason": "terminated",
+          "score": 114.0,
+          "seed": 20261257,
+          "steps": 1542
+        },
+        {
+          "episode": 155,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261258,
+          "steps": 1079
+        },
+        {
+          "episode": 156,
+          "finish_reason": "terminated",
+          "score": 11.0,
+          "seed": 20261259,
+          "steps": 538
+        },
+        {
+          "episode": 157,
+          "finish_reason": "terminated",
+          "score": 25.0,
+          "seed": 20261260,
+          "steps": 706
+        },
+        {
+          "episode": 158,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261261,
+          "steps": 1025
+        },
+        {
+          "episode": 159,
+          "finish_reason": "terminated",
+          "score": 26.0,
+          "seed": 20261262,
+          "steps": 821
+        },
+        {
+          "episode": 160,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261263,
+          "steps": 945
+        },
+        {
+          "episode": 161,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261264,
+          "steps": 802
+        },
+        {
+          "episode": 162,
+          "finish_reason": "terminated",
+          "score": 16.0,
+          "seed": 20261265,
+          "steps": 557
+        },
+        {
+          "episode": 163,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261266,
+          "steps": 878
+        },
+        {
+          "episode": 164,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261267,
+          "steps": 972
+        },
+        {
+          "episode": 165,
+          "finish_reason": "terminated",
+          "score": 14.0,
+          "seed": 20261268,
+          "steps": 569
+        },
+        {
+          "episode": 166,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261269,
+          "steps": 230
+        },
+        {
+          "episode": 167,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261270,
+          "steps": 891
+        },
+        {
+          "episode": 168,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261271,
+          "steps": 968
+        },
+        {
+          "episode": 169,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261272,
+          "steps": 210
+        },
+        {
+          "episode": 170,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261273,
+          "steps": 961
+        },
+        {
+          "episode": 171,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261274,
+          "steps": 932
+        },
+        {
+          "episode": 172,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261275,
+          "steps": 1010
+        },
+        {
+          "episode": 173,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261276,
+          "steps": 939
+        },
+        {
+          "episode": 174,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20261277,
+          "steps": 742
+        },
+        {
+          "episode": 175,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20261278,
+          "steps": 770
+        },
+        {
+          "episode": 176,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20261279,
+          "steps": 1069
+        },
+        {
+          "episode": 177,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20261280,
+          "steps": 810
+        },
+        {
+          "episode": 178,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261281,
+          "steps": 873
+        },
+        {
+          "episode": 179,
+          "finish_reason": "terminated",
+          "score": 94.0,
+          "seed": 20261282,
+          "steps": 1408
+        },
+        {
+          "episode": 180,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261283,
+          "steps": 868
+        },
+        {
+          "episode": 181,
+          "finish_reason": "terminated",
+          "score": 56.0,
+          "seed": 20261284,
+          "steps": 1056
+        },
+        {
+          "episode": 182,
+          "finish_reason": "terminated",
+          "score": 131.0,
+          "seed": 20261285,
+          "steps": 1627
+        },
+        {
+          "episode": 183,
+          "finish_reason": "terminated",
+          "score": 22.0,
+          "seed": 20261286,
+          "steps": 668
+        },
+        {
+          "episode": 184,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261287,
+          "steps": 740
+        },
+        {
+          "episode": 185,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261288,
+          "steps": 930
+        },
+        {
+          "episode": 186,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261289,
+          "steps": 963
+        },
+        {
+          "episode": 187,
+          "finish_reason": "terminated",
+          "score": 22.0,
+          "seed": 20261290,
+          "steps": 708
+        },
+        {
+          "episode": 188,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261291,
+          "steps": 1074
+        },
+        {
+          "episode": 189,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261292,
+          "steps": 969
+        },
+        {
+          "episode": 190,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261293,
+          "steps": 989
+        },
+        {
+          "episode": 191,
+          "finish_reason": "terminated",
+          "score": 100.0,
+          "seed": 20261294,
+          "steps": 1420
+        },
+        {
+          "episode": 192,
+          "finish_reason": "terminated",
+          "score": 14.0,
+          "seed": 20261295,
+          "steps": 554
+        },
+        {
+          "episode": 193,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261296,
+          "steps": 995
+        },
+        {
+          "episode": 194,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261297,
+          "steps": 896
+        },
+        {
+          "episode": 195,
+          "finish_reason": "terminated",
+          "score": 61.0,
+          "seed": 20261298,
+          "steps": 1083
+        },
+        {
+          "episode": 196,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20261299,
+          "steps": 1001
+        },
+        {
+          "episode": 197,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20261300,
+          "steps": 826
+        },
+        {
+          "episode": 198,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261301,
+          "steps": 614
+        },
+        {
+          "episode": 199,
+          "finish_reason": "terminated",
+          "score": 66.0,
+          "seed": 20261302,
+          "steps": 1185
+        },
+        {
+          "episode": 200,
+          "finish_reason": "terminated",
+          "score": 29.0,
+          "seed": 20261303,
+          "steps": 806
+        },
+        {
+          "episode": 201,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261304,
+          "steps": 994
+        },
+        {
+          "episode": 202,
+          "finish_reason": "terminated",
+          "score": 29.0,
+          "seed": 20261305,
+          "steps": 826
+        },
+        {
+          "episode": 203,
+          "finish_reason": "terminated",
+          "score": 60.0,
+          "seed": 20261306,
+          "steps": 1026
+        },
+        {
+          "episode": 204,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261307,
+          "steps": 858
+        },
+        {
+          "episode": 205,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261308,
+          "steps": 746
+        },
+        {
+          "episode": 206,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261309,
+          "steps": 1022
+        },
+        {
+          "episode": 207,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261310,
+          "steps": 238
+        },
+        {
+          "episode": 208,
+          "finish_reason": "terminated",
+          "score": 19.0,
+          "seed": 20261311,
+          "steps": 706
+        },
+        {
+          "episode": 209,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261312,
+          "steps": 930
+        },
+        {
+          "episode": 210,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261313,
+          "steps": 831
+        },
+        {
+          "episode": 211,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261314,
+          "steps": 1044
+        },
+        {
+          "episode": 212,
+          "finish_reason": "terminated",
+          "score": 85.0,
+          "seed": 20261315,
+          "steps": 1304
+        },
+        {
+          "episode": 213,
+          "finish_reason": "terminated",
+          "score": 88.0,
+          "seed": 20261316,
+          "steps": 1303
+        },
+        {
+          "episode": 214,
+          "finish_reason": "terminated",
+          "score": 73.0,
+          "seed": 20261317,
+          "steps": 1193
+        },
+        {
+          "episode": 215,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261318,
+          "steps": 909
+        },
+        {
+          "episode": 216,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261319,
+          "steps": 926
+        },
+        {
+          "episode": 217,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261320,
+          "steps": 1046
+        },
+        {
+          "episode": 218,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261321,
+          "steps": 1006
+        },
+        {
+          "episode": 219,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261322,
+          "steps": 952
+        },
+        {
+          "episode": 220,
+          "finish_reason": "terminated",
+          "score": 11.0,
+          "seed": 20261323,
+          "steps": 535
+        },
+        {
+          "episode": 221,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261324,
+          "steps": 905
+        },
+        {
+          "episode": 222,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261325,
+          "steps": 857
+        },
+        {
+          "episode": 223,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261326,
+          "steps": 1003
+        },
+        {
+          "episode": 224,
+          "finish_reason": "terminated",
+          "score": 12.0,
+          "seed": 20261327,
+          "steps": 536
+        },
+        {
+          "episode": 225,
+          "finish_reason": "terminated",
+          "score": 18.0,
+          "seed": 20261328,
+          "steps": 736
+        },
+        {
+          "episode": 226,
+          "finish_reason": "terminated",
+          "score": 85.0,
+          "seed": 20261329,
+          "steps": 1256
+        },
+        {
+          "episode": 227,
+          "finish_reason": "terminated",
+          "score": 36.0,
+          "seed": 20261330,
+          "steps": 941
+        },
+        {
+          "episode": 228,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261331,
+          "steps": 1015
+        },
+        {
+          "episode": 229,
+          "finish_reason": "terminated",
+          "score": 14.0,
+          "seed": 20261332,
+          "steps": 454
+        },
+        {
+          "episode": 230,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20261333,
+          "steps": 1001
+        },
+        {
+          "episode": 231,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261334,
+          "steps": 959
+        },
+        {
+          "episode": 232,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261335,
+          "steps": 829
+        },
+        {
+          "episode": 233,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261336,
+          "steps": 1025
+        },
+        {
+          "episode": 234,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20261337,
+          "steps": 1016
+        },
+        {
+          "episode": 235,
+          "finish_reason": "terminated",
+          "score": 36.0,
+          "seed": 20261338,
+          "steps": 939
+        },
+        {
+          "episode": 236,
+          "finish_reason": "terminated",
+          "score": 63.0,
+          "seed": 20261339,
+          "steps": 1127
+        },
+        {
+          "episode": 237,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261340,
+          "steps": 1006
+        },
+        {
+          "episode": 238,
+          "finish_reason": "terminated",
+          "score": 84.0,
+          "seed": 20261341,
+          "steps": 1221
+        },
+        {
+          "episode": 239,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261342,
+          "steps": 943
+        },
+        {
+          "episode": 240,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261343,
+          "steps": 1110
+        },
+        {
+          "episode": 241,
+          "finish_reason": "terminated",
+          "score": 110.0,
+          "seed": 20261344,
+          "steps": 1450
+        },
+        {
+          "episode": 242,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20261345,
+          "steps": 760
+        },
+        {
+          "episode": 243,
+          "finish_reason": "terminated",
+          "score": 8.0,
+          "seed": 20261346,
+          "steps": 323
+        },
+        {
+          "episode": 244,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261347,
+          "steps": 646
+        },
+        {
+          "episode": 245,
+          "finish_reason": "terminated",
+          "score": 4.0,
+          "seed": 20261348,
+          "steps": 362
+        },
+        {
+          "episode": 246,
+          "finish_reason": "terminated",
+          "score": 67.0,
+          "seed": 20261349,
+          "steps": 1166
+        },
+        {
+          "episode": 247,
+          "finish_reason": "terminated",
+          "score": 4.0,
+          "seed": 20261350,
+          "steps": 410
+        },
+        {
+          "episode": 248,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261351,
+          "steps": 254
+        },
+        {
+          "episode": 249,
+          "finish_reason": "terminated",
+          "score": 77.0,
+          "seed": 20261352,
+          "steps": 1189
+        },
+        {
+          "episode": 250,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261353,
+          "steps": 742
+        },
+        {
+          "episode": 251,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261354,
+          "steps": 934
+        },
+        {
+          "episode": 252,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261355,
+          "steps": 981
+        },
+        {
+          "episode": 253,
+          "finish_reason": "terminated",
+          "score": 56.0,
+          "seed": 20261356,
+          "steps": 1057
+        },
+        {
+          "episode": 254,
+          "finish_reason": "terminated",
+          "score": 80.0,
+          "seed": 20261357,
+          "steps": 1209
+        },
+        {
+          "episode": 255,
+          "finish_reason": "terminated",
+          "score": 56.0,
+          "seed": 20261358,
+          "steps": 1017
+        },
+        {
+          "episode": 256,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261359,
+          "steps": 181
+        },
+        {
+          "episode": 257,
+          "finish_reason": "terminated",
+          "score": 87.0,
+          "seed": 20261360,
+          "steps": 1215
+        },
+        {
+          "episode": 258,
+          "finish_reason": "terminated",
+          "score": 85.0,
+          "seed": 20261361,
+          "steps": 1285
+        },
+        {
+          "episode": 259,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261362,
+          "steps": 1006
+        },
+        {
+          "episode": 260,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261363,
+          "steps": 706
+        },
+        {
+          "episode": 261,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261364,
+          "steps": 931
+        },
+        {
+          "episode": 262,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261365,
+          "steps": 762
+        },
+        {
+          "episode": 263,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261366,
+          "steps": 814
+        },
+        {
+          "episode": 264,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261367,
+          "steps": 950
+        },
+        {
+          "episode": 265,
+          "finish_reason": "terminated",
+          "score": 8.0,
+          "seed": 20261368,
+          "steps": 535
+        },
+        {
+          "episode": 266,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20261369,
+          "steps": 1011
+        },
+        {
+          "episode": 267,
+          "finish_reason": "terminated",
+          "score": 55.0,
+          "seed": 20261370,
+          "steps": 1016
+        },
+        {
+          "episode": 268,
+          "finish_reason": "terminated",
+          "score": 36.0,
+          "seed": 20261371,
+          "steps": 939
+        },
+        {
+          "episode": 269,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261372,
+          "steps": 1071
+        },
+        {
+          "episode": 270,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261373,
+          "steps": 1029
+        },
+        {
+          "episode": 271,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261374,
+          "steps": 876
+        },
+        {
+          "episode": 272,
+          "finish_reason": "terminated",
+          "score": 57.0,
+          "seed": 20261375,
+          "steps": 983
+        },
+        {
+          "episode": 273,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261376,
+          "steps": 993
+        },
+        {
+          "episode": 274,
+          "finish_reason": "terminated",
+          "score": 106.0,
+          "seed": 20261377,
+          "steps": 1391
+        },
+        {
+          "episode": 275,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261378,
+          "steps": 918
+        },
+        {
+          "episode": 276,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20261379,
+          "steps": 1012
+        },
+        {
+          "episode": 277,
+          "finish_reason": "terminated",
+          "score": 10.0,
+          "seed": 20261380,
+          "steps": 439
+        },
+        {
+          "episode": 278,
+          "finish_reason": "terminated",
+          "score": 10.0,
+          "seed": 20261381,
+          "steps": 548
+        },
+        {
+          "episode": 279,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261382,
+          "steps": 779
+        },
+        {
+          "episode": 280,
+          "finish_reason": "terminated",
+          "score": 57.0,
+          "seed": 20261383,
+          "steps": 1012
+        },
+        {
+          "episode": 281,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261384,
+          "steps": 989
+        },
+        {
+          "episode": 282,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261385,
+          "steps": 929
+        },
+        {
+          "episode": 283,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261386,
+          "steps": 928
+        },
+        {
+          "episode": 284,
+          "finish_reason": "terminated",
+          "score": 55.0,
+          "seed": 20261387,
+          "steps": 971
+        },
+        {
+          "episode": 285,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261388,
+          "steps": 952
+        },
+        {
+          "episode": 286,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261389,
+          "steps": 1028
+        },
+        {
+          "episode": 287,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261390,
+          "steps": 951
+        },
+        {
+          "episode": 288,
+          "finish_reason": "terminated",
+          "score": 10.0,
+          "seed": 20261391,
+          "steps": 529
+        },
+        {
+          "episode": 289,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20261392,
+          "steps": 1066
+        },
+        {
+          "episode": 290,
+          "finish_reason": "terminated",
+          "score": 67.0,
+          "seed": 20261393,
+          "steps": 1156
+        },
+        {
+          "episode": 291,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20261394,
+          "steps": 977
+        },
+        {
+          "episode": 292,
+          "finish_reason": "terminated",
+          "score": 62.0,
+          "seed": 20261395,
+          "steps": 1103
+        },
+        {
+          "episode": 293,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261396,
+          "steps": 736
+        },
+        {
+          "episode": 294,
+          "finish_reason": "terminated",
+          "score": 70.0,
+          "seed": 20261397,
+          "steps": 1165
+        },
+        {
+          "episode": 295,
+          "finish_reason": "terminated",
+          "score": 57.0,
+          "seed": 20261398,
+          "steps": 1062
+        },
+        {
+          "episode": 296,
+          "finish_reason": "terminated",
+          "score": 1.0,
+          "seed": 20261399,
+          "steps": 96
+        },
+        {
+          "episode": 297,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20261400,
+          "steps": 784
+        },
+        {
+          "episode": 298,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261401,
+          "steps": 1063
+        },
+        {
+          "episode": 299,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20261402,
+          "steps": 993
+        },
+        {
+          "episode": 300,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261403,
+          "steps": 928
+        },
+        {
+          "episode": 301,
+          "finish_reason": "terminated",
+          "score": 100.0,
+          "seed": 20261404,
+          "steps": 1373
+        },
+        {
+          "episode": 302,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261405,
+          "steps": 950
+        },
+        {
+          "episode": 303,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261406,
+          "steps": 949
+        },
+        {
+          "episode": 304,
+          "finish_reason": "terminated",
+          "score": 83.0,
+          "seed": 20261407,
+          "steps": 1242
+        },
+        {
+          "episode": 305,
+          "finish_reason": "terminated",
+          "score": 78.0,
+          "seed": 20261408,
+          "steps": 1324
+        },
+        {
+          "episode": 306,
+          "finish_reason": "terminated",
+          "score": 69.0,
+          "seed": 20261409,
+          "steps": 1192
+        },
+        {
+          "episode": 307,
+          "finish_reason": "terminated",
+          "score": 10.0,
+          "seed": 20261410,
+          "steps": 382
+        },
+        {
+          "episode": 308,
+          "finish_reason": "terminated",
+          "score": 55.0,
+          "seed": 20261411,
+          "steps": 1033
+        },
+        {
+          "episode": 309,
+          "finish_reason": "terminated",
+          "score": 46.0,
+          "seed": 20261412,
+          "steps": 972
+        },
+        {
+          "episode": 310,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261413,
+          "steps": 870
+        },
+        {
+          "episode": 311,
+          "finish_reason": "terminated",
+          "score": 7.0,
+          "seed": 20261414,
+          "steps": 406
+        },
+        {
+          "episode": 312,
+          "finish_reason": "terminated",
+          "score": 3.0,
+          "seed": 20261415,
+          "steps": 101
+        },
+        {
+          "episode": 313,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261416,
+          "steps": 1098
+        },
+        {
+          "episode": 314,
+          "finish_reason": "terminated",
+          "score": 81.0,
+          "seed": 20261417,
+          "steps": 1339
+        },
+        {
+          "episode": 315,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261418,
+          "steps": 943
+        },
+        {
+          "episode": 316,
+          "finish_reason": "terminated",
+          "score": 19.0,
+          "seed": 20261419,
+          "steps": 569
+        },
+        {
+          "episode": 317,
+          "finish_reason": "terminated",
+          "score": 90.0,
+          "seed": 20261420,
+          "steps": 1331
+        },
+        {
+          "episode": 318,
+          "finish_reason": "terminated",
+          "score": 41.0,
+          "seed": 20261421,
+          "steps": 1009
+        },
+        {
+          "episode": 319,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261422,
+          "steps": 772
+        },
+        {
+          "episode": 320,
+          "finish_reason": "terminated",
+          "score": 26.0,
+          "seed": 20261423,
+          "steps": 782
+        },
+        {
+          "episode": 321,
+          "finish_reason": "terminated",
+          "score": 13.0,
+          "seed": 20261424,
+          "steps": 622
+        },
+        {
+          "episode": 322,
+          "finish_reason": "terminated",
+          "score": 77.0,
+          "seed": 20261425,
+          "steps": 1210
+        },
+        {
+          "episode": 323,
+          "finish_reason": "terminated",
+          "score": 13.0,
+          "seed": 20261426,
+          "steps": 479
+        },
+        {
+          "episode": 324,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261427,
+          "steps": 948
+        },
+        {
+          "episode": 325,
+          "finish_reason": "terminated",
+          "score": 60.0,
+          "seed": 20261428,
+          "steps": 1204
+        },
+        {
+          "episode": 326,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261429,
+          "steps": 948
+        },
+        {
+          "episode": 327,
+          "finish_reason": "terminated",
+          "score": 7.0,
+          "seed": 20261430,
+          "steps": 427
+        },
+        {
+          "episode": 328,
+          "finish_reason": "terminated",
+          "score": 60.0,
+          "seed": 20261431,
+          "steps": 1107
+        },
+        {
+          "episode": 329,
+          "finish_reason": "terminated",
+          "score": 9.0,
+          "seed": 20261432,
+          "steps": 425
+        },
+        {
+          "episode": 330,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261433,
+          "steps": 838
+        },
+        {
+          "episode": 331,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261434,
+          "steps": 928
+        },
+        {
+          "episode": 332,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261435,
+          "steps": 954
+        },
+        {
+          "episode": 333,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20261436,
+          "steps": 833
+        },
+        {
+          "episode": 334,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261437,
+          "steps": 937
+        },
+        {
+          "episode": 335,
+          "finish_reason": "terminated",
+          "score": 60.0,
+          "seed": 20261438,
+          "steps": 1153
+        },
+        {
+          "episode": 336,
+          "finish_reason": "terminated",
+          "score": 29.0,
+          "seed": 20261439,
+          "steps": 928
+        },
+        {
+          "episode": 337,
+          "finish_reason": "terminated",
+          "score": 57.0,
+          "seed": 20261440,
+          "steps": 1030
+        },
+        {
+          "episode": 338,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261441,
+          "steps": 949
+        },
+        {
+          "episode": 339,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261442,
+          "steps": 959
+        },
+        {
+          "episode": 340,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261443,
+          "steps": 980
+        },
+        {
+          "episode": 341,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261444,
+          "steps": 744
+        },
+        {
+          "episode": 342,
+          "finish_reason": "terminated",
+          "score": 9.0,
+          "seed": 20261445,
+          "steps": 262
+        },
+        {
+          "episode": 343,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20261446,
+          "steps": 1017
+        },
+        {
+          "episode": 344,
+          "finish_reason": "terminated",
+          "score": 4.0,
+          "seed": 20261447,
+          "steps": 258
+        },
+        {
+          "episode": 345,
+          "finish_reason": "terminated",
+          "score": 9.0,
+          "seed": 20261448,
+          "steps": 344
+        },
+        {
+          "episode": 346,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261449,
+          "steps": 961
+        },
+        {
+          "episode": 347,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261450,
+          "steps": 848
+        },
+        {
+          "episode": 348,
+          "finish_reason": "terminated",
+          "score": 56.0,
+          "seed": 20261451,
+          "steps": 1042
+        },
+        {
+          "episode": 349,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261452,
+          "steps": 878
+        },
+        {
+          "episode": 350,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261453,
+          "steps": 938
+        },
+        {
+          "episode": 351,
+          "finish_reason": "terminated",
+          "score": 80.0,
+          "seed": 20261454,
+          "steps": 1171
+        },
+        {
+          "episode": 352,
+          "finish_reason": "terminated",
+          "score": 22.0,
+          "seed": 20261455,
+          "steps": 766
+        },
+        {
+          "episode": 353,
+          "finish_reason": "terminated",
+          "score": 65.0,
+          "seed": 20261456,
+          "steps": 1082
+        },
+        {
+          "episode": 354,
+          "finish_reason": "terminated",
+          "score": 77.0,
+          "seed": 20261457,
+          "steps": 1146
+        },
+        {
+          "episode": 355,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261458,
+          "steps": 844
+        },
+        {
+          "episode": 356,
+          "finish_reason": "terminated",
+          "score": 14.0,
+          "seed": 20261459,
+          "steps": 747
+        },
+        {
+          "episode": 357,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261460,
+          "steps": 951
+        },
+        {
+          "episode": 358,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261461,
+          "steps": 1042
+        },
+        {
+          "episode": 359,
+          "finish_reason": "terminated",
+          "score": 100.0,
+          "seed": 20261462,
+          "steps": 1489
+        },
+        {
+          "episode": 360,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261463,
+          "steps": 788
+        },
+        {
+          "episode": 361,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261464,
+          "steps": 935
+        },
+        {
+          "episode": 362,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20261465,
+          "steps": 728
+        },
+        {
+          "episode": 363,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261466,
+          "steps": 1129
+        },
+        {
+          "episode": 364,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261467,
+          "steps": 961
+        },
+        {
+          "episode": 365,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261468,
+          "steps": 812
+        },
+        {
+          "episode": 366,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261469,
+          "steps": 840
+        },
+        {
+          "episode": 367,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261470,
+          "steps": 954
+        },
+        {
+          "episode": 368,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261471,
+          "steps": 997
+        },
+        {
+          "episode": 369,
+          "finish_reason": "terminated",
+          "score": 29.0,
+          "seed": 20261472,
+          "steps": 738
+        },
+        {
+          "episode": 370,
+          "finish_reason": "terminated",
+          "score": 11.0,
+          "seed": 20261473,
+          "steps": 532
+        },
+        {
+          "episode": 371,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261474,
+          "steps": 714
+        },
+        {
+          "episode": 372,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261475,
+          "steps": 929
+        },
+        {
+          "episode": 373,
+          "finish_reason": "terminated",
+          "score": 26.0,
+          "seed": 20261476,
+          "steps": 674
+        },
+        {
+          "episode": 374,
+          "finish_reason": "terminated",
+          "score": 84.0,
+          "seed": 20261477,
+          "steps": 1354
+        },
+        {
+          "episode": 375,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261478,
+          "steps": 944
+        },
+        {
+          "episode": 376,
+          "finish_reason": "terminated",
+          "score": 70.0,
+          "seed": 20261479,
+          "steps": 1175
+        },
+        {
+          "episode": 377,
+          "finish_reason": "terminated",
+          "score": 2.0,
+          "seed": 20261480,
+          "steps": 174
+        },
+        {
+          "episode": 378,
+          "finish_reason": "terminated",
+          "score": 9.0,
+          "seed": 20261481,
+          "steps": 323
+        },
+        {
+          "episode": 379,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261482,
+          "steps": 1058
+        },
+        {
+          "episode": 380,
+          "finish_reason": "terminated",
+          "score": 57.0,
+          "seed": 20261483,
+          "steps": 1124
+        },
+        {
+          "episode": 381,
+          "finish_reason": "terminated",
+          "score": 90.0,
+          "seed": 20261484,
+          "steps": 1321
+        },
+        {
+          "episode": 382,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261485,
+          "steps": 970
+        },
+        {
+          "episode": 383,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261486,
+          "steps": 937
+        },
+        {
+          "episode": 384,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261487,
+          "steps": 996
+        },
+        {
+          "episode": 385,
+          "finish_reason": "terminated",
+          "score": 54.0,
+          "seed": 20261488,
+          "steps": 986
+        },
+        {
+          "episode": 386,
+          "finish_reason": "terminated",
+          "score": 61.0,
+          "seed": 20261489,
+          "steps": 1006
+        },
+        {
+          "episode": 387,
+          "finish_reason": "terminated",
+          "score": 61.0,
+          "seed": 20261490,
+          "steps": 1075
+        },
+        {
+          "episode": 388,
+          "finish_reason": "terminated",
+          "score": 52.0,
+          "seed": 20261491,
+          "steps": 1003
+        },
+        {
+          "episode": 389,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261492,
+          "steps": 1136
+        },
+        {
+          "episode": 390,
+          "finish_reason": "terminated",
+          "score": 14.0,
+          "seed": 20261493,
+          "steps": 614
+        },
+        {
+          "episode": 391,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261494,
+          "steps": 1066
+        },
+        {
+          "episode": 392,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261495,
+          "steps": 1035
+        },
+        {
+          "episode": 393,
+          "finish_reason": "terminated",
+          "score": 46.0,
+          "seed": 20261496,
+          "steps": 966
+        },
+        {
+          "episode": 394,
+          "finish_reason": "terminated",
+          "score": 26.0,
+          "seed": 20261497,
+          "steps": 776
+        },
+        {
+          "episode": 395,
+          "finish_reason": "terminated",
+          "score": 68.0,
+          "seed": 20261498,
+          "steps": 1225
+        },
+        {
+          "episode": 396,
+          "finish_reason": "terminated",
+          "score": 5.0,
+          "seed": 20261499,
+          "steps": 286
+        },
+        {
+          "episode": 397,
+          "finish_reason": "terminated",
+          "score": 5.0,
+          "seed": 20261500,
+          "steps": 246
+        },
+        {
+          "episode": 398,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261501,
+          "steps": 971
+        },
+        {
+          "episode": 399,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261502,
+          "steps": 852
+        },
+        {
+          "episode": 400,
+          "finish_reason": "terminated",
+          "score": 46.0,
+          "seed": 20261503,
+          "steps": 953
+        },
+        {
+          "episode": 401,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261504,
+          "steps": 903
+        },
+        {
+          "episode": 402,
+          "finish_reason": "terminated",
+          "score": 72.0,
+          "seed": 20261505,
+          "steps": 1155
+        },
+        {
+          "episode": 403,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261506,
+          "steps": 288
+        },
+        {
+          "episode": 404,
+          "finish_reason": "terminated",
+          "score": 22.0,
+          "seed": 20261507,
+          "steps": 778
+        },
+        {
+          "episode": 405,
+          "finish_reason": "terminated",
+          "score": 62.0,
+          "seed": 20261508,
+          "steps": 1052
+        },
+        {
+          "episode": 406,
+          "finish_reason": "terminated",
+          "score": 69.0,
+          "seed": 20261509,
+          "steps": 1230
+        },
+        {
+          "episode": 407,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261510,
+          "steps": 974
+        },
+        {
+          "episode": 408,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261511,
+          "steps": 997
+        },
+        {
+          "episode": 409,
+          "finish_reason": "terminated",
+          "score": 71.0,
+          "seed": 20261512,
+          "steps": 1229
+        },
+        {
+          "episode": 410,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261513,
+          "steps": 1067
+        },
+        {
+          "episode": 411,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261514,
+          "steps": 1033
+        },
+        {
+          "episode": 412,
+          "finish_reason": "terminated",
+          "score": 26.0,
+          "seed": 20261515,
+          "steps": 821
+        },
+        {
+          "episode": 413,
+          "finish_reason": "terminated",
+          "score": 41.0,
+          "seed": 20261516,
+          "steps": 1000
+        },
+        {
+          "episode": 414,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20261517,
+          "steps": 1021
+        },
+        {
+          "episode": 415,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261518,
+          "steps": 954
+        },
+        {
+          "episode": 416,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261519,
+          "steps": 927
+        },
+        {
+          "episode": 417,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20261520,
+          "steps": 804
+        },
+        {
+          "episode": 418,
+          "finish_reason": "terminated",
+          "score": 135.0,
+          "seed": 20261521,
+          "steps": 1644
+        },
+        {
+          "episode": 419,
+          "finish_reason": "terminated",
+          "score": 10.0,
+          "seed": 20261522,
+          "steps": 362
+        },
+        {
+          "episode": 420,
+          "finish_reason": "terminated",
+          "score": 26.0,
+          "seed": 20261523,
+          "steps": 863
+        },
+        {
+          "episode": 421,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261524,
+          "steps": 624
+        },
+        {
+          "episode": 422,
+          "finish_reason": "terminated",
+          "score": 74.0,
+          "seed": 20261525,
+          "steps": 1224
+        },
+        {
+          "episode": 423,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261526,
+          "steps": 985
+        },
+        {
+          "episode": 424,
+          "finish_reason": "terminated",
+          "score": 75.0,
+          "seed": 20261527,
+          "steps": 1255
+        },
+        {
+          "episode": 425,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261528,
+          "steps": 930
+        },
+        {
+          "episode": 426,
+          "finish_reason": "terminated",
+          "score": 56.0,
+          "seed": 20261529,
+          "steps": 1003
+        },
+        {
+          "episode": 427,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261530,
+          "steps": 947
+        },
+        {
+          "episode": 428,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261531,
+          "steps": 926
+        },
+        {
+          "episode": 429,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261532,
+          "steps": 959
+        },
+        {
+          "episode": 430,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261533,
+          "steps": 977
+        },
+        {
+          "episode": 431,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261534,
+          "steps": 422
+        },
+        {
+          "episode": 432,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261535,
+          "steps": 870
+        },
+        {
+          "episode": 433,
+          "finish_reason": "terminated",
+          "score": 36.0,
+          "seed": 20261536,
+          "steps": 927
+        },
+        {
+          "episode": 434,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261537,
+          "steps": 748
+        },
+        {
+          "episode": 435,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20261538,
+          "steps": 624
+        },
+        {
+          "episode": 436,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20261539,
+          "steps": 969
+        },
+        {
+          "episode": 437,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20261540,
+          "steps": 1045
+        },
+        {
+          "episode": 438,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261541,
+          "steps": 964
+        },
+        {
+          "episode": 439,
+          "finish_reason": "terminated",
+          "score": 61.0,
+          "seed": 20261542,
+          "steps": 1112
+        },
+        {
+          "episode": 440,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261543,
+          "steps": 933
+        },
+        {
+          "episode": 441,
+          "finish_reason": "terminated",
+          "score": 25.0,
+          "seed": 20261544,
+          "steps": 706
+        },
+        {
+          "episode": 442,
+          "finish_reason": "terminated",
+          "score": 13.0,
+          "seed": 20261545,
+          "steps": 682
+        },
+        {
+          "episode": 443,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261546,
+          "steps": 1041
+        },
+        {
+          "episode": 444,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261547,
+          "steps": 980
+        },
+        {
+          "episode": 445,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261548,
+          "steps": 712
+        },
+        {
+          "episode": 446,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261549,
+          "steps": 822
+        },
+        {
+          "episode": 447,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261550,
+          "steps": 754
+        },
+        {
+          "episode": 448,
+          "finish_reason": "terminated",
+          "score": 64.0,
+          "seed": 20261551,
+          "steps": 1105
+        },
+        {
+          "episode": 449,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261552,
+          "steps": 536
+        },
+        {
+          "episode": 450,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261553,
+          "steps": 746
+        },
+        {
+          "episode": 451,
+          "finish_reason": "terminated",
+          "score": 52.0,
+          "seed": 20261554,
+          "steps": 998
+        },
+        {
+          "episode": 452,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261555,
+          "steps": 958
+        },
+        {
+          "episode": 453,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261556,
+          "steps": 933
+        },
+        {
+          "episode": 454,
+          "finish_reason": "terminated",
+          "score": 7.0,
+          "seed": 20261557,
+          "steps": 500
+        },
+        {
+          "episode": 455,
+          "finish_reason": "terminated",
+          "score": 29.0,
+          "seed": 20261558,
+          "steps": 852
+        },
+        {
+          "episode": 456,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261559,
+          "steps": 1047
+        },
+        {
+          "episode": 457,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261560,
+          "steps": 997
+        },
+        {
+          "episode": 458,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261561,
+          "steps": 951
+        },
+        {
+          "episode": 459,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261562,
+          "steps": 957
+        },
+        {
+          "episode": 460,
+          "finish_reason": "terminated",
+          "score": 63.0,
+          "seed": 20261563,
+          "steps": 1016
+        },
+        {
+          "episode": 461,
+          "finish_reason": "terminated",
+          "score": 23.0,
+          "seed": 20261564,
+          "steps": 770
+        },
+        {
+          "episode": 462,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261565,
+          "steps": 970
+        },
+        {
+          "episode": 463,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20261566,
+          "steps": 1075
+        },
+        {
+          "episode": 464,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261567,
+          "steps": 938
+        },
+        {
+          "episode": 465,
+          "finish_reason": "terminated",
+          "score": 67.0,
+          "seed": 20261568,
+          "steps": 1094
+        },
+        {
+          "episode": 466,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261569,
+          "steps": 569
+        },
+        {
+          "episode": 467,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261570,
+          "steps": 940
+        },
+        {
+          "episode": 468,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261571,
+          "steps": 950
+        },
+        {
+          "episode": 469,
+          "finish_reason": "terminated",
+          "score": 41.0,
+          "seed": 20261572,
+          "steps": 1009
+        },
+        {
+          "episode": 470,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261573,
+          "steps": 581
+        },
+        {
+          "episode": 471,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261574,
+          "steps": 1030
+        },
+        {
+          "episode": 472,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261575,
+          "steps": 953
+        },
+        {
+          "episode": 473,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261576,
+          "steps": 1040
+        },
+        {
+          "episode": 474,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261577,
+          "steps": 927
+        },
+        {
+          "episode": 475,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261578,
+          "steps": 608
+        },
+        {
+          "episode": 476,
+          "finish_reason": "terminated",
+          "score": 61.0,
+          "seed": 20261579,
+          "steps": 1072
+        },
+        {
+          "episode": 477,
+          "finish_reason": "terminated",
+          "score": 88.0,
+          "seed": 20261580,
+          "steps": 1234
+        },
+        {
+          "episode": 478,
+          "finish_reason": "terminated",
+          "score": 60.0,
+          "seed": 20261581,
+          "steps": 1083
+        },
+        {
+          "episode": 479,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20261582,
+          "steps": 1100
+        },
+        {
+          "episode": 480,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261583,
+          "steps": 652
+        },
+        {
+          "episode": 481,
+          "finish_reason": "terminated",
+          "score": 64.0,
+          "seed": 20261584,
+          "steps": 1112
+        },
+        {
+          "episode": 482,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261585,
+          "steps": 724
+        },
+        {
+          "episode": 483,
+          "finish_reason": "terminated",
+          "score": 55.0,
+          "seed": 20261586,
+          "steps": 1045
+        },
+        {
+          "episode": 484,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261587,
+          "steps": 952
+        },
+        {
+          "episode": 485,
+          "finish_reason": "terminated",
+          "score": 59.0,
+          "seed": 20261588,
+          "steps": 1021
+        },
+        {
+          "episode": 486,
+          "finish_reason": "terminated",
+          "score": 61.0,
+          "seed": 20261589,
+          "steps": 1086
+        },
+        {
+          "episode": 487,
+          "finish_reason": "terminated",
+          "score": 71.0,
+          "seed": 20261590,
+          "steps": 1112
+        },
+        {
+          "episode": 488,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261591,
+          "steps": 925
+        },
+        {
+          "episode": 489,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261592,
+          "steps": 1000
+        },
+        {
+          "episode": 490,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261593,
+          "steps": 871
+        },
+        {
+          "episode": 491,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261594,
+          "steps": 798
+        },
+        {
+          "episode": 492,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261595,
+          "steps": 930
+        },
+        {
+          "episode": 493,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261596,
+          "steps": 916
+        },
+        {
+          "episode": 494,
+          "finish_reason": "terminated",
+          "score": 62.0,
+          "seed": 20261597,
+          "steps": 1083
+        },
+        {
+          "episode": 495,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261598,
+          "steps": 320
+        },
+        {
+          "episode": 496,
+          "finish_reason": "terminated",
+          "score": 57.0,
+          "seed": 20261599,
+          "steps": 1090
+        },
+        {
+          "episode": 497,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261600,
+          "steps": 948
+        },
+        {
+          "episode": 498,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261601,
+          "steps": 969
+        },
+        {
+          "episode": 499,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261602,
+          "steps": 871
+        },
+        {
+          "episode": 500,
+          "finish_reason": "terminated",
+          "score": 99.0,
+          "seed": 20261603,
+          "steps": 1297
+        },
+        {
+          "episode": 501,
+          "finish_reason": "terminated",
+          "score": 71.0,
+          "seed": 20261604,
+          "steps": 1151
+        },
+        {
+          "episode": 502,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261605,
+          "steps": 173
+        },
+        {
+          "episode": 503,
+          "finish_reason": "terminated",
+          "score": 68.0,
+          "seed": 20261606,
+          "steps": 1153
+        },
+        {
+          "episode": 504,
+          "finish_reason": "terminated",
+          "score": 67.0,
+          "seed": 20261607,
+          "steps": 1132
+        },
+        {
+          "episode": 505,
+          "finish_reason": "terminated",
+          "score": 18.0,
+          "seed": 20261608,
+          "steps": 612
+        },
+        {
+          "episode": 506,
+          "finish_reason": "terminated",
+          "score": 54.0,
+          "seed": 20261609,
+          "steps": 1117
+        },
+        {
+          "episode": 507,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20261610,
+          "steps": 572
+        },
+        {
+          "episode": 508,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261611,
+          "steps": 959
+        },
+        {
+          "episode": 509,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261612,
+          "steps": 821
+        },
+        {
+          "episode": 510,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261613,
+          "steps": 756
+        },
+        {
+          "episode": 511,
+          "finish_reason": "terminated",
+          "score": 68.0,
+          "seed": 20261614,
+          "steps": 1270
+        },
+        {
+          "episode": 512,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261615,
+          "steps": 929
+        },
+        {
+          "episode": 513,
+          "finish_reason": "terminated",
+          "score": 2.0,
+          "seed": 20261616,
+          "steps": 111
+        },
+        {
+          "episode": 514,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261617,
+          "steps": 1003
+        },
+        {
+          "episode": 515,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261618,
+          "steps": 1014
+        },
+        {
+          "episode": 516,
+          "finish_reason": "terminated",
+          "score": 56.0,
+          "seed": 20261619,
+          "steps": 987
+        },
+        {
+          "episode": 517,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261620,
+          "steps": 940
+        },
+        {
+          "episode": 518,
+          "finish_reason": "terminated",
+          "score": 52.0,
+          "seed": 20261621,
+          "steps": 1031
+        },
+        {
+          "episode": 519,
+          "finish_reason": "terminated",
+          "score": 14.0,
+          "seed": 20261622,
+          "steps": 533
+        },
+        {
+          "episode": 520,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261623,
+          "steps": 1022
+        },
+        {
+          "episode": 521,
+          "finish_reason": "terminated",
+          "score": 25.0,
+          "seed": 20261624,
+          "steps": 750
+        },
+        {
+          "episode": 522,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261625,
+          "steps": 902
+        },
+        {
+          "episode": 523,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261626,
+          "steps": 861
+        },
+        {
+          "episode": 524,
+          "finish_reason": "terminated",
+          "score": 14.0,
+          "seed": 20261627,
+          "steps": 455
+        },
+        {
+          "episode": 525,
+          "finish_reason": "terminated",
+          "score": 14.0,
+          "seed": 20261628,
+          "steps": 746
+        },
+        {
+          "episode": 526,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261629,
+          "steps": 961
+        },
+        {
+          "episode": 527,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261630,
+          "steps": 1025
+        },
+        {
+          "episode": 528,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261631,
+          "steps": 958
+        },
+        {
+          "episode": 529,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20261632,
+          "steps": 1005
+        },
+        {
+          "episode": 530,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261633,
+          "steps": 776
+        },
+        {
+          "episode": 531,
+          "finish_reason": "terminated",
+          "score": 36.0,
+          "seed": 20261634,
+          "steps": 865
+        },
+        {
+          "episode": 532,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261635,
+          "steps": 542
+        },
+        {
+          "episode": 533,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261636,
+          "steps": 943
+        },
+        {
+          "episode": 534,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261637,
+          "steps": 887
+        },
+        {
+          "episode": 535,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261638,
+          "steps": 955
+        },
+        {
+          "episode": 536,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261639,
+          "steps": 978
+        },
+        {
+          "episode": 537,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261640,
+          "steps": 458
+        },
+        {
+          "episode": 538,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20261641,
+          "steps": 1017
+        },
+        {
+          "episode": 539,
+          "finish_reason": "terminated",
+          "score": 55.0,
+          "seed": 20261642,
+          "steps": 1128
+        },
+        {
+          "episode": 540,
+          "finish_reason": "terminated",
+          "score": 63.0,
+          "seed": 20261643,
+          "steps": 1189
+        },
+        {
+          "episode": 541,
+          "finish_reason": "terminated",
+          "score": 3.0,
+          "seed": 20261644,
+          "steps": 181
+        },
+        {
+          "episode": 542,
+          "finish_reason": "terminated",
+          "score": 26.0,
+          "seed": 20261645,
+          "steps": 832
+        },
+        {
+          "episode": 543,
+          "finish_reason": "terminated",
+          "score": 52.0,
+          "seed": 20261646,
+          "steps": 1050
+        },
+        {
+          "episode": 544,
+          "finish_reason": "terminated",
+          "score": 56.0,
+          "seed": 20261647,
+          "steps": 1131
+        },
+        {
+          "episode": 545,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261648,
+          "steps": 822
+        },
+        {
+          "episode": 546,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261649,
+          "steps": 394
+        },
+        {
+          "episode": 547,
+          "finish_reason": "terminated",
+          "score": 55.0,
+          "seed": 20261650,
+          "steps": 1139
+        },
+        {
+          "episode": 548,
+          "finish_reason": "terminated",
+          "score": 54.0,
+          "seed": 20261651,
+          "steps": 1032
+        },
+        {
+          "episode": 549,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261652,
+          "steps": 684
+        },
+        {
+          "episode": 550,
+          "finish_reason": "terminated",
+          "score": 60.0,
+          "seed": 20261653,
+          "steps": 1055
+        },
+        {
+          "episode": 551,
+          "finish_reason": "terminated",
+          "score": 13.0,
+          "seed": 20261654,
+          "steps": 624
+        },
+        {
+          "episode": 552,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261655,
+          "steps": 969
+        },
+        {
+          "episode": 553,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261656,
+          "steps": 975
+        },
+        {
+          "episode": 554,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261657,
+          "steps": 926
+        },
+        {
+          "episode": 555,
+          "finish_reason": "terminated",
+          "score": 65.0,
+          "seed": 20261658,
+          "steps": 1130
+        },
+        {
+          "episode": 556,
+          "finish_reason": "terminated",
+          "score": 71.0,
+          "seed": 20261659,
+          "steps": 1176
+        },
+        {
+          "episode": 557,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261660,
+          "steps": 786
+        },
+        {
+          "episode": 558,
+          "finish_reason": "terminated",
+          "score": 67.0,
+          "seed": 20261661,
+          "steps": 1244
+        },
+        {
+          "episode": 559,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20261662,
+          "steps": 993
+        },
+        {
+          "episode": 560,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261663,
+          "steps": 955
+        },
+        {
+          "episode": 561,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261664,
+          "steps": 972
+        },
+        {
+          "episode": 562,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261665,
+          "steps": 979
+        },
+        {
+          "episode": 563,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261666,
+          "steps": 584
+        },
+        {
+          "episode": 564,
+          "finish_reason": "terminated",
+          "score": 36.0,
+          "seed": 20261667,
+          "steps": 937
+        },
+        {
+          "episode": 565,
+          "finish_reason": "terminated",
+          "score": 36.0,
+          "seed": 20261668,
+          "steps": 792
+        },
+        {
+          "episode": 566,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261669,
+          "steps": 842
+        },
+        {
+          "episode": 567,
+          "finish_reason": "terminated",
+          "score": 29.0,
+          "seed": 20261670,
+          "steps": 866
+        },
+        {
+          "episode": 568,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261671,
+          "steps": 1088
+        },
+        {
+          "episode": 569,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261672,
+          "steps": 1005
+        },
+        {
+          "episode": 570,
+          "finish_reason": "terminated",
+          "score": 57.0,
+          "seed": 20261673,
+          "steps": 1141
+        },
+        {
+          "episode": 571,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261674,
+          "steps": 538
+        },
+        {
+          "episode": 572,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261675,
+          "steps": 1010
+        },
+        {
+          "episode": 573,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261676,
+          "steps": 926
+        },
+        {
+          "episode": 574,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261677,
+          "steps": 930
+        },
+        {
+          "episode": 575,
+          "finish_reason": "terminated",
+          "score": 52.0,
+          "seed": 20261678,
+          "steps": 1082
+        },
+        {
+          "episode": 576,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261679,
+          "steps": 888
+        },
+        {
+          "episode": 577,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261680,
+          "steps": 779
+        },
+        {
+          "episode": 578,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261681,
+          "steps": 978
+        },
+        {
+          "episode": 579,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261682,
+          "steps": 979
+        },
+        {
+          "episode": 580,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261683,
+          "steps": 944
+        },
+        {
+          "episode": 581,
+          "finish_reason": "terminated",
+          "score": 91.0,
+          "seed": 20261684,
+          "steps": 1409
+        },
+        {
+          "episode": 582,
+          "finish_reason": "terminated",
+          "score": 80.0,
+          "seed": 20261685,
+          "steps": 1243
+        },
+        {
+          "episode": 583,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261686,
+          "steps": 977
+        },
+        {
+          "episode": 584,
+          "finish_reason": "terminated",
+          "score": 18.0,
+          "seed": 20261687,
+          "steps": 751
+        },
+        {
+          "episode": 585,
+          "finish_reason": "terminated",
+          "score": 2.0,
+          "seed": 20261688,
+          "steps": 282
+        },
+        {
+          "episode": 586,
+          "finish_reason": "terminated",
+          "score": 11.0,
+          "seed": 20261689,
+          "steps": 634
+        },
+        {
+          "episode": 587,
+          "finish_reason": "terminated",
+          "score": 5.0,
+          "seed": 20261690,
+          "steps": 260
+        },
+        {
+          "episode": 588,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261691,
+          "steps": 942
+        },
+        {
+          "episode": 589,
+          "finish_reason": "terminated",
+          "score": 52.0,
+          "seed": 20261692,
+          "steps": 1057
+        },
+        {
+          "episode": 590,
+          "finish_reason": "terminated",
+          "score": 125.0,
+          "seed": 20261693,
+          "steps": 1662
+        },
+        {
+          "episode": 591,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20261694,
+          "steps": 1028
+        },
+        {
+          "episode": 592,
+          "finish_reason": "terminated",
+          "score": 54.0,
+          "seed": 20261695,
+          "steps": 953
+        },
+        {
+          "episode": 593,
+          "finish_reason": "terminated",
+          "score": 138.0,
+          "seed": 20261696,
+          "steps": 1678
+        },
+        {
+          "episode": 594,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261697,
+          "steps": 960
+        },
+        {
+          "episode": 595,
+          "finish_reason": "terminated",
+          "score": 1.0,
+          "seed": 20261698,
+          "steps": 230
+        },
+        {
+          "episode": 596,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261699,
+          "steps": 446
+        },
+        {
+          "episode": 597,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261700,
+          "steps": 796
+        },
+        {
+          "episode": 598,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261701,
+          "steps": 222
+        },
+        {
+          "episode": 599,
+          "finish_reason": "terminated",
+          "score": 56.0,
+          "seed": 20261702,
+          "steps": 1092
+        },
+        {
+          "episode": 600,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261703,
+          "steps": 998
+        },
+        {
+          "episode": 601,
+          "finish_reason": "terminated",
+          "score": 25.0,
+          "seed": 20261704,
+          "steps": 848
+        },
+        {
+          "episode": 602,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261705,
+          "steps": 1018
+        },
+        {
+          "episode": 603,
+          "finish_reason": "terminated",
+          "score": 59.0,
+          "seed": 20261706,
+          "steps": 1087
+        },
+        {
+          "episode": 604,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261707,
+          "steps": 1033
+        },
+        {
+          "episode": 605,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261708,
+          "steps": 918
+        },
+        {
+          "episode": 606,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261709,
+          "steps": 1104
+        },
+        {
+          "episode": 607,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20261710,
+          "steps": 784
+        },
+        {
+          "episode": 608,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261711,
+          "steps": 992
+        },
+        {
+          "episode": 609,
+          "finish_reason": "terminated",
+          "score": 1.0,
+          "seed": 20261712,
+          "steps": 234
+        },
+        {
+          "episode": 610,
+          "finish_reason": "terminated",
+          "score": 22.0,
+          "seed": 20261713,
+          "steps": 734
+        },
+        {
+          "episode": 611,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261714,
+          "steps": 993
+        },
+        {
+          "episode": 612,
+          "finish_reason": "terminated",
+          "score": 65.0,
+          "seed": 20261715,
+          "steps": 1118
+        },
+        {
+          "episode": 613,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20261716,
+          "steps": 686
+        },
+        {
+          "episode": 614,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261717,
+          "steps": 1142
+        },
+        {
+          "episode": 615,
+          "finish_reason": "terminated",
+          "score": 16.0,
+          "seed": 20261718,
+          "steps": 608
+        },
+        {
+          "episode": 616,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261719,
+          "steps": 974
+        },
+        {
+          "episode": 617,
+          "finish_reason": "terminated",
+          "score": 46.0,
+          "seed": 20261720,
+          "steps": 1009
+        },
+        {
+          "episode": 618,
+          "finish_reason": "terminated",
+          "score": 41.0,
+          "seed": 20261721,
+          "steps": 987
+        },
+        {
+          "episode": 619,
+          "finish_reason": "terminated",
+          "score": 56.0,
+          "seed": 20261722,
+          "steps": 1170
+        },
+        {
+          "episode": 620,
+          "finish_reason": "terminated",
+          "score": 101.0,
+          "seed": 20261723,
+          "steps": 1511
+        },
+        {
+          "episode": 621,
+          "finish_reason": "terminated",
+          "score": 9.0,
+          "seed": 20261724,
+          "steps": 373
+        },
+        {
+          "episode": 622,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261725,
+          "steps": 869
+        },
+        {
+          "episode": 623,
+          "finish_reason": "terminated",
+          "score": 41.0,
+          "seed": 20261726,
+          "steps": 988
+        },
+        {
+          "episode": 624,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261727,
+          "steps": 925
+        },
+        {
+          "episode": 625,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261728,
+          "steps": 928
+        },
+        {
+          "episode": 626,
+          "finish_reason": "terminated",
+          "score": 59.0,
+          "seed": 20261729,
+          "steps": 1058
+        },
+        {
+          "episode": 627,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261730,
+          "steps": 942
+        },
+        {
+          "episode": 628,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261731,
+          "steps": 969
+        },
+        {
+          "episode": 629,
+          "finish_reason": "terminated",
+          "score": 16.0,
+          "seed": 20261732,
+          "steps": 644
+        },
+        {
+          "episode": 630,
+          "finish_reason": "terminated",
+          "score": 41.0,
+          "seed": 20261733,
+          "steps": 992
+        },
+        {
+          "episode": 631,
+          "finish_reason": "terminated",
+          "score": 95.0,
+          "seed": 20261734,
+          "steps": 1386
+        },
+        {
+          "episode": 632,
+          "finish_reason": "terminated",
+          "score": 72.0,
+          "seed": 20261735,
+          "steps": 1105
+        },
+        {
+          "episode": 633,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261736,
+          "steps": 774
+        },
+        {
+          "episode": 634,
+          "finish_reason": "terminated",
+          "score": 70.0,
+          "seed": 20261737,
+          "steps": 1197
+        },
+        {
+          "episode": 635,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261738,
+          "steps": 982
+        },
+        {
+          "episode": 636,
+          "finish_reason": "terminated",
+          "score": 1.0,
+          "seed": 20261739,
+          "steps": 201
+        },
+        {
+          "episode": 637,
+          "finish_reason": "terminated",
+          "score": 67.0,
+          "seed": 20261740,
+          "steps": 1135
+        },
+        {
+          "episode": 638,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261741,
+          "steps": 696
+        },
+        {
+          "episode": 639,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261742,
+          "steps": 1058
+        },
+        {
+          "episode": 640,
+          "finish_reason": "terminated",
+          "score": 23.0,
+          "seed": 20261743,
+          "steps": 746
+        },
+        {
+          "episode": 641,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261744,
+          "steps": 878
+        },
+        {
+          "episode": 642,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261745,
+          "steps": 992
+        },
+        {
+          "episode": 643,
+          "finish_reason": "terminated",
+          "score": 64.0,
+          "seed": 20261746,
+          "steps": 1090
+        },
+        {
+          "episode": 644,
+          "finish_reason": "terminated",
+          "score": 22.0,
+          "seed": 20261747,
+          "steps": 742
+        },
+        {
+          "episode": 645,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261748,
+          "steps": 1047
+        },
+        {
+          "episode": 646,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261749,
+          "steps": 864
+        },
+        {
+          "episode": 647,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261750,
+          "steps": 951
+        },
+        {
+          "episode": 648,
+          "finish_reason": "terminated",
+          "score": 55.0,
+          "seed": 20261751,
+          "steps": 970
+        },
+        {
+          "episode": 649,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261752,
+          "steps": 953
+        },
+        {
+          "episode": 650,
+          "finish_reason": "terminated",
+          "score": 55.0,
+          "seed": 20261753,
+          "steps": 1052
+        },
+        {
+          "episode": 651,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261754,
+          "steps": 1219
+        },
+        {
+          "episode": 652,
+          "finish_reason": "terminated",
+          "score": 46.0,
+          "seed": 20261755,
+          "steps": 1061
+        },
+        {
+          "episode": 653,
+          "finish_reason": "terminated",
+          "score": 5.0,
+          "seed": 20261756,
+          "steps": 171
+        },
+        {
+          "episode": 654,
+          "finish_reason": "terminated",
+          "score": 23.0,
+          "seed": 20261757,
+          "steps": 752
+        },
+        {
+          "episode": 655,
+          "finish_reason": "terminated",
+          "score": 1.0,
+          "seed": 20261758,
+          "steps": 76
+        },
+        {
+          "episode": 656,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261759,
+          "steps": 985
+        },
+        {
+          "episode": 657,
+          "finish_reason": "terminated",
+          "score": 22.0,
+          "seed": 20261760,
+          "steps": 792
+        },
+        {
+          "episode": 658,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261761,
+          "steps": 993
+        },
+        {
+          "episode": 659,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261762,
+          "steps": 824
+        },
+        {
+          "episode": 660,
+          "finish_reason": "terminated",
+          "score": 12.0,
+          "seed": 20261763,
+          "steps": 410
+        },
+        {
+          "episode": 661,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261764,
+          "steps": 944
+        },
+        {
+          "episode": 662,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261765,
+          "steps": 925
+        },
+        {
+          "episode": 663,
+          "finish_reason": "terminated",
+          "score": 29.0,
+          "seed": 20261766,
+          "steps": 762
+        },
+        {
+          "episode": 664,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261767,
+          "steps": 1032
+        },
+        {
+          "episode": 665,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261768,
+          "steps": 990
+        },
+        {
+          "episode": 666,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20261769,
+          "steps": 1051
+        },
+        {
+          "episode": 667,
+          "finish_reason": "terminated",
+          "score": 63.0,
+          "seed": 20261770,
+          "steps": 1126
+        },
+        {
+          "episode": 668,
+          "finish_reason": "terminated",
+          "score": 134.0,
+          "seed": 20261771,
+          "steps": 1518
+        },
+        {
+          "episode": 669,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261772,
+          "steps": 951
+        },
+        {
+          "episode": 670,
+          "finish_reason": "terminated",
+          "score": 69.0,
+          "seed": 20261773,
+          "steps": 1212
+        },
+        {
+          "episode": 671,
+          "finish_reason": "terminated",
+          "score": 75.0,
+          "seed": 20261774,
+          "steps": 1254
+        },
+        {
+          "episode": 672,
+          "finish_reason": "terminated",
+          "score": 14.0,
+          "seed": 20261775,
+          "steps": 568
+        },
+        {
+          "episode": 673,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261776,
+          "steps": 896
+        },
+        {
+          "episode": 674,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20261777,
+          "steps": 979
+        },
+        {
+          "episode": 675,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261778,
+          "steps": 1135
+        },
+        {
+          "episode": 676,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261779,
+          "steps": 960
+        },
+        {
+          "episode": 677,
+          "finish_reason": "terminated",
+          "score": 5.0,
+          "seed": 20261780,
+          "steps": 191
+        },
+        {
+          "episode": 678,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261781,
+          "steps": 1020
+        },
+        {
+          "episode": 679,
+          "finish_reason": "terminated",
+          "score": 95.0,
+          "seed": 20261782,
+          "steps": 1228
+        },
+        {
+          "episode": 680,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20261783,
+          "steps": 1029
+        },
+        {
+          "episode": 681,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261784,
+          "steps": 985
+        },
+        {
+          "episode": 682,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261785,
+          "steps": 996
+        },
+        {
+          "episode": 683,
+          "finish_reason": "terminated",
+          "score": 59.0,
+          "seed": 20261786,
+          "steps": 1067
+        },
+        {
+          "episode": 684,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261787,
+          "steps": 485
+        },
+        {
+          "episode": 685,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261788,
+          "steps": 987
+        },
+        {
+          "episode": 686,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261789,
+          "steps": 1028
+        },
+        {
+          "episode": 687,
+          "finish_reason": "terminated",
+          "score": 197.0,
+          "seed": 20261790,
+          "steps": 2108
+        },
+        {
+          "episode": 688,
+          "finish_reason": "terminated",
+          "score": 52.0,
+          "seed": 20261791,
+          "steps": 1005
+        },
+        {
+          "episode": 689,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261792,
+          "steps": 929
+        },
+        {
+          "episode": 690,
+          "finish_reason": "terminated",
+          "score": 8.0,
+          "seed": 20261793,
+          "steps": 226
+        },
+        {
+          "episode": 691,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261794,
+          "steps": 656
+        },
+        {
+          "episode": 692,
+          "finish_reason": "terminated",
+          "score": 7.0,
+          "seed": 20261795,
+          "steps": 376
+        },
+        {
+          "episode": 693,
+          "finish_reason": "terminated",
+          "score": 105.0,
+          "seed": 20261796,
+          "steps": 1393
+        },
+        {
+          "episode": 694,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261797,
+          "steps": 778
+        },
+        {
+          "episode": 695,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261798,
+          "steps": 974
+        },
+        {
+          "episode": 696,
+          "finish_reason": "terminated",
+          "score": 2.0,
+          "seed": 20261799,
+          "steps": 171
+        },
+        {
+          "episode": 697,
+          "finish_reason": "terminated",
+          "score": 70.0,
+          "seed": 20261800,
+          "steps": 1276
+        },
+        {
+          "episode": 698,
+          "finish_reason": "terminated",
+          "score": 83.0,
+          "seed": 20261801,
+          "steps": 1210
+        },
+        {
+          "episode": 699,
+          "finish_reason": "terminated",
+          "score": 52.0,
+          "seed": 20261802,
+          "steps": 1010
+        },
+        {
+          "episode": 700,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20261803,
+          "steps": 987
+        },
+        {
+          "episode": 701,
+          "finish_reason": "terminated",
+          "score": 101.0,
+          "seed": 20261804,
+          "steps": 1446
+        },
+        {
+          "episode": 702,
+          "finish_reason": "terminated",
+          "score": 62.0,
+          "seed": 20261805,
+          "steps": 1124
+        },
+        {
+          "episode": 703,
+          "finish_reason": "terminated",
+          "score": 25.0,
+          "seed": 20261806,
+          "steps": 819
+        },
+        {
+          "episode": 704,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261807,
+          "steps": 1101
+        },
+        {
+          "episode": 705,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261808,
+          "steps": 965
+        },
+        {
+          "episode": 706,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261809,
+          "steps": 954
+        },
+        {
+          "episode": 707,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20261810,
+          "steps": 684
+        },
+        {
+          "episode": 708,
+          "finish_reason": "terminated",
+          "score": 59.0,
+          "seed": 20261811,
+          "steps": 1110
+        },
+        {
+          "episode": 709,
+          "finish_reason": "terminated",
+          "score": 52.0,
+          "seed": 20261812,
+          "steps": 1010
+        },
+        {
+          "episode": 710,
+          "finish_reason": "terminated",
+          "score": 1.0,
+          "seed": 20261813,
+          "steps": 81
+        },
+        {
+          "episode": 711,
+          "finish_reason": "terminated",
+          "score": 11.0,
+          "seed": 20261814,
+          "steps": 466
+        },
+        {
+          "episode": 712,
+          "finish_reason": "terminated",
+          "score": 72.0,
+          "seed": 20261815,
+          "steps": 1095
+        },
+        {
+          "episode": 713,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20261816,
+          "steps": 916
+        },
+        {
+          "episode": 714,
+          "finish_reason": "terminated",
+          "score": 10.0,
+          "seed": 20261817,
+          "steps": 380
+        },
+        {
+          "episode": 715,
+          "finish_reason": "terminated",
+          "score": 1.0,
+          "seed": 20261818,
+          "steps": 146
+        },
+        {
+          "episode": 716,
+          "finish_reason": "terminated",
+          "score": 5.0,
+          "seed": 20261819,
+          "steps": 270
+        },
+        {
+          "episode": 717,
+          "finish_reason": "terminated",
+          "score": 80.0,
+          "seed": 20261820,
+          "steps": 1199
+        },
+        {
+          "episode": 718,
+          "finish_reason": "terminated",
+          "score": 41.0,
+          "seed": 20261821,
+          "steps": 943
+        },
+        {
+          "episode": 719,
+          "finish_reason": "terminated",
+          "score": 61.0,
+          "seed": 20261822,
+          "steps": 1096
+        },
+        {
+          "episode": 720,
+          "finish_reason": "terminated",
+          "score": 16.0,
+          "seed": 20261823,
+          "steps": 660
+        },
+        {
+          "episode": 721,
+          "finish_reason": "terminated",
+          "score": 5.0,
+          "seed": 20261824,
+          "steps": 398
+        },
+        {
+          "episode": 722,
+          "finish_reason": "terminated",
+          "score": 46.0,
+          "seed": 20261825,
+          "steps": 853
+        },
+        {
+          "episode": 723,
+          "finish_reason": "terminated",
+          "score": 12.0,
+          "seed": 20261826,
+          "steps": 646
+        },
+        {
+          "episode": 724,
+          "finish_reason": "terminated",
+          "score": 60.0,
+          "seed": 20261827,
+          "steps": 1043
+        },
+        {
+          "episode": 725,
+          "finish_reason": "terminated",
+          "score": 62.0,
+          "seed": 20261828,
+          "steps": 1071
+        },
+        {
+          "episode": 726,
+          "finish_reason": "terminated",
+          "score": 16.0,
+          "seed": 20261829,
+          "steps": 688
+        },
+        {
+          "episode": 727,
+          "finish_reason": "terminated",
+          "score": 92.0,
+          "seed": 20261830,
+          "steps": 1342
+        },
+        {
+          "episode": 728,
+          "finish_reason": "terminated",
+          "score": 41.0,
+          "seed": 20261831,
+          "steps": 975
+        },
+        {
+          "episode": 729,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261832,
+          "steps": 992
+        },
+        {
+          "episode": 730,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261833,
+          "steps": 794
+        },
+        {
+          "episode": 731,
+          "finish_reason": "terminated",
+          "score": 41.0,
+          "seed": 20261834,
+          "steps": 949
+        },
+        {
+          "episode": 732,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261835,
+          "steps": 1086
+        },
+        {
+          "episode": 733,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261836,
+          "steps": 902
+        },
+        {
+          "episode": 734,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261837,
+          "steps": 948
+        },
+        {
+          "episode": 735,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261838,
+          "steps": 952
+        },
+        {
+          "episode": 736,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20261839,
+          "steps": 770
+        },
+        {
+          "episode": 737,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261840,
+          "steps": 929
+        },
+        {
+          "episode": 738,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261841,
+          "steps": 847
+        },
+        {
+          "episode": 739,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261842,
+          "steps": 936
+        },
+        {
+          "episode": 740,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20261843,
+          "steps": 952
+        },
+        {
+          "episode": 741,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261844,
+          "steps": 961
+        },
+        {
+          "episode": 742,
+          "finish_reason": "terminated",
+          "score": 18.0,
+          "seed": 20261845,
+          "steps": 741
+        },
+        {
+          "episode": 743,
+          "finish_reason": "terminated",
+          "score": 4.0,
+          "seed": 20261846,
+          "steps": 191
+        },
+        {
+          "episode": 744,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261847,
+          "steps": 982
+        },
+        {
+          "episode": 745,
+          "finish_reason": "terminated",
+          "score": 9.0,
+          "seed": 20261848,
+          "steps": 330
+        },
+        {
+          "episode": 746,
+          "finish_reason": "terminated",
+          "score": 59.0,
+          "seed": 20261849,
+          "steps": 1008
+        },
+        {
+          "episode": 747,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261850,
+          "steps": 960
+        },
+        {
+          "episode": 748,
+          "finish_reason": "terminated",
+          "score": 76.0,
+          "seed": 20261851,
+          "steps": 1210
+        },
+        {
+          "episode": 749,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261852,
+          "steps": 732
+        },
+        {
+          "episode": 750,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20261853,
+          "steps": 758
+        },
+        {
+          "episode": 751,
+          "finish_reason": "terminated",
+          "score": 1.0,
+          "seed": 20261854,
+          "steps": 68
+        },
+        {
+          "episode": 752,
+          "finish_reason": "terminated",
+          "score": 71.0,
+          "seed": 20261855,
+          "steps": 1136
+        },
+        {
+          "episode": 753,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261856,
+          "steps": 1019
+        },
+        {
+          "episode": 754,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261857,
+          "steps": 1013
+        },
+        {
+          "episode": 755,
+          "finish_reason": "terminated",
+          "score": 10.0,
+          "seed": 20261858,
+          "steps": 536
+        },
+        {
+          "episode": 756,
+          "finish_reason": "terminated",
+          "score": 89.0,
+          "seed": 20261859,
+          "steps": 1255
+        },
+        {
+          "episode": 757,
+          "finish_reason": "terminated",
+          "score": 59.0,
+          "seed": 20261860,
+          "steps": 1114
+        },
+        {
+          "episode": 758,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261861,
+          "steps": 766
+        },
+        {
+          "episode": 759,
+          "finish_reason": "terminated",
+          "score": 46.0,
+          "seed": 20261862,
+          "steps": 939
+        },
+        {
+          "episode": 760,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261863,
+          "steps": 741
+        },
+        {
+          "episode": 761,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261864,
+          "steps": 1014
+        },
+        {
+          "episode": 762,
+          "finish_reason": "terminated",
+          "score": 59.0,
+          "seed": 20261865,
+          "steps": 1051
+        },
+        {
+          "episode": 763,
+          "finish_reason": "terminated",
+          "score": 63.0,
+          "seed": 20261866,
+          "steps": 1104
+        },
+        {
+          "episode": 764,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261867,
+          "steps": 812
+        },
+        {
+          "episode": 765,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261868,
+          "steps": 957
+        },
+        {
+          "episode": 766,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261869,
+          "steps": 772
+        },
+        {
+          "episode": 767,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261870,
+          "steps": 816
+        },
+        {
+          "episode": 768,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261871,
+          "steps": 964
+        },
+        {
+          "episode": 769,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261872,
+          "steps": 816
+        },
+        {
+          "episode": 770,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261873,
+          "steps": 975
+        },
+        {
+          "episode": 771,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261874,
+          "steps": 965
+        },
+        {
+          "episode": 772,
+          "finish_reason": "terminated",
+          "score": 1.0,
+          "seed": 20261875,
+          "steps": 196
+        },
+        {
+          "episode": 773,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261876,
+          "steps": 972
+        },
+        {
+          "episode": 774,
+          "finish_reason": "terminated",
+          "score": 25.0,
+          "seed": 20261877,
+          "steps": 806
+        },
+        {
+          "episode": 775,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261878,
+          "steps": 994
+        },
+        {
+          "episode": 776,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261879,
+          "steps": 980
+        },
+        {
+          "episode": 777,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261880,
+          "steps": 986
+        },
+        {
+          "episode": 778,
+          "finish_reason": "terminated",
+          "score": 13.0,
+          "seed": 20261881,
+          "steps": 494
+        },
+        {
+          "episode": 779,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261882,
+          "steps": 933
+        },
+        {
+          "episode": 780,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261883,
+          "steps": 965
+        },
+        {
+          "episode": 781,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261884,
+          "steps": 997
+        },
+        {
+          "episode": 782,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261885,
+          "steps": 931
+        },
+        {
+          "episode": 783,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261886,
+          "steps": 1039
+        },
+        {
+          "episode": 784,
+          "finish_reason": "terminated",
+          "score": 70.0,
+          "seed": 20261887,
+          "steps": 1174
+        },
+        {
+          "episode": 785,
+          "finish_reason": "terminated",
+          "score": 71.0,
+          "seed": 20261888,
+          "steps": 1096
+        },
+        {
+          "episode": 786,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20261889,
+          "steps": 916
+        },
+        {
+          "episode": 787,
+          "finish_reason": "terminated",
+          "score": 77.0,
+          "seed": 20261890,
+          "steps": 1330
+        },
+        {
+          "episode": 788,
+          "finish_reason": "terminated",
+          "score": 19.0,
+          "seed": 20261891,
+          "steps": 682
+        },
+        {
+          "episode": 789,
+          "finish_reason": "terminated",
+          "score": 74.0,
+          "seed": 20261892,
+          "steps": 1204
+        },
+        {
+          "episode": 790,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261893,
+          "steps": 826
+        },
+        {
+          "episode": 791,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261894,
+          "steps": 945
+        },
+        {
+          "episode": 792,
+          "finish_reason": "terminated",
+          "score": 86.0,
+          "seed": 20261895,
+          "steps": 1214
+        },
+        {
+          "episode": 793,
+          "finish_reason": "terminated",
+          "score": 10.0,
+          "seed": 20261896,
+          "steps": 370
+        },
+        {
+          "episode": 794,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261897,
+          "steps": 802
+        },
+        {
+          "episode": 795,
+          "finish_reason": "terminated",
+          "score": 19.0,
+          "seed": 20261898,
+          "steps": 786
+        },
+        {
+          "episode": 796,
+          "finish_reason": "terminated",
+          "score": 1.0,
+          "seed": 20261899,
+          "steps": 136
+        },
+        {
+          "episode": 797,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20261900,
+          "steps": 624
+        },
+        {
+          "episode": 798,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20261901,
+          "steps": 936
+        },
+        {
+          "episode": 799,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20261902,
+          "steps": 750
+        },
+        {
+          "episode": 800,
+          "finish_reason": "terminated",
+          "score": 61.0,
+          "seed": 20261903,
+          "steps": 1105
+        },
+        {
+          "episode": 801,
+          "finish_reason": "terminated",
+          "score": 25.0,
+          "seed": 20261904,
+          "steps": 796
+        },
+        {
+          "episode": 802,
+          "finish_reason": "terminated",
+          "score": 67.0,
+          "seed": 20261905,
+          "steps": 1182
+        },
+        {
+          "episode": 803,
+          "finish_reason": "terminated",
+          "score": 79.0,
+          "seed": 20261906,
+          "steps": 1292
+        },
+        {
+          "episode": 804,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261907,
+          "steps": 766
+        },
+        {
+          "episode": 805,
+          "finish_reason": "terminated",
+          "score": 26.0,
+          "seed": 20261908,
+          "steps": 676
+        },
+        {
+          "episode": 806,
+          "finish_reason": "terminated",
+          "score": 4.0,
+          "seed": 20261909,
+          "steps": 341
+        },
+        {
+          "episode": 807,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20261910,
+          "steps": 942
+        },
+        {
+          "episode": 808,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261911,
+          "steps": 1066
+        },
+        {
+          "episode": 809,
+          "finish_reason": "terminated",
+          "score": 8.0,
+          "seed": 20261912,
+          "steps": 497
+        },
+        {
+          "episode": 810,
+          "finish_reason": "terminated",
+          "score": 84.0,
+          "seed": 20261913,
+          "steps": 1309
+        },
+        {
+          "episode": 811,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20261914,
+          "steps": 770
+        },
+        {
+          "episode": 812,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261915,
+          "steps": 614
+        },
+        {
+          "episode": 813,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261916,
+          "steps": 952
+        },
+        {
+          "episode": 814,
+          "finish_reason": "terminated",
+          "score": 2.0,
+          "seed": 20261917,
+          "steps": 126
+        },
+        {
+          "episode": 815,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261918,
+          "steps": 547
+        },
+        {
+          "episode": 816,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20261919,
+          "steps": 992
+        },
+        {
+          "episode": 817,
+          "finish_reason": "terminated",
+          "score": 74.0,
+          "seed": 20261920,
+          "steps": 1178
+        },
+        {
+          "episode": 818,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261921,
+          "steps": 828
+        },
+        {
+          "episode": 819,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261922,
+          "steps": 972
+        },
+        {
+          "episode": 820,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261923,
+          "steps": 999
+        },
+        {
+          "episode": 821,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261924,
+          "steps": 800
+        },
+        {
+          "episode": 822,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261925,
+          "steps": 818
+        },
+        {
+          "episode": 823,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20261926,
+          "steps": 945
+        },
+        {
+          "episode": 824,
+          "finish_reason": "terminated",
+          "score": 22.0,
+          "seed": 20261927,
+          "steps": 835
+        },
+        {
+          "episode": 825,
+          "finish_reason": "terminated",
+          "score": 59.0,
+          "seed": 20261928,
+          "steps": 1129
+        },
+        {
+          "episode": 826,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20261929,
+          "steps": 775
+        },
+        {
+          "episode": 827,
+          "finish_reason": "terminated",
+          "score": 5.0,
+          "seed": 20261930,
+          "steps": 314
+        },
+        {
+          "episode": 828,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261931,
+          "steps": 904
+        },
+        {
+          "episode": 829,
+          "finish_reason": "terminated",
+          "score": 60.0,
+          "seed": 20261932,
+          "steps": 1069
+        },
+        {
+          "episode": 830,
+          "finish_reason": "terminated",
+          "score": 127.0,
+          "seed": 20261933,
+          "steps": 1713
+        },
+        {
+          "episode": 831,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261934,
+          "steps": 929
+        },
+        {
+          "episode": 832,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261935,
+          "steps": 882
+        },
+        {
+          "episode": 833,
+          "finish_reason": "terminated",
+          "score": 57.0,
+          "seed": 20261936,
+          "steps": 1010
+        },
+        {
+          "episode": 834,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261937,
+          "steps": 973
+        },
+        {
+          "episode": 835,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20261938,
+          "steps": 964
+        },
+        {
+          "episode": 836,
+          "finish_reason": "terminated",
+          "score": 11.0,
+          "seed": 20261939,
+          "steps": 458
+        },
+        {
+          "episode": 837,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20261940,
+          "steps": 969
+        },
+        {
+          "episode": 838,
+          "finish_reason": "terminated",
+          "score": 36.0,
+          "seed": 20261941,
+          "steps": 938
+        },
+        {
+          "episode": 839,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261942,
+          "steps": 1059
+        },
+        {
+          "episode": 840,
+          "finish_reason": "terminated",
+          "score": 29.0,
+          "seed": 20261943,
+          "steps": 885
+        },
+        {
+          "episode": 841,
+          "finish_reason": "terminated",
+          "score": 61.0,
+          "seed": 20261944,
+          "steps": 1135
+        },
+        {
+          "episode": 842,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261945,
+          "steps": 730
+        },
+        {
+          "episode": 843,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261946,
+          "steps": 863
+        },
+        {
+          "episode": 844,
+          "finish_reason": "terminated",
+          "score": 14.0,
+          "seed": 20261947,
+          "steps": 542
+        },
+        {
+          "episode": 845,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261948,
+          "steps": 760
+        },
+        {
+          "episode": 846,
+          "finish_reason": "terminated",
+          "score": 29.0,
+          "seed": 20261949,
+          "steps": 860
+        },
+        {
+          "episode": 847,
+          "finish_reason": "terminated",
+          "score": 3.0,
+          "seed": 20261950,
+          "steps": 208
+        },
+        {
+          "episode": 848,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261951,
+          "steps": 1017
+        },
+        {
+          "episode": 849,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20261952,
+          "steps": 996
+        },
+        {
+          "episode": 850,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20261953,
+          "steps": 903
+        },
+        {
+          "episode": 851,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261954,
+          "steps": 762
+        },
+        {
+          "episode": 852,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261955,
+          "steps": 927
+        },
+        {
+          "episode": 853,
+          "finish_reason": "terminated",
+          "score": 8.0,
+          "seed": 20261956,
+          "steps": 569
+        },
+        {
+          "episode": 854,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20261957,
+          "steps": 972
+        },
+        {
+          "episode": 855,
+          "finish_reason": "terminated",
+          "score": 74.0,
+          "seed": 20261958,
+          "steps": 1263
+        },
+        {
+          "episode": 856,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261959,
+          "steps": 950
+        },
+        {
+          "episode": 857,
+          "finish_reason": "terminated",
+          "score": 10.0,
+          "seed": 20261960,
+          "steps": 622
+        },
+        {
+          "episode": 858,
+          "finish_reason": "terminated",
+          "score": 61.0,
+          "seed": 20261961,
+          "steps": 1136
+        },
+        {
+          "episode": 859,
+          "finish_reason": "terminated",
+          "score": 5.0,
+          "seed": 20261962,
+          "steps": 310
+        },
+        {
+          "episode": 860,
+          "finish_reason": "terminated",
+          "score": 0.0,
+          "seed": 20261963,
+          "steps": 226
+        },
+        {
+          "episode": 861,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261964,
+          "steps": 545
+        },
+        {
+          "episode": 862,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20261965,
+          "steps": 708
+        },
+        {
+          "episode": 863,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20261966,
+          "steps": 1008
+        },
+        {
+          "episode": 864,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20261967,
+          "steps": 822
+        },
+        {
+          "episode": 865,
+          "finish_reason": "terminated",
+          "score": 3.0,
+          "seed": 20261968,
+          "steps": 196
+        },
+        {
+          "episode": 866,
+          "finish_reason": "terminated",
+          "score": 57.0,
+          "seed": 20261969,
+          "steps": 1124
+        },
+        {
+          "episode": 867,
+          "finish_reason": "terminated",
+          "score": 27.0,
+          "seed": 20261970,
+          "steps": 770
+        },
+        {
+          "episode": 868,
+          "finish_reason": "terminated",
+          "score": 55.0,
+          "seed": 20261971,
+          "steps": 1047
+        },
+        {
+          "episode": 869,
+          "finish_reason": "terminated",
+          "score": 55.0,
+          "seed": 20261972,
+          "steps": 1008
+        },
+        {
+          "episode": 870,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20261973,
+          "steps": 1028
+        },
+        {
+          "episode": 871,
+          "finish_reason": "terminated",
+          "score": 57.0,
+          "seed": 20261974,
+          "steps": 1066
+        },
+        {
+          "episode": 872,
+          "finish_reason": "terminated",
+          "score": 29.0,
+          "seed": 20261975,
+          "steps": 730
+        },
+        {
+          "episode": 873,
+          "finish_reason": "terminated",
+          "score": 58.0,
+          "seed": 20261976,
+          "steps": 1054
+        },
+        {
+          "episode": 874,
+          "finish_reason": "terminated",
+          "score": 21.0,
+          "seed": 20261977,
+          "steps": 802
+        },
+        {
+          "episode": 875,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20261978,
+          "steps": 551
+        },
+        {
+          "episode": 876,
+          "finish_reason": "terminated",
+          "score": 14.0,
+          "seed": 20261979,
+          "steps": 554
+        },
+        {
+          "episode": 877,
+          "finish_reason": "terminated",
+          "score": 16.0,
+          "seed": 20261980,
+          "steps": 553
+        },
+        {
+          "episode": 878,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261981,
+          "steps": 958
+        },
+        {
+          "episode": 879,
+          "finish_reason": "terminated",
+          "score": 67.0,
+          "seed": 20261982,
+          "steps": 1143
+        },
+        {
+          "episode": 880,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261983,
+          "steps": 976
+        },
+        {
+          "episode": 881,
+          "finish_reason": "terminated",
+          "score": 22.0,
+          "seed": 20261984,
+          "steps": 767
+        },
+        {
+          "episode": 882,
+          "finish_reason": "terminated",
+          "score": 50.0,
+          "seed": 20261985,
+          "steps": 975
+        },
+        {
+          "episode": 883,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261986,
+          "steps": 218
+        },
+        {
+          "episode": 884,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261987,
+          "steps": 566
+        },
+        {
+          "episode": 885,
+          "finish_reason": "terminated",
+          "score": 10.0,
+          "seed": 20261988,
+          "steps": 370
+        },
+        {
+          "episode": 886,
+          "finish_reason": "terminated",
+          "score": 64.0,
+          "seed": 20261989,
+          "steps": 1062
+        },
+        {
+          "episode": 887,
+          "finish_reason": "terminated",
+          "score": 6.0,
+          "seed": 20261990,
+          "steps": 298
+        },
+        {
+          "episode": 888,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261991,
+          "steps": 1064
+        },
+        {
+          "episode": 889,
+          "finish_reason": "terminated",
+          "score": 23.0,
+          "seed": 20261992,
+          "steps": 814
+        },
+        {
+          "episode": 890,
+          "finish_reason": "terminated",
+          "score": 15.0,
+          "seed": 20261993,
+          "steps": 470
+        },
+        {
+          "episode": 891,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20261994,
+          "steps": 979
+        },
+        {
+          "episode": 892,
+          "finish_reason": "terminated",
+          "score": 26.0,
+          "seed": 20261995,
+          "steps": 866
+        },
+        {
+          "episode": 893,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261996,
+          "steps": 1062
+        },
+        {
+          "episode": 894,
+          "finish_reason": "terminated",
+          "score": 59.0,
+          "seed": 20261997,
+          "steps": 1034
+        },
+        {
+          "episode": 895,
+          "finish_reason": "terminated",
+          "score": 18.0,
+          "seed": 20261998,
+          "steps": 640
+        },
+        {
+          "episode": 896,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20261999,
+          "steps": 947
+        },
+        {
+          "episode": 897,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20262000,
+          "steps": 928
+        },
+        {
+          "episode": 898,
+          "finish_reason": "terminated",
+          "score": 19.0,
+          "seed": 20262001,
+          "steps": 762
+        },
+        {
+          "episode": 899,
+          "finish_reason": "terminated",
+          "score": 56.0,
+          "seed": 20262002,
+          "steps": 1075
+        },
+        {
+          "episode": 900,
+          "finish_reason": "terminated",
+          "score": 59.0,
+          "seed": 20262003,
+          "steps": 1179
+        },
+        {
+          "episode": 901,
+          "finish_reason": "terminated",
+          "score": 115.0,
+          "seed": 20262004,
+          "steps": 1532
+        },
+        {
+          "episode": 902,
+          "finish_reason": "terminated",
+          "score": 54.0,
+          "seed": 20262005,
+          "steps": 1007
+        },
+        {
+          "episode": 903,
+          "finish_reason": "terminated",
+          "score": 44.0,
+          "seed": 20262006,
+          "steps": 973
+        },
+        {
+          "episode": 904,
+          "finish_reason": "terminated",
+          "score": 52.0,
+          "seed": 20262007,
+          "steps": 1093
+        },
+        {
+          "episode": 905,
+          "finish_reason": "terminated",
+          "score": 19.0,
+          "seed": 20262008,
+          "steps": 671
+        },
+        {
+          "episode": 906,
+          "finish_reason": "terminated",
+          "score": 19.0,
+          "seed": 20262009,
+          "steps": 816
+        },
+        {
+          "episode": 907,
+          "finish_reason": "terminated",
+          "score": 150.0,
+          "seed": 20262010,
+          "steps": 1662
+        },
+        {
+          "episode": 908,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20262011,
+          "steps": 936
+        },
+        {
+          "episode": 909,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20262012,
+          "steps": 605
+        },
+        {
+          "episode": 910,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20262013,
+          "steps": 981
+        },
+        {
+          "episode": 911,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20262014,
+          "steps": 802
+        },
+        {
+          "episode": 912,
+          "finish_reason": "terminated",
+          "score": 30.0,
+          "seed": 20262015,
+          "steps": 942
+        },
+        {
+          "episode": 913,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20262016,
+          "steps": 950
+        },
+        {
+          "episode": 914,
+          "finish_reason": "terminated",
+          "score": 74.0,
+          "seed": 20262017,
+          "steps": 1186
+        },
+        {
+          "episode": 915,
+          "finish_reason": "terminated",
+          "score": 1.0,
+          "seed": 20262018,
+          "steps": 48
+        },
+        {
+          "episode": 916,
+          "finish_reason": "terminated",
+          "score": 68.0,
+          "seed": 20262019,
+          "steps": 1113
+        },
+        {
+          "episode": 917,
+          "finish_reason": "terminated",
+          "score": 33.0,
+          "seed": 20262020,
+          "steps": 934
+        },
+        {
+          "episode": 918,
+          "finish_reason": "terminated",
+          "score": 3.0,
+          "seed": 20262021,
+          "steps": 210
+        },
+        {
+          "episode": 919,
+          "finish_reason": "terminated",
+          "score": 34.0,
+          "seed": 20262022,
+          "steps": 928
+        },
+        {
+          "episode": 920,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20262023,
+          "steps": 930
+        },
+        {
+          "episode": 921,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20262024,
+          "steps": 926
+        },
+        {
+          "episode": 922,
+          "finish_reason": "terminated",
+          "score": 5.0,
+          "seed": 20262025,
+          "steps": 374
+        },
+        {
+          "episode": 923,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20262026,
+          "steps": 958
+        },
+        {
+          "episode": 924,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20262027,
+          "steps": 818
+        },
+        {
+          "episode": 925,
+          "finish_reason": "terminated",
+          "score": 64.0,
+          "seed": 20262028,
+          "steps": 1114
+        },
+        {
+          "episode": 926,
+          "finish_reason": "terminated",
+          "score": 2.0,
+          "seed": 20262029,
+          "steps": 181
+        },
+        {
+          "episode": 927,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20262030,
+          "steps": 925
+        },
+        {
+          "episode": 928,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20262031,
+          "steps": 1070
+        },
+        {
+          "episode": 929,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20262032,
+          "steps": 915
+        },
+        {
+          "episode": 930,
+          "finish_reason": "terminated",
+          "score": 62.0,
+          "seed": 20262033,
+          "steps": 1063
+        },
+        {
+          "episode": 931,
+          "finish_reason": "terminated",
+          "score": 78.0,
+          "seed": 20262034,
+          "steps": 1149
+        },
+        {
+          "episode": 932,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20262035,
+          "steps": 900
+        },
+        {
+          "episode": 933,
+          "finish_reason": "terminated",
+          "score": 11.0,
+          "seed": 20262036,
+          "steps": 464
+        },
+        {
+          "episode": 934,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20262037,
+          "steps": 854
+        },
+        {
+          "episode": 935,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20262038,
+          "steps": 817
+        },
+        {
+          "episode": 936,
+          "finish_reason": "terminated",
+          "score": 26.0,
+          "seed": 20262039,
+          "steps": 806
+        },
+        {
+          "episode": 937,
+          "finish_reason": "terminated",
+          "score": 42.0,
+          "seed": 20262040,
+          "steps": 1067
+        },
+        {
+          "episode": 938,
+          "finish_reason": "terminated",
+          "score": 54.0,
+          "seed": 20262041,
+          "steps": 1044
+        },
+        {
+          "episode": 939,
+          "finish_reason": "terminated",
+          "score": 13.0,
+          "seed": 20262042,
+          "steps": 533
+        },
+        {
+          "episode": 940,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20262043,
+          "steps": 671
+        },
+        {
+          "episode": 941,
+          "finish_reason": "terminated",
+          "score": 11.0,
+          "seed": 20262044,
+          "steps": 431
+        },
+        {
+          "episode": 942,
+          "finish_reason": "terminated",
+          "score": 23.0,
+          "seed": 20262045,
+          "steps": 880
+        },
+        {
+          "episode": 943,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20262046,
+          "steps": 660
+        },
+        {
+          "episode": 944,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20262047,
+          "steps": 797
+        },
+        {
+          "episode": 945,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20262048,
+          "steps": 939
+        },
+        {
+          "episode": 946,
+          "finish_reason": "terminated",
+          "score": 55.0,
+          "seed": 20262049,
+          "steps": 1029
+        },
+        {
+          "episode": 947,
+          "finish_reason": "terminated",
+          "score": 37.0,
+          "seed": 20262050,
+          "steps": 933
+        },
+        {
+          "episode": 948,
+          "finish_reason": "terminated",
+          "score": 4.0,
+          "seed": 20262051,
+          "steps": 224
+        },
+        {
+          "episode": 949,
+          "finish_reason": "terminated",
+          "score": 75.0,
+          "seed": 20262052,
+          "steps": 1182
+        },
+        {
+          "episode": 950,
+          "finish_reason": "terminated",
+          "score": 4.0,
+          "seed": 20262053,
+          "steps": 226
+        },
+        {
+          "episode": 951,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20262054,
+          "steps": 1004
+        },
+        {
+          "episode": 952,
+          "finish_reason": "terminated",
+          "score": 28.0,
+          "seed": 20262055,
+          "steps": 819
+        },
+        {
+          "episode": 953,
+          "finish_reason": "terminated",
+          "score": 60.0,
+          "seed": 20262056,
+          "steps": 1051
+        },
+        {
+          "episode": 954,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20262057,
+          "steps": 672
+        },
+        {
+          "episode": 955,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20262058,
+          "steps": 958
+        },
+        {
+          "episode": 956,
+          "finish_reason": "terminated",
+          "score": 63.0,
+          "seed": 20262059,
+          "steps": 1103
+        },
+        {
+          "episode": 957,
+          "finish_reason": "terminated",
+          "score": 65.0,
+          "seed": 20262060,
+          "steps": 1040
+        },
+        {
+          "episode": 958,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20262061,
+          "steps": 748
+        },
+        {
+          "episode": 959,
+          "finish_reason": "terminated",
+          "score": 8.0,
+          "seed": 20262062,
+          "steps": 306
+        },
+        {
+          "episode": 960,
+          "finish_reason": "terminated",
+          "score": 38.0,
+          "seed": 20262063,
+          "steps": 950
+        },
+        {
+          "episode": 961,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20262064,
+          "steps": 971
+        },
+        {
+          "episode": 962,
+          "finish_reason": "terminated",
+          "score": 3.0,
+          "seed": 20262065,
+          "steps": 181
+        },
+        {
+          "episode": 963,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20262066,
+          "steps": 1032
+        },
+        {
+          "episode": 964,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20262067,
+          "steps": 981
+        },
+        {
+          "episode": 965,
+          "finish_reason": "terminated",
+          "score": 56.0,
+          "seed": 20262068,
+          "steps": 974
+        },
+        {
+          "episode": 966,
+          "finish_reason": "terminated",
+          "score": 7.0,
+          "seed": 20262069,
+          "steps": 300
+        },
+        {
+          "episode": 967,
+          "finish_reason": "terminated",
+          "score": 16.0,
+          "seed": 20262070,
+          "steps": 651
+        },
+        {
+          "episode": 968,
+          "finish_reason": "terminated",
+          "score": 36.0,
+          "seed": 20262071,
+          "steps": 953
+        },
+        {
+          "episode": 969,
+          "finish_reason": "terminated",
+          "score": 25.0,
+          "seed": 20262072,
+          "steps": 778
+        },
+        {
+          "episode": 970,
+          "finish_reason": "terminated",
+          "score": 51.0,
+          "seed": 20262073,
+          "steps": 1019
+        },
+        {
+          "episode": 971,
+          "finish_reason": "terminated",
+          "score": 35.0,
+          "seed": 20262074,
+          "steps": 875
+        },
+        {
+          "episode": 972,
+          "finish_reason": "terminated",
+          "score": 7.0,
+          "seed": 20262075,
+          "steps": 206
+        },
+        {
+          "episode": 973,
+          "finish_reason": "terminated",
+          "score": 86.0,
+          "seed": 20262076,
+          "steps": 1263
+        },
+        {
+          "episode": 974,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20262077,
+          "steps": 996
+        },
+        {
+          "episode": 975,
+          "finish_reason": "terminated",
+          "score": 95.0,
+          "seed": 20262078,
+          "steps": 1440
+        },
+        {
+          "episode": 976,
+          "finish_reason": "terminated",
+          "score": 66.0,
+          "seed": 20262079,
+          "steps": 1090
+        },
+        {
+          "episode": 977,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20262080,
+          "steps": 1098
+        },
+        {
+          "episode": 978,
+          "finish_reason": "terminated",
+          "score": 47.0,
+          "seed": 20262081,
+          "steps": 1015
+        },
+        {
+          "episode": 979,
+          "finish_reason": "terminated",
+          "score": 13.0,
+          "seed": 20262082,
+          "steps": 436
+        },
+        {
+          "episode": 980,
+          "finish_reason": "terminated",
+          "score": 56.0,
+          "seed": 20262083,
+          "steps": 1073
+        },
+        {
+          "episode": 981,
+          "finish_reason": "terminated",
+          "score": 23.0,
+          "seed": 20262084,
+          "steps": 776
+        },
+        {
+          "episode": 982,
+          "finish_reason": "terminated",
+          "score": 40.0,
+          "seed": 20262085,
+          "steps": 1090
+        },
+        {
+          "episode": 983,
+          "finish_reason": "terminated",
+          "score": 3.0,
+          "seed": 20262086,
+          "steps": 310
+        },
+        {
+          "episode": 984,
+          "finish_reason": "terminated",
+          "score": 20.0,
+          "seed": 20262087,
+          "steps": 545
+        },
+        {
+          "episode": 985,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20262088,
+          "steps": 808
+        },
+        {
+          "episode": 986,
+          "finish_reason": "terminated",
+          "score": 85.0,
+          "seed": 20262089,
+          "steps": 1242
+        },
+        {
+          "episode": 987,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20262090,
+          "steps": 800
+        },
+        {
+          "episode": 988,
+          "finish_reason": "terminated",
+          "score": 39.0,
+          "seed": 20262091,
+          "steps": 964
+        },
+        {
+          "episode": 989,
+          "finish_reason": "terminated",
+          "score": 17.0,
+          "seed": 20262092,
+          "steps": 780
+        },
+        {
+          "episode": 990,
+          "finish_reason": "terminated",
+          "score": 46.0,
+          "seed": 20262093,
+          "steps": 1040
+        },
+        {
+          "episode": 991,
+          "finish_reason": "terminated",
+          "score": 32.0,
+          "seed": 20262094,
+          "steps": 856
+        },
+        {
+          "episode": 992,
+          "finish_reason": "terminated",
+          "score": 26.0,
+          "seed": 20262095,
+          "steps": 808
+        },
+        {
+          "episode": 993,
+          "finish_reason": "terminated",
+          "score": 48.0,
+          "seed": 20262096,
+          "steps": 1080
+        },
+        {
+          "episode": 994,
+          "finish_reason": "terminated",
+          "score": 24.0,
+          "seed": 20262097,
+          "steps": 596
+        },
+        {
+          "episode": 995,
+          "finish_reason": "terminated",
+          "score": 31.0,
+          "seed": 20262098,
+          "steps": 863
+        },
+        {
+          "episode": 996,
+          "finish_reason": "terminated",
+          "score": 49.0,
+          "seed": 20262099,
+          "steps": 1038
+        },
+        {
+          "episode": 997,
+          "finish_reason": "terminated",
+          "score": 43.0,
+          "seed": 20262100,
+          "steps": 1026
+        },
+        {
+          "episode": 998,
+          "finish_reason": "terminated",
+          "score": 45.0,
+          "seed": 20262101,
+          "steps": 955
+        },
+        {
+          "episode": 999,
+          "finish_reason": "terminated",
+          "score": 53.0,
+          "seed": 20262102,
+          "steps": 1053
+        }
+      ],
+      "scorer": "openwsp-reconstructed-minatar-v1",
+      "seed": 20261103,
+      "seed_matches_authors": false,
+      "standard_error": 0.7301036709744517,
+      "sticky_action_probability": 0.1
+    },
+    "nonzero_parameters": 1733,
+    "parameters": 20486,
+    "parser": {
+      "applied": 147,
+      "block_found": true,
+      "errors": [],
+      "statements": 147
+    }
+  },
+  "status": "completed",
+  "tools": []
+}

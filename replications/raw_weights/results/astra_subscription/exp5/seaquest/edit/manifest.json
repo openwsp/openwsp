@@ -1,0 +1,99 @@
+{
+  "base_model": "exp5:seaquest:shown",
+  "base_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "changed_entries_total": 1257,
+  "changed_tensors": 6,
+  "edit_sha256": "f2948b1c6ece0ec521a83f36d1da1aa66e4e863386397fd30214fc9708903257",
+  "format": "openwsp.edit",
+  "format_version": 1,
+  "payload_sha256": "23c8f87c1fe02593408f0a43710ff46e06a769ea28ee6cb570454c78e3f3b7dc",
+  "tensors": [
+    {
+      "base_sha256": "5c9b37300155c1f3338bc88f17d69c51fb248b0de0155630962ca6504d789bba",
+      "changed_columns": 32,
+      "changed_entries": 1041,
+      "changed_rows": 332,
+      "dtype": "bfloat16",
+      "edited_sha256": "a1db9df493a8a953f66a8f56a14fa17c3cb4ba090b44fb10acf88c8d1c2a356b",
+      "form": "sparse",
+      "name": "W1",
+      "relative_change": null,
+      "shape": [
+        600,
+        32
+      ],
+      "submitted_file": "W1.npy"
+    },
+    {
+      "base_sha256": "e5a00aa9991ac8a5ee3109844d84a55583bd20572ad3ffcd42792f3c36b183ad",
+      "changed_columns": 26,
+      "changed_entries": 105,
+      "changed_rows": 32,
+      "dtype": "bfloat16",
+      "edited_sha256": "f973940903ed43d283d875a9c8b8af24b07848454b676775f640087aea92b1e6",
+      "form": "sparse",
+      "name": "W2",
+      "relative_change": null,
+      "shape": [
+        32,
+        32
+      ],
+      "submitted_file": "W2.npy"
+    },
+    {
+      "base_sha256": "a1a4f5721c1c4610af7f71078f3a68c330536d679803b0e0507ee8dc10c5dfca",
+      "changed_columns": 5,
+      "changed_entries": 48,
+      "changed_rows": 26,
+      "dtype": "bfloat16",
+      "edited_sha256": "9a978ab2e5d4899b4c63f33c1bda50a83ddd5b2c1665838b4664f569bfd0637d",
+      "form": "sparse",
+      "name": "W3",
+      "relative_change": null,
+      "shape": [
+        32,
+        6
+      ],
+      "submitted_file": "W3.npy"
+    },
+    {
+      "base_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+      "changed_entries": 31,
+      "dtype": "bfloat16",
+      "edited_sha256": "9e800723fd030e2ac1948e934f7d2ffde230535423bf47682971c7e678249c9b",
+      "form": "sparse",
+      "name": "b1",
+      "relative_change": null,
+      "shape": [
+        32
+      ],
+      "submitted_file": "b1.npy"
+    },
+    {
+      "base_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+      "changed_entries": 26,
+      "dtype": "bfloat16",
+      "edited_sha256": "c7cbc1986208b8c86a6ed61e43fd43ea8a3ad7a9e6c92c73df6bb13099f9628e",
+      "form": "sparse",
+      "name": "b2",
+      "relative_change": null,
+      "shape": [
+        32
+      ],
+      "submitted_file": "b2.npy"
+    },
+    {
+      "base_sha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+      "changed_entries": 6,
+      "dtype": "bfloat16",
+      "edited_sha256": "c14b7b2e9879d157dc1ec2d93cf44f669345e53fd79a8b3bb9d6d6c3a5dc3048",
+      "form": "sparse",
+      "name": "b3",
+      "relative_change": null,
+      "shape": [
+        6
+      ],
+      "submitted_file": "b3.npy"
+    }
+  ]
+}

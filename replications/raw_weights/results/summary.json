@@ -1,9 +1,34 @@
 {
-  "basis": "Immutable completed Astra label/car outcomes, with pending Fable comparators; ongoing experiment5 is excluded from this publication snapshot",
+  "basis": "Saved new editor responses only; source-network calibration is separate",
+  "editors": {
+    "astra_subscription": {
+      "blocked_items": 0,
+      "completed_replies": 11,
+      "completed_scores": 11,
+      "pending_items": 0,
+      "planned_items": 11,
+      "usage_totals": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 931527,
+        "output_tokens": 88470,
+        "reasoning_output_tokens": 70955
+      }
+    },
+    "fable_native_anthropic": {
+      "blocked_items": 0,
+      "completed_replies": 0,
+      "completed_scores": 0,
+      "pending_items": 11,
+      "planned_items": 11,
+      "usage_totals": {}
+    }
+  },
   "items": [
     {
       "answer_bytes": 2632,
       "answer_sha256": "64a67aa4cbbf3e8921174bc0e2a64eafa296a2795c4862693f1b54b571abfbcf",
+      "authors_input_tokens": 73749,
       "billing": "chatgpt_subscription_no_api_price_inferred",
       "correct": true,
       "editor": "astra_subscription",
@@ -16,6 +41,7 @@
       },
       "experiment": "exp1",
       "item_id": "breakout",
+      "ours_minus_authors_input_tokens": -3480,
       "predicted": [
         "breakout"
       ],
@@ -35,6 +61,7 @@
     {
       "answer_bytes": 3041,
       "answer_sha256": "e07c091fae4fc3e3fac25c9005f38304530a5064f52419e3aeb65f420424adc3",
+      "authors_input_tokens": 73695,
       "billing": "chatgpt_subscription_no_api_price_inferred",
       "correct": true,
       "editor": "astra_subscription",
@@ -47,6 +74,7 @@
       },
       "experiment": "exp1",
       "item_id": "freeway",
+      "ours_minus_authors_input_tokens": -3480,
       "predicted": [
         "freeway"
       ],
@@ -66,6 +94,7 @@
     {
       "answer_bytes": 2937,
       "answer_sha256": "0a5e78f239468c34a68017df321017497cc15cd571d2f74ddd94c8dfec655897",
+      "authors_input_tokens": 73723,
       "billing": "chatgpt_subscription_no_api_price_inferred",
       "correct": true,
       "editor": "astra_subscription",
@@ -78,6 +107,7 @@
       },
       "experiment": "exp1",
       "item_id": "pacman",
+      "ours_minus_authors_input_tokens": -3480,
       "predicted": [
         "pacman"
       ],
@@ -97,6 +127,7 @@
     {
       "answer_bytes": 2727,
       "answer_sha256": "74a389fcae11c26d4b954615fb75137e7cd722b974a26590b992621b0f951ee2",
+      "authors_input_tokens": 73723,
       "billing": "chatgpt_subscription_no_api_price_inferred",
       "correct": true,
       "editor": "astra_subscription",
@@ -109,6 +140,7 @@
       },
       "experiment": "exp1",
       "item_id": "pong",
+      "ours_minus_authors_input_tokens": -3480,
       "predicted": [
         "pong"
       ],
@@ -128,6 +160,7 @@
     {
       "answer_bytes": 1760,
       "answer_sha256": "d02de7d3d6a14f994278603876b9b4617a8aec4ef70228468b825ee0924c52d4",
+      "authors_input_tokens": 99791,
       "billing": "chatgpt_subscription_no_api_price_inferred",
       "correct": true,
       "editor": "astra_subscription",
@@ -140,6 +173,7 @@
       },
       "experiment": "exp2",
       "item_id": "circle",
+      "ours_minus_authors_input_tokens": -3480,
       "predicted": [
         "circle"
       ],
@@ -159,6 +193,7 @@
     {
       "answer_bytes": 1906,
       "answer_sha256": "07ae3e5d48bc2c38ba0cae83b11661f8103e85bea9040a89fae2ffdb33e1b86d",
+      "authors_input_tokens": 99789,
       "billing": "chatgpt_subscription_no_api_price_inferred",
       "correct": true,
       "editor": "astra_subscription",
@@ -171,6 +206,7 @@
       },
       "experiment": "exp2",
       "item_id": "square",
+      "ours_minus_authors_input_tokens": -3480,
       "predicted": [
         "square"
       ],
@@ -190,6 +226,7 @@
     {
       "answer_bytes": 1872,
       "answer_sha256": "9209f65ce6526f4879ed786722337fb5ae928a99ea65f22ce6cc3229874fc7ed",
+      "authors_input_tokens": 99773,
       "billing": "chatgpt_subscription_no_api_price_inferred",
       "correct": true,
       "editor": "astra_subscription",
@@ -202,6 +239,7 @@
       },
       "experiment": "exp2",
       "item_id": "triangle",
+      "ours_minus_authors_input_tokens": -3480,
       "predicted": [
         "triangle"
       ],
@@ -221,7 +259,9 @@
     {
       "answer_bytes": 1974,
       "answer_sha256": "9e0f5286821c611ab5ac7ba025f7f0926830b11f8c6c7a81102ad12b09703706",
+      "authors_input_tokens": 355201,
       "billing": "chatgpt_subscription_no_api_price_inferred",
+      "changed_parameters": 2918,
       "editor": "astra_subscription",
       "editor_contract": {
         "effort": "high",
@@ -272,6 +312,9 @@
       },
       "experiment": "exp4",
       "item_id": "oneshot_repair",
+      "nonzero_parameters": 162201,
+      "ours_minus_authors_input_tokens": -3478,
+      "parameters": 171664,
       "parser": {
         "applied": 31,
         "block_found": true,
@@ -289,6 +332,162 @@
         "input_tokens": 351723,
         "output_tokens": 4777,
         "reasoning_output_tokens": 4126
+      }
+    },
+    {
+      "answer_bytes": 5606,
+      "answer_sha256": "a79e096e616da48ec6cf9ae40ec4a375bdde643d3af64250095088ffb173e72c",
+      "authors_input_tokens": 6199,
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "changed_parameters": 1733,
+      "editor": "astra_subscription",
+      "editor_contract": {
+        "effort": "xhigh",
+        "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+        "reasoning_summary": "detailed",
+        "transport": "codex_cli_chatgpt",
+        "verbosity": "low"
+      },
+      "evaluation": {
+        "environment_class_sha256": "bc704b4acc3ef2871632bef770d3bb8168d0a9ba7faa0022e4c76227480cf73a",
+        "episodes": 1000,
+        "game": "asterix",
+        "max_steps": 10000,
+        "mean": 39.709,
+        "mean_steps": 883.629,
+        "minatar_version": "1.0.15",
+        "scorer": "openwsp-reconstructed-minatar-v1",
+        "seed": 20261103,
+        "seed_matches_authors": false,
+        "standard_error": 0.7301036709744517,
+        "sticky_action_probability": 0.1
+      },
+      "experiment": "exp5",
+      "item_id": "asterix",
+      "nonzero_parameters": 1733,
+      "ours_minus_authors_input_tokens": -3503,
+      "parameters": 20486,
+      "parser": {
+        "applied": 147,
+        "block_found": true,
+        "errors": [],
+        "statements": 147
+      },
+      "prompt_sha256": "9e8243d5545956e42b8bd130bceba6ed90ecb807768be3ae0f498f765197f5da",
+      "reply_status": "completed",
+      "result_path": "astra_subscription/exp5/asterix/result.json",
+      "result_sha256": "ac6f8aa4733a607b56fcce742fffa3cfe1afa8c8df4eb2b6f410fccf2b662e4e",
+      "score_status": "completed",
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 2696,
+        "output_tokens": 22150,
+        "reasoning_output_tokens": 18839
+      }
+    },
+    {
+      "answer_bytes": 9003,
+      "answer_sha256": "548e7ef9fafb0aa15f18494b5380b1756f2cfd1edc0d4b225530edf617aefe0c",
+      "authors_input_tokens": 6119,
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "changed_parameters": 1555,
+      "editor": "astra_subscription",
+      "editor_contract": {
+        "effort": "xhigh",
+        "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+        "reasoning_summary": "detailed",
+        "transport": "codex_cli_chatgpt",
+        "verbosity": "low"
+      },
+      "evaluation": {
+        "environment_class_sha256": "59bf8361539001c3c8497be0a00c6a905eda56297c610d84b1f3dc882d51f655",
+        "episodes": 1000,
+        "game": "breakout",
+        "max_steps": 10000,
+        "mean": 458.73,
+        "mean_steps": 8469.502,
+        "minatar_version": "1.0.15",
+        "scorer": "openwsp-reconstructed-minatar-v1",
+        "seed": 20261103,
+        "seed_matches_authors": false,
+        "standard_error": 4.994559512582137,
+        "sticky_action_probability": 0.1
+      },
+      "experiment": "exp5",
+      "item_id": "breakout",
+      "nonzero_parameters": 1555,
+      "ours_minus_authors_input_tokens": -3503,
+      "parameters": 20486,
+      "parser": {
+        "applied": 194,
+        "block_found": true,
+        "errors": [],
+        "statements": 194
+      },
+      "prompt_sha256": "766ee251d59a7893ed86d5eaea99ddb847529ab2092afc69f90f55fb0a22e876",
+      "reply_status": "completed",
+      "result_path": "astra_subscription/exp5/breakout/result.json",
+      "result_sha256": "90c5db69d324ca77a04a736650bc4052f63f48b35b1c509da08db298ed57e6ca",
+      "score_status": "completed",
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 2616,
+        "output_tokens": 23733,
+        "reasoning_output_tokens": 17881
+      }
+    },
+    {
+      "answer_bytes": 5600,
+      "answer_sha256": "703b0dbfe3d2a1083f503ac8d2e46aceb57eafe28504108a1205032dea626613",
+      "authors_input_tokens": 8112,
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "changed_parameters": 1257,
+      "editor": "astra_subscription",
+      "editor_contract": {
+        "effort": "xhigh",
+        "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+        "reasoning_summary": "detailed",
+        "transport": "codex_cli_chatgpt",
+        "verbosity": "low"
+      },
+      "evaluation": {
+        "environment_class_sha256": "cfefdbde123e683a0733a6475e70e66b241a441b35979c486e5b304de073876a",
+        "episodes": 1000,
+        "game": "seaquest",
+        "max_steps": 10000,
+        "mean": 2.407,
+        "mean_steps": 233.502,
+        "minatar_version": "1.0.15",
+        "scorer": "openwsp-reconstructed-minatar-v1",
+        "seed": 20261103,
+        "seed_matches_authors": false,
+        "standard_error": 0.10593664886890455,
+        "sticky_action_probability": 0.1
+      },
+      "experiment": "exp5",
+      "item_id": "seaquest",
+      "nonzero_parameters": 1257,
+      "ours_minus_authors_input_tokens": -3503,
+      "parameters": 20486,
+      "parser": {
+        "applied": 172,
+        "block_found": true,
+        "errors": [],
+        "statements": 172
+      },
+      "prompt_sha256": "81e51857d7cffac29b12a389dee6ffcda2256a9e03f6cf91f4fd96e1eb855bf6",
+      "reply_status": "completed",
+      "result_path": "astra_subscription/exp5/seaquest/result.json",
+      "result_sha256": "a0aa1cc11ba15581695d0220c799693dd0824e625669c7a79e02c2e70ffdfcfa",
+      "score_status": "completed",
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 4609,
+        "output_tokens": 24551,
+        "reasoning_output_tokens": 21210
       }
     },
     {
@@ -354,15 +553,33 @@
       "prompt_sha256": "2ed66051f4fa554d43d0163eb48e4256dc80aef78d875a218826beefeb7d0559",
       "reply_status": "pending",
       "score_status": "pending"
+    },
+    {
+      "editor": "fable_native_anthropic",
+      "experiment": "exp5",
+      "item_id": "asterix",
+      "prompt_sha256": "9e8243d5545956e42b8bd130bceba6ed90ecb807768be3ae0f498f765197f5da",
+      "reply_status": "pending",
+      "score_status": "pending"
+    },
+    {
+      "editor": "fable_native_anthropic",
+      "experiment": "exp5",
+      "item_id": "breakout",
+      "prompt_sha256": "766ee251d59a7893ed86d5eaea99ddb847529ab2092afc69f90f55fb0a22e876",
+      "reply_status": "pending",
+      "score_status": "pending"
+    },
+    {
+      "editor": "fable_native_anthropic",
+      "experiment": "exp5",
+      "item_id": "seaquest",
+      "prompt_sha256": "81e51857d7cffac29b12a389dee6ffcda2256a9e03f6cf91f4fd96e1eb855bf6",
+      "reply_status": "pending",
+      "score_status": "pending"
     }
   ],
   "items_per_editor": 11,
-  "recorded_at": "2026-11-03T19:50:13.989418+00:00",
   "schema_version": 1,
-  "snapshot_scope": [
-    "exp1",
-    "exp2",
-    "exp4"
-  ],
   "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f"
 }

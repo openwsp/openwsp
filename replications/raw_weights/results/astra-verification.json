@@ -1,0 +1,389 @@
+{
+  "basis": "Completed receipts, source hashes, event logs and v1 edits verified; scored float32 tensors reconstructed from saved replies without repeating inference or rollouts",
+  "completed_items": 11,
+  "edit_precision_note": "The generic v1 edit format stores bfloat16 values and is not the exact scored network. CPU raw-weight scores use float32 parsed weights; tensor hashes below identify that precision. Full weights remain outside git.",
+  "items": [
+    {
+      "answer_sha256": "64a67aa4cbbf3e8921174bc0e2a64eafa296a2795c4862693f1b54b571abfbcf",
+      "completed_turns": 1,
+      "event_sha256": "8713bbbc2dfedd8f8cf6bcfd74df2c3f2734354e1b395c4352d2e355311a5025",
+      "experiment": "exp1",
+      "item_id": "breakout",
+      "native_tool_items": 0,
+      "prompt_sha256": "ba1d97cfcb585f0ccab628ed1ef983b230d897b97ae6ff10f2de6eac6d390b31",
+      "thread_id": "01a1a2dd-830a-7513-b2de-127bdbf19fb3"
+    },
+    {
+      "answer_sha256": "e07c091fae4fc3e3fac25c9005f38304530a5064f52419e3aeb65f420424adc3",
+      "completed_turns": 1,
+      "event_sha256": "9a65dc90b5c495a80ded6fc70b66d57c754f5209fc0e9288578c7167579ef2b5",
+      "experiment": "exp1",
+      "item_id": "freeway",
+      "native_tool_items": 0,
+      "prompt_sha256": "76f30db2c4591e340f4a8e1ca56abdfdf6aa9857e3220936ca178f86c29e6070",
+      "thread_id": "01a1a2de-81f4-7131-8958-c653c53202dc"
+    },
+    {
+      "answer_sha256": "0a5e78f239468c34a68017df321017497cc15cd571d2f74ddd94c8dfec655897",
+      "completed_turns": 1,
+      "event_sha256": "ca75ac4a11122bac4368d5c77868b52f037d75fedb450bad7c82f67e63368ae5",
+      "experiment": "exp1",
+      "item_id": "pacman",
+      "native_tool_items": 0,
+      "prompt_sha256": "1c75e66aab1e611bdb07a87d6f70e3d2ba3d149e58f259b5ad7a485661244acf",
+      "thread_id": "01a1a2df-5012-7823-867e-4284a544d795"
+    },
+    {
+      "answer_sha256": "74a389fcae11c26d4b954615fb75137e7cd722b974a26590b992621b0f951ee2",
+      "completed_turns": 1,
+      "event_sha256": "50376bd2d68d4b44363182f3be8eaa9dbd1f828efc090642db7438f266c39fb9",
+      "experiment": "exp1",
+      "item_id": "pong",
+      "native_tool_items": 0,
+      "prompt_sha256": "1b143ac2f46ab7a0c4b3eb45bd2b9d82314c3b24e2d2412f80566946c935c5ba",
+      "thread_id": "01a1a2df-dde6-76c3-a83b-c1a533dc5229"
+    },
+    {
+      "answer_sha256": "d02de7d3d6a14f994278603876b9b4617a8aec4ef70228468b825ee0924c52d4",
+      "completed_turns": 1,
+      "event_sha256": "c31f8362b75e3375aa8d67b7c5762b126ff4b45c438bd5f9d947a48e40e83792",
+      "experiment": "exp2",
+      "item_id": "circle",
+      "native_tool_items": 0,
+      "prompt_sha256": "f02e93fcdb15177695684005f4345a6f9fc94d9925ad6c0fe69545203676693b",
+      "thread_id": "01a1a2e0-ec27-74b3-bd3f-83e44aebb8e7"
+    },
+    {
+      "answer_sha256": "07ae3e5d48bc2c38ba0cae83b11661f8103e85bea9040a89fae2ffdb33e1b86d",
+      "completed_turns": 1,
+      "event_sha256": "0199352df35b55502fb797f04e7a813addbb45ed2d701502af1bdc18eeea3ef7",
+      "experiment": "exp2",
+      "item_id": "square",
+      "native_tool_items": 0,
+      "prompt_sha256": "fbb9f8b4b1b63dd4460d7168159b135b1420e70e24bcddd00f986e191f417172",
+      "thread_id": "01a1a2e2-19ae-7672-b73c-e19613989fb2"
+    },
+    {
+      "answer_sha256": "9209f65ce6526f4879ed786722337fb5ae928a99ea65f22ce6cc3229874fc7ed",
+      "completed_turns": 1,
+      "event_sha256": "7c9e29a5e9bbc69e52f3b5002f3cacfc9cdf05bf34ba53590e13221631960f75",
+      "experiment": "exp2",
+      "item_id": "triangle",
+      "native_tool_items": 0,
+      "prompt_sha256": "d8533653617af859a80f105b8a6360efbf7331be41f85f97212b75fcc63da897",
+      "thread_id": "01a1a2e3-32aa-7ae2-84c8-f38cf1577686"
+    },
+    {
+      "answer_sha256": "9e0f5286821c611ab5ac7ba025f7f0926830b11f8c6c7a81102ad12b09703706",
+      "completed_turns": 1,
+      "episode_records": 1024,
+      "event_sha256": "95fda4117e288aab5f4d2fac08a554455c033af8d58b35252efd6585bee965d9",
+      "experiment": "exp4",
+      "float32_actor_basis": "Deterministically reconstructed from the saved answer using the same numeric parser and shown base as CPU scoring",
+      "float32_tensors": {
+        "actor0.W": {
+          "dtype": "float32",
+          "sha256": "e7c2380e71c74e5120bd6067ce8c312d464122b32c56982bf0dacaa840f1db7d",
+          "shape": [
+            128,
+            128
+          ]
+        },
+        "actor0.b": {
+          "dtype": "float32",
+          "sha256": "8e651b639824d74e721eb43f01ad5620cd156db697a9d866019eb6bbb8d0a1dc",
+          "shape": [
+            128
+          ]
+        },
+        "actor1.W": {
+          "dtype": "float32",
+          "sha256": "f0976a014d421ef1f64801b29b565fdad3c932f8c1a05c4b906d1555ff61bbd0",
+          "shape": [
+            128,
+            128
+          ]
+        },
+        "actor1.b": {
+          "dtype": "float32",
+          "sha256": "841e54f8969858aa0a6e361d42c4ea2017efc30e26c4793ed6ef285fb89a1484",
+          "shape": [
+            128
+          ]
+        },
+        "actor2.W": {
+          "dtype": "float32",
+          "sha256": "02aec040a198db9d93c1d5cd6a0bdf4513eba5bd4991674b2ad94a8a3aca8cb6",
+          "shape": [
+            128,
+            128
+          ]
+        },
+        "actor2.b": {
+          "dtype": "float32",
+          "sha256": "19f8851b9fe00913f21c96572767411ada3337c9fbb2841764424fded684db66",
+          "shape": [
+            128
+          ]
+        },
+        "actor3.W": {
+          "dtype": "float32",
+          "sha256": "dd48e56ca16fa18a291bb3604ce8ecccc1445ad6e0cd94590058ef78ede02f19",
+          "shape": [
+            128,
+            128
+          ]
+        },
+        "actor3.b": {
+          "dtype": "float32",
+          "sha256": "b11a16b6dd91ec68b0ce066ffa471fdfe4521e1cf7e6cc6b99310f93e9cd170f",
+          "shape": [
+            128
+          ]
+        },
+        "actor4.W": {
+          "dtype": "float32",
+          "sha256": "5744b1d44751f952a44888dcf5222c3919ba76d8f9074ec131e525fb1c2c22d0",
+          "shape": [
+            128,
+            128
+          ]
+        },
+        "actor4.b": {
+          "dtype": "float32",
+          "sha256": "a044525d86a268f9e219c82ab99f1639321fedc087af0cffe66d8723bf519cb5",
+          "shape": [
+            128
+          ]
+        },
+        "actor_head.W": {
+          "dtype": "float32",
+          "sha256": "892ff4afdb9063dcce4c605d202919cf885031e9cba5c6df84e67680983dd9f5",
+          "shape": [
+            128,
+            16
+          ]
+        },
+        "actor_head.b": {
+          "dtype": "float32",
+          "sha256": "0156a395034847a746492df27e695e78ee5db5b8ce4538105750a4d92bc2d5a5",
+          "shape": [
+            16
+          ]
+        },
+        "embed.W": {
+          "dtype": "float32",
+          "sha256": "ed1477869aa80249875dfb1857869aa859e9b3424d9275a90eee45c6791aca0d",
+          "shape": [
+            679,
+            128
+          ]
+        },
+        "embed.b": {
+          "dtype": "float32",
+          "sha256": "ea556483ce09bfc63cd1dee60f19124d5e4aaf7842048753adfdd252e7941b3b",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "item_id": "oneshot_repair",
+      "native_tool_items": 0,
+      "prompt_sha256": "2ed66051f4fa554d43d0163eb48e4256dc80aef78d875a218826beefeb7d0559",
+      "tensor_hash_encoding": "Contiguous C-order little-endian float32 bytes",
+      "thread_id": "01a1a2e4-6e89-7d43-9dc0-54ed577f51d6",
+      "v1_edit_matches_bfloat16_rounding": true
+    },
+    {
+      "answer_sha256": "a79e096e616da48ec6cf9ae40ec4a375bdde643d3af64250095088ffb173e72c",
+      "completed_turns": 1,
+      "episode_records": 1000,
+      "event_sha256": "fac821fe79e9df9698574adf9358918cd0721019fbf70956226e08075e0e5513",
+      "experiment": "exp5",
+      "float32_actor_basis": "Deterministically reconstructed from the saved answer using the same numeric parser and shown base as CPU scoring",
+      "float32_tensors": {
+        "W1": {
+          "dtype": "float32",
+          "sha256": "27570dfec238e23f603f8e46b27c700ac8334683cb138055fd7caf01fdf857a3",
+          "shape": [
+            600,
+            32
+          ]
+        },
+        "W2": {
+          "dtype": "float32",
+          "sha256": "04c1181a658ef7f59478d61cdcf2e7200e860e32d11b9893ad4cd30b57a60497",
+          "shape": [
+            32,
+            32
+          ]
+        },
+        "W3": {
+          "dtype": "float32",
+          "sha256": "1660909e7a444a894fd75bdb56855c736a5ac69e8d31aae60d66a1fc8df566cb",
+          "shape": [
+            32,
+            6
+          ]
+        },
+        "b1": {
+          "dtype": "float32",
+          "sha256": "492616ad2b02b4fe12532c60780fabbaedf3ae4fc214a1eb9d24cd581ae44931",
+          "shape": [
+            32
+          ]
+        },
+        "b2": {
+          "dtype": "float32",
+          "sha256": "9130c39fe3147265ab1c1b5628ed0452007f628519ba5ba41163b54663484d90",
+          "shape": [
+            32
+          ]
+        },
+        "b3": {
+          "dtype": "float32",
+          "sha256": "537d5a44db968b51fca4469d390ef925d8bba2308f5e761457da86f28e2815f8",
+          "shape": [
+            6
+          ]
+        }
+      },
+      "item_id": "asterix",
+      "native_tool_items": 0,
+      "prompt_sha256": "9e8243d5545956e42b8bd130bceba6ed90ecb807768be3ae0f498f765197f5da",
+      "tensor_hash_encoding": "Contiguous C-order little-endian float32 bytes",
+      "thread_id": "01a1a2e8-23a8-7672-91a1-0b874330afb8",
+      "v1_edit_matches_bfloat16_rounding": true
+    },
+    {
+      "answer_sha256": "548e7ef9fafb0aa15f18494b5380b1756f2cfd1edc0d4b225530edf617aefe0c",
+      "completed_turns": 1,
+      "episode_records": 1000,
+      "event_sha256": "02c3b7507c7ea224ffcf38f9ce6b5930e1f173bbf7f1f3ca235e6a673a682030",
+      "experiment": "exp5",
+      "float32_actor_basis": "Deterministically reconstructed from the saved answer using the same numeric parser and shown base as CPU scoring",
+      "float32_tensors": {
+        "W1": {
+          "dtype": "float32",
+          "sha256": "295186ff48efb6a8f9327f7bc002155de53c950a42b2e294af024ed5f6547b32",
+          "shape": [
+            600,
+            32
+          ]
+        },
+        "W2": {
+          "dtype": "float32",
+          "sha256": "ea30d7594141abdf60cc349cf6e2b02b73b9e4a40058011d75b4f21bf6cc2054",
+          "shape": [
+            32,
+            32
+          ]
+        },
+        "W3": {
+          "dtype": "float32",
+          "sha256": "d784eac9520ccf29c94d087d1b2356b72074aad0c1b175cbe5cc995d29b96a3b",
+          "shape": [
+            32,
+            6
+          ]
+        },
+        "b1": {
+          "dtype": "float32",
+          "sha256": "b4986eceee59ee8c4078cd89a864acaeb99b1ab86074a7d8d043986b0cdc4dda",
+          "shape": [
+            32
+          ]
+        },
+        "b2": {
+          "dtype": "float32",
+          "sha256": "46199f70762bf8361a8263d79ce98f8c6ca2465282c74f18659fa5f2da7e706d",
+          "shape": [
+            32
+          ]
+        },
+        "b3": {
+          "dtype": "float32",
+          "sha256": "3bb43083d9a26afe26aaee40bd840fdd178905695e3bd0768c9b069a9694d980",
+          "shape": [
+            6
+          ]
+        }
+      },
+      "item_id": "breakout",
+      "native_tool_items": 0,
+      "prompt_sha256": "766ee251d59a7893ed86d5eaea99ddb847529ab2092afc69f90f55fb0a22e876",
+      "tensor_hash_encoding": "Contiguous C-order little-endian float32 bytes",
+      "thread_id": "01a1a2f3-3e5b-7b02-89ea-ab3acd9ed579",
+      "v1_edit_matches_bfloat16_rounding": true
+    },
+    {
+      "answer_sha256": "703b0dbfe3d2a1083f503ac8d2e46aceb57eafe28504108a1205032dea626613",
+      "completed_turns": 1,
+      "episode_records": 1000,
+      "event_sha256": "1a0ead63fbf4a8508e48efb06a4e1b0c16e5664ddaabe52ed9d9782d653a8d74",
+      "experiment": "exp5",
+      "float32_actor_basis": "Deterministically reconstructed from the saved answer using the same numeric parser and shown base as CPU scoring",
+      "float32_tensors": {
+        "W1": {
+          "dtype": "float32",
+          "sha256": "f17fc06cbaa6b428a588a08b86a30d31fa1d2520cfec20fb074807fe25cc8e6a",
+          "shape": [
+            600,
+            32
+          ]
+        },
+        "W2": {
+          "dtype": "float32",
+          "sha256": "b02a08b70eb9e8ced4b20b3d38f17ba1e6206e7fef64bceec5b3cb46be05c101",
+          "shape": [
+            32,
+            32
+          ]
+        },
+        "W3": {
+          "dtype": "float32",
+          "sha256": "dd914f27cf63aa253c53f53da85292fcade74fb1ec3bef641ab5aa67c8d1d5d3",
+          "shape": [
+            32,
+            6
+          ]
+        },
+        "b1": {
+          "dtype": "float32",
+          "sha256": "8fcd1bc14526bdd5c1a2046a2aa4f97f603e5e0794e0a054bee224a7d5e07e2d",
+          "shape": [
+            32
+          ]
+        },
+        "b2": {
+          "dtype": "float32",
+          "sha256": "211b882a391ef42fdc1805fe81bd0d2b08ff52aa9d4692d5416acb73e122cc33",
+          "shape": [
+            32
+          ]
+        },
+        "b3": {
+          "dtype": "float32",
+          "sha256": "08ad270315a1808eb8e7d1a5b3cdf17de22d8ca5a559702e9ab765b7c2206cf2",
+          "shape": [
+            6
+          ]
+        }
+      },
+      "item_id": "seaquest",
+      "native_tool_items": 0,
+      "prompt_sha256": "81e51857d7cffac29b12a389dee6ffcda2256a9e03f6cf91f4fd96e1eb855bf6",
+      "tensor_hash_encoding": "Contiguous C-order little-endian float32 bytes",
+      "thread_id": "01a1a2fc-7847-7862-ab17-acfd251ac2dc",
+      "v1_edit_matches_bfloat16_rounding": true
+    }
+  ],
+  "parser_sha256": "78f9a8984cb5ffb13b63649b3643fc6856200618f6cde76d9576d13495acce74",
+  "schema_version": 1,
+  "scorer_sha256": {
+    "kinetix_score.py": "2690d0d82444701234d7bb3060182a01fdb7a9170f97f08f3f7a2248d510ee5c",
+    "minatar_score.py": "08205960ecb52294d25e5cf4ae9688f171f01d9fa60580af36ac0eb62daf9d1b"
+  },
+  "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "unique_threads": 11
+}

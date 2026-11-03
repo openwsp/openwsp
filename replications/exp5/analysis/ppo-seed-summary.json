@@ -1,0 +1,152 @@
+{
+  "aggregation": "Equal weight over every released training seed; no best-seed selection",
+  "basis": "Authors' reference only; no new PPO training or evaluation",
+  "rows": [
+    {
+      "episodes_per_seed": 1000,
+      "game": "breakout",
+      "individual_means": {
+        "ppo100_s0": 6.038,
+        "ppo100_s1": 6.687,
+        "ppo100_s2": 15.779,
+        "ppo100_s3": 11.15,
+        "ppo100_s4": 11.261,
+        "ppo100_s5": 6.552,
+        "ppo100_s6": 5.682,
+        "ppo100_s7": 6.424,
+        "ppo100_s8": 6.942,
+        "ppo100_s9": 5.608
+      },
+      "maximum_seed_mean": 15.779,
+      "mean_of_seed_means": 8.2123,
+      "minimum_seed_mean": 5.608,
+      "seed_count": 10,
+      "seed_names": [
+        "ppo100_s0",
+        "ppo100_s1",
+        "ppo100_s2",
+        "ppo100_s3",
+        "ppo100_s4",
+        "ppo100_s5",
+        "ppo100_s6",
+        "ppo100_s7",
+        "ppo100_s8",
+        "ppo100_s9"
+      ],
+      "training_steps_millions": 100
+    },
+    {
+      "episodes_per_seed": 1000,
+      "game": "breakout",
+      "individual_means": {
+        "ppo500_s0": 25.344,
+        "ppo500_s1": 12.194,
+        "ppo500_s2": 19.82
+      },
+      "maximum_seed_mean": 25.344,
+      "mean_of_seed_means": 19.119333333333334,
+      "minimum_seed_mean": 12.194,
+      "seed_count": 3,
+      "seed_names": [
+        "ppo500_s0",
+        "ppo500_s1",
+        "ppo500_s2"
+      ],
+      "training_steps_millions": 500
+    },
+    {
+      "episodes_per_seed": 1000,
+      "game": "seaquest",
+      "individual_means": {
+        "ppo100_s0": 4.421,
+        "ppo100_s1": 4.408,
+        "ppo100_s2": 5.617
+      },
+      "maximum_seed_mean": 5.617,
+      "mean_of_seed_means": 4.815333333333334,
+      "minimum_seed_mean": 4.408,
+      "seed_count": 3,
+      "seed_names": [
+        "ppo100_s0",
+        "ppo100_s1",
+        "ppo100_s2"
+      ],
+      "training_steps_millions": 100
+    },
+    {
+      "episodes_per_seed": 1000,
+      "game": "seaquest",
+      "individual_means": {
+        "ppo500_s0": 7.493,
+        "ppo500_s1": 4.379,
+        "ppo500_s2": 88.884
+      },
+      "maximum_seed_mean": 88.884,
+      "mean_of_seed_means": 33.58533333333333,
+      "minimum_seed_mean": 4.379,
+      "seed_count": 3,
+      "seed_names": [
+        "ppo500_s0",
+        "ppo500_s1",
+        "ppo500_s2"
+      ],
+      "training_steps_millions": 500
+    },
+    {
+      "episodes_per_seed": 1000,
+      "game": "asterix",
+      "individual_means": {
+        "ppo100_s0": 16.064,
+        "ppo100_s1": 15.912,
+        "ppo100_s2": 20.194,
+        "ppo100_s3": 21.34,
+        "ppo100_s4": 20.378,
+        "ppo100_s5": 13.209,
+        "ppo100_s6": 25.82,
+        "ppo100_s7": 15.541,
+        "ppo100_s8": 15.329,
+        "ppo100_s9": 18.073
+      },
+      "maximum_seed_mean": 25.82,
+      "mean_of_seed_means": 18.186,
+      "minimum_seed_mean": 13.209,
+      "seed_count": 10,
+      "seed_names": [
+        "ppo100_s0",
+        "ppo100_s1",
+        "ppo100_s2",
+        "ppo100_s3",
+        "ppo100_s4",
+        "ppo100_s5",
+        "ppo100_s6",
+        "ppo100_s7",
+        "ppo100_s8",
+        "ppo100_s9"
+      ],
+      "training_steps_millions": 100
+    },
+    {
+      "episodes_per_seed": 1000,
+      "game": "asterix",
+      "individual_means": {
+        "ppo500_s0": 44.706,
+        "ppo500_s1": 55.204,
+        "ppo500_s2": 46.879
+      },
+      "maximum_seed_mean": 55.204,
+      "mean_of_seed_means": 48.92966666666666,
+      "minimum_seed_mean": 44.706,
+      "seed_count": 3,
+      "seed_names": [
+        "ppo500_s0",
+        "ppo500_s1",
+        "ppo500_s2"
+      ],
+      "training_steps_millions": 500
+    }
+  ],
+  "schema_version": 1,
+  "source_path": "replications/exp5/reference/minatar_eval.json",
+  "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "source_sha256": "bc10c6f957af95cdd52ee4be085acd249046f6117dbdb8c735fd5ddb2195c47c"
+}
