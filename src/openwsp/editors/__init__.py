@@ -1,6 +1,16 @@
 """Editor adapters. Native model tools are deliberately not exposed."""
-from .base import Editor, EditorError, EditorIncomplete, EditorRefused, ProviderUnavailable, UncertainRequest
+from .anthropic import AnthropicEditor, AnthropicTokenRates
+from .base import (
+    Editor,
+    EditorError,
+    EditorIncomplete,
+    EditorRefused,
+    EditorRunaway,
+    ProviderUnavailable,
+    UncertainRequest,
+)
 from .openai import AstraEditor
 
-__all__ = ["AstraEditor", "Editor", "EditorError", "EditorIncomplete", "EditorRefused",
+__all__ = ["AnthropicEditor", "AnthropicTokenRates", "AstraEditor", "Editor", "EditorError",
+           "EditorIncomplete", "EditorRefused", "EditorRunaway",
            "ProviderUnavailable", "UncertainRequest"]

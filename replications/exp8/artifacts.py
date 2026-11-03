@@ -29,6 +29,12 @@ def collect(data="/data", staging="/data/publication"):
         if source.exists():
             (root / "kernel").mkdir(exist_ok=True)
             shutil.copyfile(source, root / "kernel" / name)
+    for name, target in (("summary.json", "editor-transport-probe.json"),
+                         ("authorization.json", "editor-budget-authorization.json")):
+        source = data / "editor-transport-probe" / name
+        if source.exists():
+            (root / "kernel").mkdir(exist_ok=True)
+            shutil.copyfile(source, root / "kernel" / target)
     for name in ("calibration-check.json", "calibration-gap-audit.json", "budget.json"):
         if (data / name).exists():
             shutil.copyfile(data / name, root / ("costs.json" if name == "budget.json" else name))
@@ -50,6 +56,8 @@ def collect(data="/data", staging="/data/publication"):
             shutil.copytree(live / "edit", public_live / "edit", dirs_exist_ok=True)
         if (live / "final_answer.md").exists():
             shutil.copyfile(live / "final_answer.md", public_live / "final_answer.md")
+        if (live / "transport-reviewed.json").exists():
+            shutil.copyfile(live / "transport-reviewed.json", public_live / "transport-reviewed.json")
     control = data / "controls/mechanical"
     if (control / "method.json").exists():
         method = json.loads((control / "method.json").read_text())

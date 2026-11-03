@@ -17,7 +17,7 @@ from replications.exp8.jobs import ProtocolGPUJobs, gpu_instance
 
 def run(stage, overrides, *, app, driver_ticket=None):
     from openwsp.backends.modal_app import prepare, data_volume, Generator
-    if stage not in {"all", "prepare", "calibration", "smoke", "kernel", "live", "evaluate", "controls", "control4", "control5", "publish"}:
+    if stage not in {"all", "prepare", "calibration", "smoke", "kernel", "live", "evaluate", "controls", "control4", "control5", "editor_probe", "review_live", "publish"}:
         raise ValueError("Unknown replication stage")
     if overrides:
         unknown = set(overrides) - {"publish_results"}
@@ -170,6 +170,16 @@ def run(stage, overrides, *, app, driver_ticket=None):
             state["active_stage"] = stage
             checkpoint()
             state["stages"][stage] = run_optional_control(stage, ledger, checkpoint)
+        if stage == "editor_probe":
+            from replications.exp8.editor_validation import run_probe
+            state["active_stage"] = stage
+            checkpoint()
+            state["stages"][stage] = run_probe(ledger, checkpoint)
+        if stage == "review_live":
+            from replications.exp8.editor_validation import review_live_transport
+            state["active_stage"] = stage
+            checkpoint()
+            state["stages"][stage] = review_live_transport(ledger, checkpoint)
         if stage in ("all", "publish"):
             from replications.exp8.artifacts import publish
             state.update(active_stage="publication", status="complete" if stage == "all" else "stage_done")

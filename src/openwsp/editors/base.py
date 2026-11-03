@@ -26,6 +26,18 @@ class EditorIncomplete(EditorError):
         super().__init__(f"Editor response incomplete: {reason}; response and usage are recorded")
 
 
+class EditorRunaway(EditorError):
+    """Formatting runaway blocks this conversation, including new paid requests."""
+
+    def __init__(self, reason: str, response_id: str, diagnostic: dict, *, usage_pending: bool):
+        self.reason = reason
+        self.response_id = response_id
+        self.diagnostic = diagnostic
+        self.usage_pending = usage_pending
+        super().__init__("Runaway editor formatting detected; conversation blocked for review"
+                         + ("; usage reservation retained" if usage_pending else "; usage recorded"))
+
+
 class Editor(Protocol):
     last_response: dict | None
 

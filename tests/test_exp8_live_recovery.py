@@ -151,6 +151,25 @@ def test_failed_final_freeze_does_not_mark_run_done(driver, monkeypatch):
     assert result["submission"]["sha256"] == "edit-sha"
 
 
+@pytest.mark.parametrize("admitted", [False, True])
+def test_restart_notice_precedes_only_a_never_admitted_editor_turn(driver, admitted):
+    driver.write_state(turn=2, pending={"kind": "editor", "turn": 3})
+    turn = driver.root / "turns/t003"
+    turn.mkdir(parents=True)
+    (turn / "prompt.txt").write_text("Saved request input")
+    (driver.root / "editor").mkdir()
+    (driver.root / "editor/editor_state.json").write_text(json.dumps({
+        "pending": {"key": "t003", "response_id": "existing"} if admitted else None, "completed": {}}))
+    driver.run()
+    received = driver.editor_messages[0][1]
+    if admitted:
+        assert received == "Saved request input"
+    else:
+        assert received.startswith("The kernel was restarted; variables were lost")
+        assert received.endswith("Saved request input")
+    assert (turn / "prompt.txt").read_text() == received
+
+
 def test_completed_forward_receipt_counts_once_after_logging_failure(driver, monkeypatch):
     driver.write_state(passes=49)
     driver.replies["t001"] = 'I will inspect the result.\n```forward\n{"type":"generate"}\n```'

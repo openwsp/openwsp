@@ -130,7 +130,14 @@ def run_live(outer_state, ledger, checkpoint, *, app):
         checkpoint()
 
     try:
-        editor = AstraEditor(root / "editor", ledger, on_poll=lambda _: save(), commit=save)
+        transport_path = root / "transport-reviewed.json"
+        editor_options = {}
+        if transport_path.exists():
+            transport = json.loads(transport_path.read_text())
+            if transport.get("status") != "reviewed_for_resume" or transport.get("editor_options") != {"verbosity": "low", "max_output_tokens": 32768}:
+                raise ValueError("Unrecognized editor transport recovery record")
+            editor_options = transport["editor_options"]
+        editor = AstraEditor(root / "editor", ledger, on_poll=lambda _: save(), commit=save, **editor_options)
         restart_notice_due = bool(state["turn"] or state.get("pending"))
         if state["turn"] and not state.get("pending"):
             state["next"] = "The kernel was restarted; variables were lost, but files in /work and saved edits remain.\n" + state["next"]
@@ -156,6 +163,20 @@ def run_live(outer_state, ledger, checkpoint, *, app):
                 state["notices"].append(notice)
             if pending:
                 message = (directory / "prompt.txt").read_text()
+                # A budget rejection before request admission has no provider
+                # input to preserve. Tell the editor about this fresh kernel
+                # before its next action; never rewrite admitted request input.
+                editor_state_path = root / "editor/editor_state.json"
+                if (restart_notice_due and pending["kind"] == "editor" and editor_state_path.exists()
+                        and not (directory / "answer.md").exists()):
+                    editor_state = json.loads(editor_state_path.read_text())
+                    if editor_state.get("pending") is None and f"t{turn:03d}" not in editor_state.get("completed", {}):
+                        notice_text = "The kernel was restarted; variables were lost, but files in /work and saved edits remain.\n"
+                        if not message.startswith(notice_text):
+                            message = notice_text + message
+                            (directory / "prompt.txt").write_text(message)
+                            save()
+                        restart_notice_due = False
             else:
                 (directory / "prompt.txt").write_text(message)
                 state["pending"] = {"kind": "editor", "turn": turn}
