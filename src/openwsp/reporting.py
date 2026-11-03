@@ -82,12 +82,17 @@ def _status_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path) -> 
             continue
         path, data = evidence[name]
         state = data.get("status")
-        if name == "coordinator.json":
-            state = (data.get("current") or {}).get("phase", state)
+        diagnostic = data.get("error")
         details = data.get("active_stage") or data.get("error_type") or name
+        if name == "coordinator.json":
+            current = data.get("current") or {}
+            state = current.get("phase", state)
+            diagnostic = current.get("reason") or diagnostic
+            details = current.get("stage") or details
         lines.append(f"| {label} | {_recorded(state, path, relative_to)} | {_recorded(details, path, relative_to)} |")
-        if data.get("error"):
-            lines.append(f"| Recorded blocker | {_recorded(str(data['error'])[:500], path, relative_to)} | See source record. |")
+        if diagnostic:
+            label = "Recorded blocker" if state in {"blocked", "failed", "error"} else "Recorded diagnostic"
+            lines.append(f"| {label} | {_recorded(str(diagnostic)[:500], path, relative_to)} | See source record. |")
     if "live-run/state.json" in evidence:
         path, data = evidence["live-run/state.json"]
         state = "submission recorded" if data.get("done") is True else "incomplete"
@@ -100,7 +105,7 @@ def _status_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path) -> 
         lines.append("| Pipeline | pending: no published state record | No completion claim. |")
     elif pipeline is None:
         lines.append("| Pipeline | pending: no published pipeline state | Component checks do not establish overall completion. |")
-    return "\n".join(lines)
+    return "\n".join(lines) + "\n\nStates are recorded snapshots; use `openwsp status` to check current liveness."
 
 
 def _calibration_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path) -> str:

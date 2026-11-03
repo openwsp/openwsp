@@ -116,6 +116,26 @@ def test_component_success_is_not_whole_pipeline_success(tmp_path):
     assert "Component checks do not establish overall completion" in text
 
 
+def test_fallback_diagnostic_is_not_labeled_as_an_active_blocker(tmp_path):
+    results = setup_repo(tmp_path)
+    write_json(results / "kernel/weight-swap.json", {"status": "fallback", "error": "Native swap unavailable; fresh engine selected"})
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "Recorded diagnostic" in text
+    assert "Recorded blocker" not in text
+    assert "[fallback](replications/exp8/results/kernel/weight-swap.json)" in text
+    assert "States are recorded snapshots" in text
+
+
+def test_coordinator_block_reason_is_retained(tmp_path):
+    results = setup_repo(tmp_path)
+    write_json(results / "coordinator.json", {"current": {"phase": "blocked", "stage": "all", "reason": "Provider outcome remains uncertain"}})
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "Recorded blocker" in text
+    assert "[Provider outcome remains uncertain](replications/exp8/results/coordinator.json)" in text
+
+
 def test_calibration_gap_audit_and_runtime_are_source_linked(tmp_path):
     results = setup_repo(tmp_path)
     write_json(results / "calibration-check.json", {

@@ -71,6 +71,9 @@ def fake_transport(monkeypatch, source_repo, *, rejects=0, failure=None, concurr
             pushes.append({
                 "readme": (cwd / "README.md").read_text(),
                 "source": (cwd / "source.py").read_text(),
+                "status": (cwd / "STATUS.md").read_text() if (cwd / "STATUS.md").exists() else None,
+                "evidence": (cwd / PREFIX / "kernel/local-evidence.json").read_text()
+                if (cwd / PREFIX / "kernel/local-evidence.json").exists() else None,
                 "files": git(cwd, "show", "--format=", "--name-only", "HEAD").stdout.splitlines(),
             })
             if concurrent and len(pushes) == 1:
@@ -117,6 +120,30 @@ def test_concurrent_push_reclones_and_preserves_new_human_prose(tmp_path, monkey
     assert result["attempts"] == 2
     assert "New human prose stays." in pushes[-1]["readme"]
     assert sum("clone" in call for call in calls) == 2
+
+
+def test_blocked_publication_preserves_concurrent_status_and_unrelated_evidence(tmp_path, monkeypatch, source_repo, staging):
+    state = staging / PREFIX / "pipeline-state.json"
+    state.write_text(json.dumps({"status": "blocked", "active_stage": "live", "error": "Budget exhausted"}))
+
+    def concurrent():
+        (source_repo / "STATUS.md").write_text("Human status update after deployment.\n")
+        evidence = source_repo / PREFIX / "kernel/local-evidence.json"
+        evidence.parent.mkdir(parents=True, exist_ok=True)
+        evidence.write_text('{"status": "passed", "source": "local probe"}\n')
+        git(source_repo, "add", "STATUS.md", str(evidence.relative_to(source_repo)))
+        git(source_repo, "commit", "-qm", "record independent evidence")
+
+    _, pushes = fake_transport(monkeypatch, source_repo, rejects=1, concurrent=concurrent)
+    result = P.publish_results(staging, artifact_paths(staging), checkout_dir=tmp_path / "checkouts")
+    assert result["attempts"] == 2
+    assert pushes[-1]["status"] == "Human status update after deployment.\n"
+    assert json.loads(pushes[-1]["evidence"])["source"] == "local probe"
+    assert "[blocked](replications/exp8/results/pipeline-state.json)" in pushes[-1]["readme"]
+    assert "[Budget exhausted](replications/exp8/results/pipeline-state.json)" in pushes[-1]["readme"]
+    assert "[partial](replications/exp8/results/live/eval/math500/summary.json)" in pushes[-1]["readme"]
+    assert "STATUS.md" not in result["paths"]
+    assert PREFIX + "/kernel/local-evidence.json" not in result["paths"]
 
 
 def test_authentication_failure_is_not_retried_or_exposed(tmp_path, monkeypatch, source_repo, staging):
