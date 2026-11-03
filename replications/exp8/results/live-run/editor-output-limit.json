@@ -105,7 +105,37 @@
         "tools": []
       },
       "next_response_status": "completed",
-      "source": "logs/t014-incomplete-recovery.json"
+      "source": "logs/t014-incomplete-recovery.json",
+      "source_volume_path": "/live-run/turns/t014/editor_event.json"
+    },
+    {
+      "status": "incomplete",
+      "reason": "max_output_tokens",
+      "response_id": "resp_05e27016f3ef07b8006ae9b01ed8c087d28fcc6bfb7a8f5ce7",
+      "executed": false,
+      "usage": {
+        "input_tokens": 185299,
+        "input_tokens_details": {
+          "cache_write_tokens": 1054,
+          "cached_tokens": 184242,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 1054
+          }
+        },
+        "output_tokens": 128000,
+        "output_tokens_details": {
+          "reasoning_tokens": 128
+        },
+        "total_tokens": 313299
+      },
+      "cost_usd": "6.597447",
+      "partial_text_characters": 213619,
+      "partial_text_sha256": "75f82005f5aad23e28f09c3fbed6d004bd9a6ee3aad631e6c14c90e14f54b9d3",
+      "response_volume": "openwsp-exp8-data",
+      "response_volume_path": "/live-run/editor/response_a62c4cf3d1b3491089c2324d68873f63.json",
+      "turn": 16,
+      "source_volume_path": "/live-run/turns/t016/editor_event.json"
     }
   ]
 }
