@@ -14,7 +14,7 @@ import tempfile
 import uuid
 from contextlib import contextmanager
 from datetime import UTC, datetime
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any
 
@@ -164,6 +164,62 @@ class BudgetLedger:
             if row["status"] == "settled":
                 raise ValueError("Cannot release settled usage")
             row.update(status="released", release_reason=str(reason), completed_at=_utc())
+
+    def authorize_editor_limit(self, total_limit, *, authorization_id, evidence):
+        """Apply an audited, explicit user authorization for a cumulative cap.
+
+        This is not a top-up or a provider-balance observation. The caller must
+        verify the authorization and commit its storage before further dispatch.
+        Evidence needs a source, timezone-aware authorized_at, and
+        basis='explicit_user_authorization'. Replaying the same ID and payload
+        returns its original audit record without changing the current cap,
+        even if another authorization has since changed it.
+        """
+        if not isinstance(authorization_id, str) or not authorization_id.strip():
+            raise ValueError("A nonempty stable authorization_id is required")
+        try:
+            limit = _money(total_limit)
+        except (InvalidOperation, TypeError, ValueError) as error:
+            raise ValueError("The cumulative editor limit must be finite and nonnegative") from error
+        if (
+            not isinstance(evidence, dict)
+            or not isinstance(evidence.get("source"), str)
+            or not evidence["source"].strip()
+            or not isinstance(evidence.get("authorized_at"), str)
+            or evidence.get("basis") != "explicit_user_authorization"
+        ):
+            raise ValueError("Evidence requires source, authorized_at, and explicit_user_authorization basis")
+        try:
+            authorized_at = datetime.fromisoformat(evidence["authorized_at"])
+            serialized = json.dumps(evidence, sort_keys=True, allow_nan=False)
+        except (TypeError, ValueError) as error:
+            raise ValueError("Authorization evidence must have a valid timestamp and JSON values") from error
+        if authorized_at.tzinfo is None:
+            raise ValueError("Authorization timestamp must include a timezone")
+        evidence = json.loads(serialized)
+        with self._locked() as state:
+            previous = state.get("editor_authorizations", {}).get(authorization_id)
+            if previous is not None:
+                if (
+                    _money(previous["new_limit_usd"]) != limit
+                    or json.dumps(previous["evidence"], sort_keys=True, allow_nan=False) != serialized
+                ):
+                    raise ValueError("Authorization ID was already used with a different payload")
+                return json.loads(json.dumps(previous))
+            spent, reserved = self._totals(state, "editor")
+            if limit < spent + reserved:
+                raise ValueError("The editor limit cannot be below settled spend plus retained reservations")
+            record = {
+                "authorization_id": authorization_id,
+                "prior_limit_usd": state["limits"]["editor"],
+                "new_limit_usd": str(limit),
+                "evidence": evidence,
+                "applied_at": _utc(),
+            }
+            state["limits"]["editor"] = str(limit)
+            state.setdefault("editor_authorizations", {})[authorization_id] = record
+            state["events"].append({"event": "editor_limit_authorized", **record})
+            return json.loads(json.dumps(record))
 
     def observe_modal_allowance(self, cycle_limit, cycle_usage, evidence):
         """Apply a fresh authoritative billing observation, never a predicted increase.

@@ -105,3 +105,150 @@ def test_compute_cost_includes_sandbox_memory_and_cpu():
 def test_invalid_costs_rejected(tmp_path, value):
     with pytest.raises(ValueError):
         BudgetLedger(tmp_path / "budget.json").reserve("modal", value, "invalid")
+
+
+def authorization_evidence(**extra):
+    return {
+        "source": "user-message:explicit-budget-change",
+        "authorized_at": "2026-11-03T12:30:00+00:00",
+        "basis": "explicit_user_authorization",
+        **extra,
+    }
+
+
+def test_explicit_editor_authorization_sets_absolute_cap_without_rewriting_usage(tmp_path):
+    path = tmp_path / "budget.json"
+    ledger = BudgetLedger(path)
+    settled = ledger.reserve("editor", 80, "earlier")
+    ledger.settle(settled, "78.292765", usage={"response_id": "saved-receipt"})
+    ledger.reserve("editor", 10, "still-pending", reservation_id="pending")
+    ledger.reserve("modal", 2, "compute", reservation_id="modal-work")
+    before = ledger.snapshot()
+    evidence = authorization_evidence(
+        additional_authorized_usd="160.85", reserved_for_other_work_usd="160.85",
+        prior_settled_usd="78.292765",
+    )
+    record = ledger.authorize_editor_limit(
+        "239.142765", authorization_id="exp8-additional-160.85", evidence=evidence,
+    )
+    after = ledger.snapshot()
+    assert record["prior_limit_usd"] == "100" and record["new_limit_usd"] == "239.142765"
+    assert after["limits"]["editor"] == "239.142765"
+    assert after["summary"]["editor"] == {
+        "spent_usd": 78.292765, "reserved_usd": 10.0, "available_usd": 150.85,
+    }
+    assert after["reservations"] == before["reservations"]
+    for field in ("modal_allowance", "modal_prior_usage_floor", "halted"):
+        assert after[field] == before[field]
+    assert after["limits"]["modal"] == before["limits"]["modal"]
+    assert after["summary"]["modal"] == before["summary"]["modal"]
+    assert after["events"][:-1] == before["events"]
+    assert after["events"][-1] == {"event": "editor_limit_authorized", **record}
+    assert after["editor_authorizations"] == {"exp8-additional-160.85": record}
+    evidence["additional_authorized_usd"] = "changed outside ledger"
+    record["evidence"]["source"] = "changed return value"
+    assert BudgetLedger(path).snapshot() == after
+    with pytest.raises(ValueError, match="authorized task budgets"):
+        BudgetLedger(path, editor_limit="239.142765")
+
+
+def test_authorization_replay_never_restores_spent_funds_or_a_superseded_cap(tmp_path):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    evidence = authorization_evidence()
+    original = ledger.authorize_editor_limit(200, authorization_id="first", evidence=evidence)
+    rid = ledger.reserve("editor", 30, "after-authorization")
+    ledger.settle(rid, 20)
+    consumed = ledger.snapshot()
+    assert ledger.authorize_editor_limit("200.00", authorization_id="first", evidence=evidence) == original
+    assert ledger.snapshot() == consumed
+    assert consumed["summary"]["editor"]["available_usd"] == 180
+    for new_cap, key in ((250, "higher"), (150, "lower")):
+        ledger.authorize_editor_limit(new_cap, authorization_id=key, evidence=evidence)
+        updated = ledger.snapshot()
+        assert ledger.authorize_editor_limit(200, authorization_id="first", evidence=evidence) == original
+        assert ledger.snapshot() == updated
+        assert updated["summary"]["editor"]["available_usd"] == new_cap - 20
+
+
+def test_conflicting_authorization_replays_fail_without_mutation(tmp_path):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    evidence = authorization_evidence(approved=True)
+    ledger.authorize_editor_limit(200, authorization_id="same", evidence=evidence)
+    before = ledger.snapshot()
+    for limit, changed in (
+        (201, evidence),
+        (200, {**evidence, "source": "different"}),
+        (200, {**evidence, "approved": 1}),
+    ):
+        with pytest.raises(ValueError, match="different payload"):
+            ledger.authorize_editor_limit(limit, authorization_id="same", evidence=changed)
+        assert ledger.snapshot() == before
+
+
+def test_new_cap_must_cover_spend_and_unresolved_reservations(tmp_path):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    rid = ledger.reserve("editor", 70, "finished")
+    ledger.settle(rid, 60)
+    ledger.reserve("editor", 30, "uncertain", reservation_id="unknown")
+    before = ledger.snapshot()
+    with pytest.raises(ValueError, match="settled spend plus retained reservations"):
+        ledger.authorize_editor_limit("89.99", authorization_id="too-low", evidence=authorization_evidence())
+    assert ledger.snapshot() == before
+    ledger.authorize_editor_limit(90, authorization_id="exact", evidence=authorization_evidence())
+    assert ledger.snapshot()["summary"]["editor"]["available_usd"] == 0
+
+
+def test_editor_authorization_cannot_clear_a_budget_halt(tmp_path):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    rid = ledger.reserve("editor", 1, "overrun")
+    with pytest.raises(BudgetOverrun):
+        ledger.settle(rid, 2)
+    ledger.authorize_editor_limit(200, authorization_id="raised", evidence=authorization_evidence())
+    assert ledger.snapshot()["halted"] is True
+    with pytest.raises(BudgetExceeded, match="halted"):
+        ledger.reserve("editor", 1, "still-blocked")
+
+
+@pytest.mark.parametrize("limit", [True, -1, "NaN", "Infinity", "not-money"])
+def test_editor_authorization_rejects_invalid_caps(tmp_path, limit):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    before = ledger.snapshot()
+    with pytest.raises(ValueError, match="finite and nonnegative"):
+        ledger.authorize_editor_limit(limit, authorization_id="bad", evidence=authorization_evidence())
+    assert ledger.snapshot() == before
+
+
+@pytest.mark.parametrize("key,evidence", [
+    ("", authorization_evidence()),
+    ("   ", authorization_evidence()),
+    (None, authorization_evidence()),
+    ("id", {}),
+    ("id", authorization_evidence(source="")),
+    ("id", authorization_evidence(basis="provider balance")),
+    ("id", authorization_evidence(authorized_at="2026-11-03T12:30:00")),
+    ("id", authorization_evidence(authorized_at="not-a-time")),
+    ("id", authorization_evidence(detail=float("nan"))),
+])
+def test_editor_authorization_requires_explicit_auditable_evidence(tmp_path, key, evidence):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    before = ledger.snapshot()
+    with pytest.raises(ValueError):
+        ledger.authorize_editor_limit(200, authorization_id=key, evidence=evidence)
+    assert ledger.snapshot() == before
+
+
+def _apply_same_editor_authorization(path):
+    return BudgetLedger(path).authorize_editor_limit(
+        200, authorization_id="one-user-message", evidence=authorization_evidence(),
+    )
+
+
+def test_concurrent_authorization_replays_add_one_event(tmp_path):
+    path = str(tmp_path / "budget.json")
+    BudgetLedger(path)
+    with ProcessPoolExecutor(max_workers=3) as pool:
+        records = list(pool.map(_apply_same_editor_authorization, [path] * 6))
+    assert all(record == records[0] for record in records)
+    snapshot = BudgetLedger(path).snapshot()
+    assert snapshot["limits"]["editor"] == "200"
+    assert len(snapshot["editor_authorizations"]) == len(snapshot["events"]) == 1
