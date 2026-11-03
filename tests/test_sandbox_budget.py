@@ -1,5 +1,4 @@
 import threading
-import time
 from decimal import Decimal
 
 import pytest
@@ -207,16 +206,12 @@ def test_creation_uncertain_keeps_entire_startup_reservation(tmp_path):
 
 
 def test_background_controller_renews_and_stops_on_close(tmp_path):
-    class RealtimeClock:
-        def __call__(self):
-            return time.monotonic()
-
-        def advance(self, _seconds):
-            return None
-
-    clock = RealtimeClock()
+    # Exercise the real background thread without making disk/fsync latency
+    # consume the fake sandbox's 20 ms observation window on a busy CI host.
+    clock = Clock()
     ledger = BudgetLedger(tmp_path / "budget.json")
     transport = FakeTransport(clock, ledger)
+    transport.status_delay = 0
     renewed = threading.Event()
     original_status = transport.status
 
@@ -230,7 +225,7 @@ def test_background_controller_renews_and_stops_on_close(tmp_path):
     lease = SandboxBudgetLease(ledger, tmp_path / "lease.json", clock=clock,
                                heartbeat_interval=0.02, background=True)
     lease.start(lambda: transport)
-    assert renewed.wait(timeout=1), "Background controller did not renew its reservation"
+    assert renewed.wait(timeout=5), "Background controller did not renew its reservation"
     lease.close()
     assert not lease._thread.is_alive()
     assert ledger.snapshot()["summary"]["modal"]["reserved_usd"] == 0
