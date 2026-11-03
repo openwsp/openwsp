@@ -376,7 +376,11 @@ def public_forward(payload):
 
 
 @app.function(image=driver_image, timeout=60, volumes={"/data": data_volume})
+@modal.concurrent(max_inputs=1)
 def status():
+    # Warm containers retain a mounted snapshot until explicitly refreshed.
+    # Serialize these reads so reload never races another open status file.
+    data_volume.reload()
     path = Path("/data/state.json")
     return json.loads(path.read_text()) if path.exists() else {"status": "not_started"}
 

@@ -70,11 +70,27 @@ def _private_directory(value, *, create=True):
 
 
 def _pending_timeout(error):
-    """A polling timeout is different from a returned remote execution timeout."""
+    """Accept only the SDK's observed empty-output, still-running poll result."""
+    from modal._functions import _Invocation
     from modal._traceback import traceback_contains_remote_call
     from modal.exception import TimeoutError as ModalTimeoutError
+    from modal_proto import api_pb2
 
-    return type(error) is ModalTimeoutError and not traceback_contains_remote_call(error.__traceback__)
+    if type(error) not in (TimeoutError, ModalTimeoutError) or traceback_contains_remote_call(error.__traceback__):
+        return False
+    # A remote user TimeoutError may lose its serialized traceback, and network
+    # failures can use the same built-in class. Neither proves the call is still
+    # running. Modal 1.6.3 raises its polling timeout directly in this SDK frame
+    # after receiving no outputs and a positive unfinished-input count.
+    traceback = error.__traceback__
+    while traceback is not None and traceback.tb_next is not None:
+        traceback = traceback.tb_next
+    code = getattr(_Invocation.poll_function, "__code__", None)
+    if traceback is None or code is None or traceback.tb_frame.f_code is not code:
+        return False
+    response = traceback.tb_frame.f_locals.get("response")
+    return (isinstance(response, api_pb2.FunctionGetOutputsResponse)
+            and len(response.outputs) == 0 and response.num_unfinished_inputs > 0)
 
 
 class CodexWorker:
