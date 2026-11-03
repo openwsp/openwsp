@@ -1,0 +1,64 @@
+{
+  "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "source": "https://github.com/RikiyaT/lm_understand-logs",
+  "definition": "All released assistant answer.md turns across p10c, p25c and p50c; UTF-8 file bytes including explanations and fenced code.",
+  "turns_n": 318,
+  "largest": {
+    "path": "exp8_math/runs/p50c/turns/t157/answer.md",
+    "bytes": 8867,
+    "sha256": "4b4e90df0159e64b3eb7d046bb86802250a0f4650da5ce47e1af62cde456cbd8"
+  },
+  "limit_bytes": 17734,
+  "largest_ten": [
+    {
+      "path": "exp8_math/runs/p50c/turns/t157/answer.md",
+      "bytes": 8867,
+      "sha256": "4b4e90df0159e64b3eb7d046bb86802250a0f4650da5ce47e1af62cde456cbd8"
+    },
+    {
+      "path": "exp8_math/runs/p10c/turns/t061/answer.md",
+      "bytes": 7241,
+      "sha256": "ee462c8a2b78cbb5b47aaa5e5b014fb63da6ae90bf7caa870d8038016f7937ac"
+    },
+    {
+      "path": "exp8_math/runs/p10c/turns/t064/answer.md",
+      "bytes": 7014,
+      "sha256": "cc873dc75388c56aa4871f6e0bb587a893c58ef0d5cc1fc59e9c346c3da2d81f"
+    },
+    {
+      "path": "exp8_math/runs/p10c/turns/t066/answer.md",
+      "bytes": 7000,
+      "sha256": "ba96963e191f818281c6b1cdc531b457caff2b9a8d09ccf2c10839cfa8c49a5b"
+    },
+    {
+      "path": "exp8_math/runs/p10c/turns/t068/answer.md",
+      "bytes": 6918,
+      "sha256": "86773d625500f5c43e9482a49876f6998551c656781707379bc600d8fab19b9a"
+    },
+    {
+      "path": "exp8_math/runs/p50c/turns/t097/answer.md",
+      "bytes": 6916,
+      "sha256": "d10ce27bdab2a7d927975b9cadac43a3e556ef15e1326cd419c3ef5d57b2e43c"
+    },
+    {
+      "path": "exp8_math/runs/p50c/turns/t095/answer.md",
+      "bytes": 6872,
+      "sha256": "0f30aa26b3c01c396c3beb696abee14cc4e0d832779d3a2fbb0184297e2f53d3"
+    },
+    {
+      "path": "exp8_math/runs/p50c/turns/t085/answer.md",
+      "bytes": 6868,
+      "sha256": "e2eac4f515e5ff36ef2c4361885a401a636b61186fa846b437ff3e4f26e9c313"
+    },
+    {
+      "path": "exp8_math/runs/p50c/turns/t099/answer.md",
+      "bytes": 6864,
+      "sha256": "07ac888a0d367c68470fbca1d6e23292e2360bf1aaac44aa5fcbccf2c73b86ce"
+    },
+    {
+      "path": "exp8_math/runs/p10c/turns/t070/answer.md",
+      "bytes": 6854,
+      "sha256": "b0b18bf9809ca9ab09695e91f0ad75f5e601bf54661ab1847db4f0e7bb0fd65f"
+    }
+  ]
+}

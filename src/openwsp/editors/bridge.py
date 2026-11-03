@@ -17,7 +17,7 @@ from contextlib import contextmanager
 from pathlib import Path
 
 from ..budget import atomic_json
-from .base import EditorError, EditorRefused, ProviderUnavailable, UncertainRequest
+from .base import EditorError, EditorIncomplete, EditorRefused, ProviderUnavailable, UncertainRequest
 
 _IDENTITY_FIELDS = ("schema_version", "run_id", "request_key", "conversation_index", "messages", "prompt_sha256")
 _TERMINAL = ("completed", "blocked")
@@ -256,11 +256,15 @@ class BridgeEditor:
     """Remote-side editor facade; the broker may be a BridgeStore or RPC proxy."""
 
     def __init__(self, state_dir, *, run_id, store, poll_interval=5, max_wait_seconds=3600,
-                 reload=lambda: None, commit=lambda: None, on_poll=None, sleep=time.sleep):
+                 reload=lambda: None, commit=lambda: None, on_poll=None, sleep=time.sleep,
+                 max_output_bytes=None):
         if any(isinstance(n, bool) or not math.isfinite(n) or n <= 0 for n in (poll_interval, max_wait_seconds)):
             raise ValueError("Bridge polling and timeout must be finite and positive")
         if poll_interval > 60:
             raise ValueError("Bridge polling interval must not exceed 60 seconds")
+        if max_output_bytes is not None and (isinstance(max_output_bytes, bool)
+                or not isinstance(max_output_bytes, int) or max_output_bytes <= 0):
+            raise ValueError("Output byte ceiling must be a positive integer")
         self.root = Path(state_dir)
         self.root.mkdir(parents=True, exist_ok=True, mode=0o700)
         self.path = self.root / "bridge_editor_state.json"
@@ -268,6 +272,7 @@ class BridgeEditor:
         self.poll_interval, self.max_wait_seconds = poll_interval, max_wait_seconds
         self.reload, self.commit, self.on_poll, self.sleep = reload, commit, on_poll, sleep
         self.last_response = None
+        self.max_output_bytes = max_output_bytes
 
     @contextmanager
     def _state(self):
@@ -364,6 +369,13 @@ class BridgeEditor:
             raise BridgeConflict("Final result does not match its request")
         self.last_response = {**_receipt(result["receipt"]), "_openwsp_bridge": {
             k: record[k] for k in ("run_id", "request_key", "conversation_index", "request_hash", "claimed_by")}}
+        if self.max_output_bytes is not None and len(result["text"].encode("utf-8")) > self.max_output_bytes:
+            # The immutable completed receipt and its original usage are already
+            # durable. Reject execution, never resample this request or bill twice.
+            self.last_response.update(text=result["text"], execution_rejected="output_byte_limit",
+                                      output_bytes=len(result["text"].encode("utf-8")),
+                                      max_output_bytes=self.max_output_bytes)
+            raise EditorIncomplete("output_byte_limit", self.last_response.get("response_id", record["request_hash"]))
         return result["text"]
 
 

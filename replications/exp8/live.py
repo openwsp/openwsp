@@ -4,12 +4,11 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-import time
 from pathlib import Path
 
-from openwsp.editors.base import EditorIncomplete, EditorRefused, ProviderUnavailable
-from openwsp.budget import BudgetExceeded
 from openwsp.backends.jobs import JobBlocked, JobPending
+from openwsp.budget import BudgetExceeded
+from openwsp.editors.base import EditorIncomplete, EditorRefused, ProviderUnavailable
 from openwsp.editors.openai import AstraEditor
 from replications.exp8.forward import ForwardTool, freeze_checkpoint
 from replications.exp8.runtime import CONFIG, ROOT, atomic_write
@@ -17,6 +16,7 @@ from replications.exp8.runtime import CONFIG, ROOT, atomic_write
 BLOCK = re.compile(r"```(python|forward)\s*\n(.*?)```", re.DOTALL)
 EXPLANATION = ("Your reply had no explanation, so its block was NOT run (no Python run or forward pass was used). "
                + (ROOT / "prompts/message.txt").read_text().split("EXPLAIN EVERY STEP.", 1)[1].split("\n\nRULES.")[0])
+OUTPUT_BYTE_LIMIT = json.loads((ROOT / "reference/editor-output-limit.json").read_text())["limit_bytes"]
 
 
 def parse_reply(text):
@@ -49,7 +49,7 @@ def handoff(task, state, sandbox, last_result):
 
 
 def verify_kernel(ledger, checkpoint, app):
-    from openwsp.backends.modal_app import sandbox_image, model_volume, practice_volume, work_volume
+    from openwsp.backends.modal_app import model_volume, practice_volume, sandbox_image, work_volume
     from openwsp.backends.sandbox import ModalSandboxTransport
     from openwsp.backends.sandbox_budget import SandboxBudgetLease
     lease = SandboxBudgetLease(ledger, "/data/kernel-lease.json", stage="kernel_verification", commit=checkpoint)
@@ -91,7 +91,13 @@ def verify_kernel(ledger, checkpoint, app):
 
 
 def run_live(outer_state, ledger, checkpoint, *, app, identity=None):
-    from openwsp.backends.modal_app import sandbox_image, model_volume, practice_volume, work_volume, data_volume
+    from openwsp.backends.modal_app import (
+        data_volume,
+        model_volume,
+        practice_volume,
+        sandbox_image,
+        work_volume,
+    )
     from openwsp.backends.sandbox import ModalSandboxTransport
     from openwsp.backends.sandbox_budget import SandboxBudgetLease
     from replications.exp8.run_identity import LiveIdentity
@@ -106,7 +112,7 @@ def run_live(outer_state, ledger, checkpoint, *, app, identity=None):
         "notices": [], "unexplained_streak": 0, "next": task, "pending": None}
     if state["done"]:
         return state
-    if not outer_state["stages"].get("kernel", {}).get("status") == "passed":
+    if outer_state["stages"].get("kernel", {}).get("status") != "passed":
         outer_state["stages"]["kernel"] = verify_kernel(ledger, checkpoint, app)
     work = Path(str(identity.work))
     work.mkdir(parents=True, exist_ok=True)
@@ -150,7 +156,7 @@ def run_live(outer_state, ledger, checkpoint, *, app, identity=None):
             from openwsp.backends.editor_bridge import ModalBridgeStore
             from openwsp.editors.bridge import BridgeEditor
             editor = BridgeEditor(root / "editor", run_id=identity.run_id, store=ModalBridgeStore(),
-                                  on_poll=lambda _: save(), commit=save)
+                                  on_poll=lambda _: save(), commit=save, max_output_bytes=OUTPUT_BYTE_LIMIT)
         else:
             editor = AstraEditor(root / "editor", ledger, on_poll=lambda _: save(), commit=save, **editor_options)
         restart_notice_due = bool(state["turn"] or state.get("pending"))
@@ -199,6 +205,15 @@ def run_live(outer_state, ledger, checkpoint, *, app, identity=None):
             try:
                 answer = ((directory / "answer.md").read_text() if (directory / "answer.md").exists()
                           else editor.complete(message, request_key=f"t{turn:03d}"))
+                if len(answer.encode("utf-8")) > OUTPUT_BYTE_LIMIT:
+                    saved_receipt = directory / "run.json"
+                    receipt = (json.loads(saved_receipt.read_text()) if saved_receipt.exists()
+                               else editor.last_response or {})
+                    editor.last_response = {**receipt, "text": answer,
+                                            "execution_rejected": "output_byte_limit",
+                                            "output_bytes": len(answer.encode("utf-8")),
+                                            "max_output_bytes": OUTPUT_BYTE_LIMIT}
+                    raise EditorIncomplete("output_byte_limit", editor.last_response.get("response_id", f"t{turn:03d}"))
             except EditorIncomplete as exc:
                 # A terminal, billed output-limit response is an editor turn,
                 # not an ambiguous POST or executable partial program. Keep its
@@ -215,8 +230,10 @@ def run_live(outer_state, ledger, checkpoint, *, app, identity=None):
                     "response_volume": "openwsp-exp8-data",
                     "response_volume_path": f"/{identity.relative}/editor/{record['response_file']}" if record.get("response_file") else None,
                 })
-                state["next"] = ("The editor API returned an incomplete response (max_output_tokens). "
-                                 "No code or forward pass from that response was executed.")
+                state["next"] = (("The editor response exceeded the output byte limit. "
+                                  if exc.reason == "output_byte_limit" else
+                                  "The editor API returned an incomplete response (max_output_tokens). ")
+                                 + "No code or forward pass from that response was executed.")
                 if restart_notice_due:
                     state["next"] = "The kernel was restarted; variables were lost, but files in /work and saved edits remain.\n" + state["next"]
                     restart_notice_due = False
@@ -283,7 +300,7 @@ def run_live(outer_state, ledger, checkpoint, *, app, identity=None):
                         atomic_write(root / "requests" / f"fwd_{state['requests']}.done.json", result)
                     if result.get("ok"):
                         applied = state.setdefault("counted_requests", [])
-                        if state["requests"] not in applied:
+                        if state["requests"] not in applied and tool.counts_as_pass(state["requests"]):
                             state["passes"] += 1
                             applied.append(state["requests"])
                         state["next"] = f"FORWARD PASS {state['passes']} of 50:\n```json\n{json.dumps(result)}\n```"

@@ -70,6 +70,8 @@ class Generator:
     slot: str = modal.parameter(default="generation")
     job_key: str = modal.parameter(default="")
     gpu_kind: str = modal.parameter(default="H100")
+    max_model_len: int = modal.parameter(default=34816)
+    max_num_seqs: int = modal.parameter(default=128)
 
     @modal.enter()
     def load(self):
@@ -93,10 +95,13 @@ class Generator:
     def _load(self):
         from transformers import AutoTokenizer
         from vllm import LLM
+
+        from openwsp.backends.thinking_close import ThinkingCloseLogitsProcessor
         self.tokenizer = AutoTokenizer.from_pretrained(self.checkpoint)
         self.engine = LLM(model=self.checkpoint, dtype="bfloat16", language_model_only=True,
-                          max_model_len=34816, gpu_memory_utilization=0.85, seed=0,
-                          max_num_seqs=128, enable_prefix_caching=False, disable_log_stats=False)
+                          max_model_len=self.max_model_len, gpu_memory_utilization=0.85, seed=0,
+                          max_num_seqs=self.max_num_seqs, enable_prefix_caching=False, disable_log_stats=False,
+                          logits_processors=[ThinkingCloseLogitsProcessor])
         self.last_accounted = self.started
         kernel_cache_volume.commit()
 
@@ -136,7 +141,8 @@ class Generator:
 
     @modal.method()
     def generate(self, rows, sampling, thinking=True, seed_by_id=False,
-                 edits=None, edit_id=None, probe_token_ids=None, reference=None):
+                 edits=None, edit_id=None, probe_token_ids=None, reference=None,
+                 seed_scheme="sha256_first8_utf8_problem_id_mod_2**31", decoding_policy=None):
         if self.load_error:
             raise RuntimeError(self.load_error)
         import hashlib
@@ -144,6 +150,10 @@ class Generator:
         from vllm import SamplingParams
 
         from replications.exp8.runtime import INSTRUCTION
+        if seed_scheme != "sha256_first8_utf8_problem_id_mod_2**31":
+            raise ValueError("Unsupported generation seed scheme")
+        if decoding_policy is not None and not thinking:
+            raise ValueError("Forced thinking close requires thinking enabled")
         start = time.monotonic()
         swap = self._swap(edits, edit_id, probe_token_ids, reference) if edits is not None else None
         if swap and not swap["ok"]:
@@ -151,19 +161,34 @@ class Generator:
         prompts = [self.tokenizer.apply_chat_template(
             [{"role": "user", "content": row.get("prompt", row.get("problem", "") + "\n" + INSTRUCTION)}],
             tokenize=False, add_generation_prompt=True, enable_thinking=thinking) for row in rows]
-        params = SamplingParams(**sampling)
+        if any(len(self.tokenizer.encode(prompt, add_special_tokens=False)) + sampling["max_tokens"]
+               > self.max_model_len for prompt in prompts):
+            raise ValueError("Rendered prompt plus full output allowance exceeds model context; no output cap was shortened")
+        params_options = dict(sampling)
+        close_id = None
+        if decoding_policy is not None:
+            close_ids = self.tokenizer.encode("</think>", add_special_tokens=False)
+            if len(close_ids) != 1:
+                raise ValueError("Forced thinking close requires a single-token </think>")
+            close_id = close_ids[0]
+            params_options["extra_args"] = {"openwsp_thinking_close": {
+                "policy": decoding_policy, "close_token_id": close_id}}
+        params = SamplingParams(**params_options)
         if seed_by_id:
-            params = [SamplingParams(**{**sampling, "seed": int(hashlib.sha256(str(row["id"]).encode()).hexdigest()[:8], 16) % (2**31)})
+            params = [SamplingParams(**{**params_options, "seed": int(hashlib.sha256(str(row["id"]).encode()).hexdigest()[:8], 16) % (2**31)})
                       for row in rows]
         generated = self.engine.generate(prompts, params, use_tqdm=False)
+        from replications.exp8.eval_grid import close_metadata
         outputs = [{"id": row["id"], "samples": [
-            {"text": sample.text, "token_count": len(sample.token_ids), "finish_reason": sample.finish_reason}
+            {"text": sample.text, "token_count": len(sample.token_ids), "finish_reason": sample.finish_reason,
+             **(close_metadata(sample.token_ids, decoding_policy, close_id, max_tokens=sampling["max_tokens"])
+                if decoding_policy is not None else {})}
             for sample in output.outputs]} for row, output in zip(rows, generated, strict=True)]
         return {"outputs": outputs, "generation_seconds": time.monotonic()-start,
                 "container_seconds": self._seconds(),
                 "gpu": self.gpu_kind, "engine": "vllm==0.33.0", "transformers": "5.17.0", "swap": swap,
-                "engine_settings": {"dtype": "bfloat16", "language_model_only": True, "max_model_len": 34816,
-                                    "max_num_seqs": 128, "gpu_memory_utilization": 0.85, "prefix_caching": False}}
+                "engine_settings": {"dtype": "bfloat16", "language_model_only": True, "max_model_len": self.max_model_len,
+                                    "max_num_seqs": self.max_num_seqs, "gpu_memory_utilization": 0.85, "prefix_caching": False}}
 
 
 @app.cls(image=gpu_image, gpu="H100", cpu=(4, 4), memory=(16384, 16384), timeout=1800, startup_timeout=600,

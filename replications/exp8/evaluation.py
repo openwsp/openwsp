@@ -6,27 +6,55 @@ import math
 from pathlib import Path
 
 from openwsp.budget import compute_cost
+from openwsp.metrics import finished_metrics
 from replications.exp8.jobs import ProtocolGPUJobs, gpu_instance
 from replications.exp8.runtime import CONFIG, atomic_write, evaluate_outputs, read_rows, write_rows
 
 
 def evaluate(name, checkpoint_dir, benchmark, samples, ledger, checkpoint, *, thinking=True, changes=None,
-             engine="vllm", problem_limit=None):
+             engine="vllm", problem_limit=None, engine_settings=None, generation_options=None,
+             extra_provenance=None):
     from openwsp.backends.modal_app import Generator, TransformerReader
     if engine not in {"vllm", "transformers"}:
         raise ValueError("Unsupported evaluation engine")
     if problem_limit is not None and (type(problem_limit) is not int or problem_limit < 1):
         raise ValueError("Problem limit must be a positive integer")
+    engine_settings = dict(engine_settings or {})
+    generation_options = dict(generation_options or {})
+    extra_provenance = dict(extra_provenance or {})
+    if (engine_settings or generation_options) and engine != "vllm":
+        raise ValueError("Evaluation grid options require the vLLM engine")
+    if set(engine_settings) - {"max_model_len", "max_num_seqs"}:
+        raise ValueError("Unknown evaluation engine setting")
+    if set(generation_options) - {"seed_by_id", "seed_scheme", "decoding_policy"}:
+        raise ValueError("Unknown evaluation generation option")
     generator = Generator if engine == "vllm" else TransformerReader
     directory = Path("/data/results") / name / benchmark
+    params = {**CONFIG["sampling"], **(changes or {}), "n": samples}
+    # New variants must bind the immutable experiment specification before any
+    # smoke/batch output is written. A resumed variant cannot silently reuse a
+    # summary from different decoding settings, weights or submission.
+    if engine_settings or generation_options or extra_provenance:
+        expected = {"checkpoint": checkpoint_dir, "sampling": params, "thinking": thinking,
+                    "engine": engine, "engine_settings": engine_settings,
+                    "generation_options": generation_options, "provenance": extra_provenance,
+                    "problem_limit": problem_limit}
+        binding = directory / "evaluation_spec.json"
+        if binding.exists():
+            if json.loads(binding.read_text()) != expected:
+                raise ValueError("Evaluation variant is bound to a different specification")
+        elif directory.exists() and any(directory.iterdir()):
+            raise ValueError("Cannot attach a variant specification to existing unbound outputs")
+        else:
+            atomic_write(binding, expected)
+            checkpoint()
     if (directory / "summary.json").exists():
         return json.loads((directory / "summary.json").read_text())
     rows = read_rows(Path("/data/benchmarks") / f"{benchmark}.jsonl")
     if problem_limit is not None:
         rows = rows[:problem_limit]
-    params = {**CONFIG["sampling"], **(changes or {}), "n": samples}
     runner = ProtocolGPUJobs(ledger, "/data/jobs", commit=checkpoint)
-    batch_size = max(1, 256 // samples)
+    batch_size = max(1, min(256, engine_settings.get("max_num_seqs", 256)) // samples)
     batches = [("smoke", rows[:4])] + [(f"batch_{i:03d}", rows[start:start+batch_size])
                for i, start in enumerate(range(0, len(rows), batch_size))]
     summaries, records = [], []
@@ -40,7 +68,10 @@ def evaluate(name, checkpoint_dir, benchmark, samples, ledger, checkpoint, *, th
                            "ids": [row["id"] for row in selected]}
             if engine != "vllm":
                 fingerprint["engine"] = engine
-            runner.launch(key, lambda gpu, gate, selected=selected: gpu_instance(generator, gpu, gate, checkpoint=checkpoint_dir).generate.spawn(selected, params, thinking),
+            if engine_settings or generation_options or extra_provenance:
+                fingerprint.update(engine_settings=engine_settings, generation_options=generation_options,
+                                   extra_provenance=extra_provenance)
+            runner.launch(key, lambda gpu, gate, selected=selected: gpu_instance(generator, gpu, gate, checkpoint=checkpoint_dir, **engine_settings).generate.spawn(selected, params, thinking, **generation_options),
                           fingerprint=fingerprint)
             result = runner.result(key, timeout=3600)
             seconds = result.get("_openwsp_gpu", {}).get("billable_seconds", result["container_seconds"] + 122)
@@ -52,7 +83,7 @@ def evaluate(name, checkpoint_dir, benchmark, samples, ledger, checkpoint, *, th
                                        "engine_settings": result.get("engine_settings", {}),
                                        "seconds_basis": "accounted_resource_seconds_including_margins_and_cancelled_attempts",
                                        "container_seconds": result["container_seconds"],
-                                       "transformers": result["transformers"]})
+                                       "transformers": result["transformers"], **extra_provenance})
             checkpoint()
         if label != "smoke":
             summaries.append(summary)
@@ -64,11 +95,12 @@ def evaluate(name, checkpoint_dir, benchmark, samples, ledger, checkpoint, *, th
     # problem identities remain available for a clustered reanalysis.
     summary = {**summaries[0], "stage": name, "n": n, "correct": correct,
                "accuracy": accuracy, "standard_error": math.sqrt(accuracy*(1-accuracy)/n),
+               **finished_metrics(records),
                "mean_tokens": sum(row["token_count"] for row in records)/n,
                "cut_share": sum(row["finish_reason"] == "length" for row in records)/n,
                "seconds": sum(row["seconds"] for row in summaries),
                "cost_usd": sum(row["cost_usd"] for row in summaries)}
-    summary["provenance"].update(batch_generations=256, standard_error="binomial_per_sample",
+    summary["provenance"].update(batch_generations=batch_size * samples, standard_error="binomial_per_sample",
                                  smoke_included_in_score=False,
                                  batches=[{"gpu": row["provenance"]["gpu"], "seconds": row["seconds"],
                                            "cost_usd": row["cost_usd"]} for row in summaries])

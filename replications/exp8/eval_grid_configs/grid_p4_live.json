@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "stage": "grid_p4_live",
+  "protocol": "P4",
+  "model": "live",
+  "benchmark": "math500",
+  "samples_per_problem": 1,
+  "thinking": true,
+  "sampling": {
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "presence_penalty": 1.5,
+    "max_tokens": 32768
+  },
+  "engine_settings": {
+    "max_model_len": 34816,
+    "max_num_seqs": 128
+  },
+  "decoding_policy": {
+    "kind": "thinking_token_cap",
+    "thinking_tokens": 8192
+  },
+  "seed_scheme": "sha256_first8_utf8_problem_id_mod_2**31"
+}

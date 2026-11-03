@@ -1,0 +1,26 @@
+{
+  "backend": "cpu_fixture",
+  "checks": {
+    "changed_weights_miss": true,
+    "identical_generation_hit": true,
+    "immutable_artifact_restored": true,
+    "request_body_hashed": true
+  },
+  "generation_key_fields": [
+    "problem_id",
+    "prompt_sha256",
+    "sampling_sha256",
+    "model_sha256",
+    "seed"
+  ],
+  "model_sha256": "44b45f406055f739a1c40472495c7ea22c3ac89133a7e9de6c179f0effa9f2ec",
+  "provenance": {
+    "command": "python scripts/check_forward_bank.py --output OUTPUT.json",
+    "scope": "Synthetic CPU cache verification; no scientific model inference or provider calls"
+  },
+  "schema_version": 1,
+  "stage": "forward_bank_cpu",
+  "status": "passed",
+  "synthetic_forward_entries": 1,
+  "synthetic_generation_entries": 1
+}

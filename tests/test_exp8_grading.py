@@ -18,9 +18,35 @@ def test_authors_real_extraction_and_math_verify(tmp_path):
         [{"id": "a", "answer": "0.5"}], directory=tmp_path, stage="test", benchmark="math500", samples=1,
         seconds=1, cost_usd=0, provenance={})
     assert result["correct"] == 1
+    assert result["finished_n"] == result["finished_correct"] == 1
+    assert result["accuracy_finished"] == 1
     assert Path(tmp_path, "samples.jsonl").exists()
     with pytest.raises(NotImplementedError):
         module.mcqa_loop_signals("unused")
+
+
+def test_finished_grading_keeps_correct_cutoff_in_overall_accuracy(tmp_path):
+    pytest.importorskip("math_verify")
+    result = evaluate_outputs(
+        [{"id": "a", "samples": [
+            {"text": r"\boxed{1}", "token_count": 7, "finish_reason": "length"},
+            {"text": r"\boxed{2}", "token_count": 3, "finish_reason": "stop"},
+        ]}], [{"id": "a", "answer": "1"}], directory=tmp_path, stage="test", benchmark="math500", samples=2,
+        seconds=1, cost_usd=0, provenance={})
+    assert result["accuracy"] == result["cut_share"] == 0.5
+    assert result["finished_n"] == 1 and result["finished_correct"] == 0
+    assert result["accuracy_finished"] == 0
+
+
+def test_all_cutoff_grading_keeps_finished_accuracy_undefined(tmp_path):
+    pytest.importorskip("math_verify")
+    result = evaluate_outputs(
+        [{"id": "a", "samples": [{"text": r"\boxed{1}", "token_count": 7, "finish_reason": "length"}]}],
+        [{"id": "a", "answer": "1"}], directory=tmp_path, stage="test", benchmark="math500", samples=1,
+        seconds=1, cost_usd=0, provenance={})
+    assert result["accuracy"] == 1
+    assert result["finished_n"] == result["finished_correct"] == 0
+    assert result["accuracy_finished"] is None
 
 
 def test_ifeval_strict_response_after_thinking():

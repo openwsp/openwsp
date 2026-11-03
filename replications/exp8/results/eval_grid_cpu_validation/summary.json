@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "status": "validated",
+  "stage": "eval_grid_cpu_validation",
+  "benchmark": "token_state_machine",
+  "checks": {
+    "no_early_close": true,
+    "close_after_thinking_cap": true,
+    "one_close_then_answer": true,
+    "natural_close_disables_intervention": true,
+    "overlapping_eightgram_occurrences": true,
+    "no_injected_token_after_total_cap": true,
+    "all_registered_configs_load": true
+  },
+  "checks_passed": 7,
+  "provenance": {
+    "synthetic": true,
+    "scope": "Tiny implementation validation only; not a model benchmark.",
+    "command": "python -m replications.exp8.eval_grid validate --output replications/exp8/results/eval_grid_cpu_validation/summary.json",
+    "config_sha256": {
+      "grid_p3_base": "9384b86a345805ec10c16b9f292b8af7475b14173e4662f14b33da5de7b55320",
+      "grid_p3_p50c": "ae348c05d4b044da46601abe5d4aa0cb07424103d8bbb4c229a4fb8b26c06a04",
+      "grid_p3_live": "048e499cc012253e35a5647cceeb8b3363be49d2463b3f3a38a3296793b3f2dc",
+      "grid_p4_base": "341552c0caa6c56e7736d3d48a7f23ea38cf7fc4b446ea3017d526368989bd72",
+      "grid_p4_p50c": "3a7748a57b2fe970a2a139d2866c0c474a3ba274dac32dd7cc135a3213c2a0cf",
+      "grid_p4_live": "c66558ba31b5a86ab89366b347dd3abcff2ac57885f986cfb6aa9ffc34cf471e",
+      "grid_p1_base": "ff5e297e7aec6ebefb7b5f95d57c90712592ccf16d2ed34f290519d0cdb52705",
+      "grid_p1_p50c": "452b2427ab79b4a3c864083f2ac889637fad060b4a9afc20a7efc01a123a4514",
+      "grid_p5_presence_base": "7eedb736fab5863cc90a050fe72c2fe48ab1744e78c38e88ebcde9d223790f7a",
+      "grid_p5_repetition_base": "38431f2e6b3cdc260cd498d4cbf72f10a1565698e308a4a426388e6c5775c659",
+      "grid_p5_repeat_close_base": "3c4dc5c2a18b5d6f7b903183e29b92edb50bb5b5bd4254317878b5746ca378f8"
+    },
+    "model_calls": 0,
+    "gpu_calls": 0
+  }
+}

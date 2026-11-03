@@ -140,6 +140,9 @@ def driver(monkeypatch, tmp_path):
         def __init__(self, *args, **kwargs):
             pass
 
+        def counts_as_pass(self, number):
+            return True
+
         def execute(self, request, number, turn):
             tool_calls.append((request, number, turn))
             return {"ok": True, "type": "generate", "file": "/work/gen_1.jsonl"}
@@ -232,6 +235,47 @@ def test_completed_forward_receipt_counts_once_after_logging_failure(driver, mon
     assert result["requests"] == 1
     assert result["counted_requests"] == [1]
     assert "variables were lost" in driver.editor_messages[-1][1]
+
+
+def test_effective_duplicate_is_served_without_incrementing_pass_count(driver, monkeypatch):
+    driver.write_state(passes=49)
+    reply = 'The result will inform the next action.\n```forward\n{"type":"generate"}\n```'
+    driver.replies.update(t001=reply, t002=reply)
+    monkeypatch.setattr(live.ForwardTool, "counts_as_pass", lambda self, number: number != 1)
+    result = driver.run()
+    assert result["done"] and result["passes"] == 50 and result["requests"] == 2
+    assert result["counted_requests"] == [2]
+    assert "FORWARD PASS 49 of 50" in driver.editor_messages[1][1]
+    assert "duplicate" not in driver.editor_messages[1][1].lower()
+
+
+def test_oversized_turn_never_executes_a_complete_code_prefix(driver, monkeypatch):
+    driver.write_state()
+    monkeypatch.setattr(live, "OUTPUT_BYTE_LIMIT", 128)
+    driver.replies["t001"] = 'Explanation.\n```python\nraise RuntimeError("must not execute")\n```' + "é" * 64
+    result = driver.run()
+    assert result["done"] and result["turn"] == 2 and result["runs"] == 0
+    event = json.loads((driver.root / "turns/t001/editor_event.json").read_text())
+    assert event["reason"] == "output_byte_limit" and event["executed"] is False
+    assert "No code or forward pass" in driver.editor_messages[1][1]
+    assert not (driver.root / "turns/t001/answer.md").exists()
+
+
+def test_saved_oversized_turn_preserves_its_original_usage_receipt(driver, monkeypatch):
+    driver.write_state(pending={"kind": "editor", "turn": 1})
+    monkeypatch.setattr(live, "OUTPUT_BYTE_LIMIT", 128)
+    directory = driver.root / "turns/t001"
+    directory.mkdir(parents=True)
+    (directory / "prompt.txt").write_text("Exact original input")
+    (directory / "answer.md").write_text("é" * 100)
+    receipt = {"status": "completed", "response_id": "original", "usage": {"output_tokens": 100}, "cost_usd": 0.25}
+    (directory / "run.json").write_text(json.dumps(receipt))
+    result = driver.run()
+    saved = json.loads((directory / "run.json").read_text())
+    assert result["done"] and result["turn"] == 2
+    assert all(saved[key] == value for key, value in receipt.items())
+    assert [key for key, _ in driver.editor_messages] == ["t002"]
+    assert saved["execution_rejected"] == "output_byte_limit"
 
 
 def test_delivery_interruption_keeps_the_same_pending_forward_request(driver, monkeypatch):

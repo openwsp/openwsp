@@ -9,6 +9,8 @@ import time
 import urllib.request
 from pathlib import Path
 
+from openwsp.metrics import finished_metrics
+
 ROOT = Path(__file__).parent
 CONFIG = json.loads((ROOT / "config.json").read_text())
 INSTRUCTION = "Please reason step by step, and put your final answer within \\boxed{}."
@@ -152,6 +154,7 @@ def evaluate_outputs(outputs, rows, *, directory, stage, benchmark, samples, sec
                "accuracy": accuracy, "standard_error": math.sqrt(accuracy * (1-accuracy) / n),
                "mean_tokens": sum(r["token_count"] for r in records)/n,
                "cut_share": sum(r["finish_reason"] == "length" for r in records)/n,
+               **finished_metrics(records),
                "seconds": seconds, "cost_usd": cost_usd, "provenance": provenance}
     atomic_write(directory / "summary.json", summary)
     return summary

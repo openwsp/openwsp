@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from openwsp.editors.base import EditorRefused, ProviderUnavailable, UncertainRequest
+from openwsp.editors.base import EditorIncomplete, EditorRefused, ProviderUnavailable, UncertainRequest
 from openwsp.editors.bridge import BridgeConflict, BridgeEditor, BridgeStore, process_request
 
 
@@ -44,6 +44,35 @@ def submit(store, key="t001", *, conversation=0, message="exact prompt"):
 
 def owner(record, worker="worker-a"):
     return {"request_hash": record["request_hash"], "worker_id": worker}
+
+
+def test_bridge_output_byte_ceiling_rejects_execution_without_repeating_or_rebilling(tmp_path):
+    store = BridgeStore(tmp_path / "store")
+    record = submit(store)
+    store.claim("run-a", "t001", **owner(record))
+    store.dispatch("run-a", "t001", **owner(record))
+    receipt = {"status": "completed", "response_id": "one-response", "usage": {"output_tokens": 7}}
+    store.finish("run-a", "t001", **owner(record), text="é" * 5, receipt=receipt)
+    editor = BridgeEditor(tmp_path / "editor", run_id="run-a", store=store, max_output_bytes=9)
+    for _ in range(2):
+        with pytest.raises(EditorIncomplete) as raised:
+            editor.complete("exact prompt", request_key="t001")
+        assert raised.value.reason == "output_byte_limit"
+        assert editor.last_response["usage"] == {"output_tokens": 7}
+        assert editor.last_response["output_bytes"] == 10
+    assert store.get("run-a", "t001")["completion"]["receipt"] == receipt
+    # A completed but non-executed response does not strand the conversation.
+    assert submit(store, key="t002", message="Neutral failure")['status'] == 'queued'
+
+
+def test_bridge_output_exact_byte_ceiling_is_delivered(tmp_path):
+    store = BridgeStore(tmp_path / "store")
+    record = submit(store)
+    store.claim("run-a", "t001", **owner(record))
+    store.dispatch("run-a", "t001", **owner(record))
+    store.finish("run-a", "t001", **owner(record), text="é" * 5, receipt={"status": "completed"})
+    editor = BridgeEditor(tmp_path / "editor", run_id="run-a", store=store, max_output_bytes=10)
+    assert editor.complete("exact prompt", request_key="t001") == "é" * 5
 
 
 def test_store_request_and_terminal_payloads_are_immutable(tmp_path):

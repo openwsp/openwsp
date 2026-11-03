@@ -13,11 +13,12 @@ from openwsp.budget import BudgetLedger, compute_cost
 from openwsp.backends.jobs import RemoteJobRunner
 from replications.exp8.runtime import CONFIG, ROOT, atomic_write, evaluate_outputs, read_rows
 from replications.exp8.jobs import ProtocolGPUJobs, gpu_instance
+from replications.exp8.eval_grid import STAGES as GRID_STAGES
 
 
 def run(stage, overrides, *, app, driver_ticket=None):
     from openwsp.backends.modal_app import prepare, data_volume, Generator
-    if stage not in {"all", "prepare", "calibration", "smoke", "kernel", "live", "evaluate", "controls", "control4", "control5", "editor_probe", "review_live", "publish"}:
+    if stage not in {"all", "prepare", "calibration", "smoke", "kernel", "live", "evaluate", "controls", "control4", "control5", "editor_probe", "review_live", "publish", *GRID_STAGES}:
         raise ValueError("Unknown replication stage")
     if overrides:
         unknown = set(overrides) - {"publish_results", "editor", "run_id"}
@@ -32,6 +33,9 @@ def run(stage, overrides, *, app, driver_ticket=None):
     # The serialized launcher committed this invocation's ticket after any
     # predecessor finished. A warm worker must see that new Volume snapshot.
     data_volume.reload()
+    if stage in GRID_STAGES:
+        from replications.exp8.eval_grid import grid_live_identity
+        identity = grid_live_identity(overrides or {}, data=data)
     ledger = BudgetLedger(data / "budget.json")
     state_path = data / "state.json"
     state = json.loads(state_path.read_text()) if state_path.exists() else {"stages": {}}
@@ -181,6 +185,11 @@ def run(stage, overrides, *, app, driver_ticket=None):
             state["active_stage"] = stage
             checkpoint()
             state["stages"][stage] = run_optional_control(stage, ledger, checkpoint)
+        if stage in GRID_STAGES:
+            from replications.exp8.eval_grid import run_grid_stage
+            state["active_stage"] = stage
+            checkpoint()
+            state["stages"][stage] = run_grid_stage(stage, ledger, checkpoint, identity=identity)
         if stage == "editor_probe":
             from replications.exp8.editor_validation import run_probe
             state["active_stage"] = stage

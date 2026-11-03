@@ -12,10 +12,17 @@ from pathlib import Path
 
 import numpy as np
 
-from openwsp.budget import compute_cost, BudgetExceeded
+from openwsp.backends.forward_bank import (
+    BankError,
+    ForwardResultBank,
+    GenerationBank,
+    checkpoint_hash,
+    json_hash,
+)
 from openwsp.backends.jobs import JobBlocked, JobPending
-from replications.exp8.jobs import ProtocolGPUJobs, gpu_instance
+from openwsp.budget import BudgetExceeded, compute_cost
 from openwsp.core import WeightStore
+from replications.exp8.jobs import ProtocolGPUJobs, gpu_instance
 from replications.exp8.runtime import CONFIG, ROOT, atomic_write, read_rows, write_rows
 
 
@@ -53,7 +60,7 @@ def freeze_checkpoint(work, destination):
             shutil.copyfile(path, checkpoint / path.name)
     for path in original.glob("*.safetensors"):
         with safe_open(path, framework="pt") as handle:
-            tensors = {name: handle.get_tensor(name) for name in handle.keys()}
+            tensors = {name: handle.get_tensor(name) for name in handle.keys()}  # noqa: SIM118 - safetensors API
         for name, tensor in snapshot.items():
             if name in tensors:
                 tensors[name] = tensor.to(tensors[name].dtype).contiguous()
@@ -103,6 +110,117 @@ class ForwardTool:
         self.jobs = ProtocolGPUJobs(ledger, self.run_dir / "jobs", commit=checkpoint)
         self.work.mkdir(parents=True, exist_ok=True)
         (self.run_dir / "requests").mkdir(parents=True, exist_ok=True)
+
+    def counts_as_pass(self, number):
+        path = self.run_dir / "requests" / f"fwd_{number}.provenance.json"
+        return bool(json.loads(path.read_text()).get("count_pass", True)) if path.exists() else True
+
+    def _banks(self):
+        if not hasattr(self, "base_bank"):
+            self.base_bank = GenerationBank("/data/forward-bank/base")
+        if not hasattr(self, "result_bank"):
+            self.result_bank = ForwardResultBank(self.run_dir / "forward-bank")
+        return self.base_bank, self.result_bank
+
+    def _model_hashes(self, frozen):
+        if not hasattr(self, "_checkpoint_hashes"):
+            self._checkpoint_hashes = {}
+        for path in ("/data/original", frozen):
+            if path not in self._checkpoint_hashes:
+                self._checkpoint_hashes[path] = checkpoint_hash(path)
+        return {"original": self._checkpoint_hashes["/data/original"], "edited": self._checkpoint_hashes[frozen]}
+
+    def _generation_prompts(self, rows):
+        from transformers import AutoTokenizer
+
+        from replications.exp8.runtime import INSTRUCTION
+        if not hasattr(self, "generation_tokenizer"):
+            self.generation_tokenizer = AutoTokenizer.from_pretrained("/data/original", local_files_only=True)
+        return [self.generation_tokenizer.apply_chat_template(
+            [{"role": "user", "content": row.get("prompt", row.get("problem", "") + "\n" + INSTRUCTION)}],
+            tokenize=False, add_generation_prompt=True, enable_thinking=True) for row in rows]
+
+    def _effective_identity(self, request, frozen, edit_id):
+        if request.get("type") == "generate":
+            rows, _, _ = validate_generate(request, self.practice)
+            resolved = {"rows": rows, "rendered_prompts": self._generation_prompts(rows)}
+        else:
+            resolved = request.get("texts", request.get("chats"))
+        return {"schema_version": 1, "request_body_sha256": json_hash(request),
+                "resolved_content_sha256": json_hash(resolved), "checkpoints": self._model_hashes(frozen),
+                "edit_snapshot_sha256": edit_id, "sampling": CONFIG["sampling"],
+                "engine": CONFIG["engine"], "transformers": CONFIG["transformers"],
+                "seed_policy": "sha256(problem_id).hexdigest()[:8] modulo 2^31"}
+
+    def _base_plan(self, number, rows, sampling, model_hash, *, paired, identity):
+        bank, _ = self._banks()
+        prompts = self._generation_prompts(rows)
+        keys = [bank.identity(str(row["id"]), prompt,
+                              {"sampling": sampling, "thinking": True, "engine": CONFIG["engine"],
+                               "transformers": CONFIG["transformers"]}, model_hash,
+                              int(hashlib.sha256(str(row["id"]).encode()).hexdigest()[:8], 16) % 2**31)
+                for row, prompt in zip(rows, prompts, strict=True)]
+        path = self.run_dir / "requests" / f"fwd_{number}.base-plan.json"
+        if path.exists():
+            try:
+                plan = json.loads(path.read_text())
+                if (not isinstance(plan, dict) or plan.get("identity") != identity or plan.get("keys") != keys
+                        or not isinstance(plan.get("cached_sha256"), list) or len(plan["cached_sha256"]) != len(keys)
+                        or any(item is not None and (not isinstance(item, str) or re.fullmatch(r"[a-f0-9]{64}", item) is None)
+                               for item in plan["cached_sha256"])
+                        or plan.get("missing") != [index for index, digest in enumerate(plan["cached_sha256"]) if digest is None]):
+                    raise ValueError("Generation plan binding differs")
+            except (OSError, ValueError, TypeError) as error:
+                raise JobPending("Saved generation plan is malformed or does not match the effective request; inspect before resuming") from error
+        else:
+            # An older job already owns its exact rows. Never replace that job's
+            # immutable receipt with a new partial plan or new sampling.
+            existing = self.jobs.has_job(f"{self.job_prefix}/fwd_{number}/original")
+            cached = [bank.get(key) if paired and not existing else None for key in keys]
+            plan = {"identity": identity, "keys": keys,
+                    "cached_sha256": [entry["output_sha256"] if entry else None for entry in cached],
+                    "missing": [index for index, entry in enumerate(cached) if entry is None],
+                    "preserved_existing_job": existing}
+            atomic_write(path, plan)
+            self.checkpoint()
+        cached = [bank.get(key) if digest is not None else None
+                  for key, digest in zip(keys, plan["cached_sha256"], strict=True)]
+        if any(digest is not None and (entry is None or entry["output_sha256"] != digest)
+               for digest, entry in zip(plan["cached_sha256"], cached, strict=True)):
+            raise JobPending("Saved base generations are unavailable; no replacement sampling was launched")
+        return plan, cached
+
+    def _serve_duplicate(self, entry, request, number, turn, identity, started):
+        _, bank = self._banks()
+        old = entry["source_request"]
+
+        def rename(value):
+            return re.sub(rf"^(gen_|fwd_){old}(?=[_./]|$)", rf"\g<1>{number}", value)
+
+        bank.restore(entry, self.work, paths={item["path"]: rename(item["path"]) for item in entry["artifacts"]})
+
+        def rewrite(value):
+            if isinstance(value, str) and value.startswith("/work/"):
+                return "/work/" + rename(value[6:])
+            if isinstance(value, dict):
+                return {key: rewrite(item) for key, item in value.items()}
+            if isinstance(value, list):
+                return [rewrite(item) for item in value]
+            return value
+
+        result = rewrite(entry["result"])
+        result["s"] = time.monotonic() - started
+        atomic_write(self.run_dir / "requests" / f"fwd_{number}.provenance.json",
+                     {"turn": turn, "request_body_sha256": identity["request_body_sha256"],
+                      "effective_request_sha256": json_hash(identity), "served_from_request": old,
+                      "count_pass": old == number, "base_generations_reused": False,
+                      "bank_artifacts": entry["artifacts"]})
+        from openwsp.backends.modal_app import work_volume
+        work_volume.commit()
+        self._deliver_artifacts(request, number, result)
+        atomic_write(self.run_dir / "requests" / f"fwd_{number}.done.json", result)
+        self.checkpoint()
+        return result
 
     def _launch(self, key, spawn, fingerprint):
         return self.jobs.launch(key, spawn, fingerprint=fingerprint)
@@ -195,18 +313,37 @@ class ForwardTool:
         # Validate even original-only passes: direct file writes must not evade save_edit rules.
         frozen, edit_id, names = freeze_checkpoint(self.work, "/data/live-checkpoints")
         data_volume.commit()
+        identity = self._effective_identity(request, frozen, edit_id)
+        identity_path = self.run_dir / "requests" / f"fwd_{number}.identity.json"
+        if identity_path.exists():
+            try:
+                prior_identity = json.loads(identity_path.read_text())
+            except (OSError, ValueError, TypeError) as error:
+                raise JobPending("Pending forward identity is malformed; inspect before resuming") from error
+            if prior_identity != identity:
+                raise JobPending("Pending forward request has a different effective checkpoint or text; inspect before resuming")
+        atomic_write(identity_path, identity)
+        self.checkpoint()
+        base_bank, result_bank = self._banks()
+        try:
+            duplicate = result_bank.get(identity)
+            if duplicate is not None:
+                return self._serve_duplicate(duplicate, request, number, turn, identity, started)
+        except BankError as error:
+            raise JobPending("A saved forward bank entry could not be verified; no replacement job was launched") from error
         if request.get("type") == "generate":
             rows, n, max_tokens = validate_generate(request, self.practice)
             modes = ("original", "edited") if request["model"] == "both" else (request["model"],)
             sampling = {**CONFIG["sampling"], "n": n, "max_tokens": max_tokens}
-            cache_dir = Path("/data/base-generation-cache")
-            cache_dir.mkdir(exist_ok=True)
-            cache_paths = [cache_dir / (base_cache_key(row, sampling) + ".json") for row in rows]
-            # User-authorized budget fallback; no new information is supplied to
-            # the editor. Record its use in the public protocol provenance.
-            reuse_base = (request["model"] == "both"
-                          and self.ledger.snapshot()["summary"]["modal"]["available_usd"] < 20
-                          and all(path.exists() for path in cache_paths))
+            base_plan, cached_base = (None, None)
+            if "original" in modes:
+                try:
+                    base_plan, cached_base = self._base_plan(number, rows, sampling, identity["checkpoints"]["original"],
+                                                              paired=request["model"] == "both", identity=identity)
+                except BankError as error:
+                    raise JobPending("A base bank entry could not be verified; no replacement sampling was launched") from error
+            reuse_base = bool(base_plan and any(item is not None for item in cached_base))
+            base_complete = bool(base_plan and not base_plan["missing"])
             swap_path = Path("/data/results/kernel/weight-swap.json")
             use_swap = ("edited" in modes and bool(names) and swap_path.exists()
                         and json.loads(swap_path.read_text()).get("mode") == "verified_native_swap")
@@ -231,11 +368,11 @@ class ForwardTool:
             # Check combined bounds before either dispatch; the journal reserves each.
             bound = float(compute_cost(2520, gpu="H100", cpu_cores=4, memory_gib=16))
             missing = sum(not self.jobs.has_job(f"{self.job_prefix}/fwd_{number}/{mode}") for mode in modes
-                          if not (reuse_base and mode == "original"))
+                          if not (base_complete and mode == "original"))
             if self.ledger.snapshot()["summary"]["modal"]["available_usd"] < bound * missing:
                 raise BudgetExceeded("Insufficient reserved capacity for this paired pass")
             for mode in modes:
-                if reuse_base and mode == "original":
+                if base_complete and mode == "original":
                     running.append((mode, None))
                     continue
                 model_path = "/data/original" if mode == "original" else frozen
@@ -243,12 +380,13 @@ class ForwardTool:
                 arguments = swap_arguments if mode == "edited" else {}
                 if arguments:
                     model_path = "/data/original"
-                self._launch(key, lambda gpu, gate, model_path=model_path, mode=mode, arguments=arguments: gpu_instance(Generator, gpu, gate, checkpoint=model_path, slot=mode).generate.spawn(rows, sampling, True, True, **arguments),
+                job_rows = [rows[index] for index in base_plan["missing"]] if mode == "original" else rows
+                self._launch(key, lambda gpu, gate, model_path=model_path, mode=mode, arguments=arguments, job_rows=job_rows: gpu_instance(Generator, gpu, gate, checkpoint=model_path, slot=mode).generate.spawn(job_rows, sampling, True, True, **arguments),
                              {"request": request, "mode": mode, "edit": edit_id if mode == "edited" else "original"})
                 running.append((mode, key))
             all_records, summaries = {}, {}
             for mode, key in running:
-                response = self._result(key) if key else {"outputs": [json.loads(path.read_text()) for path in cache_paths]}
+                response = self._result(key) if key else {"outputs": []}
                 if response.get("needs_fresh_engine"):
                     prior_swap = json.loads(swap_path.read_text())
                     prior_swap.update(mode="fresh_engine_per_pass", status="fallback",
@@ -260,9 +398,19 @@ class ForwardTool:
                                  {"request": request, "edit": edit_id, "reason": response["swap_failure"]})
                     atomic_write(self.run_dir / "requests" / f"fwd_{number}.swap-fallback.json", response["swap_failure"])
                     response = self._result(fallback_key)
-                if mode == "original" and key:
-                    for path, generated in zip(cache_paths, response["outputs"], strict=True):
-                        atomic_write(path, generated)
+                if mode == "original":
+                    outputs = [entry["output"] if entry else None for entry in cached_base]
+                    for index, generated in zip(base_plan["missing"], response["outputs"], strict=True):
+                        if generated.get("id") != rows[index]["id"] or len(generated["samples"]) != n:
+                            raise JobPending("Generation receipt does not match its saved row plan")
+                        try:
+                            base_bank.put(base_plan["keys"][index], generated,
+                                          provenance={"job_key": key, "run_directory": str(self.run_dir),
+                                                      "request": number, "engine": response.get("engine", CONFIG["engine"])})
+                        except BankError as error:
+                            raise JobPending("Saved generation could not enter the verified bank; retain its job receipt") from error
+                        outputs[index] = generated
+                    response = {**response, "outputs": outputs}
                     data_volume.commit()
                 records, samples = [], []
                 for row, generated in zip(rows, response["outputs"], strict=True):
@@ -297,7 +445,7 @@ class ForwardTool:
                     folder = self.work / f"gen_{number}{suffix}_acts"
                     model_path = "/data/original" if mode == "original" else frozen
                     key = f"{self.job_prefix}/fwd_{number}/{mode}/activations"
-                    self._launch(key, lambda gpu, gate: gpu_instance(TransformerReader, gpu, gate, checkpoint=model_path).generation_activations.spawn(
+                    self._launch(key, lambda gpu, gate, model_path=model_path, records=records, params=params, folder=folder: gpu_instance(TransformerReader, gpu, gate, checkpoint=model_path).generation_activations.spawn(
                         rows, records, params.get("layers", []), params.get("mlp", False), str(folder)),
                         {"request": request, "mode": mode, "edit": edit_id if mode == "edited" else "original"})
                     result = self._result(key)
@@ -325,6 +473,7 @@ class ForwardTool:
             if request.get("model") not in ("original", "edited"):
                 raise ValueError("Teacher-forced model must be original or edited")
             from transformers import AutoTokenizer
+
             from replications.exp8.internals import tokenize_request
             if not hasattr(self, "tokenizer"):
                 self.tokenizer = AutoTokenizer.from_pretrained("/model", local_files_only=True)
@@ -348,9 +497,21 @@ class ForwardTool:
         # Provenance stays in harness logs, outside the editor-visible summary.
         atomic_write(self.run_dir / "requests" / f"fwd_{number}.provenance.json",
                      {"turn": turn, "edit_sha256": edit_id, "tensors": names,
-                      "base_generations_reused": bool(locals().get("reuse_base", False))})
+                      "request_body_sha256": identity["request_body_sha256"],
+                      "effective_request_sha256": json_hash(identity), "count_pass": True,
+                      "base_generations_reused": bool(locals().get("reuse_base", False)),
+                      "base_bank": [{"key": json_hash(key), "reused": cached is not None,
+                                     "source": cached["provenance"] if cached else {"request": number}}
+                                    for key, cached in zip(base_plan["keys"], cached_base, strict=True)]
+                                   if locals().get("base_plan") else []})
         work_volume.commit()
         self._deliver_artifacts(request, number, result)
+        delivery = json.loads((self.run_dir / "requests" / f"fwd_{number}.delivery.json").read_text())
+        try:
+            result_bank.put(identity, result, request_number=number,
+                            artifacts={item["path"][6:]: self.work / item["path"][6:] for item in delivery["files"]})
+        except BankError as error:
+            raise JobPending("Forward result is saved but its bank artifacts require inspection; retain job receipts") from error
         atomic_write(destination, result)
         self.checkpoint()
         return result
