@@ -180,3 +180,37 @@ def test_safe_checkpoint_cannot_overwrite_original(weights, tmp_path):
     with pytest.raises(EditRefused, match="original"):
         store.export_checkpoint(model)
     assert model.read_bytes() == original_bytes
+
+
+def test_snapshot_keeps_one_validated_edit_view_after_external_changes(weights, tmp_path):
+    name = "model.layers.0.mlp.down_proj.weight"
+    store = WeightStore(weights, tmp_path / "edited")
+    edited = store.load_original(name)
+    edited[0, 0] = 7
+    store.save_edit(name, edited)
+    snapshot = store.snapshot()
+    later = edited.clone()
+    later[0, 1] = 9
+    np.save(tmp_path / "edited" / f"{name}.npy", later.numpy())
+    assert torch.equal(snapshot.load(name), edited)
+    assert torch.equal(store.load(name), later)
+    snapshot.drop_edit(name)
+    assert torch.equal(store.load(name), later)
+    assert torch.equal(snapshot.load_original(name), weights[name])
+
+
+def test_apply_unknown_existing_submission_refuses_before_replacing_edits(weights, tmp_path):
+    from openwsp.edits import export_edit
+
+    name = "model.layers.0.mlp.down_proj.weight"
+    store = WeightStore(weights, tmp_path / "edited")
+    current = store.load_original(name)
+    current[0, 0] = 7
+    store.save_edit(name, current)
+    replacement = current.clone()
+    replacement[0, 1] = 9
+    export_edit(weights, {name: replacement}, tmp_path / "replacement")
+    np.save(tmp_path / "edited/unknown.npy", np.ones(2, dtype=np.float32))
+    with pytest.raises(EditRefused, match="Unknown"):
+        store.apply_edit(tmp_path / "replacement")
+    assert torch.equal(store.load(name), current)

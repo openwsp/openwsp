@@ -6,6 +6,7 @@ float32; exported public edits and checkpoints describe their bfloat16 evaluatio
 
 from __future__ import annotations
 
+import copy
 import os
 import stat
 import tempfile
@@ -194,6 +195,27 @@ class WeightStore:
                 raise EditRefused("Submission changed during validation") from exc
             return tensors
 
+    def snapshot(self) -> WeightStore:
+        """Capture all validated edits for one forward without rereading live files.
+
+        File-backed originals remain lazy and must remain immutable, as for this
+        store. In-memory originals are cloned. Changes made through either store
+        after this call do not alter the other's submitted tensors.
+        """
+        with self._lock:
+            submitted = self.validate_submission()
+            result = copy.copy(self)
+            result._lock = threading.RLock()
+            result._files = self._files.copy()
+            result._memory = (
+                None
+                if self._memory is None
+                else {name: value.clone() for name, value in self._memory.items()}
+            )
+            result.edit_dir = None
+            result._edits = submitted
+            return result
+
     def _validate(self, name: str, tensor: Any) -> torch.Tensor:
         self._check_name(name)
         if name in self.frozen_names:
@@ -310,10 +332,11 @@ class WeightStore:
         with self._lock:
             manifest, tensors = read_edit(path, _Originals(self))
             validated = {name: self._validate(name, tensor) for name, tensor in tensors.items()}
+            previous = self.edited()
             # All validation precedes mutation. Each file is replaced atomically.
             for name, value in validated.items():
                 self._persist(name, value)
-            for name in set(self.edited()) - validated.keys():
+            for name in set(previous) - validated.keys():
                 self.drop_edit(name)
             return manifest
 

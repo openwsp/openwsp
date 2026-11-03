@@ -28,6 +28,19 @@ def test_sdk_edit_changes_forward_and_roundtrips(tmp_path):
     assert restored.forward(request) == after
 
 
+def test_tiny_forward_roundtrip_preserves_bf16_evaluated_decimal_edits(tmp_path):
+    api = OpenWSP.tiny(tmp_path / "submitted")
+    values = [[1.123456, 2.987654], [-1, 1]]
+    api.save_edit("layer1.weight", values)
+    request = {"inputs": [[0.125, 0.25]], "model": "both"}
+    expected = api.forward(request)
+    api.export_edit(tmp_path / "export")
+    restored = OpenWSP.tiny(tmp_path / "restored")
+    restored.apply_edit(tmp_path / "export")
+    assert restored.forward(request) == expected
+    assert torch.equal(api.store.load("layer1.weight"), torch.tensor(values))
+
+
 def test_bounded_reads_and_persistent_kernel(tmp_path):
     api = OpenWSP.tiny(tmp_path)
     assert len(api.list_tensors()) == 4
@@ -83,3 +96,39 @@ def test_backend_errors_and_input_validation(tmp_path):
         load_backend("invalid")
     with pytest.raises(ValueError, match="real"):
         api.save_edit("layer1.weight", torch.ones((2, 2), dtype=torch.complex64))
+
+
+def test_forward_validates_even_unread_submission_files(tmp_path):
+    import numpy as np
+
+    api = OpenWSP.tiny(tmp_path)
+    np.save(tmp_path / "edited/unknown.npy", np.ones(2, dtype=np.float32))
+    with pytest.raises(ValueError, match="Unknown"):
+        api.forward({"inputs": [[1, 0]], "model": "original"})
+
+
+def test_forward_uses_one_snapshot_and_does_not_mutate_caller_request(tmp_path):
+    import numpy as np
+
+    api = OpenWSP.tiny(tmp_path)
+    name = "layer1.weight"
+    api.save_edit(name, [[2, 2], [-1, 1]])
+    expected = api.store.load(name)
+    request = {"inputs": [[1, 0]], "model": "edited"}
+
+    class Backend:
+        def forward(self, received, store):
+            assert not torch.is_grad_enabled()
+            received["inputs"][0][0] = 99
+            before = store.load(name)
+            np.save(tmp_path / "edited" / f"{name}.npy", np.array([[3, 2], [-1, 1]], dtype=np.float32))
+            after = store.load(name)
+            store.drop_edit(name)
+            return {"before": before.tolist(), "after": after.tolist()}
+
+    api.backend = Backend()
+    result = api.forward(request)
+    assert result["before"] == result["after"] == expected.tolist()
+    assert request == {"inputs": [[1, 0]], "model": "edited"}
+    assert api.store.load(name)[0, 0].item() == 3
+    assert api.store.edited() == [name]

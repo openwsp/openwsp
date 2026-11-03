@@ -33,6 +33,15 @@ def _provider_call(call_id):
     return modal.FunctionCall.from_id(call_id)
 
 
+def _remote_failure(error):
+    """Only Modal's reconstructed remote traceback establishes a user-code failure."""
+    try:
+        from modal._traceback import traceback_contains_remote_call
+    except ImportError:
+        return False
+    return traceback_contains_remote_call(error.__traceback__)
+
+
 def _failure_kind(error):
     """Classify without persisting provider messages, which can contain secrets."""
     name = type(error).__name__
@@ -50,7 +59,7 @@ def _failure_kind(error):
     # These SDK exceptions follow a returned function result. OutputExpiredError
     # means the SDK observed no outputs AND no unfinished inputs. RPC failures
     # instead map to the communication errors below and never establish exit.
-    if name in {"FunctionTimeoutError", "RemoteError", "InternalFailure", "OutputExpiredError", "ExecutionError"}:
+    if name in {"FunctionTimeoutError", "RemoteError", "InternalFailure", "OutputExpiredError"} or _remote_failure(error):
         return "failed"
     if isinstance(error, TimeoutError) or name == "TimeoutError":
         return "running"
@@ -61,7 +70,7 @@ def _failure_kind(error):
         return "unknown"
     if any(base.__name__ == "Error" and base.__module__.startswith("modal") for base in type(error).__mro__):
         return "unknown"
-    return "failed"
+    return "unknown"
 
 
 class DriverCoordinator:
@@ -164,7 +173,14 @@ class DriverCoordinator:
                 if current["fingerprint"] == fingerprint:
                     return self._recover(spawn)
                 if current["phase"] != "complete":
-                    raise ValueError("Another driver request still owns this coordinator")
+                    # Stage transitions need not wait for the periodic watchdog.
+                    # Observe/reconcile only: a different request cannot cancel
+                    # or restart the previous owner as a side effect of launch.
+                    self._recover(spawn, completion_only=True)
+                    current = self.record["current"]
+                    if current["phase"] != "complete":
+                        raise ValueError("Another driver request still owns this coordinator")
+                    state = self._read(self.state_path)
             if not current and state.get("status") == "running":
                 return self._view("legacy_running", "Existing driver has no coordinator ticket; left untouched")
             if state.get("status") == "blocked":
@@ -241,9 +257,16 @@ class DriverCoordinator:
             # Modal InputCancellation inherits BaseException rather than Exception.
             if not isinstance(error, Exception) and type(error).__name__ != "InputCancellation":
                 raise
-            return _failure_kind(error), {"error_type": type(error).__name__}
+            kind = _failure_kind(error)
+            result = {"error_type": type(error).__name__}
+            if kind == "auth_quota_budget" and _remote_failure(error):
+                # The invocation ended, but its failure must never cause an
+                # automatic retry. Reconcile its receipt, then block the stage.
+                result["failure_category"] = kind
+                return "failed", result
+            return kind, result
 
-    def _recover(self, spawn):
+    def _recover(self, spawn, *, completion_only=False):
         current = self.record["current"]
         if not current:
             state = self._read(self.state_path)
@@ -254,11 +277,11 @@ class DriverCoordinator:
         if phase in {"complete", "blocked"}:
             return self._view()
         if phase == "preparing":
-            return self._dispatch(spawn)
+            return self._view() if completion_only else self._dispatch(spawn)
         if phase == "dispatching" or not current.get("call_id"):
             return self._block("Dispatch outcome unknown; reservation retained and automatic retry disabled")
         if phase == "terminal":
-            return self._reconcile(spawn)
+            return self._reconcile(spawn, allow_restart=not completion_only)
         try:
             call = self.call_factory(current["call_id"])
         except Exception as error:  # noqa: BLE001 — lookup failures cannot establish provider exit
@@ -267,14 +290,18 @@ class DriverCoordinator:
             return self._view("pending", "Provider call lookup failed; owner and reservation retained")
         outcome, result = self._poll(call)
         if outcome in {"completed", "failed", "cancelled"}:
-            return self._terminal(outcome, result, spawn)
+            return self._terminal(outcome, result, spawn, allow_restart=not completion_only)
         if outcome == "auth_quota_budget":
             return self._block("Provider authentication, quota or budget blocked; no automatic retry")
         if outcome == "unknown":
             return self._view("pending", "Provider state unknown; owner and reservation retained")
+        if completion_only:
+            return self._view("running", "Previous driver still owns this coordinator")
         state = self._read(self.state_path)
         if phase == "cancelling":
-            return self._view("pending", "Cancellation requested; provider exit is not confirmed")
+            # Cancel is idempotent for this exact call ID. An intent may have
+            # committed before its RPC was sent, or the RPC response was lost.
+            return self._cancel(call, spawn)
         heartbeat = state.get("heartbeat", current["dispatched_at"])
         if not isinstance(heartbeat, (int, float)) or not math.isfinite(heartbeat):
             return self._view("pending", "Invalid heartbeat; cannot establish stale ownership")
@@ -285,6 +312,10 @@ class DriverCoordinator:
         current.update(phase="cancelling", stale_stage=state.get("active_stage") or current["stage"],
                        no_restart=state.get("status") == "blocked", cancel_requested_at=self.clock())
         self._write()
+        return self._cancel(call, spawn)
+
+    def _cancel(self, call, spawn):
+        current = self.record["current"]
         try:
             call.cancel(terminate_containers=True)
         except Exception as error:  # noqa: BLE001 — preserve ownership after every ambiguous cancellation
@@ -300,7 +331,7 @@ class DriverCoordinator:
             return self._block("Provider access blocked after cancellation; reservation retained")
         return self._view("pending", "Cancellation requested; provider exit is not confirmed")
 
-    def _terminal(self, outcome, result, spawn):
+    def _terminal(self, outcome, result, spawn, *, allow_restart=True):
         current = self.record["current"]
         # Save the provider observation before touching reservations. No raw return
         # value is needed for coordination; explicit status is its only contract.
@@ -308,10 +339,12 @@ class DriverCoordinator:
                        result_status=result.get("status") if isinstance(result, dict) else None)
         if isinstance(result, dict) and result.get("error_type"):
             current["error_type"] = result["error_type"]
+        if isinstance(result, dict) and result.get("failure_category") == "auth_quota_budget":
+            current["no_restart"] = True
         self._write()
-        return self._reconcile(spawn)
+        return self._reconcile(spawn, allow_restart=allow_restart)
 
-    def _reconcile(self, spawn):
+    def _reconcile(self, spawn, *, allow_restart=True):
         current = self.record["current"]
         # Terminal evidence establishes transfer of ledger ownership from worker.
         self.reload()
@@ -344,6 +377,8 @@ class DriverCoordinator:
         except (ValueError, BudgetExceeded, DriverLeaseError) as error:
             return self._block("Driver reconciliation refused: " + type(error).__name__)
         if current.get("manual_resume"):
+            if not allow_restart:
+                return self._view("pending", "Previous manual resume still owns this coordinator")
             request = current["manual_resume"]
             return self._start(request["stage"], request["config"], request["fingerprint"], spawn)
         state = self._read(self.state_path)
@@ -355,6 +390,8 @@ class DriverCoordinator:
             current.update(phase="complete", completed_at=self.clock())
             self._write()
             return self._view("complete")
+        if not allow_restart:
+            return self._view("pending", "Previous driver ended without completing its stage")
         stage = current.get("stale_stage") or state.get("active_stage") or current["stage"]
         attempts = self.record["restart_counts"].get(stage, 0)
         if attempts >= self.max_restarts:

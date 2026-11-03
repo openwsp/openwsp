@@ -71,15 +71,44 @@ _FORBIDDEN_ATTRIBUTES = {
     "quit",
 }
 _EXECUTION_LOCK = threading.RLock()
+_LAYER_CALLS = {
+    "Linear",
+    "Embedding",
+    "Conv1d",
+    "Conv2d",
+    "Conv3d",
+    "RNN",
+    "GRU",
+    "LSTM",
+    "Transformer",
+    "TransformerEncoder",
+    "TransformerDecoder",
+    "Sequential",
+    "Module",
+    "linear",
+    "embedding",
+    "conv1d",
+    "conv2d",
+    "conv3d",
+}
+_GRAD_TOGGLES = {"set_grad_enabled", "requires_grad_"}
 
 
-def validate_code(code: str) -> ast.Module:
+def validate_code(code: str, *, aliases: dict[str, str] | None = None) -> ast.Module:
     """Reject explicit training, model loading/execution, and process/network tools.
 
     The AST filter is intentionally described as a protocol guard. It cannot
     prove arbitrary Python is safe or recognize every handwritten network.
     """
     tree = ast.parse(code, mode="exec")
+    callable_aliases = dict(aliases or {})
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ImportFrom) and node.module in {"torch", "torch.nn.functional"}:
+            for imported in node.names:
+                if imported.name == "*":
+                    raise ProtocolRefused("Wildcard torch imports cannot be checked; import names explicitly")
+                if imported.name in _LAYER_CALLS | _GRAD_TOGGLES:
+                    callable_aliases[imported.asname or imported.name] = imported.name
     for node in ast.walk(tree):
         if isinstance(node, (ast.Import, ast.ImportFrom)):
             modules = (
@@ -112,31 +141,16 @@ def validate_code(code: str) -> ast.Module:
                 key = node.args[1]
                 if isinstance(key, ast.Constant) and key.value in _FORBIDDEN_ATTRIBUTES:
                     raise ProtocolRefused("Accessing a forbidden operation dynamically is not allowed")
-            if isinstance(node.func, ast.Attribute) and node.func.attr in {
-                "Linear",
-                "Embedding",
-                "Conv1d",
-                "Conv2d",
-                "Conv3d",
-                "RNN",
-                "GRU",
-                "LSTM",
-                "Transformer",
-                "TransformerEncoder",
-                "TransformerDecoder",
-                "Sequential",
-                "Module",
-                "linear",
-                "embedding",
-                "conv1d",
-                "conv2d",
-                "conv3d",
-            }:
+            callable_name = (
+                node.func.attr
+                if isinstance(node.func, ast.Attribute)
+                else callable_aliases.get(node.func.id)
+                if isinstance(node.func, ast.Name)
+                else None
+            )
+            if callable_name in _LAYER_CALLS:
                 raise ProtocolRefused("Running model layers in the kernel is forbidden; use the forward tool")
-            if isinstance(node.func, ast.Attribute) and node.func.attr in {
-                "set_grad_enabled",
-                "requires_grad_",
-            }:
+            if callable_name in _GRAD_TOGGLES:
                 args = list(node.args) + [keyword.value for keyword in node.keywords]
                 if not args or not all(isinstance(arg, ast.Constant) and arg.value is False for arg in args):
                     raise ProtocolRefused("Enabling gradients is forbidden")
@@ -151,6 +165,9 @@ def validate_code(code: str) -> ast.Module:
                 isinstance(target, ast.Attribute) and target.attr == "requires_grad" for target in targets
             ):
                 raise ProtocolRefused("Changing gradient flags is forbidden")
+    if aliases is not None:
+        aliases.clear()
+        aliases.update(callable_aliases)
     return tree
 
 
@@ -241,6 +258,7 @@ class Kernel:
         self.timeout = timeout
         self.output_limit = output_limit
         self.runs = 0
+        self._call_aliases: dict[str, str] = {}
         self._lock = threading.RLock()
         self.namespace: dict[str, Any] = {
             "__name__": "__openwsp_kernel__",
@@ -269,7 +287,7 @@ class Kernel:
                 }
             # A refused block was not executed and does not consume a code run.
             try:
-                tree = validate_code(code)
+                tree = validate_code(code, aliases=self._call_aliases)
             except (ProtocolRefused, SyntaxError) as exc:
                 return {
                     "ok": False,

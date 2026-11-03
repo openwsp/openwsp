@@ -197,6 +197,7 @@ class Supervisor:
 
         self.config = config
         self._validate_code = validate_code
+        self._call_aliases: dict[str, str] = {}
         self._completed: dict[str, tuple[str, dict]] = {}
         self.runs = config["initial_runs"]
         self.restarts = 0
@@ -236,6 +237,7 @@ class Supervisor:
         }
 
     def _start(self):
+        self._call_aliases.clear()
         context = mp.get_context("spawn")
         parent, child = context.Pipe()
         config = dict(self.config, initial_runs=self.runs)
@@ -282,6 +284,8 @@ class Supervisor:
                 "error": "Request id must be at most 200 characters",
                 "runs": self.runs,
             }
+        if not isinstance(request.get("op"), str):
+            return {"id": identifier, "ok": False, "error": "Operation must be a string", "runs": self.runs}
         if request.get("op") in {"run", "restart"} and identifier is not None:
             digest = hashlib.sha256(
                 json.dumps(request, sort_keys=True, ensure_ascii=True).encode()
@@ -324,7 +328,7 @@ class Supervisor:
         if self.runs >= self.config["max_runs"]:
             return dict(common, ok=False, output="", error="Code-run budget exhausted", seconds=0.0)
         try:
-            self._validate_code(request["code"])
+            self._validate_code(request["code"], aliases=self._call_aliases)
         except (ValueError, SyntaxError) as exc:
             return dict(
                 common, ok=False, output="", error=f"{type(exc).__name__}: {exc}"[:10_000], seconds=0.0

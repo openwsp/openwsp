@@ -360,3 +360,39 @@ def test_status_heartbeat_arrives_before_running_cell_finishes(worker_factory):
     assert finished["ok"] is True
     assert finished["output"].strip() == "42"
     assert finished["runs"] == 1
+
+
+def test_malformed_operation_type_is_refused_without_stopping_worker(worker_factory):
+    worker = worker_factory()
+    for operation in ([], {}, 123, None):
+        response = worker.request(operation)
+        assert response["ok"] is False
+        assert response["runs"] == 0
+        assert "string" in response["error"]
+    following = worker.request("run", code="6 * 7")
+    assert following["ok"] is True
+    assert following["output"].strip() == "42"
+
+
+def test_supervisor_remembers_import_aliases_and_resets_them_on_restart(worker_factory):
+    worker = worker_factory()
+    imported = worker.request(
+        "run",
+        code=("from torch import set_grad_enabled as grad\nfrom torch.nn.functional import linear as dense"),
+    )
+    assert imported["ok"] is True
+    assert imported["runs"] == 1
+    for code in ("grad(True)", "dense(load(NAMES[0]), load(NAMES[0]))"):
+        refused = worker.request("run", code=code)
+        assert refused["ok"] is False
+        assert "ProtocolRefused" in refused["error"]
+        assert refused["runs"] == 1
+    disabled = worker.request("run", code="grad(False)\ntorch.is_grad_enabled()")
+    assert disabled["ok"] is True
+    assert disabled["output"].strip() == "False"
+    assert disabled["runs"] == 2
+    worker.request("restart")
+    fresh = worker.request("run", code="dense = lambda: 7\ndense()")
+    assert fresh["ok"] is True
+    assert fresh["output"].strip() == "7"
+    assert fresh["runs"] == 3

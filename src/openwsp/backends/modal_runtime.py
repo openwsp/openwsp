@@ -2,29 +2,60 @@
 from __future__ import annotations
 
 import os
+import ssl
+
+
+def _trust_http_session(session, ca):
+    """Augment the context already chosen by Modal's native proxy connector."""
+    context = getattr(session.connector, "_ssl", None)
+    if (not isinstance(context, ssl.SSLContext) or context.verify_mode != ssl.CERT_REQUIRED
+            or not context.check_hostname):
+        raise RuntimeError("Modal HTTP connector must verify TLS certificates and hostnames")
+    context.load_verify_locations(cafile=ca)
+    return session
 
 
 def configure_tls():
-    """Add the caller's configured CA bundle to grpclib without disabling verification.
+    """Add the caller's configured CA bundle to Modal gRPC and HTTP contexts.
 
-    grpclib explicitly selects certifi and otherwise ignores SSL_CERT_FILE. Modal
-    retains its native HTTP CONNECT proxy support; no routes or proxy variables change.
+    Both grpclib and Modal's HTTP factory explicitly select certifi, otherwise
+    ignoring SSL_CERT_FILE. Keep Modal's factory/ProxyConnector, timeout and native
+    proxy routing, and add roots to its existing verified SSLContext. Volume v2
+    downloads use this HTTP session. No routes or proxy variables are changed.
     """
     ca = os.environ.get("SSL_CERT_FILE") or os.environ.get("REQUESTS_CA_BUNDLE")
     if not ca:
         return
+    from modal._utils import http_utils
     from modal._utils.grpc_utils import ModalChannel
-    if getattr(ModalChannel, "_openwsp_ca_configured", False):
-        return
-    original = ModalChannel._get_default_ssl_context
 
-    def trusted_context(self, **kwargs):
-        context = original(self, **kwargs)
-        context.load_verify_locations(cafile=ca)
-        return context
+    ModalChannel._openwsp_ca_bundle = ca
+    if not getattr(ModalChannel, "_openwsp_ca_configured", False):
+        original = ModalChannel._get_default_ssl_context
 
-    ModalChannel._get_default_ssl_context = trusted_context
-    ModalChannel._openwsp_ca_configured = True
+        def trusted_context(self, **kwargs):
+            context = original(self, **kwargs)
+            context.load_verify_locations(cafile=ModalChannel._openwsp_ca_bundle)
+            return context
+
+        ModalChannel._get_default_ssl_context = trusted_context
+        ModalChannel._openwsp_ca_configured = True
+
+    # Modal 1.6 uses the same _ssl SSLContext field for TCPConnector and its
+    # aiohttp_socks ProxyConnector. Alter the trust store before any HTTP request;
+    # replacing the connector would discard Modal's proxy normalization/rDNS.
+    http_utils._openwsp_ca_bundle = ca
+    if not getattr(http_utils._http_client_with_tls, "_openwsp_ca_configured", False):
+        original_http = http_utils._http_client_with_tls
+
+        def trusted_http_client(timeout):
+            return _trust_http_session(original_http(timeout), http_utils._openwsp_ca_bundle)
+
+        trusted_http_client._openwsp_ca_configured = True
+        http_utils._http_client_with_tls = trusted_http_client
+    registry = http_utils.ClientSessionRegistry
+    if registry._client_session_active:
+        _trust_http_session(registry._client_session, ca)
 
 
 def allowance(*, workspace=None):

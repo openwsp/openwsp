@@ -6,6 +6,7 @@ backend/sandbox for untrusted editors; this API is not an operating-system sandb
 
 from __future__ import annotations
 
+import copy
 import importlib
 from collections.abc import Mapping
 from pathlib import Path
@@ -107,7 +108,11 @@ class OpenWSP:
             raise TypeError("forward request must be a JSON object")
         if self.backend is None:
             raise RuntimeError("No forward backend configured; supply a backend or use the tiny CPU example")
-        return self.backend.forward(request, self.store)
+        # Validate every submission, including files a backend might not read,
+        # and keep one pass consistent if another process restores saved edits.
+        snapshot = self.store.snapshot()
+        with torch.inference_mode():
+            return self.backend.forward(copy.deepcopy(request), snapshot)
 
     def save_edit(self, name: str, values: Any) -> dict[str, Any]:
         # Preserve complex/gradient-bearing inputs for the core's refusal checks.
@@ -126,7 +131,7 @@ class OpenWSP:
 
 
 class TinyBackend:
-    """Two linear maps with tanh, executed without autograd; never used as an experiment result."""
+    """Two CPU linear maps over bf16-rounded weights; never an experiment result."""
 
     def forward(self, request: dict[str, Any], store: WeightStore) -> dict[str, Any]:
         model = request.get("model", "edited")
@@ -139,7 +144,13 @@ class TinyBackend:
             raise ValueError("tiny forward inputs must be finite")
         if model == "both":
             return {arm: self.forward({**request, "model": arm}, store) for arm in ("original", "edited")}
-        load = store.load_original if model == "original" else store.load
+        read = store.load_original if model == "original" else store.load
+
+        def load(name):
+            # Public edits identify bf16-evaluated weights. Keep the tiny CPU
+            # arithmetic in float32, but honor the same weight-rounding contract.
+            return read(name).to(torch.bfloat16).float()
+
         with torch.inference_mode():
             hidden = torch.tanh(inputs @ load("layer1.weight").T + load("layer1.bias"))
             logits = hidden @ load("layer2.weight").T + load("layer2.bias")

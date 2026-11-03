@@ -30,6 +30,12 @@ def test_save_and_inspect(kernel):
     "code",
     [
         "torch.set_grad_enabled(True)",
+        "from torch import set_grad_enabled as grad; grad(True)",
+        "from torch import set_grad_enabled; set_grad_enabled(True)",
+        "from torch.nn.functional import linear; linear(torch.ones(2), torch.ones(2, 2))",
+        "from torch.nn.functional import linear as dense; dense(torch.ones(2), torch.ones(2, 2))",
+        "from torch import *",
+        "from torch.nn.functional import *",
         "torch.autograd.grad([], [])",
         "w = torch.ones(2, requires_grad=True)",
         "load(NAMES[0]).backward()",
@@ -62,6 +68,19 @@ def test_weight_analysis_normalization_is_allowed(kernel):
     )
     assert result["ok"]
     assert result["output"] == "torch.Size([2, 2])\n"
+
+
+def test_imported_callable_aliases_are_checked_across_cells(kernel):
+    assert kernel.run("from torch import set_grad_enabled as grad")["ok"]
+    refused = kernel.run("grad(True)")
+    assert not refused["ok"] and "ProtocolRefused" in refused["error"]
+    assert refused["runs"] == 1
+    disabled = kernel.run("grad(False)\ntorch.is_grad_enabled()")
+    assert disabled["ok"] and disabled["output"] == "False\n"
+    assert kernel.run("from torch.nn.functional import linear as dense")["ok"]
+    refused = kernel.run("dense(load(NAMES[0]), load(NAMES[0]))")
+    assert not refused["ok"] and "ProtocolRefused" in refused["error"]
+    assert refused["runs"] == 3
 
 
 def test_output_bound_and_ascii(kernel):

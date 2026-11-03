@@ -1,7 +1,9 @@
 """Provider state and budget invariants of a restartable driver coordinator."""
 
 import json
+import sys
 from decimal import Decimal
+from types import ModuleType
 
 import pytest
 
@@ -190,6 +192,118 @@ def test_unconfirmed_cancellation_cannot_release_funds_or_spawn(setup):
     assert len(calls) == 1
     assert "cancel" in calls[0].events
     assert rows(ledger)[tickets[0]["reservation_id"]]["status"] == "reserved"
+
+
+@pytest.mark.parametrize("interruption", ["before-cancel-rpc", "uncertain-cancel-rpc"])
+def test_interrupted_cancellation_is_reissued_and_confirmed_before_replacement(setup, interruption):
+    ledger, clock, calls, tickets, _, spawn, coordinator, _ = setup
+    start(coordinator, spawn)
+    old, old_ticket = calls[0], tickets[0]
+    clock.now += 601
+    interrupted = coordinator()
+
+    class SimulatedCrash(BaseException):
+        pass
+
+    if interruption == "before-cancel-rpc":
+        commit = interrupted.commit
+
+        def commit_then_crash():
+            commit()
+            if json.loads(interrupted.path.read_text())["current"]["phase"] == "cancelling":
+                raise SimulatedCrash()
+
+        interrupted.commit = commit_then_crash
+        with pytest.raises(SimulatedCrash):
+            interrupted.recover(spawn)
+        assert old.events == ["get"]
+    else:
+        cancel = old.cancel
+
+        def uncertain_cancel(*, terminate_containers):
+            assert terminate_containers is True
+            old.events.append("cancel")
+            raise ConnectionError("Cancellation acknowledgement lost before delivery was known")
+
+        old.cancel = uncertain_cancel
+        assert interrupted.recover(spawn)["status"] == "pending"
+        old.cancel = cancel
+        assert old.events == ["get", "cancel"]
+    assert not old.cancelled and len(calls) == 1
+    assert rows(ledger)[old_ticket["reservation_id"]]["status"] == "reserved"
+
+    def checked_spawn(stage, config, ticket):
+        assert old.cancelled and old.events[-2:] == ["cancel", "get"]
+        row = rows(ledger)[old_ticket["reservation_id"]]
+        assert row["status"] == "settled"
+        assert Decimal(row["actual_usd"]) == Decimal(row["upper_bound_usd"])
+        return spawn(stage, config, ticket)
+
+    assert coordinator().recover(checked_spawn)["status"] == "running"
+    assert len(calls) == len(rows(ledger)) == 2
+    assert tickets[1]["reservation_id"] != old_ticket["reservation_id"]
+    assert old.events.count("cancel") == (1 if interruption == "before-cancel-rpc" else 2)
+
+
+@pytest.mark.parametrize("observation", ["different-stage", "unknown-get"])
+def test_existing_cancellation_is_not_reissued_by_observation_or_unknown_get(setup, observation):
+    ledger, clock, calls, tickets, _, spawn, coordinator, _ = setup
+    start(coordinator, spawn)
+    old = calls[0]
+    old.cancel_sticks = False
+    clock.now += 601
+    assert coordinator().recover(spawn)["status"] == "pending"
+    old.events.clear()
+    if observation == "different-stage":
+        with pytest.raises(ValueError, match="owns this coordinator"):
+            coordinator().launch("controls", {"seed": 1}, spawn)
+    else:
+        old.get_error = ConnectionError("Provider status is unavailable")
+        assert coordinator().recover(spawn)["status"] == "pending"
+    assert old.events == ["get"]
+    assert len(calls) == len(rows(ledger)) == 1
+    assert rows(ledger)[tickets[0]["reservation_id"]]["status"] == "reserved"
+
+
+@pytest.mark.parametrize("remote_traceback", [False, True])
+def test_runtime_error_requires_remote_traceback_evidence_before_releasing_owner(
+    setup, monkeypatch, remote_traceback
+):
+    ledger, clock, calls, tickets, _, spawn, coordinator, _ = setup
+    traceback_module = ModuleType("modal._traceback")
+    inspected = []
+
+    def contains_remote_call(traceback):
+        inspected.append(traceback)
+        return remote_traceback
+
+    traceback_module.traceback_contains_remote_call = contains_remote_call
+    monkeypatch.setitem(sys.modules, "modal._traceback", traceback_module)
+    start(coordinator, spawn)
+    error = RuntimeError("A failure whose source must be established")
+    calls[0].get_error = error
+    clock.now += 601
+    result = coordinator().recover(spawn)
+    assert result["status"] == ("running" if remote_traceback else "pending")
+    assert inspected == [error.__traceback__]
+    assert calls[0].events == ["get"]
+    assert len(calls) == (2 if remote_traceback else 1)
+    assert rows(ledger)[tickets[0]["reservation_id"]]["status"] == (
+        "settled" if remote_traceback else "reserved"
+    )
+
+
+def test_remote_quota_failure_reconciles_terminal_owner_without_automatic_retry(setup, monkeypatch):
+    ledger, _, calls, tickets, _, spawn, coordinator, _ = setup
+    traceback_module = ModuleType("modal._traceback")
+    traceback_module.traceback_contains_remote_call = lambda traceback: True
+    monkeypatch.setitem(sys.modules, "modal._traceback", traceback_module)
+    start(coordinator, spawn)
+    calls[0].get_error = RuntimeError("insufficient_quota")
+    assert coordinator().recover(spawn)["status"] == "blocked"
+    assert rows(ledger)[tickets[0]["reservation_id"]]["status"] == "settled"
+    assert coordinator().recover(spawn)["status"] == "blocked"
+    assert len(calls) == 1
 
 
 def test_stage_is_blocked_after_three_confirmed_restarts(setup):
@@ -517,3 +631,55 @@ def test_explicit_resume_observes_a_newly_blocked_worker_before_watchdog_has_pol
     assert len(calls) == 2
     assert rows(ledger)[tickets[0]["reservation_id"]]["status"] == "settled"
     assert rows(ledger)[tickets[1]["reservation_id"]]["status"] == "reserved"
+
+
+def test_next_stage_observes_unpolled_completion_and_settles_before_dispatch(setup):
+    ledger, clock, calls, tickets, write_state, spawn, coordinator, _ = setup
+    start(coordinator, spawn)
+    old_call, old_ticket = calls[0], tickets[0]
+    clock.now += 10
+    old_call.lease.finish(elapsed_seconds=10)
+    old_call.complete = True
+
+    def spawn_controls(stage, config, ticket):
+        assert stage == "controls" and config == {"seed": 1}
+        assert rows(ledger)[old_ticket["reservation_id"]]["status"] == "settled"
+        call = Call("fc-controls")
+        call.lease = DriverBudgetLease.claim(ledger, ticket, owner_id=call.object_id, clock=clock)
+        calls.append(call)
+        tickets.append(ticket)
+        write_state(status="running", heartbeat=clock(), active_stage="controls")
+        return call
+
+    # Deliberately omit recover(): stage transitions must observe provider completion themselves.
+    result = coordinator().launch("controls", {"seed": 1}, spawn_controls)
+    assert result["status"] == "running" and result["stage"] == "controls"
+    assert len(calls) == len(rows(ledger)) == 2
+    assert old_call.events == ["get"]
+    assert rows(ledger)[tickets[1]["reservation_id"]]["status"] == "reserved"
+
+
+@pytest.mark.parametrize("provider_state", ["running", "unknown", "failed"])
+def test_next_stage_cannot_cancel_restart_or_skip_an_unfinished_predecessor(setup, provider_state):
+    ledger, clock, calls, tickets, _, spawn, coordinator, _ = setup
+    start(coordinator, spawn)
+    # A request for another stage must not trigger the stale-owner restart workflow.
+    clock.now += 601
+    if provider_state == "unknown":
+        calls[0].get_error = ConnectionError("provider status cannot be read")
+    elif provider_state == "failed":
+        failure = type("FunctionTimeoutError", (Exception,), {})
+        calls[0].get_error = failure("prior stage did not complete")
+    attempted_dispatches = []
+
+    def must_not_spawn(*args):
+        attempted_dispatches.append(args)
+        raise AssertionError("A different-stage request must not dispatch replacement work")
+
+    with pytest.raises(ValueError):
+        coordinator().launch("controls", {"seed": 1}, must_not_spawn)
+    assert not attempted_dispatches
+    assert len(calls) == len(rows(ledger)) == 1
+    assert calls[0].events == ["get"]
+    expected_status = "settled" if provider_state == "failed" else "reserved"
+    assert rows(ledger)[tickets[0]["reservation_id"]]["status"] == expected_status

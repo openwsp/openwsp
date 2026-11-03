@@ -62,4 +62,26 @@ The tiny example is a functional CPU network used by the tests. It produces no E
 
 For a checkpoint, replace `--tiny` with `--model /absolute/path/model.safetensors`. Configure inference with `--backend installed_module:factory`; the trusted factory takes no arguments and returns a backend with `forward(request, store) -> dict`. A backend must support that model before forward requests can run; loading its tensors alone does not configure inference. See [architecture](architecture.md) for the backend boundary and [edit format](edit-format.md) for portable artifacts.
 
+## Qwen with the built-in Modal backend
+
+The shipped `openwsp.backends.modal_api:from_env` factory connects these same tools to a prepared `openwsp-exp8/public_forward` deployment. No custom backend code is needed. Follow the [Modal setup](architecture.md#built-in-modal-forward-backend) to install the provider extra, obtain the pinned local Qwen checkpoint, and configure the app, function, base revision, writable budget directory and resource bounds.
+
+Replace the tiny server command in any client configuration with:
+
+```sh
+uv run --project /absolute/path/openwsp --no-sync openwsp-mcp \
+  --model /absolute/path/qwen --work-dir /absolute/path/work \
+  --backend openwsp.backends.modal_api:from_env
+```
+
+The server process must receive the `OPENWSP_MODAL_*` configuration from the setup example. For desktop clients, put those non-secret settings in that MCP server's `env` object; use the normal Modal credential configuration for authentication. The `OPENWSP_MODAL_WORK_DIR` should be beneath the agent's local working directory so downloaded arrays are accessible to its kernel. Omit `OPENWSP_MODAL_ENABLED=1` to keep forward execution disabled while using the tensor and edit tools.
+
+Ask the agent to read a bounded slice of `model.language_model.layers.15.mlp.down_proj.weight`, make and save an edit, inspect `diff`, then invoke `forward` with:
+
+```json
+{"type":"generate","model":"both","prompts":["What is 2 + 2?"],"max_tokens":32,"request_id":"first-comparison"}
+```
+
+Only that forward call launches paid inference, after reserving its full declared bound. Repeating an identical ID and edit retrieves the existing result; choose a new ID for a new sample. Unknown dispatch outcomes are blocked rather than duplicated. A teacher-forced request can return verified local array paths in `result.files`, ready for the same session's `run_code` tool to inspect with NumPy. This public agent workflow is separate from the fixed Experiment 8 editor protocol.
+
 `run_code` in a local MCP server has the local process's access. Run the server in an isolated environment when executing untrusted code. The Experiment 8 editor instead receives the authors' text-block interface inside its dedicated network-blocked sandbox; connecting a general-purpose MCP client is a separate use of the tooling.
