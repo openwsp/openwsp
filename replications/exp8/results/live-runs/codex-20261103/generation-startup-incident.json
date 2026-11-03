@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-03T19:45:17.464824+00:00",
+  "run_id": "codex-20261103",
+  "status": "mitigation_deployed_ordinary_generation_verification_pending",
+  "driver_call_id": "fc-01M6HCQ89PPXXFSZB647FGB9VF",
+  "cause": "Custom ThinkingCloseLogitsProcessor was registered unconditionally. Its old V1 AdapterLogitsProcessor base is incompatible with the default V2 runner in pinned vLLM0.33.0.",
+  "observed_error": "ThinkingCloseLogitsProcessor is not a subclass of vllm.v1.worker.gpu.sample.logits_processor.LogitsProcessor",
+  "failed_editor_turns": [
+    11,
+    12,
+    14,
+    16,
+    17,
+    21,
+    26,
+    29
+  ],
+  "failed_requests_counted": false,
+  "affected_deployed_commit": "e00d48c554a18e02db035ef6719955324c38437b",
+  "mitigation_commit": "d4ba698094bba3956fe0406c08c39389bdd5d88d",
+  "mitigation": "Ordinary Generator omits all custom processors. Forced-close policies require an explicitly enabled engine. The local worker was held during a definition-only deployment and continued with its completed response preserved.",
+  "preserved": [
+    "driver call",
+    "run identity",
+    "editor conversation",
+    "completed pending response",
+    "weights and editor choices",
+    "pass and turn counters",
+    "all recorded costs and reservations"
+  ],
+  "validation": {
+    "focused_tests_passed": 13,
+    "ruff": "passed",
+    "deployment_log": "logs/modal-generation-fix-deploy.log",
+    "post_resume": {
+      "turn": 31,
+      "passes": 7,
+      "requests": 15,
+      "last_success": "teacher_forced"
+    },
+    "ordinary_generation": "awaiting next editor generation request"
+  },
+  "accounting": "Failed-job upper bounds and unresolved paired-child reservations remain. Provider audit is in progress; no calibration timing has been substituted for failed-job measurements.",
+  "protocol_effect": "Eight neutral forward-failure messages are part of this trajectory. This attempt was not restarted and its failure history will be disclosed."
+}
