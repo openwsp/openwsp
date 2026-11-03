@@ -76,6 +76,8 @@ def fake_transport(monkeypatch, source_repo, *, rejects=0, failure=None, concurr
                 if (cwd / PREFIX / "kernel/local-evidence.json").exists() else None,
                 "transcript": (cwd / PREFIX / "live-run/transcript.md").read_bytes()
                 if (cwd / PREFIX / "live-run/transcript.md").exists() else None,
+                "named_transcripts": {path.parent.name: path.read_bytes()
+                                      for path in (cwd / PREFIX / "live-runs").glob("*/transcript.md")},
                 "files": git(cwd, "show", "--format=", "--name-only", "HEAD").stdout.splitlines(),
             })
             if concurrent and len(pushes) == 1:
@@ -209,19 +211,27 @@ def test_versioned_edit_and_transcript_are_publishable(tmp_path, monkeypatch, so
     assert PREFIX + "/live/edit/edit.npz" in pushes[0]["files"]
 
 
-def test_live_transcript_preserves_recorded_trailing_whitespace(tmp_path, monkeypatch, source_repo, staging):
+@pytest.mark.parametrize("directory", ["live-run", "live-runs/codex-fixture"])
+def test_live_transcript_preserves_recorded_trailing_whitespace(
+    tmp_path, monkeypatch, source_repo, staging, directory,
+):
     _, pushes = fake_transport(monkeypatch, source_repo)
-    transcript = staging / PREFIX / "live-run/transcript.md"
+    transcript = staging / PREFIX / directory / "transcript.md"
     transcript.parent.mkdir(parents=True)
     captured = b"# Editor turn\n\n```python\nmessage = 'captured  '  \n \n```\nResult  \n"
     transcript.write_bytes(captured)
     result = P.publish_results(staging, artifact_paths(staging), checkout_dir=tmp_path / "checkouts")
     assert result["status"] == "pushed"
-    assert pushes[0]["transcript"] == captured
+    published = (pushes[0]["transcript"] if directory == "live-run"
+                 else pushes[0]["named_transcripts"]["codex-fixture"])
+    assert published == captured
     assert transcript.read_bytes() == captured
 
 
-@pytest.mark.parametrize("filename", ["metadata.json", "another-run/transcript.md"])
+@pytest.mark.parametrize("filename", [
+    "metadata.json", "another-run/transcript.md", "live-runs/codex-fixture/metadata.json",
+    "live-runs/codex-fixture/nested/transcript.md", "live-runs/transcript.md",
+])
 def test_other_artifact_whitespace_still_prevents_publication(tmp_path, monkeypatch, source_repo, staging, filename):
     calls, pushes = fake_transport(monkeypatch, source_repo)
     artifact = staging / PREFIX / filename
@@ -233,9 +243,10 @@ def test_other_artifact_whitespace_still_prevents_publication(tmp_path, monkeypa
     assert not any("commit" in call for call in calls)
 
 
-def test_live_transcript_whitespace_exemption_keeps_secret_guard(tmp_path, monkeypatch, staging):
+@pytest.mark.parametrize("directory", ["live-run", "live-runs/codex-fixture"])
+def test_live_transcript_whitespace_exemption_keeps_secret_guard(tmp_path, monkeypatch, staging, directory):
     monkeypatch.setenv("GITHUB_TOKEN", "dummy")
-    transcript = staging / PREFIX / "live-run/transcript.md"
+    transcript = staging / PREFIX / directory / "transcript.md"
     transcript.parent.mkdir(parents=True)
     transcript.write_text("Captured value: " + "sk-" + "x" * 40 + " \n")
     with pytest.raises(P.PublishingError, match="Credential-shaped"):

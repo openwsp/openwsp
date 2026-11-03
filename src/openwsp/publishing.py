@@ -229,12 +229,13 @@ def publish_results(
             if not staged:
                 return {"status": "unchanged", "attempts": attempt, "paths": []}
             _run([sys.executable, "scripts/check_secrets.py", "--staged"], cwd=clone, env=env)
-            # The live transcript preserves captured editor code/output, whose
-            # trailing spaces may be meaningful evidence. Exempt only that file
+            # Live transcripts preserve captured editor code/output, whose
+            # trailing spaces may be meaningful evidence. Exempt only those files
             # from cosmetic whitespace lint; every content/secret guard above
-            # still covers it, and all other staged files retain this check.
+            # still covers them, and all other staged files retain this check.
             _run(git + ["diff", "--cached", "--check", "--", ".",
-                        ":(exclude,literal)replications/exp8/results/live-run/transcript.md"], cwd=clone, env=env)
+                        ":(exclude,literal)replications/exp8/results/live-run/transcript.md",
+                        ":(exclude,glob)replications/exp8/results/live-runs/*/transcript.md"], cwd=clone, env=env)
             evidence = "Evidence:\n" + "\n".join(sorted(path for path in staged if path != "README.md"))
             _run(git + ["commit", "-m", "docs(results): publish recorded replication evidence", "-m", evidence], cwd=clone, env=env)
             pushed = _run(git + ["push", "origin", "HEAD:main"], cwd=clone, env=env, check=False)
