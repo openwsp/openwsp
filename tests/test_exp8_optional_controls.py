@@ -59,6 +59,9 @@ def test_engine_evaluation_preserves_sampling_smoke_and_fixed_subset(monkeypatch
     module = ModuleType("openwsp.backends.modal_app")
     module.Generator, module.TransformerReader = object(), object()
     monkeypatch.setitem(sys.modules, module.__name__, module)
+    from openwsp.backends.forward_bank import GenerationBank
+    monkeypatch.setattr(evaluation, "_base_generation_keys", lambda rows, *args:
+                        [GenerationBank.identity(row["id"], row["problem"], {}, "a" * 64, 0) for row in rows])
     calls, results = [], {}
 
     def instance(cls, gpu, gate, **kwargs):
@@ -68,7 +71,8 @@ def test_engine_evaluation_preserves_sampling_smoke_and_fixed_subset(monkeypatch
         def spawn(rows, params, thinking):
             calls.append((rows, params, thinking))
             return {"outputs": [{"id": row["id"], "samples": [{"text": r"\boxed{1}", "token_count": 3, "finish_reason": "stop"}]} for row in rows],
-                    "container_seconds": 1, "gpu": gpu, "engine": engine, "transformers": "test"}
+                    "container_seconds": 1, "gpu": gpu, "engine": evaluation.CONFIG["engine"] if engine == "vllm" else engine,
+                    "transformers": evaluation.CONFIG["transformers"]}
         return SimpleNamespace(generate=SimpleNamespace(spawn=spawn))
 
     class Jobs:
@@ -78,6 +82,9 @@ def test_engine_evaluation_preserves_sampling_smoke_and_fixed_subset(monkeypatch
         def launch(self, key, spawn_for, *, fingerprint):
             assert fingerprint.get("engine", "vllm") == engine
             results[key] = spawn_for("H100", "gate")
+
+        def has_job(self, key):
+            return key in results
 
         def result(self, key, timeout):
             return results[key]

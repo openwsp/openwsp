@@ -195,6 +195,9 @@ def test_grid_evaluation_binds_provenance_preserves_options_and_aggregates_finis
     module = ModuleType("openwsp.backends.modal_app")
     module.Generator, module.TransformerReader = object(), object()
     monkeypatch.setitem(sys.modules, module.__name__, module)
+    from openwsp.backends.forward_bank import GenerationBank
+    monkeypatch.setattr(evaluation, "_base_generation_keys", lambda rows, *args:
+                        [GenerationBank.identity(row["id"], row["problem"], {}, "a" * 64, 0) for row in rows])
     calls, results = [], {}
 
     def instance(cls, gpu, gate, **kwargs):
@@ -204,7 +207,7 @@ def test_grid_evaluation_binds_provenance_preserves_options_and_aggregates_finis
             calls.append((rows, params, thinking, options))
             return {"outputs": [{"id": row["id"], "samples": [{"text": r"\boxed{1}", "token_count": 3,
                 "finish_reason": "length" if row["id"] == "0" else "stop"}]} for row in rows],
-                "container_seconds": 1, "gpu": gpu, "engine": "vllm", "transformers": "test"}
+                "container_seconds": 1, "gpu": gpu, "engine": CONFIG["engine"], "transformers": CONFIG["transformers"]}
         return SimpleNamespace(generate=SimpleNamespace(spawn=spawn))
 
     class Jobs:
@@ -214,6 +217,9 @@ def test_grid_evaluation_binds_provenance_preserves_options_and_aggregates_finis
         def launch(self, key, spawn_for, *, fingerprint):
             assert fingerprint["generation_options"]["seed_scheme"] == eval_grid.SEED_SCHEME
             results[key] = spawn_for("H100", "gate")
+
+        def has_job(self, key):
+            return key in results
 
         def result(self, key, timeout):
             return results[key]
