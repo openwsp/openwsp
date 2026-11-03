@@ -46,6 +46,13 @@ def test_numeric_ranges_support_negative_steps_and_reject_zero_step():
     assert torch.equal(store.load("b"), torch.tensor([3., 1., 3., 1., 1.]))
 
 
+def test_unterminated_list_does_not_swallow_next_valid_statement():
+    store = WeightStore({"b": torch.zeros(2)}, refuse_rescale=False)
+    result = apply_numeric_edits("```edits\nb[0] = [1\nb[1] = 2\n```", store)
+    assert result["statements"] == 2 and result["applied"] == 1
+    assert torch.equal(store.load("b"), torch.tensor([0., 2.]))
+
+
 def test_label_scorer_ignores_reasoning_and_ambiguous_final_labels():
     assert score_label("exp1", "freeway", "Reasoning: pong.\n## Game\nFrogger")['correct']
     assert not score_label("exp1", "pong", "I considered Pong.\nGame: Breakout")['correct']
@@ -146,6 +153,43 @@ def test_blocked_reply_retains_receipt_without_scoring(tmp_path):
     assert record["status"] == "blocked" and "score" not in record
     assert record["receipt"]["cost_usd"] == "0.001"
     assert (target / "incomplete-answer.md").read_text() == "Partial text"
+    def forbidden(*args):
+        raise AssertionError("Terminal failed attempt must never construct another editor")
+    replay = run_item(item, source_root=source, state_root=tmp_path / "changed-state", output_root=tmp_path / "out",
+                     editor_name="fable_native_anthropic", editor_factory=forbidden)
+    assert replay == record
+
+
+def test_uncertain_attempt_cannot_dispatch_after_private_state_loss(tmp_path):
+    from openwsp.editors.base import UncertainRequest
+    from replications.raw_weights.runner import run_item
+    data = b"source"
+    (tmp_path / "prompt.txt").write_bytes(data)
+    item = {"experiment": "exp1", "item_id": "pong", "prompt": {"path": "prompt.txt", "sha256": hashlib.sha256(data).hexdigest()},
+            "instructions": {"path": "prompt.txt", "sha256": hashlib.sha256(data).hexdigest()}}
+    calls = []
+    class Editor:
+        last_response = None
+
+        def has_request(self, key):
+            return False  # Simulates lost private journal or an unrelated state root.
+
+        def complete(self, *args, **kwargs):
+            calls.append("dispatch")
+            raise UncertainRequest("Provider outcome is unknown")
+    options = {"source_root": tmp_path, "state_root": tmp_path / "state", "output_root": tmp_path / "out",
+               "editor_name": "astra_subscription", "editor_factory": lambda *args: Editor()}
+    with pytest.raises(UncertainRequest, match="unknown"):
+        run_item(item, **options)
+    record = (tmp_path / "out/astra_subscription/exp1/pong/result.json").read_bytes()
+    with pytest.raises(UncertainRequest, match="durable request evidence"):
+        run_item(item, **options)
+    assert calls == ["dispatch"]
+    assert (tmp_path / "out/astra_subscription/exp1/pong/result.json").read_bytes() == record
+    options["state_root"] = tmp_path / "different-state"
+    with pytest.raises(UncertainRequest, match="different private state"):
+        run_item(item, **options)
+    assert calls == ["dispatch"]
 
 
 def test_car_scoring_subprocess_uses_pinned_cpu_environment(tmp_path, monkeypatch):
@@ -173,19 +217,33 @@ def test_car_scoring_subprocess_uses_pinned_cpu_environment(tmp_path, monkeypatc
 def test_report_preserves_pending_and_verifies_answer_bytes(tmp_path, monkeypatch):
     from replications.raw_weights import report
     manifest = {"editors": ["astra_subscription", "fable_native_anthropic"], "revision": "pinned",
-                "items_per_editor": 1, "items": [{"experiment": "exp1", "item_id": "pong", "prompt": {"sha256": "prompt-hash"}}]}
+                "items_per_editor": 1, "items": [{"experiment": "exp1", "item_id": "pong", "prompt": {"sha256": "prompt-hash"},
+                                                  "instructions": {"sha256": "instructions-hash"}}]}
     monkeypatch.setattr(report, "inventory", lambda: manifest)
     target = tmp_path / "astra_subscription/exp1/pong"
     target.mkdir(parents=True)
     answer = b"Game: Pong"
     (target / "answer.md").write_bytes(answer)
-    (target / "result.json").write_text(json.dumps({"binding": {"prompt_sha256": "prompt-hash"}, "status": "completed",
+    binding = {"source_revision": "pinned", "prompt_sha256": "prompt-hash", "instructions_sha256": "instructions-hash",
+               "editor": "astra_subscription", "experiment": "exp1", "item_id": "pong"}
+    (target / "result.json").write_text(json.dumps({"binding": binding, "status": "completed",
         "answer_sha256": hashlib.sha256(answer).hexdigest(), "score": {"correct": True, "predicted": ["pong"]}}))
     rows = report.generate(tmp_path)["items"]
     assert rows[0]["correct"] is True and "cost_usd" not in rows[0]
     assert rows[1]["reply_status"] == "pending" and "correct" not in rows[1]
     (target / "answer.md").write_text("Changed answer")
     with pytest.raises(ValueError, match="scored receipt"):
+        report.generate(tmp_path)
+    (target / "answer.md").write_bytes(answer)
+    wrong = json.loads((target / "result.json").read_text())
+    wrong["binding"]["editor"] = "fable_native_anthropic"
+    (target / "result.json").write_text(json.dumps(wrong))
+    with pytest.raises(ValueError, match="binding differs"):
+        report.generate(tmp_path)
+    wrong["binding"] = binding
+    wrong.pop("answer_sha256")
+    (target / "result.json").write_text(json.dumps(wrong))
+    with pytest.raises(ValueError, match="hash-verified answer"):
         report.generate(tmp_path)
 
 

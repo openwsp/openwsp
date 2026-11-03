@@ -50,6 +50,11 @@ def _statements(block):
         line = line.split("#", 1)[0].strip()
         if not line:
             continue
+        if pending and re.match(r"(?:ZERO\s+[A-Za-z_]|[A-Za-z_][\w.]*\s*\[)", line):
+            # An unfinished numeric list cannot contain another tensor
+            # statement. Skip that malformed statement and preserve the next.
+            yield " ".join(pending)
+            pending, depth = [], 0
         pending.append(line)
         depth += line.count("[") - line.count("]")
         if depth <= 0:

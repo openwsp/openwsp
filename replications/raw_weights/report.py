@@ -21,8 +21,11 @@ def generate(output_root):
             if path.exists():
                 data = path.read_bytes()
                 record = json.loads(data)
-                if record["binding"]["prompt_sha256"] != row["prompt_sha256"]:
-                    raise ValueError("Result prompt differs from the released manifest")
+                expected_binding = {"source_revision": inventory()["revision"], "prompt_sha256": item["prompt"]["sha256"],
+                    "instructions_sha256": item["instructions"]["sha256"], "editor": editor,
+                    "experiment": item["experiment"], "item_id": item["item_id"]}
+                if record["binding"] != expected_binding:
+                    raise ValueError("Result editor/item/source binding differs from the released manifest")
                 if "answer_sha256" in record:
                     answer = path.with_name("answer.md").read_bytes()
                     if hashlib.sha256(answer).hexdigest() != record["answer_sha256"]:
@@ -40,12 +43,19 @@ def generate(output_root):
                 if "billing" in receipt:
                     row["billing"] = receipt["billing"]
                 score = record.get("score", {})
+                if score and ("answer_sha256" not in record or record["status"] != "completed"):
+                    raise ValueError("A published score requires a completed hash-verified answer")
                 if "correct" in score:
                     row.update(score_status="completed", correct=score["correct"], predicted=score["predicted"])
                 evaluation = score.get("evaluation", {})
-                if evaluation and evaluation.get("status") != "pending":
+                if evaluation and evaluation.get("status") in (None, "completed"):
+                    metric = "success" if item["experiment"] == "exp4" else "mean"
+                    if type(evaluation.get("episodes")) is not int or evaluation["episodes"] < 1 or metric not in evaluation:
+                        raise ValueError("Completed evaluation is missing its episode count or metric")
                     row["score_status"] = "completed"
                     row["evaluation"] = {key: value for key, value in evaluation.items() if key != "records"}
+                elif evaluation.get("status") not in (None, "pending"):
+                    row["score_status"] = evaluation["status"]
                 if "parser" in score:
                     row["parser"] = score["parser"]
             rows.append(row)

@@ -16,6 +16,7 @@ import numpy as np
 
 from openwsp.budget import BudgetLedger, atomic_json
 from openwsp.editors.anthropic import AnthropicTokenRates
+from openwsp.editors.base import UncertainRequest
 from openwsp.editors.profiles import ASTRA_CODEX_PROFILE, FABLE_5_1_PROFILE, ThinkingConfig, create_editor
 
 from .edits import apply_numeric_edits, shown_car_store, zero_minatar_store
@@ -27,6 +28,12 @@ INVENTORY = Path(__file__).with_name("inventory.json")
 
 def inventory():
     return json.loads(INVENTORY.read_text())
+
+
+def item_binding(item, editor_name):
+    return {"source_revision": inventory()["revision"], "prompt_sha256": item["prompt"]["sha256"],
+            "instructions_sha256": item["instructions"]["sha256"], "editor": editor_name,
+            "experiment": item["experiment"], "item_id": item["item_id"]}
 
 
 def verified_source(source_root, item):
@@ -99,13 +106,13 @@ def run_item(item, *, source_root, state_root, output_root, editor_name, editor_
     target = Path(output_root) / editor_name / item["experiment"] / item["item_id"]
     target.mkdir(parents=True, exist_ok=True)
     state = _private(Path(state_root) / editor_name / item["experiment"] / item["item_id"])
-    binding = {"source_revision": inventory()["revision"], "prompt_sha256": item["prompt"]["sha256"],
-               "instructions_sha256": item["instructions"]["sha256"], "editor": editor_name,
-               "experiment": item["experiment"], "item_id": item["item_id"]}
+    binding = item_binding(item, editor_name)
+    state_identity = hashlib.sha256(str(state).encode()).hexdigest()
     request_key = "raw-weights:" + hashlib.sha256(json.dumps(binding, sort_keys=True).encode()).hexdigest()
     with (state / "runner.lock").open("a+") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         record_path = target / "result.json"
+        old = None
         if record_path.exists():
             old = json.loads(record_path.read_text())
             if old.get("binding") != binding:
@@ -120,9 +127,22 @@ def run_item(item, *, source_root, state_root, output_root, editor_name, editor_
                     old["status"] = "completed"
                     atomic_json(record_path, old)
                 return old
+            if old.get("status") == "blocked" and old.get("receipt"):
+                # A known terminal refusal/incomplete/error is the sole attempt.
+                return old
+            if old.get("state_identity") not in (None, state_identity):
+                raise UncertainRequest("Existing attempt belongs to different private state; no inference started")
         if score_only:
             raise ValueError("Scoring requires a saved, hash-verified answer; no editor was invoked")
+        # Construction only opens/validates local adapter state. Existing
+        # dispatches require durable request evidence before complete() can run.
+        editor = editor_factory(item, source["instructions"], state)
+        if old is not None:
+            has_request = getattr(editor, "has_request", None)
+            if not callable(has_request) or not has_request(request_key):
+                raise UncertainRequest("Prior dispatch has no validated durable request evidence; no inference started")
         record = {"binding": binding, "request_key": request_key, "status": "pending",
+                  "state_identity": state_identity, "dispatch_intent": True,
                   "tools": [], "scientific_replies_requested": 1,
                   "editor_contract": {"effort": item.get("authors_config", {}).get("effort"),
                       "reasoning_summary": item.get("authors_config", {}).get("reasoning_summary"),
@@ -130,7 +150,6 @@ def run_item(item, *, source_root, state_root, output_root, editor_name, editor_
                       "transport": "codex_cli_chatgpt" if editor_name == "astra_subscription" else "anthropic_messages",
                       "instructions_sha256": item["instructions"]["sha256"]}}
         atomic_json(record_path, record)
-        editor = editor_factory(item, source["instructions"], state)
         try:
             answer = editor.complete(source["prompt"], request_key=request_key)
         except Exception as exc:
