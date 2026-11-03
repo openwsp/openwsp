@@ -1,24 +1,24 @@
 # OpenWSP
 
-OpenWSP is open tooling for weight-space programming: to read, edit and version the weights of open models. The term was introduced by [Rikiya Takehi](https://github.com/RikiyaT "Equal contribution"), [Jayden Teoh](https://github.com/JaydenTeoh "Equal contribution"), [Alex Zhang](https://github.com/alexzhang13) and [Omar Khattab](https://github.com/okhat) from the [MIT CSAIL](https://csail.mit.edu) on November 2, 2026 as [a blog post](https://rikiyat.github.io/blog/weight-space-programming/) titled "Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights". They used [GPT-6 Astra](https://openai.com/index/gpt-6-astra/) with natural language and demonstrated and it can read neural network weights, fix them, and write them from scratch. Importantly, GPT-6 Astra demonstrated these capabilities without being allowed to write training loops, it reasoned about the weights demonstrating an alien understanding of neural networks.
+OpenWSP is open tooling for weight-space programming: reading, editing and versioning the weights of open models. It is an independent replication of the work of [Rikiya Takehi](https://github.com/RikiyaT "Equal contribution"), [Jayden Teoh](https://github.com/JaydenTeoh "Equal contribution"), [Alex Zhang](https://github.com/alexzhang13) and [Omar Khattab](https://github.com/okhat) at [MIT CSAIL](https://csail.mit.edu), with no affiliation to the authors.
 
-I wanted to replicate this groundbreaking approach and realized a lot of the tooling is missing, hence started developing OpenWSP. My goal is to make it easier to read, edit and version LLM weights. I see a future where editing weights of LLMs agentically is as common as we humans were used to reason and commit code. Therefore, there is a lot of tools and services to develop around this new workflow. My first goal is to replicate _Sparks of Weight-Space Programming_'s Experiment 8: "Make a language model better at math". Namely, to edit the [Qwen3.5-0.8B](https://huggingface.co/Qwen/Qwen3.5-0.8B) weights to fix its thinking loops shortcoming to improve its MATH-500 score from 7.9% to about 48.1%, as demonstrated by the MIT researchers.
+**Experiment 8 is still running.** The current [`codex-20261103` attempt](replications/exp8/results/live-runs/codex-20261103/identity.json) uses GPT-6 Astra through Codex and a ChatGPT Pro subscription. It has begun forward-pass work; no final edit or live benchmark result is available. The earlier API attempt remains recorded separately at [4 of 50 passes](replications/exp8/results/live-run/blocker.json).
 
-To get to there, the tools in development are a Python kernel over model weights, a forward-pass service and a versioned edit format, exposed through one API as a CLI, Python SDK and MCP server. To replicate Experiment 8, it is using [OpenAI API](https://developers.openai.com/api/docs/models/gpt-6-astra) to access GPT-6 Astra and [Modal](https://modal.com) for computer, [Hugging Face](https://huggingface.co) to read the open weight LLM and publish its modification.
+The authors introduced the term in ["Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights"](https://rikiyat.github.io/blog/weight-space-programming/). Their experiments used [GPT-6 Astra](https://openai.com/index/gpt-6-astra/) to read weights, repair networks and construct them from scratch, without writing training loops. The editor reasons about the weights and writes changes directly.
 
-Once Experiment 8 is replicated, I plan to replicate all of their experiments and have more fun. Email me by my name at my handle dot com only if you're a human.
+OpenWSP began as an effort to reproduce that work and build the missing tools around it. The goal is to make agentic weight editing as reproducible and reviewable as working with code: inspect a model, make a change, measure its effects and preserve the exact diff. The first target is Experiment 8, "Make a language model better at math". The authors edited [Qwen3.5-0.8B](https://huggingface.co/Qwen/Qwen3.5-0.8B) to reduce its thinking loops and raised MATH-500 accuracy from [7.9%](replications/exp8/reference/unedited.json) to [48.1%](replications/exp8/reference/p50c.json). Reproducing that live editing process is the test of this tooling.
+
+The tools are a Python kernel over model weights, a forward-pass service and a versioned edit format, exposed through one core API as a CLI, Python SDK and MCP server. The current experiment uses [Codex with subscription billing](docs/subscription-replication.md) for its editor, [Modal](https://modal.com) for computation and [Hugging Face](https://huggingface.co/Qwen/Qwen3.5-0.8B) for the pinned base model. The [Responses API adapter](docs/editor-recovery.md) remains available as a separate route. Further experiments, editors and services can build on the same interfaces.
+
+After Experiment 8, the plan is to reproduce the remaining experiments. For human correspondence, use the maintainer's name at their handle dot com.
 
 ## Project Status
 <!-- OPENWSP:STATUS:START -->
 | Recorded component | State | Evidence |
 | --- | --- | --- |
-| Required live run | [blocked](replications/exp8/results/live-run/blocker.json) | [live goal unmet](replications/exp8/results/live-run/blocker.json); [editor_budget_admission](replications/exp8/results/live-run/blocker.json) |
-| Live pass requirement | [4](replications/exp8/results/live-run/blocker.json) / [50](replications/exp8/results/live-run/blocker.json) | Recorded turn: [26](replications/exp8/results/live-run/blocker.json) |
-| Live final evaluation | [not_started_no_completed_50_pass_submission](replications/exp8/results/live-run/blocker.json) | See live-run record. |
-| Recorded live blocker | [BudgetExceeded: editor stage editor:t027: reserve $30.478625, only $21.7072350 available](replications/exp8/results/live-run/blocker.json) | See live-run record. |
-| Pipeline | [stage_done](replications/exp8/results/pipeline-state.json) | [publication](replications/exp8/results/pipeline-state.json) |
-| Driver recovery | [blocked](replications/exp8/results/coordinator.json) | [all](replications/exp8/results/coordinator.json) |
-| Recorded blocker | [Pipeline blocked; previous owner reconciled and automatic restart disabled](replications/exp8/results/coordinator.json) | See source record. |
+| Required live run | [live goal unmet](replications/exp8/results/live-runs/codex-20261103/state.json) | Active attempt: [codex-20261103](replications/exp8/results/active-live.json); submission requirement pending |
+| Pipeline | [running](replications/exp8/results/pipeline-state.json) | [live](replications/exp8/results/pipeline-state.json) |
+| Driver recovery | [running](replications/exp8/results/coordinator.json) | [all](replications/exp8/results/coordinator.json) |
 | Calibration prompt audit | [passed](replications/exp8/results/calibration-prompt-audit.json) | [calibration-prompt-audit.json](replications/exp8/results/calibration-prompt-audit.json) |
 | Calibration comparison | [passed](replications/exp8/results/calibration-check.json) | [calibration-check.json](replications/exp8/results/calibration-check.json) |
 | Tensor hashes | [passed](replications/exp8/results/kernel/hash-verification.json) | [kernel/hash-verification.json](replications/exp8/results/kernel/hash-verification.json) |
@@ -26,59 +26,44 @@ Once Experiment 8 is replicated, I plan to replicate all of their experiments an
 | Forward service | [passed](replications/exp8/results/kernel/forward-verification.json) | [kernel/forward-verification.json](replications/exp8/results/kernel/forward-verification.json) |
 | Weight swap check | [fallback](replications/exp8/results/kernel/weight-swap.json) | [kernel/weight-swap.json](replications/exp8/results/kernel/weight-swap.json) |
 | Recorded diagnostic | [Engine does not expose a compatible weight-reload contract](replications/exp8/results/kernel/weight-swap.json) | See source record. |
-| Live editor | [incomplete](replications/exp8/results/live-run/state.json) | passes: [4](replications/exp8/results/live-run/state.json); turn: [26](replications/exp8/results/live-run/state.json); runs: [10](replications/exp8/results/live-run/state.json) |
 
-Completed controls or publication do not satisfy the blocked live-run goal.
+Live attempts:
+
+| Attempt | Selection | Editor | Recorded state | Passes | Turns | Runs | Submission | Final evaluations | Evidence |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| live-run | historical | pending | [blocked](replications/exp8/results/live-run/blocker.json) | [4](replications/exp8/results/live-run/state.json) | [26](replications/exp8/results/live-run/state.json) | [10](replications/exp8/results/live-run/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](replications/exp8/results/live-run/state.json); [blocker.json](replications/exp8/results/live-run/blocker.json); [transcript.md](replications/exp8/results/live-run/transcript.md) |
+| live-runs/codex-20261103 | active | [codex](replications/exp8/results/live-runs/codex-20261103/identity.json) | [incomplete](replications/exp8/results/live-runs/codex-20261103/state.json) | [0](replications/exp8/results/live-runs/codex-20261103/state.json) | [2](replications/exp8/results/live-runs/codex-20261103/state.json) | [1](replications/exp8/results/live-runs/codex-20261103/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](replications/exp8/results/live-runs/codex-20261103/state.json); [identity.json](replications/exp8/results/live-runs/codex-20261103/identity.json); [transcript.md](replications/exp8/results/live-runs/codex-20261103/transcript.md) |
+
+The active pointer selects the current attempt. Historical blockers and completed controls do not establish its completion.
 
 States are recorded snapshots; use `openwsp status` to check current liveness.
 <!-- OPENWSP:STATUS:END -->
 
-The tools are a Python kernel over model weights, a forward-pass service and a versioned edit format, exposed through one API as a CLI, Python SDK and MCP server. The test is Experiment 8: can an editor diagnose a model's math failures and repair its weights without gradients or training?
+The tables distinguish calibration, controls and each live attempt. A completed component does not establish a completed replication. `openwsp status` shows the current driver state; the published records are snapshots.
 
 ## Experiment 8
 
-**TL;DR:** [Calibration passed](replications/exp8/results/calibration-check.json). The required live run stopped at [4 of 50 passes](replications/exp8/results/live-run/blocker.json) before a final submission because the next editor response could exceed the remaining budget. Controls are reported separately; there is no final live-edit benchmark result.
+**TL;DR:** [Calibration passed](replications/exp8/results/calibration-check.json), and the [required controls](#openwsp-controls) have results. The subscription attempt is running from the original weights. The earlier API attempt stopped at [4 of 50 passes](replications/exp8/results/live-run/blocker.json), before a final submission, because the next response could exceed its remaining budget. Neither attempt has a final live-edit benchmark result.
 
 ### Setup
 
-The prescribed editor setup is recorded in the [task message](replications/exp8/prompts/message.txt), [source manifest](replications/exp8/sources.json) and [task decisions](docs/TASK.md). Actual runtime choices and deviations are recorded below and with each result.
+The [task message](replications/exp8/prompts/message.txt) defines what the editor can see and do. The [source manifest](replications/exp8/sources.json) pins the released material, and [task decisions](docs/TASK.md) record the budget and implementation choices. Each result retains its runtime configuration.
 
-- **Editor:** `gpt-6-astra`, reasoning effort `max`, through the Responses API. It receives the authors' [one-line instructions](replications/exp8/prompts/instructions.md), task message and text-block interface. It has no built-in tools or access to the authors' findings.
+- **Editor:** `gpt-6-astra`, reasoning effort `max`, through the [pinned Codex CLI configuration](docs/codex-editor.md) with ChatGPT Pro billing. It receives the authors' [one-line instructions](replications/exp8/prompts/instructions.md), task message and text-block interface. Native tools and additional instructions are disabled in the verified configuration. The editor has no access to the authors' findings, calibration results or control results.
 - **Model:** the text part of `Qwen/Qwen3.5-0.8B`, pinned to [revision `2fc06364715b967f1860aea9cf38778875588b17`](https://huggingface.co/Qwen/Qwen3.5-0.8B/tree/2fc06364715b967f1860aea9cf38778875588b17).
 - **Kernel:** persistent Python over float32 weights, with a [96 GiB memory limit](docs/TASK.md), no GPU, no network and no secrets. The model and practice paths are read-only. Edits to the final norm, embedding and output layer, or whole-tensor rescaling, are refused.
 - **Tools and run limits:** [50 forward passes and at most 300 Python runs](replications/exp8/prompts/message.txt). A generation pass has up to [512 answers, or 256 per model for a paired comparison](replications/exp8/prompts/message.txt). A teacher-forced pass returns log probabilities, hidden states, MLP activations or attention under the authors' limits.
 - **Practice:** the released GSM8K train, MATH train and AIME files, with [7,469, 7,275 and 714 problems respectively](replications/exp8/prompts/message.txt). The editor never receives benchmark problems or calibration results.
 - **Evaluation:** the authors' [`think35` protocol](replications/exp8/vendor/evaluate.py): thinking on, temperature [0.6](replications/exp8/vendor/evaluate.py), top-p [0.95](replications/exp8/vendor/evaluate.py), top-k [20](replications/exp8/vendor/evaluate.py), presence penalty [1.5](replications/exp8/vendor/evaluate.py), and up to [32,768 new tokens](replications/exp8/vendor/evaluate.py). Math uses the last boxed answer and math-verify. IFEval uses strict prompt-level grading after the thinking block.
-- **Final samples per problem:** [MATH-500: 4; GSM8K: 2; IFEval: 2](replications/exp8/vendor/evaluate.py). Calibration and our required controls begin with [one sample per problem](docs/TASK.md).
-- **Spending limits:** [OpenAI initially $100, followed by $160.85 additional for this attempt with a separate $160.85 Plan B reserve](replications/exp8/authorizations/editor-budget-20261103.json); [Modal: the verified billing-cycle allowance, up to $150 total after an observed limit increase](docs/TASK.md). Job estimates precede launches; token usage and compute time are recorded.
+- **Final samples per problem:** [MATH-500: 4; GSM8K: 2; IFEval: 2](replications/exp8/vendor/evaluate.py). Calibration and the required controls use [one sample per problem](docs/TASK.md).
+- **Editor billing:** the current route uses the [ChatGPT Pro subscription](docs/TASK.md). Subscription quota is recorded separately from API charges. The retained API route has an [explicit additional allocation and protected Plan B reserve](replications/exp8/authorizations/editor-budget-20261103.json); it is never selected automatically when subscription quota runs out.
+- **Compute budget:** Modal remains capped at the confirmed [$42 billing-cycle allowance](docs/TASK.md). The task permits [up to $150 total](docs/TASK.md) only after an increase is confirmed. Job estimates precede launches, and unresolved reservations remain in the ledger.
 
 ### Results
 
-These tables are generated by `openwsp report exp8` from the [authors' reference files](replications/exp8/reference) and [our evaluation files](replications/exp8/results). Missing measurements remain pending. The source link for each number is its evidence.
+`openwsp report exp8` generates these tables from the [authors' reference files](replications/exp8/reference) and [OpenWSP evaluation files](replications/exp8/results). Every number links to its source. Missing measurements remain pending, and unfinished attempts remain visible alongside completed evaluations. The calibrated p50c score measures the authors' released edit; it is not a result from an OpenWSP live editor.
 
 <!-- OPENWSP:RESULTS:START -->
-| Recorded component | State | Evidence |
-| --- | --- | --- |
-| Required live run | [blocked](replications/exp8/results/live-run/blocker.json) | [live goal unmet](replications/exp8/results/live-run/blocker.json); [editor_budget_admission](replications/exp8/results/live-run/blocker.json) |
-| Live pass requirement | [4](replications/exp8/results/live-run/blocker.json) / [50](replications/exp8/results/live-run/blocker.json) | Recorded turn: [26](replications/exp8/results/live-run/blocker.json) |
-| Live final evaluation | [not_started_no_completed_50_pass_submission](replications/exp8/results/live-run/blocker.json) | See live-run record. |
-| Recorded live blocker | [BudgetExceeded: editor stage editor:t027: reserve $30.478625, only $21.7072350 available](replications/exp8/results/live-run/blocker.json) | See live-run record. |
-| Pipeline | [stage_done](replications/exp8/results/pipeline-state.json) | [publication](replications/exp8/results/pipeline-state.json) |
-| Driver recovery | [blocked](replications/exp8/results/coordinator.json) | [all](replications/exp8/results/coordinator.json) |
-| Recorded blocker | [Pipeline blocked; previous owner reconciled and automatic restart disabled](replications/exp8/results/coordinator.json) | See source record. |
-| Calibration prompt audit | [passed](replications/exp8/results/calibration-prompt-audit.json) | [calibration-prompt-audit.json](replications/exp8/results/calibration-prompt-audit.json) |
-| Calibration comparison | [passed](replications/exp8/results/calibration-check.json) | [calibration-check.json](replications/exp8/results/calibration-check.json) |
-| Tensor hashes | [passed](replications/exp8/results/kernel/hash-verification.json) | [kernel/hash-verification.json](replications/exp8/results/kernel/hash-verification.json) |
-| Sandbox and first cell | [passed](replications/exp8/results/kernel/sandbox-verification.json) | [kernel/sandbox-verification.json](replications/exp8/results/kernel/sandbox-verification.json) |
-| Forward service | [passed](replications/exp8/results/kernel/forward-verification.json) | [kernel/forward-verification.json](replications/exp8/results/kernel/forward-verification.json) |
-| Weight swap check | [fallback](replications/exp8/results/kernel/weight-swap.json) | [kernel/weight-swap.json](replications/exp8/results/kernel/weight-swap.json) |
-| Recorded diagnostic | [Engine does not expose a compatible weight-reload contract](replications/exp8/results/kernel/weight-swap.json) | See source record. |
-| Live editor | [incomplete](replications/exp8/results/live-run/state.json) | passes: [4](replications/exp8/results/live-run/state.json); turn: [26](replications/exp8/results/live-run/state.json); runs: [10](replications/exp8/results/live-run/state.json) |
-
-Completed controls or publication do not satisfy the blocked live-run goal.
-
-States are recorded snapshots; use `openwsp status` to check current liveness.
-
 Authors' released evaluations:
 
 | Run | MATH-500 | GSM8K | IFEval | MATH-500 hit token limit |
@@ -118,31 +103,33 @@ Recorded runtime and uncertainty:
 | control3_repetition / math500 | [vllm==0.33.0](replications/exp8/results/control3_repetition/math500/summary.json) | [H100](replications/exp8/results/control3_repetition/math500/summary.json) | [5.17.0](replications/exp8/results/control3_repetition/math500/summary.json) | [binomial_per_sample](replications/exp8/results/control3_repetition/math500/summary.json) |
 <!-- OPENWSP:RESULTS:END -->
 
-### Controls — ours
+### OpenWSP controls
 
-These controls are additions to the replication, not results reported by the authors. Their definitions are fixed before their results are read; see the [protocol](docs/TASK.md).
+These controls were added for this replication. They answer alternative explanations for the reported gain, using definitions fixed in the [protocol](docs/TASK.md) before their results were read. They are OpenWSP results and are not attributed to the authors.
 
 | Question | Control | Evidence |
 | --- | --- | --- |
 | Is the baseline broken by the thinking setup? | Base model with thinking off and the model card's recommended non-thinking sampling. | `control1_nothink` in the [generated results](#results). |
 | Is it a mechanical direction removal? | Difference of mean MLP outputs for looping versus finished base answers, removed from the same layers and columns in the same form as the published p50c edit. | `control2_mechanical` in the [generated results](#results). |
 | Is it a decoding fix? | Base model with repetition penalty [1.1](docs/TASK.md), everything else unchanged. | `control3_repetition` in the [generated results](#results). |
-| Does the direction matter? | Published p50c edit with a random unit vector replacing its direction. | Optional; only claimed when its result record is present. |
-| Is looping specific to vLLM? | Base model in another engine with the same sampling on the prescribed subset. | Optional; only claimed when its result record is present. |
+| Does the direction matter? | Published p50c edit with a random unit vector replacing its direction. | Optional; no result published. |
+| Is looping specific to vLLM? | Base model in another engine with the same sampling on the prescribed subset. | Optional; no result published. |
 
-The mechanical control uses calibration generations to construct its direction. Its provenance must identify that data reuse; it is not a separately held-out discovery experiment.
+The mechanical control constructs its direction from calibration generations on the same benchmark. Its [method record](replications/exp8/results/control2_mechanical/method.json) documents that reuse. It is a diagnostic comparison, not a held-out discovery experiment.
 
 ### What happened during the run
 
-The [readable live-run transcript](replications/exp8/results/live-run/transcript.md) records each available turn's explanation, code or forward request, and returned result. Incomplete runs are labeled, and failed requests remain in the record. Full generations and activations stay on the volume, with paths and hashes in the compact records.
+The [subscription attempt's transcript](replications/exp8/results/live-runs/codex-20261103/transcript.md) records its explanations, Python cells, forward requests and returned results. Its [identity](replications/exp8/results/live-runs/codex-20261103/identity.json) and [state](replications/exp8/results/live-runs/codex-20261103/state.json) distinguish it from the [earlier API transcript](replications/exp8/results/live-run/transcript.md). Each attempt keeps its failed requests as well as its successful ones. Full generations and activations stay on the volume; public records retain their paths and hashes.
 
-No final live edit was submitted; [the recorded run remains blocked](replications/exp8/results/live-run/blocker.json). We did not select among the editor's candidates or change its live weights. Before the live run, [kernel verification](STATUS.md) established the published p50c tensor hashes and ran the authors' first Python cell unmodified.
+The subscription attempt started from the original pinned weights, empty working state and fresh counters. It does not inherit the API attempt's partial edits or conversation. Within the subscription attempt, Codex resumes the exact saved conversation. A [synthetic check](replications/exp8/results/kernel/codex-subscription-probe.json) verified short formatted output and same-session continuation; it does not establish reliability over a full live run.
 
-The live run stopped at its [editor budget admission check](replications/exp8/results/live-run/blocker.json). A later audit found [seven output-limit responses](replications/exp8/results/live-run/editor-format-loop.json) that wrote a complete fenced action and then repeated backticks and blank lines. Their trailing formatting loops contain about [49,000–213,000 characters each](replications/exp8/results/live-run/editor-format-loop.json). None of these incomplete responses was executed. Raising the output limit did not solve the loop; retaining those responses also enlarged subsequent context.
+The API attempt stopped at its [editor budget admission check](replications/exp8/results/live-run/blocker.json). A later audit found [seven output-limit responses](replications/exp8/results/live-run/editor-format-loop.json) that wrote a complete fenced action and then repeated backticks and blank lines. Their trailing loops contain about [49,000 to 213,000 characters each](replications/exp8/results/live-run/editor-format-loop.json). None of those incomplete actions was executed. Raising the output limit did not solve the loop, and retaining the responses enlarged subsequent context. The [API recovery work](docs/editor-recovery.md) remains available separately.
+
+No final live edit has been submitted. Candidate edits remain the editor's choices; the operator does not choose a winner or alter its weights. Before live editing, [kernel verification](replications/exp8/results/kernel/hash-verification.json) reproduced the released p50c tensor hashes, and the [sandbox check](replications/exp8/results/kernel/sandbox-verification.json) ran the authors' first Python cell unmodified.
 
 ### Cost and time
 
-Cost records distinguish API usage charges, resource estimates and unresolved reservations. The linked files state what each duration measures. Resource time summed across jobs is not end-to-end wall time.
+The cost records distinguish the earlier API charges, Modal resource estimates and unresolved reservations. Subscription usage is recorded as quota and token counters, without assigning an API price or treating it as free. Each duration retains its measurement basis. Adding resource time across jobs does not give end-to-end elapsed time.
 
 <!-- OPENWSP:COSTS:START -->
 | Stage | Benchmark | Recorded hours | Recorded cost (USD) |
@@ -160,6 +147,7 @@ Budget ledger: [source](replications/exp8/results/costs.json). Reservations are 
 | Budget / stage / operation | State | Receipts | Recorded hours | Settled amount (USD) | Reserved bound (USD) | Basis |
 | --- | --- | --- | --- | --- | --- | --- |
 | editor / editor turns | [settled](replications/exp8/results/costs.json) | [26](replications/exp8/results/costs.json) | [1.815](replications/exp8/results/costs.json) | [78.2928](replications/exp8/results/costs.json) | pending | [API usage and recorded token rates](replications/exp8/results/costs.json) |
+| modal / all | [reserved](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | pending | pending | [1.9060](replications/exp8/results/costs.json) | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / all | [settled](replications/exp8/results/costs.json) | [4](replications/exp8/results/costs.json) | [3.457](replications/exp8/results/costs.json) | [0.2741](replications/exp8/results/costs.json) | pending | [driver_resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
 | modal / calibration | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.906](replications/exp8/results/costs.json) | [0.0718](replications/exp8/results/costs.json) | pending | [driver_resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
 | modal / calibration_base | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.499](replications/exp8/results/costs.json) | [2.1280](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
@@ -182,14 +170,16 @@ Budget ledger: [source](replications/exp8/results/costs.json). Reservations are 
 | modal / kernel_verification:startup | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.004](replications/exp8/results/costs.json) | [0.0092](replications/exp8/results/costs.json) | pending | [resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
 | modal / live / activation extraction / original | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.700](replications/exp8/results/costs.json) | [2.9870](replications/exp8/results/costs.json) | pending | [failed job upper bound; not invoice](replications/exp8/results/costs.json) |
 | modal / live / activation extraction / original | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.071](replications/exp8/results/costs.json) | [0.3049](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
+| modal / live / codex-20261103 / fwd_1 / original | [reserved](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | pending | pending | [2.9870](replications/exp8/results/costs.json) | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / live / generation / edited | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.111](replications/exp8/results/costs.json) | [0.4719](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / live / generation / original | [settled](replications/exp8/results/costs.json) | [3](replications/exp8/results/costs.json) | [0.637](replications/exp8/results/costs.json) | [2.7181](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / live / teacher-forced | [settled](replications/exp8/results/costs.json) | [2](replications/exp8/results/costs.json) | [0.079](replications/exp8/results/costs.json) | [0.3373](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / prepare | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.010](replications/exp8/results/costs.json) | [0.0016](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / prepare-v2 | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.038](replications/exp8/results/costs.json) | [0.0060](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
-| modal / publish | [reserved](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | pending | pending | [1.9060](replications/exp8/results/costs.json) | [resource estimate; not invoice](replications/exp8/results/costs.json) |
-| modal / sandbox:heartbeat | [settled](replications/exp8/results/costs.json) | [188](replications/exp8/results/costs.json) | [3.060](replications/exp8/results/costs.json) | [7.9188](replications/exp8/results/costs.json) | pending | [resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
-| modal / sandbox:startup | [settled](replications/exp8/results/costs.json) | [4](replications/exp8/results/costs.json) | [0.015](replications/exp8/results/costs.json) | [0.0400](replications/exp8/results/costs.json) | pending | [resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
+| modal / publish | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.134](replications/exp8/results/costs.json) | [0.0107](replications/exp8/results/costs.json) | pending | [driver_resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
+| modal / sandbox:heartbeat | [reserved](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | pending | pending | [0.2157](replications/exp8/results/costs.json) | [resource estimate; not invoice](replications/exp8/results/costs.json) |
+| modal / sandbox:heartbeat | [settled](replications/exp8/results/costs.json) | [202](replications/exp8/results/costs.json) | [3.293](replications/exp8/results/costs.json) | [8.5226](replications/exp8/results/costs.json) | pending | [resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
+| modal / sandbox:startup | [settled](replications/exp8/results/costs.json) | [5](replications/exp8/results/costs.json) | [0.019](replications/exp8/results/costs.json) | [0.0504](replications/exp8/results/costs.json) | pending | [resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
 | modal / verify / attention | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.038](replications/exp8/results/costs.json) | [0.1626](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / verify / fresh-reference | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.086](replications/exp8/results/costs.json) | [0.3677](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / verify / native-swap | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.097](replications/exp8/results/costs.json) | [0.4123](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
@@ -200,33 +190,34 @@ Repeated requests, attempts and batches are grouped by stage and operation; the 
 
 ### FAQ
 
-**Is the baseline broken?** We reproduce the low thinking baseline: [7.2%](replications/exp8/results/calibration_base/summary.json). The same base weights reach [46.8% with thinking off](replications/exp8/results/control1_nothink/math500/summary.json), and the token-limit share falls from [93.2%](replications/exp8/results/calibration_base/summary.json) to [0.6%](replications/exp8/results/control1_nothink/math500/summary.json). This control changes both thinking mode and sampling to the model card's non-thinking recommendations; it does not isolate either change alone.
+**Is the baseline broken?** The thinking baseline scores [7.2%](replications/exp8/results/calibration_base/summary.json), within the prescribed tolerance of the authors' result. The same base weights reach [46.8% with thinking off](replications/exp8/results/control1_nothink/math500/summary.json), and the token-limit share falls from [93.2%](replications/exp8/results/calibration_base/summary.json) to [0.6%](replications/exp8/results/control1_nothink/math500/summary.json). This control changes both thinking mode and sampling to the model card's non-thinking recommendations. It does not isolate either change alone.
 
-**Is it abliteration?** A mechanical direction computed from mean activations reaches [46.0%](replications/exp8/results/control2_mechanical/math500/summary.json), compared with [50.6% for the authors' p50c edit](replications/exp8/results/calibration_p50c/summary.json). It uses the same changed columns and projection form. The [method](replications/exp8/results/control2_mechanical/method.json) derives its direction from the calibration answers on this benchmark, so this is a diagnostic comparison, not a held-out estimate or proof that the two edits work identically.
+**Is it abliteration?** A mechanical direction computed from mean activations reaches [46.0%](replications/exp8/results/control2_mechanical/math500/summary.json), compared with [50.6% for the authors' p50c edit](replications/exp8/results/calibration_p50c/summary.json). It uses the same changed columns and projection form. The [method](replications/exp8/results/control2_mechanical/method.json) derives its direction from calibration answers on this benchmark. That result supports direction removal as a useful comparison, but it is not a held-out estimate or proof that the edits work identically.
 
 **Is it a decoding fix?** Adding repetition penalty [1.1](replications/exp8/results/control3_repetition/math500/summary.json) with the base weights and other thinking settings fixed raises accuracy to [23.8%](replications/exp8/results/control3_repetition/math500/summary.json). The token-limit share remains [75.6%](replications/exp8/results/control3_repetition/math500/summary.json). This decoding change helps, but does not reproduce the [50.6%](replications/exp8/results/calibration_p50c/summary.json) calibrated p50c result.
 
-**What tools did the editor have?** The kernel, practice files and bounded forward-pass interface listed above. It does not see test sets, the reference edit, calibration outcomes, our control results or the internet. The live run uses the authors' text-block protocol; the public MCP interface is a separate way to use the same core operations.
+**What tools did the editor have?** The kernel, practice files and bounded forward-pass interface listed above. It does not see test sets, the reference edit, calibration outcomes, control results or the internet. The live experiment uses the authors' text-block protocol. The public MCP server exposes the core operations for other agent workflows.
 
-**What did it cost?** The editor spent [$78.292765](replications/exp8/results/live-run/editor-cost-analysis.json) before the next response could no longer be admitted under the cap. The seven incomplete requests account for [$60.234243 including input](replications/exp8/results/live-run/editor-cost-analysis.json). The generated cost table records compute separately. The [budget policy](docs/TASK.md) is a spending limit, not a reported cost.
+**What did it cost?** The stopped API attempt incurred [$78.292765](replications/exp8/results/live-run/editor-cost-analysis.json) in editor charges before its next response failed the budget check. The incomplete requests account for [$60.234243 including input](replications/exp8/results/live-run/editor-cost-analysis.json). The current attempt uses a [ChatGPT Pro subscription](docs/TASK.md), whose quota counters do not establish a dollar cost per run. Modal computation is still paid and appears separately in the generated table. The [budget policy](docs/TASK.md) sets spending limits; it is not a cost measurement.
 
 ### Differences from the authors' setup
 
 | Component | Difference and evidence |
 | --- | --- |
 | Harness | The original Experiment 8 driver, kernel and forward server were not released. OpenWSP reconstructs the documented contract from [their release](https://github.com/RikiyaT/lm_understand-logs/tree/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math). |
-| Editor transport | Responses API with response chaining instead of the Codex CLI. API usage is recorded per response. The output ceiling changed from [32,768 to the documented 128,000 after the first truncated turn](replications/exp8/results/live-run/editor-output-limit.json). The captured incomplete responses were charged, retained in history and never executed. The [CPU-tested API fallback](docs/editor-recovery.md) detects the recorded formatting loop and requests cancellation; it has not processed a live provider stream. Codex subscription feasibility is being checked before further API spending. |
+| Editor transport | The current attempt uses [pinned Codex CLI with ChatGPT billing](docs/codex-editor.md). The authors' released logs show Codex use, but their exact CLI version and billing method were not released. OpenWSP's local worker keeps authentication and conversation files off Modal, and the pinned configuration disables native tools. The earlier API attempt used Responses chaining; it remains a separate recorded attempt. |
+| Editor output handling | In the API attempt, the ceiling changed from [32,768 to 128,000 after the first truncated turn](replications/exp8/results/live-run/editor-output-limit.json). Incomplete responses were charged and retained in history, but never executed. The [API streaming repair](docs/editor-recovery.md) requests cancellation when it detects the recorded loop. Its cancellation and recovery behavior has CPU tests but has not been exercised against a live provider response. The Codex adapter checks completed output for the same pattern. Neither check establishes that the subscription attempt cannot loop. |
 | Sandbox | Modal Sandbox instead of the authors' local isolation. The memory limit follows the authors' evidence. See [architecture](docs/architecture.md) for what the kernel and OS enforce. |
 | Inference engine, GPU and dependency versions | The generated runtime table links each recorded version and GPU to its result provenance. Missing metadata remains pending. |
 | Weight updates | The production native-update check found an incompatible vLLM interface. This run uses the specified [fresh-engine fallback](replications/exp8/results/kernel/weight-swap.json), loading the submitted checkpoint for each pass. |
 | Scheduling | Subsequent jobs cap active vLLM sequences at [128](DECISIONS.md), based on observed KV-cache capacity. Final evaluations use batches of [256 generations](replications/exp8/evaluation.py). Compilation caches persist between containers; GPUs scale down between editor turns. |
 | Refusal implementation | The authors did not release the numerical whole-tensor scaling test. OpenWSP's explicit tolerance and refusal tests are documented in [the kernel implementation](src/openwsp/core.py) and [decisions](DECISIONS.md). |
-| Sampling and seeds | Preserve the published sampling settings. The original per-problem seed algorithm was not released. Live passes use the [first eight SHA-256 hex digits of the problem ID, modulo 2^31](src/openwsp/backends/modal_app.py), identically for both models and repeated requests. Calibration uses the published seed. |
+| Sampling and seeds | Evaluation preserves the published sampling settings. The original per-problem seed algorithm was not released. Live passes use the [first eight SHA-256 hex digits of the problem ID, modulo 2^31](src/openwsp/backends/modal_app.py), identically for both models and repeated requests. Calibration uses the published seed. |
 | Base-generation reuse | Only the budget fallback authorized in [the task](docs/TASK.md) may reuse repeated problem/seed generations. Any use must be disclosed in the affected result's provenance. |
 
 ## Quickstart
 
-Install from this repository:
+Install the locked dependencies from this repository. The tests and tiny-model examples run on CPU.
 
 ```sh
 git clone https://github.com/openwsp/openwsp.git
@@ -236,11 +227,11 @@ uv run openwsp --help
 uv run pytest -q
 ```
 
-For ChatGPT subscription billing, follow the [subscription setup](docs/subscription-replication.md): a persistent local Codex worker supplies editor responses while Modal runs the experiment. The [editor architecture](docs/editor-architecture.md) keeps this route, the existing Responses API adapter and the Fable profile separate from the kernel.
+For the primary ChatGPT subscription route, follow the [subscription setup](docs/subscription-replication.md). A persistent local Codex worker supplies editor responses while Modal runs the kernel and forward passes. Its private configuration names a run and the local authentication and state directories. Keep the worker and its host available throughout the run.
 
-Set the environment variables listed in [.env.example](.env.example) using your environment's secret mechanism. Both routes use Modal for compute, Hugging Face for model access, and GitHub for the authorized result push. `OPENAI_API_KEY` is needed only for the Responses API route. Keep credentials out of repository files and remote URLs.
+Set the variables listed in [.env.example](.env.example) through the environment's secret mechanism. Both routes use Modal for compute, Hugging Face for model access and GitHub for result publication. `OPENAI_API_KEY` is needed only for the Responses API route. ChatGPT credentials stay with the local Codex worker. Keep all credentials out of repository files and remote URLs.
 
-Before deploying, create its named secrets in the same Modal workspace environment. This command reads the exported values at runtime, maps `GITHUB_ACCESS_TOKEN` to the remote `GITHUB_TOKEN` key, and leaves existing secrets unchanged:
+Create the named secrets in the Modal workspace environment before deployment. This command reads exported values at runtime, maps `GITHUB_ACCESS_TOKEN` to the remote `GITHUB_TOKEN` key and retains existing secrets:
 
 ```sh
 uv run --no-sync python - <<'PY'
@@ -262,9 +253,9 @@ for name, contents in secrets.items():
 PY
 ```
 
-Existing secret values are retained; update them in Modal if their credentials have changed. See [Modal's secret setup](https://modal.com/docs/guide/secrets). The local CPU examples below require no credentials.
+Update existing secrets in Modal if their credentials have changed; see [Modal's secret setup](https://modal.com/docs/guide/secrets). The local CPU examples below require no credentials.
 
-Launch or resume with the private subscription configuration from the setup guide (Modal compute is still paid), inspect its state, and regenerate its report:
+Launch or resume the named subscription attempt with the private configuration from the setup guide. Modal compute is still paid.
 
 ```sh
 uv run openwsp replicate exp8 --config /absolute/private/codex-exp8.json --foreground
@@ -272,9 +263,9 @@ uv run openwsp status exp8
 uv run openwsp report exp8
 ```
 
-Current progress and exact resume commands are in [STATUS.md](STATUS.md).
+`openwsp status exp8` shows progress on one screen; add `--json` for the full saved state. `openwsp report exp8` rebuilds the README tables from locally available result files. Current progress and the configured resume command are in [STATUS.md](STATUS.md).
 
-The original `uv run openwsp replicate exp8` command retains the Responses API route and its API-token billing; it requires the `openai` Modal secret. No automatic switch between billing routes occurs.
+Without a subscription configuration, `uv run openwsp replicate exp8` retains the Responses API route and its token billing. It requires the `openai` Modal secret. No automatic switch between billing routes occurs. Reusing a subscription run ID resumes its saved attempt; a new ID starts a separate attempt from the original weights.
 
 For a local CPU example:
 
@@ -290,20 +281,22 @@ uv run openwsp --model /absolute/path/model.safetensors \
   --work-dir /absolute/path/work --backend my_backend:create tensors
 ```
 
-The factory implements the forward operation for that model; tensor loading alone does not configure inference. The [architecture guide](docs/architecture.md) shows the Python SDK and shared operations. The [MCP guide](docs/mcp.md) shows setup for Codex, Claude Code and Cursor. The [edit format](docs/edit-format.md) defines portable, verified diffs.
+The factory supplies inference for that model. Loading tensors alone does not configure a forward service. The same read, run, forward, save, diff, apply and export operations are available through the [Python SDK](docs/architecture.md) and the [MCP server](docs/mcp.md), with connection examples for Codex, Claude Code and Cursor. The [edit format](docs/edit-format.md) defines the portable diff and its verification rules.
 
-For a different editor, the optional [Anthropic Messages adapter](docs/anthropic-editor.md) implements the same `complete(messages)` interface with durable history and usage accounting. It requires explicit model prices and token ceilings; its tests use mocked responses. Experiment 8 continues to use Astra.
+Editors sit behind a separate `complete(messages)` interface. The [profile and transport architecture](docs/editor-architecture.md) retains the Astra subscription and Responses routes and adds a Fable profile over the [Anthropic Messages adapter](docs/anthropic-editor.md). Native API use requires explicit prices and token bounds. Fable has mocked transport tests but no live Experiment 8 comparison. OpenRouter is an extension target, not an implemented route. The current experiment continues to use Astra.
 
 ## What we did not do
 
-We do not train or compute gradients, give the live editor benchmark data, choose its winning edit, or change the protocol to pursue a score. Experiments before Experiment 8 have layout placeholders only. There is no hosted service, web UI, package-registry publication, or edit intended to remove safety behavior. The optional controls and extra evaluations are not claimed complete while their records are absent.
+This replication does not train the model or compute gradients. The live editor receives no benchmark data, reference edit or control outcomes, and its final edit is not selected by an operator. The original API attempt was not relabeled as a completed run when the subscription attempt began.
+
+The remaining experiments have layout placeholders only. There is no hosted service, web UI, package-registry release or Hugging Face publication of a new live edit. The optional controls, extra evaluations and Fable comparison have no published results. Those are further work, separate from the running Experiment 8 attempt.
 
 ## Add a result
 
-Results are evidence files, not hand-edited table cells. Add a run directory under [replications/exp8/results](replications/exp8/results), with its pinned configuration, compact sample records, summaries, edit identity, costs and deviations. Run `openwsp report exp8` and submit the files and regenerated table in a pull request. Include every run, including failed, incomplete and lower-scoring runs. See the [result schema](docs/results-schema.md).
+The result table can be extended by pull request. Add a separately identified run under [replications/exp8/results](replications/exp8/results), including its pinned configuration, compact sample records, summaries, edit identity, usage, costs and differences from the protocol. Run `openwsp report exp8` to derive the table from those files. Preserve failed, incomplete and lower-scoring attempts as well as completed ones. The [result schema](docs/results-schema.md) describes the required evidence and active-attempt selection.
 
 ## Dual use
 
-The method that removes a loop can remove safety behavior too. This repository ships no such edits. The Experiment 8 base model is pinned. OpenWSP v1 edits are SHA-256-addressed diffs that validate only the listed tensors. Callers must separately verify the complete base checkpoint and revision; optional model/revision labels do not enforce either.
+The method that removes a loop can remove safety behavior too. This repository ships no such edits. Experiment 8 uses a pinned base model, and OpenWSP edits are versioned, SHA-256-addressed diffs so the changed tensors can be verified. The format validates the listed tensors; callers must also verify the complete base checkpoint and revision. Model and revision labels alone do not enforce that match.
 
 OpenWSP code is [MIT licensed](LICENSE). The authors' scripts, logs and edits retain their respective licenses; see [third-party notices](THIRD_PARTY_NOTICES.md).

@@ -1,24 +1,21 @@
 {
   "current": {
-    "call_id": "fc-01M6GC9HWAFHZTMEWBB811B23D",
-    "config": {},
-    "created_at": 1793698604.5312808,
-    "dispatched_at": 1793698611.2091756,
-    "error_type": "BudgetExceeded",
-    "fingerprint": "b8af3916e33fdca49d89f3ce031e4440cb2684502985bd1db3bb99538c64d67b",
-    "no_restart": true,
-    "phase": "blocked",
-    "reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
-    "reservation_id": "driver-6e838d8f270e4e499e87a429f4a6d5dc",
-    "result_status": null,
+    "call_id": "fc-01M6GW82J9KN0T8G4CEXCKEJPS",
+    "config": {
+      "editor": "codex",
+      "run_id": "codex-20261103"
+    },
+    "created_at": 1793715339.890846,
+    "dispatched_at": 1793715341.4172251,
+    "fingerprint": "eab07648334622e04a11b59b63e4e82421f192b04de8b2ae72072ffcccf3e9e5",
+    "phase": "running",
+    "reservation_id": "driver-4b40974af1c24071a19c0eea758459ef",
     "stage": "all",
-    "terminal_at": 1793705513.090215,
-    "terminal_state": "failed",
     "ticket": {
       "cpu_cores": 1,
       "memory_gib": 4,
-      "prepared_at": 1793698608.1972063,
-      "reservation_id": "driver-6e838d8f270e4e499e87a429f4a6d5dc",
+      "prepared_at": 1793715340.7850928,
+      "reservation_id": "driver-4b40974af1c24071a19c0eea758459ef",
       "scaledown_seconds": 5,
       "schema_version": 1,
       "stage": "all",
@@ -26,9 +23,6 @@
       "timeout_seconds": 86400,
       "upper_bound_usd": "1.905953472222222222222222222"
     }
-  },
-  "restart_counts": {
-    "live": 1
   },
   "history": [
     {
@@ -174,6 +168,92 @@
         "timeout_seconds": 86400,
         "upper_bound_usd": "1.905953472222222222222222222"
       }
+    },
+    {
+      "call_id": "fc-01M6GC9HWAFHZTMEWBB811B23D",
+      "config": {},
+      "created_at": 1793698604.5312808,
+      "dispatched_at": 1793698611.2091756,
+      "error_type": "BudgetExceeded",
+      "fingerprint": "b8af3916e33fdca49d89f3ce031e4440cb2684502985bd1db3bb99538c64d67b",
+      "manual_resume": {
+        "config": {},
+        "fingerprint": "743c411accbd1e965d0f170401ef575af7c886f24861f7787fe9b410df35f63b",
+        "reason": "The live driver fc-01M6GC9HWAFHZTMEWBB811B23D is confirmed terminal after its next editor reservation exceeded the remaining 100 USD allowance. Complete independent controls 1-3 using existing calibration data and the unchanged 42 USD Modal allowance; preserve the live state and editor ceiling.",
+        "stage": "controls"
+      },
+      "no_restart": true,
+      "phase": "terminal",
+      "reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+      "reservation_id": "driver-6e838d8f270e4e499e87a429f4a6d5dc",
+      "result_status": null,
+      "stage": "all",
+      "terminal_at": 1793705768.4508667,
+      "terminal_state": "failed",
+      "ticket": {
+        "cpu_cores": 1,
+        "memory_gib": 4,
+        "prepared_at": 1793698608.1972063,
+        "reservation_id": "driver-6e838d8f270e4e499e87a429f4a6d5dc",
+        "scaledown_seconds": 5,
+        "schema_version": 1,
+        "stage": "all",
+        "startup_seconds": 120,
+        "timeout_seconds": 86400,
+        "upper_bound_usd": "1.905953472222222222222222222"
+      }
+    },
+    {
+      "call_id": "fc-01M6GK405JWFKWRJ6GH83K4HN4",
+      "completed_at": 1793711451.457698,
+      "config": {},
+      "created_at": 1793705769.6239007,
+      "dispatched_at": 1793705770.8009722,
+      "fingerprint": "743c411accbd1e965d0f170401ef575af7c886f24861f7787fe9b410df35f63b",
+      "phase": "complete",
+      "reservation_id": "driver-128098e888584eb2829c9b132fe517e5",
+      "result_status": "stage_done",
+      "stage": "controls",
+      "terminal_at": 1793711448.352127,
+      "terminal_state": "completed",
+      "ticket": {
+        "cpu_cores": 1,
+        "memory_gib": 4,
+        "prepared_at": 1793705770.2245436,
+        "reservation_id": "driver-128098e888584eb2829c9b132fe517e5",
+        "scaledown_seconds": 5,
+        "schema_version": 1,
+        "stage": "controls",
+        "startup_seconds": 120,
+        "timeout_seconds": 86400,
+        "upper_bound_usd": "1.905953472222222222222222222"
+      }
+    },
+    {
+      "call_id": "fc-01M6GRHF24VBTCAP8FSZXWXBZW",
+      "completed_at": 1793711816.0620277,
+      "config": {},
+      "created_at": 1793711452.4147265,
+      "dispatched_at": 1793711454.6394608,
+      "fingerprint": "9e69ae5b2459b580b77b16a02c7bd50a11dddb0822c0e3cbe4a0b461daed97e1",
+      "phase": "complete",
+      "reservation_id": "driver-6345cecb41ad4321a7ffe845ba9456cf",
+      "result_status": "stage_done",
+      "stage": "publish",
+      "terminal_at": 1793711813.6924562,
+      "terminal_state": "completed",
+      "ticket": {
+        "cpu_cores": 1,
+        "memory_gib": 4,
+        "prepared_at": 1793711453.3927836,
+        "reservation_id": "driver-6345cecb41ad4321a7ffe845ba9456cf",
+        "scaledown_seconds": 5,
+        "schema_version": 1,
+        "stage": "publish",
+        "startup_seconds": 120,
+        "timeout_seconds": 86400,
+        "upper_bound_usd": "1.905953472222222222222222222"
+      }
     }
   ],
   "manual_resumes": [
@@ -203,6 +283,19 @@
       "previous_state_status": "blocked",
       "reason": "Recorded terminal t011 max_output_tokens response is settled and never executed. Typed incomplete-turn handling preserves its response lineage, reports only the API failure, and uses the documented128000 future output ceiling. Transcript whitespace publication issue is fixed. Previous driver confirmed terminal; no failed key is resampled.",
       "stage": "all"
+    },
+    {
+      "at": 1793705767.9209452,
+      "previous_call_id": "fc-01M6GC9HWAFHZTMEWBB811B23D",
+      "previous_coordinator_reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+      "previous_state_error": "BudgetExceeded: editor stage editor:t027: reserve $30.478625, only $21.7072350 available",
+      "previous_state_status": "blocked",
+      "reason": "The live driver fc-01M6GC9HWAFHZTMEWBB811B23D is confirmed terminal after its next editor reservation exceeded the remaining 100 USD allowance. Complete independent controls 1-3 using existing calibration data and the unchanged 42 USD Modal allowance; preserve the live state and editor ceiling.",
+      "stage": "controls"
     }
-  ]
+  ],
+  "restart_counts": {
+    "live": 1
+  },
+  "schema_version": 1
 }

@@ -556,18 +556,22 @@ def generate_report(repo_root: str | Path, results_dir: str | Path) -> dict[str,
         data = _read_json(path)
         _validate_summary(data, path)
         extra_costs.append((path, data))
-    def result_body(relative_to):
-        return "\n\n".join((status_body(relative_to), _results_table(references, summaries, relative_to),
-                            _calibration_table(evidence, relative_to), _runtime_table(summaries, relative_to)))
+    def result_body(relative_to, *, include_status=True):
+        sections = [_results_table(references, summaries, relative_to),
+                    _calibration_table(evidence, relative_to), _runtime_table(summaries, relative_to)]
+        if include_status:
+            sections.insert(0, status_body(relative_to))
+        return "\n\n".join(sections)
     def status_body(relative_to):
         return _status_table(evidence, relative_to, pointer=pointer, attempts=attempts, summaries=summaries)
     def cost_body(relative_to):
         return _costs_table(summaries + extra_costs, relative_to, ledgers)
     readme_path = repo / "README.md"
     readme = readme_path.read_text() if readme_path.exists() else "# OpenWSP\n"
-    if "<!-- OPENWSP:STATUS:" in readme:
+    standalone_status = "<!-- OPENWSP:STATUS:" in readme
+    if standalone_status:
         readme = _replace_section(readme, "STATUS", status_body(repo))
-    readme = _replace_section(readme, "RESULTS", result_body(repo))
+    readme = _replace_section(readme, "RESULTS", result_body(repo, include_status=not standalone_status))
     readme = _replace_section(readme, "COSTS", cost_body(repo))
     report_path = results / "report.md"
     report = "# Recorded evaluation results\n\n" + result_body(results)

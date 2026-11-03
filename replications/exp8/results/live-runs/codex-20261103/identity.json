@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "editor": "codex",
+  "run_id": "codex-20261103",
+  "relative_path": "live-runs/codex-20261103",
+  "task_sha256": "ce36e273b668e4edb8fa44effaab055cbece7e3b4acbce7ffcc77dde024c8b74",
+  "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+  "initialization": "Original pinned weights, empty isolated work namespace, zero live counters.",
+  "relationship": "Separate attempt; no prior API response history, partial edit or control result is supplied."
+}

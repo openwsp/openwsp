@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261103",
+  "driver_call_id": "fc-01M6GW82J9KN0T8G4CEXCKEJPS",
+  "deployment_commit": "89c321cfb665a247c3547d68fb74053e90c9e67b",
+  "launch_command": "openwsp replicate exp8 --config .openwsp/codex-live.json --foreground",
+  "observed_at": "2026-11-03T14:31:38.064491+00:00",
+  "snapshot_heartbeat": 1793716232.869213,
+  "worker_only_recovery": "Reconnected to the same driver after fixing local polling classification; no model request, kernel or live counters were restarted.",
+  "editor_receipts": [
+    {
+      "status": "completed",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "input_sha256": "3c63882671f0f732fb0eac53af3f9a0f5bc9b387816998319750027bff5a8e64",
+      "thread_id": "01a1a1cb-a0cb-7cf0-9751-a33765ee0efd",
+      "recorded_at": 1793715870.1137094,
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 2494,
+        "output_tokens": 675,
+        "reasoning_output_tokens": 166
+      },
+      "exit": {
+        "reason": null,
+        "returncode": 0,
+        "seconds": 30.990683355999863,
+        "violation": null
+      },
+      "request_key": "bridge:b7a2e0dab24b6b1b3b59b142d6f38a6f9c147389dbefc6df008ed630dfb6f93d"
+    },
+    {
+      "status": "completed",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "input_sha256": "6b318a847029f15061c62b0cba2fbbd5c045e46784891fa92f6767e90c0aac7b",
+      "thread_id": "01a1a1cb-a0cb-7cf0-9751-a33765ee0efd",
+      "recorded_at": 1793715941.63035,
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 5778,
+        "output_tokens": 1211,
+        "reasoning_output_tokens": 189
+      },
+      "exit": {
+        "reason": null,
+        "returncode": 0,
+        "seconds": 14.781486209999457,
+        "violation": null
+      },
+      "request_key": "bridge:53df3be31e881c350f79533e7ecf1eb5ce8c5d12889adedfbc98c89d2065fde9"
+    },
+    {
+      "status": "completed",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "input_sha256": "db8fbcdf5e5bd0934ac6f6f00446d5474a4d155bffe4a835d69788327f435a50",
+      "thread_id": "01a1a1cb-a0cb-7cf0-9751-a33765ee0efd",
+      "recorded_at": 1793716001.2250593,
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 12136,
+        "output_tokens": 2946,
+        "reasoning_output_tokens": 265
+      },
+      "exit": {
+        "reason": null,
+        "returncode": 0,
+        "seconds": 31.01318399000047,
+        "violation": null
+      },
+      "request_key": "bridge:42a3fff20d7f5de4ebd931a27c91dfe346f32c554b4a2fb9b86f260c118b626d"
+    }
+  ],
+  "subscription_usage_note": "CLI counters are cumulative within each conversation; do not sum them or assign an API dollar price.",
+  "api_spent_usd": 78.292765,
+  "modal_budget_snapshot": {
+    "spent_usd": 30.50383620357859,
+    "reserved_usd": 9.384483472222222,
+    "available_usd": 2.0616803241991866
+  }
+}

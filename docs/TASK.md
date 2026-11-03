@@ -170,3 +170,7 @@ Use the upgraded subscription as the primary editor route. Retain the tested API
 The live backend quota endpoint confirms `pro`, 99% of its weekly allowance remaining, and one reset credit; observed expiry is 2026-11-06 23:52:26 UTC. The older cached credential metadata still says `prolite`; backend quota is the newer evidence. No reset was redeemed. Record quota exhaustion and the available reset when action is needed. Source: `logs/codex-subscription-upgraded.json`. Do not purchase additional credits or upgrade beyond the user's completed change.
 
 The user reconfirmed the Modal dashboard still shows $42: “still 42 but it will increase dont worry about it i will keep track of that; just report here periodically”. Retain the $42 ceiling until they confirm the increase. During the live run, report progress and compute spend in this chat about every fifteen minutes, and report budget/quota stops immediately.
+
+## README style follow-up
+
+The user requested a README overhaul using their commit0a41b05 as the style reference. Remove first-person 'I'; neutral or passive constructions are acceptable. Do not use em dashes anywhere, especially in titles. This supersedes the earlier instruction to preserve that introduction byte-for-byte while retaining its intent, attribution and scientific evidence.

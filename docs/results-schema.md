@@ -6,6 +6,8 @@
 
 Place one run under `replications/exp8/results/<run-id>/`. Keep a separate `summary.json` for each stage, model condition and benchmark, for example `<run-id>/evaluation/<condition>/<benchmark>/summary.json`. The reporter discovers `summary.json` files recursively under the results directory.
 
+Named live attempts use `replications/exp8/results/live-runs/<run-id>/`, with `identity.json`, `state.json`, `transcript.md` and final summaries at `<benchmark>/summary.json`. The original API attempt remains under `live-run/`. A new attempt does not overwrite its state, costs or transcript.
+
 Commit compact per-sample records, summaries, configuration/provenance, the edit manifest and diff, and the readable transcript. Do not commit weights, checkpoints, activations or full generated text. Full text remains on the volume, referenced by path and SHA-256. Preserve the original artifacts when a run is repeated; do not overwrite a lower result.
 
 ## Evaluation summary
@@ -61,11 +63,15 @@ Stage summaries may contain `seconds` and `cost_usd`. A separate `cost.json` can
 
 The report reads `pipeline-state.json`, optional `coordinator.json`, `live-run/state.json`, the kernel verification files, `calibration-prompt-audit.json`, `calibration-check.json` and optional `calibration-gap-audit.json`. A top-of-README table uses optional `OPENWSP:STATUS` markers. Publication may change only that table body and the existing `RESULTS` and `COSTS` table bodies; surrounding prose stays unchanged.
 
+`active-live.json` selects the current named attempt. Its version, editor, run ID, relative path, task hash and instructions hash must match the attempt's identity record. The relative path must be exactly `live-runs/<run-id>`, with a run ID matching `[a-z][a-z0-9_-]{0,63}`. Historical attempts remain in the report. Without an active pointer, the original `live-run/` remains the default.
+
+Missing active state or identity keeps the current goal pending. A recorded live completion requires exactly fifty passes, `done: true`, a concrete submission checkpoint and hash, and full MATH-500, GSM8K and IFEval summaries for that same attempt and submitted edit. Each final summary records the matching `provenance.submission_sha256`; subset or batch results do not establish completion. Summary paths must resolve within their own attempt directory.
+
 Pipeline and recovery states are shown as recorded. The live editor's `done` flag means a submission was recorded, not that evaluation, controls, CI and publication all passed. The report never promotes a passed hash check or completed evaluation into an overall completion claim. The saved heartbeat is a snapshot, so current liveness must be checked through `openwsp status`.
 
 Calibration comparison records retain observed/reference accuracy, gap and the prescribed tolerance outcome. A recorded gap stays visible when a circuit-breaker audit permits continuation. Publish the audit file with its checks and unresolved discrepancy; an absent audit is shown explicitly. Runtime metadata and standard-error methods are read from each summary's `provenance` object.
 
-The readable transcript is generated from `turns/` and `tool_calls.jsonl`. Each turn retains the editor's explanation, code or forward block and returned result. Redact credentials; link to large outputs by their artifact identity instead of embedding arrays or full datasets. Experiment 8's primary transcript is at `replications/exp8/results/live-run/transcript.md`.
+The readable transcript is generated from `turns/` and `tool_calls.jsonl`. Each turn retains the editor's explanation, code or forward block and returned result. Redact credentials; link to large outputs by their artifact identity instead of embedding arrays or full datasets. The current Experiment 8 transcript is selected by [`active-live.json`](../replications/exp8/results/active-live.json), presently [`live-runs/codex-20261103/transcript.md`](../replications/exp8/results/live-runs/codex-20261103/transcript.md). The [`live-run/transcript.md`](../replications/exp8/results/live-run/transcript.md) file preserves the earlier API attempt.
 
 ## Add a run by pull request
 

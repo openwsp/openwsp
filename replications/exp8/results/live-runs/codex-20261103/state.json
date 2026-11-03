@@ -1,0 +1,12 @@
+{
+  "turn": 2,
+  "runs": 1,
+  "passes": 0,
+  "requests": 1,
+  "handoffs": 0,
+  "done": false,
+  "submission": null,
+  "run_id": "codex-20261103",
+  "editor": "codex",
+  "base_generation_reuse_requests": []
+}

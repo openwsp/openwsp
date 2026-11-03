@@ -75,6 +75,30 @@ def test_empty_report_does_not_invent_results_or_zero_cost(tmp_path):
     assert "[0.0%]" not in text and "[0.0000]" not in text
 
 
+@pytest.mark.parametrize("standalone_status", [False, True])
+def test_status_appears_once_in_each_readme_layout_and_standalone_report(tmp_path, standalone_status):
+    results = setup_repo(tmp_path)
+    readme = tmp_path / "README.md"
+    if standalone_status:
+        readme.write_text("<!-- OPENWSP:STATUS:START -->\nstale status\n<!-- OPENWSP:STATUS:END -->\n"
+                          + readme.read_text())
+    write_json(results / "pipeline-state.json", {"status": "blocked", "active_stage": "live"})
+    generate_report(tmp_path, results)
+    text = readme.read_text()
+    status_heading = "| Recorded component | State | Evidence |"
+    assert text.count(status_heading) == 1
+    assert "[blocked](replications/exp8/results/pipeline-state.json)" in text
+    result_section = text.split("<!-- OPENWSP:RESULTS:START -->", 1)[1].split(
+        "<!-- OPENWSP:RESULTS:END -->", 1)[0]
+    assert (status_heading in result_section) is not standalone_status
+    report = (results / "report.md").read_text()
+    assert report.count(status_heading) == 1
+    assert "[blocked](pipeline-state.json)" in report
+    generate_report(tmp_path, results)
+    assert readme.read_text() == text
+    assert (results / "report.md").read_text() == report
+
+
 def test_stale_sample_summary_does_not_modify_readme(tmp_path):
     results = setup_repo(tmp_path)
     summary = results / "calibration_base/summary.json"
