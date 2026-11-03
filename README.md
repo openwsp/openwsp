@@ -264,6 +264,8 @@ uv run openwsp --model /absolute/path/model.safetensors \
 
 The factory implements the forward operation for that model; tensor loading alone does not configure inference. The [architecture guide](docs/architecture.md) shows the Python SDK and shared operations. The [MCP guide](docs/mcp.md) shows setup for Codex, Claude Code and Cursor. The [edit format](docs/edit-format.md) defines portable, verified diffs.
 
+For a different editor, the optional [Anthropic Messages adapter](docs/anthropic-editor.md) implements the same `complete(messages)` interface with durable history and usage accounting. It requires explicit model prices and token ceilings; its tests use mocked responses. Experiment 8 continues to use Astra.
+
 ## What we did not do
 
 We do not train or compute gradients, give the live editor benchmark data, choose its winning edit, or change the protocol to pursue a score. Experiments before Experiment 8 have layout placeholders only. There is no hosted service, web UI, package-registry publication, or edit intended to remove safety behavior. The optional controls and extra evaluations are not claimed complete while their records are absent.

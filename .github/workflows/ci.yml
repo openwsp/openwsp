@@ -33,7 +33,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: uv.lock
       - name: Install locked CPU dependencies
-        run: uv sync --locked --extra dev --extra modal --extra replication
+        run: uv sync --locked --extra dev --extra modal --extra replication --extra anthropic
       - name: Check tracked files for credentials
         run: uv run --no-sync python scripts/check_secrets.py --all
       - name: Run CPU and MCP client tests
