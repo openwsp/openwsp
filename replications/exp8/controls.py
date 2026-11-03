@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from openwsp.backends.jobs import RemoteJobRunner
+from replications.exp8.jobs import ProtocolGPUJobs, gpu_instance
 from openwsp.budget import compute_cost
 from openwsp.core import WeightStore
 from replications.exp8.evaluation import evaluate
@@ -39,7 +39,7 @@ def mechanical_edit(ledger, checkpoint):
                          "group": "finished" if finished else "looping"})
     if {row["group"] for row in examples} != {"looping", "finished"}:
         raise ValueError("Calibration produced no valid looping/finished contrast for control 2")
-    runner = RemoteJobRunner(ledger, "/data/jobs", commit=checkpoint)
+    runner = ProtocolGPUJobs(ledger, "/data/jobs", commit=checkpoint)
     totals = {group: {str(layer): np.zeros(1024) for layer in (15, 19)} for group in ("looping", "finished")}
     counts = {"looping": 0, "finished": 0}
     # Smoke on four genuine examples, then bounded teacher-forced batches.
@@ -47,13 +47,10 @@ def mechanical_edit(ledger, checkpoint):
                for i, start in enumerate(range(0, len(examples), 32))]
     for label, batch in batches:
         key = f"control2/directions/{label}"
-        runner.launch(key, lambda: TransformerReader().mean_mlp_outputs.spawn(batch),
-                      upper_bound_usd=compute_cost(2520, gpu="H100", cpu_cores=4, memory_gib=16),
-                      cost_options={"gpu": "H100", "cpu_cores": 4, "memory_gib": 16,
-                                    "startup_seconds": 120, "scaledown_seconds": 2},
+        runner.launch(key, lambda gpu, gate: gpu_instance(TransformerReader, gpu, gate).mean_mlp_outputs.spawn(batch),
                       fingerprint={"ids": [row["id"] for row in batch], "layers": [15, 19],
                                    "answer_tokens": 8192, "loop_tail_duplicate8_min": 0.5})
-        result = runner.result(key, timeout=2520)
+        result = runner.result(key, timeout=3600)
         if label != "smoke":
             for group in counts:
                 counts[group] += result["counts"][group]

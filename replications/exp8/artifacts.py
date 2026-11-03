@@ -29,7 +29,7 @@ def collect(data="/data", staging="/data/publication"):
         if source.exists():
             (root / "kernel").mkdir(exist_ok=True)
             shutil.copyfile(source, root / "kernel" / name)
-    for name in ("calibration-check.json", "budget.json"):
+    for name in ("calibration-check.json", "calibration-gap-audit.json", "budget.json"):
         if (data / name).exists():
             shutil.copyfile(data / name, root / ("costs.json" if name == "budget.json" else name))
     live = data / "live-run"

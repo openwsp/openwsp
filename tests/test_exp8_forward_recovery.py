@@ -26,11 +26,14 @@ def tool_setup(tmp_path, monkeypatch):
         def _path(self, key):
             return jobs_dir / (key.replace("/", "_") + ".json")
 
+        def has_job(self, key):
+            return self._path(key).exists()
+
         def launch(self, key, spawn, **kwargs):
             if self._path(key).exists():
                 events.append(("reused_job", key))
                 return "existing-call"
-            call = spawn()
+            call = spawn("H100", "fake-gate")
             self._path(key).write_text(json.dumps({"call_id": call.object_id}))
             events.append(("new_job", key))
             return call.object_id
@@ -46,12 +49,14 @@ def tool_setup(tmp_path, monkeypatch):
                 ]
             }
 
-    def generator(*, checkpoint, slot="generation"):
+    def generator(*, checkpoint, slot="generation", job_key="", gpu_kind="H100"):
         def spawn(*args, **kwargs):
             dispatched.append(checkpoint)
             return SimpleNamespace(object_id=f"fake-call-{len(dispatched)}")
 
         return SimpleNamespace(generate=SimpleNamespace(spawn=spawn))
+
+    generator.with_options = lambda **options: generator
 
     sandbox = SimpleNamespace(
         commit_work=lambda: events.append("sandbox_commit"),

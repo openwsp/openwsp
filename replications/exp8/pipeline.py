@@ -12,6 +12,7 @@ from pathlib import Path
 from openwsp.budget import BudgetLedger, compute_cost
 from openwsp.backends.jobs import RemoteJobRunner
 from replications.exp8.runtime import CONFIG, ROOT, atomic_write, evaluate_outputs, read_rows
+from replications.exp8.jobs import ProtocolGPUJobs, gpu_instance
 
 
 def run(stage, overrides, *, app, driver_ticket=None):
@@ -24,6 +25,9 @@ def run(stage, overrides, *, app, driver_ticket=None):
             raise ValueError("Protocol overrides are disabled for this pinned replication: " + ", ".join(sorted(unknown)))
     settings = {**CONFIG, **overrides}
     data = Path("/data")
+    # The serialized launcher committed this invocation's ticket after any
+    # predecessor finished. A warm worker must see that new Volume snapshot.
+    data_volume.reload()
     ledger = BudgetLedger(data / "budget.json")
     state_path = data / "state.json"
     state = json.loads(state_path.read_text()) if state_path.exists() else {"stages": {}}
@@ -45,6 +49,7 @@ def run(stage, overrides, *, app, driver_ticket=None):
             checkpoint()
 
     jobs_runner = RemoteJobRunner(ledger, data / "jobs", commit=data_volume.commit)
+    gpu_jobs = ProtocolGPUJobs(ledger, data / "jobs", commit=checkpoint)
     driver_lease = None
     if driver_ticket:
         import modal
@@ -92,25 +97,23 @@ def run(stage, overrides, *, app, driver_ticket=None):
                     if (target / "summary.json").exists():
                         state["stages"][job] = json.loads((target / "summary.json").read_text())
                         continue
-                    max_seconds = settings["max_job_seconds"]
-                    bound_seconds = max_seconds + 600 + 120
                     state["active_stage"] = job
                     checkpoint()
-                    start = time.monotonic()
-                    jobs_runner.launch(job, lambda: Generator(checkpoint=checkpoint_dir).generate.spawn(selected, params, thinking),
-                                       upper_bound_usd=compute_cost(bound_seconds, gpu="H100", cpu_cores=4, memory_gib=16),
-                                       cost_options={"gpu": "H100", "cpu_cores": 4, "memory_gib": 16, "startup_seconds": 120, "scaledown_seconds": 2},
+                    gpu_jobs.launch(job, lambda gpu, gate: gpu_instance(Generator, gpu, gate, checkpoint=checkpoint_dir).generate.spawn(selected, params, thinking),
                                        fingerprint={"checkpoint": checkpoint_dir, "params": params, "thinking": thinking,
                                                     "ids": [r["id"] for r in selected]})
-                    result = jobs_runner.result(job, timeout=bound_seconds)
+                    result = gpu_jobs.result(job, timeout=3600)
                     elapsed = result["container_seconds"]
-                    cost = compute_cost(elapsed + 122, gpu="H100", cpu_cores=4, memory_gib=16)
+                    cost = result.get("_openwsp_gpu", {}).get("total_settled_cost_usd") or compute_cost(elapsed + 122, gpu=result["gpu"], cpu_cores=4, memory_gib=16)
                     summary = evaluate_outputs(result["outputs"], selected, directory=target, stage=job,
                                                benchmark="math500", samples=1, seconds=elapsed,
                                                cost_usd=float(cost), thinking=thinking,
                                                provenance={"revision": settings["revision"], "sampling": params,
                                                            "thinking": thinking, "gpu": result["gpu"],
                                                            "engine": result["engine"],
+                                                           "engine_settings": result.get("engine_settings", {"max_num_seqs": "vLLM default"}),
+                                                           "seconds_basis": "observed_container_duration",
+                                                           "accounted_gpu_seconds": result.get("_openwsp_gpu", {}).get("billable_seconds", elapsed + 122),
                                                            "transformers": result["transformers"]})
                     state["stages"][job] = summary
                     checkpoint()
@@ -171,6 +174,16 @@ def run(stage, overrides, *, app, driver_ticket=None):
         return state
     except Exception as exc:
         state.update(status="blocked", error=f"{type(exc).__name__}: {exc}", error_type=type(exc).__name__)
+        checkpoint()
+        if stage == "all":
+            # A detached run must publish partial evidence and its blocker too.
+            # This uses the already-reserved CPU driver, and never masks the
+            # original stage failure or starts more paid inference work.
+            try:
+                from replications.exp8.artifacts import publish
+                state["publication"] = publish()
+            except Exception as publication_error:
+                state["publication"] = {"status": "blocked", "error_type": type(publication_error).__name__}
         raise
     finally:
         stop.set()

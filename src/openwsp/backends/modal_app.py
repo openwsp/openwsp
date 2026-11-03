@@ -11,10 +11,12 @@ configure_tls()
 REPO = Path(__file__).resolve().parents[3] if modal.is_local() else Path("/opt/openwsp")
 SOURCE = REPO / "src/openwsp" if modal.is_local() else REPO / "openwsp"
 app = modal.App("openwsp-exp8")
+start_gate_store = modal.Dict.from_name("openwsp-exp8-start-gates", create_if_missing=True)
 data_volume = modal.Volume.from_name("openwsp-exp8-data", create_if_missing=True, version=2)
 model_volume = modal.Volume.from_name("openwsp-exp8-model", create_if_missing=True, version=2)
 practice_volume = modal.Volume.from_name("openwsp-exp8-practice", create_if_missing=True, version=2)
 work_volume = modal.Volume.from_name("openwsp-exp8-work", create_if_missing=True, version=2)
+kernel_cache_volume = modal.Volume.from_name("openwsp-exp8-kernel-cache", create_if_missing=True, version=2)
 common = ["numpy", "safetensors", "transformers==5.17.0", "math-verify==0.9.0", "datasets",
           "absl-py", "langdetect", "nltk", "immutabledict",
           "scipy", "scikit-learn", "pandas", "sympy", "networkx", "openai==3.42.1", "modal==1.6.3"]
@@ -35,7 +37,9 @@ gpu_image = (modal.Image.from_registry("nvidia/cuda:13.0.3-devel-ubuntu24.04", a
              .uv_pip_install("vllm==0.33.0", *common)
              .add_local_dir(SOURCE, "/opt/openwsp/openwsp", copy=True)
              .add_local_dir(REPO / "replications", "/opt/openwsp/replications", copy=True)
-             .env({"PYTHONPATH": "/opt/openwsp", "HF_HUB_DISABLE_XET": "1"}))
+             .env({"PYTHONPATH": "/opt/openwsp", "HF_HUB_DISABLE_XET": "1",
+                   "VLLM_CACHE_ROOT": "/kernel-cache/vllm", "TRITON_CACHE_DIR": "/kernel-cache/triton",
+                   "FLASHINFER_WORKSPACE_BASE": "/kernel-cache/flashinfer"}))
 
 
 @app.function(image=driver_image, timeout=1800, cpu=(2, 2), memory=(8192, 8192),
@@ -54,15 +58,26 @@ def prepare():
 
 
 @app.cls(image=gpu_image, gpu="H100", cpu=(4, 4), memory=(16384, 16384), timeout=1800, startup_timeout=600,
-         scaledown_window=2, max_containers=2, volumes={"/data": data_volume})
+         scaledown_window=2, max_containers=2, volumes={"/data": data_volume, "/kernel-cache": kernel_cache_volume})
 class Generator:
     checkpoint: str = modal.parameter(default="/data/original")
     slot: str = modal.parameter(default="generation")
+    job_key: str = modal.parameter(default="")
+    gpu_kind: str = modal.parameter(default="H100")
 
     @modal.enter()
     def load(self):
+        self.started = time.monotonic()
         self.load_error = None
         try:
+            if self.job_key:
+                import uuid
+
+                from openwsp.backends.start_gate import StartGate
+                decision = StartGate(start_gate_store).try_start(self.job_key, owner_id=uuid.uuid4().hex)
+                if not decision.may_start:
+                    self.load_error = "Queued attempt did not win its start gate: " + decision.state
+                    return
             self._load()
         except Exception as exc:  # noqa: BLE001 - deliver startup failures once to the caller
             # Returning from enter prevents Modal's startup retry loop from
@@ -72,12 +87,12 @@ class Generator:
     def _load(self):
         from transformers import AutoTokenizer
         from vllm import LLM
-        self.started = time.monotonic()
         self.tokenizer = AutoTokenizer.from_pretrained(self.checkpoint)
         self.engine = LLM(model=self.checkpoint, dtype="bfloat16", language_model_only=True,
                           max_model_len=34816, gpu_memory_utilization=0.85, seed=0,
-                          enable_prefix_caching=False)
+                          max_num_seqs=128, enable_prefix_caching=False, disable_log_stats=False)
         self.last_accounted = self.started
+        kernel_cache_volume.commit()
 
     def _seconds(self):
         now = time.monotonic()
@@ -140,20 +155,33 @@ class Generator:
             for sample in output.outputs]} for row, output in zip(rows, generated, strict=True)]
         return {"outputs": outputs, "generation_seconds": time.monotonic()-start,
                 "container_seconds": self._seconds(),
-                "gpu": "H100", "engine": "vllm==0.33.0", "transformers": "5.17.0", "swap": swap}
+                "gpu": self.gpu_kind, "engine": "vllm==0.33.0", "transformers": "5.17.0", "swap": swap,
+                "engine_settings": {"dtype": "bfloat16", "language_model_only": True, "max_model_len": 34816,
+                                    "max_num_seqs": 128, "gpu_memory_utilization": 0.85, "prefix_caching": False}}
 
 
 @app.cls(image=gpu_image, gpu="H100", cpu=(4, 4), memory=(16384, 16384), timeout=1800, startup_timeout=600,
          scaledown_window=2, max_containers=2,
-         volumes={"/data": data_volume, "/work": work_volume})
+         volumes={"/data": data_volume, "/work": work_volume, "/kernel-cache": kernel_cache_volume})
 class TransformerReader:
     checkpoint: str = modal.parameter(default="/data/original")
     eager: bool = modal.parameter(default=False)
+    job_key: str = modal.parameter(default="")
+    gpu_kind: str = modal.parameter(default="H100")
 
     @modal.enter()
     def load(self):
+        self.started = time.monotonic()
         self.load_error = None
         try:
+            if self.job_key:
+                import uuid
+
+                from openwsp.backends.start_gate import StartGate
+                decision = StartGate(start_gate_store).try_start(self.job_key, owner_id=uuid.uuid4().hex)
+                if not decision.may_start:
+                    self.load_error = "Queued attempt did not win its start gate: " + decision.state
+                    return
             self._load()
         except Exception as exc:  # noqa: BLE001 - prevent repeated failed container startups
             self.load_error = f"{type(exc).__name__}: {exc}"
@@ -161,7 +189,6 @@ class TransformerReader:
     def _load(self):
         import torch
         from transformers import AutoTokenizer, Qwen3_5ForConditionalGeneration
-        self.started = time.monotonic()
         self.tokenizer = AutoTokenizer.from_pretrained(self.checkpoint)
         self.model = Qwen3_5ForConditionalGeneration.from_pretrained(
             self.checkpoint, dtype=torch.bfloat16,
@@ -182,7 +209,7 @@ class TransformerReader:
         start = time.monotonic()
         result = capture(self.model, self.tokenizer, request, directory)
         result.update(s=time.monotonic()-start, container_seconds=self._seconds())
-        work_volume.commit()
+        (data_volume if Path(directory).is_relative_to("/data") else work_volume).commit()
         return result
 
     @modal.method()
@@ -317,6 +344,15 @@ def launch(stage="all", config=None, recover=False):
               schedule=modal.Period(minutes=15))
 def watchdog():
     return launch.remote(recover=True)
+
+
+@app.function(image=driver_image, timeout=3600, startup_timeout=120, scaledown_window=5,
+              cpu=(1, 1), memory=(4096, 4096), retries=0, max_containers=1,
+              volumes={"/data": data_volume})
+@modal.concurrent(max_inputs=1)
+def public_forward(payload):
+    from openwsp.backends.public_forward import execute
+    return execute(payload)
 
 
 @app.function(image=driver_image, timeout=60, volumes={"/data": data_volume})

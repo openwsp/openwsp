@@ -5,7 +5,7 @@ import json
 import math
 from pathlib import Path
 
-from openwsp.backends.jobs import RemoteJobRunner
+from replications.exp8.jobs import ProtocolGPUJobs, gpu_instance
 from openwsp.budget import compute_cost
 from replications.exp8.runtime import CONFIG, atomic_write, evaluate_outputs, read_rows, write_rows
 
@@ -17,7 +17,7 @@ def evaluate(name, checkpoint_dir, benchmark, samples, ledger, checkpoint, *, th
         return json.loads((directory / "summary.json").read_text())
     rows = read_rows(Path("/data/benchmarks") / f"{benchmark}.jsonl")
     params = {**CONFIG["sampling"], **(changes or {}), "n": samples}
-    runner = RemoteJobRunner(ledger, "/data/jobs", commit=checkpoint)
+    runner = ProtocolGPUJobs(ledger, "/data/jobs", commit=checkpoint)
     batch_size = max(1, 256 // samples)
     batches = [("smoke", rows[:4])] + [(f"batch_{i:03d}", rows[start:start+batch_size])
                for i, start in enumerate(range(0, len(rows), batch_size))]
@@ -28,19 +28,19 @@ def evaluate(name, checkpoint_dir, benchmark, samples, ledger, checkpoint, *, th
             summary = json.loads((target / "summary.json").read_text())
         else:
             key = f"evaluation/{name}/{benchmark}/{label}"
-            runner.launch(key, lambda: Generator(checkpoint=checkpoint_dir).generate.spawn(selected, params, thinking),
-                          upper_bound_usd=compute_cost(2520, gpu="H100", cpu_cores=4, memory_gib=16),
-                          cost_options={"gpu": "H100", "cpu_cores": 4, "memory_gib": 16,
-                                        "startup_seconds": 120, "scaledown_seconds": 2},
+            runner.launch(key, lambda gpu, gate: gpu_instance(Generator, gpu, gate, checkpoint=checkpoint_dir).generate.spawn(selected, params, thinking),
                           fingerprint={"checkpoint": checkpoint_dir, "sampling": params, "thinking": thinking,
                                        "ids": [row["id"] for row in selected]})
-            result = runner.result(key, timeout=2520)
-            seconds = result["container_seconds"] + 122
+            result = runner.result(key, timeout=3600)
+            seconds = result.get("_openwsp_gpu", {}).get("billable_seconds", result["container_seconds"] + 122)
             summary = evaluate_outputs(result["outputs"], selected, directory=target, stage=name,
                                        benchmark=benchmark, samples=samples, seconds=seconds,
-                                       cost_usd=float(compute_cost(seconds, gpu="H100", cpu_cores=4, memory_gib=16)),
+                                       cost_usd=float(result.get("_openwsp_gpu", {}).get("total_settled_cost_usd") or compute_cost(seconds, gpu=result["gpu"], cpu_cores=4, memory_gib=16)),
                                        thinking=thinking, provenance={"revision": CONFIG["revision"], "sampling": params,
                                        "thinking": thinking, "gpu": result["gpu"], "engine": result["engine"],
+                                       "engine_settings": result.get("engine_settings", {}),
+                                       "seconds_basis": "accounted_resource_seconds_including_margins_and_cancelled_attempts",
+                                       "container_seconds": result["container_seconds"],
                                        "transformers": result["transformers"]})
             checkpoint()
         if label != "smoke":
@@ -58,7 +58,9 @@ def evaluate(name, checkpoint_dir, benchmark, samples, ledger, checkpoint, *, th
                "seconds": sum(row["seconds"] for row in summaries),
                "cost_usd": sum(row["cost_usd"] for row in summaries)}
     summary["provenance"].update(batch_generations=256, standard_error="binomial_per_sample",
-                                 smoke_included_in_score=False)
+                                 smoke_included_in_score=False,
+                                 batches=[{"gpu": row["provenance"]["gpu"], "seconds": row["seconds"],
+                                           "cost_usd": row["cost_usd"]} for row in summaries])
     write_rows(directory / "samples.jsonl", records)
     atomic_write(directory / "summary.json", summary)
     checkpoint()

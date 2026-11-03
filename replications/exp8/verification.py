@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from openwsp.backends.jobs import RemoteJobRunner
+from replications.exp8.jobs import ProtocolGPUJobs, gpu_instance
 from openwsp.budget import compute_cost
 from openwsp.core import WeightStore
 from replications.exp8.runtime import atomic_write
@@ -15,13 +15,11 @@ def verify_forward(ledger, checkpoint):
     from openwsp.backends.modal_app import Generator, TransformerReader, work_volume
     root = Path("/data/results/kernel")
     root.mkdir(parents=True, exist_ok=True)
-    runner = RemoteJobRunner(ledger, "/data/jobs", commit=checkpoint)
+    runner = ProtocolGPUJobs(ledger, "/data/jobs", commit=checkpoint)
 
     def run(key, spawn, fingerprint):
-        runner.launch(key, spawn, upper_bound_usd=compute_cost(2520, gpu="H100", cpu_cores=4, memory_gib=16),
-                      cost_options={"gpu": "H100", "cpu_cores": 4, "memory_gib": 16,
-                                    "startup_seconds": 120, "scaledown_seconds": 2}, fingerprint=fingerprint)
-        return runner.result(key, timeout=2520)
+        runner.launch(key, spawn, fingerprint=fingerprint)
+        return runner.result(key, timeout=3600)
 
     if not (root / "weight-swap.json").exists():
         tokenizer = AutoTokenizer.from_pretrained("/model", local_files_only=True)
@@ -31,9 +29,9 @@ def verify_forward(ledger, checkpoint):
         store.apply_edit("/data/reference_edit")
         edits = store.validate_submission()
         edit_id = "authors-p50c-pinned"
-        reference = run("verify/fresh-reference", lambda: Generator(checkpoint="/data/p50c", slot="verification-reference").reference.spawn(probes, edit_id),
+        reference = run("verify/fresh-reference", lambda gpu, gate: gpu_instance(Generator, gpu, gate, checkpoint="/data/p50c", slot="verification-reference").reference.spawn(probes, edit_id),
                         {"edit": edit_id, "probes": probes})
-        swapped = run("verify/native-swap", lambda: Generator(slot="verification-swap").audit_swap.spawn(edits, edit_id, probes, reference["reference"]),
+        swapped = run("verify/native-swap", lambda gpu, gate: gpu_instance(Generator, gpu, gate, slot="verification-swap").audit_swap.spawn(edits, edit_id, probes, reference["reference"]),
                       {"edit": edit_id, "probes": probes})
         atomic_write(root / "weight-swap.json", {"status": "passed" if swapped["ok"] else "fallback",
                      "mode": "verified_native_swap" if swapped["ok"] else "fresh_engine_per_pass", **swapped})
@@ -41,10 +39,10 @@ def verify_forward(ledger, checkpoint):
     if not (root / "forward-verification.json").exists():
         request = {"texts": ["1+1=2", "2+3=5", "3+4=7", "4+5=9"],
                    "return": {"token_logprobs": True, "topk": 3, "hidden_states": [0, 4, 24], "mlp_act": [15, 19]}}
-        result = run("verify/teacher-forced", lambda: TransformerReader().read.spawn(request, "/work/verification/teacher"), request)
+        result = run("verify/teacher-forced", lambda gpu, gate: gpu_instance(TransformerReader, gpu, gate).read.spawn(request, "/work/verification/teacher"), request)
         attention = {"texts": ["One plus one equals two.", "Two plus three equals five."],
                      "return": {"attn_layers": [3, 7, 11, 15, 19, 23]}}
-        attn = run("verify/attention", lambda: TransformerReader(eager=True).read.spawn(attention, "/work/verification/attention"), attention)
+        attn = run("verify/attention", lambda gpu, gate: gpu_instance(TransformerReader, gpu, gate, eager=True).read.spawn(attention, "/work/verification/attention"), attention)
         work_volume.reload()
         import numpy as np
         for directory in ("teacher", "attention"):
