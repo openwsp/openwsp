@@ -1,0 +1,611 @@
+{
+  "accounting_checks": {
+    "all_26_receipts_recompute_exactly": true,
+    "incomplete_events_match_ledger": true,
+    "no_accounting_discrepancy_found_in_this_scope": true,
+    "no_duplicate_response_ids": true,
+    "reasoning_not_double_counted": true
+  },
+  "admission_block": {
+    "all_input_cache_write_component_usd": "20.878625",
+    "bound_basis": "Assume all bounded input tokens are newly written to the 30m cache, plus the full configured 128000 output tokens, at the applicable context tier.",
+    "editor_task_limit_usd": "100",
+    "exception": "BudgetExceeded",
+    "implied_input_token_bound": 835145,
+    "max_output_component_usd": "9.600000",
+    "meaning": "Local task-spend authorization guard before creation, not evidence of an OpenAI account balance or payment failure. This reservation is an upper bound, not a predicted turn charge or a full-run budget.",
+    "no_t027_receipt_or_reservation": true,
+    "remaining_usd": "21.7072350",
+    "required_new_reservation_usd": "30.478625",
+    "reservation_shortfall_usd": "8.7713900",
+    "spent_usd": "78.2927650",
+    "stage": "editor:t027"
+  },
+  "basis": "Derived from saved provider token-usage receipts using the configured published Standard rates; not a provider invoice or an account-balance check.",
+  "breakdown": {
+    "cache_write_12h": {
+      "cost_usd": "0",
+      "tokens": 0
+    },
+    "cache_write_30m": {
+      "cost_usd": "15.6889250",
+      "tokens": 737611
+    },
+    "cached_input": {
+      "cost_usd": "9.062260",
+      "tokens": 4746656
+    },
+    "ordinary_uncached_input": {
+      "cost_usd": "0.00108",
+      "tokens": 78
+    },
+    "output_including_reasoning": {
+      "cost_usd": "53.540500",
+      "tokens": 813433
+    }
+  },
+  "cache_hit_rate": {
+    "basis": "Token-weighted across all 26 responses; repeated conversation input is counted on each request. Cache writes are not cache hits.",
+    "denominator_all_reported_input_tokens": 5484345,
+    "numerator_cached_input_tokens": 4746656,
+    "percent": "86.54918682176267175022723771"
+  },
+  "comparison_to_authors": {
+    "brief_reported_editor_cost_approximately_usd": "20",
+    "brief_reported_editor_turns": 158,
+    "brief_reported_input_cache_hit_percent": 96,
+    "limitations": [
+      "Authors' cumulative snapshots were audited, but their complete per-request billed usage and invoice were not reconstructed; neither the brief's approximately $20 nor the illustrative final-counter arithmetic forecasts this run.",
+      "No scientific response text was inspected and no claim is made about why the model generated these long outputs.",
+      "Only 4105 of our output tokens are labeled reasoning; the high output bill cannot be attributed primarily to reasoning-token volume.",
+      "The 128000 ceiling permits larger outputs but is not itself the billed token count: costs use actual reported usage.",
+      "No total-run budget or top-up amount is projected, and provider balances were not checked."
+    ],
+    "observed_cost_drivers": [
+      "Output accounts for $53.540500 of $78.292765; the seven confirmed incomplete responses generated 800768 of 813433 output tokens.",
+      "Incomplete responses remain billed and in the same response lineage. Subsequent receipts show their large generated outputs entering the next input context and cache writes.",
+      "Ten requests exceed 272000 actual input tokens and receive the published higher context-tier rates.",
+      "The token-weighted input cache-hit share is approximately 86.55%, below the 96% stated in the brief."
+    ],
+    "pinned_metadata_audit": {
+      "configuration_counts": {
+        "model_auto_compact_token_limit=1000000": 158,
+        "model_context_window=872000": 158,
+        "model_instructions_file=\"<per-run instructions.md>\"": 158,
+        "model_reasoning_effort=\"max\"": 158
+      },
+      "counter_limitations": [
+        "The first thread has decreasing counters after turn15; final thread snapshots do not establish every billed request or discarded branch.",
+        "Cumulative counters do not by themselves establish each request's input context and pricing tier.",
+        "The authors' Codex CLI version and provider billing receipt are absent from these records.",
+        "run.limit=false is a harness record, not a provider incomplete-status field."
+      ],
+      "final_conversation_counter_sum": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 5180032,
+        "input_tokens": 5437759,
+        "output_tokens": 149017,
+        "reasoning_output_tokens": 46800
+      },
+      "final_counter_cache_hit_percent": "95.26041886004878112472435796",
+      "final_counter_cost_at_normal_rates_usd": "15.208152",
+      "model_counts": {
+        "gpt-6-astra": 158
+      },
+      "openwsp_output_vs_author_final_counters_ratio": "5.458659079165464342994423455",
+      "rate_assumptions": "Illustrative arithmetic using $10/M ordinary input, $1/M cached input, $50/M output and the recorded zero cache-write counters. Reasoning is included in output. This is not an exact invoice estimate.",
+      "records_reviewed": 158,
+      "repository": "RikiyaT/lm_understand-logs",
+      "revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+      "run_limit_count": 0,
+      "threads": [
+        {
+          "counter_decreases": [
+            {
+              "fields": [
+                "input_tokens",
+                "output_tokens",
+                "reasoning_output_tokens"
+              ],
+              "turn": 16
+            },
+            {
+              "fields": [
+                "input_tokens",
+                "output_tokens",
+                "reasoning_output_tokens"
+              ],
+              "turn": 18
+            },
+            {
+              "fields": [
+                "input_tokens",
+                "output_tokens",
+                "reasoning_output_tokens"
+              ],
+              "turn": 20
+            },
+            {
+              "fields": [
+                "reasoning_output_tokens"
+              ],
+              "turn": 21
+            },
+            {
+              "fields": [
+                "input_tokens",
+                "output_tokens",
+                "reasoning_output_tokens"
+              ],
+              "turn": 22
+            },
+            {
+              "fields": [
+                "input_tokens"
+              ],
+              "turn": 23
+            },
+            {
+              "fields": [
+                "input_tokens",
+                "output_tokens"
+              ],
+              "turn": 24
+            },
+            {
+              "fields": [
+                "input_tokens",
+                "output_tokens"
+              ],
+              "turn": 26
+            },
+            {
+              "fields": [
+                "output_tokens",
+                "reasoning_output_tokens"
+              ],
+              "turn": 27
+            },
+            {
+              "fields": [
+                "output_tokens"
+              ],
+              "turn": 28
+            },
+            {
+              "fields": [
+                "input_tokens"
+              ],
+              "turn": 29
+            },
+            {
+              "fields": [
+                "input_tokens",
+                "output_tokens",
+                "reasoning_output_tokens"
+              ],
+              "turn": 30
+            },
+            {
+              "fields": [
+                "input_tokens",
+                "output_tokens",
+                "reasoning_output_tokens"
+              ],
+              "turn": 32
+            },
+            {
+              "fields": [
+                "output_tokens",
+                "reasoning_output_tokens"
+              ],
+              "turn": 33
+            },
+            {
+              "fields": [
+                "cached_input_tokens"
+              ],
+              "turn": 34
+            },
+            {
+              "fields": [
+                "input_tokens",
+                "output_tokens",
+                "reasoning_output_tokens"
+              ],
+              "turn": 35
+            },
+            {
+              "fields": [
+                "output_tokens",
+                "reasoning_output_tokens"
+              ],
+              "turn": 36
+            },
+            {
+              "fields": [
+                "cached_input_tokens"
+              ],
+              "turn": 37
+            },
+            {
+              "fields": [
+                "input_tokens",
+                "output_tokens",
+                "reasoning_output_tokens"
+              ],
+              "turn": 38
+            },
+            {
+              "fields": [
+                "cached_input_tokens",
+                "output_tokens"
+              ],
+              "turn": 39
+            },
+            {
+              "fields": [
+                "input_tokens",
+                "reasoning_output_tokens"
+              ],
+              "turn": 40
+            }
+          ],
+          "final_usage": {
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 307072,
+            "input_tokens": 337669,
+            "output_tokens": 10081,
+            "reasoning_output_tokens": 2426
+          },
+          "first_turn": 1,
+          "last_turn": 40,
+          "record_count": 40,
+          "thread_id": "id-f4333c3a"
+        },
+        {
+          "counter_decreases": [],
+          "final_usage": {
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 1683712,
+            "input_tokens": 1769070,
+            "output_tokens": 50977,
+            "reasoning_output_tokens": 15447
+          },
+          "first_turn": 41,
+          "last_turn": 80,
+          "record_count": 40,
+          "thread_id": "id-e624be4b"
+        },
+        {
+          "counter_decreases": [],
+          "final_usage": {
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 1725440,
+            "input_tokens": 1820215,
+            "output_tokens": 51220,
+            "reasoning_output_tokens": 14703
+          },
+          "first_turn": 81,
+          "last_turn": 120,
+          "record_count": 40,
+          "thread_id": "id-d4aea4ed"
+        },
+        {
+          "counter_decreases": [],
+          "final_usage": {
+            "cache_write_input_tokens": 0,
+            "cached_input_tokens": 1463808,
+            "input_tokens": 1510805,
+            "output_tokens": 36739,
+            "reasoning_output_tokens": 14224
+          },
+          "first_turn": 121,
+          "last_turn": 158,
+          "record_count": 38,
+          "thread_id": "id-3bbcba11"
+        }
+      ],
+      "tool_free_count": 158,
+      "turn_completed_count": 158,
+      "usage_semantics": "The pinned authors README explicitly says Codex usage accumulates over a conversation and must not be summed over turns (exp8_math/README.md lines94\u201395).",
+      "verified_sources": [
+        {
+          "matches_pinned_source_manifest": true,
+          "sha256": "b140155f253f4e0208ea408c2b6ddbeb052409a60a7c4b3237307222a5365706",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/turns/t001/run.json"
+        },
+        {
+          "matches_pinned_source_manifest": true,
+          "sha256": "3dc719a8ee7103433da5f76cae78d3abe477500445fd668b8cadf871dfc4a4d7",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/turns/t040/run.json"
+        },
+        {
+          "matches_pinned_source_manifest": true,
+          "sha256": "6106b8e30e68b180987da8d7e843b6f9d6ff61503316453f60d356e220bae110",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/turns/t080/run.json"
+        },
+        {
+          "matches_pinned_source_manifest": true,
+          "sha256": "2f771a53ba926367db96a20d815c8cd5456b82da3d0361022771fefbf0c9cf51",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/turns/t120/run.json"
+        },
+        {
+          "matches_pinned_source_manifest": true,
+          "sha256": "4a48d23070bad24c5a8b3ab46c94c23279f3edf3c361c0adb8d147e0498e343c",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/turns/t158/run.json"
+        },
+        {
+          "matches_pinned_source_manifest": true,
+          "sha256": "473e386ade21ff52240103003b6b125e4362d9fa11010916c1b770ddb0edcbbd",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/README.md"
+        },
+        {
+          "matches_pinned_source_manifest": true,
+          "sha256": "0ed095ea5be86d47daade93f8fac2d0fd102681b6e2d2e46273cdd70e30bf93c",
+          "url": "https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/harness/codex_config.toml"
+        }
+      ]
+    },
+    "source": "docs/TASK.md:10 and docs/TASK.md:58",
+    "transport_controls": {
+      "author_explicit_controls": {
+        "client": "Codex exec --strict-config --json; exec resume within each thread",
+        "code_mode": false,
+        "explicit_output_token_ceiling": null,
+        "explicit_sampling_parameters": null,
+        "explicit_stop_sequences": null,
+        "explicit_verbosity": null,
+        "fresh_conversation_turns": [
+          1,
+          41,
+          81,
+          121
+        ],
+        "model_auto_compact_token_limit": 1000000,
+        "model_context_window": 872000
+      },
+      "interpretation": "The release establishes a different client and history transport but not a specific verbosity or stop-setting mismatch. No client setting has been identified as the cause of the incomplete formatting responses.",
+      "matched": [
+        "Explicit gpt-6-astra model selection",
+        "Explicit max reasoning effort",
+        "Experiment's one-line instructions file",
+        "Native model tools disabled"
+      ],
+      "openwsp_explicit_controls": {
+        "background": true,
+        "client": "Direct OpenAI Responses API",
+        "explicit_sampling_parameters": null,
+        "explicit_stop_sequences": null,
+        "explicit_verbosity": null,
+        "history": "previous_response_id",
+        "max_output_tokens": 128000,
+        "prompt_cache_options": {
+          "ttl": "30m"
+        },
+        "service_tier": "default",
+        "store": true,
+        "truncation": "disabled"
+      },
+      "unknowns": [
+        "Authors' actual wire request and backend endpoint/snapshot",
+        "Authors' effective output-token ceiling, verbosity and output-format defaults",
+        "Authors' provider-side cache policy",
+        "Whether an unrecorded client or backend difference contributes to the formatting failure"
+      ]
+    }
+  },
+  "generated_at": "2026-11-03T12:05:55.489408+00:00",
+  "incomplete_responses": {
+    "all_executed_false": true,
+    "count": 7,
+    "events": [
+      {
+        "cost_usd": "1.683131",
+        "executed": false,
+        "input_tokens": 19703,
+        "output_tokens": 32768,
+        "reason": "max_output_tokens",
+        "response_id": "resp_05e27016f3ef07b8006ae9a485842c87d2b45330e540cf2cb0",
+        "source_line": 957,
+        "status": "incomplete",
+        "turn": 11
+      },
+      {
+        "cost_usd": "6.474481",
+        "executed": false,
+        "input_tokens": 56215,
+        "output_tokens": 128000,
+        "reason": "max_output_tokens",
+        "response_id": "resp_05e27016f3ef07b8006ae9abf6273487d288e8485e557048a5",
+        "source_line": 1409,
+        "status": "incomplete",
+        "turn": 14
+      },
+      {
+        "cost_usd": "6.597447",
+        "executed": false,
+        "input_tokens": 185299,
+        "output_tokens": 128000,
+        "reason": "max_output_tokens",
+        "response_id": "resp_05e27016f3ef07b8006ae9b01ed8c087d28fcc6bfb7a8f5ce7",
+        "source_line": 1582,
+        "status": "incomplete",
+        "turn": 16
+      },
+      {
+        "cost_usd": "10.269271",
+        "executed": false,
+        "input_tokens": 317508,
+        "output_tokens": 128000,
+        "reason": "max_output_tokens",
+        "response_id": "resp_05e27016f3ef07b8006ae9b494c53487d2879989c3de561501",
+        "source_line": 2144,
+        "status": "incomplete",
+        "turn": 20
+      },
+      {
+        "cost_usd": "13.43582",
+        "executed": false,
+        "input_tokens": 445538,
+        "output_tokens": 128000,
+        "reason": "max_output_tokens",
+        "response_id": "resp_05e27016f3ef07b8006ae9b8421bb087d2b41a273e4100a285",
+        "source_line": 2188,
+        "status": "incomplete",
+        "turn": 21
+      },
+      {
+        "cost_usd": "10.756797",
+        "executed": false,
+        "input_tokens": 574266,
+        "output_tokens": 128000,
+        "reason": "max_output_tokens",
+        "response_id": "resp_05e27016f3ef07b8006ae9bc0a57f087d2b3e72a2f0bda4170",
+        "source_line": 2303,
+        "status": "incomplete",
+        "turn": 24
+      },
+      {
+        "cost_usd": "11.017296",
+        "executed": false,
+        "input_tokens": 702802,
+        "output_tokens": 128000,
+        "reason": "max_output_tokens",
+        "response_id": "resp_05e27016f3ef07b8006ae9c106df6087d2a443c8e5a644d199",
+        "source_line": 2421,
+        "status": "incomplete",
+        "turn": 26
+      }
+    ],
+    "output_component_cost_usd": "52.8384",
+    "output_tokens": 800768,
+    "request_cost_usd": "60.234243",
+    "status_evidence": "Explicit status=incomplete and reason=max_output_tokens in the public editor-event metadata, matched by response ID, full usage and cost to ledger receipts. Output-ceiling equality alone was not used to infer status."
+  },
+  "modal_snapshot": {
+    "cycle_allowance_usd": "42",
+    "note": "Same ledger snapshot only; controls may still change Modal expenditure. No observed allowance increase or current account-balance claim.",
+    "remaining_after_reservations_usd": "15.40078551431647494823165554",
+    "retained_reservations_usd": "6.181793472222222222222222222",
+    "settled_estimates_usd": "20.36742101346130282954612224"
+  },
+  "pricing": {
+    "comparison_note": "Same-usage arithmetic at the lower rates only; the lower rates are not available for these long requests.",
+    "extra_cost_from_long_context_rates_for_this_same_usage_usd": "23.6535415",
+    "normal": {
+      "cache_write_12h": "25",
+      "cache_write_30m": "12.5",
+      "cached_input": "1",
+      "ordinary_input": "10",
+      "output_including_reasoning": "50"
+    },
+    "over_272000_input_tokens": {
+      "cache_write_12h": "50",
+      "cache_write_30m": "25",
+      "cached_input": "2",
+      "ordinary_input": "20",
+      "output_including_reasoning": "75"
+    },
+    "receipt_tiers": {
+      "over_272000_input_tokens": {
+        "cost_usd": "60.175933",
+        "input_tokens": 4833137,
+        "output_tokens": 514754,
+        "request_count": 10,
+        "turns": [
+          "editor:t017",
+          "editor:t018",
+          "editor:t019",
+          "editor:t020",
+          "editor:t021",
+          "editor:t022",
+          "editor:t023",
+          "editor:t024",
+          "editor:t025",
+          "editor:t026"
+        ]
+      },
+      "up_to_272000_input_tokens": {
+        "cost_usd": "18.1168320",
+        "input_tokens": 651208,
+        "output_tokens": 298679,
+        "request_count": 16,
+        "turns": [
+          "editor:t001",
+          "editor:t002",
+          "editor:t003",
+          "editor:t004",
+          "editor:t005",
+          "editor:t006",
+          "editor:t007",
+          "editor:t008",
+          "editor:t009",
+          "editor:t010",
+          "editor:t011",
+          "editor:t012",
+          "editor:t013",
+          "editor:t014",
+          "editor:t015",
+          "editor:t016"
+        ]
+      }
+    },
+    "source": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+    "tier_applies_to_entire_request": true,
+    "unit": "USD per million tokens"
+  },
+  "receipt_coverage": {
+    "first_stage": "editor:t001",
+    "last_stage": "editor:t026",
+    "latest_completed_at": "2026-11-03T11:27:18.440235+00:00",
+    "settled_response_count": 26,
+    "unique_response_ids": 26
+  },
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "replications/exp8/results/costs.json",
+      "role": "ledger",
+      "sha256": "589c0f8bf9514a26239f7a82908651ee532d1d9296820187d9390ab94e31c004"
+    },
+    {
+      "path": "replications/exp8/results/live-run/transcript.md",
+      "role": "event_metadata",
+      "sha256": "62739d34b97f8ecfcf6e57ee9e61f3ee1546ce58570b17ee8a57aed0bbd62ad6"
+    },
+    {
+      "path": "replications/exp8/results/pipeline-state.json",
+      "role": "admission_block",
+      "sha256": "29b666ca78f662279e4f0ba0fe887edaa048e2c28314a2bd8344eeb124299aee"
+    },
+    {
+      "path": "src/openwsp/budget.py",
+      "role": "pricing_implementation",
+      "sha256": "dbb36a1aad805e1190c55e81b994c6271d3999fa28fe84dd9d704f4733d279bb"
+    },
+    {
+      "path": "src/openwsp/editors/openai.py",
+      "role": "adapter_implementation",
+      "sha256": "06f4fa354703fdf11aa19dee6e096ca644940b9c6bbadf15f7d1d6795af7e5a9"
+    },
+    {
+      "path": "docs/TASK.md",
+      "role": "comparison_brief",
+      "sha256": "b5fcc0b7ed4e6dcb5b5f6e545eadd479ff9c1a0cc4b4d10375c2ee7a00a71954"
+    },
+    {
+      "path": "replications/exp8/sources.json",
+      "role": "author_release_manifest",
+      "sha256": "c32604af98283bde91c20c3a2ae23ddaf8776824f8e8f54a216605fe4e1d3e5d"
+    }
+  ],
+  "totals": {
+    "cost_usd": "78.2927650",
+    "input_tokens": 5484345,
+    "output_tokens": 813433,
+    "reasoning_cost_included_in_output_usd": "0.235375",
+    "reasoning_tokens_included_in_output": 4105,
+    "reserved_usd": 0
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "status": "verified_format_runaway",
+  "method": "Inspect saved provider responses; locate first complete python/forward fence, parse its prefix without execution, and classify every suffix character. No live request, replay, or edit was performed.",
+  "turns": [
+    {
+      "turn": "t011",
+      "status": "incomplete",
+      "output_tokens": 32768,
+      "total_characters": 57418,
+      "first_complete_fenced_response_characters": 7940,
+      "suffix_characters": 49478,
+      "suffix_only_backticks_and_whitespace": false,
+      "parsed_prefix": {
+        "kind": "forward",
+        "explanation_characters": 458,
+        "payload_characters": 7465
+      },
+      "response_id": "resp_05e27016f3ef07b8006ae9a485842c87d2b45330e540cf2cb0",
+      "trailing_only_backticks_and_whitespace_characters": 49235,
+      "trailing_repeated_nonempty_lines": 9847,
+      "most_repeated_line_count": 9846,
+      "response_volume": "openwsp-exp8-data",
+      "response_volume_path": "/live-run/editor/response_490adc47ada040ca85bf1648d8c82b81.json",
+      "partial_text_sha256": "051168f8647a1d58a8bd529e39aee8d33b68d26f99a39034ff86eaade1420605",
+      "offline_guard": {
+        "detected": true,
+        "first_detection_character_count_upper_bound": 9216,
+        "scan_stride_characters": 64,
+        "diagnostic": {
+          "kind": "runaway_backtick_suffix",
+          "backtick_lines": 3277,
+          "suffix_chars": 16383,
+          "scanned_chars": 16384,
+          "scan_truncated": true
+        }
+      },
+      "prefix_syntax_validation": "JSON parse without dispatch",
+      "returned_text_configuration": {
+        "format": {
+          "type": "text"
+        },
+        "verbosity": "medium"
+      }
+    },
+    {
+      "turn": "t014",
+      "status": "incomplete",
+      "output_tokens": 128000,
+      "total_characters": 214198,
+      "first_complete_fenced_response_characters": 2531,
+      "suffix_characters": 211667,
+      "suffix_only_backticks_and_whitespace": false,
+      "parsed_prefix": {
+        "kind": "python",
+        "explanation_characters": 405,
+        "payload_characters": 2110
+      },
+      "response_id": "resp_05e27016f3ef07b8006ae9abf6273487d288e8485e557048a5",
+      "trailing_only_backticks_and_whitespace_characters": 211502,
+      "trailing_repeated_nonempty_lines": 42300,
+      "most_repeated_line_count": 42300,
+      "response_volume": "openwsp-exp8-data",
+      "response_volume_path": "/live-run/editor/response_442caf0057ef4607b4cffe1a28f42358.json",
+      "partial_text_sha256": "28d19e86ea6d41c12bbf1442bec95f2e3b5172615a186713e3b5e4732611e315",
+      "offline_guard": {
+        "detected": true,
+        "first_detection_character_count_upper_bound": 3776,
+        "scan_stride_characters": 64,
+        "diagnostic": {
+          "kind": "runaway_backtick_suffix",
+          "backtick_lines": 3276,
+          "suffix_chars": 16382,
+          "scanned_chars": 16384,
+          "scan_truncated": true
+        }
+      },
+      "prefix_syntax_validation": "Python AST parse without execution",
+      "returned_text_configuration": {
+        "format": {
+          "type": "text"
+        },
+        "verbosity": "medium"
+      }
+    },
+    {
+      "turn": "t016",
+      "status": "incomplete",
+      "output_tokens": 128000,
+      "total_characters": 213619,
+      "first_complete_fenced_response_characters": 801,
+      "suffix_characters": 212818,
+      "suffix_only_backticks_and_whitespace": false,
+      "parsed_prefix": {
+        "kind": "python",
+        "explanation_characters": 381,
+        "payload_characters": 404
+      },
+      "response_id": "resp_05e27016f3ef07b8006ae9b01ed8c087d28fcc6bfb7a8f5ce7",
+      "trailing_only_backticks_and_whitespace_characters": 212805,
+      "trailing_repeated_nonempty_lines": 42561,
+      "most_repeated_line_count": 42561,
+      "response_volume": "openwsp-exp8-data",
+      "response_volume_path": "/live-run/editor/response_a62c4cf3d1b3491089c2324d68873f63.json",
+      "partial_text_sha256": "75f82005f5aad23e28f09c3fbed6d004bd9a6ee3aad631e6c14c90e14f54b9d3",
+      "offline_guard": {
+        "detected": true,
+        "first_detection_character_count_upper_bound": 1856,
+        "scan_stride_characters": 64,
+        "diagnostic": {
+          "kind": "runaway_backtick_suffix",
+          "backtick_lines": 3277,
+          "suffix_chars": 16383,
+          "scanned_chars": 16384,
+          "scan_truncated": true
+        }
+      },
+      "prefix_syntax_validation": "Python AST parse without execution",
+      "returned_text_configuration": {
+        "format": {
+          "type": "text"
+        },
+        "verbosity": "medium"
+      }
+    },
+    {
+      "turn": "t020",
+      "status": "incomplete",
+      "output_tokens": 128000,
+      "total_characters": 214030,
+      "first_complete_fenced_response_characters": 2337,
+      "suffix_characters": 211693,
+      "suffix_only_backticks_and_whitespace": false,
+      "parsed_prefix": {
+        "kind": "forward",
+        "explanation_characters": 431,
+        "payload_characters": 1889
+      },
+      "response_id": "resp_05e27016f3ef07b8006ae9b494c53487d2879989c3de561501",
+      "trailing_only_backticks_and_whitespace_characters": 211643,
+      "trailing_repeated_nonempty_lines": 42329,
+      "most_repeated_line_count": 42328,
+      "response_volume": "openwsp-exp8-data",
+      "response_volume_path": "/live-run/editor/response_15473456ac864e19acc6a6889c2039eb.json",
+      "partial_text_sha256": "802d66d62b9daf1d7a512b9d93c6d35440b9458209a8e11df9e44fecca2464d1",
+      "offline_guard": {
+        "detected": true,
+        "first_detection_character_count_upper_bound": 3456,
+        "scan_stride_characters": 64,
+        "diagnostic": {
+          "kind": "runaway_backtick_suffix",
+          "backtick_lines": 3277,
+          "suffix_chars": 16383,
+          "scanned_chars": 16384,
+          "scan_truncated": true
+        }
+      },
+      "prefix_syntax_validation": "JSON parse without dispatch",
+      "returned_text_configuration": {
+        "format": {
+          "type": "text"
+        },
+        "verbosity": "medium"
+      }
+    },
+    {
+      "turn": "t021",
+      "status": "incomplete",
+      "output_tokens": 128000,
+      "total_characters": 213616,
+      "first_complete_fenced_response_characters": 1284,
+      "suffix_characters": 212332,
+      "suffix_only_backticks_and_whitespace": false,
+      "parsed_prefix": {
+        "kind": "forward",
+        "explanation_characters": 251,
+        "payload_characters": 1016
+      },
+      "response_id": "resp_05e27016f3ef07b8006ae9b8421bb087d2b41a273e4100a285",
+      "trailing_only_backticks_and_whitespace_characters": 212307,
+      "trailing_repeated_nonempty_lines": 42461,
+      "most_repeated_line_count": 42461,
+      "response_volume": "openwsp-exp8-data",
+      "response_volume_path": "/live-run/editor/response_a1aeb0998a9a4181bf1b8ad73d9356f2.json",
+      "partial_text_sha256": "ccf7338250b19f3c55ceef4f7821045d8b866ebde2b3ed6474744d9815072ed8",
+      "offline_guard": {
+        "detected": true,
+        "first_detection_character_count_upper_bound": 2368,
+        "scan_stride_characters": 64,
+        "diagnostic": {
+          "kind": "runaway_backtick_suffix",
+          "backtick_lines": 3276,
+          "suffix_chars": 16382,
+          "scanned_chars": 16384,
+          "scan_truncated": true
+        }
+      },
+      "prefix_syntax_validation": "JSON parse without dispatch",
+      "returned_text_configuration": {
+        "format": {
+          "type": "text"
+        },
+        "verbosity": "medium"
+      }
+    },
+    {
+      "turn": "t024",
+      "status": "incomplete",
+      "output_tokens": 128000,
+      "total_characters": 214018,
+      "first_complete_fenced_response_characters": 1239,
+      "suffix_characters": 212779,
+      "suffix_only_backticks_and_whitespace": false,
+      "parsed_prefix": {
+        "kind": "forward",
+        "explanation_characters": 358,
+        "payload_characters": 864
+      },
+      "response_id": "resp_05e27016f3ef07b8006ae9bc0a57f087d2b3e72a2f0bda4170",
+      "trailing_only_backticks_and_whitespace_characters": 212655,
+      "trailing_repeated_nonempty_lines": 42531,
+      "most_repeated_line_count": 42531,
+      "response_volume": "openwsp-exp8-data",
+      "response_volume_path": "/live-run/editor/response_9c4b2e7277df456ca643a15fc406c2aa.json",
+      "partial_text_sha256": "b94e0b5e2b6b61e3385c74925823b2b9a5554aa2b7c02a7577c489c52babaaca",
+      "offline_guard": {
+        "detected": true,
+        "first_detection_character_count_upper_bound": 2432,
+        "scan_stride_characters": 64,
+        "diagnostic": {
+          "kind": "runaway_backtick_suffix",
+          "backtick_lines": 3277,
+          "suffix_chars": 16383,
+          "scanned_chars": 16384,
+          "scan_truncated": true
+        }
+      },
+      "prefix_syntax_validation": "JSON parse without dispatch",
+      "returned_text_configuration": {
+        "format": {
+          "type": "text"
+        },
+        "verbosity": "medium"
+      }
+    },
+    {
+      "turn": "t026",
+      "status": "incomplete",
+      "output_tokens": 128000,
+      "total_characters": 213685,
+      "first_complete_fenced_response_characters": 863,
+      "suffix_characters": 212822,
+      "suffix_only_backticks_and_whitespace": false,
+      "parsed_prefix": {
+        "kind": "python",
+        "explanation_characters": 385,
+        "payload_characters": 462
+      },
+      "response_id": "resp_05e27016f3ef07b8006ae9c106df6087d2a443c8e5a644d199",
+      "trailing_only_backticks_and_whitespace_characters": 212805,
+      "trailing_repeated_nonempty_lines": 42561,
+      "most_repeated_line_count": 42561,
+      "response_volume": "openwsp-exp8-data",
+      "response_volume_path": "/live-run/editor/response_19ce206d6618497e895284906aa3ccdc.json",
+      "partial_text_sha256": "af321201f6cee0c6dc262a364d8bc51a39558f3a56373dccf7ecfe2c7a077a61",
+      "offline_guard": {
+        "detected": true,
+        "first_detection_character_count_upper_bound": 1920,
+        "scan_stride_characters": 64,
+        "diagnostic": {
+          "kind": "runaway_backtick_suffix",
+          "backtick_lines": 3277,
+          "suffix_chars": 16383,
+          "scanned_chars": 16384,
+          "scan_truncated": true
+        }
+      },
+      "prefix_syntax_validation": "Python AST parse without execution",
+      "returned_text_configuration": {
+        "format": {
+          "type": "text"
+        },
+        "verbosity": "medium"
+      }
+    }
+  ],
+  "limitation": "Character counts are not token attribution. A syntactically complete prefix was never executed because the provider response was incomplete.",
+  "source": "Saved provider response objects identified by response_id and Modal volume path; private audit copies in logs/editor-response-audit.",
+  "guard_validation": "Offline replay of saved text in 64-character increments. This verifies pattern recognition, not live API cancellation latency or token billing.",
+  "transport_comparison": {
+    "observed_api_verbosity": "medium",
+    "current_codex_catalog_verbosity": "low",
+    "codex_source_revision": "9630fcfc1375f868693227ae14b5bd7142d8f8af",
+    "source": "https://github.com/openai/codex/blob/9630fcfc1375f868693227ae14b5bd7142d8f8af/codex-rs/models-manager/models.json#L4",
+    "limitation": "Authors exact CLI version/defaults are not recorded; this is a testable difference, not evidence that verbosity caused the loop."
+  }
+}

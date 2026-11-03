@@ -127,6 +127,8 @@ The [readable live-run transcript](replications/exp8/results/live-run/transcript
 
 No final live edit was submitted; [the recorded run remains blocked](replications/exp8/results/live-run/blocker.json). We did not select among the editor's candidates or change its live weights. Before the live run, [kernel verification](STATUS.md) established the published p50c tensor hashes and ran the authors' first Python cell unmodified.
 
+The live run stopped at its [editor budget admission check](replications/exp8/results/live-run/blocker.json). A later audit found [seven output-limit responses](replications/exp8/results/live-run/editor-format-loop.json) that wrote a complete fenced action and then repeated backticks and blank lines. Their trailing formatting loops contain about [49,000–213,000 characters each](replications/exp8/results/live-run/editor-format-loop.json). None of these incomplete responses was executed. Raising the output limit did not solve the loop; retaining those responses also enlarged subsequent context.
+
 ### Cost and time
 
 Cost records distinguish API usage charges, resource estimates and unresolved reservations. The linked files state what each duration measures. Resource time summed across jobs is not end-to-end wall time.
@@ -183,7 +185,7 @@ Repeated requests, attempts and batches are grouped by stage and operation; the 
 
 **What tools did the editor have?** The kernel, practice files and bounded forward-pass interface listed above. It does not see test sets, the reference edit, calibration outcomes, our control results or the internet. The live run uses the authors' text-block protocol; the public MCP interface is a separate way to use the same core operations.
 
-**What did it cost?** The generated cost table links to per-stage records. The [budget policy](docs/TASK.md) is a spending limit, not a reported cost.
+**What did it cost?** The editor spent [$78.292765](replications/exp8/results/live-run/editor-cost-analysis.json) before the next response could no longer be admitted under the cap. The seven incomplete requests account for [$60.234243 including input](replications/exp8/results/live-run/editor-cost-analysis.json). The generated cost table records compute separately. The [budget policy](docs/TASK.md) is a spending limit, not a reported cost.
 
 ### Differences from the authors' setup
 
