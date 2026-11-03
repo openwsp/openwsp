@@ -10,6 +10,21 @@ Fable uses `claude-fable-5-1`, adaptive thinking and the corresponding native ef
 
 All 11 Fable items share one existing `BudgetLedger` configured with `editor_limit=20`. The five explicit rates are input 10, output 50, cache read 0.25, 5-minute cache creation 12.50 and 1-hour creation 20 dollars per million. The adapter reserves the conservative maximum input rate and output ceiling before each request, and settles actual disjoint usage. No prompt caching, batch discount, US-only routing, API fallback or best-of selection is requested. Stop when the next conservative bound cannot fit; preserve the unattempted item as pending. The fixed output ceiling is 8,192 for experiments 1/2 and 32,768 for 4/5, including thinking. Before Fable execution, save native token-count evidence and a conservative input ceiling for each exact prompt in the limits file. Source authors' token counts are not Fable counts. A length-limited reply is retained as incomplete, never continued or replaced.
 
+From the OpenWSP repository root, prepare the pinned source cache once, using sparse checkout for the four raw-experiment folders. These commands do not call an editor or run a scorer:
+
+```sh
+mkdir -p .openwsp
+git clone --filter=blob:none --no-checkout \
+  https://github.com/RikiyaT/lm_understand-logs.git .openwsp/upstream
+git -C .openwsp/upstream sparse-checkout init --cone
+git -C .openwsp/upstream sparse-checkout set \
+  exp1_which_game exp2_diffusion exp4_fix_car exp5_write_from_scratch
+git -C .openwsp/upstream checkout --detach 4d09ba6d6a7e891dd8063974dfe81b3d78e3494f
+git -C .openwsp/upstream rev-parse HEAD
+```
+
+If `.openwsp/upstream` already exists, reuse it when `rev-parse HEAD` reports that exact revision and the inventory hash check below passes. Preserve existing changes and sparse-checkout selections. For a different or modified checkout, use a new cache directory and pass its path with `--source-root` to the runner, token counter and source validator. The runner verifies existing source files; it never downloads or rewrites them.
+
 Run inventory and hash verification without inference:
 
 ```sh
