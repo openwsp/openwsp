@@ -56,6 +56,10 @@ def verify_forward(ledger, checkpoint):
                         if not np.allclose(values[i, :, :length, :length].sum(-1), 1, atol=.015):
                             raise ValueError("Attention probabilities do not sum to one")
                 del values
+        # Public evidence names the actual files and records only their shapes.
+        # Bare input_ids is reserved by the publisher for forbidden raw arrays.
+        for metadata in (result, attn):
+            metadata["files"] = {name + ".npy": shape for name, shape in metadata["files"].items()}
         atomic_write(root / "forward-verification.json", {"status": "passed", "teacher_forced": result, "attention": attn})
         checkpoint()
     return {"status": "passed", "weight_swap": json.loads((root / "weight-swap.json").read_text()),

@@ -1,0 +1,6 @@
+{
+  "file": "/data/results/kernel/forward-verification.json",
+  "normalized": true,
+  "sha256": "7e979f409894e6a37150a925fc84e85ac3ddeaab0f9b2e02ac86a6a43fc4ddfc",
+  "scope": "Artifact filenames only; measured arrays, dimensions and results unchanged."
+}

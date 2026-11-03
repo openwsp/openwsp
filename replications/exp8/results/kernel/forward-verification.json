@@ -1,0 +1,140 @@
+{
+  "status": "passed",
+  "teacher_forced": {
+    "bytes": 410544,
+    "container_seconds": 15.919023681,
+    "files": {
+      "hidden_0.npy": [
+        4,
+        5,
+        1024
+      ],
+      "hidden_24.npy": [
+        4,
+        5,
+        1024
+      ],
+      "hidden_4.npy": [
+        4,
+        5,
+        1024
+      ],
+      "input_ids.npy": [
+        4,
+        5
+      ],
+      "mlp_act_15.npy": [
+        4,
+        5,
+        3584
+      ],
+      "mlp_act_19.npy": [
+        4,
+        5,
+        3584
+      ],
+      "token_logprobs.npy": [
+        4,
+        4
+      ],
+      "topk_ids.npy": [
+        4,
+        5,
+        3
+      ],
+      "topk_logprobs.npy": [
+        4,
+        5,
+        3
+      ]
+    },
+    "lengths": [
+      5,
+      5,
+      5,
+      5
+    ],
+    "mean_token_logprob": [
+      -2.9796934127807617,
+      -3.1176869869232178,
+      -3.2245213985443115,
+      -3.255728244781494
+    ],
+    "ok": true,
+    "s": 2.6683454289999986,
+    "type": "teacher_forced",
+    "_openwsp_gpu": {
+      "actual_gpu": "H100",
+      "attempt_count": 1,
+      "total_settled_cost_usd": 0.16348001606987866,
+      "billable_seconds": 137.919023681,
+      "cost_basis": "resource_estimate_not_provider_invoice",
+      "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
+    }
+  },
+  "attention": {
+    "bytes": 7008,
+    "container_seconds": 15.14082306,
+    "files": {
+      "attn_11.npy": [
+        2,
+        8,
+        6,
+        6
+      ],
+      "attn_15.npy": [
+        2,
+        8,
+        6,
+        6
+      ],
+      "attn_19.npy": [
+        2,
+        8,
+        6,
+        6
+      ],
+      "attn_23.npy": [
+        2,
+        8,
+        6,
+        6
+      ],
+      "attn_3.npy": [
+        2,
+        8,
+        6,
+        6
+      ],
+      "attn_7.npy": [
+        2,
+        8,
+        6,
+        6
+      ],
+      "input_ids.npy": [
+        2,
+        6
+      ]
+    },
+    "lengths": [
+      6,
+      6
+    ],
+    "mean_token_logprob": [
+      -3.258798599243164,
+      -4.04314079284668
+    ],
+    "ok": true,
+    "s": 4.147893221,
+    "type": "teacher_forced",
+    "_openwsp_gpu": {
+      "actual_gpu": "H100",
+      "attempt_count": 1,
+      "total_settled_cost_usd": 0.16255758893378666,
+      "billable_seconds": 137.14082306,
+      "cost_basis": "resource_estimate_not_provider_invoice",
+      "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "status": "fallback",
+  "mode": "fresh_engine_per_pass",
+  "container_seconds": 225.87615156299998,
+  "error": "Engine does not expose a compatible weight-reload contract",
+  "evidence": {},
+  "fallback": "fresh_engine_per_pass",
+  "ok": false,
+  "_openwsp_gpu": {
+    "actual_gpu": "H100",
+    "attempt_count": 1,
+    "total_settled_cost_usd": 0.4123491983193427,
+    "billable_seconds": 347.876151563,
+    "cost_basis": "resource_estimate_not_provider_invoice",
+    "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
+  }
+}
