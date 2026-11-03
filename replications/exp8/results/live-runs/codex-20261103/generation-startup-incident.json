@@ -41,6 +41,10 @@
     },
     "ordinary_generation": "awaiting next editor generation request"
   },
-  "accounting": "Failed-job upper bounds and unresolved paired-child reservations remain. Provider audit is in progress; no calibration timing has been substituted for failed-job measurements.",
-  "protocol_effect": "Eight neutral forward-failure messages are part of this trajectory. This attempt was not restarted and its failure history will be disclosed."
+  "accounting": "Provider audit confirmed all 12 affected calls terminal: eight failed-call bounds were already settled and four edited-partner bounds remain reserved. Every bound is retained because billed container duration is unavailable; these are resource estimates, not invoices. The audit made no ledger changes.",
+  "protocol_effect": "Eight neutral forward-failure messages are part of this trajectory. This attempt was not restarted and its failure history will be disclosed.",
+  "accounting_audit": {
+    "path": "generation-startup-provider-audit.json",
+    "sha256": "fa8f5febbf7697e49beb50510b3247af04b8ffe39dacd421dd2caa8189a09ed9"
+  }
 }

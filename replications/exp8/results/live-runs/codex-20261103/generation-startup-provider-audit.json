@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261103",
+  "status": "all_audited_calls_terminal_failure",
+  "observed_at": "2026-11-03T19:46:58.921790+00:00",
+  "published_at": "2026-11-03T19:51:14.187445+00:00",
+  "scope": "Read-only audit of the eight failed generation requests and their four uncollected edited partners. It does not assert that the current live driver has stopped.",
+  "provider_evidence": {
+    "method": "Modal FunctionGetOutputs",
+    "request_options": {
+      "timeout": 0,
+      "clear_on_success": false,
+      "start_idx": 0,
+      "end_idx": 0
+    },
+    "result_payloads_decoded": false,
+    "discovery": "FunctionGetCallGraph, then exact call outputs and four saved GPU journals",
+    "call_graph_truncated": false
+  },
+  "counts": {
+    "failed_forward_requests": 8,
+    "provider_terminal_calls": 12,
+    "already_settled_full_bounds": 8,
+    "still_reserved_partner_bounds": 4,
+    "active_gpu_calls_among_audited_calls": 0
+  },
+  "accounting": {
+    "basis": "retained resource upper bounds, not provider invoices",
+    "invoice": false,
+    "already_settled_bound_usd": "23.8963200",
+    "reserved_partner_bound_usd": "11.9481600",
+    "reliable_billed_container_duration_available": false,
+    "ledger_mutated_by_audit": false,
+    "decision": "Retain every full bound. Changing a reserved bound to a settled bound would not increase available budget."
+  },
+  "timing_limit": "Provider method timestamps exclude class-constructor loading. Start-gate timestamps also do not establish billed container duration. No calibration timing or inferred refund replaces the retained bound.",
+  "orphan_cause": "Both paired children launch before original-first collection. Failure of the original result exits the request before collecting the edited partner, leaving an active wrapper and reservation despite terminal provider failure.",
+  "reconciliation_boundary": "The existing coordinator currently reconciles its driver ticket only. Child reconciliation must wait for confirmed terminal ownership transfer from the live driver, verify these immutable IDs, and retain full-bound failed-job receipts before any replacement driver starts. No cancellation, spawn, counter reset or settlement was performed by this audit.",
+  "records": [
+    {
+      "call_id": "fc-01M6HD35FMBA7A9M7KA9270Y6C",
+      "reservation_id": "modal-job-fbc2c94a4eaa310f2501cac530a1c0d39e0dd22d2aeb9cdc96069b64816dcd86",
+      "job_key": "live/codex-20261103/fwd_3/edited",
+      "ledger_status_at_audit": "reserved",
+      "retained_resource_bound_usd": "2.9870400",
+      "invoice": false,
+      "provider_terminal_state": "failed",
+      "provider_output_status": "GENERIC_STATUS_FAILURE",
+      "provider_input_id": "in-01M6HD35FW99QR5FVCM9DHZZQ3",
+      "provider_task_id": "ta-01M6HD35VKNYQQ5GP39QZWWGYR",
+      "provider_input_started_at": 1793733036.4301102,
+      "provider_output_created_at": 1793733036.4317157,
+      "retry_count": 0,
+      "exception_sha256": "9e82f08cb4513ad86ed11f613e5aed2737039fe06d9be1b4d7b623dc23afcb11",
+      "recognized_error_markers": [
+        "ThinkingCloseLogitsProcessor",
+        "RuntimeError"
+      ],
+      "journal_proof": {
+        "path": "/live-runs/codex-20261103/jobs/gated/c371debb5fffbc77b4bd4449b805b14d724fa91293e1dde9b21a245d9ef27db9.gpu.json",
+        "sha256": "f333812c9cfc9a7fbd25303c7c4b79d7b1d04165f1af0068c044b8d1a381f3b0",
+        "wrapper_status_at_audit": "active",
+        "gate": {
+          "version": 1,
+          "job_key": "openwsp-gpu:3ee1857cf14946aea2a7fdddee510488:0",
+          "state": "started",
+          "owner_id": "eab540ebd0934b2da8e4ce188c80862c",
+          "created_at": 1793733011.040991
+        }
+      }
+    },
+    {
+      "call_id": "fc-01M6HD2Z7XN1MTKHSGVJ622TQ1",
+      "reservation_id": "modal-job-45f71b210dc94bc1a280025bc0de34e4f58540a275ebcf010000d389e046041b",
+      "job_key": "live/codex-20261103/fwd_3/original",
+      "ledger_status_at_audit": "settled",
+      "retained_resource_bound_usd": "2.9870400",
+      "invoice": false,
+      "provider_terminal_state": "failed",
+      "provider_output_status": "GENERIC_STATUS_FAILURE",
+      "provider_input_id": "in-01M6HD2Z88H5SSWHJPEDCWPCDM",
+      "provider_task_id": "ta-01M6HD2ZNGK0G2VAAQ56AA553R",
+      "provider_input_started_at": 1793733027.0166218,
+      "provider_output_created_at": 1793733027.0191526,
+      "retry_count": 0,
+      "exception_sha256": "9e82f08cb4513ad86ed11f613e5aed2737039fe06d9be1b4d7b623dc23afcb11",
+      "recognized_error_markers": [
+        "ThinkingCloseLogitsProcessor",
+        "RuntimeError"
+      ]
+    },
+    {
+      "call_id": "fc-01M6HD59WQV91SQA00M7KQJ0D1",
+      "reservation_id": "modal-job-9ff62df3c432d930a6a888ca74d05aa4391f0b3fffff2338fedfdae1f50d1d91",
+      "job_key": "live/codex-20261103/fwd_4/edited",
+      "ledger_status_at_audit": "reserved",
+      "retained_resource_bound_usd": "2.9870400",
+      "invoice": false,
+      "provider_terminal_state": "failed",
+      "provider_output_status": "GENERIC_STATUS_FAILURE",
+      "provider_input_id": "in-01M6HD59WX3S0XM4DFYVKM9JYK",
+      "provider_task_id": "ta-01M6HD5A7WCQ8T1RTZJJ2Q34DR",
+      "provider_input_started_at": 1793733105.1618366,
+      "provider_output_created_at": 1793733105.1637464,
+      "retry_count": 0,
+      "exception_sha256": "9e82f08cb4513ad86ed11f613e5aed2737039fe06d9be1b4d7b623dc23afcb11",
+      "recognized_error_markers": [
+        "ThinkingCloseLogitsProcessor",
+        "RuntimeError"
+      ],
+      "journal_proof": {
+        "path": "/live-runs/codex-20261103/jobs/gated/4a083616dabbde3d7ca297e9b5fc4982c2998b4f7b134da81a786c4e5561e330.gpu.json",
+        "sha256": "195c3731cb9b5245415c514744b11d7bd03c27465edf694acc672f8546e0725d",
+        "wrapper_status_at_audit": "active",
+        "gate": {
+          "version": 1,
+          "job_key": "openwsp-gpu:7235727434904654ba83a1e1fa21b76a:0",
+          "state": "started",
+          "owner_id": "a84ba63481eb40be924e945bba979d9c",
+          "created_at": 1793733081.3183384
+        }
+      }
+    },
+    {
+      "call_id": "fc-01M6HD54DNW2F8X9RXAHYNKPY8",
+      "reservation_id": "modal-job-38ad628bbbf00b8f715f4b942f0b54edca12da0e06a40ab279f0361f6fe7546e",
+      "job_key": "live/codex-20261103/fwd_4/original",
+      "ledger_status_at_audit": "settled",
+      "retained_resource_bound_usd": "2.9870400",
+      "invoice": false,
+      "provider_terminal_state": "failed",
+      "provider_output_status": "GENERIC_STATUS_FAILURE",
+      "provider_input_id": "in-01M6HD54DZ83P1WZHFBSS04M4E",
+      "provider_task_id": "ta-01M6HD54Q8N7FKQGQYJFS9YF4R",
+      "provider_input_started_at": 1793733098.5315967,
+      "provider_output_created_at": 1793733098.5336611,
+      "retry_count": 0,
+      "exception_sha256": "9e82f08cb4513ad86ed11f613e5aed2737039fe06d9be1b4d7b623dc23afcb11",
+      "recognized_error_markers": [
+        "ThinkingCloseLogitsProcessor",
+        "RuntimeError"
+      ]
+    },
+    {
+      "call_id": "fc-01M6HD8WJKA9VP9DQYCEHZSF5G",
+      "reservation_id": "modal-job-e3519f3077ae7d2249927f89da40c2a0104ac660104a4568b4bbbe2b5dbb6a36",
+      "job_key": "live/codex-20261103/fwd_5/edited",
+      "ledger_status_at_audit": "reserved",
+      "retained_resource_bound_usd": "2.9870400",
+      "invoice": false,
+      "provider_terminal_state": "failed",
+      "provider_output_status": "GENERIC_STATUS_FAILURE",
+      "provider_input_id": "in-01M6HD8WJRR9996PCX46GQ9ZW2",
+      "provider_task_id": "ta-01M6HD8WYA02773KBPDHWTX6SR",
+      "provider_input_started_at": 1793733218.1615088,
+      "provider_output_created_at": 1793733218.163309,
+      "retry_count": 0,
+      "exception_sha256": "9e82f08cb4513ad86ed11f613e5aed2737039fe06d9be1b4d7b623dc23afcb11",
+      "recognized_error_markers": [
+        "ThinkingCloseLogitsProcessor",
+        "RuntimeError"
+      ],
+      "journal_proof": {
+        "path": "/live-runs/codex-20261103/jobs/gated/f3ef6ccfd12c162ebcee19427fd5aaadf59f5103dae1668130fa5c865061464a.gpu.json",
+        "sha256": "14f901449df76a1af5b78c26dcd02f0ba861dcaa30acbb5395eb9eb78d078442",
+        "wrapper_status_at_audit": "active",
+        "gate": {
+          "version": 1,
+          "job_key": "openwsp-gpu:2d301d2a4e6049309163a3a9c5000fa8:0",
+          "state": "started",
+          "owner_id": "ca017407a54f40e89789e3180859e521",
+          "created_at": 1793733197.5958169
+        }
+      }
+    },
+    {
+      "call_id": "fc-01M6HD8PKQJAD3KPATKZFKY6G0",
+      "reservation_id": "modal-job-7038ddae7f80e14948d4bdd85384a92c33707c9e39a50ac55c8cfeb7c3621602",
+      "job_key": "live/codex-20261103/fwd_5/original",
+      "ledger_status_at_audit": "settled",
+      "retained_resource_bound_usd": "2.9870400",
+      "invoice": false,
+      "provider_terminal_state": "failed",
+      "provider_output_status": "GENERIC_STATUS_FAILURE",
+      "provider_input_id": "in-01M6HD8PKZB83X3SD04B7FM88H",
+      "provider_task_id": "ta-01M6HD8Q2GWNM02CPE2Q5G682R",
+      "provider_input_started_at": 1793733221.7239714,
+      "provider_output_created_at": 1793733221.7263253,
+      "retry_count": 0,
+      "exception_sha256": "9e82f08cb4513ad86ed11f613e5aed2737039fe06d9be1b4d7b623dc23afcb11",
+      "recognized_error_markers": [
+        "ThinkingCloseLogitsProcessor",
+        "RuntimeError"
+      ]
+    },
+    {
+      "call_id": "fc-01M6HDD6V7QZQWFZCDWRS6VXFP",
+      "reservation_id": "modal-job-7ecbd0c8497bf0acde4ff5f32e593997d76fddf766e93373158f963d7abf03f2",
+      "job_key": "live/codex-20261103/fwd_7/edited",
+      "ledger_status_at_audit": "settled",
+      "retained_resource_bound_usd": "2.9870400",
+      "invoice": false,
+      "provider_terminal_state": "failed",
+      "provider_output_status": "GENERIC_STATUS_FAILURE",
+      "provider_input_id": "in-01M6HDD6VFGXXQ2VZYFHGRRW88",
+      "provider_task_id": "ta-01M6HDD78V4KFQXPVJGRC4VSYR",
+      "provider_input_started_at": 1793733364.6897206,
+      "provider_output_created_at": 1793733364.6916554,
+      "retry_count": 0,
+      "exception_sha256": "9e82f08cb4513ad86ed11f613e5aed2737039fe06d9be1b4d7b623dc23afcb11",
+      "recognized_error_markers": [
+        "ThinkingCloseLogitsProcessor",
+        "RuntimeError"
+      ]
+    },
+    {
+      "call_id": "fc-01M6HDFMY37EA855HE93HSTRYD",
+      "reservation_id": "modal-job-f603a2e0dd54f0e43ce1a9f7ef1cbb50a58b08dcff6d05e5b48fc8e9219a67b7",
+      "job_key": "live/codex-20261103/fwd_8/original",
+      "ledger_status_at_audit": "settled",
+      "retained_resource_bound_usd": "2.9870400",
+      "invoice": false,
+      "provider_terminal_state": "failed",
+      "provider_output_status": "GENERIC_STATUS_FAILURE",
+      "provider_input_id": "in-01M6HDFMYAFA9HR4E10ZWDVPKM",
+      "provider_task_id": "ta-01M6HDFNAW1YQMVYVFSJTMJDSR",
+      "provider_input_started_at": 1793733438.861129,
+      "provider_output_created_at": 1793733438.8628056,
+      "retry_count": 0,
+      "exception_sha256": "9e82f08cb4513ad86ed11f613e5aed2737039fe06d9be1b4d7b623dc23afcb11",
+      "recognized_error_markers": [
+        "ThinkingCloseLogitsProcessor",
+        "RuntimeError"
+      ]
+    },
+    {
+      "call_id": "fc-01M6HDR51KHKX8X657H7VYB1G1",
+      "reservation_id": "modal-job-45bf8282f52d4672d292f9546b4faed8b6b4dee3e45a9fc29e3737f7a2e083f7",
+      "job_key": "live/codex-20261103/fwd_10/edited",
+      "ledger_status_at_audit": "reserved",
+      "retained_resource_bound_usd": "2.9870400",
+      "invoice": false,
+      "provider_terminal_state": "failed",
+      "provider_output_status": "GENERIC_STATUS_FAILURE",
+      "provider_input_id": "in-01M6HDR51Z2AKXWSCAG3QSGJ26",
+      "provider_task_id": "ta-01M6HDR5HTP3AYMXX7MVT9E78R",
+      "provider_input_started_at": 1793733721.273044,
+      "provider_output_created_at": 1793733721.275119,
+      "retry_count": 0,
+      "exception_sha256": "9e82f08cb4513ad86ed11f613e5aed2737039fe06d9be1b4d7b623dc23afcb11",
+      "recognized_error_markers": [
+        "ThinkingCloseLogitsProcessor",
+        "RuntimeError"
+      ],
+      "journal_proof": {
+        "path": "/live-runs/codex-20261103/jobs/gated/326abeb89e0e24ccc5127f490efbc36394431cc58176e50277a6e8944efa5b94.gpu.json",
+        "sha256": "17e81cb13adbb6f872473e6841678fa1eeed33e4706db2d9aa1f799c32994a50",
+        "wrapper_status_at_audit": "active",
+        "gate": {
+          "version": 1,
+          "job_key": "openwsp-gpu:08b782ad79794d93a8d574c6f23e2604:0",
+          "state": "started",
+          "owner_id": "5867e76c0df34cfd843458a8acb12dc8",
+          "created_at": 1793733698.7819505
+        }
+      }
+    },
+    {
+      "call_id": "fc-01M6HDR061WY7DC9ZB1H7SMXKS",
+      "reservation_id": "modal-job-28b05f9c4952f4e9e298c38046211e7ba1a49cded9bb06f5c73ed77e523e60a3",
+      "job_key": "live/codex-20261103/fwd_10/original",
+      "ledger_status_at_audit": "settled",
+      "retained_resource_bound_usd": "2.9870400",
+      "invoice": false,
+      "provider_terminal_state": "failed",
+      "provider_output_status": "GENERIC_STATUS_FAILURE",
+      "provider_input_id": "in-01M6HDR06FH62QRH25P28GA2PC",
+      "provider_task_id": "ta-01M6HDR0HR32XPJF6062ZNSHJR",
+      "provider_input_started_at": 1793733719.987528,
+      "provider_output_created_at": 1793733719.9894123,
+      "retry_count": 0,
+      "exception_sha256": "9e82f08cb4513ad86ed11f613e5aed2737039fe06d9be1b4d7b623dc23afcb11",
+      "recognized_error_markers": [
+        "ThinkingCloseLogitsProcessor",
+        "RuntimeError"
+      ]
+    },
+    {
+      "call_id": "fc-01M6HE3HMSN0BGM1T5RTFHRTAY",
+      "reservation_id": "modal-job-3023963acd1558c732045d6a627ba3f59664747c9fee346dbb2e228035f1dc3b",
+      "job_key": "live/codex-20261103/fwd_12/original",
+      "ledger_status_at_audit": "settled",
+      "retained_resource_bound_usd": "2.9870400",
+      "invoice": false,
+      "provider_terminal_state": "failed",
+      "provider_output_status": "GENERIC_STATUS_FAILURE",
+      "provider_input_id": "in-01M6HE3HMZVHYS0C975V1SDG85",
+      "provider_task_id": "ta-01M6HE3HZ6702VS92K5FQ38J4R",
+      "provider_input_started_at": 1793734088.4374294,
+      "provider_output_created_at": 1793734088.4393382,
+      "retry_count": 0,
+      "exception_sha256": "9e82f08cb4513ad86ed11f613e5aed2737039fe06d9be1b4d7b623dc23afcb11",
+      "recognized_error_markers": [
+        "ThinkingCloseLogitsProcessor",
+        "RuntimeError"
+      ]
+    },
+    {
+      "call_id": "fc-01M6HEC960CGWXJATT0XSTPWK0",
+      "reservation_id": "modal-job-39cdc8ea4f00a34c86837cfeac5f9980cb27bdd06a8731ca9aeaa7eb69c31ef1",
+      "job_key": "live/codex-20261103/fwd_14/edited",
+      "ledger_status_at_audit": "settled",
+      "retained_resource_bound_usd": "2.9870400",
+      "invoice": false,
+      "provider_terminal_state": "failed",
+      "provider_output_status": "GENERIC_STATUS_FAILURE",
+      "provider_input_id": "in-01M6HEC96B9RV878K5TQ0RN3WT",
+      "provider_task_id": "ta-01M6HEC9E487Z5NHJGKMDC8RNR",
+      "provider_input_started_at": 1793734383.9419847,
+      "provider_output_created_at": 1793734383.9438758,
+      "retry_count": 0,
+      "exception_sha256": "9e82f08cb4513ad86ed11f613e5aed2737039fe06d9be1b4d7b623dc23afcb11",
+      "recognized_error_markers": [
+        "ThinkingCloseLogitsProcessor",
+        "RuntimeError"
+      ]
+    }
+  ],
+  "audit_source_sha256": {
+    "provider_metadata": "01e8c1f14f1c29388297d99cff0ec6ea3d1ebca9c27ad915a88d67d2fd9ae520",
+    "paired_job_journals": "cb88318feb97eece097ff77a4ac4960daaa0fdc3ccdaaaf9c0d5f2fca4af91f5",
+    "ledger_snapshot": "aba4540f5be3133a289bfc34425562d8ae348fe6e64cbe1c66671e6cb85c9924"
+  }
+}
