@@ -2,6 +2,7 @@
 
 import json
 import sys
+from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 from types import ModuleType
 
@@ -125,6 +126,237 @@ def start(coordinator, spawn):
 
 def rows(ledger):
     return ledger.snapshot()["reservations"]
+
+
+def allowance_observation(*, at=None, **changes):
+    return {"observation_id": "dashboard-1", "cycle_limit": 100, "cycle_usage": 50,
+            "evidence": {"source": "user-confirmed Modal dashboard", "basis": "user_confirmed_dashboard",
+                         "observed_at": (at or datetime.now(UTC)).isoformat()}, **changes}
+
+
+def prohibit_launch_side_effects(coordinator, monkeypatch):
+    def forbidden(*args, **kwargs):
+        pytest.fail("Allowance observation must not launch, cancel, reconcile, or settle")
+    for name in ("_start", "_recover", "_resume", "_terminal", "_reconcile", "_cancel", "_dispatch"):
+        monkeypatch.setattr(coordinator, name, forbidden)
+    monkeypatch.setattr(DriverBudgetLease, "settle_completed", forbidden)
+    monkeypatch.setattr(DriverBudgetLease, "settle_worst_case", forbidden)
+
+
+def test_allowance_only_update_observes_terminal_owner_without_changing_driver_or_costs(setup, monkeypatch):
+    ledger, _, calls, _, write_state, spawn, factory, reloads = setup
+    start(factory, spawn)
+    calls[0].complete = True
+    write_state(status="blocked", error_type="BudgetExceeded")
+    coordinator = factory()
+    prohibit_launch_side_effects(coordinator, monkeypatch)
+    before_ledger = ledger.snapshot()
+    before_journal = coordinator.path.read_bytes()
+    before_state = coordinator.state_path.read_bytes()
+    before_reloads = len(reloads)
+    receipt = coordinator.observe_modal_allowance(allowance_observation())
+    after = ledger.snapshot()
+    assert calls[0].events == ["get"] and len(calls) == 1 and not calls[0].cancelled
+    assert len(reloads) == before_reloads + 2
+    assert coordinator.path.read_bytes() == before_journal and coordinator.state_path.read_bytes() == before_state
+    for key in ("reservations", "limits", "halted", "modal_prior_usage_floor"):
+        assert after[key] == before_ledger[key]
+    assert receipt["applied_allowance"] == after["modal_allowance"]
+
+
+@pytest.mark.parametrize("outcome", ["running", "unknown", "auth", "lookup"])
+def test_allowance_update_refuses_unconfirmed_owner_without_any_state_change(setup, monkeypatch, outcome):
+    ledger, _, calls, _, write_state, spawn, factory, _ = setup
+    start(factory, spawn)
+    write_state(status="blocked", error_type="BudgetExceeded")
+    coordinator = factory()
+    prohibit_launch_side_effects(coordinator, monkeypatch)
+    if outcome == "unknown":
+        calls[0].get_error = ConnectionError("unavailable")
+    elif outcome == "auth":
+        calls[0].get_error = RuntimeError("401 Unauthorized")
+    elif outcome == "lookup":
+        def missing(_):
+            raise ConnectionError("lookup unavailable")
+        coordinator.call_factory = missing
+    before = [path.read_bytes() for path in (ledger.path, coordinator.path, coordinator.state_path)]
+    with pytest.raises(ValueError, match="owner|terminal"):
+        coordinator.observe_modal_allowance(allowance_observation())
+    assert [path.read_bytes() for path in (ledger.path, coordinator.path, coordinator.state_path)] == before
+    assert not calls[0].cancelled and len(calls) == 1
+
+
+@pytest.mark.parametrize("phase", ["terminal", "complete", "blocked"])
+def test_saved_terminal_proof_allows_observation_without_provider_calls(setup, monkeypatch, phase):
+    ledger, clock, calls, _, _, spawn, factory, _ = setup
+    start(factory, spawn)
+    coordinator = factory()
+    record = json.loads(coordinator.path.read_text())
+    record["current"].update(phase=phase, terminal_state="failed", terminal_at=clock())
+    coordinator.path.write_text(json.dumps(record))
+    before = coordinator.path.read_bytes()
+
+    def forbidden(_):
+        pytest.fail("Saved terminal evidence needs no provider call")
+
+    coordinator.call_factory = forbidden
+    prohibit_launch_side_effects(coordinator, monkeypatch)
+    coordinator.observe_modal_allowance(allowance_observation())
+    assert coordinator.path.read_bytes() == before
+    assert calls[0].events == [] and len(rows(ledger)) == 1
+
+
+def test_allowance_observation_rejects_ambiguous_dispatch(setup, monkeypatch):
+    ledger, _, _, _, _, _, factory, _ = setup
+
+    def lost(*args):
+        raise ConnectionError("unknown dispatch")
+
+    start(factory, lost)
+    coordinator = factory()
+    prohibit_launch_side_effects(coordinator, monkeypatch)
+    before = (ledger.path.read_bytes(), coordinator.path.read_bytes())
+    with pytest.raises(ValueError, match="Ambiguous"):
+        coordinator.observe_modal_allowance(allowance_observation())
+    assert (ledger.path.read_bytes(), coordinator.path.read_bytes()) == before
+
+
+def test_allowance_update_allows_known_not_dispatched_budget_block(setup, monkeypatch):
+    ledger, _, _, _, _, _, factory, _ = setup
+    coordinator = factory()
+    record = {"schema_version": 1, "current": {"phase": "blocked", "reservation_id": "unallocated"},
+              "restart_counts": {}, "history": []}
+    coordinator.path.write_text(json.dumps(record))
+    before = coordinator.path.read_bytes()
+    prohibit_launch_side_effects(coordinator, monkeypatch)
+    coordinator.observe_modal_allowance(allowance_observation())
+    assert coordinator.path.read_bytes() == before and not rows(ledger)
+
+
+def test_idle_allowance_update_requires_existing_ledger_and_never_calls_factory(tmp_path, monkeypatch):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    coordinator = DriverCoordinator(BudgetLedger.from_existing(ledger.path), tmp_path / "coordinator.json",
+                                    state_path=tmp_path / "state.json")
+    prohibit_launch_side_effects(coordinator, monkeypatch)
+    coordinator.observe_modal_allowance(allowance_observation())
+    assert not coordinator.path.exists() and not coordinator.state_path.exists()
+    before = ledger.path.read_bytes()
+
+    def forbidden():
+        pytest.fail("Allowance updates must never invoke a ledger initializer")
+
+    coordinator.ledger_source = forbidden
+    with pytest.raises(ValueError, match="existing ledger"):
+        coordinator.observe_modal_allowance(allowance_observation())
+    assert ledger.path.read_bytes() == before
+    coordinator.ledger_source = ledger
+    ledger.path.unlink()
+    with pytest.raises(ValueError, match="existing ledger"):
+        coordinator.observe_modal_allowance(allowance_observation())
+    assert not ledger.path.exists()
+
+
+@pytest.mark.parametrize("status", ["running", "blocked", "complete"])
+def test_allowance_update_rejects_legacy_unidentified_owner(setup, status):
+    ledger, _, _, _, write_state, _, factory, _ = setup
+    write_state(status=status)
+    before = ledger.path.read_bytes()
+    with pytest.raises(ValueError, match="legacy driver"):
+        factory().observe_modal_allowance(allowance_observation())
+    assert ledger.path.read_bytes() == before
+
+
+@pytest.mark.parametrize("journal", ["mismatched_owner", "missing_current", "missing_ticket"])
+def test_allowance_update_cannot_ignore_retained_driver_ownership(setup, monkeypatch, journal):
+    ledger, clock, calls, tickets, write_state, spawn, factory, _ = setup
+    start(factory, spawn)
+    coordinator = factory()
+    record = json.loads(coordinator.path.read_text())
+    record["current"].update(phase="blocked", terminal_state="failed", terminal_at=clock())
+    if journal == "mismatched_owner":
+        with ledger._locked() as state:
+            state["reservations"][tickets[0]["reservation_id"]]["metadata"]["driver_owner_id"] = "fc-other"
+    elif journal == "missing_current":
+        record["current"] = None
+    else:
+        record["current"]["ticket"] = {"different": "ticket"}
+    write_state(status="blocked")
+    coordinator.path.write_text(json.dumps(record))
+    before = ledger.path.read_bytes(), coordinator.path.read_bytes(), coordinator.state_path.read_bytes()
+    prohibit_launch_side_effects(coordinator, monkeypatch)
+    with pytest.raises(ValueError, match="driver"):
+        coordinator.observe_modal_allowance(allowance_observation())
+    assert (ledger.path.read_bytes(), coordinator.path.read_bytes(), coordinator.state_path.read_bytes()) == before
+    assert calls[0].events == []
+
+
+def test_retained_historical_driver_ticket_requires_its_own_terminal_proof(setup, monkeypatch):
+    ledger, clock, _, _, _, spawn, factory, _ = setup
+    start(factory, spawn)
+    coordinator = factory()
+    record = json.loads(coordinator.path.read_text())
+    previous = record["current"]
+    record["history"].append(previous)
+    record["current"] = None
+    coordinator.state_path.unlink()
+    coordinator.path.write_text(json.dumps(record))
+    prohibit_launch_side_effects(coordinator, monkeypatch)
+    before = ledger.path.read_bytes()
+    with pytest.raises(ValueError, match="not confirmed terminal"):
+        coordinator.observe_modal_allowance(allowance_observation())
+    assert ledger.path.read_bytes() == before
+    previous.update(phase="terminal", terminal_state="failed", terminal_at=clock())
+    coordinator.path.write_text(json.dumps(record))
+    before_rows = rows(ledger)
+    coordinator.observe_modal_allowance(allowance_observation())
+    assert rows(ledger) == before_rows
+
+
+def test_allowance_retry_after_lost_commit_acknowledgement_recommits_without_reapplying(setup, monkeypatch):
+    ledger, _, _, _, _, _, factory, _ = setup
+    coordinator = factory()
+    prohibit_launch_side_effects(coordinator, monkeypatch)
+    observation = allowance_observation()
+    commits = []
+
+    def commit():
+        commits.append(True)
+        if len(commits) == 1:
+            raise ConnectionError("lost commit acknowledgement")
+
+    coordinator.commit = commit
+    with pytest.raises(ConnectionError):
+        coordinator.observe_modal_allowance(observation)
+    before = ledger.path.read_bytes()
+    receipt = json.loads(before)["modal_observations"]["dashboard-1"]
+    observed = datetime.fromisoformat(observation["evidence"]["observed_at"])
+
+    class Later(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return observed + timedelta(hours=2)
+
+    monkeypatch.setattr("openwsp.budget.datetime", Later)
+    assert coordinator.observe_modal_allowance(observation) == receipt
+    assert ledger.path.read_bytes() == before and len(commits) == 2
+    with pytest.raises(ValueError, match="different payload"):
+        coordinator.observe_modal_allowance({**observation, "cycle_limit": 200})
+    assert len(commits) == 2 and ledger.path.read_bytes() == before
+
+
+def test_invalid_or_stale_observation_cannot_poll_or_change_any_state(setup):
+    ledger, _, calls, _, _, spawn, factory, reloads = setup
+    start(factory, spawn)
+    coordinator = factory()
+    before = ledger.path.read_bytes(), coordinator.path.read_bytes()
+    reload_count = len(reloads)
+    with pytest.raises(ValueError):
+        coordinator.observe_modal_allowance(allowance_observation(unexpected=True))
+    assert len(reloads) == reload_count and calls[0].events == []
+    with pytest.raises(ValueError, match="15 minutes"):
+        coordinator.observe_modal_allowance(allowance_observation(at=datetime.now(UTC) - timedelta(hours=1)))
+    assert calls[0].events == []
+    assert (ledger.path.read_bytes(), coordinator.path.read_bytes()) == before
 
 
 def test_fresh_live_call_is_recovered_without_another_dispatch(setup):

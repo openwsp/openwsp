@@ -211,6 +211,21 @@ def report(experiment: Annotated[str, typer.Argument()] = "exp8") -> None:
     _emit(write_report(experiment))
 
 
+@app.command("record-modal-allowance")
+def record_modal_allowance(
+    observation: Annotated[Path, typer.Option(help="Absolute path to user-confirmed dashboard evidence JSON.")],
+    experiment: Annotated[str, typer.Argument()] = "exp8",
+) -> None:
+    """Record Modal allowance evidence without deploying or restarting work."""
+    from .replication import record_modal_allowance as record_allowance
+
+    try:
+        result = record_allowance(experiment, observation=observation)
+    except (OSError, ValueError) as error:
+        raise typer.BadParameter(str(error)) from error
+    _emit(result)
+
+
 def main() -> None:
     app()
 

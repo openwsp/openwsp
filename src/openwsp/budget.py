@@ -7,6 +7,7 @@ Workers receive bounded deadlines; only the driver mutates reservations.
 from __future__ import annotations
 
 import fcntl
+import hashlib
 import json
 import math
 import os
@@ -38,6 +39,55 @@ def _utc() -> str:
     return datetime.now(UTC).isoformat()
 
 
+def _allowance_binding(cycle_limit, cycle_usage, evidence, *, observation_id=None, cycle_id=None):
+    try:
+        limit, usage = _money(cycle_limit), _money(cycle_usage)
+        evidence = json.loads(json.dumps(evidence, sort_keys=True, allow_nan=False))
+    except (InvalidOperation, TypeError, ValueError) as error:
+        raise ValueError("Billing observation requires finite costs and JSON evidence") from error
+    if (not isinstance(evidence, dict) or not isinstance(evidence.get("source"), str)
+            or not evidence["source"].strip() or not isinstance(evidence.get("observed_at"), str)):
+        raise ValueError("Billing observation needs source and observed_at evidence")
+    observed = datetime.fromisoformat(evidence["observed_at"])
+    if observed.tzinfo is None:
+        raise ValueError("Billing observation timestamp must include a timezone")
+    for name, value in (("observation_id", observation_id), ("cycle_id", cycle_id)):
+        if value is not None and (not isinstance(value, str) or not value.strip() or len(value) > 256):
+            raise ValueError(f"{name} must be a nonempty identifier of at most 256 characters")
+    binding = {"cycle_limit": format(limit.normalize(), "f"), "cycle_usage": format(usage.normalize(), "f"),
+               "evidence": evidence, "cycle_id": cycle_id}
+    if observation_id is None:
+        encoded = json.dumps(binding, sort_keys=True, separators=(",", ":"), allow_nan=False)
+        observation_id = "legacy-" + hashlib.sha256(encoded.encode()).hexdigest()
+    return {"observation_id": observation_id, **binding}
+
+
+def validate_modal_allowance_observation(observation):
+    """Copy and validate a dashboard observation without I/O or freshness checks.
+
+    Freshness belongs to the ledger: an identical acknowledged observation may
+    safely be retried after its evidence ages. This function authenticates neither
+    the dashboard evidence nor the caller's authority to apply it.
+    """
+    try:
+        observation = json.loads(json.dumps(observation, sort_keys=True, allow_nan=False))
+    except (TypeError, ValueError) as error:
+        raise ValueError("Observation must contain only finite JSON values") from error
+    required = {"observation_id", "cycle_limit", "cycle_usage", "evidence"}
+    if (not isinstance(observation, dict) or not required <= observation.keys()
+            or observation.keys() - required - {"cycle_id"}):
+        raise ValueError("Observation requires observation_id, cycle_limit, cycle_usage and evidence")
+    if observation["observation_id"] is None:
+        raise ValueError("A stable observation_id is required")
+    binding = _allowance_binding(**observation)
+    if binding["evidence"].get("basis") != "user_confirmed_dashboard":
+        raise ValueError("Observation requires user_confirmed_dashboard evidence")
+    observed = datetime.fromisoformat(binding["evidence"]["observed_at"])
+    if observed.utcoffset().total_seconds() != 0:
+        raise ValueError("Dashboard observation timestamp must be UTC")
+    return binding
+
+
 def atomic_json(path: Path, value: dict) -> None:
     """Replace a JSON record durably without exposing partial state."""
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -60,6 +110,18 @@ def atomic_json(path: Path, value: dict) -> None:
 
 
 class BudgetLedger:
+    @classmethod
+    def from_existing(cls, path):
+        """Open an existing ledger without initializing, rewriting, or reserving."""
+        instance = cls.__new__(cls)
+        instance.path, instance.initial = Path(path), None
+        if not instance.path.is_file():
+            raise ValueError("An existing budget ledger is required")
+        state = json.loads(instance.path.read_text())
+        if not isinstance(state, dict) or state.get("schema_version") != 1:
+            raise ValueError("Unsupported budget ledger version")
+        return instance
+
     def __init__(self, path, *, editor_limit=100, modal_task_limit=150,
                  modal_cycle_limit=42, modal_prior_usage=0.05):
         self.path = Path(path)
@@ -87,6 +149,8 @@ class BudgetLedger:
         with self.path.with_suffix(self.path.suffix + ".lock").open("a+") as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
             state = json.loads(self.path.read_text()) if self.path.exists() else self.initial
+            if state is None:
+                raise ValueError("The existing budget ledger disappeared; initialization is forbidden")
             yield state
             atomic_json(self.path, state)
 
@@ -221,31 +285,68 @@ class BudgetLedger:
             state["events"].append({"event": "editor_limit_authorized", **record})
             return json.loads(json.dumps(record))
 
-    def observe_modal_allowance(self, cycle_limit, cycle_usage, evidence):
-        """Apply a fresh authoritative billing observation, never a predicted increase.
-
-        evidence requires source and observed_at; its payload is retained for audit.
-        This method must be called by the driver after reading the account's billing
-        state, not merely after a successful job or a $10 usage threshold.
-        """
-        limit, usage = _money(cycle_limit), _money(cycle_usage)
-        if not isinstance(evidence, dict) or not evidence.get("source") or not evidence.get("observed_at"):
-            raise ValueError("Billing observation needs source and observed_at evidence")
-        observed = datetime.fromisoformat(evidence["observed_at"])
-        if observed.tzinfo is None:
-            raise ValueError("Billing observation timestamp must include a timezone")
+    @staticmethod
+    def _check_modal_observation(state, binding):
+        previous = state.get("modal_observations", {}).get(binding["observation_id"])
+        if previous is not None:
+            if previous.get("observation") != binding:
+                raise ValueError("Observation ID was already used with a different payload")
+            return json.loads(json.dumps(previous))
+        observed = datetime.fromisoformat(binding["evidence"]["observed_at"])
         age = (datetime.now(UTC) - observed).total_seconds()
         if age < -60 or age > 900:
             raise ValueError("Billing observation must be current (within 15 minutes)")
+        allowance = state["modal_allowance"]
+        # Initial user-reported allowance is not a measured dashboard observation.
+        if allowance.get("evidence", {}).get("basis") != "user report":
+            previous_at = datetime.fromisoformat(allowance["observed_at"])
+            if observed <= previous_at:
+                raise ValueError("New billing observations must be newer than the recorded observation")
+        if (binding["cycle_id"] is not None and allowance.get("cycle_id") is not None
+                and binding["cycle_id"] != allowance["cycle_id"]):
+            raise ValueError("A different billing cycle requires explicit rollover handling")
+        return None
+
+    def preview_modal_allowance(self, observation):
+        """Validate an observation against existing state without writing files."""
+        binding = validate_modal_allowance_observation(observation)
+        state = json.loads(self.path.read_text())
+        if state.get("schema_version") != 1:
+            raise ValueError("Unsupported budget ledger version")
+        return self._check_modal_observation(state, binding)
+
+    def observe_modal_allowance(self, cycle_limit, cycle_usage, evidence, *, observation_id=None, cycle_id=None):
+        """Apply a fresh authoritative billing observation, never a predicted increase.
+
+        Evidence requires source and observed_at; its payload is retained for audit.
+        This method must be called by the driver after reading the account's billing
+        state, not merely after a successful job or a $10 usage threshold.
+        Stable IDs bind immutable receipts; identical retries never reapply an old
+        observation. Known usage and all reservations survive decreases or increases.
+        """
+        binding = _allowance_binding(cycle_limit, cycle_usage, evidence,
+                                     observation_id=observation_id, cycle_id=cycle_id)
         with self._locked() as state:
+            previous = self._check_modal_observation(state, binding)
+            if previous is not None:
+                return previous
             spent, _ = self._totals(state, "modal")
-            # Provider billing observations can lag jobs we have already timed.
-            # An increased allowance never erases our own measured consumption.
-            usage = max(usage, spent + _money(state.get("modal_prior_usage_floor", "0.05")))
-            state["modal_allowance"] = {"cycle_limit": str(limit), "cycle_usage": str(usage),
-                                        "task_spend_at_observation": str(spent),
-                                        "observed_at": evidence["observed_at"], "evidence": evidence}
-            state["events"].append({"event": "modal_allowance_observed", "at": _utc(), "evidence": evidence})
+            prior = state["modal_allowance"]
+            known_usage = (_money(prior["cycle_usage"]) + spent
+                           - _money(prior["task_spend_at_observation"]))
+            usage = max(_money(binding["cycle_usage"]), known_usage,
+                        spent + _money(state.get("modal_prior_usage_floor", "0.05")))
+            applied = {"cycle_limit": binding["cycle_limit"], "cycle_usage": str(usage),
+                       "task_spend_at_observation": str(spent),
+                       "observed_at": binding["evidence"]["observed_at"], "evidence": binding["evidence"],
+                       "cycle_id": cycle_id or prior.get("cycle_id")}
+            receipt = {"observation_id": binding["observation_id"], "observation": binding,
+                       "prior_allowance": json.loads(json.dumps(prior)), "applied_allowance": applied,
+                       "applied_at": _utc()}
+            state["modal_allowance"] = applied
+            state.setdefault("modal_observations", {})[binding["observation_id"]] = receipt
+            state["events"].append({"event": "modal_allowance_observed", **receipt})
+            return json.loads(json.dumps(receipt))
 
     def snapshot(self):
         with self._locked() as state:

@@ -24,7 +24,7 @@ from contextlib import contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
 
-from ..budget import BudgetExceeded, atomic_json
+from ..budget import BudgetExceeded, BudgetLedger, atomic_json, validate_modal_allowance_observation
 from .driver_budget import DriverBudgetLease, DriverLeaseError
 
 
@@ -138,6 +138,83 @@ class DriverCoordinator:
     def _fingerprint(stage, config):
         encoded = json.dumps({"stage": stage, "config": config}, sort_keys=True, allow_nan=False)
         return hashlib.sha256(encoded.encode()).hexdigest()
+
+    @staticmethod
+    def _has_terminal_proof(record):
+        terminal_at = record.get("terminal_at")
+        return (record.get("phase") in {"terminal", "complete", "blocked"}
+                and isinstance(record.get("call_id"), str) and bool(record["call_id"])
+                and record.get("terminal_state") in {"completed", "failed", "cancelled"}
+                and type(terminal_at) in (int, float) and math.isfinite(terminal_at))
+
+    def _check_allowance_driver_owners(self, ledger_state, observed_terminal):
+        records = [*self.record["history"], *([self.record["current"]] if self.record["current"] else [])]
+        for reservation_id, row in ledger_state["reservations"].items():
+            metadata = row.get("metadata", {})
+            if row["status"] != "reserved" or not (
+                metadata.get("kind") == "driver_resource_upper_bound"
+                or "driver_ticket" in metadata or "driver_owner_id" in metadata
+            ):
+                continue
+            matches = [record for record in records if record.get("reservation_id") == reservation_id]
+            if len(matches) != 1:
+                raise ValueError("Unmatched retained driver ticket prevents an allowance update")
+            owner = matches[0]
+            call_id = owner.get("call_id")
+            if (not call_id or owner.get("ticket") != metadata.get("driver_ticket")
+                    or metadata.get("driver_owner_id") not in (None, call_id)
+                    or not (self._has_terminal_proof(owner) or call_id in observed_terminal)):
+                raise ValueError("Retained driver owner is not confirmed terminal; allowance remains unchanged")
+
+    def observe_modal_allowance(self, observation):
+        """Record allowance evidence only; never launch, reconcile, or unblock work.
+
+        Route this operation through the same serialized owner as launch/recover.
+        Supply BudgetLedger.from_existing(), not a factory with initialization or
+        reservation side effects. Provider reads establish that no driver can still
+        write the ledger; ambiguous ownership leaves every file untouched.
+        """
+        observation = validate_modal_allowance_observation(observation)
+        with self._locked():
+            ledger = self.ledger_source
+            if not isinstance(ledger, BudgetLedger) or not ledger.path.is_file():
+                raise ValueError("Allowance updates require an existing ledger object, not a ledger factory")
+            ledger.preview_modal_allowance(observation)
+            current = self.record["current"]
+            observed_terminal = set()
+            if not current:
+                if self._read(self.state_path):
+                    # Legacy status strings (including blocked/complete) do not
+                    # prove that an unticketed invocation has actually exited.
+                    raise ValueError("A legacy driver has no current owner with verifiable terminal evidence")
+            else:
+                if not self._has_terminal_proof(current):
+                    if not current.get("call_id"):
+                        state = self._read(ledger.path)
+                        if (current.get("phase") != "blocked"
+                                or current.get("ticket") or current.get("dispatched_at") is not None
+                                or current.get("reservation_id") in state["reservations"]):
+                            raise ValueError("Ambiguous driver dispatch prevents an allowance update")
+                        if self._read(self.state_path).get("status") == "running":
+                            raise ValueError("A driver may still own the ledger")
+                    else:
+                        try:
+                            call = self.call_factory(current["call_id"])
+                        except Exception:  # noqa: BLE001 - lookup failures never establish terminal ownership
+                            raise ValueError("Provider owner could not be checked; allowance remains unchanged") from None
+                        outcome, _ = self._poll(call)
+                        if outcome not in {"completed", "failed", "cancelled"}:
+                            raise ValueError("Previous driver is not confirmed terminal; allowance remains unchanged")
+                        observed_terminal.add(current["call_id"])
+                        # The driver may have committed its final costs immediately
+                        # before returning. Refresh them before applying evidence.
+                        self.reload()
+                        if self._read(self.path) != self.record:
+                            raise ValueError("Coordinator ownership changed during the observation")
+            self._check_allowance_driver_owners(self._read(ledger.path), observed_terminal)
+            receipt = ledger.observe_modal_allowance(**observation)
+            self.commit()  # Recommit identical retries after a lost acknowledgement.
+            return receipt
 
     def launch(self, stage, config, spawn, *, resume_reason=None):
         """Reserve and dispatch once, or recover an already recorded invocation.

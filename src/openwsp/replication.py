@@ -80,6 +80,24 @@ def status(experiment="exp8"):
     return modal.Function.from_name("openwsp-exp8", "status").remote()
 
 
+def record_modal_allowance(experiment="exp8", *, observation):
+    """Record explicit dashboard evidence through the existing serialized owner.
+
+    This command never deploys, creates a ledger, or launches/restarts work.
+    """
+    if experiment != "exp8":
+        raise ValueError("Only exp8 supports Modal allowance observations")
+    path = Path(observation)
+    if not path.is_absolute():
+        raise ValueError("--observation must be an absolute path to a JSON evidence file")
+    from openwsp.budget import validate_modal_allowance_observation
+    value = validate_modal_allowance_observation(json.loads(path.read_text()))
+    from openwsp.backends.modal_runtime import configure_tls
+    configure_tls()
+    import modal
+    return modal.Function.from_name("openwsp-exp8", "launch").remote(allowance_observation=value)
+
+
 def report(experiment="exp8"):
     if experiment != "exp8":
         raise ValueError("Unknown replication")

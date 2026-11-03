@@ -1,5 +1,5 @@
 from concurrent.futures import ProcessPoolExecutor
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 
 import pytest
@@ -11,6 +11,7 @@ from openwsp.budget import (
     astra_cost,
     astra_upper_bound,
     compute_cost,
+    validate_modal_allowance_observation,
 )
 
 
@@ -69,6 +70,125 @@ def test_lagging_billing_observation_does_not_erase_known_usage(tmp_path):
     ledger.observe_modal_allowance(50, 5,
                                   {"source": "modal.billing", "observed_at": datetime.now(UTC).isoformat()})
     assert ledger.snapshot()["summary"]["modal"]["available_usd"] == pytest.approx(19.95)
+
+
+def modal_observation(*, key="dashboard-1", at=None, limit=100, usage=50, **extra):
+    return {"observation_id": key, "cycle_limit": limit, "cycle_usage": usage,
+            "evidence": {"source": "user-confirmed Modal dashboard", "basis": "user_confirmed_dashboard",
+                         "observed_at": (at or datetime.now(UTC)).isoformat()}, **extra}
+
+
+def test_existing_ledger_open_does_not_initialize_or_rewrite(tmp_path):
+    path = tmp_path / "budget.json"
+    with pytest.raises(ValueError, match="existing"):
+        BudgetLedger.from_existing(path)
+    assert not path.exists()
+    BudgetLedger(path)
+    original, modified = path.read_bytes(), path.stat().st_mtime_ns
+    opened = BudgetLedger.from_existing(path)
+    assert opened.path == path and path.read_bytes() == original and path.stat().st_mtime_ns == modified
+    path.unlink()
+    with pytest.raises(ValueError, match="disappeared"):
+        opened.observe_modal_allowance(**modal_observation())
+    assert not path.exists()
+
+
+def test_observation_preserves_external_usage_and_later_local_spend_when_limit_decreases(tmp_path):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    settled = ledger.reserve("modal", 10, "done")
+    ledger.settle(settled, 10)
+    at = datetime.now(UTC) - timedelta(seconds=10)
+    first = ledger.observe_modal_allowance(**modal_observation(at=at, usage=80, cycle_id="2026-11"))
+    later = ledger.reserve("modal", 5, "later")
+    ledger.settle(later, 5)
+    held = ledger.reserve("modal", 2, "unresolved")
+    before = ledger.snapshot()
+    second = ledger.observe_modal_allowance(**modal_observation(
+        key="dashboard-2", at=at + timedelta(seconds=1), limit=70, usage=4, cycle_id="2026-11"))
+    after = ledger.snapshot()
+    assert second["observation"]["cycle_usage"] == "4"
+    assert after["modal_allowance"]["cycle_usage"] == "85"
+    assert after["modal_allowance"]["cycle_limit"] == "70"
+    assert after["summary"]["modal"]["available_usd"] == 0
+    for field in ("limits", "reservations", "halted", "modal_prior_usage_floor"):
+        assert after[field] == before[field]
+    assert after["reservations"][held]["status"] == "reserved"
+    assert after["limits"]["modal"] == "150"
+    assert first["applied_allowance"]["cycle_usage"] == "80"
+
+
+def test_observation_retry_is_immutable_even_after_aging_and_a_newer_update(tmp_path, monkeypatch):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    at = datetime.now(UTC) - timedelta(seconds=10)
+    observation = modal_observation(at=at)
+    original = ledger.observe_modal_allowance(**observation)
+    ledger.observe_modal_allowance(**modal_observation(key="dashboard-2", at=at + timedelta(seconds=1), limit=90))
+    before = ledger.path.read_bytes()
+
+    class Later(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return at + timedelta(hours=2)
+
+    monkeypatch.setattr("openwsp.budget.datetime", Later)
+    assert ledger.observe_modal_allowance(**observation) == original
+    assert ledger.path.read_bytes() == before
+    with pytest.raises(ValueError, match="different payload"):
+        ledger.observe_modal_allowance(**{**observation, "cycle_limit": 200})
+    assert ledger.path.read_bytes() == before
+
+
+@pytest.mark.parametrize("kind", ["older", "equal_time", "stale", "future", "cycle_change"])
+def test_new_observation_rejects_stale_reordered_or_different_cycle_without_writing(tmp_path, kind):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    at = datetime.now(UTC) - timedelta(seconds=10)
+    ledger.observe_modal_allowance(**modal_observation(at=at, cycle_id="2026-11"))
+    observation = modal_observation(key="dashboard-2", at=at + timedelta(seconds=1), cycle_id="2026-11")
+    if kind in ("older", "equal_time", "stale", "future"):
+        offset = {"older": -1, "equal_time": 0, "stale": -1000, "future": 1000}[kind]
+        observation["evidence"]["observed_at"] = (at + timedelta(seconds=offset)).isoformat()
+    else:
+        observation["cycle_id"] = "2026-12"
+    before = ledger.path.read_bytes()
+    with pytest.raises(ValueError):
+        ledger.observe_modal_allowance(**observation)
+    assert ledger.path.read_bytes() == before
+
+
+def test_modal_observation_validation_detaches_and_normalizes_without_io():
+    original = modal_observation(limit="100.00", usage="50.000")
+    copied = validate_modal_allowance_observation(original)
+    assert copied["cycle_limit"] == "100" and copied["cycle_usage"] == "50"
+    copied["evidence"]["source"] = "modified"
+    assert original["evidence"]["source"] == "user-confirmed Modal dashboard"
+
+
+def _record_modal_observation(arguments):
+    path, observation = arguments
+    return BudgetLedger.from_existing(path).observe_modal_allowance(**observation)
+
+
+def test_concurrent_identical_observations_create_one_immutable_receipt(tmp_path):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    observation = modal_observation()
+    with ProcessPoolExecutor(max_workers=3) as pool:
+        receipts = list(pool.map(_record_modal_observation, [(str(ledger.path), observation)] * 6))
+    assert all(receipt == receipts[0] for receipt in receipts)
+    state = ledger.snapshot()
+    assert len(state["modal_observations"]) == 1
+    assert len([event for event in state["events"] if event["event"] == "modal_allowance_observed"]) == 1
+
+
+@pytest.mark.parametrize("changes", [
+    {"observation_id": ""}, {"observation_id": None}, {"cycle_limit": float("nan")},
+    {"cycle_usage": -1}, {"unexpected": True}, {"cycle_id": ""},
+    {"evidence": {"source": "dashboard", "observed_at": "2026-11-03T00:00:00", "basis": "user_confirmed_dashboard"}},
+    {"evidence": {"source": "dashboard", "observed_at": "2026-11-03T01:00:00+01:00", "basis": "user_confirmed_dashboard"}},
+    {"evidence": {"source": "dashboard", "observed_at": "2026-11-03T00:00:00+00:00", "basis": "prediction"}},
+])
+def test_malformed_dashboard_observation_is_rejected(changes):
+    with pytest.raises(ValueError):
+        validate_modal_allowance_observation({**modal_observation(), **changes})
 
 
 def test_actual_overrun_is_saved_and_halts_future_launches(tmp_path):

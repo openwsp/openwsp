@@ -341,9 +341,18 @@ def pipeline(stage="all", config=None, driver_ticket=None):
               cpu=(0.25, 0.25), memory=(1024, 1024), max_containers=1,
               volumes={"/data": data_volume})
 @modal.concurrent(max_inputs=1)
-def launch(stage="all", config=None, recover=False):
+def launch(stage="all", config=None, recover=False, *, allowance_observation=None):
     from openwsp.backends.coordinator import DriverCoordinator
     from openwsp.budget import BudgetLedger
+    if allowance_observation is not None:
+        if stage != "all" or config is not None or recover is not False:
+            raise ValueError("Allowance observations cannot be combined with stage, config, or recovery")
+        data_volume.reload()
+        ledger = BudgetLedger.from_existing("/data/budget.json")
+        coordinator = DriverCoordinator(ledger, "/data/coordinator.json",
+                                        state_path="/data/state.json", commit=data_volume.commit,
+                                        reload=data_volume.reload)
+        return coordinator.observe_modal_allowance(allowance_observation)
     def ledger_owner():
         ledger = BudgetLedger("/data/budget.json")
         if "infrastructure-headroom" not in ledger.snapshot()["reservations"]:
