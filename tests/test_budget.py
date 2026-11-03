@@ -163,6 +163,33 @@ def test_modal_observation_validation_detaches_and_normalizes_without_io():
     assert original["evidence"]["source"] == "user-confirmed Modal dashboard"
 
 
+def test_explicit_topup_authorization_preserves_spend_reservations_and_task_cap(tmp_path):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    charged = ledger.reserve("modal", 30, "completed")
+    ledger.settle(charged, 30)
+    held = ledger.reserve("modal", 4, "unresolved")
+    observation = modal_observation(limit=150, usage=0)
+    observation["evidence"].update(
+        basis="operator_automatic_topups", source="Operator instructed automatic top-ups",
+        automatic_topups_authorized=True, provider_limit_observed=False)
+    before = ledger.snapshot()
+    receipt = ledger.observe_modal_allowance(**validate_modal_allowance_observation(observation))
+    after = ledger.snapshot()
+    assert after["modal_allowance"]["cycle_usage"] == "30.05"
+    assert after["summary"]["modal"]["available_usd"] == pytest.approx(115.95)
+    assert after["reservations"][held] == before["reservations"][held]
+    assert after["limits"] == before["limits"]
+    assert receipt["applied_allowance"]["evidence"]["provider_limit_observed"] is False
+    with pytest.raises(BudgetExceeded):
+        ledger.reserve("modal", 116, "over-cap")
+    for change in ({"automatic_topups_authorized": False}, {"provider_limit_observed": True}):
+        bad = {**observation, "evidence": {**observation["evidence"], **change}}
+        with pytest.raises(ValueError, match="explicit authorization"):
+            validate_modal_allowance_observation(bad)
+    with pytest.raises(ValueError, match="task cap"):
+        validate_modal_allowance_observation({**observation, "cycle_limit": 151})
+
+
 def _record_modal_observation(arguments):
     path, observation = arguments
     return BudgetLedger.from_existing(path).observe_modal_allowance(**observation)

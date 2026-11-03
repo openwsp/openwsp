@@ -63,7 +63,7 @@ def _allowance_binding(cycle_limit, cycle_usage, evidence, *, observation_id=Non
 
 
 def validate_modal_allowance_observation(observation):
-    """Copy and validate a dashboard observation without I/O or freshness checks.
+    """Validate dashboard evidence or explicit operator funding authorization.
 
     Freshness belongs to the ledger: an identical acknowledged observation may
     safely be retried after its evidence ages. This function authenticates neither
@@ -80,11 +80,20 @@ def validate_modal_allowance_observation(observation):
     if observation["observation_id"] is None:
         raise ValueError("A stable observation_id is required")
     binding = _allowance_binding(**observation)
-    if binding["evidence"].get("basis") != "user_confirmed_dashboard":
-        raise ValueError("Observation requires user_confirmed_dashboard evidence")
+    basis = binding["evidence"].get("basis")
+    if basis not in {"user_confirmed_dashboard", "operator_automatic_topups"}:
+        raise ValueError("Observation requires user_confirmed_dashboard or operator_automatic_topups evidence")
+    if basis == "operator_automatic_topups":
+        # This is spending authorization, not a claim about the provider's
+        # current dashboard. Keep the existing task cap and known usage floor.
+        evidence = binding["evidence"]
+        if (evidence.get("automatic_topups_authorized") is not True
+                or evidence.get("provider_limit_observed") is not False
+                or _money(binding["cycle_limit"]) > 150):
+            raise ValueError("Automatic top-ups require explicit authorization within the $150 task cap, not a provider-limit claim")
     observed = datetime.fromisoformat(binding["evidence"]["observed_at"])
     if observed.utcoffset().total_seconds() != 0:
-        raise ValueError("Dashboard observation timestamp must be UTC")
+        raise ValueError("Allowance evidence timestamp must be UTC")
     return binding
 
 
@@ -316,11 +325,11 @@ class BudgetLedger:
         return self._check_modal_observation(state, binding)
 
     def observe_modal_allowance(self, cycle_limit, cycle_usage, evidence, *, observation_id=None, cycle_id=None):
-        """Apply a fresh authoritative billing observation, never a predicted increase.
+        """Apply fresh billing evidence or explicit operator funding authorization.
 
         Evidence requires source and observed_at; its payload is retained for audit.
-        This method must be called by the driver after reading the account's billing
-        state, not merely after a successful job or a $10 usage threshold.
+        Funding authorization is distinguished from observed provider limits in
+        evidence; successful jobs or usage thresholds never authorize an increase.
         Stable IDs bind immutable receipts; identical retries never reapply an old
         observation. Known usage and all reservations survive decreases or increases.
         """

@@ -99,3 +99,9 @@ Unlike the allowance command, this normal replication command deploys and may
 launch work. Use it only after the allowance receipt is accepted and within the
 user's authorized task scope. Do not substitute a new run ID or a fresh local editor
 journal to get around a blocked or uncertain run.
+
+## Explicit automatic top-up authorization
+
+An operator may explicitly authorize ongoing automatic top-ups within the existing task cap. The same command accepts `basis: "operator_automatic_topups"`, `automatic_topups_authorized: true` and `provider_limit_observed: false` in `evidence`. In this case `cycle_limit` is the authorized funding envelope, at most$150, not an observed provider dashboard limit. `cycle_usage` remains a conservative known-usage figure; the ledger always retains its greater existing usage floor. Include the exact instruction and source in evidence. This route does not infer permission from a successful charge or expected limit increase, and does not change the task cap.
+
+The operator's direct instruction accompanying steering update2 supplies that authorization for this task. Record it, retain the returned receipt ID in `resume_reason`, and resume the same `codex-20261103` journal. The earlier dashboard-only instructions describe the prior gate.

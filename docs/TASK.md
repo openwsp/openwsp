@@ -174,3 +174,9 @@ The user reconfirmed the Modal dashboard still shows $42: “still 42 but it wil
 ## README style follow-up
 
 The user requested a README overhaul using their commit0a41b05 as the style reference. Remove first-person 'I'; neutral or passive constructions are acceptable. Do not use em dashes anywhere, especially in titles. This supersedes the earlier instruction to preserve that introduction byte-for-byte while retaining its intent, attribution and scientific evidence.
+
+## Steering update 2 and automatic Modal top-ups
+
+The user supplied `docs/STEERING_UPDATE_2.md` and stated: “we've 22 dollars more never stop due to that it will top up automatically. also a prompt by a smart ai for you attached”. The direct message supersedes the attachment's older42cycle-gate language. Treat automatic top-ups as operator authorization to continue within the existing150total Modal task cap, not as an observed provider dashboard limit or an unlimited task budget. Preserve all charges and reservations. Use the existing allowance-recording mechanism with truthful operator-authorization provenance; do not create another ledger or accounting abstraction. Real provider auth/quota failures still preserve state and are reported.
+
+The attached update authorizes CPU-only experiments1,2,4,5 with separate Astra(subscription) and Fable(native Anthropic) one-reply/no-tools runs; Fable has a20USD whole-set cap. Experiments3,6,7 remain layout-only. It additionally authorizes the specified inspect, repair, KL, eval grid, finished-answer metric, bank, source-backed README and contributor work. Run2 still requires fresh operator confirmation after run1. The160.85OpenAI PlanB reserve remains protected. All steering/field findings are orchestrator-only and must not reach scientific editor inputs.
