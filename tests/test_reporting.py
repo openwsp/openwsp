@@ -88,6 +88,96 @@ def test_stale_sample_summary_does_not_modify_readme(tmp_path):
     assert (tmp_path / "README.md").read_text() == original
 
 
+def test_report_preserves_blocked_and_recovering_state_with_source_links(tmp_path):
+    results = setup_repo(tmp_path)
+    readme = tmp_path / "README.md"
+    readme.write_text("<!-- OPENWSP:STATUS:START -->\nstale status\n<!-- OPENWSP:STATUS:END -->\n" + readme.read_text())
+    write_json(results / "pipeline-state.json", {"status": "blocked", "active_stage": "calibration_p50c", "error": "quota exhausted"})
+    write_json(results / "coordinator.json", {"current": {"phase": "recovering"}})
+    write_json(results / "kernel/hash-verification.json", {"status": "passed"})
+    write_json(results / "live-run/state.json", {"done": False, "passes": 2, "turn": 3, "runs": 4})
+    generated = generate_report(tmp_path, results)
+    text = readme.read_text()
+    assert "[blocked](replications/exp8/results/pipeline-state.json)" in text
+    assert "[recovering](replications/exp8/results/coordinator.json)" in text
+    assert "[quota exhausted](replications/exp8/results/pipeline-state.json)" in text
+    assert "[incomplete](replications/exp8/results/live-run/state.json)" in text
+    assert "[2](replications/exp8/results/live-run/state.json)" in text
+    assert "stale status" not in text
+    assert len(generated["sources"]) == 4
+
+
+def test_component_success_is_not_whole_pipeline_success(tmp_path):
+    results = setup_repo(tmp_path)
+    write_json(results / "kernel/hash-verification.json", {"status": "passed"})
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "[passed]" in text
+    assert "Component checks do not establish overall completion" in text
+
+
+def test_calibration_gap_audit_and_runtime_are_source_linked(tmp_path):
+    results = setup_repo(tmp_path)
+    write_json(results / "calibration-check.json", {
+        "status": "gap_requires_review", "calibration_base": {"accuracy": 0.1, "reference_accuracy": 0.2,
+        "gap": -0.1, "within_two_standard_errors": False},
+    })
+    write_json(results / "calibration-gap-audit.json", {"circuit_breaker_tripped": False, "checks": {"prompt": True}})
+    write_json(results / "calibration_base/summary.json", {"stage": "calibration_base", "benchmark": "math500",
+        "accuracy": 0.1, "provenance": {"engine": "test-engine", "gpu": "test-gpu", "transformers": "test-version",
+        "standard_error": "binomial_per_sample"}})
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "[-10.00](replications/exp8/results/calibration-check.json)" in text
+    assert "[audit](replications/exp8/results/calibration-gap-audit.json)" in text
+    assert "[test-engine](replications/exp8/results/calibration_base/summary.json)" in text
+    assert "[binomial_per_sample](replications/exp8/results/calibration_base/summary.json)" in text
+
+
+def test_cost_ledger_separates_settled_estimates_and_reserved_bounds(tmp_path):
+    results = setup_repo(tmp_path)
+    write_json(results / "costs.json", {"reservations": {
+        "a": {"kind": "modal", "stage": "calibration_base", "status": "settled", "actual_usd": "2.50",
+              "seconds": 3600, "receipt_metadata": {"billing_basis": "resource_upper_bound_not_invoice"}},
+        "b": {"kind": "editor", "stage": "editor:1", "status": "reserved", "upper_bound_usd": "1.25"},
+    }})
+    write_json(results / "setup/cost.json", {"stage": "setup", "cost_usd": 0.25})
+    generated = generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "[2.5000](replications/exp8/results/costs.json)" in text
+    assert "[1.2500](replications/exp8/results/costs.json)" in text
+    assert "[0.2500](replications/exp8/results/setup/cost.json)" in text
+    assert "[resource_upper_bound_not_invoice](replications/exp8/results/costs.json)" in text
+    assert "Reservations are retained bounds, not charges" in text
+    assert "resource hours are not end-to-end wall time" in text
+    assert "[0.0000]" not in text
+    assert len(generated["sources"]) == 2
+
+
+@pytest.mark.parametrize("amount", ["NaN", "-1", True])
+def test_invalid_settled_ledger_does_not_replace_published_files(tmp_path, amount):
+    results = setup_repo(tmp_path)
+    write_json(results / "costs.json", {"reservations": {"a": {
+        "kind": "modal", "stage": "calibration_base", "status": "settled", "actual_usd": amount,
+    }}})
+    original = (tmp_path / "README.md").read_text()
+    with pytest.raises(ValueError, match="cost value"):
+        generate_report(tmp_path, results)
+    assert (tmp_path / "README.md").read_text() == original
+    assert not (results / "report.md").exists()
+
+
+def test_missing_settled_amount_stays_pending(tmp_path):
+    results = setup_repo(tmp_path)
+    write_json(results / "costs.json", {"reservations": {"a": {
+        "kind": "modal", "stage": "calibration_base", "status": "settled",
+    }}})
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "[settled]" in text
+    assert "[0.0000]" not in text
+
+
 def test_transcript_contains_actual_turns_tools_and_redacts_tokens(tmp_path):
     run = tmp_path / "run"
     turn = run / "turns/t001"

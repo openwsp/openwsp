@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "model": "Qwen/Qwen3.5-0.8B",
+  "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+  "template_source": "replications/exp8/prompts/eval_prompt_format.txt",
+  "template_source_sha256": "6aff9ff9c1f67cfa071fa85db87d3020acece233e90fcc3d80218587cb9066a4",
+  "probe_problem": "What is 2 + 2?",
+  "rendered_sha256": "cce9dcf37f75f7bb4d150fddf76b7aa9495962c32af882e6ff00f85a6173d9cb",
+  "authors_format_sha256": "cce9dcf37f75f7bb4d150fddf76b7aa9495962c32af882e6ff00f85a6173d9cb",
+  "exact_match": true,
+  "sampling": {
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "presence_penalty": 1.5,
+    "max_tokens": 32768,
+    "seed": 0
+  },
+  "thinking": true
+}

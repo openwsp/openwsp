@@ -17,6 +17,11 @@ _BENCHMARKS = ("math500", "gsm8k", "ifeval")
 _COMPARATORS = {"calibration_base": "unedited", "calibration_p50c": "p50c", "live-run": "p50c"}
 _SECRET = re.compile(r"(?:sk-|hf_|ak-|as-|ghp_|github_pat_)[A-Za-z0-9_-]{16,}")
 _BEARER = re.compile(r"(?i)(authorization[\"'\s:]+bearer\s+)[A-Za-z0-9._~+/-]+")
+_STATE_FILES = (
+    "pipeline-state.json", "coordinator.json", "live-run/state.json", "calibration-check.json", "calibration-prompt-audit.json",
+    "calibration-gap-audit.json", "kernel/hash-verification.json", "kernel/sandbox-verification.json",
+    "kernel/forward-verification.json", "kernel/weight-swap.json",
+)
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -56,6 +61,88 @@ def _metric(value: Any, path: Path, relative_to: Path, *, percent: bool = False,
         return "pending"
     rendered = f"{value * 100:.{digits}f}%" if percent else f"{value:.{digits}f}"
     return f"[{rendered}]({_link(path, relative_to)})"
+
+
+def _recorded(value: Any, path: Path, relative_to: Path) -> str:
+    return f"[{_text(_redact(str(value)))}]({_link(path, relative_to)})" if value is not None else "pending"
+
+
+def _status_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path) -> str:
+    lines = ["| Recorded component | State | Evidence |", "| --- | --- | --- |"]
+    labels = {
+        "pipeline-state.json": "Pipeline", "coordinator.json": "Driver recovery",
+        "calibration-prompt-audit.json": "Calibration prompt audit",
+        "calibration-check.json": "Calibration comparison", "kernel/hash-verification.json": "Tensor hashes",
+        "kernel/sandbox-verification.json": "Sandbox and first cell", "kernel/forward-verification.json": "Forward service",
+        "kernel/weight-swap.json": "Weight swap check",
+    }
+    pipeline = evidence.get("pipeline-state.json")
+    for name, label in labels.items():
+        if name not in evidence:
+            continue
+        path, data = evidence[name]
+        state = data.get("status")
+        if name == "coordinator.json":
+            state = (data.get("current") or {}).get("phase", state)
+        details = data.get("active_stage") or data.get("error_type") or name
+        lines.append(f"| {label} | {_recorded(state, path, relative_to)} | {_recorded(details, path, relative_to)} |")
+        if data.get("error"):
+            lines.append(f"| Recorded blocker | {_recorded(str(data['error'])[:500], path, relative_to)} | See source record. |")
+    if "live-run/state.json" in evidence:
+        path, data = evidence["live-run/state.json"]
+        state = "submission recorded" if data.get("done") is True else "incomplete"
+        counts = [f"{key}: {_metric(data.get(key), path, relative_to, digits=0)}" for key in ("passes", "turn", "runs")]
+        lines.append(f"| Live editor | {_recorded(state, path, relative_to)} | {'; '.join(counts)} |")
+        reused = data.get("base_generation_reuse_requests")
+        if isinstance(reused, list) and reused:
+            lines.append(f"| Base-generation reuse | {_recorded('used', path, relative_to)} | Requests: {_metric(len(reused), path, relative_to, digits=0)} |")
+    if len(lines) == 2:
+        lines.append("| Pipeline | pending: no published state record | No completion claim. |")
+    elif pipeline is None:
+        lines.append("| Pipeline | pending: no published pipeline state | Component checks do not establish overall completion. |")
+    return "\n".join(lines)
+
+
+def _calibration_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path) -> str:
+    item = evidence.get("calibration-check.json")
+    if item is None:
+        return "Calibration comparison: pending."
+    path, data = item
+    lines = ["Calibration comparison:", "", "| Condition | Accuracy | Reference | Gap (points) | Within prescribed tolerance |",
+             "| --- | --- | --- | --- | --- |"]
+    for condition, row in data.items():
+        if not isinstance(row, dict) or "accuracy" not in row:
+            continue
+        gap = row.get("gap")
+        lines.append("| " + " | ".join((
+            _text(condition), _metric(row.get("accuracy"), path, relative_to, percent=True),
+            _metric(row.get("reference_accuracy"), path, relative_to, percent=True),
+            _metric(gap * 100 if _number(gap) else None, path, relative_to, digits=2),
+            _recorded(row.get("within_two_standard_errors"), path, relative_to),
+        )) + " |")
+    if data.get("status") != "passed":
+        audit = evidence.get("calibration-gap-audit.json")
+        if audit is None:
+            lines += ["", "Calibration has a recorded gap; no circuit-breaker audit artifact is published."]
+        else:
+            audit_path, audit_data = audit
+            lines += ["", (f"Circuit-breaker audit: {_recorded(audit_data.get('circuit_breaker_tripped'), audit_path, relative_to)}. "
+                           f"Checks and remaining gap: [audit]({_link(audit_path, relative_to)}).")]
+    return "\n".join(lines)
+
+
+def _runtime_table(summaries: list[tuple[Path, dict]], relative_to: Path) -> str:
+    lines = ["Recorded runtime and uncertainty:", "", "| Stage / benchmark | Engine | GPU | Transformers | Uncertainty method |",
+             "| --- | --- | --- | --- | --- |"]
+    for path, data in summaries:
+        provenance = data.get("provenance") or {}
+        lines.append("| " + " | ".join([
+            _text(f"{data.get('stage', 'pending')} / {data.get('benchmark', 'pending')}"),
+            *[_recorded(provenance.get(key), path, relative_to) for key in ("engine", "gpu", "transformers", "standard_error")],
+        ]) + " |")
+    if not summaries:
+        lines.append("| pending | pending | pending | pending | pending |")
+    return "\n".join(lines)
 
 
 def _validate_summary(summary: dict[str, Any], path: Path) -> None:
@@ -156,7 +243,8 @@ def _results_table(
     return "\n".join(lines)
 
 
-def _costs_table(summaries: list[tuple[Path, dict[str, Any]]], relative_to: Path) -> str:
+def _costs_table(summaries: list[tuple[Path, dict[str, Any]]], relative_to: Path,
+                 ledgers: list[tuple[Path, dict]] | None = None) -> str:
     lines = [
         "| Stage | Benchmark | Recorded hours | Recorded cost (USD) |",
         "| --- | --- | --- | --- |",
@@ -182,7 +270,56 @@ def _costs_table(summaries: list[tuple[Path, dict[str, Any]]], relative_to: Path
         "",
         "Costs and durations come from the linked records. Missing costs are not treated as zero; rows are not summed because stages may overlap.",
     ]
+    for path, ledger in ledgers or []:
+        reservations = ledger.get("reservations")
+        if not isinstance(reservations, dict):
+            raise TypeError(f"Cost ledger reservations must be an object in {path}")
+        groups: dict[tuple, list[dict]] = {}
+        for row in reservations.values():
+            if not isinstance(row, dict):
+                raise TypeError(f"Cost ledger entries must be objects in {path}")
+            kind = row.get("kind", "pending")
+            stage = str(row.get("stage", "pending"))
+            if kind == "editor":
+                stage = "editor turns"
+            receipt = row.get("receipt_metadata") or {}
+            basis = receipt.get("billing_basis") or receipt.get("cost_basis")
+            if not basis:
+                basis = "API usage and recorded token rates" if kind == "editor" else "resource estimate; not invoice"
+            key = (kind, stage, row.get("status", "unspecified"), str(basis))
+            groups.setdefault(key, []).append(row)
+        lines += ["", f"Budget ledger: [source]({_link(path, relative_to)}). Reservations are retained bounds, not charges.", "",
+                  "| Budget / stage | State | Recorded hours | Settled amount (USD) | Reserved bound (USD) | Basis |",
+                  "| --- | --- | --- | --- | --- | --- |"]
+        for (kind, stage, status, basis), rows in sorted(groups.items()):
+            seconds = [_ledger_number(row.get("seconds"), path) for row in rows]
+            duration = sum(seconds) / 3600 if all(value is not None for value in seconds) else None
+            amounts = [_ledger_number(row.get("actual_usd"), path) for row in rows]
+            bounds = [_ledger_number(row.get("upper_bound_usd"), path) for row in rows]
+            settled = sum(amounts) if status == "settled" and all(value is not None for value in amounts) else None
+            reserved = sum(bounds) if status == "reserved" and all(value is not None for value in bounds) else None
+            lines.append("| " + " | ".join((
+                _text(f"{kind} / {stage}"), _recorded(status, path, relative_to),
+                _metric(duration, path, relative_to, digits=3), _metric(settled, path, relative_to, digits=4),
+                _metric(reserved, path, relative_to, digits=4), _recorded(basis, path, relative_to),
+            )) + " |")
+        if not groups:
+            lines.append("| No recorded jobs | pending | pending | pending | pending | Ledger has no receipts. |")
+        lines += ["", ("Ledger rows and evaluation summaries may describe the same jobs; do not add the two tables. "
+                       "Summed resource hours are not end-to-end wall time. Settled resource estimates remain estimates until reconciled with provider billing.")]
     return "\n".join(lines)
+
+
+def _ledger_number(value: Any, path: Path) -> float | None:
+    if value is None:
+        return None
+    try:
+        number = float(value)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(f"Missing or invalid cost value in {path}") from exc
+    if isinstance(value, bool) or not math.isfinite(number) or number < 0:
+        raise ValueError(f"Invalid cost value in {path}")
+    return number
 
 
 def _replace_section(readme: str, name: str, body: str) -> str:
@@ -212,13 +349,27 @@ def generate_report(repo_root: str | Path, results_dir: str | Path) -> dict[str,
         data = _read_json(path)
         _validate_summary(data, path)
         summaries.append((path, data))
+    evidence = {name: (results / name, _read_json(results / name)) for name in _STATE_FILES if (results / name).exists()}
+    ledgers = [(path, _read_json(path)) for path in sorted(results.rglob("costs.json"))]
+    extra_costs = []
+    for path in sorted(results.rglob("cost.json")):
+        data = _read_json(path)
+        _validate_summary(data, path)
+        extra_costs.append((path, data))
+    def result_body(relative_to):
+        return "\n\n".join((_status_table(evidence, relative_to), _results_table(references, summaries, relative_to),
+                            _calibration_table(evidence, relative_to), _runtime_table(summaries, relative_to)))
+    def cost_body(relative_to):
+        return _costs_table(summaries + extra_costs, relative_to, ledgers)
     readme_path = repo / "README.md"
     readme = readme_path.read_text() if readme_path.exists() else "# OpenWSP\n"
-    readme = _replace_section(readme, "RESULTS", _results_table(references, summaries, repo))
-    readme = _replace_section(readme, "COSTS", _costs_table(summaries, repo))
+    if "<!-- OPENWSP:STATUS:" in readme:
+        readme = _replace_section(readme, "STATUS", _status_table(evidence, repo))
+    readme = _replace_section(readme, "RESULTS", result_body(repo))
+    readme = _replace_section(readme, "COSTS", cost_body(repo))
     report_path = results / "report.md"
-    report = "# Recorded evaluation results\n\n" + _results_table(references, summaries, results)
-    report += "\n\n" + _costs_table(summaries, results) + "\n"
+    report = "# Recorded evaluation results\n\n" + result_body(results)
+    report += "\n\n" + cost_body(results) + "\n"
     # Validate all inputs and both replacements before changing published files.
     _atomic_write(report_path, report)
     _atomic_write(readme_path, readme)
@@ -228,7 +379,8 @@ def generate_report(repo_root: str | Path, results_dir: str | Path) -> dict[str,
         "summaries": len(summaries),
         "sources": [
             {"path": str(path), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
-            for path in [*(item[0] for item in references.values()), *(item[0] for item in summaries)]
+            for path in [*(item[0] for item in references.values()), *(item[0] for item in summaries),
+                         *(item[0] for item in evidence.values()), *(item[0] for item in ledgers), *(item[0] for item in extra_costs)]
         ],
     }
 

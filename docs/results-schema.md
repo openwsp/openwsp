@@ -1,6 +1,6 @@
 # Result records and contributions
 
-`openwsp report exp8` reads evaluation files and regenerates the README's marked result and cost tables. It does not infer success from the presence of a run directory. Missing measurements remain pending, and an interrupted or blocked run must retain its status.
+`openwsp report exp8` reads evaluation files and regenerates the README's marked status, result and cost tables. It does not infer success from the presence of a run directory. Missing measurements remain pending, and an interrupted or blocked run must retain its status.
 
 ## Layout
 
@@ -54,6 +54,16 @@ If a shared raw artifact contains multiple samples, record how the problem ID an
 ## Cost and transcript records
 
 Stage summaries may contain `seconds` and `cost_usd`. A separate `cost.json` can record billing for a stage that has no evaluation summary, with `stage`, `seconds`, `cost_usd`, and provenance identifying the job and measurement method. Avoid counting the same charge in both files. Store GPU seconds, CPU/memory use or rate assumptions, and the pre-launch estimate with the underlying job record.
+
+`costs.json` is the durable budget ledger. The report reads its `reservations` object, groups receipts by budget, stage, state and billing basis, and combines editor-turn receipts for display. Settled amounts and reserved upper bounds appear in separate columns. Numeric strings from the ledger are accepted only when finite and nonnegative. A missing amount stays pending; an unresolved reservation is not a charge or a zero-cost job. The ledger table and evaluation summaries may refer to the same work and must not be added together. Resource estimates do not become invoices merely because their reservations are settled.
+
+## Published state and calibration evidence
+
+The report reads `pipeline-state.json`, optional `coordinator.json`, `live-run/state.json`, the kernel verification files, `calibration-prompt-audit.json`, `calibration-check.json` and optional `calibration-gap-audit.json`. A top-of-README table uses optional `OPENWSP:STATUS` markers. Publication may change only that table body and the existing `RESULTS` and `COSTS` table bodies; surrounding prose stays unchanged.
+
+Pipeline and recovery states are shown as recorded. The live editor's `done` flag means a submission was recorded, not that evaluation, controls, CI and publication all passed. The report never promotes a passed hash check or completed evaluation into an overall completion claim. The saved heartbeat is a snapshot, so current liveness must be checked through `openwsp status`.
+
+Calibration comparison records retain observed/reference accuracy, gap and the prescribed tolerance outcome. A recorded gap stays visible when a circuit-breaker audit permits continuation. Publish the audit file with its checks and unresolved discrepancy; an absent audit is shown explicitly. Runtime metadata and standard-error methods are read from each summary's `provenance` object.
 
 The readable transcript is generated from `turns/` and `tool_calls.jsonl`. Each turn retains the editor's explanation, code or forward block and returned result. Redact credentials; link to large outputs by their artifact identity instead of embedding arrays or full datasets. Experiment 8's primary transcript is at `replications/exp8/results/live-run/transcript.md`.
 

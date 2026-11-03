@@ -25,6 +25,7 @@ def source_repo(tmp_path):
     git(repo, "config", "user.email", "test@example.invalid")
     (repo / "README.md").write_text(
         "# Project\nHuman prose stays.\n"
+        "<!-- OPENWSP:STATUS:START -->\nold state\n<!-- OPENWSP:STATUS:END -->\n"
         "<!-- OPENWSP:RESULTS:START -->\nold result\n<!-- OPENWSP:RESULTS:END -->\n"
         "<!-- OPENWSP:COSTS:START -->\nold cost\n<!-- OPENWSP:COSTS:END -->\n"
     )
@@ -96,6 +97,8 @@ def test_publish_changes_only_allowlisted_results_and_readme_tables(tmp_path, mo
     assert result["status"] == "pushed"
     assert result["attempts"] == 1
     assert "Human prose stays." in pushes[0]["readme"]
+    assert "old state" not in pushes[0]["readme"]
+    assert "pending: no published state record" in pushes[0]["readme"]
     assert pushes[0]["source"] == "human_source = True\n"
     assert all(path == "README.md" or path.startswith(PREFIX + "/") for path in result["paths"])
     assert any("pull" in command and "--rebase" in command for command in calls)

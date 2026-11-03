@@ -104,8 +104,10 @@ def _validate_file(path: Path) -> None:
 
 def _readme_prose(text: str) -> str:
     """Remove only table bodies; the remaining bytes must not change."""
-    for section in ("RESULTS", "COSTS"):
+    for section in ("STATUS", "RESULTS", "COSTS"):
         start, end = f"<!-- OPENWSP:{section}:START -->", f"<!-- OPENWSP:{section}:END -->"
+        if section == "STATUS" and start not in text and end not in text:
+            continue
         if text.count(start) != 1 or text.count(end) != 1 or text.index(start) >= text.index(end):
             raise PublishingError("README must contain exactly one ordered pair of each table marker")
         before, rest = text.split(start)
