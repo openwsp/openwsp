@@ -1,0 +1,17 @@
+{
+  "version": "v0.33.0",
+  "license": "Apache-2.0",
+  "purpose": "Actual import-light V2 interface and loader for CPU compatibility regression; no CUDA/model code is executed.",
+  "files": [
+    {
+      "file": "interface.py.txt",
+      "source": "https://github.com/vllm-project/vllm/blob/v0.33.0/vllm/v1/worker/gpu/sample/logits_processor/interface.py",
+      "sha256": "4172bdc4d3b736cb6670323f84aa8eb310567cd4f288c6ea4ab29e4bb6c9bcdd"
+    },
+    {
+      "file": "loader.py.txt",
+      "source": "https://github.com/vllm-project/vllm/blob/v0.33.0/vllm/v1/worker/gpu/sample/logits_processor/loader.py",
+      "sha256": "5a51b37ffb6f489029500021310b21a8e666c14842d1f91b58d33cac5a805348"
+    }
+  ]
+}
