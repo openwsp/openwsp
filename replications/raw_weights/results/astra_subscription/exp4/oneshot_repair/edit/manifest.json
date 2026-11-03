@@ -1,0 +1,215 @@
+{
+  "base_model": "exp4:oneshot_repair:shown",
+  "base_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "changed_entries_total": 2918,
+  "changed_tensors": 14,
+  "edit_sha256": "d7fcb97aeeedfde6f2085d7c0876ee95a1370b3f91fc5ae9d8448bc87fd6ecf4",
+  "format": "openwsp.edit",
+  "format_version": 1,
+  "payload_sha256": "63c9dc26a7ce89409134fa0e0e6a5870089a0f3ac810fb1565876359dede57d8",
+  "tensors": [
+    {
+      "base_sha256": "e81cfeb6d06e3594b159c8a3e3460ea5d4e8ef59c87cbcd5fb2a53a29806a10b",
+      "changed_columns": 128,
+      "changed_entries": 508,
+      "changed_rows": 128,
+      "dtype": "bfloat16",
+      "edited_sha256": "d1eda2a2b8666993848f57c56a2fdd8d66d7a9cd32c3e0c54ae8a616808e36dc",
+      "form": "sparse",
+      "name": "actor0.W",
+      "relative_change": 7.8473594469570696,
+      "shape": [
+        128,
+        128
+      ],
+      "submitted_file": "actor0.W.npy"
+    },
+    {
+      "base_sha256": "1100370ba9bf8907213008c19f8e1e970cabfcd47b30e345ba035033f26fbe14",
+      "changed_entries": 2,
+      "dtype": "bfloat16",
+      "edited_sha256": "46a2f3de3392adbb28bcb1ea69b5c804849380078e6837763069338e2ddd34dd",
+      "form": "sparse",
+      "name": "actor0.b",
+      "relative_change": 0.062224433939455856,
+      "shape": [
+        128
+      ],
+      "submitted_file": "actor0.b.npy"
+    },
+    {
+      "base_sha256": "26d20601de89231fe46ea0534edba9bd6f6d3c9a9528372923717719e0038703",
+      "changed_columns": 128,
+      "changed_entries": 381,
+      "changed_rows": 127,
+      "dtype": "bfloat16",
+      "edited_sha256": "e71234c25b3909a46b2b32ff6c6e83071aaf21de5bdd20dcd4a2e55b0fb1a393",
+      "form": "sparse",
+      "name": "actor1.W",
+      "relative_change": 0.6593509966321071,
+      "shape": [
+        128,
+        128
+      ],
+      "submitted_file": "actor1.W.npy"
+    },
+    {
+      "base_sha256": "5acc14cec52f5d9fc1711f29dcda438c069fcda5fcf0f3ec3010112e28694617",
+      "changed_entries": 1,
+      "dtype": "bfloat16",
+      "edited_sha256": "6be981dc5a1e0999ac32a51fff05a7aa5ba8f24187d893fbedca765283240cd3",
+      "form": "sparse",
+      "name": "actor1.b",
+      "relative_change": 20.897435807791023,
+      "shape": [
+        128
+      ],
+      "submitted_file": "actor1.b.npy"
+    },
+    {
+      "base_sha256": "63a9a36813be23d7b7cbd12773a2fa4a53cb50712bb7b32f4c08c7ca4c42fe15",
+      "changed_columns": 127,
+      "changed_entries": 252,
+      "changed_rows": 126,
+      "dtype": "bfloat16",
+      "edited_sha256": "b0158c016ebe182d7f848e1e5b040368adf641460277cd1cc7abf5fe0cd1e5a5",
+      "form": "sparse",
+      "name": "actor2.W",
+      "relative_change": 0.4579892530721506,
+      "shape": [
+        128,
+        128
+      ],
+      "submitted_file": "actor2.W.npy"
+    },
+    {
+      "base_sha256": "f1a57decc1d62b11103fb1b91b68094d8eeb8e0605eb86305b76a0c6ead2a3cd",
+      "changed_entries": 1,
+      "dtype": "bfloat16",
+      "edited_sha256": "a74b6d75f024dc8a0c8c0ea7dc5e868eb3d38801e2ad6a888447373090449690",
+      "form": "sparse",
+      "name": "actor2.b",
+      "relative_change": 0.1223482159624574,
+      "shape": [
+        128
+      ],
+      "submitted_file": "actor2.b.npy"
+    },
+    {
+      "base_sha256": "2f4c96a66ff9623bc52762f45d53df7fe461128c34b3b91dcee242261596086b",
+      "changed_columns": 128,
+      "changed_entries": 254,
+      "changed_rows": 127,
+      "dtype": "bfloat16",
+      "edited_sha256": "e1970e46be977ccf28322dc8069e5c02994e7371f11a122e0c7a415ffd61d5ef",
+      "form": "sparse",
+      "name": "actor3.W",
+      "relative_change": 0.47676599195862,
+      "shape": [
+        128,
+        128
+      ],
+      "submitted_file": "actor3.W.npy"
+    },
+    {
+      "base_sha256": "438acca13de4f4500dfa0eb9644b79941adef775b30cc0e3daecace374e7aeae",
+      "changed_entries": 1,
+      "dtype": "bfloat16",
+      "edited_sha256": "f19654d0c3a6569b721bc09bb233506488608858fdaa6d3eff16a10500a6c458",
+      "form": "sparse",
+      "name": "actor3.b",
+      "relative_change": 0.12609725894334933,
+      "shape": [
+        128
+      ],
+      "submitted_file": "actor3.b.npy"
+    },
+    {
+      "base_sha256": "80f83aa0ac3443305f3dc56b14c7f8c38532ecbc5a2b80a7fc0a9a0ba525067c",
+      "changed_columns": 128,
+      "changed_entries": 255,
+      "changed_rows": 128,
+      "dtype": "bfloat16",
+      "edited_sha256": "0daa4f9c87d6c1f31ffc51ccadba84c4baa3e947cd85652ab8f366cb986b0f37",
+      "form": "sparse",
+      "name": "actor4.W",
+      "relative_change": 0.47305348757192767,
+      "shape": [
+        128,
+        128
+      ],
+      "submitted_file": "actor4.W.npy"
+    },
+    {
+      "base_sha256": "0f8acf6064ea69f2541cd2c58ebd00110a278f044a691d82a068b6d3e264245e",
+      "changed_entries": 1,
+      "dtype": "bfloat16",
+      "edited_sha256": "3baaa236eb99c129b7c25730ac39709235ebfc97b6606b633e982d8019ee1c0a",
+      "form": "sparse",
+      "name": "actor4.b",
+      "relative_change": 0.022457341535591244,
+      "shape": [
+        128
+      ],
+      "submitted_file": "actor4.b.npy"
+    },
+    {
+      "base_sha256": "fd9ff9c8e7b594cef4cbdc2d3f595d7e1c468b0c4a2178eed6c33a0f34cbe36b",
+      "changed_columns": 3,
+      "changed_entries": 3,
+      "changed_rows": 1,
+      "dtype": "bfloat16",
+      "edited_sha256": "16451bafb83edb012cad5fc2f509ff68be2a9312d2a39dfb7d8ee76c00701a04",
+      "form": "sparse",
+      "name": "actor_head.W",
+      "relative_change": 31.51942281487296,
+      "shape": [
+        128,
+        16
+      ],
+      "submitted_file": "actor_head.W.npy"
+    },
+    {
+      "base_sha256": "3a72601cea0a7c87b369414a99e793feda8f6d0a4195eafb3b458a177ea632d2",
+      "changed_entries": 1,
+      "dtype": "bfloat16",
+      "edited_sha256": "823ea7ac371df36c49d6b3d3c9e94b66375513ab987508b36b65635e8aec9c9b",
+      "form": "sparse",
+      "name": "actor_head.b",
+      "relative_change": 765.1159932420986,
+      "shape": [
+        16
+      ],
+      "submitted_file": "actor_head.b.npy"
+    },
+    {
+      "base_sha256": "615e9482b5727c43e8f1cfa5c30440e67ec2dc767d840c4df98be53e1a7e13c7",
+      "changed_columns": 2,
+      "changed_entries": 1256,
+      "changed_rows": 674,
+      "dtype": "bfloat16",
+      "edited_sha256": "ec3b74bce6331f89ead89e6c293bf68e29ee0fae00a3cc5e319b352e3d947c32",
+      "form": "sparse",
+      "name": "embed.W",
+      "relative_change": 0.13201464875747967,
+      "shape": [
+        679,
+        128
+      ],
+      "submitted_file": "embed.W.npy"
+    },
+    {
+      "base_sha256": "a01fcd4e1c9fe147e81dd227c0cbfcf007d5245630438a0372cd60f6afea43d2",
+      "changed_entries": 2,
+      "dtype": "bfloat16",
+      "edited_sha256": "5e4e47d299f9b3860b0648efb13bf96a1ab2cb7af1e2cfc759e0f65ca20927bb",
+      "form": "sparse",
+      "name": "embed.b",
+      "relative_change": 30.851296620446764,
+      "shape": [
+        128
+      ],
+      "submitted_file": "embed.b.npy"
+    }
+  ]
+}

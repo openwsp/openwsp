@@ -1,0 +1,368 @@
+{
+  "basis": "Immutable completed Astra label/car outcomes, with pending Fable comparators; ongoing experiment5 is excluded from this publication snapshot",
+  "items": [
+    {
+      "answer_bytes": 2632,
+      "answer_sha256": "64a67aa4cbbf3e8921174bc0e2a64eafa296a2795c4862693f1b54b571abfbcf",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "correct": true,
+      "editor": "astra_subscription",
+      "editor_contract": {
+        "effort": "high",
+        "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+        "reasoning_summary": "detailed",
+        "transport": "codex_cli_chatgpt",
+        "verbosity": "low"
+      },
+      "experiment": "exp1",
+      "item_id": "breakout",
+      "predicted": [
+        "breakout"
+      ],
+      "prompt_sha256": "ba1d97cfcb585f0ccab628ed1ef983b230d897b97ae6ff10f2de6eac6d390b31",
+      "reply_status": "completed",
+      "result_path": "astra_subscription/exp1/breakout/result.json",
+      "result_sha256": "a2c4a7e5aca965068c0a17b43afc44eb145e117596549f25d1d2acd3e511bc97",
+      "score_status": "completed",
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 70269,
+        "output_tokens": 2056,
+        "reasoning_output_tokens": 1414
+      }
+    },
+    {
+      "answer_bytes": 3041,
+      "answer_sha256": "e07c091fae4fc3e3fac25c9005f38304530a5064f52419e3aeb65f420424adc3",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "correct": true,
+      "editor": "astra_subscription",
+      "editor_contract": {
+        "effort": "high",
+        "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+        "reasoning_summary": "detailed",
+        "transport": "codex_cli_chatgpt",
+        "verbosity": "low"
+      },
+      "experiment": "exp1",
+      "item_id": "freeway",
+      "predicted": [
+        "freeway"
+      ],
+      "prompt_sha256": "76f30db2c4591e340f4a8e1ca56abdfdf6aa9857e3220936ca178f86c29e6070",
+      "reply_status": "completed",
+      "result_path": "astra_subscription/exp1/freeway/result.json",
+      "result_sha256": "98d2f14fad123e08226f5caa0f86a00e3b6288d3f8a6b9388b711b97dbbe9d1f",
+      "score_status": "completed",
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 70215,
+        "output_tokens": 1802,
+        "reasoning_output_tokens": 1034
+      }
+    },
+    {
+      "answer_bytes": 2937,
+      "answer_sha256": "0a5e78f239468c34a68017df321017497cc15cd571d2f74ddd94c8dfec655897",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "correct": true,
+      "editor": "astra_subscription",
+      "editor_contract": {
+        "effort": "high",
+        "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+        "reasoning_summary": "detailed",
+        "transport": "codex_cli_chatgpt",
+        "verbosity": "low"
+      },
+      "experiment": "exp1",
+      "item_id": "pacman",
+      "predicted": [
+        "pacman"
+      ],
+      "prompt_sha256": "1c75e66aab1e611bdb07a87d6f70e3d2ba3d149e58f259b5ad7a485661244acf",
+      "reply_status": "completed",
+      "result_path": "astra_subscription/exp1/pacman/result.json",
+      "result_sha256": "0297fa30bbe5e262c0a683842f7bf3c36d91678201a27e2bad4c18061d8a6d9d",
+      "score_status": "completed",
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 70243,
+        "output_tokens": 1554,
+        "reasoning_output_tokens": 840
+      }
+    },
+    {
+      "answer_bytes": 2727,
+      "answer_sha256": "74a389fcae11c26d4b954615fb75137e7cd722b974a26590b992621b0f951ee2",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "correct": true,
+      "editor": "astra_subscription",
+      "editor_contract": {
+        "effort": "high",
+        "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+        "reasoning_summary": "detailed",
+        "transport": "codex_cli_chatgpt",
+        "verbosity": "low"
+      },
+      "experiment": "exp1",
+      "item_id": "pong",
+      "predicted": [
+        "pong"
+      ],
+      "prompt_sha256": "1b143ac2f46ab7a0c4b3eb45bd2b9d82314c3b24e2d2412f80566946c935c5ba",
+      "reply_status": "completed",
+      "result_path": "astra_subscription/exp1/pong/result.json",
+      "result_sha256": "c9a0a6f8405876b8adc7143cf1fa17a6029cc4c6609b8e639c9fae604e9d12e5",
+      "score_status": "completed",
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 70243,
+        "output_tokens": 1302,
+        "reasoning_output_tokens": 592
+      }
+    },
+    {
+      "answer_bytes": 1760,
+      "answer_sha256": "d02de7d3d6a14f994278603876b9b4617a8aec4ef70228468b825ee0924c52d4",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "correct": true,
+      "editor": "astra_subscription",
+      "editor_contract": {
+        "effort": "high",
+        "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+        "reasoning_summary": "detailed",
+        "transport": "codex_cli_chatgpt",
+        "verbosity": "low"
+      },
+      "experiment": "exp2",
+      "item_id": "circle",
+      "predicted": [
+        "circle"
+      ],
+      "prompt_sha256": "f02e93fcdb15177695684005f4345a6f9fc94d9925ad6c0fe69545203676693b",
+      "reply_status": "completed",
+      "result_path": "astra_subscription/exp2/circle/result.json",
+      "result_sha256": "568e2df3236e07f991272a8555743e9ce134ece7cbcab5f510b466d4c3eb791d",
+      "score_status": "completed",
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 96311,
+        "output_tokens": 2328,
+        "reasoning_output_tokens": 1842
+      }
+    },
+    {
+      "answer_bytes": 1906,
+      "answer_sha256": "07ae3e5d48bc2c38ba0cae83b11661f8103e85bea9040a89fae2ffdb33e1b86d",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "correct": true,
+      "editor": "astra_subscription",
+      "editor_contract": {
+        "effort": "high",
+        "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+        "reasoning_summary": "detailed",
+        "transport": "codex_cli_chatgpt",
+        "verbosity": "low"
+      },
+      "experiment": "exp2",
+      "item_id": "square",
+      "predicted": [
+        "square"
+      ],
+      "prompt_sha256": "fbb9f8b4b1b63dd4460d7168159b135b1420e70e24bcddd00f986e191f417172",
+      "reply_status": "completed",
+      "result_path": "astra_subscription/exp2/square/result.json",
+      "result_sha256": "b02d9bb2052d4a5953596577911ebf07f4ff29e29f75547976dbaa44f9904700",
+      "score_status": "completed",
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 96309,
+        "output_tokens": 1790,
+        "reasoning_output_tokens": 1276
+      }
+    },
+    {
+      "answer_bytes": 1872,
+      "answer_sha256": "9209f65ce6526f4879ed786722337fb5ae928a99ea65f22ce6cc3229874fc7ed",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "correct": true,
+      "editor": "astra_subscription",
+      "editor_contract": {
+        "effort": "high",
+        "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+        "reasoning_summary": "detailed",
+        "transport": "codex_cli_chatgpt",
+        "verbosity": "low"
+      },
+      "experiment": "exp2",
+      "item_id": "triangle",
+      "predicted": [
+        "triangle"
+      ],
+      "prompt_sha256": "d8533653617af859a80f105b8a6360efbf7331be41f85f97212b75fcc63da897",
+      "reply_status": "completed",
+      "result_path": "astra_subscription/exp2/triangle/result.json",
+      "result_sha256": "7014bbb04fa6a6a96bc9a898ad1d999d131357fce2f93b9f41b7a85eed4f83c8",
+      "score_status": "completed",
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 96293,
+        "output_tokens": 2427,
+        "reasoning_output_tokens": 1901
+      }
+    },
+    {
+      "answer_bytes": 1974,
+      "answer_sha256": "9e0f5286821c611ab5ac7ba025f7f0926830b11f8c6c7a81102ad12b09703706",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "editor": "astra_subscription",
+      "editor_contract": {
+        "effort": "high",
+        "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+        "reasoning_summary": null,
+        "transport": "codex_cli_chatgpt",
+        "verbosity": "low"
+      },
+      "evaluation": {
+        "batch_size": 32,
+        "episodes": 1024,
+        "invalid": 0.0,
+        "length": 32.0,
+        "mode": "sample",
+        "network_sha256": "daa905dc84113fe8f0647f32c5bfc21546d9c61ba5d9f6023fc8edbf6ba4fbbe",
+        "provenance": {
+          "backend": "cpu",
+          "dense_reward_scale": 0.2,
+          "frame_skip": 2,
+          "jax": "0.4.38",
+          "jax2d": "1.0.1",
+          "jaxlib": "0.4.38",
+          "max_steps": 256,
+          "numpy": "2.5.4",
+          "observation_sha256": "e93284ac32346642d6d791228d5257fae8c910db7deb06ebbcb89da3f485d1bd",
+          "repository": "https://github.com/FLAIROx/Kinetix",
+          "revision": "80ee9c292837c825cafaf9889323fdcc212efd1b",
+          "sha256": {
+            "kinetix/environment/env.py": "3413dcf9c700d0a5e3682e52d32229f7b2238fcfd579b38d87cf75221a503020",
+            "kinetix/environment/spaces.py": "9589b11367a6fe707d1c1326d6c928143f5c489f15d30232546723f005c9d719",
+            "kinetix/levels/l/h2_car_ramp.json": "6616869302884dcfa74ec2e8da37b523c13fdc51f4b829eb3ecd7ba5e0ada6b1",
+            "kinetix/render/renderer_symbolic_common.py": "2326758951bb0ec9addb9110b3f030e5c3b42b1347d013b23366c3be38ecefa1",
+            "kinetix/render/renderer_symbolic_flat.py": "25e27b496b662975f899873becc57a3ad02ddaadf2dbdee13736d077e61dcbc0",
+            "pyproject.toml": "16cd7917d100d1912b5796c7bf25992d1b06953f4dba2b4b87ce63affab01a2a"
+          }
+        },
+        "red": 1.0,
+        "return": -0.7675305306911469,
+        "scorer": "openwsp-reconstructed-kinetix-v1",
+        "seconds": 98.37882933799847,
+        "seed": 20261103,
+        "seed_matches_authors": false,
+        "seed_rule": "jax.random.fold_in(PRNGKey(seed), episode_index)",
+        "standard_error": 0.0,
+        "success": 0.0,
+        "successes": 0,
+        "timeout": 0.0
+      },
+      "experiment": "exp4",
+      "item_id": "oneshot_repair",
+      "parser": {
+        "applied": 31,
+        "block_found": true,
+        "errors": [],
+        "statements": 31
+      },
+      "prompt_sha256": "2ed66051f4fa554d43d0163eb48e4256dc80aef78d875a218826beefeb7d0559",
+      "reply_status": "completed",
+      "result_path": "astra_subscription/exp4/oneshot_repair/result.json",
+      "result_sha256": "81655eb5b212fdc14bdd0de68424b8ff4ede6cbe71eaacf4909f9166ab1ba9e5",
+      "score_status": "completed",
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 351723,
+        "output_tokens": 4777,
+        "reasoning_output_tokens": 4126
+      }
+    },
+    {
+      "editor": "fable_native_anthropic",
+      "experiment": "exp1",
+      "item_id": "breakout",
+      "prompt_sha256": "ba1d97cfcb585f0ccab628ed1ef983b230d897b97ae6ff10f2de6eac6d390b31",
+      "reply_status": "pending",
+      "score_status": "pending"
+    },
+    {
+      "editor": "fable_native_anthropic",
+      "experiment": "exp1",
+      "item_id": "freeway",
+      "prompt_sha256": "76f30db2c4591e340f4a8e1ca56abdfdf6aa9857e3220936ca178f86c29e6070",
+      "reply_status": "pending",
+      "score_status": "pending"
+    },
+    {
+      "editor": "fable_native_anthropic",
+      "experiment": "exp1",
+      "item_id": "pacman",
+      "prompt_sha256": "1c75e66aab1e611bdb07a87d6f70e3d2ba3d149e58f259b5ad7a485661244acf",
+      "reply_status": "pending",
+      "score_status": "pending"
+    },
+    {
+      "editor": "fable_native_anthropic",
+      "experiment": "exp1",
+      "item_id": "pong",
+      "prompt_sha256": "1b143ac2f46ab7a0c4b3eb45bd2b9d82314c3b24e2d2412f80566946c935c5ba",
+      "reply_status": "pending",
+      "score_status": "pending"
+    },
+    {
+      "editor": "fable_native_anthropic",
+      "experiment": "exp2",
+      "item_id": "circle",
+      "prompt_sha256": "f02e93fcdb15177695684005f4345a6f9fc94d9925ad6c0fe69545203676693b",
+      "reply_status": "pending",
+      "score_status": "pending"
+    },
+    {
+      "editor": "fable_native_anthropic",
+      "experiment": "exp2",
+      "item_id": "square",
+      "prompt_sha256": "fbb9f8b4b1b63dd4460d7168159b135b1420e70e24bcddd00f986e191f417172",
+      "reply_status": "pending",
+      "score_status": "pending"
+    },
+    {
+      "editor": "fable_native_anthropic",
+      "experiment": "exp2",
+      "item_id": "triangle",
+      "prompt_sha256": "d8533653617af859a80f105b8a6360efbf7331be41f85f97212b75fcc63da897",
+      "reply_status": "pending",
+      "score_status": "pending"
+    },
+    {
+      "editor": "fable_native_anthropic",
+      "experiment": "exp4",
+      "item_id": "oneshot_repair",
+      "prompt_sha256": "2ed66051f4fa554d43d0163eb48e4256dc80aef78d875a218826beefeb7d0559",
+      "reply_status": "pending",
+      "score_status": "pending"
+    }
+  ],
+  "items_per_editor": 11,
+  "recorded_at": "2026-11-03T19:50:13.989418+00:00",
+  "schema_version": 1,
+  "snapshot_scope": [
+    "exp1",
+    "exp2",
+    "exp4"
+  ],
+  "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f"
+}

@@ -10,7 +10,7 @@ OpenWSP began as an effort to reproduce that work and build the missing tools ar
 
 The tools are a Python kernel over model weights, a forward-pass service and a versioned edit format, exposed through one core API as a CLI, Python SDK and MCP server. The current experiment uses [Codex with subscription billing](docs/subscription-replication.md) for its editor, [Modal](https://modal.com) for computation and [Hugging Face](https://huggingface.co/Qwen/Qwen3.5-0.8B) for the pinned base model. The [Responses API adapter](docs/editor-recovery.md) remains available as a separate route. Further experiments, editors and services can build on the same interfaces.
 
-CPU replication work for the raw-weight experiments is also underway; the remaining language-model experiments follow Experiment 8. For human correspondence, use the maintainer's name at their handle dot com.
+The [CPU raw-weight replications](#raw-weight-experiments) have new Astra results: all seven game/shape labels are correct, while the one-shot car repair fails. Network-writing runs are still in progress; the remaining language-model experiments follow Experiment 8. For human correspondence, use the maintainer's name at their handle dot com.
 
 ## Project Status
 <!-- OPENWSP:STATUS:START -->
@@ -375,11 +375,26 @@ The factory supplies inference for that model. Loading tensors alone does not co
 
 Editors sit behind a separate `complete(messages)` interface. The [profile and transport architecture](docs/editor-architecture.md) retains the Astra subscription and Responses routes and adds a Fable profile over the [Anthropic Messages adapter](docs/anthropic-editor.md). Native API use requires explicit prices and token bounds. Fable has mocked transport tests but no live Experiment 8 comparison. OpenRouter is an extension target, not an implemented route. The current experiment continues to use Astra.
 
+## Raw-weight experiments
+
+The [pinned inventory](replications/raw_weights/inventory.json) contains every released item for experiments 1, 2, 4 and 5: 11 prompts per editor. Each item gets the verbatim user prompt and neutral instruction, a fresh conversation, no tools, one reply and no feedback or best-of selection. Astra runs through the existing ChatGPT subscription; native Fable 5.1 is pending credentials and verified token-count bounds, with one shared $20 cap for its entire set. The [runner and scoring plan](replications/raw_weights/README.md) give exact commands, source hashes and licenses.
+
+| Experiment | Authors' released result | Astra — ChatGPT subscription | Fable — native Anthropic |
+| --- | --- | --- | --- |
+| [1: identify the game](replications/exp1) | [4/4 labels](replications/exp1/reference/scores.json) | [4/4 labels](replications/raw_weights/results/labels-car-snapshot.json) | Pending credentials |
+| [2: identify image families](replications/exp2) | [3/3 shapes](replications/exp2/reference/scores.json) | [3/3 shapes](replications/raw_weights/results/labels-car-snapshot.json) | Pending credentials |
+| [4: repair the car](replications/exp4) | [1,024/1,024 successes](replications/exp4/reference/oneshot_result.json) | [0/1,024 successes](replications/raw_weights/results/astra_subscription/exp4/oneshot_repair/kinetix-evaluation.json); all episodes hit red | Pending credentials |
+| [5: write MinAtar weights](replications/exp5) | [Released three-game scores](replications/exp5/reference/minatar_eval.json) | In progress; no full three-game result yet | Pending credentials |
+
+The car failure is the sole new reply, retained with [31 valid edit statements and its usage receipt](replications/raw_weights/results/astra_subscription/exp4/oneshot_repair/result.json). It received no refinement or replacement. This is distinct from source-network calibration: the reconstructed CPU scorer reproduced [the authors' 0/256 base and 1,024/1,024 repaired successes](replications/exp4/calibration/summary.json), and all three released MinAtar networks were [evaluated over 1,000 episodes](replications/raw_weights/calibration/minatar/summary.json) with a disclosed independent seed. Source-network calibration is not a new editor outcome.
+
+These are prompt-faithful replications with disclosed execution differences. Astra matches the authors' `high` effort for experiments 1/2/4 and `xhigh` for 5, including their reasoning-summary choices; our verified Codex profile also explicitly selects `low` verbosity. The original complete client/configuration envelope and subscription entitlement were not released. Despite identical released prompt bytes, [our input-token receipts](replications/raw_weights/results/labels-car-snapshot.json) are 3,480 tokens lower than the [authors' counts](replications/raw_weights/inventory.json) on each of the seven labels, and 3,478 lower on the car prompt. No guessed prefix was added to erase that difference. The released scoring code and evaluation seeds were unavailable, so the documented scorers are reconstructions validated against published answers and networks.
+
 ## Limits and unfinished work
 
 This replication does not train the model or compute gradients. The live editor receives no benchmark data, reference edit or control outcomes, and its final edit is not selected by an operator. The original API attempt was not relabeled as a completed run when the subscription attempt began.
 
-The [raw-weight experiment folders](replications/raw_weights) are being reconstructed from the released material; their new editor results remain pending. Experiments [3](replications/exp3), [6](replications/exp6) and [7](replications/exp7) remain layout only. There is no hosted service, web UI, package-registry release or Hugging Face publication of a new live edit. The expanded [evaluation grid](replications/exp8/eval_grid_configs) has CPU implementation checks, not measured GPU results. Optional controls and additional editor comparisons remain separate from the active Experiment 8 attempt.
+The raw-weight experiments retain the completed label/car outcomes above; the MinAtar editor runs and Fable comparisons are unfinished. Experiments [3](replications/exp3), [6](replications/exp6) and [7](replications/exp7) remain layout only. There is no hosted service, web UI, package-registry release or Hugging Face publication of a new live edit. The expanded [evaluation grid](replications/exp8/eval_grid_configs) has CPU implementation checks, not measured GPU results. Optional controls and additional editor comparisons remain separate from the active Experiment 8 attempt.
 
 ## Add a result
 

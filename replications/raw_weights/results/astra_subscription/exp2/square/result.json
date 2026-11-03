@@ -1,0 +1,101 @@
+{
+  "answer_bytes": 1906,
+  "answer_sha256": "07ae3e5d48bc2c38ba0cae83b11661f8103e85bea9040a89fae2ffdb33e1b86d",
+  "binding": {
+    "editor": "astra_subscription",
+    "experiment": "exp2",
+    "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+    "item_id": "square",
+    "prompt_sha256": "fbb9f8b4b1b63dd4460d7168159b135b1420e70e24bcddd00f986e191f417172",
+    "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f"
+  },
+  "editor_contract": {
+    "effort": "high",
+    "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+    "reasoning_summary": "detailed",
+    "transport": "codex_cli_chatgpt",
+    "verbosity": "low"
+  },
+  "receipt": {
+    "billing": "chatgpt_subscription_no_api_price_inferred",
+    "event_file": "a0667cbd3fa74d6597615aa1c26078e8/events.jsonl",
+    "exit": {
+      "reason": null,
+      "returncode": 0,
+      "seconds": 71.90927051099789,
+      "violation": null
+    },
+    "final_file": "a0667cbd3fa74d6597615aa1c26078e8/final.txt",
+    "input_sha256": "00572b9a02b046aabecc4ed56555cb1a23b8bd7cf7dcb15b01c949e9dceb75d9",
+    "profile": {
+      "auto_compact_token_limit": 1000000,
+      "catalog_path": "/workspace/openwsp/src/openwsp/editors/data/codex-models-0.163.0.json",
+      "catalog_sha256": "05723cac0f7da85c31f710f602bb0c47a5588d8bdf68aad24e9dd6ac951c7705",
+      "cli_version": "0.163.0",
+      "context_window": 872000,
+      "effort": "high",
+      "instructions": "Answer the user's request.\n",
+      "model": "gpt-6-astra",
+      "name": "astra-exp2-authors",
+      "reasoning_summary": "detailed",
+      "transport": "codex_cli_chatgpt",
+      "verbosity": "low"
+    },
+    "recorded_at": 1793734160.9723165,
+    "request_key": "raw-weights:e65708b5c6e52ab6e05d7ab8fe608ab6a56a3fe867a7f5197c7a8c2a8878ab41",
+    "response_id": "a0667cbd3fa74d6597615aa1c26078e8",
+    "runaway": null,
+    "schema_version": 1,
+    "settings": {
+      "catalog_sha256": "05723cac0f7da85c31f710f602bb0c47a5588d8bdf68aad24e9dd6ac951c7705",
+      "cli_version": "0.163.0",
+      "codex_home": "/workspace/openwsp/.openwsp/codex-subscription",
+      "effort": "high",
+      "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+      "model": "gpt-6-astra",
+      "reasoning_summary": "detailed",
+      "verbosity": "low",
+      "work_dir": "/tmp/openwsp-raw-7cfe11d392702dbad72f06fa"
+    },
+    "status": "completed",
+    "text": "Observations:\n- **Horizontal strokes:** W3 unit 55 has weights `0.486 0.498 0.510 0.503` at row 1, columns 4\u20137. Unit 47 has `0.340 0.415 0.443 0.366 0.300` at row 3, columns 4\u20138. Unit 20 has `0.434 0.502 0.540 0.529 0.453` at row 10, columns 4\u20138. These are concentrated horizontal bands at different heights.\n- **Vertical strokes:** W3 unit 42 has `0.641` at row 2, column 1, with substantial positive weights continuing down that column. Unit 56 has `0.367`, `0.433`, and `0.458` at rows 5, 6, and 7 of column 10.\n- **Other units suppress particular strokes:** W3 unit 3 has `-0.406`, `-0.472`, and `-0.499` at rows 6\u20138, column 3. This suggests selecting among alternative edge positions rather than drawing every available line.\n- **Dark margins:** b3 at the four corners is `-0.691`, `-0.714`, `-0.626`, and `-0.690`; interior biases are much nearer zero.\n\nReasoning:\nThe strongest spatial structure is a vocabulary of horizontal and vertical edges at multiple positions. This most naturally fits **axis-aligned rectangular outlines**, with varying boundaries. Narrow stroke concentrations favor hollow rectangles over filled blocks. Circles, diagonals, handwritten characters, and textured scenes fit substantially less well.\n\nThe weights do not directly establish exact size frequencies or guarantee that every sample is a perfect rectangle.\n\nImages:\nMy best inference is **a single white, approximately one-pixel-thick rectangular outline on black**, varying in width, height, and position; sometimes square. It generally sits inside the outer black margin, predominantly within rows and columns 1\u201310. A roughly 7-by-8-pixel outline is a plausible representative, not a uniquely determined size.\n\nExample:\n```text\n............\n............\n...#######..\n...#.....#..\n...#.....#..\n...#.....#..\n...#.....#..\n...#.....#..\n...#.....#..\n...#######..\n............\n............\n```\n\nConfidence: 80%",
+    "thread_id": "01a1a2e2-19ae-7672-b73c-e19613989fb2",
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 96309,
+      "output_tokens": 1790,
+      "reasoning_output_tokens": 1276
+    },
+    "usage_snapshot": {
+      "basis": "new_thread_total",
+      "cumulative": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 96309,
+        "output_tokens": 1790,
+        "reasoning_output_tokens": 1276
+      },
+      "delta": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 96309,
+        "output_tokens": 1790,
+        "reasoning_output_tokens": 1276
+      }
+    }
+  },
+  "request_key": "raw-weights:e65708b5c6e52ab6e05d7ab8fe608ab6a56a3fe867a7f5197c7a8c2a8878ab41",
+  "scientific_replies_requested": 1,
+  "score": {
+    "answer_section_found": true,
+    "correct": true,
+    "expected": "square",
+    "predicted": [
+      "square"
+    ],
+    "scorer": "openwsp-reconstructed-label-v1"
+  },
+  "status": "completed",
+  "tools": []
+}

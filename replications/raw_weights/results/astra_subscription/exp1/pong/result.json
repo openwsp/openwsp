@@ -1,0 +1,101 @@
+{
+  "answer_bytes": 2727,
+  "answer_sha256": "74a389fcae11c26d4b954615fb75137e7cd722b974a26590b992621b0f951ee2",
+  "binding": {
+    "editor": "astra_subscription",
+    "experiment": "exp1",
+    "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+    "item_id": "pong",
+    "prompt_sha256": "1b143ac2f46ab7a0c4b3eb45bd2b9d82314c3b24e2d2412f80566946c935c5ba",
+    "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f"
+  },
+  "editor_contract": {
+    "effort": "high",
+    "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+    "reasoning_summary": "detailed",
+    "transport": "codex_cli_chatgpt",
+    "verbosity": "low"
+  },
+  "receipt": {
+    "billing": "chatgpt_subscription_no_api_price_inferred",
+    "event_file": "e30d7ac0f9184abb89de9ff9b193289e/events.jsonl",
+    "exit": {
+      "reason": null,
+      "returncode": 0,
+      "seconds": 49.75354736200097,
+      "violation": null
+    },
+    "final_file": "e30d7ac0f9184abb89de9ff9b193289e/final.txt",
+    "input_sha256": "1314479d56da7716de2f2d4faae3a0283b71805949a16a295989e779d08f856c",
+    "profile": {
+      "auto_compact_token_limit": 1000000,
+      "catalog_path": "/workspace/openwsp/src/openwsp/editors/data/codex-models-0.163.0.json",
+      "catalog_sha256": "05723cac0f7da85c31f710f602bb0c47a5588d8bdf68aad24e9dd6ac951c7705",
+      "cli_version": "0.163.0",
+      "context_window": 872000,
+      "effort": "high",
+      "instructions": "Answer the user's request.\n",
+      "model": "gpt-6-astra",
+      "name": "astra-exp1-authors",
+      "reasoning_summary": "detailed",
+      "transport": "codex_cli_chatgpt",
+      "verbosity": "low"
+    },
+    "recorded_at": 1793733992.4628775,
+    "request_key": "raw-weights:4aab174bb1db90abb72e4b54c16836eb9b23cf342350814e1e605a8a93d35584",
+    "response_id": "e30d7ac0f9184abb89de9ff9b193289e",
+    "runaway": null,
+    "schema_version": 1,
+    "settings": {
+      "catalog_sha256": "05723cac0f7da85c31f710f602bb0c47a5588d8bdf68aad24e9dd6ac951c7705",
+      "cli_version": "0.163.0",
+      "codex_home": "/workspace/openwsp/.openwsp/codex-subscription",
+      "effort": "high",
+      "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+      "model": "gpt-6-astra",
+      "reasoning_summary": "detailed",
+      "verbosity": "low",
+      "work_dir": "/tmp/openwsp-raw-be290e87871bb4bf51bfea1b"
+    },
+    "status": "completed",
+    "text": "Observations:\n- **Channel 0 \u2014 agent:** Large weights are concentrated in **column 1, rows 1\u20138**, suggesting a paddle moving vertically along the left side. For example, at `(1,1)` the weights include `2.697, -2.474, -2.322`; at `(2,1)` they include `-3.588, 2.245, -2.085`. Agent weights elsewhere generally look like small initialization-scale values.\n- **Channel 1 \u2014 moving objects:** Large, position-dependent weights occupy the interior to the paddle\u2019s right. At `(1,2)` they include `-3.169, -2.772, -3.022`; at `(2,2)`, `-3.780, 3.740, -3.767`. This fits a ball travelling through the court, rather than an agent navigating that area.\n- **Channel 2 \u2014 reward targets:** Interior weights are generally small. The **right border, column 9**, instead has a repeated structured pattern: at `(1,9)` its weights begin `0.028, -0.052, 0.203, 0.316`. This suggests a fixed scoring/target boundary, not scattered food or bricks.\n- **Channel 3 \u2014 obstacles:** The outer wall weights have a repeated pattern resembling `b1`: for example, `(0,0)` begins `-0.180, -0.080, 0.191, 0.275`, while `b1` begins `-0.076, -0.136, 0.184, 0.271`. Interior obstacle weights are small. Constant border inputs can function as additional biases; they do not establish detailed collision rules.\n- **Channel 4 \u2014 previous frame:** Substantial weights cover previous paddle/ball positions. At `(1,5)`, examples include `3.115, 5.236, 3.913`. This supports using motion history to anticipate ball trajectories.\n- **Outputs:** Up and down are distinctly represented; no-op, left and right have very similar output columns. For example, W3 row 18 is `-1.399, -1.370, 1.587, -1.283, -1.215`, and row 31 is `0.553, 1.950, 0.123, 0.616, 0.587`. Biases slightly favour up/down: `0.931, 1.261, 1.065, 0.861, 0.855`. This is effectively vertical control plus staying still.\n\nReasoning:\nA left-edge paddle, a freely moving ball, trajectory information, and exclusively vertical meaningful actions strongly indicate **Pong**. Snake and maze-collection games would require agent-position structure throughout the interior and meaningful horizontal actions. Conventional Breakout would instead have a bottom paddle, horizontal control, and structured brick targets across the upper court. The fixed right-edge target favours a simplified Pong court, though the weights alone cannot determine its precise scoring rules.\n\nGame: **Pong \u2014 a simplified single-paddle, left-side grid version.**\n\nDescription: The agent moves its paddle up and down to intercept and return a bouncing ball, preventing it from escaping past the left side. Reward likely comes from successful returns and/or sending the ball to the right-hand scoring boundary.\n\nConfidence: 97%",
+    "thread_id": "01a1a2df-dde6-76c3-a83b-c1a533dc5229",
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 70243,
+      "output_tokens": 1302,
+      "reasoning_output_tokens": 592
+    },
+    "usage_snapshot": {
+      "basis": "new_thread_total",
+      "cumulative": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 70243,
+        "output_tokens": 1302,
+        "reasoning_output_tokens": 592
+      },
+      "delta": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 70243,
+        "output_tokens": 1302,
+        "reasoning_output_tokens": 592
+      }
+    }
+  },
+  "request_key": "raw-weights:4aab174bb1db90abb72e4b54c16836eb9b23cf342350814e1e605a8a93d35584",
+  "scientific_replies_requested": 1,
+  "score": {
+    "answer_section_found": true,
+    "correct": true,
+    "expected": "pong",
+    "predicted": [
+      "pong"
+    ],
+    "scorer": "openwsp-reconstructed-label-v1"
+  },
+  "status": "completed",
+  "tools": []
+}

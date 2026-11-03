@@ -1,0 +1,16 @@
+Observations:
+- **Channel 0 — agent:** Learned structure covers much of rows 2–8, rather than a single paddle row. For example, at **(2,4)** the weights include `4.331, -2.970, -1.338, -0.382, 2.806`; row 1’s agent weights are comparatively small. This suggests a player traversing the board, with the top playable row terminating the crossing.
+- **Channel 1 — moving objects:** Strong structure occupies **rows 2–7**, while row 8 looks comparatively unused. There are striking horizontal repetitions: at **(2,1)** and **(2,5)**, hidden unit 18 receives `-1.898` and `-1.879`, and unit 25 receives `1.562` and `1.611`. At **(3,2)** and **(3,6)**, unit 12 receives `6.639` and `6.689`. These repeated, lane-specific patterns suggest horizontally circulating traffic.
+- **Channel 2 — reward targets:** The conspicuous structure is across **row 1**, not scattered throughout the board. At **(1,1)**, selected weights are `-0.550` to unit 3, `0.440` to unit 25, and `0.464` to unit 28. Interior target weights below that are mostly small. This fits a fixed destination across the top.
+- **Channel 3 — obstacles:** The border has a nearly repeated weight vector; at **(0,0)**, units 3, 25 and 28 receive `-0.477, 0.440, 0.437`. Interior obstacle weights are largely small: there is no obvious learned maze. The border vector also resembles **b1**, whose corresponding entries are `-0.492, 0.434, 0.434`. Constant wall and goal inputs can learn bias-like contributions, so their magnitudes alone do not establish attraction or avoidance.
+- **Channel 4 — previous frame:** Strong, lane-specific structure accompanies the moving objects. It includes spatially shifted matches: previous-frame **(2,1)** has `-1.443` to unit 3 and `-2.266` to unit 11; current moving-object **(2,2)** has `-1.480` and `-2.373`. That is consistent with tracking traffic moving one cell right.
+- **Outputs:** The biases strongly favor **up**: `[-0.029, 3.142, -1.862, 0.173, -1.269]`. However, lateral decisions remain substantial: output-weight row 29 gives left/right `-1.691, 2.315`, and row 20 gives `1.314, -1.687`. This suggests upward progress with state-dependent sideways avoidance, not simply always moving up. Biases alone are not the final action probabilities.
+
+Reasoning:
+A safe bottom starting row, several horizontally moving traffic lanes, a top goal strip, temporal motion information, and an upward preference fit a road-crossing game extremely well. Paddle games would ordinarily concentrate agent weights along one edge. Snake or food collection would need distributed reward-target information; maze navigation would usually show interior obstacle structure. The weights support traffic crossing more specifically than a full Frogger implementation with rivers and logs.
+
+Game: **Simplified Frogger — a traffic-dodging road-crossing game.**
+
+Description: The agent moves from the bottom toward the top, timing its advances and moving sideways to avoid passing vehicles. Reaching the top goal row gives reward.
+
+Confidence: **96%**
