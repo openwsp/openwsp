@@ -17,7 +17,8 @@ After Experiment 8, the plan is to reproduce the remaining experiments. For huma
 | Recorded component | State | Evidence |
 | --- | --- | --- |
 | Required live run | [live goal unmet](replications/exp8/results/live-runs/codex-20261103/state.json) | Active attempt: [codex-20261103](replications/exp8/results/active-live.json); submission requirement pending |
-| Pipeline | [running](replications/exp8/results/pipeline-state.json) | [live](replications/exp8/results/pipeline-state.json) |
+| Pipeline | [blocked](replications/exp8/results/pipeline-state.json) | [live](replications/exp8/results/pipeline-state.json) |
+| Recorded blocker | [BudgetExceeded: modal stage live/codex-20261103/fwd_2/teacher_forced/openwsp-gpu:a9addc225efa46ff8f8450c1570c26cf:0: reserve $2.9870400, only $2.909644918156211473271933328 available](replications/exp8/results/pipeline-state.json) | See source record. |
 | Driver recovery | [running](replications/exp8/results/coordinator.json) | [all](replications/exp8/results/coordinator.json) |
 | Calibration prompt audit | [passed](replications/exp8/results/calibration-prompt-audit.json) | [calibration-prompt-audit.json](replications/exp8/results/calibration-prompt-audit.json) |
 | Calibration comparison | [passed](replications/exp8/results/calibration-check.json) | [calibration-check.json](replications/exp8/results/calibration-check.json) |
@@ -32,7 +33,7 @@ Live attempts:
 | Attempt | Selection | Editor | Recorded state | Passes | Turns | Runs | Submission | Final evaluations | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | live-run | historical | pending | [blocked](replications/exp8/results/live-run/blocker.json) | [4](replications/exp8/results/live-run/state.json) | [26](replications/exp8/results/live-run/state.json) | [10](replications/exp8/results/live-run/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](replications/exp8/results/live-run/state.json); [blocker.json](replications/exp8/results/live-run/blocker.json); [transcript.md](replications/exp8/results/live-run/transcript.md) |
-| live-runs/codex-20261103 | active | [codex](replications/exp8/results/live-runs/codex-20261103/identity.json) | [incomplete](replications/exp8/results/live-runs/codex-20261103/state.json) | [0](replications/exp8/results/live-runs/codex-20261103/state.json) | [2](replications/exp8/results/live-runs/codex-20261103/state.json) | [1](replications/exp8/results/live-runs/codex-20261103/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](replications/exp8/results/live-runs/codex-20261103/state.json); [identity.json](replications/exp8/results/live-runs/codex-20261103/identity.json); [transcript.md](replications/exp8/results/live-runs/codex-20261103/transcript.md) |
+| live-runs/codex-20261103 | active | [codex](replications/exp8/results/live-runs/codex-20261103/identity.json) | [incomplete](replications/exp8/results/live-runs/codex-20261103/state.json) | [1](replications/exp8/results/live-runs/codex-20261103/state.json) | [6](replications/exp8/results/live-runs/codex-20261103/state.json) | [4](replications/exp8/results/live-runs/codex-20261103/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](replications/exp8/results/live-runs/codex-20261103/state.json); [identity.json](replications/exp8/results/live-runs/codex-20261103/identity.json); [transcript.md](replications/exp8/results/live-runs/codex-20261103/transcript.md) |
 
 The active pointer selects the current attempt. Historical blockers and completed controls do not establish its completion.
 
@@ -64,6 +65,31 @@ The [task message](replications/exp8/prompts/message.txt) defines what the edito
 `openwsp report exp8` generates these tables from the [authors' reference files](replications/exp8/reference) and [OpenWSP evaluation files](replications/exp8/results). Every number links to its source. Missing measurements remain pending, and unfinished attempts remain visible alongside completed evaluations. The calibrated p50c score measures the authors' released edit; it is not a result from an OpenWSP live editor.
 
 <!-- OPENWSP:RESULTS:START -->
+| Recorded component | State | Evidence |
+| --- | --- | --- |
+| Required live run | [live goal unmet](replications/exp8/results/live-runs/codex-20261103/state.json) | Active attempt: [codex-20261103](replications/exp8/results/active-live.json); submission requirement pending |
+| Pipeline | [blocked](replications/exp8/results/pipeline-state.json) | [live](replications/exp8/results/pipeline-state.json) |
+| Recorded blocker | [BudgetExceeded: modal stage live/codex-20261103/fwd_2/teacher_forced/openwsp-gpu:a9addc225efa46ff8f8450c1570c26cf:0: reserve $2.9870400, only $2.909644918156211473271933328 available](replications/exp8/results/pipeline-state.json) | See source record. |
+| Driver recovery | [running](replications/exp8/results/coordinator.json) | [all](replications/exp8/results/coordinator.json) |
+| Calibration prompt audit | [passed](replications/exp8/results/calibration-prompt-audit.json) | [calibration-prompt-audit.json](replications/exp8/results/calibration-prompt-audit.json) |
+| Calibration comparison | [passed](replications/exp8/results/calibration-check.json) | [calibration-check.json](replications/exp8/results/calibration-check.json) |
+| Tensor hashes | [passed](replications/exp8/results/kernel/hash-verification.json) | [kernel/hash-verification.json](replications/exp8/results/kernel/hash-verification.json) |
+| Sandbox and first cell | [passed](replications/exp8/results/kernel/sandbox-verification.json) | [kernel/sandbox-verification.json](replications/exp8/results/kernel/sandbox-verification.json) |
+| Forward service | [passed](replications/exp8/results/kernel/forward-verification.json) | [kernel/forward-verification.json](replications/exp8/results/kernel/forward-verification.json) |
+| Weight swap check | [fallback](replications/exp8/results/kernel/weight-swap.json) | [kernel/weight-swap.json](replications/exp8/results/kernel/weight-swap.json) |
+| Recorded diagnostic | [Engine does not expose a compatible weight-reload contract](replications/exp8/results/kernel/weight-swap.json) | See source record. |
+
+Live attempts:
+
+| Attempt | Selection | Editor | Recorded state | Passes | Turns | Runs | Submission | Final evaluations | Evidence |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| live-run | historical | pending | [blocked](replications/exp8/results/live-run/blocker.json) | [4](replications/exp8/results/live-run/state.json) | [26](replications/exp8/results/live-run/state.json) | [10](replications/exp8/results/live-run/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](replications/exp8/results/live-run/state.json); [blocker.json](replications/exp8/results/live-run/blocker.json); [transcript.md](replications/exp8/results/live-run/transcript.md) |
+| live-runs/codex-20261103 | active | [codex](replications/exp8/results/live-runs/codex-20261103/identity.json) | [incomplete](replications/exp8/results/live-runs/codex-20261103/state.json) | [1](replications/exp8/results/live-runs/codex-20261103/state.json) | [6](replications/exp8/results/live-runs/codex-20261103/state.json) | [4](replications/exp8/results/live-runs/codex-20261103/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](replications/exp8/results/live-runs/codex-20261103/state.json); [identity.json](replications/exp8/results/live-runs/codex-20261103/identity.json); [transcript.md](replications/exp8/results/live-runs/codex-20261103/transcript.md) |
+
+The active pointer selects the current attempt. Historical blockers and completed controls do not establish its completion.
+
+States are recorded snapshots; use `openwsp status` to check current liveness.
+
 Authors' released evaluations:
 
 | Run | MATH-500 | GSM8K | IFEval | MATH-500 hit token limit |
@@ -170,15 +196,15 @@ Budget ledger: [source](replications/exp8/results/costs.json). Reservations are 
 | modal / kernel_verification:startup | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.004](replications/exp8/results/costs.json) | [0.0092](replications/exp8/results/costs.json) | pending | [resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
 | modal / live / activation extraction / original | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.700](replications/exp8/results/costs.json) | [2.9870](replications/exp8/results/costs.json) | pending | [failed job upper bound; not invoice](replications/exp8/results/costs.json) |
 | modal / live / activation extraction / original | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.071](replications/exp8/results/costs.json) | [0.3049](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
-| modal / live / codex-20261103 / fwd_1 / original | [reserved](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | pending | pending | [2.9870](replications/exp8/results/costs.json) | [resource estimate; not invoice](replications/exp8/results/costs.json) |
+| modal / live / codex-20261103 / fwd_1 / original | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.234](replications/exp8/results/costs.json) | [0.9999](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
+| modal / live / codex-20261103 / fwd_1 / original / activations | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.105](replications/exp8/results/costs.json) | [0.4491](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / live / generation / edited | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.111](replications/exp8/results/costs.json) | [0.4719](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / live / generation / original | [settled](replications/exp8/results/costs.json) | [3](replications/exp8/results/costs.json) | [0.637](replications/exp8/results/costs.json) | [2.7181](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / live / teacher-forced | [settled](replications/exp8/results/costs.json) | [2](replications/exp8/results/costs.json) | [0.079](replications/exp8/results/costs.json) | [0.3373](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / prepare | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.010](replications/exp8/results/costs.json) | [0.0016](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / prepare-v2 | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.038](replications/exp8/results/costs.json) | [0.0060](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / publish | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.134](replications/exp8/results/costs.json) | [0.0107](replications/exp8/results/costs.json) | pending | [driver_resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
-| modal / sandbox:heartbeat | [reserved](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | pending | pending | [0.2157](replications/exp8/results/costs.json) | [resource estimate; not invoice](replications/exp8/results/costs.json) |
-| modal / sandbox:heartbeat | [settled](replications/exp8/results/costs.json) | [202](replications/exp8/results/costs.json) | [3.293](replications/exp8/results/costs.json) | [8.5226](replications/exp8/results/costs.json) | pending | [resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
+| modal / sandbox:heartbeat | [settled](replications/exp8/results/costs.json) | [220](replications/exp8/results/costs.json) | [3.579](replications/exp8/results/costs.json) | [9.2607](replications/exp8/results/costs.json) | pending | [resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
 | modal / sandbox:startup | [settled](replications/exp8/results/costs.json) | [5](replications/exp8/results/costs.json) | [0.019](replications/exp8/results/costs.json) | [0.0504](replications/exp8/results/costs.json) | pending | [resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
 | modal / verify / attention | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.038](replications/exp8/results/costs.json) | [0.1626](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / verify / fresh-reference | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.086](replications/exp8/results/costs.json) | [0.3677](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
