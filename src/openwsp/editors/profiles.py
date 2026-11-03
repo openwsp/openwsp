@@ -46,6 +46,7 @@ class CodexProfile(EditorProfile):
     instructions: str
     context_window: int
     auto_compact_token_limit: int
+    reasoning_summary: str | None = None
 
     def __post_init__(self):
         super().__post_init__()
@@ -55,6 +56,8 @@ class CodexProfile(EditorProfile):
         _text(self.effort, "effort")
         if self.verbosity not in (None, "low", "medium", "high"):
             raise ValueError("Unsupported Codex verbosity")
+        if self.reasoning_summary not in (None, "auto", "concise", "detailed", "none"):
+            raise ValueError("Unsupported Codex reasoning summary")
         if not isinstance(self.catalog_sha256, str) or not re.fullmatch("[0-9a-f]{64}", self.catalog_sha256):
             raise ValueError("catalog_sha256 must be a lowercase SHA-256 digest")
         object.__setattr__(self, "catalog_path", Path(self.catalog_path))
@@ -68,6 +71,12 @@ class CodexProfile(EditorProfile):
             raise ValueError("Context and compaction limits must be positive integers")
         if self.auto_compact_token_limit < self.context_window:
             raise ValueError("Compaction limit must cover the explicit context window")
+
+    def record(self):
+        value = super().record()
+        if self.reasoning_summary is None:
+            value.pop("reasoning_summary")
+        return value
 
 
 @dataclass(frozen=True, kw_only=True)

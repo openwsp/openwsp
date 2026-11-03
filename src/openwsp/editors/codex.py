@@ -197,6 +197,8 @@ class CodexEditor:
         for name in ("context_window", "auto_compact_token_limit"):
             if getattr(profile, name) != getattr(ASTRA_CODEX_PROFILE, name):
                 self.settings[name] = getattr(profile, name)
+        if profile.reasoning_summary is not None:
+            self.settings["reasoning_summary"] = profile.reasoning_summary
 
     def _environment(self):
         environment = {key: value for key, value in os.environ.items() if key in _ENVIRONMENT}
@@ -414,6 +416,8 @@ class CodexEditor:
         }
         if self.profile.verbosity is not None:
             config["model_verbosity"] = self.profile.verbosity
+        if self.profile.reasoning_summary is not None:
+            config["model_reasoning_summary"] = self.profile.reasoning_summary
         command = [self.executable, "exec", "--sandbox", "read-only"]
         if thread_id:
             command += ["resume"]

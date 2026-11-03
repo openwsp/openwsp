@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/RikiyaT/lm_understand-logs",
+  "revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "license": "CC-BY-4.0; exp5 embedded MinAtar source GPL-3.0",
+  "files": {
+    "exp4_fix_car/README.md": "97cf395dd262069b09137807c492fc96dee396f45505fd5df2ab4b85a71102ce",
+    "exp4_fix_car/eval/base_result.json": "0ccbbad5e2ac84dc0970fb14065167d5b66a18635a967b05827fc17dbee9c1b8",
+    "exp4_fix_car/eval/oneshot_result.json": "d9e57db254079b776ee574ba94bfc061ca1e4ce199fad316dea6f8faa2049330",
+    "exp4_fix_car/eval/ppo_training_result.json": "2c7b750580500a90a7fdb4f6fcf3300d1ceb82a0a2219fd155b64dd5752c1ee2",
+    "exp4_fix_car/networks/edited_actor.npz": "610d62dbacdb16389f698cdf7d3bf39b185e410b8c6e03a1ac4833768066060a",
+    "exp4_fix_car/networks/ppo_final_seed0.npz": "b0cdbccd5b4751d5a6dc4cb0deb18a036e6d08d71ad34802cea44dd26c6f4d11",
+    "exp4_fix_car/runs/oneshot_repair/instructions.md": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+    "exp4_fix_car/runs/oneshot_repair/loop.log": "7edf78ac7a2cbdacfbe6187237db66c67f9552ef8b432fbe591e1b6fcbad369c",
+    "exp4_fix_car/runs/oneshot_repair/oneshot_repair.log": "af4b0e3fc61e6ca52d3768fd166af3362e2e292c3a71fc8b09dd409061453419",
+    "exp4_fix_car/runs/oneshot_repair/reply/answer.md": "dc295adb701bb943a6a324fd7fd4aeb97bb69a2d8fb73b9472e3a9371275f959",
+    "exp4_fix_car/runs/oneshot_repair/reply/events.jsonl": "bd8ac4c887e9411b74ea230490f17e5a14a042bcfc3483639ffe70ad37c5b032",
+    "exp4_fix_car/runs/oneshot_repair/reply/message.txt": "2ed66051f4fa554d43d0163eb48e4256dc80aef78d875a218826beefeb7d0559",
+    "exp4_fix_car/runs/oneshot_repair/reply/prompt.txt": "2ed66051f4fa554d43d0163eb48e4256dc80aef78d875a218826beefeb7d0559",
+    "exp4_fix_car/runs/oneshot_repair/reply/run.json": "0d8e476c05ed5c194a0dde7660976f06d9df51bfbe3706b6d7212748ca99207d",
+    "exp4_fix_car/runs/oneshot_repair/reply/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "LICENSE": "395f7febedfda6b5498ca36cfe3344d3986659ce4385dd8b03d2d75604250a8e"
+  }
+}

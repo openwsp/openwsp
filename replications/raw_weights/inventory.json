@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "repository": "https://github.com/RikiyaT/lm_understand-logs",
+  "revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "items_per_editor": 11,
+  "editors": [
+    "astra_subscription",
+    "fable_native_anthropic"
+  ],
+  "fable_entire_set_cap_usd": 20,
+  "modal_gpu_cost_usd": 0,
+  "scoring_code_released": false,
+  "items": [
+    {
+      "experiment": "exp1",
+      "item_id": "breakout",
+      "prompt": {
+        "path": "exp1_which_game/runs/breakout/prompt.txt",
+        "sha256": "ba1d97cfcb585f0ccab628ed1ef983b230d897b97ae6ff10f2de6eac6d390b31",
+        "bytes": 115478
+      },
+      "instructions": {
+        "path": "exp1_which_game/runs/breakout/instructions.md",
+        "sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+      },
+      "authors_config": {
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "reasoning_summary": "detailed"
+      },
+      "authors_usage": {
+        "input_tokens": 73749,
+        "cached_input_tokens": 2432,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1679,
+        "reasoning_output_tokens": 833
+      },
+      "scorer_kind": "game_name"
+    },
+    {
+      "experiment": "exp1",
+      "item_id": "freeway",
+      "prompt": {
+        "path": "exp1_which_game/runs/freeway/prompt.txt",
+        "sha256": "76f30db2c4591e340f4a8e1ca56abdfdf6aa9857e3220936ca178f86c29e6070",
+        "bytes": 115259
+      },
+      "instructions": {
+        "path": "exp1_which_game/runs/freeway/instructions.md",
+        "sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+      },
+      "authors_config": {
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "reasoning_summary": "detailed"
+      },
+      "authors_usage": {
+        "input_tokens": 73695,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1768,
+        "reasoning_output_tokens": 1034
+      },
+      "scorer_kind": "game_name"
+    },
+    {
+      "experiment": "exp1",
+      "item_id": "pacman",
+      "prompt": {
+        "path": "exp1_which_game/runs/pacman/prompt.txt",
+        "sha256": "1c75e66aab1e611bdb07a87d6f70e3d2ba3d149e58f259b5ad7a485661244acf",
+        "bytes": 115394
+      },
+      "instructions": {
+        "path": "exp1_which_game/runs/pacman/instructions.md",
+        "sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+      },
+      "authors_config": {
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "reasoning_summary": "detailed"
+      },
+      "authors_usage": {
+        "input_tokens": 73723,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1838,
+        "reasoning_output_tokens": 1034
+      },
+      "scorer_kind": "game_name"
+    },
+    {
+      "experiment": "exp1",
+      "item_id": "pong",
+      "prompt": {
+        "path": "exp1_which_game/runs/pong/prompt.txt",
+        "sha256": "1b143ac2f46ab7a0c4b3eb45bd2b9d82314c3b24e2d2412f80566946c935c5ba",
+        "bytes": 115269
+      },
+      "instructions": {
+        "path": "exp1_which_game/runs/pong/instructions.md",
+        "sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+      },
+      "authors_config": {
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "reasoning_summary": "detailed"
+      },
+      "authors_usage": {
+        "input_tokens": 73723,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1833,
+        "reasoning_output_tokens": 1031
+      },
+      "scorer_kind": "game_name"
+    },
+    {
+      "experiment": "exp2",
+      "item_id": "circle",
+      "prompt": {
+        "path": "exp2_diffusion/runs/circle/prompt.txt",
+        "sha256": "f02e93fcdb15177695684005f4345a6f9fc94d9925ad6c0fe69545203676693b",
+        "bytes": 157889
+      },
+      "instructions": {
+        "path": "exp2_diffusion/runs/circle/instructions.md",
+        "sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+      },
+      "authors_config": {
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "reasoning_summary": "detailed"
+      },
+      "authors_usage": {
+        "input_tokens": 99791,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2778,
+        "reasoning_output_tokens": 2272
+      },
+      "scorer_kind": "shape_name"
+    },
+    {
+      "experiment": "exp2",
+      "item_id": "square",
+      "prompt": {
+        "path": "exp2_diffusion/runs/square/prompt.txt",
+        "sha256": "fbb9f8b4b1b63dd4460d7168159b135b1420e70e24bcddd00f986e191f417172",
+        "bytes": 158187
+      },
+      "instructions": {
+        "path": "exp2_diffusion/runs/square/instructions.md",
+        "sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+      },
+      "authors_config": {
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "reasoning_summary": "detailed"
+      },
+      "authors_usage": {
+        "input_tokens": 99789,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3149,
+        "reasoning_output_tokens": 2588
+      },
+      "scorer_kind": "shape_name"
+    },
+    {
+      "experiment": "exp2",
+      "item_id": "triangle",
+      "prompt": {
+        "path": "exp2_diffusion/runs/triangle/prompt.txt",
+        "sha256": "d8533653617af859a80f105b8a6360efbf7331be41f85f97212b75fcc63da897",
+        "bytes": 158457
+      },
+      "instructions": {
+        "path": "exp2_diffusion/runs/triangle/instructions.md",
+        "sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+      },
+      "authors_config": {
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "reasoning_summary": "detailed"
+      },
+      "authors_usage": {
+        "input_tokens": 99773,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1541,
+        "reasoning_output_tokens": 1034
+      },
+      "scorer_kind": "shape_name"
+    },
+    {
+      "experiment": "exp4",
+      "item_id": "oneshot_repair",
+      "prompt": {
+        "path": "exp4_fix_car/runs/oneshot_repair/reply/prompt.txt",
+        "sha256": "2ed66051f4fa554d43d0163eb48e4256dc80aef78d875a218826beefeb7d0559",
+        "bytes": 577774
+      },
+      "instructions": {
+        "path": "exp4_fix_car/runs/oneshot_repair/instructions.md",
+        "sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+      },
+      "authors_config": {
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "reasoning_summary": null
+      },
+      "authors_usage": {
+        "input_tokens": 355201,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 10134,
+        "reasoning_output_tokens": 9146
+      },
+      "scorer_kind": "kinetix_success"
+    },
+    {
+      "experiment": "exp5",
+      "item_id": "asterix",
+      "prompt": {
+        "path": "exp5_write_from_scratch/runs/asterix/reply/prompt.txt",
+        "sha256": "9e8243d5545956e42b8bd130bceba6ed90ecb807768be3ae0f498f765197f5da",
+        "bytes": 10930
+      },
+      "instructions": {
+        "path": "exp5_write_from_scratch/runs/asterix/instructions.md",
+        "sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+      },
+      "authors_config": {
+        "model": "gpt-6-astra",
+        "effort": "xhigh",
+        "reasoning_summary": "detailed"
+      },
+      "authors_usage": {
+        "input_tokens": 6199,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 28993,
+        "reasoning_output_tokens": 25694
+      },
+      "scorer_kind": "minatar_score"
+    },
+    {
+      "experiment": "exp5",
+      "item_id": "breakout",
+      "prompt": {
+        "path": "exp5_write_from_scratch/runs/breakout/reply/prompt.txt",
+        "sha256": "766ee251d59a7893ed86d5eaea99ddb847529ab2092afc69f90f55fb0a22e876",
+        "bytes": 9973
+      },
+      "instructions": {
+        "path": "exp5_write_from_scratch/runs/breakout/instructions.md",
+        "sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+      },
+      "authors_config": {
+        "model": "gpt-6-astra",
+        "effort": "xhigh",
+        "reasoning_summary": "detailed"
+      },
+      "authors_usage": {
+        "input_tokens": 6119,
+        "cached_input_tokens": 5888,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 20567,
+        "reasoning_output_tokens": 16828
+      },
+      "scorer_kind": "minatar_score"
+    },
+    {
+      "experiment": "exp5",
+      "item_id": "seaquest",
+      "prompt": {
+        "path": "exp5_write_from_scratch/runs/seaquest/reply/prompt.txt",
+        "sha256": "81e51857d7cffac29b12a389dee6ffcda2256a9e03f6cf91f4fd96e1eb855bf6",
+        "bytes": 18266
+      },
+      "instructions": {
+        "path": "exp5_write_from_scratch/runs/seaquest/instructions.md",
+        "sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb"
+      },
+      "authors_config": {
+        "model": "gpt-6-astra",
+        "effort": "xhigh",
+        "reasoning_summary": "detailed"
+      },
+      "authors_usage": {
+        "input_tokens": 8112,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 23894,
+        "reasoning_output_tokens": 19803
+      },
+      "scorer_kind": "minatar_score"
+    }
+  ]
+}

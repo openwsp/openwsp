@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "experiment": "exp1",
+  "source_folder": "exp1_which_game",
+  "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "one_reply_per_item": true,
+  "tools": false,
+  "fresh_conversation_per_item": true,
+  "modal_gpu": false,
+  "item_ids": [
+    "breakout",
+    "freeway",
+    "pacman",
+    "pong"
+  ]
+}

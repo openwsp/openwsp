@@ -90,6 +90,21 @@ def test_changed_profile_cannot_silently_continue_existing_conversation(tmp_path
     assert len(launches(editor)) == 1
 
 
+def test_explicit_reasoning_summary_is_bound_without_changing_default_identity(tmp_path):
+    assert "reasoning_summary" not in ASTRA_CODEX_PROFILE.record()
+    plain = make_editor(tmp_path)
+    assert "model_reasoning_summary" not in config(plain._command(plain.root / "request", None))
+    profile = replace(ASTRA_CODEX_PROFILE, effort="high", reasoning_summary="detailed")
+    editor = make_editor(tmp_path, profile=profile)
+    assert editor.complete("Task", request_key="one") == "Final answer"
+    assert config(launches(editor)[0]["argv"])["model_reasoning_summary"] == "detailed"
+    assert editor.settings["reasoning_summary"] == "detailed"
+    changed = make_editor(tmp_path, profile=replace(profile, reasoning_summary=None))
+    with pytest.raises(EditorError, match="explicit new_conversation"):
+        changed.complete("Another task", request_key="two")
+    assert len(launches(editor)) == 1
+
+
 def test_codex_profile_cannot_select_a_model_absent_from_its_verified_catalog(tmp_path):
     editor = make_editor(tmp_path, profile=replace(ASTRA_CODEX_PROFILE, model="not-in-catalog"))
     with pytest.raises(EditorError, match="selected profile model"):
@@ -238,6 +253,7 @@ def test_wrong_transport_profile_type_is_rejected_before_client_construction():
         {"instructions": "one\ntwo"},
         {"context_window": True},
         {"auto_compact_token_limit": 1},
+        {"reasoning_summary": "unsupported"},
     ],
 )
 def test_invalid_codex_profile_identity_or_limits_are_rejected(changes):
