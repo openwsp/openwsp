@@ -1,8 +1,8 @@
 {
-  "turn": 65,
-  "runs": 34,
-  "passes": 21,
-  "requests": 30,
+  "turn": 74,
+  "runs": 39,
+  "passes": 25,
+  "requests": 34,
   "handoffs": 1,
   "done": false,
   "submission": null,
@@ -12,6 +12,8 @@
     "fwd_23",
     "fwd_24",
     "fwd_26",
-    "fwd_28"
+    "fwd_28",
+    "fwd_31",
+    "fwd_32"
   ]
 }
