@@ -1,0 +1,14 @@
+{
+  "status": "authenticated_read_verified",
+  "observed_at": "2026-11-03T08:26:31.165900+00:00",
+  "repository": "openwsp/openwsp",
+  "container_id": "ta-01M6G6VQ7S4C03B7PM1XA15G6R",
+  "call_id": "fc-01M6G6VP8MG500BV4QCYY9J8N6",
+  "operation": "GET https://api.github.com/repos/openwsp/openwsp using the existing driver GITHUB_TOKEN",
+  "response_permissions": {
+    "push": true,
+    "pull": true
+  },
+  "limits": "Repository permissions describe the authenticated actor; this read does not establish token write scope. No push, mutation or token refresh was performed.",
+  "log_path": "logs/modal-publication-access-probe.log"
+}

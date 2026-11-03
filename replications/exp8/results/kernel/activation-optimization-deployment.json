@@ -1,0 +1,18 @@
+{
+  "status": "deployed",
+  "observed_at": "2026-11-03T08:22:28Z",
+  "deployment_finished_at": "2026-11-03T08:20:12Z",
+  "source_commit": "f72e8344cc95c17164e8ca3270fae76761747916",
+  "implementation_commit": "b6499aaba2cd879b5e400e6839bf252b2bea5007",
+  "command": "modal deploy --strategy rolling -m openwsp.backends.modal_app",
+  "snapshot": "/tmp/openwsp-reviewed-deploy-t29lw0p7",
+  "log_path": "logs/modal-reviewed-activation-update.log",
+  "log_sha256": "acfbea7a201e015b21f0421550794b4265343a3d05b48b76a8dd5c24d2f82bf9",
+  "app_url": "https://modal.com/apps/hantuzun/main/deployed/openwsp-exp8",
+  "equivalence_evidence": "replications/exp8/results/kernel/activation-summary-equivalence.json",
+  "ci_url": "https://github.com/openwsp/openwsp/actions/runs/41601782786",
+  "strategy_docs": "https://modal.com/docs/guide/managing-deployments#deployment-strategies",
+  "scope": "Deployment only. No launch, restart, cancellation, driver call, weight change or editor instruction.",
+  "active_input_behavior": "Rolling preserves assigned inputs. Later requests may receive the updated implementation after cutover.",
+  "approval_review": "Accepted after exact equivalence on the actual pinned bf16 model and documented rolling behavior supplied new evidence following two earlier rejections."
+}
