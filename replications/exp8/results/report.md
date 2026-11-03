@@ -4,7 +4,8 @@
 | --- | --- | --- |
 | Pipeline | [blocked](pipeline-state.json) | [live](pipeline-state.json) |
 | Recorded blocker | [BudgetExceeded: editor stage editor:t027: reserve $30.478625, only $21.7072350 available](pipeline-state.json) | See source record. |
-| Driver recovery | [running](coordinator.json) | [all](coordinator.json) |
+| Driver recovery | [blocked](coordinator.json) | [all](coordinator.json) |
+| Recorded blocker | [Pipeline blocked; previous owner reconciled and automatic restart disabled](coordinator.json) | See source record. |
 | Calibration prompt audit | [passed](calibration-prompt-audit.json) | [calibration-prompt-audit.json](calibration-prompt-audit.json) |
 | Calibration comparison | [passed](calibration-check.json) | [calibration-check.json](calibration-check.json) |
 | Tensor hashes | [passed](kernel/hash-verification.json) | [kernel/hash-verification.json](kernel/hash-verification.json) |

@@ -1,0 +1,50 @@
+{
+  "status": "blocked",
+  "reason": "editor_budget_admission",
+  "error": "BudgetExceeded: editor stage editor:t027: reserve $30.478625, only $21.7072350 available",
+  "editor_limit_usd": 100,
+  "editor_spent_usd": 78.292765,
+  "editor_available_usd": 21.707235,
+  "next_response_reserved_bound_usd": 30.478625,
+  "next_editor_turn": 27,
+  "next_response_dispatched": false,
+  "live": {
+    "turn": 26,
+    "runs": 10,
+    "passes": 4,
+    "requests": 5,
+    "done": false,
+    "since_handoff": 26,
+    "submission": null
+  },
+  "required_live_passes": 50,
+  "provider_terminal": {
+    "call_id": "fc-01M6GC9HWAFHZTMEWBB811B23D",
+    "provider_outcome": "failed",
+    "details": {
+      "error_type": "BudgetExceeded",
+      "failure_category": "auth_quota_budget"
+    }
+  },
+  "publication": {
+    "status": "pushed",
+    "commit": "33d9cc4c9298a76014cebf783a4d86b186039555",
+    "attempts": 1,
+    "paths": [
+      "README.md",
+      "replications/exp8/results/costs.json",
+      "replications/exp8/results/live-run/forward-artifacts.json",
+      "replications/exp8/results/live-run/state.json",
+      "replications/exp8/results/live-run/transcript.md",
+      "replications/exp8/results/pipeline-state.json",
+      "replications/exp8/results/report.md"
+    ]
+  },
+  "final_evaluation_status": "not_started_no_completed_50_pass_submission",
+  "remaining_work": "Run independent required controls using remaining Modal allowance; preserve the blocked live trajectory and both budget ceilings.",
+  "sources": [
+    "logs/modal-status-publication-change.json",
+    "logs/live-budget-terminal.json",
+    "logs/live-budget-block-state.json"
+  ]
+}
