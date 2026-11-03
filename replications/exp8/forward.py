@@ -5,6 +5,7 @@ import hashlib
 import importlib.util
 import json
 import math
+import re
 import shutil
 import time
 from pathlib import Path
@@ -12,7 +13,7 @@ from pathlib import Path
 import numpy as np
 
 from openwsp.budget import compute_cost, BudgetExceeded
-from openwsp.backends.jobs import JobBlocked
+from openwsp.backends.jobs import JobBlocked, JobPending
 from replications.exp8.jobs import ProtocolGPUJobs, gpu_instance
 from openwsp.core import WeightStore
 from replications.exp8.runtime import CONFIG, ROOT, atomic_write, read_rows, write_rows
@@ -120,6 +121,61 @@ class ForwardTool:
             error_type = record.get("failure", {}).get("exception_type", "unknown")
             raise RuntimeError(f"The remote forward execution failed ({error_type}); its upper-bound cost was retained") from exc
 
+    def _deliver_artifacts(self, request, number, result):
+        """Publish only this result's files in the kernel's existing mount.
+
+        A global volume reload can fail while the editor retains a file or
+        memory map. Atomic file publication preserves that kernel state and
+        does not require credentials or network access inside the sandbox.
+        """
+        if not result.get("ok"):
+            return
+        try:
+            artifacts = []
+            if request["type"] == "generate":
+                paired = request["model"] == "both"
+                modes = ("original", "edited") if paired else (request["model"],)
+                for mode in modes:
+                    suffix = f"_{mode}" if paired else ""
+                    name = f"gen_{number}{suffix}.jsonl"
+                    reported = result["files"][mode] if paired else result["file"]
+                    if reported != f"/work/{name}":
+                        raise ValueError("Generation result path disagrees with its request")
+                    artifacts.append(Path(name))
+                    activations = ((result.get("activations") or {}).get(mode) if paired
+                                   else result.get("activations"))
+                    if activations:
+                        folder = f"gen_{number}{suffix}_acts"
+                        if activations["dir"].rstrip("/") != f"/work/{folder}":
+                            raise ValueError("Activation result path disagrees with its request")
+                        for name in [*activations["files"], "index.json"]:
+                            if not re.fullmatch(r"[A-Za-z0-9_]+\.(?:npy|json)", name):
+                                raise ValueError("Invalid activation artifact name")
+                            artifacts.append(Path(folder) / name)
+            elif request["type"] == "teacher_forced":
+                folder = Path(f"fwd_{number}")
+                for name in result["files"]:
+                    if not re.fullmatch(r"[A-Za-z0-9_]+", name):
+                        raise ValueError("Invalid teacher-forced artifact name")
+                    artifacts.append(folder / f"{name}.npy")
+                artifacts.append(folder / "meta.json")
+            else:
+                raise ValueError("Unknown forward artifact type")
+            receipts = []
+            for relative in artifacts:
+                receipt = self.sandbox.publish_file(self.work / relative, f"/work/{relative.as_posix()}")
+                receipts.append({**receipt, "volume_path": f"/live/{relative.as_posix()}"})
+            atomic_write(self.run_dir / "requests" / f"fwd_{number}.delivery.json",
+                         {"request": number, "volume": "openwsp-exp8-work", "files": receipts})
+            self.checkpoint()
+        except BudgetExceeded:
+            raise
+        except Exception as exc:
+            # Delivery is infrastructure recovery, not a model failure. Keep
+            # successful GPU receipts and prevent the live loop from converting
+            # this exception into a failed request that the editor must repeat.
+            raise JobPending("Forward artifacts are saved but sandbox delivery did not complete; resume the existing request") from exc
+
     def execute(self, request, number, turn):
         from openwsp.backends.modal_app import Generator, TransformerReader, data_volume, work_volume
         started = time.monotonic()
@@ -129,8 +185,9 @@ class ForwardTool:
             raise ValueError("Forward request number already belongs to different input")
         if destination.exists():
             # A prior driver may have saved the result just before delivery.
-            self.sandbox.reload_work()
-            return json.loads(destination.read_text())
+            result = json.loads(destination.read_text())
+            self._deliver_artifacts(request, number, result)
+            return result
         atomic_write(source, request)
         self.sandbox.commit_work()
         work_volume.reload()
@@ -221,6 +278,7 @@ class ForwardTool:
                 suffix = f"_{mode}" if request["model"] == "both" else ""
                 name = f"gen_{number}{suffix}.jsonl"
                 write_rows(self.work / name, records)
+                work_volume.commit()
                 graded = [(row, sample) for row, sample in samples if sample["correct"] is not None]
                 sources = sorted({row["source"] for row, _ in graded})
                 summary = {"file": f"/work/{name}", "generations": len(samples), "graded": len(graded),
@@ -291,7 +349,7 @@ class ForwardTool:
                      {"turn": turn, "edit_sha256": edit_id, "tensors": names,
                       "base_generations_reused": bool(locals().get("reuse_base", False))})
         work_volume.commit()
-        self.sandbox.reload_work()
+        self._deliver_artifacts(request, number, result)
         atomic_write(destination, result)
         self.checkpoint()
         return result

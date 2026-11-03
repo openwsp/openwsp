@@ -170,6 +170,28 @@ def test_completed_forward_receipt_counts_once_after_logging_failure(driver, mon
     assert "variables were lost" in driver.editor_messages[-1][1]
 
 
+def test_delivery_interruption_keeps_the_same_pending_forward_request(driver, monkeypatch):
+    driver.write_state(passes=49)
+    driver.replies["t001"] = 'I will inspect the result.\n```forward\n{"type":"generate"}\n```'
+    original = live.ForwardTool.execute
+
+    def interrupted_delivery(*args):
+        raise live.JobPending("Saved artifacts are not delivered yet")
+
+    monkeypatch.setattr(live.ForwardTool, "execute", interrupted_delivery)
+    with pytest.raises(live.JobPending, match="not delivered"):
+        driver.run()
+    state = driver.read_state()
+    assert state["passes"] == 49 and state["requests"] == 1 and state["turn"] == 0
+    assert state["pending"] == {"kind": "forward", "request": 1, "turn": 1}
+    assert not (driver.root / "requests/fwd_1.done.json").exists()
+    monkeypatch.setattr(live.ForwardTool, "execute", original)
+    result = driver.run()
+    assert result["passes"] == 50 and result["requests"] == 1
+    assert result["counted_requests"] == [1]
+    assert [turn for turn, _ in driver.editor_messages] == ["t001", "t002"]
+
+
 def test_cached_refused_cell_preserves_replacement_run_counter(driver):
     driver.write_state(pending={"kind": "python", "turn": 1, "request_id": "live-t001"})
     turn = driver.root / "turns/t001"

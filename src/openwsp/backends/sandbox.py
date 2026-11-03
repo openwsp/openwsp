@@ -7,9 +7,12 @@ core remain provider-independent. This adapter targets the documented Modal
 
 from __future__ import annotations
 
+import hashlib
 import inspect
 import json
+import os
 import queue
+import stat
 import threading
 import time
 import uuid
@@ -19,6 +22,156 @@ from typing import Any
 
 class SandboxTransportError(RuntimeError):
     pass
+
+
+def _artifact_receiver(root: str, request: dict, input_stream=None) -> dict:
+    """Receive one bounded artifact operation, with no symlink traversal."""
+    import hashlib
+    import os
+    import stat
+    import sys
+    from pathlib import PurePosixPath
+
+    relative = PurePosixPath(request["path"])
+    transfer = request["transfer_id"]
+    if relative.is_absolute() or not relative.parts or any(part in (".", "..") for part in relative.parts):
+        raise ValueError("Artifact path must be a file under the work directory")
+    if (
+        not isinstance(transfer, str)
+        or len(transfer) != 32
+        or any(c not in "0123456789abcdef" for c in transfer)
+    ):
+        raise ValueError("Invalid artifact transfer id")
+    operation = request["op"]
+    if operation not in ("init", "chunk", "finish", "abort"):
+        raise ValueError("Unknown artifact operation")
+    flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW
+    directory = os.open(root, flags)
+    temporary = ".openwsp-artifact-" + transfer
+    descriptor = None
+    owned = False
+    try:
+        for part in relative.parts[:-1]:
+            if operation == "init":
+                try:
+                    os.mkdir(part, mode=0o755, dir_fd=directory)
+                except FileExistsError:
+                    pass
+            child = os.open(part, flags, dir_fd=directory)
+            os.close(directory)
+            directory = child
+        name = relative.name
+        try:
+            target = os.stat(name, dir_fd=directory, follow_symlinks=False)
+        except FileNotFoundError:
+            target = None
+        if operation == "init" and target is not None and not stat.S_ISREG(target.st_mode):
+            raise ValueError("Artifact destination must be a regular file, not a symlink or special file")
+        if operation == "init":
+            descriptor = os.open(
+                temporary, os.O_RDWR | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=directory
+            )
+            owned = True
+        else:
+            try:
+                descriptor = os.open(temporary, os.O_RDWR | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory)
+            except FileNotFoundError:
+                if operation == "abort":
+                    return {"removed": False}
+                raise
+        info = os.fstat(descriptor)
+        identity = [info.st_dev, info.st_ino]
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1:
+            raise ValueError("Artifact temporary file is not a private regular file")
+        if operation != "init":
+            if request.get("identity") != identity:
+                raise ValueError("Artifact temporary file changed identity")
+            owned = True
+        if operation == "init":
+            return {"identity": identity, "bytes": 0}
+        if operation == "abort":
+            os.unlink(temporary, dir_fd=directory)
+            owned = False
+            return {"removed": True}
+        expected_size = request["size"]
+        if type(expected_size) is not int or expected_size < 0:
+            raise ValueError("Invalid artifact size")
+        if operation == "chunk":
+            offset = request["offset"]
+            if type(offset) is not int or offset < 0 or info.st_size != offset:
+                raise ValueError("Artifact chunk offset does not match the temporary file")
+            if expected_size > 16 * 1024**2:
+                raise ValueError("Artifact chunk exceeds 16 MiB")
+            stream = sys.stdin.buffer if input_stream is None else input_stream
+            chunk = stream.read(expected_size + 1)
+            if len(chunk) != expected_size or hashlib.sha256(chunk).hexdigest() != request["sha256"]:
+                raise ValueError("Artifact chunk length or sha256 mismatch")
+            os.lseek(descriptor, offset, os.SEEK_SET)
+            view = memoryview(chunk)
+            while view:
+                written = os.write(descriptor, view)
+                if written <= 0:
+                    raise OSError("Artifact write made no progress")
+                view = view[written:]
+            return {"identity": identity, "bytes": offset + len(chunk), "sha256": request["sha256"]}
+        if info.st_size != expected_size:
+            raise ValueError("Artifact final length mismatch")
+        digest = hashlib.sha256()
+        os.lseek(descriptor, 0, os.SEEK_SET)
+        while chunk := os.read(descriptor, 1024**2):
+            digest.update(chunk)
+        if digest.hexdigest() != request["sha256"]:
+            raise ValueError("Artifact final sha256 mismatch")
+        os.fsync(descriptor)
+        try:
+            target = os.stat(name, dir_fd=directory, follow_symlinks=False)
+        except FileNotFoundError:
+            target = None
+        if target is not None and not stat.S_ISREG(target.st_mode):
+            raise ValueError("Artifact destination must be a regular file, not a symlink or special file")
+        # Rename replaces this directory entry, so an existing reader/memmap
+        # keeps its old inode while later opens see the complete new artifact.
+        os.replace(temporary, name, src_dir_fd=directory, dst_dir_fd=directory)
+        owned = False
+        return {
+            "identity": identity,
+            "path": str(relative),
+            "bytes": expected_size,
+            "sha256": digest.hexdigest(),
+        }
+    except Exception:
+        if owned:
+            try:
+                os.unlink(temporary, dir_fd=directory)
+            except FileNotFoundError:
+                pass
+        raise
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
+        os.close(directory)
+
+
+def _open_artifact_source(path: str | Path):
+    """Open a regular local source without following symlink parents or files."""
+    absolute = Path(os.path.abspath(path))
+    directory = os.open(absolute.anchor, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    descriptor = None
+    try:
+        for part in absolute.parts[1:-1]:
+            child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory)
+            os.close(directory)
+            directory = child
+        descriptor = os.open(absolute.name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory)
+        if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+            raise ValueError("Artifact source must be a regular file")
+        stream = os.fdopen(descriptor, "rb")
+        descriptor = None
+        return stream
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
+        os.close(directory)
 
 
 def _inspect_work_snapshot(root: str) -> dict:
@@ -494,6 +647,107 @@ class ModalSandboxTransport:
         self.sandbox.filesystem.make_directory(str(PurePosixPath(remote).parent))
         self.sandbox.filesystem.copy_from_local(local_path, remote)
 
+    def _artifact_operation(self, request: dict, chunk: bytes | None = None) -> dict:
+        script = "import json, sys\n" + inspect.getsource(_artifact_receiver)
+        script += "\nprint(json.dumps(_artifact_receiver('/work', json.loads(sys.argv[1]))))\n"
+        self._guard_activity("exec", timeout_seconds=55)
+        with self._lock:
+            process = self.sandbox.exec(
+                "python", "-I", "-c", script, json.dumps(request), timeout=55, text=False
+            )
+            if chunk is not None:
+                process.stdin.write(chunk)
+                process.stdin.write_eof()
+                process.stdin.drain()
+            output = process.stdout.read()
+            process.wait()
+        if process.returncode != 0:
+            raise SandboxTransportError(
+                f"Artifact {request['op']} failed with exit code {process.returncode}"
+            )
+        encoded = output if isinstance(output, bytes) else output.encode()
+        if len(encoded) > 16_384:
+            raise SandboxTransportError("Artifact receiver response exceeded 16 KiB")
+        try:
+            result = json.loads(encoded)
+        except ValueError as exc:
+            raise SandboxTransportError("Artifact receiver returned invalid JSON") from exc
+        if not isinstance(result, dict):
+            raise SandboxTransportError("Artifact receiver returned a non-object response")
+        return result
+
+    def publish_file(self, local_path: str | Path, remote_path: str) -> dict:
+        """Publish one verified artifact into /work without reloading any mount.
+
+        Sources and destination parents must not be symlinks. Each receiver exec
+        has a 55-second bound and at most one 16 MiB chunk in memory. The final
+        receiver verifies the complete SHA256 before atomically replacing the
+        destination. Existing open readers and kernel variables remain intact.
+        Cleanup is attempted on failure under the same budget guard; if remote
+        access is lost, an incomplete hidden temporary file may remain.
+        """
+        remote = self._work_path(remote_path)
+        relative = str(PurePosixPath(remote).relative_to("/work"))
+        common = {"path": relative, "transfer_id": uuid.uuid4().hex}
+        identity = None
+        finished = False
+        with _open_artifact_source(local_path) as source:
+            before = os.fstat(source.fileno())
+            try:
+                result = self._artifact_operation({**common, "op": "init"})
+                identity = result.get("identity")
+                if (
+                    not isinstance(identity, list)
+                    or len(identity) != 2
+                    or any(type(part) is not int or part < 0 for part in identity)
+                    or result.get("bytes") != 0
+                ):
+                    raise SandboxTransportError("Artifact receiver returned an invalid file identity")
+                common["identity"] = identity
+                digest, total = hashlib.sha256(), 0
+                while total < before.st_size:
+                    chunk = source.read(min(16 * 1024**2, before.st_size - total))
+                    if not chunk:
+                        raise SandboxTransportError("Artifact source changed during publication")
+                    chunk_sha = hashlib.sha256(chunk).hexdigest()
+                    result = self._artifact_operation(
+                        {**common, "op": "chunk", "offset": total, "size": len(chunk), "sha256": chunk_sha},
+                        chunk,
+                    )
+                    total += len(chunk)
+                    digest.update(chunk)
+                    if (
+                        result.get("identity") != identity
+                        or result.get("bytes") != total
+                        or result.get("sha256") != chunk_sha
+                    ):
+                        raise SandboxTransportError("Artifact chunk was not acknowledged correctly")
+                after = os.fstat(source.fileno())
+                if source.read(1) or (
+                    before.st_dev,
+                    before.st_ino,
+                    before.st_size,
+                    before.st_mtime_ns,
+                    before.st_ctime_ns,
+                ) != (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns, after.st_ctime_ns):
+                    raise SandboxTransportError("Artifact source changed during publication")
+                expected = {"path": relative, "bytes": total, "sha256": digest.hexdigest()}
+                result = self._artifact_operation(
+                    {**common, "op": "finish", "size": total, "sha256": digest.hexdigest()}
+                )
+                if result.get("identity") != identity or any(
+                    result.get(key) != value for key, value in expected.items()
+                ):
+                    raise SandboxTransportError("Artifact final verification receipt did not match")
+                finished = True
+                return {**expected, "path": remote}
+            finally:
+                if identity is not None and not finished:
+                    try:
+                        self._artifact_operation({**common, "op": "abort"})
+                    except Exception:  # noqa: BLE001, S110 -- preserve original failure if access is unavailable.
+                        pass
+
     def download(self, remote_path: str, local_path: str | Path) -> None:
         self._guard_activity("filesystem")
         local = Path(local_path)
@@ -551,7 +805,11 @@ class ModalSandboxTransport:
                 raise SandboxTransportError(f"Volume commit failed with exit code {process.returncode}")
 
     def reload_work(self) -> None:
-        """Call after the producing GPU/container commits its forward artifacts."""
+        """Reload ALL mounted volumes; fails when any mount has open files.
+
+        Use publish_file for forward artifacts when a persistent kernel may
+        retain open files or memory maps. Modal has no work-only reload API.
+        """
         self._guard_activity("exec", timeout_seconds=55)
         with self._lock:
             self.sandbox.reload_volumes(timeout=55)

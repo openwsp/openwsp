@@ -1,8 +1,12 @@
 {
   "current": {
     "stage": "all",
-    "phase": "running",
-    "call_id": "fc-01M6G6VP8MG500BV4QCYY9J8N6"
+    "phase": "blocked",
+    "call_id": "fc-01M6G6VP8MG500BV4QCYY9J8N6",
+    "reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+    "error_type": "ConflictError",
+    "terminal_at": 1793695625.5916924,
+    "terminal_state": "failed"
   },
   "restart_counts": {
     "live": 1

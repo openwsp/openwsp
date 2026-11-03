@@ -42,6 +42,10 @@ def collect(data="/data", staging="/data/publication"):
         compact["base_generation_reuse_requests"] = [p.stem.split(".")[0] for p in (live / "requests").glob("*.provenance.json")
             if json.loads(p.read_text()).get("base_generations_reused")]
         atomic_write(public_live / "state.json", compact)
+        deliveries = sorted((live / "requests").glob("*.delivery.json"))
+        if deliveries:
+            atomic_write(public_live / "forward-artifacts.json",
+                         {"receipts": [json.loads(path.read_text()) for path in deliveries]})
         if (live / "edit/manifest.json").exists():
             shutil.copytree(live / "edit", public_live / "edit", dirs_exist_ok=True)
         if (live / "final_answer.md").exists():

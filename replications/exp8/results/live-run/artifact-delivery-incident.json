@@ -1,0 +1,60 @@
+{
+  "status": "repair_tested_resume_pending",
+  "request": 2,
+  "counted": false,
+  "error": "ConflictError: there are open files preventing the operation",
+  "failure_location": "ModalSandboxTransport.reload_work -> Sandbox.reload_volumes",
+  "generation_call_id": "fc-01M6G8RWZRMXWTXH2E65VVKK55",
+  "activation_call_id": "fc-01M6G96PPRGTJ4E4J4A8G5AZXD",
+  "activation_result": {
+    "dir": "/work/live/gen_2_acts",
+    "files": {
+      "hidden_last_prompt.npy": [
+        64,
+        6,
+        1024
+      ],
+      "hidden_mean_answer.npy": [
+        64,
+        6,
+        1024
+      ],
+      "mlp_last_prompt.npy": [
+        64,
+        5,
+        3584
+      ],
+      "mlp_mean_answer.npy": [
+        64,
+        5,
+        3584
+      ]
+    },
+    "s": 121.06232917999999,
+    "container_seconds": 135.189483279
+  },
+  "saved_gpu_results": true,
+  "previous_driver_call_id": "fc-01M6G6VP8MG500BV4QCYY9J8N6",
+  "previous_driver_terminal": true,
+  "partial_publication": {
+    "status": "pushed",
+    "commit": "28c6e242fd14b5485d1367b0b680d79ac7fd064f",
+    "attempts": 1,
+    "paths": [
+      "README.md",
+      "replications/exp8/results/costs.json",
+      "replications/exp8/results/live-run/state.json",
+      "replications/exp8/results/live-run/transcript.md",
+      "replications/exp8/results/pipeline-state.json",
+      "replications/exp8/results/report.md"
+    ]
+  },
+  "log_path": "logs/modal-live-conflict.log",
+  "repair": "Publish the named result files into the sandbox mount in bounded chunks, verifying hashes and using atomic replacement; retain kernel state and avoid global volume reload.",
+  "validation": {
+    "cpu_tests_passed": 432,
+    "log_path": "logs/tests-artifact-delivery-full.log",
+    "forward_recovery_tests_passed": 14,
+    "transport_and_artifact_tests_passed": 58
+  }
+}

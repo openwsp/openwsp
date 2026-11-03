@@ -1,5 +1,5 @@
 {
-  "status": "authenticated_read_verified",
+  "status": "push_verified",
   "observed_at": "2026-11-03T08:26:31.165900+00:00",
   "repository": "openwsp/openwsp",
   "container_id": "ta-01M6G6VQ7S4C03B7PM1XA15G6R",
@@ -9,6 +9,20 @@
     "push": true,
     "pull": true
   },
-  "limits": "Repository permissions describe the authenticated actor; this read does not establish token write scope. No push, mutation or token refresh was performed.",
-  "log_path": "logs/modal-publication-access-probe.log"
+  "limits": "The initial read alone did not establish token write scope. The subsequent actual publisher push succeeded with the existing remote token; no token refresh was performed.",
+  "log_path": "logs/modal-publication-access-probe.log",
+  "actual_publisher_result": {
+    "status": "pushed",
+    "commit": "28c6e242fd14b5485d1367b0b680d79ac7fd064f",
+    "attempts": 1,
+    "paths": [
+      "README.md",
+      "replications/exp8/results/costs.json",
+      "replications/exp8/results/live-run/state.json",
+      "replications/exp8/results/live-run/transcript.md",
+      "replications/exp8/results/pipeline-state.json",
+      "replications/exp8/results/report.md"
+    ]
+  },
+  "push_observation_source": "logs/pipeline-open-files-block.json"
 }
