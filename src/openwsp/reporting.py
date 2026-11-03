@@ -474,6 +474,17 @@ def _tool_record(record: dict[str, Any]) -> str:
     return "\n\n".join(parts) or "No code or compact output was recorded."
 
 
+def _editor_event(record: dict[str, Any]) -> str:
+    """Render public event metadata without opening its private response reference."""
+    fields = ("status", "reason", "response_id", "executed", "usage", "cost_usd",
+              "partial_text_characters", "partial_text_sha256", "response_volume", "response_volume_path")
+    metadata = {key: record[key] for key in fields if key in record}
+    execution = ("No code or forward pass from this response was executed."
+                 if record.get("executed") is False else "Execution status is shown only as recorded below.")
+    return "\n\n".join((execution, "Partial response text remains private and is not included here.",
+                        _fence(json.dumps(_compact(metadata), indent=2), "json")))
+
+
 def render_transcript(run_dir: str | Path, output_path: str | Path) -> Path:
     """Render editor messages and compact tool outputs; never load generation/activation files."""
     run, output = Path(run_dir).resolve(), Path(output_path).resolve()
@@ -515,6 +526,8 @@ def render_transcript(run_dir: str | Path, output_path: str | Path) -> Path:
         answer = directory / "answer.md"
         if answer.exists():
             parts += ["### Editor", _redact(answer.read_text()).strip()]
+        elif (directory / "editor_event.json").exists():
+            parts += ["### Editor event", _editor_event(_read_json(directory / "editor_event.json"))]
         else:
             parts.append("Editor reply pending.")
         for record in calls_by_turn.pop(number, []):

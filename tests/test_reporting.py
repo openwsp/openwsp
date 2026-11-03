@@ -298,3 +298,35 @@ def test_transcript_contains_actual_turns_tools_and_redacts_tokens(tmp_path):
     assert credential not in text and "[REDACTED]" in text
     assert "RAW GENERATION" not in text
     assert '"accuracy": 0.25' in text
+
+
+def test_transcript_records_incomplete_editor_event_without_reading_private_response(tmp_path, monkeypatch):
+    run = tmp_path / "run"
+    turn = run / "turns/t011"
+    turn.mkdir(parents=True)
+    private_response = run / "editor/response_private.json"
+    write_json(private_response, {"text": "PRIVATE PARTIAL CODE"})
+    write_json(turn / "run.json", {"text": "PRIVATE PARTIAL CODE"})
+    write_json(turn / "editor_event.json", {
+        "status": "incomplete", "reason": "max_output_tokens", "response_id": "resp_saved",
+        "executed": False, "usage": {"output_tokens": 32768}, "cost_usd": "1.683131",
+        "partial_text_sha256": "a" * 64, "partial_text_characters": 20,
+        "response_volume": "openwsp-exp8-data", "response_volume_path": str(private_response),
+        "partial_text": "PRIVATE PARTIAL CODE", "text": "PRIVATE PARTIAL CODE",
+    })
+    original_read = Path.read_text
+    forbidden = {private_response.resolve(), (turn / "run.json").resolve()}
+
+    def read_text(path, *args, **kwargs):
+        assert path.resolve() not in forbidden, "Renderer opened a private response"
+        return original_read(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", read_text)
+    output = render_transcript(run, run / "transcript.md").read_text()
+    assert "Turn 11" in output and "### Editor event" in output
+    assert '"status": "incomplete"' in output and '"reason": "max_output_tokens"' in output
+    assert "No code or forward pass from this response was executed" in output
+    assert '"output_tokens": 32768' in output and '"cost_usd": "1.683131"' in output
+    assert '"partial_text_sha256": "' + "a" * 64 + '"' in output
+    assert "resp_saved" in output and "response_volume_path" in output
+    assert "Editor reply pending" not in output and "PRIVATE PARTIAL CODE" not in output
