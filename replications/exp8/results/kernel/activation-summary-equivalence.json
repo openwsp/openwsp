@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "base_revision": "2fc06364715b967f1860aea9cf38778875588b17",
+  "device": "cpu",
+  "dtype": "bfloat16",
+  "checks": [
+    {
+      "probe": 0,
+      "hidden_layers": 25,
+      "mlp_layers": 24,
+      "last_prompt_exact": true,
+      "mean_answer_exact": true
+    },
+    {
+      "probe": 1,
+      "hidden_layers": 25,
+      "mlp_layers": 24,
+      "last_prompt_exact": true,
+      "mean_answer_exact": true
+    },
+    {
+      "probe": 2,
+      "hidden_layers": 25,
+      "mlp_layers": 24,
+      "last_prompt_exact": true,
+      "mean_answer_exact": true
+    },
+    {
+      "probe": 3,
+      "hidden_layers": 25,
+      "mlp_layers": 24,
+      "last_prompt_exact": true,
+      "mean_answer_exact": true
+    }
+  ],
+  "seconds": 3.6588801340003556,
+  "purpose": "Internal generation-activation reduction equivalence; no live editor data or weights used."
+}

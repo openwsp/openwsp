@@ -1,17 +1,17 @@
 {
   "status": "running",
   "active_stage": "live",
-  "heartbeat": 1793691296.116515,
+  "heartbeat": 1793693337.1638381,
   "budget": {
     "editor": {
-      "spent_usd": 0.0,
+      "spent_usd": 0.214501,
       "reserved_usd": 0.0,
-      "available_usd": 100.0
+      "available_usd": 99.785499
     },
     "modal": {
-      "spent_usd": 5.47003465132999,
-      "reserved_usd": 6.397443472222222,
-      "available_usd": 30.08252187644779
+      "spent_usd": 8.438410177651235,
+      "reserved_usd": 9.384483472222222,
+      "available_usd": 24.127106350126542
     }
   },
   "controls_deferred": "Current verified allowance preserves priority for the live run and its evaluation. Controls resume afterward."

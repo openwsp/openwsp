@@ -1,0 +1,24 @@
+{
+  "current": {
+    "stage": "all",
+    "phase": "running",
+    "call_id": "fc-01M6G6VP8MG500BV4QCYY9J8N6"
+  },
+  "restart_counts": {
+    "live": 1
+  },
+  "history": [
+    {
+      "call_id": "fc-01M6G1PPP266WAAV5S8J975H8H",
+      "phase": "complete"
+    },
+    {
+      "call_id": "fc-01M6G4PFQQDTK55MZ0K0MPT21B",
+      "phase": "complete"
+    },
+    {
+      "call_id": "fc-01M6G59ENT446AAG7KGZ611VJW",
+      "phase": "terminal"
+    }
+  ]
+}
