@@ -15,7 +15,7 @@ from contextlib import contextmanager
 from pathlib import Path
 
 from ..budget import BudgetLedger, astra_cost, astra_upper_bound, atomic_json
-from .base import EditorError, EditorRefused, ProviderUnavailable, UncertainRequest
+from .base import EditorError, EditorIncomplete, EditorRefused, ProviderUnavailable, UncertainRequest
 
 INSTRUCTIONS = "Answer the user's request."
 EFFORTS = ("max", "xhigh", "high", "medium", "low")
@@ -40,7 +40,7 @@ def _error_detail(error):
 
 class AstraEditor:
     def __init__(self, state_dir, budget: BudgetLedger, *, client=None, model="gpt-6-astra",
-                 effort="max", max_output_tokens=32768, poll_interval=5,
+                 effort="max", max_output_tokens=128_000, poll_interval=5,
                  max_wait_seconds=3600, on_poll=None, sleep=time.sleep, commit=lambda: None):
         if model != "gpt-6-astra":
             raise ValueError("This adapter's verified billing schedule is for gpt-6-astra only")
@@ -278,6 +278,8 @@ class AstraEditor:
             detail = record.get("incomplete_details") or record.get("error") or {}
             if detail.get("reason") == "content_filter" or detail.get("code") in ("content_filter", "content_policy_violation"):
                 raise EditorRefused("Provider filtered the response; its usage is recorded")
+            if record["status"] == "incomplete" and detail.get("reason") == "max_output_tokens":
+                raise EditorIncomplete(detail["reason"], record["response_id"])
             raise EditorError(f"Editor response status {record['status']}; inspect the saved response before continuing")
         if not record["text"]:
             raise EditorError("Editor returned no text; response and usage are recorded")

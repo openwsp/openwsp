@@ -17,6 +17,15 @@ class EditorRefused(EditorError):
     """The driver should deliver its protocol refusal message on the next turn."""
 
 
+class EditorIncomplete(EditorError):
+    """A terminal output-limit response was recorded; partial text is not delivered."""
+
+    def __init__(self, reason: str, response_id: str):
+        self.reason = reason
+        self.response_id = response_id
+        super().__init__(f"Editor response incomplete: {reason}; response and usage are recorded")
+
+
 class Editor(Protocol):
     last_response: dict | None
 

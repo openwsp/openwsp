@@ -1,5 +1,6 @@
 """Driver crash recovery tests with no provider, model, or sandbox execution."""
 
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -190,6 +191,40 @@ def test_delivery_interruption_keeps_the_same_pending_forward_request(driver, mo
     assert result["passes"] == 50 and result["requests"] == 1
     assert result["counted_requests"] == [1]
     assert [turn for turn, _ in driver.editor_messages] == ["t001", "t002"]
+
+
+def test_incomplete_editor_turn_is_recorded_without_executing_partial_code(driver, monkeypatch):
+    driver.write_state(runs=3, requests=69, turn=0,
+                       pending={"kind": "editor", "turn": 1})
+    turn = driver.root / "turns/t001"
+    turn.mkdir(parents=True)
+    (turn / "prompt.txt").write_text("Original pending input")
+    partial = "I will inspect weights.\n```python\nraise AssertionError('must not run')"
+    original = live.AstraEditor.complete
+
+    def complete(self, message, *, request_key):
+        result = original(self, message, request_key=request_key)
+        if request_key == "t001":
+            self.last_response = {"status": "incomplete", "text": partial,
+                                  "usage": {"output_tokens": 32768}, "cost_usd": "1.683131",
+                                  "response_file": "response_saved.json"}
+            raise live.EditorIncomplete("max_output_tokens", "resp-saved")
+        return result
+
+    monkeypatch.setattr(live.AstraEditor, "complete", complete)
+    result = driver.run()
+    assert result["done"] is True and result["turn"] == 2
+    assert result["passes"] == 50 and result["runs"] == 3 and result["requests"] == 69
+    assert driver.tool_calls == []
+    assert not (turn / "answer.md").exists()
+    event = json.loads((turn / "editor_event.json").read_text())
+    assert event["executed"] is False and event["reason"] == "max_output_tokens"
+    assert event["partial_text_sha256"] == hashlib.sha256(partial.encode()).hexdigest()
+    assert "text" not in event and "must not run" not in json.dumps(event)
+    assert json.loads((turn / "run.json").read_text())["text"] == partial
+    assert driver.editor_messages[0] == ("t001", "Original pending input")
+    assert "No code or forward pass" in driver.editor_messages[1][1]
+    assert "variables were lost" in driver.editor_messages[1][1]
 
 
 def test_cached_refused_cell_preserves_replacement_run_counter(driver):

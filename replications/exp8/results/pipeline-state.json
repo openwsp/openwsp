@@ -1,20 +1,24 @@
 {
-  "status": "running",
+  "status": "blocked",
   "active_stage": "live",
-  "heartbeat": 1793696759.7059448,
-  "error": null,
-  "error_type": null,
+  "heartbeat": 1793697211.5551264,
+  "error": "EditorError: Editor response status incomplete; inspect the saved response before continuing",
+  "error_type": "EditorError",
   "budget": {
     "editor": {
-      "spent_usd": 0.42801,
+      "spent_usd": 2.538785,
       "reserved_usd": 0.0,
-      "available_usd": 99.57199
+      "available_usd": 97.461215
     },
     "modal": {
-      "spent_usd": 14.041037899513912,
-      "reserved_usd": 6.397443472222222,
-      "available_usd": 21.511518628263865
+      "spent_usd": 14.364469492085938,
+      "reserved_usd": 6.181793472222222,
+      "available_usd": 21.40373703569184
     }
   },
-  "controls_deferred": "Current verified allowance preserves priority for the live run and its evaluation. Controls resume afterward."
+  "controls_deferred": "Current verified allowance preserves priority for the live run and its evaluation. Controls resume afterward.",
+  "publication": {
+    "status": "blocked",
+    "error_type": "PublishingError"
+  }
 }

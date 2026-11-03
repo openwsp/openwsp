@@ -1,0 +1,44 @@
+{
+  "status": "repair_tested_resume_pending",
+  "turn": 11,
+  "provider_status": "incomplete",
+  "reason": "max_output_tokens",
+  "response_id": "resp_05e27016f3ef07b8006ae9a485842c87d2b45330e540cf2cb0",
+  "previous_response_id": "resp_05e27016f3ef07b8006ae9a466e49887d2926f0480ec7405cb",
+  "usage": {
+    "input_tokens": 19703,
+    "input_tokens_details": {
+      "cache_write_tokens": 2174,
+      "cache_write_tokens_details": {
+        "ttl_12h_tokens": 0,
+        "ttl_30m_tokens": 2174
+      },
+      "cached_tokens": 17526
+    },
+    "output_tokens": 32768,
+    "output_tokens_details": {
+      "reasoning_tokens": 1034
+    },
+    "total_tokens": 52471
+  },
+  "cost_usd": "1.683131",
+  "original_output_token_ceiling": 32768,
+  "future_output_token_ceiling": 128000,
+  "partial_text_sha256": "051168f8647a1d58a8bd529e39aee8d33b68d26f99a39034ff86eaade1420605",
+  "partial_text_characters": 57418,
+  "partial_executed": false,
+  "response_volume": "openwsp-exp8-data",
+  "response_volume_path": "/live-run/editor/response_490adc47ada040ca85bf1648d8c82b81.json",
+  "recovery_policy": "Record this terminal response as a non-executed editor turn, retaining the response ID and billed receipt. Continue the same conversation with a neutral API-error result. Do not resample the failed key or execute partial text.",
+  "model_limit_source": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+  "incomplete_response_source": "https://developers.openai.com/api/docs/guides/reasoning#allocating-space-for-reasoning",
+  "conversation_source": "https://developers.openai.com/api/docs/guides/conversation-state",
+  "publication_blocker": "All staged content/secret guards passed; captured transcript trailing whitespace failed the cosmetic Git diff check. Exempt exactly the transcript path while preserving its bytes and every content guard.",
+  "publication_diagnosis": "/tmp/openwsp-publication-check-90953srf/validation.json",
+  "validation": {
+    "cpu_tests_passed": 449,
+    "editor_and_live_recovery_tests_passed": 25,
+    "reporting_and_publication_tests_passed": 40,
+    "log_path": "logs/tests-editor-limit-full.log"
+  }
+}

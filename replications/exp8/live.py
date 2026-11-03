@@ -1,12 +1,13 @@
 """Tool-free editor turn loop. Reference edits and evaluation data stay outside it."""
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import time
 from pathlib import Path
 
-from openwsp.editors.base import EditorRefused, ProviderUnavailable
+from openwsp.editors.base import EditorIncomplete, EditorRefused, ProviderUnavailable
 from openwsp.budget import BudgetExceeded
 from openwsp.backends.jobs import JobBlocked, JobPending
 from openwsp.editors.openai import AstraEditor
@@ -162,6 +163,32 @@ def run_live(outer_state, ledger, checkpoint, *, app):
             try:
                 answer = ((directory / "answer.md").read_text() if (directory / "answer.md").exists()
                           else editor.complete(message, request_key=f"t{turn:03d}"))
+            except EditorIncomplete as exc:
+                # A terminal, billed output-limit response is an editor turn,
+                # not an ambiguous POST or executable partial program. Keep its
+                # provider lineage; never sample a replacement for this key.
+                record = editor.last_response or {}
+                partial = record.get("text", "")
+                atomic_write(directory / "run.json", record)
+                atomic_write(directory / "editor_event.json", {
+                    "status": "incomplete", "reason": exc.reason,
+                    "response_id": exc.response_id, "executed": False,
+                    "usage": record.get("usage"), "cost_usd": record.get("cost_usd"),
+                    "partial_text_characters": len(partial),
+                    "partial_text_sha256": hashlib.sha256(partial.encode()).hexdigest(),
+                    "response_volume": "openwsp-exp8-data",
+                    "response_volume_path": f"/live-run/editor/{record['response_file']}" if record.get("response_file") else None,
+                })
+                state["next"] = ("The editor API returned an incomplete response (max_output_tokens). "
+                                 "No code or forward pass from that response was executed.")
+                if restart_notice_due:
+                    state["next"] = "The kernel was restarted; variables were lost, but files in /work and saved edits remain.\n" + state["next"]
+                    restart_notice_due = False
+                state["turn"] = turn
+                state["since_handoff"] += 1
+                state["pending"] = None
+                save()
+                continue
             except EditorRefused:
                 state["next"] = (ROOT / "prompts/provider_refused.txt").read_text()
                 state["turn"] = turn

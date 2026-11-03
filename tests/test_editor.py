@@ -3,8 +3,15 @@ from types import SimpleNamespace
 
 import pytest
 
-from openwsp.budget import BudgetLedger
-from openwsp.editors import AstraEditor, EditorError, EditorRefused, ProviderUnavailable, UncertainRequest
+from openwsp.budget import BudgetLedger, astra_cost
+from openwsp.editors import (
+    AstraEditor,
+    EditorError,
+    EditorIncomplete,
+    EditorRefused,
+    ProviderUnavailable,
+    UncertainRequest,
+)
 
 
 def response(rid="resp_1", text="A hypothesis.\n```python\n1 + 1\n```", status="completed", refusal=False):
@@ -58,6 +65,7 @@ def test_exact_editor_contract_and_turn_reasoning_chain(tmp_path):
     first = fake.calls[0]
     assert first["instructions"] == "Answer the user's request."
     assert first["reasoning"] == {"effort": "max"}
+    assert first["max_output_tokens"] == 128_000
     assert first["tools"] == []
     assert first["prompt_cache_options"] == {"ttl": "30m"}
     assert "temperature" not in first and "top_p" not in first and "previous_response_id" not in first
@@ -146,12 +154,92 @@ def test_refusal_is_recorded_and_charged(tmp_path):
     assert e.budget.snapshot()["summary"]["editor"]["spent_usd"] > 0
 
 
-def test_missing_usage_does_not_guess_or_release_cost(tmp_path):
-    missing = response()
+def test_incomplete_output_is_settled_once_and_replayed_without_partial_text(tmp_path):
+    partial = response("resp_incomplete", text="UNFINISHED CODE", status="incomplete")
+    partial["incomplete_details"] = {"reason": "max_output_tokens"}
+    partial["usage"]["output_tokens"] = 32_768
+    fake = FakeResponses([partial])
+    e = editor(tmp_path, fake)
+    # A receipt created with the prior ceiling must remain recoverable after
+    # restarting with the new default, without submitting another paid attempt.
+    e.max_output_tokens = 32_768
+    with pytest.raises(EditorIncomplete) as raised:
+        e.complete("task", request_key="t011")
+    assert raised.value.reason == "max_output_tokens"
+    assert raised.value.response_id == "resp_incomplete"
+    assert "UNFINISHED CODE" not in str(raised.value)
+    state = json.loads(e.path.read_text())
+    assert state["pending"] is None
+    assert state["previous_response_id"] == "resp_incomplete"
+    receipt = json.loads((e.root / state["completed"]["t011"]).read_text())
+    assert receipt["usage"] == partial["usage"]
+    assert json.loads((e.root / receipt["response_file"]).read_text()) == partial
+    settled = e.budget.snapshot()
+    assert settled["summary"]["editor"]["spent_usd"] == float(astra_cost(partial["usage"]))
+    assert settled["summary"]["editor"]["reserved_usd"] == 0
+    assert [event["event"] for event in settled["events"]] == ["reserved", "settled"]
+    restarted = editor(tmp_path, fake)
+    for _ in range(2):
+        with pytest.raises(EditorIncomplete) as replayed:
+            restarted.complete("task", request_key="t011")
+        assert replayed.value.response_id == raised.value.response_id
+        assert replayed.value.reason == raised.value.reason
+    assert restarted.budget.snapshot() == settled
+    assert len(fake.calls) == 1 and not fake.gets
+    assert json.loads(e.path.read_text()) == state
+    with pytest.raises(EditorError, match="different input"):
+        restarted.complete("changed task", request_key="t011")
+
+
+def test_next_caller_message_chains_to_incomplete_response_with_new_ceiling(tmp_path):
+    partial = response("resp_incomplete", status="incomplete")
+    partial["incomplete_details"] = {"reason": "max_output_tokens"}
+    fake = FakeResponses([response("resp_complete"), partial, response("resp_next")])
+    e = editor(tmp_path, fake)
+    e.max_output_tokens = 32_768
+    e.complete("task", request_key="t010")
+    with pytest.raises(EditorIncomplete):
+        e.complete("first tool output", request_key="t011")
+    prior_state = json.loads(e.path.read_text())
+    restarted = editor(tmp_path, fake)
+    assert restarted.complete("next caller message", request_key="t012")
+    assert fake.calls[1]["previous_response_id"] == "resp_complete"
+    assert fake.calls[2]["previous_response_id"] == "resp_incomplete"
+    assert fake.calls[2]["input"] == [{"role": "user", "content": "next caller message"}]
+    assert fake.calls[2]["max_output_tokens"] == 128_000
+    assert fake.calls[2]["prompt_cache_key"] == fake.calls[0]["prompt_cache_key"]
+    final_state = json.loads(restarted.path.read_text())
+    assert final_state["previous_response_id"] == "resp_next"
+    assert all(final_state["completed"][key] == receipt for key, receipt in prior_state["completed"].items())
+    reservations = restarted.budget.snapshot()["reservations"].values()
+    assert len(reservations) == 3 and all(row["status"] == "settled" for row in reservations)
+    assert next(row for row in reservations if row["stage"] == "editor:t012")["metadata"]["max_output_tokens"] == 128_000
+
+
+@pytest.mark.parametrize("status,reason,exception", [
+    ("incomplete", "content_filter", EditorRefused),
+    ("incomplete", "max_messages", EditorError),
+    ("failed", "max_output_tokens", EditorError),
+])
+def test_only_terminal_token_limit_incomplete_gets_typed_error(tmp_path, status, reason, exception):
+    terminal = response(status=status)
+    terminal["incomplete_details"] = {"reason": reason}
+    e = editor(tmp_path, FakeResponses([terminal]))
+    with pytest.raises(exception) as raised:
+        e.complete("task")
+    assert not isinstance(raised.value, EditorIncomplete)
+
+
+@pytest.mark.parametrize("status", ["completed", "incomplete"])
+def test_missing_usage_does_not_guess_or_release_cost(tmp_path, status):
+    missing = response(status=status)
+    if status == "incomplete":
+        missing["incomplete_details"] = {"reason": "max_output_tokens"}
     missing["usage"] = None
     e = editor(tmp_path, FakeResponses([missing]))
-    with pytest.raises(EditorError, match="no usage"):
+    with pytest.raises(EditorError, match="no usage") as raised:
         e.complete("task")
+    assert not isinstance(raised.value, EditorIncomplete)
     assert e.budget.snapshot()["summary"]["editor"]["reserved_usd"] > 0
     state = json.loads(e.path.read_text())
     assert state["pending"]["response_id"] == "resp_1"
