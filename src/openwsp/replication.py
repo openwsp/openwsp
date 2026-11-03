@@ -2,8 +2,11 @@
 from __future__ import annotations
 
 import json
+import os
+import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -23,15 +26,21 @@ def replicate(experiment, *, stage="all", detach=True, config=None):
     settings = json.loads(Path(config).read_text()) if config else {}
     from openwsp.backends.modal_runtime import configure_tls
     configure_tls()
-    subprocess.run([sys.executable, str(root / "scripts/modal_cli.py"), "deploy",
-                    str(root / "src/openwsp/backends/modal_app.py")], cwd=root, check=True)
+    # Image builds can take minutes while development continues. Modal rejects
+    # mutated source mounts; snapshot precisely the files this deployment uses.
+    with tempfile.TemporaryDirectory(prefix="openwsp-deploy-") as temporary:
+        snapshot = Path(temporary)
+        for name in ("src", "replications", "scripts"):
+            shutil.copytree(root / name, snapshot / name,
+                            ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+        environment = {**os.environ, "PYTHONPATH": str(snapshot / "src")}
+        subprocess.run([sys.executable, str(snapshot / "scripts/modal_cli.py"), "deploy",
+                        "-m", "openwsp.backends.modal_app"], cwd=snapshot, env=environment, check=True)
     import modal
-    function = modal.Function.from_name("openwsp-exp8", "pipeline")
-    if detach:
-        call = function.spawn(stage, settings)
-        result = {"experiment": experiment, "stage": stage, "call_id": call.object_id, "status": "launched"}
-    else:
-        result = function.remote(stage, settings)
+    result = modal.Function.from_name("openwsp-exp8", "launch").remote(stage, settings)
+    result["experiment"] = experiment
+    if not detach and result.get("call_id"):
+        result = modal.FunctionCall.from_id(result["call_id"]).get(timeout=86400)
     path = root / ".openwsp/launch.json"
     path.parent.mkdir(exist_ok=True)
     path.write_text(json.dumps(result, indent=2) + "\n")

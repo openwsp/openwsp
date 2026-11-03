@@ -10,47 +10,62 @@ import time
 from pathlib import Path
 
 from openwsp.budget import BudgetLedger, compute_cost
+from openwsp.backends.jobs import RemoteJobRunner
 from replications.exp8.runtime import CONFIG, ROOT, atomic_write, evaluate_outputs, read_rows
 
 
-def run(stage, overrides, *, app):
+def run(stage, overrides, *, app, driver_ticket=None):
     from openwsp.backends.modal_app import prepare, data_volume, Generator
+    if stage not in {"all", "prepare", "calibration", "smoke", "kernel", "live", "evaluate", "controls", "publish"}:
+        raise ValueError("Unknown replication stage")
+    if overrides:
+        unknown = set(overrides) - {"publish_results"}
+        if unknown:
+            raise ValueError("Protocol overrides are disabled for this pinned replication: " + ", ".join(sorted(unknown)))
     settings = {**CONFIG, **overrides}
     data = Path("/data")
     ledger = BudgetLedger(data / "budget.json")
     state_path = data / "state.json"
     state = json.loads(state_path.read_text()) if state_path.exists() else {"stages": {}}
     state.update(status="running", active_stage=stage)
+    state.pop("error", None)
+    state.pop("error_type", None)
     stop = threading.Event()
+    checkpoint_lock = threading.RLock()
 
     def checkpoint():
-        state["heartbeat"] = time.time()
-        state["budget"] = ledger.snapshot()["summary"]
-        atomic_write(state_path, state)
-        data_volume.commit()
+        with checkpoint_lock:
+            state["heartbeat"] = time.time()
+            state["budget"] = ledger.snapshot()["summary"]
+            atomic_write(state_path, state)
+            data_volume.commit()
 
     def heartbeat():
         while not stop.wait(45):
             checkpoint()
 
+    jobs_runner = RemoteJobRunner(ledger, data / "jobs", commit=data_volume.commit)
+    driver_lease = None
+    if driver_ticket:
+        import modal
+        from openwsp.backends.driver_budget import DriverBudgetLease
+        driver_lease = DriverBudgetLease.claim(ledger, driver_ticket, owner_id=modal.current_function_call_id(), commit=checkpoint)
     thread = threading.Thread(target=heartbeat, daemon=True)
     thread.start()
     try:
         checkpoint()
-        if not state["stages"].get("prepare", {}).get("status") == "done":
-            reservation = ledger.reserve("modal", 1, "prepare", metadata={"estimated_seconds": 1800})
-            checkpoint()
-            start = time.monotonic()
-            result = prepare.remote()
+        if not state["stages"].get("prepare", {}).get("status") == "done" or not (data / "benchmarks/ifeval.jsonl").exists():
+            jobs_runner.launch("prepare-v2", lambda: prepare.spawn(), upper_bound_usd=1,
+                               cost_options={"cpu_cores": 2, "memory_gib": 8, "startup_seconds": 120, "scaledown_seconds": 2},
+                               fingerprint={"revision": CONFIG["revision"], "datasets": ["math500", "gsm8k", "ifeval"]})
+            result = jobs_runner.result("prepare-v2", timeout=1920)
             data_volume.reload()
-            elapsed = time.monotonic() - start
-            ledger.settle(reservation, compute_cost(elapsed, cpu_cores=2, memory_gib=8), seconds=elapsed)
             state["stages"]["prepare"] = result
             checkpoint()
         if stage == "prepare":
             state["status"] = "stage_done"
             return state
-        if stage in ("all", "calibration", "smoke", "controls"):
+        if stage in ("all", "calibration", "smoke"):
             # Rebuild with the authors' unmodified script, whose tensor hashes are assertions.
             if not (data / "p50c/config.json").exists():
                 checkpoint_dir = data / "p50c"
@@ -64,10 +79,6 @@ def run(stage, overrides, *, app):
             rows = read_rows(data / "benchmarks/math500.jsonl")
             jobs = [("calibration_base", "/data/original", True, {}),
                     ("calibration_p50c", "/data/p50c", True, {})]
-            if stage == "controls":
-                jobs = [("control1_nothink", "/data/original", False,
-                         {"temperature": 0.7, "top_p": 0.8, "max_tokens": 32768}),
-                        ("control3_repetition", "/data/original", True, {"repetition_penalty": 1.1})]
             for name, checkpoint_dir, thinking, sampling_changes in jobs:
                 if state["stages"].get(name, {}).get("status") == "done":
                     continue
@@ -79,20 +90,21 @@ def run(stage, overrides, *, app):
                 for job, selected in batches:
                     target = data / "results" / job
                     if (target / "summary.json").exists():
+                        state["stages"][job] = json.loads((target / "summary.json").read_text())
                         continue
                     max_seconds = settings["max_job_seconds"]
-                    reservation = ledger.reserve("modal", compute_cost(max_seconds + 120, gpu="H100",
-                                                  cpu_cores=4, memory_gib=16), job,
-                                                  metadata={"estimated_gpu_seconds": max_seconds,
-                                                            "problems": len(selected), "sampling": params})
+                    bound_seconds = max_seconds + 600 + 120
                     state["active_stage"] = job
                     checkpoint()
                     start = time.monotonic()
-                    result = Generator(checkpoint=checkpoint_dir).generate.remote(selected, params, thinking)
-                    elapsed = time.monotonic() - start
-                    cost = compute_cost(elapsed + 2, gpu="H100", cpu_cores=4, memory_gib=16)
-                    ledger.settle(reservation, cost, seconds=result["container_seconds"],
-                                  metadata={"generation_seconds": result["generation_seconds"]})
+                    jobs_runner.launch(job, lambda: Generator(checkpoint=checkpoint_dir).generate.spawn(selected, params, thinking),
+                                       upper_bound_usd=compute_cost(bound_seconds, gpu="H100", cpu_cores=4, memory_gib=16),
+                                       cost_options={"gpu": "H100", "cpu_cores": 4, "memory_gib": 16, "startup_seconds": 120, "scaledown_seconds": 2},
+                                       fingerprint={"checkpoint": checkpoint_dir, "params": params, "thinking": thinking,
+                                                    "ids": [r["id"] for r in selected]})
+                    result = jobs_runner.result(job, timeout=bound_seconds)
+                    elapsed = result["container_seconds"]
+                    cost = compute_cost(elapsed + 122, gpu="H100", cpu_cores=4, memory_gib=16)
                     summary = evaluate_outputs(result["outputs"], selected, directory=target, stage=job,
                                                benchmark="math500", samples=1, seconds=elapsed,
                                                cost_usd=float(cost), thinking=thinking,
@@ -102,14 +114,66 @@ def run(stage, overrides, *, app):
                                                            "transformers": result["transformers"]})
                     state["stages"][job] = summary
                     checkpoint()
-        if stage == "all":
+        if stage in ("all", "calibration"):
+            check = {}
+            for name, reference, se in (("calibration_base", .079, .012), ("calibration_p50c", .481, .022)):
+                score = state["stages"][name]["accuracy"]
+                check[name] = {"accuracy": score, "reference_accuracy": reference, "reference_standard_error": se,
+                               "gap": score-reference, "within_two_standard_errors": abs(score-reference) <= 2*se}
+            check["status"] = "passed" if all(row["within_two_standard_errors"] for row in check.values()) else "gap_requires_review"
+            atomic_write(data / "calibration-check.json", check)
+            state["calibration"] = check
+            checkpoint()
+            if stage == "all" and check["status"] != "passed":
+                audit_path = data / "calibration-gap-audit.json"
+                audit = json.loads(audit_path.read_text()) if audit_path.exists() else {}
+                if not audit.get("circuit_breaker_tripped") or not audit.get("checks"):
+                    raise RuntimeError("Calibration gap needs a recorded prompt/template/sampling audit before the live run")
+                state["calibration"]["audit"] = audit
+        if stage in ("all", "kernel", "live") and state["stages"].get("kernel", {}).get("status") != "passed":
+            from replications.exp8.live import verify_kernel
+            state["active_stage"] = "kernel_verification"
+            checkpoint()
+            state["stages"]["kernel"] = verify_kernel(ledger, checkpoint, app)
+            checkpoint()
+        if stage in ("all", "kernel", "live"):
+            from replications.exp8.verification import verify_forward
+            state["active_stage"] = "forward_verification"
+            checkpoint()
+            state["stages"]["forward_verification"] = verify_forward(ledger, checkpoint)
+        if stage in ("all", "live"):
             from replications.exp8.live import run_live
-            run_live(state, ledger, checkpoint, app=app)
-        state["status"] = "stage_done"
+            state["active_stage"] = "live"
+            checkpoint()
+            state["controls_deferred"] = "Current verified allowance preserves priority for the live run and its evaluation. Controls resume afterward."
+            result = run_live(state, ledger, checkpoint, app=app)
+            state["live"] = {key: result.get(key) for key in ("turn", "runs", "passes", "requests", "done", "submission")}
+            checkpoint()
+        if stage in ("all", "evaluate"):
+            from replications.exp8.evaluation import evaluate_live
+            live_state = json.loads((data / "live-run/state.json").read_text())
+            if not live_state.get("done") or live_state.get("passes") != 50:
+                raise ValueError("Required evaluation waits for the actual completed 50-pass submission")
+            state["active_stage"] = "evaluation"
+            checkpoint()
+            state["stages"]["live_evaluation"] = evaluate_live(live_state["submission"], ledger, checkpoint)
+        if stage in ("all", "controls"):
+            from replications.exp8.controls import run_controls
+            state["active_stage"] = "controls"
+            checkpoint()
+            state["stages"]["controls"] = run_controls(ledger, checkpoint)
+        if stage in ("all", "publish"):
+            from replications.exp8.artifacts import publish
+            state.update(active_stage="publication", status="complete" if stage == "all" else "stage_done")
+            checkpoint()
+            state["publication"] = publish()
+        state["status"] = "complete" if stage == "all" else "stage_done"
         return state
     except Exception as exc:
-        state.update(status="blocked", error=f"{type(exc).__name__}: {exc}")
+        state.update(status="blocked", error=f"{type(exc).__name__}: {exc}", error_type=type(exc).__name__)
         raise
     finally:
         stop.set()
+        if driver_lease:
+            state["driver_receipt"] = driver_lease.finish()
         checkpoint()

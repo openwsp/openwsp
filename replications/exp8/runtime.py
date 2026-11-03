@@ -85,6 +85,11 @@ def prepare(data="/data", model="/model", practice="/practice"):
                  "answer": r["answer"].split("####")[-1].strip().replace(",", "")}
                 for i, r in enumerate(load_dataset("openai/gsm8k", "main", split="test"))]
         write_rows(benchmarks / "gsm8k.jsonl", rows)
+    if not (benchmarks / "ifeval.jsonl").exists():
+        rows = [{"id": f"ifeval_{i}", "kind": "ifeval", "prompt": row["prompt"],
+                 "instruction_id_list": row["instruction_id_list"], "kwargs": row["kwargs"]}
+                for i, row in enumerate(load_dataset("google/IFEval", split="train"))]
+        write_rows(benchmarks / "ifeval.jsonl", rows)
     return {"status": "done", "model_revision": CONFIG["revision"],
             "model_sha256": digest(model / "model.safetensors"),
             "practice": {p.name: digest(p) for p in practice.glob("*.jsonl")}}
@@ -105,6 +110,11 @@ def evaluate_outputs(outputs, rows, *, directory, stage, benchmark, samples, sec
                      provenance, thinking=True):
     """Keep full text on the volume, with an auditable compact row for every sample."""
     import importlib.util
+    import sys
+    if str(ROOT / "compat") not in sys.path:
+        sys.path.insert(0, str(ROOT / "compat"))
+    if str(ROOT / "vendor") not in sys.path:
+        sys.path.insert(0, str(ROOT / "vendor"))
     spec = importlib.util.spec_from_file_location("exp8_mathqa", ROOT / "vendor/mathqa.py")
     grader = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(grader)
@@ -119,12 +129,16 @@ def evaluate_outputs(outputs, rows, *, directory, stage, benchmark, samples, sec
         for index, output in enumerate(generated["samples"]):
             if output["finish_reason"] not in ("stop", "length"):
                 raise ValueError("Incomplete generation cannot be scored")
-            pred, _ = grader.extract(output["text"])
-            correct = bool(grader.is_correct(pred, row["answer"]))
+            if benchmark == "ifeval":
+                correct, pred, extra = grade_ifeval(row, output["text"], thinking)
+            else:
+                pred, _ = grader.extract(output["text"])
+                correct = bool(grader.is_correct(pred, row["answer"]))
+                extra = {}
             raw.append({"problem_id": row["id"], "sample_index": index, **output})
             records.append({"problem_id": row["id"], "sample_index": index, "answer": pred,
                             "correct": correct, "token_count": output["token_count"],
-                            "finish_reason": output["finish_reason"]})
+                            "finish_reason": output["finish_reason"], **extra})
     raw_path = directory / "raw_generations.jsonl"
     write_rows(raw_path, raw)
     sha = digest(raw_path)
@@ -141,3 +155,22 @@ def evaluate_outputs(outputs, rows, *, directory, stage, benchmark, samples, sec
                "seconds": seconds, "cost_usd": cost_usd, "provenance": provenance}
     atomic_write(directory / "summary.json", summary)
     return summary
+
+
+def grade_ifeval(row, text, thinking=True):
+    """Authors' strict prompt-level adapter over the official pinned checkers."""
+    import sys
+    vendor = str(ROOT / "vendor")
+    if vendor not in sys.path:
+        sys.path.insert(0, vendor)
+    from instruction_following_eval import instructions_registry as registry
+    response = text.split("</think>")[-1].strip() if "</think>" in text else ("" if thinking else text.strip())
+    followed = []
+    for identifier, kwargs in zip(row["instruction_id_list"], row["kwargs"], strict=True):
+        instruction = registry.INSTRUCTION_DICT[identifier](identifier)
+        instruction.build_description(**{k: v for k, v in (kwargs or {}).items() if v is not None})
+        arguments = instruction.get_instruction_args()
+        if arguments and "prompt" in arguments:
+            instruction.build_description(prompt=row["prompt"])
+        followed.append(bool(response) and bool(instruction.check_following(response)))
+    return all(followed), None, {"inst_ok": sum(followed), "inst_total": len(followed)}
