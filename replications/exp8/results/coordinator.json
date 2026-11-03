@@ -1,21 +1,22 @@
 {
   "current": {
-    "call_id": "fc-01M6HCQ89PPXXFSZB647FGB9VF",
+    "call_id": "fc-01M6HJFWKABFATSH2NKQKVB6FN",
     "config": {
       "editor": "codex",
+      "publish_results": true,
       "run_id": "codex-20261103"
     },
-    "created_at": 1793732614.8489194,
-    "dispatched_at": 1793732615.98198,
-    "fingerprint": "eab07648334622e04a11b59b63e4e82421f192b04de8b2ae72072ffcccf3e9e5",
+    "created_at": 1793738661.5018787,
+    "dispatched_at": 1793738665.503003,
+    "fingerprint": "adda0457aafba3c8f17a8a18a6d5f8b4d715b4ec5d32390a5e4d40ce05adb12c",
     "phase": "running",
-    "reservation_id": "driver-b2a8378727b248d596e0b966003704bd",
+    "reservation_id": "driver-eb75be295e724031a4730c4308c21c8e",
     "stage": "all",
     "ticket": {
       "cpu_cores": 1,
       "memory_gib": 4,
-      "prepared_at": 1793732615.4217093,
-      "reservation_id": "driver-b2a8378727b248d596e0b966003704bd",
+      "prepared_at": 1793738662.7403998,
+      "reservation_id": "driver-eb75be295e724031a4730c4308c21c8e",
       "scaledown_seconds": 5,
       "schema_version": 1,
       "stage": "all",
@@ -294,6 +295,46 @@
         "timeout_seconds": 86400,
         "upper_bound_usd": "1.905953472222222222222222222"
       }
+    },
+    {
+      "call_id": "fc-01M6HCQ89PPXXFSZB647FGB9VF",
+      "config": {
+        "editor": "codex",
+        "run_id": "codex-20261103"
+      },
+      "created_at": 1793732614.8489194,
+      "dispatched_at": 1793732615.98198,
+      "error_type": "SandboxTransportError",
+      "fingerprint": "eab07648334622e04a11b59b63e4e82421f192b04de8b2ae72072ffcccf3e9e5",
+      "manual_resume": {
+        "config": {
+          "editor": "codex",
+          "publish_results": true,
+          "run_id": "codex-20261103"
+        },
+        "fingerprint": "adda0457aafba3c8f17a8a18a6d5f8b4d715b4ec5d32390a5e4d40ce05adb12c",
+        "reason": "Provider-confirmed terminal SandboxTransportError before turn51 editor admission (fc-01M6HCQ89PPXXFSZB647FGB9VF). Resume codex-20261103 at saved turn50, passes14, requests22 and runs26 after replacing leased text writes with the existing bounded SHA-verified atomic artifact receiver. Same conversation, journals, saved edits and work files; normal neutral kernel-restart notice. No failed request is redispatched and no counter or cost is reset.",
+        "stage": "all"
+      },
+      "phase": "terminal",
+      "reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+      "reservation_id": "driver-b2a8378727b248d596e0b966003704bd",
+      "result_status": null,
+      "stage": "all",
+      "terminal_at": 1793738658.2773757,
+      "terminal_state": "failed",
+      "ticket": {
+        "cpu_cores": 1,
+        "memory_gib": 4,
+        "prepared_at": 1793732615.4217093,
+        "reservation_id": "driver-b2a8378727b248d596e0b966003704bd",
+        "scaledown_seconds": 5,
+        "schema_version": 1,
+        "stage": "all",
+        "startup_seconds": 120,
+        "timeout_seconds": 86400,
+        "upper_bound_usd": "1.905953472222222222222222222"
+      }
     }
   ],
   "manual_resumes": [
@@ -340,6 +381,15 @@
       "previous_state_error": "BudgetExceeded: modal stage live/codex-20261103/fwd_2/teacher_forced/openwsp-gpu:a9addc225efa46ff8f8450c1570c26cf:0: reserve $2.9870400, only $2.909644918156211473271933328 available",
       "previous_state_status": "blocked",
       "reason": "Operator explicitly authorized automatic Modal top-ups within the unchanged $150 task cap; allowance receipt operator-auto-topups-20261103-steering2 recorded after terminal-owner verification. Resume codex-20261103 from its saved request2, same worker/conversation, counters and edits. No prior request was redispatched.",
+      "stage": "all"
+    },
+    {
+      "at": 1793738655.4780457,
+      "previous_call_id": "fc-01M6HCQ89PPXXFSZB647FGB9VF",
+      "previous_coordinator_reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+      "previous_state_error": "SandboxTransportError: Text transfer failed with exit code 1",
+      "previous_state_status": "blocked",
+      "reason": "Provider-confirmed terminal SandboxTransportError before turn51 editor admission (fc-01M6HCQ89PPXXFSZB647FGB9VF). Resume codex-20261103 at saved turn50, passes14, requests22 and runs26 after replacing leased text writes with the existing bounded SHA-verified atomic artifact receiver. Same conversation, journals, saved edits and work files; normal neutral kernel-restart notice. No failed request is redispatched and no counter or cost is reset.",
       "stage": "all"
     }
   ],

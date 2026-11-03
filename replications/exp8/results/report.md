@@ -3,8 +3,7 @@
 | Recorded component | State | Evidence |
 | --- | --- | --- |
 | Required live run | [live goal unmet](live-runs/codex-20261103/state.json) | Active attempt: [codex-20261103](active-live.json); submission requirement pending |
-| Pipeline | [blocked](pipeline-state.json) | [live](pipeline-state.json) |
-| Recorded blocker | [SandboxTransportError: Text transfer failed with exit code 1](pipeline-state.json) | See source record. |
+| Pipeline | [running](pipeline-state.json) | [live](pipeline-state.json) |
 | Driver recovery | [running](coordinator.json) | [all](coordinator.json) |
 | Calibration prompt audit | [passed](calibration-prompt-audit.json) | [calibration-prompt-audit.json](calibration-prompt-audit.json) |
 | Calibration comparison | [passed](calibration-check.json) | [calibration-check.json](calibration-check.json) |
@@ -19,7 +18,7 @@ Live attempts:
 | Attempt | Selection | Editor | Recorded state | Passes | Turns | Runs | Submission | Final evaluations | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | live-run | historical | pending | [blocked](live-run/blocker.json) | [4](live-run/state.json) | [26](live-run/state.json) | [10](live-run/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](live-run/state.json); [blocker.json](live-run/blocker.json); [transcript.md](live-run/transcript.md) |
-| live-runs/codex-20261103 | active | [codex](live-runs/codex-20261103/identity.json) | [incomplete](live-runs/codex-20261103/state.json) | [15](live-runs/codex-20261103/state.json) | [53](live-runs/codex-20261103/state.json) | [28](live-runs/codex-20261103/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](live-runs/codex-20261103/state.json); [identity.json](live-runs/codex-20261103/identity.json); [blocker.json](live-runs/codex-20261103/blocker.json); [transcript.md](live-runs/codex-20261103/transcript.md) |
+| live-runs/codex-20261103 | active | [codex](live-runs/codex-20261103/identity.json) | [incomplete](live-runs/codex-20261103/state.json) | [21](live-runs/codex-20261103/state.json) | [65](live-runs/codex-20261103/state.json) | [34](live-runs/codex-20261103/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](live-runs/codex-20261103/state.json); [identity.json](live-runs/codex-20261103/identity.json); [blocker.json](live-runs/codex-20261103/blocker.json); [transcript.md](live-runs/codex-20261103/transcript.md) |
 
 The active pointer selects the current attempt. Historical blockers and completed controls do not establish its completion.
 
@@ -173,7 +172,7 @@ Budget ledger: [source](costs.json). Reservations are retained bounds, not charg
 | --- | --- | --- | --- | --- | --- | --- |
 | editor / editor turns | [settled](costs.json) | [26](costs.json) | [1.815](costs.json) | [78.2928](costs.json) | pending | [API usage and recorded token rates](costs.json) |
 | modal / all | [reserved](costs.json) | [1](costs.json) | pending | pending | [1.9060](costs.json) | [resource estimate; not invoice](costs.json) |
-| modal / all | [settled](costs.json) | [5](costs.json) | [4.262](costs.json) | [0.3380](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
+| modal / all | [settled](costs.json) | [6](costs.json) | [5.769](costs.json) | [0.4575](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
 | modal / calibration | [settled](costs.json) | [1](costs.json) | [0.906](costs.json) | [0.0718](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
 | modal / calibration_base | [settled](costs.json) | [1](costs.json) | [0.499](costs.json) | [2.1280](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / calibration_base_smoke | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.2758](costs.json) | [resource estimate; not invoice](costs.json) |
@@ -216,8 +215,17 @@ Budget ledger: [source](costs.json). Reservations are retained bounds, not charg
 | modal / live / codex-20261103 / fwd_21 / original | [settled](costs.json) | [1](costs.json) | [0.276](costs.json) | [1.1781](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / live / codex-20261103 / fwd_21 / original / activations | [settled](costs.json) | [1](costs.json) | [0.085](costs.json) | [0.3608](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / live / codex-20261103 / fwd_22 / teacher_forced | [settled](costs.json) | [1](costs.json) | [0.038](costs.json) | [0.1616](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / live / codex-20261103 / fwd_23 / edited | [settled](costs.json) | [1](costs.json) | [0.275](costs.json) | [1.1723](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / live / codex-20261103 / fwd_24 / edited | [settled](costs.json) | [1](costs.json) | [0.279](costs.json) | [1.1925](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / live / codex-20261103 / fwd_25 / teacher_forced | [settled](costs.json) | [1](costs.json) | [0.039](costs.json) | [0.1662](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / live / codex-20261103 / fwd_26 / edited | [settled](costs.json) | [1](costs.json) | [0.275](costs.json) | [1.1748](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / live / codex-20261103 / fwd_27 / teacher_forced | [settled](costs.json) | [1](costs.json) | [0.039](costs.json) | [0.1657](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / live / codex-20261103 / fwd_28 / edited | [settled](costs.json) | [1](costs.json) | [0.278](costs.json) | [1.1869](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / live / codex-20261103 / fwd_29 / teacher_forced | [settled](costs.json) | [1](costs.json) | [0.039](costs.json) | [0.1673](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / live / codex-20261103 / fwd_3 / edited | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.9870](costs.json) | [resource estimate; not invoice](costs.json) |
 | modal / live / codex-20261103 / fwd_3 / original | [settled](costs.json) | [1](costs.json) | [0.700](costs.json) | [2.9870](costs.json) | pending | [failed job upper bound; not invoice](costs.json) |
+| modal / live / codex-20261103 / fwd_30 / edited | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.9870](costs.json) | [resource estimate; not invoice](costs.json) |
+| modal / live / codex-20261103 / fwd_30 / original | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.9870](costs.json) | [resource estimate; not invoice](costs.json) |
 | modal / live / codex-20261103 / fwd_4 / edited | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.9870](costs.json) | [resource estimate; not invoice](costs.json) |
 | modal / live / codex-20261103 / fwd_4 / original | [settled](costs.json) | [1](costs.json) | [0.700](costs.json) | [2.9870](costs.json) | pending | [failed job upper bound; not invoice](costs.json) |
 | modal / live / codex-20261103 / fwd_5 / edited | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.9870](costs.json) | [resource estimate; not invoice](costs.json) |
@@ -232,8 +240,9 @@ Budget ledger: [source](costs.json). Reservations are retained bounds, not charg
 | modal / prepare | [settled](costs.json) | [1](costs.json) | [0.010](costs.json) | [0.0016](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / prepare-v2 | [settled](costs.json) | [1](costs.json) | [0.038](costs.json) | [0.0060](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / publish | [settled](costs.json) | [1](costs.json) | [0.134](costs.json) | [0.0107](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
-| modal / sandbox:heartbeat | [settled](costs.json) | [305](costs.json) | [4.976](costs.json) | [12.8769](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
-| modal / sandbox:startup | [settled](costs.json) | [6](costs.json) | [0.022](costs.json) | [0.0581](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
+| modal / sandbox:heartbeat | [reserved](costs.json) | [1](costs.json) | pending | pending | [0.2157](costs.json) | [resource estimate; not invoice](costs.json) |
+| modal / sandbox:heartbeat | [settled](costs.json) | [394](costs.json) | [6.459](costs.json) | [16.7157](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
+| modal / sandbox:startup | [settled](costs.json) | [7](costs.json) | [0.026](costs.json) | [0.0677](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
 | modal / verify / attention | [settled](costs.json) | [1](costs.json) | [0.038](costs.json) | [0.1626](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / verify / fresh-reference | [settled](costs.json) | [1](costs.json) | [0.086](costs.json) | [0.3677](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / verify / native-swap | [settled](costs.json) | [1](costs.json) | [0.097](costs.json) | [0.4123](costs.json) | pending | [resource estimate; not invoice](costs.json) |

@@ -1,9 +1,9 @@
 {
-  "status": "blocked",
+  "status": "running",
   "active_stage": "live",
-  "heartbeat": 1793737681.7713466,
-  "error": "SandboxTransportError: Text transfer failed with exit code 1",
-  "error_type": "SandboxTransportError",
+  "heartbeat": 1793744043.5891843,
+  "error": null,
+  "error_type": null,
   "budget": {
     "editor": {
       "spent_usd": 78.292765,
@@ -11,9 +11,9 @@
       "available_usd": 21.707235
     },
     "modal": {
-      "spent_usd": 65.77025538028428,
-      "reserved_usd": 18.129953472222223,
-      "available_usd": 66.0497911474935
+      "spent_usd": 74.96381591361646,
+      "reserved_usd": 24.319683472222223,
+      "available_usd": 50.66650061416132
     }
   },
   "controls_deferred": "Current verified allowance preserves priority for the live run and its evaluation. Controls resume afterward."

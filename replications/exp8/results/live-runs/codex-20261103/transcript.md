@@ -4687,1168 +4687,130 @@ New relative change: 0.1793229877948761
 
 ## Turn 51
 
-Editor reply pending.
+### Input
 
-## Forward-pass summaries
+````text
+[note from the experimenters] Corrections about the tools (no action needed if they do not concern you): (1) Attention probabilities ("attn_layers") work now; give full-attention layer indices (3, 7, 11, 15, 19, 23). (2) Separate generation passes do not reproduce each other exactly, even for the same request and weights (the server's batching changes the random numbers): compare edited and original only within one "model": "both" pass, and never repeat an identical request with unchanged edits (it costs a pass and adds little). (3) /work/eval_prompt_format.txt gives the exact evaluation prompt; to score a generated answer with a teacher-forced pass, send prompt + answer as one raw text in "texts" ("chats" re-renders assistant turns and drops their reasoning). (4) Before every pass, write to /work/notes.md the exact current edit (tensors, what was changed, strength) and the problem set, so that you can rebuild them if the conversation is restarted.
 
-### fwd_1.done.json
 
-```text
-{
-  "file": "/work/gen_1.jsonl",
-  "generations": 192,
-  "graded": 192,
-  "accuracy": 0.09375,
-  "accuracy_by_source": {
-    "gsm8k": 0.09375,
-    "math": 0.09375
-  },
-  "mean_tokens": 30277.541666666668,
-  "cut_share": 0.9114583333333334,
-  "failures": {
-    "wrong_answer": 0,
-    "no_answer_finished": 0,
-    "cut_at_max_tokens": 175
-  },
-  "activations": {
-    "dir": "/work/gen_1_acts/",
-    "files": {
-      "hidden_last_prompt.npy": [
-        192,
-        6,
-        1024
-      ],
-      "hidden_mean_answer.npy": [
-        192,
-        6,
-        1024
-      ],
-      "mlp_last_prompt.npy": [
-        192,
-        5,
-        3584
-      ],
-      "mlp_mean_answer.npy": [
-        192,
-        5,
-        3584
-      ]
-    }
-  },
-  "ok": true,
-  "type": "generate",
-  "model": "original",
-  "s": 1016.616060543
-}
+The kernel was restarted; variables were lost, but files in /work and saved edits remain.
+OUTPUT of Python run 26 of at most 300:
+```
+Delta vs WvvT coefficient: 1.0
+Direction norm: 0.9999997615814209
+Old/new hashes: 133fba0996a52983 47f3baf472f381ad
+New relative change: 0.1793229877948761
+
+
+```
+````
+
+### Editor
+
+The saved direction file defines its delta as \(+(Wv)v^\top\), so the earlier “amplification” label was incorrect. The candidate that produced the 17.2-point selection gain actually used \(W'=W-4(Wv)v^\top\); this also explains why its probe results matched the earlier subtraction test. I will use explicit formulas from now on and test subtraction at strength eight. This will show whether stronger suppression further repairs loops or starts damaging useful reasoning.
+
+```python
+# Hypothesis: doubling suppression of the identified late-repetition direction improves completion until useful reasoning is damaged.
+import os, json, numpy as np, torch, hashlib
+from pathlib import Path
+def read_jsonl(path):
+    return [json.loads(x) for x in open(path)]
+c23=torch.load("/work/repetition_rank1_L23.pt",weights_only=False)
+v23=c23["direction"].float()
+outer23=torch.outer(c23["original"]@v23,v23)
+name23=c23["name"]
+splits=json.load(open("/work/splits.json"))
+selection_ids=json.load(open("/work/selection256.json"))
+sel128=splits["gsm8k"]["selection"][:64]+splits["math"]["selection"][:64]
+print("Exact prompt format:",Path("/work/eval_prompt_format.txt").read_text()[:2200])
+print("Current coefficient of WvvT:",
+      float(((load(name23)-c23["original"])*outer23).sum()/outer23.square().sum()))
+saved=torch.from_numpy(np.load("/work/candidate_reported_gain/"+name23+".npy"))
+print("Reported-gain candidate coefficient:",
+      float(((saved-c23["original"])*outer23).sum()/outer23.square().sum()))
+Path("/work/best_subtract4").mkdir(exist_ok=True)
+np.save("/work/best_subtract4/"+name23+".npy",saved.numpy())
+with open("/work/notes.md","a") as f:
+    f.write("\nSIGN CORRECTION: candidate delta in saved pt is +(Wv)v^T, not negative. gen20/gen21 actual edit W'=W-4(Wv)v^T (verified backup); gain17.1875pp SE3.207pp. fwd22 same as fwd19 is consistent with same subtraction4; initial post-restart weights had already been reversed by previous code. No evidence of stale tool remains.\n")
+    f.write("NEXT pass15: generation both, sel128=first64 GSM selection + first64 MATH selection, n2, max32768. Only "+name23+" changed, explicit W'=W-8(Wv)v^T, v from 4 matched late-minus-early repeated-check probes, orthogonalized to early mean. No other edits.\n")
 ```
 
-### fwd_2.done.json
+### Tool result
 
-```text
-{
-  "bytes": 238776824,
-  "container_seconds": 16.81395666,
-  "files": {
-    "attn_11": [
-      2,
-      8,
-      448,
-      448
-    ],
-    "attn_15": [
-      2,
-      8,
-      448,
-      448
-    ],
-    "attn_19": [
-      2,
-      8,
-      448,
-      448
-    ],
-    "attn_23": [
-      2,
-      8,
-      448,
-      448
-    ],
-    "attn_3": [
-      2,
-      8,
-      448,
-      448
-    ],
-    "attn_7": [
-      2,
-      8,
-      448,
-      448
-    ],
-    "hidden_0": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_1": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_10": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_11": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_12": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_13": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_14": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_15": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_16": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_17": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_18": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_19": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_2": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_20": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_21": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_22": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_23": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_24": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_3": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_4": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_5": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_6": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_7": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_8": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_9": [
-      2,
-      448,
-      1024
-    ],
-    "input_ids": [
-      2,
-      448
-    ],
-    "mlp_act_0": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_1": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_10": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_11": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_12": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_13": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_14": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_15": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_16": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_17": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_18": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_19": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_2": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_20": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_21": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_22": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_23": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_3": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_4": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_5": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_6": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_7": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_8": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_9": [
-      2,
-      448,
-      3584
-    ],
-    "token_logprobs": [
-      2,
-      447
-    ],
-    "topk_ids": [
-      2,
-      448,
-      20
-    ],
-    "topk_logprobs": [
-      2,
-      448,
-      20
-    ]
-  },
-  "lengths": [
-    448,
-    384
-  ],
-  "mean_token_logprob": [
-    -0.6970947914208875,
-    -1.144070856876224
-  ],
-  "ok": true,
-  "s": 44.955008141,
-  "type": "teacher_forced",
-  "_openwsp_gpu": {
-    "actual_gpu": "H100",
-    "attempt_count": 1,
-    "total_settled_cost_usd": 0.16454080996098666,
-    "billable_seconds": 138.81395666,
-    "cost_basis": "resource_estimate_not_provider_invoice",
-    "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
-  },
-  "edited_tensors": 0,
-  "model": "original"
-}
+```python
+# Hypothesis: doubling suppression of the identified late-repetition direction improves completion until useful reasoning is damaged.
+import os, json, numpy as np, torch, hashlib
+from pathlib import Path
+def read_jsonl(path):
+    return [json.loads(x) for x in open(path)]
+c23=torch.load("/work/repetition_rank1_L23.pt",weights_only=False)
+v23=c23["direction"].float()
+outer23=torch.outer(c23["original"]@v23,v23)
+name23=c23["name"]
+splits=json.load(open("/work/splits.json"))
+selection_ids=json.load(open("/work/selection256.json"))
+sel128=splits["gsm8k"]["selection"][:64]+splits["math"]["selection"][:64]
+print("Exact prompt format:",Path("/work/eval_prompt_format.txt").read_text()[:2200])
+print("Current coefficient of WvvT:",
+      float(((load(name23)-c23["original"])*outer23).sum()/outer23.square().sum()))
+saved=torch.from_numpy(np.load("/work/candidate_reported_gain/"+name23+".npy"))
+print("Reported-gain candidate coefficient:",
+      float(((saved-c23["original"])*outer23).sum()/outer23.square().sum()))
+Path("/work/best_subtract4").mkdir(exist_ok=True)
+np.save("/work/best_subtract4/"+name23+".npy",saved.numpy())
+with open("/work/notes.md","a") as f:
+    f.write("\nSIGN CORRECTION: candidate delta in saved pt is +(Wv)v^T, not negative. gen20/gen21 actual edit W'=W-4(Wv)v^T (verified backup); gain17.1875pp SE3.207pp. fwd22 same as fwd19 is consistent with same subtraction4; initial post-restart weights had already been reversed by previous code. No evidence of stale tool remains.\n")
+    f.write("NEXT pass15: generation both, sel128=first64 GSM selection + first64 MATH selection, n2, max32768. Only "+name23+" changed, explicit W'=W-8(Wv)v^T, v from 4 matched late-minus-early repeated-check probes, orthogonalized to early mean. No other edits.\n")
 ```
 
-### fwd_3.done.json
-
 ```text
-{
-  "ok": false,
-  "error": "RuntimeError: The remote forward execution failed (RuntimeError); its upper-bound cost was retained"
-}
+Exact prompt format: The evaluation prompt, exactly as the model sees it (thinking on), for a problem P:
+PREFIX + P + SUFFIX, with
+PREFIX = '<|im_start|>user\n'
+SUFFIX = '\nPlease reason step by step, and put your final answer within \\boxed{}.<|im_end|>\n<|im_start|>assistant\n<think>\n'
+The model's answer follows SUFFIX directly. To score a text with a teacher-forced pass, send PREFIX + P + SUFFIX + answer as one raw text in "texts" ("chats" re-renders assistant turns and drops their reasoning).
+
+Current coefficient of WvvT: -8.0
+Reported-gain candidate coefficient: -4.0
 ```
 
-### fwd_4.done.json
+## Turn 52
 
-```text
-{
-  "ok": false,
-  "error": "RuntimeError: The remote forward execution failed (RuntimeError); its upper-bound cost was retained"
-}
+### Input
+
+````text
+OUTPUT of Python run 27 of at most 300:
+```
+Exact prompt format: The evaluation prompt, exactly as the model sees it (thinking on), for a problem P:
+PREFIX + P + SUFFIX, with
+PREFIX = '<|im_start|>user\n'
+SUFFIX = '\nPlease reason step by step, and put your final answer within \\boxed{}.<|im_end|>\n<|im_start|>assistant\n<think>\n'
+The model's answer follows SUFFIX directly. To score a text with a teacher-forced pass, send PREFIX + P + SUFFIX + answer as one raw text in "texts" ("chats" re-renders assistant turns and drops their reasoning).
+
+Current coefficient of WvvT: -8.0
+Reported-gain candidate coefficient: -4.0
+
+
+```
+````
+
+### Editor
+
+The weight checks now unambiguously identify the successful candidate as strength-four subtraction, and the current weights as strength-eight subtraction. The preserved strength-four copy can be restored exactly. I will run the same paired selection design at strength eight, comparing only the original and edited outputs within this pass. A larger gain with continued substantive reasoning would support increasing the strength; deterioration would favor backing off.
+
+```forward
+{"type":"generate","model":"both","problems":["gsm8k_train_2488","gsm8k_train_3928","gsm8k_train_4374","gsm8k_train_3345","gsm8k_train_7446","gsm8k_train_1248","gsm8k_train_4976","gsm8k_train_5324","gsm8k_train_1621","gsm8k_train_3355","gsm8k_train_6675","gsm8k_train_7092","gsm8k_train_3150","gsm8k_train_4031","gsm8k_train_6672","gsm8k_train_4318","gsm8k_train_270","gsm8k_train_1790","gsm8k_train_734","gsm8k_train_6230","gsm8k_train_7298","gsm8k_train_446","gsm8k_train_1170","gsm8k_train_4946","gsm8k_train_4075","gsm8k_train_3610","gsm8k_train_5758","gsm8k_train_3914","gsm8k_train_3400","gsm8k_train_3940","gsm8k_train_5216","gsm8k_train_4065","gsm8k_train_1312","gsm8k_train_4081","gsm8k_train_3513","gsm8k_train_5151","gsm8k_train_6051","gsm8k_train_1243","gsm8k_train_7470","gsm8k_train_3963","gsm8k_train_5106","gsm8k_train_1149","gsm8k_train_1423","gsm8k_train_3788","gsm8k_train_5284","gsm8k_train_3669","gsm8k_train_4435","gsm8k_train_3656","gsm8k_train_4912","gsm8k_train_2392","gsm8k_train_1093","gsm8k_train_4007","gsm8k_train_434","gsm8k_train_4803","gsm8k_train_1268","gsm8k_train_4513","gsm8k_train_49","gsm8k_train_3474","gsm8k_train_3511","gsm8k_train_1020","gsm8k_train_4507","gsm8k_train_3111","gsm8k_train_5916","gsm8k_train_7323","math_train_prealgebra_139","math_train_prealgebra_700","math_train_algebra_641","math_train_prealgebra_747","math_train_algebra_517","math_train_counting_and_probability_196","math_train_prealgebra_380","math_train_number_theory_489","math_train_algebra_1248","math_train_precalculus_596","math_train_precalculus_283","math_train_intermediate_algebra_20","math_train_intermediate_algebra_221","math_train_counting_and_probability_208","math_train_geometry_740","math_train_intermediate_algebra_802","math_train_algebra_657","math_train_algebra_8","math_train_prealgebra_655","math_train_number_theory_468","math_train_geometry_360","math_train_precalculus_300","math_train_precalculus_272","math_train_number_theory_371","math_train_algebra_472","math_train_precalculus_407","math_train_intermediate_algebra_457","math_train_prealgebra_1099","math_train_number_theory_16","math_train_number_theory_161","math_train_number_theory_481","math_train_number_theory_331","math_train_number_theory_810","math_train_intermediate_algebra_1232","math_train_algebra_769","math_train_algebra_1277","math_train_algebra_185","math_train_algebra_253","math_train_prealgebra_600","math_train_prealgebra_219","math_train_intermediate_algebra_1151","math_train_algebra_990","math_train_counting_and_probability_632","math_train_algebra_906","math_train_counting_and_probability_51","math_train_algebra_1044","math_train_precalculus_2","math_train_precalculus_515","math_train_precalculus_572","math_train_geometry_263","math_train_intermediate_algebra_752","math_train_algebra_390","math_train_prealgebra_636","math_train_algebra_1000","math_train_geometry_555","math_train_algebra_638","math_train_geometry_351","math_train_intermediate_algebra_830","math_train_intermediate_algebra_30","math_train_prealgebra_1176","math_train_algebra_332","math_train_number_theory_290","math_train_prealgebra_994","math_train_precalculus_397"],"n":2,"max_tokens":32768}
 ```
 
-### fwd_5.done.json
-
-```text
-{
-  "ok": false,
-  "error": "RuntimeError: The remote forward execution failed (RuntimeError); its upper-bound cost was retained"
-}
-```
-
-### fwd_6.done.json
-
-```text
-{
-  "bytes": 3308,
-  "container_seconds": 16.986929078,
-  "files": {
-    "input_ids": [
-      1,
-      46
-    ],
-    "token_logprobs": [
-      1,
-      45
-    ],
-    "topk_ids": [
-      1,
-      46,
-      5
-    ],
-    "topk_logprobs": [
-      1,
-      46,
-      5
-    ]
-  },
-  "lengths": [
-    46
-  ],
-  "mean_token_logprob": [
-    -1.8248070610894098
-  ],
-  "ok": true,
-  "s": 31.73579474299993,
-  "type": "teacher_forced",
-  "_openwsp_gpu": {
-    "actual_gpu": "H100",
-    "attempt_count": 1,
-    "total_settled_cost_usd": 0.16474583993378933,
-    "billable_seconds": 138.986929078,
-    "cost_basis": "resource_estimate_not_provider_invoice",
-    "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
-  },
-  "edited_tensors": 1,
-  "model": "edited"
-}
-```
-
-### fwd_7.done.json
-
-```text
-{
-  "ok": false,
-  "error": "RuntimeError: The remote forward execution failed (RuntimeError); its upper-bound cost was retained"
-}
-```
-
-### fwd_8.done.json
-
-```text
-{
-  "ok": false,
-  "error": "RuntimeError: The remote forward execution failed (RuntimeError); its upper-bound cost was retained"
-}
-```
-
-### fwd_9.done.json
-
-```text
-{
-  "bytes": 15187592,
-  "container_seconds": 15.739791235999999,
-  "files": {
-    "hidden_15": [
-      2,
-      430,
-      1024
-    ],
-    "hidden_16": [
-      2,
-      430,
-      1024
-    ],
-    "hidden_19": [
-      2,
-      430,
-      1024
-    ],
-    "hidden_20": [
-      2,
-      430,
-      1024
-    ],
-    "hidden_24": [
-      2,
-      430,
-      1024
-    ],
-    "input_ids": [
-      2,
-      430
-    ],
-    "mlp_act_19": [
-      2,
-      430,
-      3584
-    ],
-    "token_logprobs": [
-      2,
-      429
-    ],
-    "topk_ids": [
-      2,
-      430,
-      20
-    ],
-    "topk_logprobs": [
-      2,
-      430,
-      20
-    ]
-  },
-  "lengths": [
-    430,
-    384
-  ],
-  "mean_token_logprob": [
-    -0.7344329051482372,
-    -1.153098721417061
-  ],
-  "ok": true,
-  "s": 30.656815844999983,
-  "type": "teacher_forced",
-  "_openwsp_gpu": {
-    "actual_gpu": "H100",
-    "attempt_count": 1,
-    "total_settled_cost_usd": 0.16326756587840532,
-    "billable_seconds": 137.739791236,
-    "cost_basis": "resource_estimate_not_provider_invoice",
-    "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
-  },
-  "edited_tensors": 1,
-  "model": "edited"
-}
-```
-
-### fwd_10.done.json
-
-```text
-{
-  "ok": false,
-  "error": "RuntimeError: The remote forward execution failed (RuntimeError); its upper-bound cost was retained"
-}
-```
-
-### fwd_11.done.json
-
-```text
-{
-  "bytes": 24998392,
-  "container_seconds": 19.692098697,
-  "files": {
-    "hidden_19": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_20": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_24": [
-      2,
-      448,
-      1024
-    ],
-    "input_ids": [
-      2,
-      448
-    ],
-    "mlp_act_19": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_22": [
-      2,
-      448,
-      3584
-    ],
-    "mlp_act_23": [
-      2,
-      448,
-      3584
-    ],
-    "token_logprobs": [
-      2,
-      447
-    ],
-    "topk_ids": [
-      2,
-      448,
-      20
-    ],
-    "topk_logprobs": [
-      2,
-      448,
-      20
-    ]
-  },
-  "lengths": [
-    448,
-    384
-  ],
-  "mean_token_logprob": [
-    -0.6974968280834907,
-    -1.1417961419406821
-  ],
-  "ok": true,
-  "s": 48.77873399000009,
-  "type": "teacher_forced",
-  "_openwsp_gpu": {
-    "actual_gpu": "H100",
-    "attempt_count": 1,
-    "total_settled_cost_usd": 0.16795236765551066,
-    "billable_seconds": 141.692098697,
-    "cost_basis": "resource_estimate_not_provider_invoice",
-    "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
-  },
-  "edited_tensors": 1,
-  "model": "edited"
-}
-```
-
-### fwd_12.done.json
-
-```text
-{
-  "ok": false,
-  "error": "RuntimeError: The remote forward execution failed (RuntimeError); its upper-bound cost was retained"
-}
-```
-
-### fwd_13.done.json
-
-```text
-{
-  "bytes": 10318328,
-  "container_seconds": 18.853893868,
-  "files": {
-    "hidden_23": [
-      2,
-      448,
-      1024
-    ],
-    "hidden_24": [
-      2,
-      448,
-      1024
-    ],
-    "input_ids": [
-      2,
-      448
-    ],
-    "mlp_act_23": [
-      2,
-      448,
-      3584
-    ],
-    "token_logprobs": [
-      2,
-      447
-    ],
-    "topk_ids": [
-      2,
-      448,
-      20
-    ],
-    "topk_logprobs": [
-      2,
-      448,
-      20
-    ]
-  },
-  "lengths": [
-    448,
-    384
-  ],
-  "mean_token_logprob": [
-    -0.7142256154309983,
-    -1.170625014342465
-  ],
-  "ok": true,
-  "s": 49.31007065199992,
-  "type": "teacher_forced",
-  "_openwsp_gpu": {
-    "actual_gpu": "H100",
-    "attempt_count": 1,
-    "total_settled_cost_usd": 0.166958815531536,
-    "billable_seconds": 140.853893868,
-    "cost_basis": "resource_estimate_not_provider_invoice",
-    "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
-  },
-  "edited_tensors": 1,
-  "model": "edited"
-}
-```
-
-### fwd_14.done.json
-
-```text
-{
-  "ok": false,
-  "error": "RuntimeError: The remote forward execution failed (RuntimeError); its upper-bound cost was retained"
-}
-```
-
-### fwd_15.done.json
-
-```text
-{
-  "bytes": 47239904,
-  "container_seconds": 13.791008755,
-  "files": {
-    "hidden_12": [
-      4,
-      273,
-      1024
-    ],
-    "hidden_13": [
-      4,
-      273,
-      1024
-    ],
-    "hidden_19": [
-      4,
-      273,
-      1024
-    ],
-    "hidden_20": [
-      4,
-      273,
-      1024
-    ],
-    "hidden_22": [
-      4,
-      273,
-      1024
-    ],
-    "hidden_23": [
-      4,
-      273,
-      1024
-    ],
-    "hidden_24": [
-      4,
-      273,
-      1024
-    ],
-    "input_ids": [
-      4,
-      273
-    ],
-    "mlp_act_12": [
-      4,
-      273,
-      3584
-    ],
-    "mlp_act_19": [
-      4,
-      273,
-      3584
-    ],
-    "mlp_act_22": [
-      4,
-      273,
-      3584
-    ],
-    "mlp_act_23": [
-      4,
-      273,
-      3584
-    ],
-    "token_logprobs": [
-      4,
-      272
-    ],
-    "topk_ids": [
-      4,
-      273,
-      20
-    ],
-    "topk_logprobs": [
-      4,
-      273,
-      20
-    ]
-  },
-  "lengths": [
-    273,
-    255,
-    271,
-    224
-  ],
-  "mean_token_logprob": [
-    -0.9666462786057416,
-    -1.2451844703494095,
-    -1.1881920002124928,
-    -1.4464305655304093
-  ],
-  "ok": true,
-  "s": 33.86715502300012,
-  "type": "teacher_forced",
-  "_openwsp_gpu": {
-    "actual_gpu": "H100",
-    "attempt_count": 1,
-    "total_settled_cost_usd": 0.16095760904426,
-    "billable_seconds": 135.791008755,
-    "cost_basis": "resource_estimate_not_provider_invoice",
-    "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
-  },
-  "edited_tensors": 0,
-  "model": "original"
-}
-```
-
-### fwd_16.done.json
-
-```text
-{
-  "bytes": 8102624,
-  "container_seconds": 16.219359569999998,
-  "files": {
-    "input_ids": [
-      4,
-      273
-    ],
-    "mlp_act_23": [
-      4,
-      273,
-      3584
-    ],
-    "token_logprobs": [
-      4,
-      272
-    ],
-    "topk_ids": [
-      4,
-      273,
-      20
-    ],
-    "topk_logprobs": [
-      4,
-      273,
-      20
-    ]
-  },
-  "lengths": [
-    273,
-    255,
-    271,
-    224
-  ],
-  "mean_token_logprob": [
-    -0.965117384405697,
-    -1.2479375403697097,
-    -1.1861037501582392,
-    -1.446000719284263
-  ],
-  "ok": true,
-  "s": 40.227649335000024,
-  "type": "teacher_forced",
-  "_openwsp_gpu": {
-    "actual_gpu": "H100",
-    "attempt_count": 1,
-    "total_settled_cost_usd": 0.16383601421030666,
-    "billable_seconds": 138.21935957,
-    "cost_basis": "resource_estimate_not_provider_invoice",
-    "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
-  },
-  "edited_tensors": 1,
-  "model": "edited"
-}
-```
-
-### fwd_17.done.json
-
-```text
-{
-  "bytes": 137584,
-  "container_seconds": 16.266068480999998,
-  "files": {
-    "input_ids": [
-      2,
-      273
-    ],
-    "token_logprobs": [
-      2,
-      272
-    ],
-    "topk_ids": [
-      2,
-      273,
-      20
-    ],
-    "topk_logprobs": [
-      2,
-      273,
-      20
-    ]
-  },
-  "lengths": [
-    273,
-    255
-  ],
-  "mean_token_logprob": [
-    -0.961283802986145,
-    -1.239167581393024
-  ],
-  "ok": true,
-  "s": 41.889628642999924,
-  "type": "teacher_forced",
-  "_openwsp_gpu": {
-    "actual_gpu": "H100",
-    "attempt_count": 1,
-    "total_settled_cost_usd": 0.16389137983947866,
-    "billable_seconds": 138.266068481,
-    "cost_basis": "resource_estimate_not_provider_invoice",
-    "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
-  },
-  "edited_tensors": 1,
-  "model": "edited"
-}
-```
-
-### fwd_18.done.json
-
-```text
-{
-  "bytes": 137584,
-  "container_seconds": 15.078496922000001,
-  "files": {
-    "input_ids": [
-      2,
-      273
-    ],
-    "token_logprobs": [
-      2,
-      272
-    ],
-    "topk_ids": [
-      2,
-      273,
-      20
-    ],
-    "topk_logprobs": [
-      2,
-      273,
-      20
-    ]
-  },
-  "lengths": [
-    273,
-    255
-  ],
-  "mean_token_logprob": [
-    -0.9754564341376809,
-    -1.2721641720749262
-  ],
-  "ok": true,
-  "s": 40.212424156,
-  "type": "teacher_forced",
-  "_openwsp_gpu": {
-    "actual_gpu": "H100",
-    "attempt_count": 1,
-    "total_settled_cost_usd": 0.16248371168487732,
-    "billable_seconds": 137.078496922,
-    "cost_basis": "resource_estimate_not_provider_invoice",
-    "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
-  },
-  "edited_tensors": 1,
-  "model": "edited"
-}
-```
-
-### fwd_19.done.json
-
-```text
-{
-  "bytes": 137584,
-  "container_seconds": 13.591544672,
-  "files": {
-    "input_ids": [
-      2,
-      273
-    ],
-    "token_logprobs": [
-      2,
-      272
-    ],
-    "topk_ids": [
-      2,
-      273,
-      20
-    ],
-    "topk_logprobs": [
-      2,
-      273,
-      20
-    ]
-  },
-  "lengths": [
-    273,
-    255
-  ],
-  "mean_token_logprob": [
-    -1.1029654951656567,
-    -1.5419830562561516
-  ],
-  "ok": true,
-  "s": 38.647797655999966,
-  "type": "teacher_forced",
-  "_openwsp_gpu": {
-    "actual_gpu": "H100",
-    "attempt_count": 1,
-    "total_settled_cost_usd": 0.16072117761787733,
-    "billable_seconds": 135.591544672,
-    "cost_basis": "resource_estimate_not_provider_invoice",
-    "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
-  },
-  "edited_tensors": 1,
-  "model": "edited"
-}
-```
-
-### fwd_20.done.json
+### Tool result
 
 ```text
 {
   "files": {
-    "original": "/work/gen_20_original.jsonl",
-    "edited": "/work/gen_20_edited.jsonl"
+    "original": "/work/gen_23_original.jsonl",
+    "edited": "/work/gen_23_edited.jsonl"
   },
   "activations": null,
-  "original": {
-    "generations": 4,
-    "graded": 4,
-    "accuracy": 0.0,
-    "accuracy_by_source": {
-      "gsm8k": 0.0
-    },
-    "mean_tokens": 32768.0,
-    "cut_share": 1.0,
-    "failures": {
-      "wrong_answer": 0,
-      "no_answer_finished": 0,
-      "cut_at_max_tokens": 4
-    }
-  },
-  "edited": {
-    "generations": 4,
-    "graded": 4,
-    "accuracy": 0.25,
-    "accuracy_by_source": {
-      "gsm8k": 0.25
-    },
-    "mean_tokens": 26107.25,
-    "cut_share": 0.75,
-    "failures": {
-      "wrong_answer": 0,
-      "no_answer_finished": 0,
-      "cut_at_max_tokens": 3
-    }
-  },
-  "paired": {
-    "items": 4,
-    "accuracy_difference": 0.25,
-    "standard_error": 0.25,
-    "samples_wrong_to_right": 1,
-    "samples_right_to_wrong": 0
-  },
-  "ok": true,
-  "type": "generate",
-  "model": "both",
-  "s": 259.6405629169999
-}
-```
-
-### fwd_21.done.json
-
-```text
-{
-  "files": {
-    "original": "/work/gen_21_original.jsonl",
-    "edited": "/work/gen_21_edited.jsonl"
-  },
-  "activations": {
-    "original": {
-      "dir": "/work/gen_21_original_acts/",
-      "files": {
-        "hidden_last_prompt.npy": [
-          256,
-          2,
-          1024
-        ],
-        "hidden_mean_answer.npy": [
-          256,
-          2,
-          1024
-        ],
-        "mlp_last_prompt.npy": [
-          256,
-          1,
-          3584
-        ],
-        "mlp_mean_answer.npy": [
-          256,
-          1,
-          3584
-        ]
-      }
-    },
-    "edited": {
-      "dir": "/work/gen_21_edited_acts/",
-      "files": {
-        "hidden_last_prompt.npy": [
-          256,
-          2,
-          1024
-        ],
-        "hidden_mean_answer.npy": [
-          256,
-          2,
-          1024
-        ],
-        "mlp_last_prompt.npy": [
-          256,
-          1,
-          3584
-        ],
-        "mlp_mean_answer.npy": [
-          256,
-          1,
-          3584
-        ]
-      }
-    }
-  },
   "original": {
     "generations": 256,
     "graded": 256,
@@ -5868,48 +4830,356 @@ Editor reply pending.
   "edited": {
     "generations": 256,
     "graded": 256,
-    "accuracy": 0.265625,
+    "accuracy": 0.015625,
     "accuracy_by_source": {
-      "gsm8k": 0.3125,
-      "math": 0.21875
+      "gsm8k": 0.0234375,
+      "math": 0.0078125
     },
-    "mean_tokens": 25840.203125,
-    "cut_share": 0.7109375,
+    "mean_tokens": 27919.55078125,
+    "cut_share": 0.80859375,
     "failures": {
-      "wrong_answer": 3,
-      "no_answer_finished": 6,
-      "cut_at_max_tokens": 182
+      "wrong_answer": 0,
+      "no_answer_finished": 46,
+      "cut_at_max_tokens": 207
     }
   },
   "paired": {
     "items": 128,
-    "accuracy_difference": 0.171875,
-    "standard_error": 0.03206971176050035,
-    "samples_wrong_to_right": 52,
-    "samples_right_to_wrong": 8
+    "accuracy_difference": -0.078125,
+    "standard_error": 0.0210728926847351,
+    "samples_wrong_to_right": 1,
+    "samples_right_to_wrong": 21
   },
   "ok": true,
   "type": "generate",
   "model": "both",
-  "s": 1285.289391834
+  "s": 909.9918597740001
 }
 ```
 
-### fwd_22.done.json
+## Turn 53
+
+### Input
+
+````text
+FORWARD PASS 15 of 50:
+```json
+{"files": {"original": "/work/gen_23_original.jsonl", "edited": "/work/gen_23_edited.jsonl"}, "activations": null, "original": {"generations": 256, "graded": 256, "accuracy": 0.09375, "accuracy_by_source": {"gsm8k": 0.1015625, "math": 0.0859375}, "mean_tokens": 30693.296875, "cut_share": 0.921875, "failures": {"wrong_answer": 0, "no_answer_finished": 0, "cut_at_max_tokens": 236}}, "edited": {"generations": 256, "graded": 256, "accuracy": 0.015625, "accuracy_by_source": {"gsm8k": 0.0234375, "math": 0.0078125}, "mean_tokens": 27919.55078125, "cut_share": 0.80859375, "failures": {"wrong_answer": 0, "no_answer_finished": 46, "cut_at_max_tokens": 207}}, "paired": {"items": 128, "accuracy_difference": -0.078125, "standard_error": 0.0210728926847351, "samples_wrong_to_right": 1, "samples_right_to_wrong": 21}, "ok": true, "type": "generate", "model": "both", "s": 909.9918597740001}
+```
+````
+
+### Editor
+
+Strength eight is clearly too strong: accuracy fell to 1.6%, and many outputs finished without an answer. This refutes a simple “more suppression is better” hypothesis and shows why cutoff reduction alone is insufficient. I will back off to strength two and inspect how selectively the direction activates during repeated versus fresh reasoning. The next generation test will determine whether a gentler intervention preserves mathematics while still breaking loops.
+
+```python
+# Hypothesis: moderate suppression repairs repetition, while excessive reversal damages coherent continuation.
+def flat_gen(path):
+    return [dict(id=r["id"],source=r["source"],**s) for r in read_jsonl(path) for s in r["samples"]]
+for k in [21,23]:
+    rs=flat_gen(f"/work/gen_{k}_edited.jsonl")
+    print("Gen",k,"completed",sum(not x["cut"] for x in rs),
+          "closed thinking",sum("</think>" in x["text"] for x in rs))
+    good=[r["tokens"] for r in rs if r["correct"]]
+    print("Correct length quantiles:", np.quantile(good,[0,.5,1]).round(0).tolist() if good else [])
+bad=[r for r in flat_gen("/work/gen_23_edited.jsonl") if not r["cut"] and not r["correct"]]
+for r in bad[:2]:
+    print("Overstrong failure:",r["id"],repr(r["text"][-280:]))
+ids15=np.load("/work/fwd_15/input_ids.npy")
+acts15=np.load("/work/fwd_15/mlp_act_23.npy",mmap_mode="r")
+meta15=json.load(open("/work/fwd_15/meta.json"))
+phrases=["Wait, 19 times 11 is 209.","Wait, Carole is half as fast as Brianna.",
+         "Wait, n must be a divisor of 506.","Wait, there are three digits remaining."]
+def enc(s):
+    return tok.encode(s,add_special_tokens=False)
+def locate_seq(ids,pat):
+    return [i for i in range(len(ids)-len(pat)+1) if np.array_equal(ids[i:i+len(pat)],pat)]
+probe_spans=[]
+for j,L in enumerate(meta15["lengths"]):
+    ids=ids15[j,:L]
+    starts=locate_seq(ids,enc(phrases[j]))
+    think=locate_seq(ids,enc("<think>"))[0]+1
+    now=locate_seq(ids,enc("Now"))[-1]
+    close=locate_seq(ids,enc("</think>"))[0]
+    spans={"initial":np.arange(think,starts[0]),"early":np.arange(starts[0],starts[2]),
+           "late":np.arange(starts[4],now),"transition":np.arange(now,now+6),
+           "new_math":np.arange(now+6,close),"close":np.arange(close,min(close+3,L))}
+    probe_spans.append(spans)
+    proj=acts15[j,:L].astype(np.float32)@v23.numpy()
+    print("Projection by span",j,{k:round(float(proj[ix].mean()),3) for k,ix in spans.items()})
+top=torch.argsort(v23.abs(),descending=True)[:12]
+print("Largest direction coordinates:",[(int(i),round(float(v23[i]),3)) for i in top])
+print("Top12 energy:",float(v23[top].square().sum()))
+save_edit(name23,c23["original"]-2*outer23)
+with open("/work/notes.md","a") as f:
+    f.write("\nPass15 gen23 L23 subtraction8 selection256: edit1.5625% vs9.375%, gain-7.8125pp SE2.1073pp, 46 finished no-answer. Reject strength8.\n")
+    f.write("NEXT pass16: only "+name23+" W'=W-2(Wv)v^T; generation both on sel128 n2 max32768. Direction unchanged. Candidate sub4 preserved.\n")
+```
+
+### Tool result
+
+```python
+# Hypothesis: moderate suppression repairs repetition, while excessive reversal damages coherent continuation.
+def flat_gen(path):
+    return [dict(id=r["id"],source=r["source"],**s) for r in read_jsonl(path) for s in r["samples"]]
+for k in [21,23]:
+    rs=flat_gen(f"/work/gen_{k}_edited.jsonl")
+    print("Gen",k,"completed",sum(not x["cut"] for x in rs),
+          "closed thinking",sum("</think>" in x["text"] for x in rs))
+    good=[r["tokens"] for r in rs if r["correct"]]
+    print("Correct length quantiles:", np.quantile(good,[0,.5,1]).round(0).tolist() if good else [])
+bad=[r for r in flat_gen("/work/gen_23_edited.jsonl") if not r["cut"] and not r["correct"]]
+for r in bad[:2]:
+    print("Overstrong failure:",r["id"],repr(r["text"][-280:]))
+ids15=np.load("/work/fwd_15/input_ids.npy")
+acts15=np.load("/work/fwd_15/mlp_act_23.npy",mmap_mode="r")
+meta15=json.load(open("/work/fwd_15/meta.json"))
+phrases=["Wait, 19 times 11 is 209.","Wait, Carole is half as fast as Brianna.",
+         "Wait, n must be a divisor of 506.","Wait, there are three digits remaining."]
+def enc(s):
+    return tok.encode(s,add_special_tokens=False)
+def locate_seq(ids,pat):
+    return [i for i in range(len(ids)-len(pat)+1) if np.array_equal(ids[i:i+len(pat)],pat)]
+probe_spans=[]
+for j,L in enumerate(meta15["lengths"]):
+    ids=ids15[j,:L]
+    starts=locate_seq(ids,enc(phrases[j]))
+    think=locate_seq(ids,enc("<think>"))[0]+1
+    now=locate_seq(ids,enc("Now"))[-1]
+    close=locate_seq(ids,enc("</think>"))[0]
+    spans={"initial":np.arange(think,starts[0]),"early":np.arange(starts[0],starts[2]),
+           "late":np.arange(starts[4],now),"transition":np.arange(now,now+6),
+           "new_math":np.arange(now+6,close),"close":np.arange(close,min(close+3,L))}
+    probe_spans.append(spans)
+    proj=acts15[j,:L].astype(np.float32)@v23.numpy()
+    print("Projection by span",j,{k:round(float(proj[ix].mean()),3) for k,ix in spans.items()})
+top=torch.argsort(v23.abs(),descending=True)[:12]
+print("Largest direction coordinates:",[(int(i),round(float(v23[i]),3)) for i in top])
+print("Top12 energy:",float(v23[top].square().sum()))
+save_edit(name23,c23["original"]-2*outer23)
+with open("/work/notes.md","a") as f:
+    f.write("\nPass15 gen23 L23 subtraction8 selection256: edit1.5625% vs9.375%, gain-7.8125pp SE2.1073pp, 46 finished no-answer. Reject strength8.\n")
+    f.write("NEXT pass16: only "+name23+" W'=W-2(Wv)v^T; generation both on sel128 n2 max32768. Direction unchanged. Candidate sub4 preserved.\n")
+```
+
+```text
+Gen 21 completed 74 closed thinking 105
+Correct length quantiles: [1443.0, 7612.0, 32768.0]
+Gen 23 completed 49 closed thinking 31
+Correct length quantiles: [3328.0, 10155.0, 32768.0]
+Overstrong failure: gsm8k_train_3928 'ster 0.45/20 = 0.0225.\n   *uster 0.45/20 = 0.0225.\n   *   \n    *   Wait, Person 1000?\n   uster Person 1000?\n   *   \n    *   Wait, Person 100uster?\n   *uster 0.45/20 = 0.0225.\n   *   \n    *   Wait, I think Iuster 0.45/20 = 0.0225.\n   *   \n    *   Wait, I think I need to stop guess'
+Overstrong failure: gsm8k_train_1621 '\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\nWitnessses:\\n\\n\\n\\n\\n\\nWitnesses:\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\nWitnesses:\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\nWitnesses:\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\nWitnesses:\\n\\nWitnesses:\\ns'
+Projection by span 0 {'initial': -1.569, 'early': -0.428, 'late': 7.004, 'transition': -1.592, 'new_math': -0.472, 'close': 0.752}
+Projection by span 1 {'initial': 0.879, 'early': 0.849, 'late': 7.824, 'transition': -0.313, 'new_math': -1.608, 'close': 0.69}
+Projection by span 2 {'initial': 0.053, 'early': 0.278, 'late': 7.052, 'transition': -0.779, 'new_math': -1.377, 'close': 0.428}
+Projection by span 3 {'initial': -1.48, 'early': -1.401, 'late': 7.409, 'transition': -0.492, 'new_math': -1.26, 'close': 0.14}
+Largest direction coordinates: [(40, -0.407), (22, 0.309), (94, 0.277), (19, 0.237), (46, 0.205), (0, 0.198), (107, 0.186), (34, 0.153), (84, 0.138), (15, -0.125), (13, 0.118), (350, -0.112)]
+Top12 energy: 0.5940107107162476
+```
+
+## Turn 54
+
+### Input
+
+````text
+OUTPUT of Python run 28 of at most 300:
+```
+Gen 21 completed 74 closed thinking 105
+Correct length quantiles: [1443.0, 7612.0, 32768.0]
+Gen 23 completed 49 closed thinking 31
+Correct length quantiles: [3328.0, 10155.0, 32768.0]
+Overstrong failure: gsm8k_train_3928 'ster 0.45/20 = 0.0225.\n   *uster 0.45/20 = 0.0225.\n   *   \n    *   Wait, Person 1000?\n   uster Person 1000?\n   *   \n    *   Wait, Person 100uster?\n   *uster 0.45/20 = 0.0225.\n   *   \n    *   Wait, I think Iuster 0.45/20 = 0.0225.\n   *   \n    *   Wait, I think I need to stop guess'
+Overstrong failure: gsm8k_train_1621 '\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\nWitnessses:\\n\\n\\n\\n\\n\\nWitnesses:\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\nWitnesses:\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\nWitnesses:\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\nWitnesses:\\n\\nWitnesses:\\ns'
+Projection by span 0 {'initial': -1.569, 'early': -0.428, 'late': 7.004, 'transition': -1.592, 'new_math': -0.472, 'close': 0.752}
+Projection by span 1 {'initial': 0.879, 'early': 0.849, 'late': 7.824, 'transition': -0.313, 'new_math': -1.608, 'close': 0.69}
+Projection by span 2 {'initial': 0.053, 'early': 0.278, 'late': 7.052, 'transition': -0.779, 'new_math': -1.377, 'close': 0.428}
+Projection by span 3 {'initial': -1.48, 'early': -1.401, 'late': 7.409, 'transition': -0.492, 'new_math': -1.26, 'close': 0.14}
+Largest direction coordinates: [(40, -0.407), (22, 0.309), (94, 0.277), (19, 0.237), (46, 0.205), (0, 0.198), (107, 0.186), (34, 0.153), (84, 0.138), (15, -0.125), (13, 0.118), (350, -0.112)]
+Top12 energy: 0.5940107107162476
+
+
+```
+````
+
+### Editor
+
+The direction is strongly selective in the diagnostic probes: its mean activation is about 7–8 during late repetition, but near zero or negative during fresh calculations. The overstrong edit produces malformed repetitive text, rather than simply ending thought early. This supports a bounded intervention on a repetition-sensitive mechanism. I will now measure the strength-two version on the full paired selection set.
+
+```forward
+{"type":"generate","model":"both","problems":["gsm8k_train_2488","gsm8k_train_3928","gsm8k_train_4374","gsm8k_train_3345","gsm8k_train_7446","gsm8k_train_1248","gsm8k_train_4976","gsm8k_train_5324","gsm8k_train_1621","gsm8k_train_3355","gsm8k_train_6675","gsm8k_train_7092","gsm8k_train_3150","gsm8k_train_4031","gsm8k_train_6672","gsm8k_train_4318","gsm8k_train_270","gsm8k_train_1790","gsm8k_train_734","gsm8k_train_6230","gsm8k_train_7298","gsm8k_train_446","gsm8k_train_1170","gsm8k_train_4946","gsm8k_train_4075","gsm8k_train_3610","gsm8k_train_5758","gsm8k_train_3914","gsm8k_train_3400","gsm8k_train_3940","gsm8k_train_5216","gsm8k_train_4065","gsm8k_train_1312","gsm8k_train_4081","gsm8k_train_3513","gsm8k_train_5151","gsm8k_train_6051","gsm8k_train_1243","gsm8k_train_7470","gsm8k_train_3963","gsm8k_train_5106","gsm8k_train_1149","gsm8k_train_1423","gsm8k_train_3788","gsm8k_train_5284","gsm8k_train_3669","gsm8k_train_4435","gsm8k_train_3656","gsm8k_train_4912","gsm8k_train_2392","gsm8k_train_1093","gsm8k_train_4007","gsm8k_train_434","gsm8k_train_4803","gsm8k_train_1268","gsm8k_train_4513","gsm8k_train_49","gsm8k_train_3474","gsm8k_train_3511","gsm8k_train_1020","gsm8k_train_4507","gsm8k_train_3111","gsm8k_train_5916","gsm8k_train_7323","math_train_prealgebra_139","math_train_prealgebra_700","math_train_algebra_641","math_train_prealgebra_747","math_train_algebra_517","math_train_counting_and_probability_196","math_train_prealgebra_380","math_train_number_theory_489","math_train_algebra_1248","math_train_precalculus_596","math_train_precalculus_283","math_train_intermediate_algebra_20","math_train_intermediate_algebra_221","math_train_counting_and_probability_208","math_train_geometry_740","math_train_intermediate_algebra_802","math_train_algebra_657","math_train_algebra_8","math_train_prealgebra_655","math_train_number_theory_468","math_train_geometry_360","math_train_precalculus_300","math_train_precalculus_272","math_train_number_theory_371","math_train_algebra_472","math_train_precalculus_407","math_train_intermediate_algebra_457","math_train_prealgebra_1099","math_train_number_theory_16","math_train_number_theory_161","math_train_number_theory_481","math_train_number_theory_331","math_train_number_theory_810","math_train_intermediate_algebra_1232","math_train_algebra_769","math_train_algebra_1277","math_train_algebra_185","math_train_algebra_253","math_train_prealgebra_600","math_train_prealgebra_219","math_train_intermediate_algebra_1151","math_train_algebra_990","math_train_counting_and_probability_632","math_train_algebra_906","math_train_counting_and_probability_51","math_train_algebra_1044","math_train_precalculus_2","math_train_precalculus_515","math_train_precalculus_572","math_train_geometry_263","math_train_intermediate_algebra_752","math_train_algebra_390","math_train_prealgebra_636","math_train_algebra_1000","math_train_geometry_555","math_train_algebra_638","math_train_geometry_351","math_train_intermediate_algebra_830","math_train_intermediate_algebra_30","math_train_prealgebra_1176","math_train_algebra_332","math_train_number_theory_290","math_train_prealgebra_994","math_train_precalculus_397"],"n":2,"max_tokens":32768}
+```
+
+### Tool result
 
 ```text
 {
-  "bytes": 4051312,
-  "container_seconds": 14.327123481000001,
+  "files": {
+    "original": "/work/gen_24_original.jsonl",
+    "edited": "/work/gen_24_edited.jsonl"
+  },
+  "activations": null,
+  "original": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.09375,
+    "accuracy_by_source": {
+      "gsm8k": 0.1015625,
+      "math": 0.0859375
+    },
+    "mean_tokens": 30693.296875,
+    "cut_share": 0.921875,
+    "failures": {
+      "wrong_answer": 0,
+      "no_answer_finished": 0,
+      "cut_at_max_tokens": 236
+    }
+  },
+  "edited": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.16796875,
+    "accuracy_by_source": {
+      "gsm8k": 0.1796875,
+      "math": 0.15625
+    },
+    "mean_tokens": 28879.42578125,
+    "cut_share": 0.85546875,
+    "failures": {
+      "wrong_answer": 0,
+      "no_answer_finished": 0,
+      "cut_at_max_tokens": 219
+    }
+  },
+  "paired": {
+    "items": 128,
+    "accuracy_difference": 0.07421875,
+    "standard_error": 0.02606600527679796,
+    "samples_wrong_to_right": 28,
+    "samples_right_to_wrong": 9
+  },
+  "ok": true,
+  "type": "generate",
+  "model": "both",
+  "s": 923.7985464399999
+}
+```
+
+## Turn 55
+
+### Input
+
+````text
+FORWARD PASS 16 of 50:
+```json
+{"files": {"original": "/work/gen_24_original.jsonl", "edited": "/work/gen_24_edited.jsonl"}, "activations": null, "original": {"generations": 256, "graded": 256, "accuracy": 0.09375, "accuracy_by_source": {"gsm8k": 0.1015625, "math": 0.0859375}, "mean_tokens": 30693.296875, "cut_share": 0.921875, "failures": {"wrong_answer": 0, "no_answer_finished": 0, "cut_at_max_tokens": 236}}, "edited": {"generations": 256, "graded": 256, "accuracy": 0.16796875, "accuracy_by_source": {"gsm8k": 0.1796875, "math": 0.15625}, "mean_tokens": 28879.42578125, "cut_share": 0.85546875, "failures": {"wrong_answer": 0, "no_answer_finished": 0, "cut_at_max_tokens": 219}}, "paired": {"items": 128, "accuracy_difference": 0.07421875, "standard_error": 0.02606600527679796, "samples_wrong_to_right": 28, "samples_right_to_wrong": 9}, "ok": true, "type": "generate", "model": "both", "s": 923.7985464399999}
+```
+````
+
+### Editor
+
+Strength two gives a smaller but positive paired gain of 7.4 points, while strength four remains the best tested setting. Together with the failure at strength eight, this establishes a non-monotonic dose response rather than a generic benefit from changing the tensor. I will test strength six to bracket the useful range. I will also compute a more selective detector that is orthogonal to the observed fresh-reasoning means, without fitting any weights to a loss.
+
+```python
+# Hypothesis: collateral changes to fresh-reasoning states limit the usable strength of repetition suppression.
+with open("/work/notes.md","a") as f:
+    f.write("\nPass16 gen24 subtraction2:16.7969% vs9.375%, gain7.4219pp SE2.6066pp, cut85.55% vs92.19%. Strength4 still best exploratory candidate.\n")
+# Analytic projection only: remove fresh-reasoning mean directions from the repetition detector.
+good_means=[]
+for j,sp in enumerate(probe_spans):
+    for k in ["initial","early","new_math"]:
+        good_means.append(acts15[j,sp[k]].astype(np.float32).mean(0))
+G=np.stack(good_means)
+_,ss,Vt=np.linalg.svd(G,full_matrices=False)
+basis=Vt[ss>ss.max()*1e-6]
+v_np=v23.numpy()
+q_np=v_np-basis.T@(basis@v_np)
+print("Fresh-mean span rank",len(basis),"remaining detector norm",np.linalg.norm(q_np))
+q_np=q_np/np.dot(q_np,v_np)
+q23=torch.tensor(q_np,dtype=torch.float32)
+oblique23=torch.outer(c23["original"]@v23,q23)
+torch.save({"name":name23,"direction":v23,"detector":q23,"delta":oblique23,
+            "good_means":G},"/work/repetition_oblique_L23.pt")
+for j,sp in enumerate(probe_spans):
+    p=acts15[j,:meta15["lengths"][j]].astype(np.float32)@q_np
+    print("Refined detector",j,{k:round(float(p[ix].mean()),3) for k,ix in sp.items()})
+save_edit(name23,c23["original"]-6*outer23)
+with open("/work/notes.md","a") as f:
+    f.write("NEXT pass17: only "+name23+" W'=W-6(Wv)v^T; teacher forced raw first two fwd15 repeated-check probes, original baseline fwd15. Strength6 dense diagnostic before generation.\n")
+```
+
+### Tool result
+
+```python
+# Hypothesis: collateral changes to fresh-reasoning states limit the usable strength of repetition suppression.
+with open("/work/notes.md","a") as f:
+    f.write("\nPass16 gen24 subtraction2:16.7969% vs9.375%, gain7.4219pp SE2.6066pp, cut85.55% vs92.19%. Strength4 still best exploratory candidate.\n")
+# Analytic projection only: remove fresh-reasoning mean directions from the repetition detector.
+good_means=[]
+for j,sp in enumerate(probe_spans):
+    for k in ["initial","early","new_math"]:
+        good_means.append(acts15[j,sp[k]].astype(np.float32).mean(0))
+G=np.stack(good_means)
+_,ss,Vt=np.linalg.svd(G,full_matrices=False)
+basis=Vt[ss>ss.max()*1e-6]
+v_np=v23.numpy()
+q_np=v_np-basis.T@(basis@v_np)
+print("Fresh-mean span rank",len(basis),"remaining detector norm",np.linalg.norm(q_np))
+q_np=q_np/np.dot(q_np,v_np)
+q23=torch.tensor(q_np,dtype=torch.float32)
+oblique23=torch.outer(c23["original"]@v23,q23)
+torch.save({"name":name23,"direction":v23,"detector":q23,"delta":oblique23,
+            "good_means":G},"/work/repetition_oblique_L23.pt")
+for j,sp in enumerate(probe_spans):
+    p=acts15[j,:meta15["lengths"][j]].astype(np.float32)@q_np
+    print("Refined detector",j,{k:round(float(p[ix].mean()),3) for k,ix in sp.items()})
+save_edit(name23,c23["original"]-6*outer23)
+with open("/work/notes.md","a") as f:
+    f.write("NEXT pass17: only "+name23+" W'=W-6(Wv)v^T; teacher forced raw first two fwd15 repeated-check probes, original baseline fwd15. Strength6 dense diagnostic before generation.\n")
+```
+
+```text
+Fresh-mean span rank 12 remaining detector norm 0.82755345
+Refined detector 0 {'initial': 0.0, 'early': 0.0, 'late': 7.125, 'transition': -0.852, 'new_math': 0.0, 'close': 0.48}
+Refined detector 1 {'initial': 0.0, 'early': 0.0, 'late': 7.035, 'transition': 1.61, 'new_math': 0.0, 'close': 0.834}
+Refined detector 2 {'initial': 0.0, 'early': 0.0, 'late': 7.268, 'transition': -0.031, 'new_math': 0.0, 'close': -0.072}
+Refined detector 3 {'initial': 0.0, 'early': 0.0, 'late': 8.42, 'transition': 1.38, 'new_math': 0.0, 'close': 0.695}
+```
+
+## Turn 56
+
+### Input
+
+````text
+OUTPUT of Python run 29 of at most 300:
+```
+Fresh-mean span rank 12 remaining detector norm 0.82755345
+Refined detector 0 {'initial': 0.0, 'early': 0.0, 'late': 7.125, 'transition': -0.852, 'new_math': 0.0, 'close': 0.48}
+Refined detector 1 {'initial': 0.0, 'early': 0.0, 'late': 7.035, 'transition': 1.61, 'new_math': 0.0, 'close': 0.834}
+Refined detector 2 {'initial': 0.0, 'early': 0.0, 'late': 7.268, 'transition': -0.031, 'new_math': 0.0, 'close': -0.072}
+Refined detector 3 {'initial': 0.0, 'early': 0.0, 'late': 8.42, 'transition': 1.38, 'new_math': 0.0, 'close': 0.695}
+
+
+```
+````
+
+### Editor
+
+The refined detector retains a large response to late repetition while having zero mean response to the fresh-reasoning spans used to construct it. That is only a construction property, not proof that it will generalize. First I will measure the existing detector at strength six on the original probes, using raw text to preserve the exact thinking context. Strong suppression of both repetition and fresh reasoning would explain why higher strengths become harmful.
+
+```forward
+{"type":"teacher_forced","model":"edited","texts":["<|im_start|>user\nSimplify 1/330 + 19/30. Please reason step by step, and put your final answer within \\boxed{}.<|im_end|>\n<|im_start|>assistant\n<think>\nThe common denominator is 330. Since 19 times 11 is 209, the sum becomes (1+209)/330.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nNow add the numerators: 1+209=210. Dividing numerator and denominator by 30 gives 7/11. The fraction is in lowest terms because 7 and 11 are coprime.\n</think>\n\nThe answer is \\boxed{7/11}.<|im_end|>\n","<|im_start|>user\nAnna reads 1 page per minute. Carole reads as fast as Anna but at half Brianna's speed. How long does Brianna take to read 100 pages? Please reason step by step, and put your final answer within \\boxed{}.<|im_end|>\n<|im_start|>assistant\n<think>\nCarole reads 1 page per minute. Since Carole is half as fast as Brianna, Brianna reads 2 pages per minute.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nNow divide the distance by the rate: 100 pages / 2 pages per minute = 50 minutes. This also checks because Brianna reads twice as fast as Anna, taking half the time.\n</think>\n\nThe answer is \\boxed{50} minutes.<|im_end|>\n"],"return":{"token_logprobs":true,"topk":20}}
+```
+
+### Tool result
+
+```text
+{
+  "bytes": 137584,
+  "container_seconds": 18.21750981,
   "files": {
     "input_ids": [
       2,
       273
-    ],
-    "mlp_act_23": [
-      2,
-      273,
-      3584
     ],
     "token_logprobs": [
       2,
@@ -5931,21 +5201,544 @@ Editor reply pending.
     255
   ],
   "mean_token_logprob": [
-    -1.1029654951656567,
-    -1.5419830562561516
+    -1.669624454834882,
+    -2.059788501168799
   ],
   "ok": true,
-  "s": 29.59043569699952,
+  "s": 45.8961610729998,
   "type": "teacher_forced",
   "_openwsp_gpu": {
     "actual_gpu": "H100",
     "attempt_count": 1,
-    "total_settled_cost_usd": 0.16159308369947867,
-    "billable_seconds": 136.327123481,
+    "total_settled_cost_usd": 0.16620448829478668,
+    "billable_seconds": 140.21750981,
     "cost_basis": "resource_estimate_not_provider_invoice",
     "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
   },
   "edited_tensors": 1,
   "model": "edited"
 }
+```
+
+## Turn 57
+
+### Input
+
+````text
+FORWARD PASS 17 of 50:
+```json
+{"bytes": 137584, "container_seconds": 18.21750981, "files": {"input_ids": [2, 273], "token_logprobs": [2, 272], "topk_ids": [2, 273, 20], "topk_logprobs": [2, 273, 20]}, "lengths": [273, 255], "mean_token_logprob": [-1.669624454834882, -2.059788501168799], "ok": true, "s": 45.8961610729998, "type": "teacher_forced", "_openwsp_gpu": {"actual_gpu": "H100", "attempt_count": 1, "total_settled_cost_usd": 0.16620448829478668, "billable_seconds": 140.21750981, "cost_basis": "resource_estimate_not_provider_invoice", "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"}, "edited_tensors": 1, "model": "edited"}
+```
+````
+
+### Editor
+
+Strength six substantially lowers the overall likelihood of these repeated-check transcripts, but that aggregate mixes desirable and undesirable effects. I will separate repeated tokens, transition tokens, and new mathematical steps before interpreting it. Then I will run the paired generation test at this strength. Accuracy—not transcript likelihood—will determine whether this stronger edit is useful.
+
+```python
+# Hypothesis: strength six may suppress loops more strongly but degrade the mathematical continuations needed for correct answers.
+def latest_fwd():
+    return max(Path("/work").glob("fwd_*"),key=lambda p:int(p.name.split("_")[-1]))
+def span_deltas(folder, baseline="/work/fwd_15", n=2):
+    lp=np.load(Path(folder)/"token_logprobs.npy")
+    bp=np.load(Path(baseline)/"token_logprobs.npy")
+    result=[]
+    for j in range(n):
+        result.append({k:round(float((lp[j,ix-1]-bp[j,ix-1]).mean()),5)
+                       for k,ix in probe_spans[j].items() if len(ix)>0})
+    return result
+f17=latest_fwd()
+print("Strength6 token-target deltas:",span_deltas(f17))
+with open("/work/notes.md","a") as f:
+    f.write("\nPass17 "+str(f17)+" strength6 span deltas "+json.dumps(span_deltas(f17))+"\n")
+    f.write("NEXT pass18: unchanged single edit "+name23+" W'=W-6(Wv)v^T. Generation both, sel128 (first64 of each source selection), n2 max32768. Different test type from preceding dense diagnostic.\n")
+```
+
+### Tool result
+
+```python
+# Hypothesis: strength six may suppress loops more strongly but degrade the mathematical continuations needed for correct answers.
+def latest_fwd():
+    return max(Path("/work").glob("fwd_*"),key=lambda p:int(p.name.split("_")[-1]))
+def span_deltas(folder, baseline="/work/fwd_15", n=2):
+    lp=np.load(Path(folder)/"token_logprobs.npy")
+    bp=np.load(Path(baseline)/"token_logprobs.npy")
+    result=[]
+    for j in range(n):
+        result.append({k:round(float((lp[j,ix-1]-bp[j,ix-1]).mean()),5)
+                       for k,ix in probe_spans[j].items() if len(ix)>0})
+    return result
+f17=latest_fwd()
+print("Strength6 token-target deltas:",span_deltas(f17))
+with open("/work/notes.md","a") as f:
+    f.write("\nPass17 "+str(f17)+" strength6 span deltas "+json.dumps(span_deltas(f17))+"\n")
+    f.write("NEXT pass18: unchanged single edit "+name23+" W'=W-6(Wv)v^T. Generation both, sel128 (first64 of each source selection), n2 max32768. Different test type from preceding dense diagnostic.\n")
+```
+
+```text
+Strength6 token-target deltas: [{'initial': -0.02562, 'early': -0.09688, 'late': -2.54347, 'transition': 0.43418, 'new_math': -0.1298, 'close': -0.06811}, {'initial': -0.35186, 'early': -0.51045, 'late': -2.66266, 'transition': 0.13567, 'new_math': -0.24762, 'close': 0.10365}]
+```
+
+## Turn 58
+
+### Input
+
+````text
+OUTPUT of Python run 30 of at most 300:
+```
+Strength6 token-target deltas: [{'initial': -0.02562, 'early': -0.09688, 'late': -2.54347, 'transition': 0.43418, 'new_math': -0.1298, 'close': -0.06811}, {'initial': -0.35186, 'early': -0.51045, 'late': -2.66266, 'transition': 0.13567, 'new_math': -0.24762, 'close': 0.10365}]
+
+
+```
+````
+
+### Editor
+
+At strength six, late repetition loses about 2.5–2.7 log-probability units per token, while fresh mathematics also loses 0.13–0.25. Transition tokens become more likely, so the intended effect is present, but collateral damage is growing. I will now test whether that tradeoff helps or harms actual problem solving. A loss relative to the original would rule out this strength even if it shortens answers.
+
+```forward
+{"type":"generate","model":"both","problems":["gsm8k_train_2488","gsm8k_train_3928","gsm8k_train_4374","gsm8k_train_3345","gsm8k_train_7446","gsm8k_train_1248","gsm8k_train_4976","gsm8k_train_5324","gsm8k_train_1621","gsm8k_train_3355","gsm8k_train_6675","gsm8k_train_7092","gsm8k_train_3150","gsm8k_train_4031","gsm8k_train_6672","gsm8k_train_4318","gsm8k_train_270","gsm8k_train_1790","gsm8k_train_734","gsm8k_train_6230","gsm8k_train_7298","gsm8k_train_446","gsm8k_train_1170","gsm8k_train_4946","gsm8k_train_4075","gsm8k_train_3610","gsm8k_train_5758","gsm8k_train_3914","gsm8k_train_3400","gsm8k_train_3940","gsm8k_train_5216","gsm8k_train_4065","gsm8k_train_1312","gsm8k_train_4081","gsm8k_train_3513","gsm8k_train_5151","gsm8k_train_6051","gsm8k_train_1243","gsm8k_train_7470","gsm8k_train_3963","gsm8k_train_5106","gsm8k_train_1149","gsm8k_train_1423","gsm8k_train_3788","gsm8k_train_5284","gsm8k_train_3669","gsm8k_train_4435","gsm8k_train_3656","gsm8k_train_4912","gsm8k_train_2392","gsm8k_train_1093","gsm8k_train_4007","gsm8k_train_434","gsm8k_train_4803","gsm8k_train_1268","gsm8k_train_4513","gsm8k_train_49","gsm8k_train_3474","gsm8k_train_3511","gsm8k_train_1020","gsm8k_train_4507","gsm8k_train_3111","gsm8k_train_5916","gsm8k_train_7323","math_train_prealgebra_139","math_train_prealgebra_700","math_train_algebra_641","math_train_prealgebra_747","math_train_algebra_517","math_train_counting_and_probability_196","math_train_prealgebra_380","math_train_number_theory_489","math_train_algebra_1248","math_train_precalculus_596","math_train_precalculus_283","math_train_intermediate_algebra_20","math_train_intermediate_algebra_221","math_train_counting_and_probability_208","math_train_geometry_740","math_train_intermediate_algebra_802","math_train_algebra_657","math_train_algebra_8","math_train_prealgebra_655","math_train_number_theory_468","math_train_geometry_360","math_train_precalculus_300","math_train_precalculus_272","math_train_number_theory_371","math_train_algebra_472","math_train_precalculus_407","math_train_intermediate_algebra_457","math_train_prealgebra_1099","math_train_number_theory_16","math_train_number_theory_161","math_train_number_theory_481","math_train_number_theory_331","math_train_number_theory_810","math_train_intermediate_algebra_1232","math_train_algebra_769","math_train_algebra_1277","math_train_algebra_185","math_train_algebra_253","math_train_prealgebra_600","math_train_prealgebra_219","math_train_intermediate_algebra_1151","math_train_algebra_990","math_train_counting_and_probability_632","math_train_algebra_906","math_train_counting_and_probability_51","math_train_algebra_1044","math_train_precalculus_2","math_train_precalculus_515","math_train_precalculus_572","math_train_geometry_263","math_train_intermediate_algebra_752","math_train_algebra_390","math_train_prealgebra_636","math_train_algebra_1000","math_train_geometry_555","math_train_algebra_638","math_train_geometry_351","math_train_intermediate_algebra_830","math_train_intermediate_algebra_30","math_train_prealgebra_1176","math_train_algebra_332","math_train_number_theory_290","math_train_prealgebra_994","math_train_precalculus_397"],"n":2,"max_tokens":32768}
+```
+
+### Tool result
+
+```text
+{
+  "files": {
+    "original": "/work/gen_26_original.jsonl",
+    "edited": "/work/gen_26_edited.jsonl"
+  },
+  "activations": null,
+  "original": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.09375,
+    "accuracy_by_source": {
+      "gsm8k": 0.1015625,
+      "math": 0.0859375
+    },
+    "mean_tokens": 30693.296875,
+    "cut_share": 0.921875,
+    "failures": {
+      "wrong_answer": 0,
+      "no_answer_finished": 0,
+      "cut_at_max_tokens": 236
+    }
+  },
+  "edited": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.09375,
+    "accuracy_by_source": {
+      "gsm8k": 0.125,
+      "math": 0.0625
+    },
+    "mean_tokens": 29131.65234375,
+    "cut_share": 0.84375,
+    "failures": {
+      "wrong_answer": 2,
+      "no_answer_finished": 16,
+      "cut_at_max_tokens": 216
+    }
+  },
+  "paired": {
+    "items": 128,
+    "accuracy_difference": 0.0,
+    "standard_error": 0.028279050981414647,
+    "samples_wrong_to_right": 20,
+    "samples_right_to_wrong": 20
+  },
+  "ok": true,
+  "type": "generate",
+  "model": "both",
+  "s": 892.424388288
+}
+```
+
+## Turn 59
+
+### Input
+
+````text
+FORWARD PASS 18 of 50:
+```json
+{"files": {"original": "/work/gen_26_original.jsonl", "edited": "/work/gen_26_edited.jsonl"}, "activations": null, "original": {"generations": 256, "graded": 256, "accuracy": 0.09375, "accuracy_by_source": {"gsm8k": 0.1015625, "math": 0.0859375}, "mean_tokens": 30693.296875, "cut_share": 0.921875, "failures": {"wrong_answer": 0, "no_answer_finished": 0, "cut_at_max_tokens": 236}}, "edited": {"generations": 256, "graded": 256, "accuracy": 0.09375, "accuracy_by_source": {"gsm8k": 0.125, "math": 0.0625}, "mean_tokens": 29131.65234375, "cut_share": 0.84375, "failures": {"wrong_answer": 2, "no_answer_finished": 16, "cut_at_max_tokens": 216}}, "paired": {"items": 128, "accuracy_difference": 0.0, "standard_error": 0.028279050981414647, "samples_wrong_to_right": 20, "samples_right_to_wrong": 20}, "ok": true, "type": "generate", "model": "both", "s": 892.424388288}
+```
+````
+
+### Editor
+
+Strength six gives no net accuracy gain: it rescues 20 samples and breaks 20 others. The original strength-four edit therefore remains preferable. I will now test the analytically refined detector, which preserves the same output intervention but reduces its response to fresh reasoning. If it maintains loop suppression with smaller mathematical losses, it may offer a better tradeoff without introducing a new mechanism.
+
+```python
+# Hypothesis: orthogonalizing the detector to fresh-reasoning means reduces collateral damage from the same targeted output correction.
+save_edit(name23,c23["original"]-4*oblique23)
+print("Oblique rank-one relative weight change:",
+      float((load(name23)-c23["original"]).norm()/c23["original"].norm()))
+with open("/work/notes.md","a") as f:
+    f.write("\nPass18 gen26 subtraction6:9.375% vs9.375%, gain0 SE2.8279pp, W->R20 R->W20; reject6. Dose2:+7.42pp,4:+17.19pp,6:0,8:-7.81pp.\n")
+    f.write("NEXT pass19: only "+name23+" W'=W-4(Wv)q^T, q=projection of v orthogonal to 12 means (initial/early/newmath each4 probes), scaled q.v=1. Definition /work/repetition_oblique_L23.pt. TF raw first2 fwd15 probes, baseline fwd15.\n")
+```
+
+### Tool result
+
+```python
+# Hypothesis: orthogonalizing the detector to fresh-reasoning means reduces collateral damage from the same targeted output correction.
+save_edit(name23,c23["original"]-4*oblique23)
+print("Oblique rank-one relative weight change:",
+      float((load(name23)-c23["original"]).norm()/c23["original"].norm()))
+with open("/work/notes.md","a") as f:
+    f.write("\nPass18 gen26 subtraction6:9.375% vs9.375%, gain0 SE2.8279pp, W->R20 R->W20; reject6. Dose2:+7.42pp,4:+17.19pp,6:0,8:-7.81pp.\n")
+    f.write("NEXT pass19: only "+name23+" W'=W-4(Wv)q^T, q=projection of v orthogonal to 12 means (initial/early/newmath each4 probes), scaled q.v=1. Definition /work/repetition_oblique_L23.pt. TF raw first2 fwd15 probes, baseline fwd15.\n")
+```
+
+```text
+Oblique rank-one relative weight change: 0.10834705084562302
+```
+
+## Turn 60
+
+### Input
+
+````text
+OUTPUT of Python run 31 of at most 300:
+```
+Oblique rank-one relative weight change: 0.10834705084562302
+
+
+```
+````
+
+### Editor
+
+The refined edit changes only one rank-one component of the same layer-23 projection. Its overall norm is slightly larger because the new detector is constrained to ignore the measured fresh-reasoning means. I will compare its token-level effects with the existing strength-four edit on identical contexts. Reduced fresh-math damage without loss of repetition suppression would support proceeding to generation.
+
+```forward
+{"type":"teacher_forced","model":"edited","texts":["<|im_start|>user\nSimplify 1/330 + 19/30. Please reason step by step, and put your final answer within \\boxed{}.<|im_end|>\n<|im_start|>assistant\n<think>\nThe common denominator is 330. Since 19 times 11 is 209, the sum becomes (1+209)/330.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nNow add the numerators: 1+209=210. Dividing numerator and denominator by 30 gives 7/11. The fraction is in lowest terms because 7 and 11 are coprime.\n</think>\n\nThe answer is \\boxed{7/11}.<|im_end|>\n","<|im_start|>user\nAnna reads 1 page per minute. Carole reads as fast as Anna but at half Brianna's speed. How long does Brianna take to read 100 pages? Please reason step by step, and put your final answer within \\boxed{}.<|im_end|>\n<|im_start|>assistant\n<think>\nCarole reads 1 page per minute. Since Carole is half as fast as Brianna, Brianna reads 2 pages per minute.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nNow divide the distance by the rate: 100 pages / 2 pages per minute = 50 minutes. This also checks because Brianna reads twice as fast as Anna, taking half the time.\n</think>\n\nThe answer is \\boxed{50} minutes.<|im_end|>\n"],"return":{"token_logprobs":true,"topk":20}}
+```
+
+### Tool result
+
+```text
+{
+  "bytes": 137584,
+  "container_seconds": 17.81056985,
+  "files": {
+    "input_ids": [
+      2,
+      273
+    ],
+    "token_logprobs": [
+      2,
+      272
+    ],
+    "topk_ids": [
+      2,
+      273,
+      20
+    ],
+    "topk_logprobs": [
+      2,
+      273,
+      20
+    ]
+  },
+  "lengths": [
+    273,
+    255
+  ],
+  "mean_token_logprob": [
+    -1.1234126511742086,
+    -1.4431994580847072
+  ],
+  "ok": true,
+  "s": 45.06220096900006,
+  "type": "teacher_forced",
+  "_openwsp_gpu": {
+    "actual_gpu": "H100",
+    "attempt_count": 1,
+    "total_settled_cost_usd": 0.16572212879553333,
+    "billable_seconds": 139.81056985,
+    "cost_basis": "resource_estimate_not_provider_invoice",
+    "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
+  },
+  "edited_tensors": 1,
+  "model": "edited"
+}
+```
+
+## Turn 61
+
+### Input
+
+````text
+FORWARD PASS 19 of 50:
+```json
+{"bytes": 137584, "container_seconds": 17.81056985, "files": {"input_ids": [2, 273], "token_logprobs": [2, 272], "topk_ids": [2, 273, 20], "topk_logprobs": [2, 273, 20]}, "lengths": [273, 255], "mean_token_logprob": [-1.1234126511742086, -1.4431994580847072], "ok": true, "s": 45.06220096900006, "type": "teacher_forced", "_openwsp_gpu": {"actual_gpu": "H100", "attempt_count": 1, "total_settled_cost_usd": 0.16572212879553333, "billable_seconds": 139.81056985, "cost_basis": "resource_estimate_not_provider_invoice", "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"}, "edited_tensors": 1, "model": "edited"}
+```
+````
+
+### Editor
+
+The refined edit has distinguishable probe effects, confirming that the altered detector is being applied. Aggregate transcript likelihood is not decisive because the transcript intentionally contains bad repetition. I will compare the effects span by span, then test the candidate on the same paired selection problems. Even an improved probe profile will be rejected if it does not improve actual accuracy.
+
+```python
+# Hypothesis: the refined detector's reduced response to fresh steps translates into better generated mathematics.
+f19=latest_fwd()
+print("Original detector strength4:",span_deltas("/work/fwd_22"))
+print("Refined detector strength4:",span_deltas(f19))
+with open("/work/notes.md","a") as f:
+    f.write("\nPass19 "+str(f19)+" refined4 deltas "+json.dumps(span_deltas(f19))+"\n")
+    f.write("NEXT pass20: same only "+name23+" W'=W-4(Wv)q^T, oblique detector from /work/repetition_oblique_L23.pt. Generation both on sel128 n2 max32768.\n")
+```
+
+### Tool result
+
+```python
+# Hypothesis: the refined detector's reduced response to fresh steps translates into better generated mathematics.
+f19=latest_fwd()
+print("Original detector strength4:",span_deltas("/work/fwd_22"))
+print("Refined detector strength4:",span_deltas(f19))
+with open("/work/notes.md","a") as f:
+    f.write("\nPass19 "+str(f19)+" refined4 deltas "+json.dumps(span_deltas(f19))+"\n")
+    f.write("NEXT pass20: same only "+name23+" W'=W-4(Wv)q^T, oblique detector from /work/repetition_oblique_L23.pt. Generation both on sel128 n2 max32768.\n")
+```
+
+```text
+Original detector strength4: [{'initial': -0.02068, 'early': -0.05623, 'late': -0.41244, 'transition': 0.26544, 'new_math': -0.0737, 'close': -0.07148}, {'initial': -0.09643, 'early': -0.16428, 'late': -1.0043, 'transition': 0.08985, 'new_math': -0.13589, 'close': 0.03874}]
+Refined detector strength4: [{'initial': 0.00391, 'early': -0.04302, 'late': -0.534, 'transition': 0.33958, 'new_math': -0.07726, 'close': -0.03202}, {'initial': 0.04706, 'early': -0.10268, 'late': -0.74138, 'transition': 0.04044, 'new_math': -0.03611, 'close': 0.01255}]
+```
+
+## Turn 62
+
+### Input
+
+````text
+OUTPUT of Python run 32 of at most 300:
+```
+Original detector strength4: [{'initial': -0.02068, 'early': -0.05623, 'late': -0.41244, 'transition': 0.26544, 'new_math': -0.0737, 'close': -0.07148}, {'initial': -0.09643, 'early': -0.16428, 'late': -1.0043, 'transition': 0.08985, 'new_math': -0.13589, 'close': 0.03874}]
+Refined detector strength4: [{'initial': 0.00391, 'early': -0.04302, 'late': -0.534, 'transition': 0.33958, 'new_math': -0.07726, 'close': -0.03202}, {'initial': 0.04706, 'early': -0.10268, 'late': -0.74138, 'transition': 0.04044, 'new_math': -0.03611, 'close': 0.01255}]
+
+
+```
+````
+
+### Editor
+
+The refined detector improves the fresh-math likelihood loss in the reading-rate probe from about 0.136 to 0.036 per token, while retaining strong suppression of repeated checks. The fraction probe shows little improvement, so this is mixed evidence rather than a clear win. I will now run the full paired generation comparison. It will test whether preserving these measured reasoning directions helps across diverse problems.
+
+```forward
+{"type":"generate","model":"both","problems":["gsm8k_train_2488","gsm8k_train_3928","gsm8k_train_4374","gsm8k_train_3345","gsm8k_train_7446","gsm8k_train_1248","gsm8k_train_4976","gsm8k_train_5324","gsm8k_train_1621","gsm8k_train_3355","gsm8k_train_6675","gsm8k_train_7092","gsm8k_train_3150","gsm8k_train_4031","gsm8k_train_6672","gsm8k_train_4318","gsm8k_train_270","gsm8k_train_1790","gsm8k_train_734","gsm8k_train_6230","gsm8k_train_7298","gsm8k_train_446","gsm8k_train_1170","gsm8k_train_4946","gsm8k_train_4075","gsm8k_train_3610","gsm8k_train_5758","gsm8k_train_3914","gsm8k_train_3400","gsm8k_train_3940","gsm8k_train_5216","gsm8k_train_4065","gsm8k_train_1312","gsm8k_train_4081","gsm8k_train_3513","gsm8k_train_5151","gsm8k_train_6051","gsm8k_train_1243","gsm8k_train_7470","gsm8k_train_3963","gsm8k_train_5106","gsm8k_train_1149","gsm8k_train_1423","gsm8k_train_3788","gsm8k_train_5284","gsm8k_train_3669","gsm8k_train_4435","gsm8k_train_3656","gsm8k_train_4912","gsm8k_train_2392","gsm8k_train_1093","gsm8k_train_4007","gsm8k_train_434","gsm8k_train_4803","gsm8k_train_1268","gsm8k_train_4513","gsm8k_train_49","gsm8k_train_3474","gsm8k_train_3511","gsm8k_train_1020","gsm8k_train_4507","gsm8k_train_3111","gsm8k_train_5916","gsm8k_train_7323","math_train_prealgebra_139","math_train_prealgebra_700","math_train_algebra_641","math_train_prealgebra_747","math_train_algebra_517","math_train_counting_and_probability_196","math_train_prealgebra_380","math_train_number_theory_489","math_train_algebra_1248","math_train_precalculus_596","math_train_precalculus_283","math_train_intermediate_algebra_20","math_train_intermediate_algebra_221","math_train_counting_and_probability_208","math_train_geometry_740","math_train_intermediate_algebra_802","math_train_algebra_657","math_train_algebra_8","math_train_prealgebra_655","math_train_number_theory_468","math_train_geometry_360","math_train_precalculus_300","math_train_precalculus_272","math_train_number_theory_371","math_train_algebra_472","math_train_precalculus_407","math_train_intermediate_algebra_457","math_train_prealgebra_1099","math_train_number_theory_16","math_train_number_theory_161","math_train_number_theory_481","math_train_number_theory_331","math_train_number_theory_810","math_train_intermediate_algebra_1232","math_train_algebra_769","math_train_algebra_1277","math_train_algebra_185","math_train_algebra_253","math_train_prealgebra_600","math_train_prealgebra_219","math_train_intermediate_algebra_1151","math_train_algebra_990","math_train_counting_and_probability_632","math_train_algebra_906","math_train_counting_and_probability_51","math_train_algebra_1044","math_train_precalculus_2","math_train_precalculus_515","math_train_precalculus_572","math_train_geometry_263","math_train_intermediate_algebra_752","math_train_algebra_390","math_train_prealgebra_636","math_train_algebra_1000","math_train_geometry_555","math_train_algebra_638","math_train_geometry_351","math_train_intermediate_algebra_830","math_train_intermediate_algebra_30","math_train_prealgebra_1176","math_train_algebra_332","math_train_number_theory_290","math_train_prealgebra_994","math_train_precalculus_397"],"n":2,"max_tokens":32768}
+```
+
+### Tool result
+
+```text
+{
+  "files": {
+    "original": "/work/gen_28_original.jsonl",
+    "edited": "/work/gen_28_edited.jsonl"
+  },
+  "activations": null,
+  "original": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.09375,
+    "accuracy_by_source": {
+      "gsm8k": 0.1015625,
+      "math": 0.0859375
+    },
+    "mean_tokens": 30693.296875,
+    "cut_share": 0.921875,
+    "failures": {
+      "wrong_answer": 0,
+      "no_answer_finished": 0,
+      "cut_at_max_tokens": 236
+    }
+  },
+  "edited": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.234375,
+    "accuracy_by_source": {
+      "gsm8k": 0.2421875,
+      "math": 0.2265625
+    },
+    "mean_tokens": 28007.2109375,
+    "cut_share": 0.78515625,
+    "failures": {
+      "wrong_answer": 2,
+      "no_answer_finished": 2,
+      "cut_at_max_tokens": 201
+    }
+  },
+  "paired": {
+    "items": 128,
+    "accuracy_difference": 0.140625,
+    "standard_error": 0.03134213779208356,
+    "samples_wrong_to_right": 49,
+    "samples_right_to_wrong": 13
+  },
+  "ok": true,
+  "type": "generate",
+  "model": "both",
+  "s": 904.6512671599999
+}
+```
+
+## Turn 63
+
+### Input
+
+````text
+FORWARD PASS 20 of 50:
+```json
+{"files": {"original": "/work/gen_28_original.jsonl", "edited": "/work/gen_28_edited.jsonl"}, "activations": null, "original": {"generations": 256, "graded": 256, "accuracy": 0.09375, "accuracy_by_source": {"gsm8k": 0.1015625, "math": 0.0859375}, "mean_tokens": 30693.296875, "cut_share": 0.921875, "failures": {"wrong_answer": 0, "no_answer_finished": 0, "cut_at_max_tokens": 236}}, "edited": {"generations": 256, "graded": 256, "accuracy": 0.234375, "accuracy_by_source": {"gsm8k": 0.2421875, "math": 0.2265625}, "mean_tokens": 28007.2109375, "cut_share": 0.78515625, "failures": {"wrong_answer": 2, "no_answer_finished": 2, "cut_at_max_tokens": 201}}, "paired": {"items": 128, "accuracy_difference": 0.140625, "standard_error": 0.03134213779208356, "samples_wrong_to_right": 49, "samples_right_to_wrong": 13}, "ok": true, "type": "generate", "model": "both", "s": 904.6512671599999}
+```
+````
+
+### Editor
+
+The refined detector improves accuracy by 14.1 points, but does not clearly outperform the simpler strength-four edit’s 17.2-point gain. I will keep the simpler candidate as the provisional best and perform a genuine opposite-sign control using an explicitly recorded positive update. This tests whether the benefit depends on suppressing the identified direction rather than merely perturbing the layer. After that, I will check nearby strengths and reserve the remaining work for independent validation.
+
+```python
+# Hypothesis: amplifying, rather than suppressing, the repetition-sensitive direction fails to repair the looping mechanism.
+Path("/work/refined4").mkdir(exist_ok=True)
+np.save("/work/refined4/"+name23+".npy",load(name23).numpy())
+save_edit(name23,c23["original"]+4*outer23)
+with open("/work/notes.md","a") as f:
+    f.write("\nPass20 gen28 oblique4:23.4375% vs9.375%, gain14.0625pp SE3.1342pp; below simple4 exploratory result. Backup /work/refined4. Provisional best simple4.\n")
+    f.write("NEXT pass21: sign control, only "+name23+" W'=W+4(Wv)v^T (positive coefficient, amplification). Teacher forced raw first2 fwd15 probes, same original baseline.\n")
+print("Verified coefficient:",float(((load(name23)-c23["original"])*outer23).sum()/outer23.square().sum()))
+```
+
+### Tool result
+
+```python
+# Hypothesis: amplifying, rather than suppressing, the repetition-sensitive direction fails to repair the looping mechanism.
+Path("/work/refined4").mkdir(exist_ok=True)
+np.save("/work/refined4/"+name23+".npy",load(name23).numpy())
+save_edit(name23,c23["original"]+4*outer23)
+with open("/work/notes.md","a") as f:
+    f.write("\nPass20 gen28 oblique4:23.4375% vs9.375%, gain14.0625pp SE3.1342pp; below simple4 exploratory result. Backup /work/refined4. Provisional best simple4.\n")
+    f.write("NEXT pass21: sign control, only "+name23+" W'=W+4(Wv)v^T (positive coefficient, amplification). Teacher forced raw first2 fwd15 probes, same original baseline.\n")
+print("Verified coefficient:",float(((load(name23)-c23["original"])*outer23).sum()/outer23.square().sum()))
+```
+
+```text
+Verified coefficient: 4.0
+```
+
+## Turn 64
+
+### Input
+
+````text
+OUTPUT of Python run 33 of at most 300:
+```
+Verified coefficient: 4.0
+
+
+```
+````
+
+### Editor
+
+The on-disk coefficient is now verified as positive four, the opposite of the successful edit. This control has not yet been measured under the corrected sign convention. I will score the same repeated-check and fresh-math spans so that only the weight intervention changes. An opposite or clearly different token-level effect would strengthen the causal localization.
+
+```forward
+{"type":"teacher_forced","model":"edited","texts":["<|im_start|>user\nSimplify 1/330 + 19/30. Please reason step by step, and put your final answer within \\boxed{}.<|im_end|>\n<|im_start|>assistant\n<think>\nThe common denominator is 330. Since 19 times 11 is 209, the sum becomes (1+209)/330.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nWait, 19 times 11 is 209.\nNow add the numerators: 1+209=210. Dividing numerator and denominator by 30 gives 7/11. The fraction is in lowest terms because 7 and 11 are coprime.\n</think>\n\nThe answer is \\boxed{7/11}.<|im_end|>\n","<|im_start|>user\nAnna reads 1 page per minute. Carole reads as fast as Anna but at half Brianna's speed. How long does Brianna take to read 100 pages? Please reason step by step, and put your final answer within \\boxed{}.<|im_end|>\n<|im_start|>assistant\n<think>\nCarole reads 1 page per minute. Since Carole is half as fast as Brianna, Brianna reads 2 pages per minute.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nWait, Carole is half as fast as Brianna.\nNow divide the distance by the rate: 100 pages / 2 pages per minute = 50 minutes. This also checks because Brianna reads twice as fast as Anna, taking half the time.\n</think>\n\nThe answer is \\boxed{50} minutes.<|im_end|>\n"],"return":{"token_logprobs":true,"topk":20}}
+```
+
+### Tool result
+
+```text
+{
+  "bytes": 137584,
+  "container_seconds": 19.163409047000002,
+  "files": {
+    "input_ids": [
+      2,
+      273
+    ],
+    "token_logprobs": [
+      2,
+      272
+    ],
+    "topk_ids": [
+      2,
+      273,
+      20
+    ],
+    "topk_logprobs": [
+      2,
+      273,
+      20
+    ]
+  },
+  "lengths": [
+    273,
+    255
+  ],
+  "mean_token_logprob": [
+    -0.9668108855976778,
+    -1.351260207769439
+  ],
+  "ok": true,
+  "s": 51.280024787,
+  "type": "teacher_forced",
+  "_openwsp_gpu": {
+    "actual_gpu": "H100",
+    "attempt_count": 1,
+    "total_settled_cost_usd": 0.16732569419037735,
+    "billable_seconds": 141.16340904700002,
+    "cost_basis": "resource_estimate_not_provider_invoice",
+    "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
+  },
+  "edited_tensors": 1,
+  "model": "edited"
+}
+```
+
+## Turn 65
+
+### Input
+
+````text
+FORWARD PASS 21 of 50:
+```json
+{"bytes": 137584, "container_seconds": 19.163409047000002, "files": {"input_ids": [2, 273], "token_logprobs": [2, 272], "topk_ids": [2, 273, 20], "topk_logprobs": [2, 273, 20]}, "lengths": [273, 255], "mean_token_logprob": [-0.9668108855976778, -1.351260207769439], "ok": true, "s": 51.280024787, "type": "teacher_forced", "_openwsp_gpu": {"actual_gpu": "H100", "attempt_count": 1, "total_settled_cost_usd": 0.16732569419037735, "billable_seconds": 141.16340904700002, "cost_basis": "resource_estimate_not_provider_invoice", "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"}, "edited_tensors": 1, "model": "edited"}
+```
+````
+
+### Editor
+
+The opposite-sign edit produces different likelihoods, so the earlier sign ambiguity is resolved. I will now quantify its span-specific effect and test generated accuracy, rather than assuming that reversing the sign must produce a perfectly symmetric response. Neural circuits can be nonlinear, especially at this intervention size. A much smaller accuracy benefit would still support the direction-specific suppression hypothesis.
+
+```python
+# Hypothesis: the beneficial intervention depends on the direction and sign, not generic rank-one weight disturbance.
+f21=latest_fwd()
+print("Amplification4 span deltas:",span_deltas(f21))
+sel64=splits["gsm8k"]["selection"][:32]+splits["math"]["selection"][:32]
+Path("/work/selection64.json").write_text(json.dumps(sel64))
+with open("/work/notes.md","a") as f:
+    f.write("\nPass21 "+str(f21)+" explicit amplification4 deltas "+json.dumps(span_deltas(f21))+"\n")
+    f.write("NEXT pass22: same only "+name23+" W'=W+4(Wv)v^T. Generation both on sel64=first32 each source selection, n4=256/model, max32768. This subset is exploratory, not confirmation.\n")
+```
+
+### Tool result
+
+```python
+# Hypothesis: the beneficial intervention depends on the direction and sign, not generic rank-one weight disturbance.
+f21=latest_fwd()
+print("Amplification4 span deltas:",span_deltas(f21))
+sel64=splits["gsm8k"]["selection"][:32]+splits["math"]["selection"][:32]
+Path("/work/selection64.json").write_text(json.dumps(sel64))
+with open("/work/notes.md","a") as f:
+    f.write("\nPass21 "+str(f21)+" explicit amplification4 deltas "+json.dumps(span_deltas(f21))+"\n")
+    f.write("NEXT pass22: same only "+name23+" W'=W+4(Wv)v^T. Generation both on sel64=first32 each source selection, n4=256/model, max32768. This subset is exploratory, not confirmation.\n")
+```
+
+```text
+Amplification4 span deltas: [{'initial': -0.01798, 'early': 0.00124, 'late': -0.01197, 'transition': 0.21057, 'new_math': 0.0223, 'close': 0.05659}, {'initial': -0.08823, 'early': -0.0349, 'late': -0.32965, 'transition': -0.03796, 'new_math': -0.10169, 'close': -0.07902}]
 ```
