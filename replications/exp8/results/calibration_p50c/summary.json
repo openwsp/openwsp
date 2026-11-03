@@ -26,6 +26,16 @@
     "thinking": true,
     "gpu": "H100",
     "engine": "vllm==0.33.0",
-    "transformers": "5.17.0"
-  }
+    "transformers": "5.17.0",
+    "finished_metrics": {
+      "method": "openwsp.metrics.finished_metrics",
+      "finished_reason": "stop",
+      "excluded_reason": "length",
+      "samples_file": "samples.jsonl",
+      "samples_sha256": "62da68586520c812a86d65f9506751643786a19cd78f4400a23a3060e4307fd2"
+    }
+  },
+  "finished_n": 345,
+  "finished_correct": 253,
+  "accuracy_finished": 0.7333333333333333
 }

@@ -75,6 +75,54 @@ def test_empty_report_does_not_invent_results_or_zero_cost(tmp_path):
     assert "[0.0%]" not in text and "[0.0000]" not in text
 
 
+def test_finished_accuracy_is_source_linked_and_zero_denominator_is_undefined(tmp_path):
+    results = setup_repo(tmp_path)
+    summary = results / "mixed/summary.json"
+    write_json(summary, {"stage": "mixed", "n": 3, "correct": 2, "accuracy": 2/3,
+                         "finished_n": 2, "finished_correct": 1, "accuracy_finished": 0.5})
+    rows = [{"problem_id": str(index), "sample_index": 0, "finish_reason": reason, "correct": correct}
+            for index, (reason, correct) in enumerate((("stop", True), ("stop", False), ("length", True)))]
+    summary.with_name("samples.jsonl").write_text("\n".join(json.dumps(row) for row in rows))
+    write_json(results / "all_cut/summary.json", {"stage": "all_cut", "n": 1, "correct": 1, "accuracy": 1,
+                                                 "finished_n": 0, "finished_correct": 0, "accuracy_finished": None})
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "Finished accuracy | Hit token limit | Finished samples" in text
+    assert "[50.0%](replications/exp8/results/mixed/summary.json)" in text
+    assert "[undefined (no finished samples)](replications/exp8/results/all_cut/summary.json)" in text
+    assert "[100.0%](replications/exp8/results/all_cut/summary.json)" in text
+
+
+@pytest.mark.parametrize("finished", [
+    {"finished_n": 0, "finished_correct": 0, "accuracy_finished": 0},
+    {"finished_n": 2, "finished_correct": 3, "accuracy_finished": 0.5},
+    {"finished_n": 2, "finished_correct": 1, "accuracy_finished": 0.75},
+    {"finished_n": 4, "finished_correct": 2, "accuracy_finished": 0.5},
+    {"finished_n": True, "finished_correct": 1, "accuracy_finished": 1},
+    {"accuracy_finished": 0.5},
+])
+def test_invalid_finished_metrics_fail_before_publication(tmp_path, finished):
+    results = setup_repo(tmp_path)
+    write_json(results / "case/summary.json", {"n": 3, "correct": 2, "accuracy": 2/3, **finished})
+    before = (tmp_path / "README.md").read_bytes()
+    with pytest.raises(ValueError):
+        generate_report(tmp_path, results)
+    assert (tmp_path / "README.md").read_bytes() == before
+
+
+def test_finished_metrics_must_match_sample_subset(tmp_path):
+    results = setup_repo(tmp_path)
+    summary = results / "case/summary.json"
+    write_json(summary, {"n": 2, "correct": 1, "accuracy": 0.5,
+                         "finished_n": 1, "finished_correct": 1, "accuracy_finished": 1})
+    summary.with_name("samples.jsonl").write_text("\n".join(json.dumps(row) for row in [
+        {"problem_id": "a", "correct": True, "finish_reason": "length"},
+        {"problem_id": "b", "correct": False, "finish_reason": "stop"},
+    ]))
+    with pytest.raises(ValueError, match="finished_correct disagrees"):
+        generate_report(tmp_path, results)
+
+
 @pytest.mark.parametrize("standalone_status", [False, True])
 def test_status_appears_once_in_each_readme_layout_and_standalone_report(tmp_path, standalone_status):
     results = setup_repo(tmp_path)
@@ -641,3 +689,101 @@ def test_transcript_records_incomplete_editor_event_without_reading_private_resp
     assert '"partial_text_sha256": "' + "a" * 64 + '"' in output
     assert "resp_saved" in output and "response_volume_path" in output
     assert "Editor reply pending" not in output and "PRIVATE PARTIAL CODE" not in output
+
+
+def test_independent_comparisons_and_faq_read_recorded_sources(tmp_path):
+    results = setup_repo(tmp_path)
+    summary = results / 'local/summary.json'
+    write_json(summary, {'stage': 'local', 'benchmark': 'math500', 'n': 10, 'accuracy': 0.4,
+                         'finished_n': 5, 'finished_correct': 3, 'accuracy_finished': 0.6,
+                         'cut_share': 0.5, 'provenance': {'thinking': False,
+                         'sampling': {'max_tokens': 8192}, 'engine': 'recorded-engine'}})
+    comparison = results / 'analysis/independent-results.json'
+    write_json(comparison, {'scope': 'Conditions differ.', 'sources': [
+        {'id': 'primary', 'immutable_url': 'https://example.org/pinned/source'}], 'results': [
+        {'label': 'External / edited', 'benchmark': 'other', 'n': 8, 'accuracy': 0.25,
+         'finished_n': None, 'accuracy_finished': None, 'cut_share': 0.75,
+         'sources': ['primary'], 'comparison_label': 'Different benchmark'},
+        {'label': 'Local / control', 'summary': 'local/summary.json',
+         'comparison_label': 'Changed thinking and cap'},
+        {'label': 'Not measured', 'summary': 'absent/summary.json',
+         'accuracy': 0.99, 'comparison_label': 'Pending evidence'}]})
+    artifact = results / 'inspection.json'
+    write_json(artifact, {'status': 'validated'})
+    faq = results / 'analysis/interpretation.json'
+    write_json(faq, {'faqs': [{'question': 'What was measured?', 'paragraphs': [[
+        'Recorded: ', {'summary': 'local/summary.json', 'metric': 'accuracy_finished'},
+        '; not measured: ', {'summary': 'absent/summary.json', 'metric': 'accuracy'},
+        '; artifact: ', {'artifact': 'inspection.json', 'label': 'Inspection'}]],
+        'quotes': [{'text': 'Exact primary-source sentence.', 'source': 'https://example.org/pinned/task'}],
+        'after_quotes': [['A distinct condition, not an isolated intervention.']]}]})
+    generated = generate_report(tmp_path, results)
+    text = (tmp_path / 'README.md').read_text()
+    independent = text.split('### Independent results')[1].split('### Questions about the result')[0]
+    assert '[25.0%](replications/exp8/results/analysis/independent-results.json)' in independent
+    assert '[60.0%](replications/exp8/results/local/summary.json)' in independent
+    assert '[off / 8192](replications/exp8/results/local/summary.json)' in independent
+    assert '[recorded-engine](replications/exp8/results/local/summary.json)' in independent
+    assert 'https://example.org/pinned/source' in independent
+    assert '99.0%' not in text  # A missing summary cannot use a stale copied metric.
+    assert '> Exact primary-source sentence.' in text
+    assert 'A distinct condition, not an isolated intervention.' in text
+    assert 'not measured: pending' in text
+    assert {str(comparison), str(faq), str(artifact)} <= {row['path'] for row in generated['sources']}
+    source = json.loads(summary.read_text())
+    source.update(finished_correct=4, accuracy_finished=0.8)
+    write_json(summary, source)
+    generate_report(tmp_path, results)
+    assert '[80.0%](replications/exp8/results/local/summary.json)' in (tmp_path / 'README.md').read_text()
+
+
+def test_faq_nested_variant_metric_is_pending_until_measured(tmp_path):
+    results = setup_repo(tmp_path)
+    summary = results / 'repair/summary.json'
+    write_json(summary, {'variants': {'2c': {'accuracy': None}}})
+    write_json(results / 'analysis/interpretation.json', {'faqs': [{'question': 'Agent or script?',
+        'paragraphs': [['2c: ', {'summary': 'repair/summary.json', 'within': ['variants', '2c'],
+                               'metric': 'accuracy', 'percent': True}]]}]})
+    generate_report(tmp_path, results)
+    assert '2c: pending' in (tmp_path / 'README.md').read_text()
+    write_json(summary, {'variants': {'2c': {'accuracy': 0.3}}})
+    generate_report(tmp_path, results)
+    assert '2c: [30.0%](replications/exp8/results/repair/summary.json)' in (tmp_path / 'README.md').read_text()
+
+
+def test_analysis_rejects_artifact_escape_before_changing_readme(tmp_path):
+    results = setup_repo(tmp_path)
+    before = (tmp_path / 'README.md').read_bytes()
+    write_json(results / 'analysis/interpretation.json', {'faqs': [{'question': 'Evidence?',
+        'paragraphs': [[{'artifact': '../../../private.json', 'label': 'Forbidden'}]]}]})
+    with pytest.raises(ValueError, match='escapes results'):
+        generate_report(tmp_path, results)
+    assert (tmp_path / 'README.md').read_bytes() == before
+    assert not (results / 'report.md').exists()
+
+
+def test_cpu_inspection_grid_and_bank_are_read_without_benchmark_claims(tmp_path):
+    results = setup_repo(tmp_path)
+    inspect = results / 'inspection/summary.json'
+    grid = results / 'eval_grid_cpu_validation/summary.json'
+    bank = results / 'forward-bank-cpu.json'
+    write_json(inspect, {'format': 'openwsp.inspect.summary', 'status': 'measured_cpu_only',
+                         'model': {'id': 'fixture', 'revision': 'pinned'}, 'tensors': [{}, {}]})
+    write_json(grid, {'stage': 'eval_grid_cpu_validation', 'status': 'validated',
+                      'benchmark': 'token_state_machine', 'checks': {'cap': True, 'closure': True},
+                      'provenance': {'synthetic': True, 'scope': 'Tiny implementation validation only'}})
+    write_json(bank, {'stage': 'forward_bank_cpu', 'status': 'failed',
+                      'checks': {'hit': True, 'miss': False},
+                      'provenance': {'scope': 'Synthetic CPU cache verification'}})
+    generated = generate_report(tmp_path, results)
+    text = (tmp_path / 'README.md').read_text()
+    cpu = text.split('### CPU analysis and implementation checks')[1].split('<!-- OPENWSP:RESULTS:END -->')[0]
+    assert '[2 tensor measurements](replications/exp8/results/inspection/summary.json)' in cpu
+    assert '[2/2 checks passed](replications/exp8/results/eval_grid_cpu_validation/summary.json)' in cpu
+    assert '[1/2 checks passed](replications/exp8/results/forward-bank-cpu.json)' in cpu
+    assert '[failed](replications/exp8/results/forward-bank-cpu.json)' in cpu
+    assert 'not GPU benchmark results' in cpu
+    before_cpu = text.split('### CPU analysis and implementation checks')[0]
+    assert 'token_state_machine' not in before_cpu and "'revision': 'pinned'" not in text
+    assert '[100.0%]' not in text and '[0.0000]' not in text
+    assert {str(inspect), str(grid), str(bank)} <= {row['path'] for row in generated['sources']}

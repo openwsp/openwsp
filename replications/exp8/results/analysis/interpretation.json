@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "purpose": "Orchestrator analysis only; never live-editor input. Rendered by openwsp report from files.",
+  "source_audit": "authors-source-verification.json",
+  "inspection_sha256": "374c1bf7c5f1e45c0a1094dc2bc73cbf2904e910ff9f1c29b79c72648b60d29c",
+  "faqs": [
+    {
+      "question": "Did the prompt point at the fix?",
+      "paragraphs": [
+        [
+          "Yes. The verbatim task identifies repetition as an in-scope failure and names token-limit cutoffs as a diagnostic. It does not supply a direction or an edit. These are the actual sentences:"
+        ]
+      ],
+      "quotes": [
+        {
+          "text": "Repairing a specific failure mechanism is in scope: for example, if the model often fails because it repeats itself and never finishes, finding and fixing what drives that repetition counts.",
+          "source": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/message.txt#L5"
+        },
+        {
+          "text": "Global knobs (making the whole output distribution sharper or flatter) are not what we are looking for, and neither is making the model skip its thinking or close it early regardless of the problem; repairing a specific failure inside the thinking (such as repetition) is in scope.",
+          "source": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/message.txt#L5"
+        },
+        {
+          "text": "Look at how the model fails on practice problems: a wrong final answer, finishing without an answer, or being cut off at the token limit (often while repeating itself in its thinking).",
+          "source": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/message.txt#L19"
+        }
+      ],
+      "after_quotes": [
+        [
+          {
+            "text": "The published excerpt of the authors’ private results table",
+            "source": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/RESULTS_excerpt.md#L3-L21"
+          },
+          " records ",
+          {
+            "text": "no submitted edit at 10 passes, but 14.1% MATH-500 at 25 passes",
+            "source": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/RESULTS_excerpt.md#L20-L21"
+          },
+          " for prompt v4, labeled shorter, DEV/HOLDOUT and no failure example. ",
+          {
+            "text": "The source also records older limits: 128 answers and no paired “both” request",
+            "source": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/code/profiles.py#L109-L111"
+          },
+          ". This changes several conditions and does not isolate the effect of removing the repetition example. The faithful run keeps the verbatim message."
+        ],
+        [
+          {
+            "artifact": "analysis/authors-source-verification.json",
+            "label": "The source audit"
+          },
+          " preserves exact quotations, hashes and the limits of these comparisons."
+        ]
+      ]
+    },
+    {
+      "question": "Is it abliteration?",
+      "paragraphs": [
+        [
+          "It uses a related directional weight edit, but its coefficient is not the textbook orthogonal projection. The authors recorded ",
+          {
+            "text": "W' = W0 - 6 outer(u, mask64 * (uᵀ W0))",
+            "source": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/tool_calls.jsonl#L150"
+          },
+          ", with a separate unit direction for each target layer. ",
+          {
+            "text": "The selected 64 columns are in layers 15 and 19",
+            "source": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/tool_calls.jsonl#L128"
+          },
+          "."
+        ],
+        [
+          "For a selected column and unit u, ",
+          {
+            "text": "uᵀw' = (1 − α)uᵀw"
+          },
+          ". Thus ",
+          {
+            "text": "α = 1 removes the parallel component, while α = 6 reverses it and multiplies it by 5"
+          },
+          ". This algebra explains the coefficient; it does not establish the behavioral mechanism."
+        ],
+        [
+          {
+            "label": "CPU inspection finds rank 64 after bfloat16 rounding, with over 99.9991% of each p50c delta’s energy in its leading direction",
+            "artifact": "inspection/p50c-vs-control2.json"
+          },
+          ". The edits are approximately rank one, not exactly rank one as stored. ",
+          {
+            "label": "The p50c layer-to-layer absolute cosine is 0.8490; its same-layer cosines with the mechanical control are 0.3293 and 0.3879",
+            "artifact": "inspection/p50c-vs-control2.json"
+          },
+          "."
+        ],
+        [
+          {
+            "label": "The limited logit lens",
+            "artifact": "inspection/p50c-vs-control2.json"
+          },
+          " does not support strong alignment to the tested Wait, But, Hmm, So or Okay embedding rows, or the mean row. ",
+          {
+            "label": "Maximum named-token absolute cosines are 0.0203, 0.0390; mean-row absolute cosines are 0.0468, 0.0400",
+            "artifact": "inspection/p50c-vs-control2.json"
+          },
+          ". This does not rule out other token directions or a more distributed mechanism."
+        ]
+      ]
+    },
+    {
+      "question": "What is the primary metric?",
+      "paragraphs": [
+        [
+          "For the mechanism question, report accuracy among finished answers together with the cap-hit rate. The faithful benchmark result remains accuracy over all samples, including capped ones. ",
+          {
+            "text": "accuracy_finished = finished_correct / finished_n"
+          },
+          ", where canonical `stop` samples finish and `length` samples hit the cap. An empty finished set has undefined accuracy."
+        ],
+        [
+          "In local calibration, base finished accuracy is ",
+          {
+            "summary": "calibration_base/summary.json",
+            "metric": "accuracy_finished",
+            "percent": true,
+            "digits": 1
+          },
+          " over ",
+          {
+            "summary": "calibration_base/summary.json",
+            "metric": "finished_n",
+            "percent": false,
+            "digits": 0
+          },
+          " finished samples; p50c is ",
+          {
+            "summary": "calibration_p50c/summary.json",
+            "metric": "accuracy_finished",
+            "percent": true,
+            "digits": 1
+          },
+          " over ",
+          {
+            "summary": "calibration_p50c/summary.json",
+            "metric": "finished_n",
+            "percent": false,
+            "digits": 0
+          },
+          ". Their cap-hit rates are ",
+          {
+            "summary": "calibration_base/summary.json",
+            "metric": "cut_share",
+            "percent": true,
+            "digits": 1
+          },
+          " and ",
+          {
+            "summary": "calibration_p50c/summary.json",
+            "metric": "cut_share",
+            "percent": true,
+            "digits": 1
+          },
+          ". These are different subsets, so the conditional comparison does not establish a paired accuracy regression. ",
+          {
+            "label": "The recomputation audit",
+            "artifact": "analysis/finished-metrics.json"
+          },
+          " retains sample hashes."
+        ],
+        [
+          "A capped answer can still grade correct, so finished accuracy cannot be recovered by dividing overall accuracy by one minus the cap-hit rate. Full author termination records are unavailable; their finished metric remains pending."
+        ]
+      ]
+    },
+    {
+      "question": "What does the agent add over a script?",
+      "paragraphs": [
+        [
+          "The released p50c edit reaches ",
+          {
+            "summary": "calibration_p50c/summary.json",
+            "metric": "accuracy",
+            "percent": true,
+            "digits": 1
+          },
+          " versus ",
+          {
+            "summary": "control2_mechanical/math500/summary.json",
+            "metric": "accuracy",
+            "percent": true,
+            "digits": 1
+          },
+          " for the mechanical control under the local think35 evaluation. The control borrows p50c’s column set and derives its direction from calibration answers on this benchmark. It is not a held-out discovery experiment."
+        ],
+        [
+          "The agent-free 2c variant will select its own columns; its benchmark accuracy is ",
+          {
+            "summary": "repair/summary.json",
+            "metric": "accuracy",
+            "percent": true,
+            "digits": 1,
+            "within": [
+              "variants",
+              "2c"
+            ]
+          },
+          ". Until that comparison and the live attempt are complete, these results show that a simple directional intervention recovers much of the reported benchmark gain, not how much an agent adds over a fully independent script."
+        ]
+      ]
+    }
+  ]
+}

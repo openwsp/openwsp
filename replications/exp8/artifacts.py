@@ -5,8 +5,9 @@ import json
 import shutil
 from pathlib import Path
 
+from openwsp.metrics import finished_metrics
 from openwsp.reporting import render_transcript
-from replications.exp8.runtime import atomic_write
+from replications.exp8.runtime import atomic_write, digest, read_rows
 
 
 def collect(data="/data", staging="/data/publication"):
@@ -24,6 +25,15 @@ def collect(data="/data", staging="/data/publication"):
                 destination = root / relative.parent / name
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(source, destination)
+        samples = path.with_name("samples.jsonl")
+        if samples.exists():
+            summary = json.loads(path.read_text())
+            summary.update(finished_metrics(read_rows(samples)))
+            summary.setdefault("provenance", {})["finished_metrics"] = {
+                "method": "openwsp.metrics.finished_metrics", "finished_reason": "stop", "excluded_reason": "length",
+                "samples_file": "samples.jsonl", "samples_sha256": digest(samples),
+            }
+            atomic_write(root / relative, summary)
     for name in ("sandbox-verification.json", "hash-verification.json", "forward-verification.json", "weight-swap.json"):
         source = data / "results/kernel" / name
         if source.exists():

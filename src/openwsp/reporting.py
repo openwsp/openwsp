@@ -12,6 +12,8 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote
 
+from openwsp.metrics import finished_metrics
+
 _REFERENCES = ("unedited", "p10c", "p25c", "p50c")
 _BENCHMARKS = ("math500", "gsm8k", "ifeval")
 _COMPARATORS = {"calibration_base": "unedited", "calibration_p50c": "p50c", "live-run": "p50c"}
@@ -305,9 +307,33 @@ def _runtime_table(summaries: list[tuple[Path, dict]], relative_to: Path) -> str
     return "\n".join(lines)
 
 
+def _cpu_evidence_table(records: list[tuple[Path, dict]], relative_to: Path) -> str:
+    if not records:
+        return ""
+    lines = ["### CPU analysis and implementation checks", "",
+             "| Component | Recorded status | Evidence count | Scope |",
+             "| --- | --- | --- | --- |"]
+    for path, data in records:
+        if data.get("format") == "openwsp.inspect.summary":
+            name = "Edit inspection"
+            count = f"{len(data.get('tensors', []))} tensor measurements"
+            scope = "Pinned weights and saved edits; no generation or GPU job"
+        else:
+            name = data.get("stage", path.stem)
+            checks = data.get("checks", {})
+            if not isinstance(checks, dict) or any(type(value) is not bool for value in checks.values()):
+                raise ValueError("CPU validation checks must be named booleans")
+            count = f"{sum(checks.values())}/{len(checks)} checks passed"
+            scope = (data.get("provenance") or {}).get("scope")
+        lines.append("| " + " | ".join((_text(name), _recorded(data.get("status"), path, relative_to),
+                                        _recorded(count, path, relative_to), _recorded(scope, path, relative_to))) + " |")
+    lines += ["", "These records establish the stated CPU measurements or implementation checks. They are not GPU benchmark results or a completed live replication."]
+    return "\n".join(lines)
+
+
 def _validate_summary(summary: dict[str, Any], path: Path) -> None:
     """Refuse impossible scores and stale totals where per-sample evidence is present."""
-    for key in ("accuracy", "standard_error", "cut_share"):
+    for key in ("accuracy", "accuracy_finished", "standard_error", "cut_share"):
         value = summary.get(key)
         if value is not None and (not _number(value) or not 0 <= value <= 1):
             raise ValueError(f"Invalid {key} in {path}")
@@ -322,10 +348,31 @@ def _validate_summary(summary: dict[str, Any], path: Path) -> None:
             expected = summary["correct"] / summary["n"]
             if not math.isclose(summary["accuracy"], expected, abs_tol=1e-9):
                 raise ValueError(f"Accuracy and counts disagree in {path}")
+    for key in ("finished_n", "finished_correct"):
+        value = summary.get(key)
+        if value is not None and (type(value) is not int or value < 0):
+            raise ValueError(f"Invalid {key} in {path}")
+    finished_n, finished_correct = summary.get("finished_n"), summary.get("finished_correct")
+    accuracy_finished = summary.get("accuracy_finished")
+    if finished_n is not None:
+        if _number(summary.get("n")) and finished_n > summary["n"]:
+            raise ValueError(f"Finished count exceeds sample count in {path}")
+        if finished_n == 0 and accuracy_finished is not None:
+            raise ValueError(f"Finished accuracy is undefined with no finished samples in {path}")
+    if finished_correct is not None:
+        if finished_n is None or finished_correct > finished_n:
+            raise ValueError(f"Finished correct count exceeds finished sample count in {path}")
+        if _number(summary.get("correct")) and finished_correct > summary["correct"]:
+            raise ValueError(f"Finished correct count exceeds total correct count in {path}")
+    if accuracy_finished is not None:
+        if not finished_n:
+            raise ValueError(f"Finished accuracy requires a positive finished count in {path}")
+        if finished_correct is not None and not math.isclose(accuracy_finished, finished_correct / finished_n, abs_tol=1e-9):
+            raise ValueError(f"Finished accuracy and counts disagree in {path}")
     samples = path.with_name("samples.jsonl")
     if samples.exists():
         count, correct = 0, 0
-        seen = set()
+        seen, records = set(), []
         with samples.open() as stream:
             for line in stream:
                 if not line.strip():
@@ -339,9 +386,21 @@ def _validate_summary(summary: dict[str, Any], path: Path) -> None:
                     raise ValueError(f"Invalid sample grade in {samples}")
                 count += 1
                 correct += int(row["correct"])
+                records.append(row)
         for key, measured in (("n", count), ("correct", correct)):
             if summary.get(key) is not None and summary[key] != measured:
                 raise ValueError(f"Summary {key} disagrees with {samples}")
+        if any(key in summary for key in ("finished_n", "finished_correct", "accuracy_finished")):
+            measured = finished_metrics(records)
+            for key, value in measured.items():
+                if key in summary and summary[key] != value:
+                    raise ValueError(f"Summary {key} disagrees with {samples}")
+
+
+def _finished_accuracy(data: dict, path: Path, relative_to: Path) -> str:
+    if data.get("finished_n") == 0 and data.get("accuracy_finished") is None:
+        return _recorded("undefined (no finished samples)", path, relative_to)
+    return _metric(data.get("accuracy_finished"), path, relative_to, percent=True)
 
 
 def _results_table(
@@ -352,25 +411,27 @@ def _results_table(
     lines = [
         "Authors' released evaluations:",
         "",
-        "| Run | MATH-500 | GSM8K | IFEval | MATH-500 hit token limit |",
-        "| --- | --- | --- | --- | --- |",
+        "| Run | MATH-500 | GSM8K | IFEval | MATH-500 finished accuracy | MATH-500 finished samples | MATH-500 hit token limit |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
     ]
     for name in _REFERENCES:
         if name not in references:
-            lines.append(f"| {name} | pending | pending | pending | pending |")
+            lines.append(f"| {name} | pending | pending | pending | pending | pending | pending |")
             continue
         path, data = references[name]
         scores = [
             _metric(data.get(bench, {}).get("acc"), path, relative_to, percent=True) for bench in _BENCHMARKS
         ]
         cut = _metric(data.get("math500", {}).get("cut_share"), path, relative_to, percent=True)
-        lines.append(f"| {name} | {' | '.join(scores)} | {cut} |")
+        finished = _finished_accuracy(data.get("math500", {}), path, relative_to)
+        count = _metric(data.get("math500", {}).get("finished_n"), path, relative_to, digits=0)
+        lines.append(f"| {name} | {' | '.join(scores)} | {finished} | {count} | {cut} |")
     lines += [
         "",
-        "Our evaluations and controls (controls are ours):",
+        "OpenWSP evaluations and controls:",
         "",
-        "| Stage | Model | Benchmark | Author comparator | Accuracy | Standard error | Samples | Hit token limit | Status |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Stage | Model | Benchmark | Author comparator | Accuracy | Finished accuracy | Hit token limit | Finished samples | Standard error | Samples | Status |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for path, data in summaries:
         stage, benchmark = data.get("stage"), data.get("benchmark")
@@ -386,19 +447,23 @@ def _results_table(
             _text(benchmark),
             comparator,
             _metric(data.get("accuracy"), path, relative_to, percent=True),
+            _finished_accuracy(data, path, relative_to),
+            _metric(data.get("cut_share"), path, relative_to, percent=True),
+            _metric(data.get("finished_n"), path, relative_to, digits=0),
             _metric(data.get("standard_error"), path, relative_to, percent=True, digits=2),
             _metric(data.get("n"), path, relative_to, digits=0),
-            _metric(data.get("cut_share"), path, relative_to, percent=True),
             f"[{_text(data.get('status'), 'unspecified')}]({_link(path, relative_to)})",
         ]
         lines.append("| " + " | ".join(values) + " |")
     if not summaries:
         lines.append(
-            "| pending | pending | pending | pending | pending | pending | pending | pending | pending |"
+            "| pending | pending | pending | pending | pending | pending | pending | pending | pending | pending | pending |"
         )
     lines += [
         "",
         "Only recorded values are shown. Missing fields remain pending; partial runs retain their recorded status.",
+        ("Finished accuracy uses only samples with `finish_reason=stop`; token-limited samples remain in all-sample accuracy. "
+         "It is undefined when no answers finish, and must be read with the cap-hit rate because the finished subset can change."),
     ]
     return "\n".join(lines)
 
@@ -422,6 +487,92 @@ def _cost_stage(stage: str) -> str:
     if directions:
         return "control2 / directions smoke" if directions[1] == "smoke" else "control2 / directions"
     return stage.replace("/", " / ")
+
+
+def _independent_results(path: Path, data: dict, summaries: dict, relative_to: Path) -> str:
+    """Compare reported results without treating different protocols as replications."""
+    lines = ["### Independent results", "", data["scope"], "",
+             "| Source / condition | Benchmark / samples | Thinking / token cap | Engine | Accuracy | Finished accuracy | Hit token limit | Finished samples | Comparison |",
+             "| --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
+    sources = {item["id"]: item for item in data.get("sources", [])}
+    for row in data["results"]:
+        _validate_summary(row, path)
+        measured_path, measured = summaries.get(row.get("summary"), (path, row))
+        if row.get("summary") and row["summary"] not in summaries:
+            measured = {}
+        provenance = measured.get("provenance") or {}
+        sampling = provenance.get("sampling") or row.get("sampling") or {}
+        thinking = provenance.get("thinking", row.get("thinking"))
+        cap = sampling.get("max_tokens", row.get("token_cap"))
+        setting = f"{'on' if thinking is True else 'off' if thinking is False else 'unreported'} / {cap if cap is not None else 'unreported'}"
+        if row.get("thinking_budget") is not None:
+            setting = f"forced close {row['thinking_budget']} + answer {row.get('answer_token_cap', 'unreported')}"
+        engine = provenance.get("engine", row.get("engine"))
+        label = _text(row.get("label", f"{row.get('researcher')} / {row.get('edit')}"))
+        primary = sources.get(next(iter(row.get("sources", [])), ""), {})
+        url = primary.get("immutable_url") or primary.get("url")
+        if url:
+            if not url.startswith("https://"):
+                raise ValueError("Independent primary source must use HTTPS")
+            label += f" ([source]({url}))"
+        benchmark = measured.get("benchmark", row.get("benchmark", "pending"))
+        cells = [label, _text(benchmark) + " / " + _metric(measured.get("n"), measured_path, relative_to, digits=0),
+                 _recorded(setting, measured_path, relative_to), _recorded(engine, measured_path, relative_to),
+                 _metric(measured.get("accuracy"), measured_path, relative_to, percent=True),
+                 _finished_accuracy(measured, measured_path, relative_to),
+                 _metric(measured.get("cut_share"), measured_path, relative_to, percent=True),
+                 _metric(measured.get("finished_n"), measured_path, relative_to, digits=0),
+                 _recorded(row["comparison_label"], path, relative_to)]
+        lines.append("| " + " | ".join(cells) + " |")
+    lines += ["", (f"[Source verification, exact settings and limitations]({_link(path, relative_to)}). "
+              "Different thinking modes, token caps, engines, sample counts and early-stop rules are separate conditions. "
+              "An unavailable finished metric is not inferred from overall accuracy and cutoff share.")]
+    return "\n".join(lines)
+
+
+def _analysis_faq(path: Path, data: dict, summaries: dict, results: Path, relative_to: Path,
+                  linked_sources: list[Path]) -> str:
+    def render(part):
+        if isinstance(part, str):
+            return _redact(part)
+        if "metric" in part:
+            source, value = summaries.get(part["summary"], (None, {}))
+            if source is None:
+                return "pending"
+            for key in part.get("within", []):
+                value = value.get(key, {}) if isinstance(value, dict) else {}
+            if part["metric"] == "accuracy_finished":
+                return _finished_accuracy(value, source, relative_to)
+            return _metric(value.get(part["metric"]), source, relative_to,
+                           percent=part.get("percent", False), digits=part.get("digits", 1))
+        if "artifact" in part:
+            artifact = (results / part["artifact"]).resolve()
+            if not artifact.is_relative_to(results):
+                raise ValueError("Analysis artifact escapes results")
+            if not artifact.is_file():
+                return _text(part["label"]) + ": pending"
+            linked_sources.append(artifact)
+            return f"[{_text(part['label'])}]({_link(artifact, relative_to)})"
+        source = part.get("source")
+        if source:
+            if not source.startswith("https://"):
+                raise ValueError("Analysis primary source must be an HTTPS permalink")
+            return f"[{_text(part['text'])}]({source})"
+        return _recorded(part["text"], path, relative_to)
+
+    lines = ["### Questions about the result", ""]
+    for item in data["faqs"]:
+        lines.append(f"**{_text(item['question'])}**")
+        for paragraph in item.get("paragraphs", []):
+            lines += ["", "".join(render(part) for part in paragraph)]
+        for quotation in item.get("quotes", []):
+            if not quotation["source"].startswith("https://"):
+                raise ValueError("Analysis quotation source must use HTTPS")
+            lines += ["", "> " + quotation["text"] + f" [Source]({quotation['source']})"]
+        for paragraph in item.get("after_quotes", []):
+            lines += ["", "".join(render(part) for part in paragraph)]
+        lines.append("")
+    return "\n".join(lines)
 
 
 def _cost_basis(row: dict[str, Any], kind: str) -> str:
@@ -556,16 +707,40 @@ def generate_report(repo_root: str | Path, results_dir: str | Path) -> dict[str,
         data = _read_json(path)
         _validate_summary(data, path)
         extra_costs.append((path, data))
+    analysis = {}
+    for name in ("independent-results.json", "interpretation.json"):
+        path = results / "analysis" / name
+        if not path.resolve().is_relative_to(results):
+            raise ValueError("Analysis evidence escapes results")
+        if path.exists():
+            analysis[name] = (path, _read_json(path))
+    summary_index = {path.relative_to(results).as_posix(): (path, data) for path, data in summaries}
+    cpu_records = [(path, data) for path, data in summaries
+                   if data.get("format") == "openwsp.inspect.summary" or (data.get("provenance") or {}).get("synthetic") is True]
+    cpu_paths = {path for path, _ in cpu_records}
+    evaluations = [(path, data) for path, data in summaries if path not in cpu_paths]
+    bank_path = results / "forward-bank-cpu.json"
+    if bank_path.exists():
+        if not bank_path.resolve().is_relative_to(results):
+            raise ValueError("CPU bank evidence escapes results")
+        cpu_records.append((bank_path, _read_json(bank_path)))
+    linked_sources = []
     def result_body(relative_to, *, include_status=True):
-        sections = [_results_table(references, summaries, relative_to),
-                    _calibration_table(evidence, relative_to), _runtime_table(summaries, relative_to)]
+        sections = [_results_table(references, evaluations, relative_to),
+                    _calibration_table(evidence, relative_to), _runtime_table(evaluations, relative_to)]
+        if cpu_records:
+            sections.append(_cpu_evidence_table(cpu_records, relative_to))
         if include_status:
             sections.insert(0, status_body(relative_to))
+        if "independent-results.json" in analysis:
+            sections.append(_independent_results(*analysis["independent-results.json"], summary_index, relative_to))
+        if "interpretation.json" in analysis:
+            sections.append(_analysis_faq(*analysis["interpretation.json"], summary_index, results, relative_to, linked_sources))
         return "\n\n".join(sections)
     def status_body(relative_to):
         return _status_table(evidence, relative_to, pointer=pointer, attempts=attempts, summaries=summaries)
     def cost_body(relative_to):
-        return _costs_table(summaries + extra_costs, relative_to, ledgers)
+        return _costs_table(evaluations + extra_costs, relative_to, ledgers)
     readme_path = repo / "README.md"
     readme = readme_path.read_text() if readme_path.exists() else "# OpenWSP\n"
     standalone_status = "<!-- OPENWSP:STATUS:" in readme
@@ -587,7 +762,8 @@ def generate_report(repo_root: str | Path, results_dir: str | Path) -> dict[str,
             {"path": str(path), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
             for path in dict.fromkeys([*(item[0] for item in references.values()), *(item[0] for item in summaries),
                          *(item[0] for item in evidence.values()), *attempt_sources,
-                         *(item[0] for item in ledgers), *(item[0] for item in extra_costs)])
+                         *(item[0] for item in ledgers), *(item[0] for item in extra_costs),
+                         *(item[0] for item in analysis.values()), *(item[0] for item in cpu_records), *linked_sources])
         ],
     }
 

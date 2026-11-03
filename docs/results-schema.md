@@ -23,6 +23,9 @@ A summary is one JSON object. Rates use fractions in the file; the report format
 | `n` | integer | Number of scored samples actually present. |
 | `correct` | integer | Number of those samples graded correct. |
 | `accuracy` | number | `correct / n`, on the interval from zero to one. |
+| `finished_n` | integer | Samples with canonical `finish_reason: "stop"`; excludes `"length"` token-limit termination. |
+| `finished_correct` | integer | Correct grades among those finished samples. |
+| `accuracy_finished` | number or null | `finished_correct / finished_n`; null when no samples finish. Missing termination evidence leaves this metric unavailable. |
 | `standard_error` | number | Standard error as a fraction, using the method declared in provenance. |
 | `mean_tokens` | number | Mean generated token count over scored samples. |
 | `cut_share` | number | Fraction of scored samples that reached the generation token limit. |
@@ -33,6 +36,10 @@ A summary is one JSON object. Rates use fractions in the file; the report format
 | `reference` | string, optional | Explicit author comparison: `unedited`, `p10c`, `p25c` or `p50c`. |
 
 The reference comparison must describe the intended comparator. It does not assert that a different control is a reproduction of that condition. The authors' table is generated separately from `replications/exp8/reference/*.json`.
+
+Compute the finished fields with `openwsp.metrics.finished_metrics(records)` from the complete compact sample records. The helper rejects unknown termination reasons and invalid grades rather than treating them as completed answers. Recompute the fields after combining batches; never average batch accuracies or inherit a batch's denominator. Overall accuracy retains capped answers, including any that still grade correct. Finished accuracy therefore cannot be inferred from overall accuracy and `cut_share`. Compare it with the cap-hit rate: different conditions can finish different subsets, so a change in conditional accuracy alone is not a paired regression.
+
+The published summaries record the helper, termination convention and compact sample SHA-256 under `provenance.finished_metrics`. The artifact collector recomputes these fields from collected samples, preserving the original private summary. The reporter checks any recorded finished fields against the sample file before changing published tables. `analysis/finished-metrics.json` records the initial recomputation over previously published samples.
 
 Record problem coverage as well as sample count in provenance. Multiple samples of the same problem are not independent problems: report the uncertainty method and preserve the per-problem grouping. An exact ratio with no uncertainty method is insufficient for a calibration claim.
 
@@ -47,7 +54,7 @@ Use JSON Lines, one object for every scored sample:
 | `answer` | string or null | Extracted final answer, not the full generated reasoning. |
 | `correct` | boolean | Grade under the recorded official protocol. |
 | `token_count` | integer | Generated tokens for this sample. |
-| `finish_reason` | string | Engine termination reason, including token-limit termination. |
+| `finish_reason` | string | Canonical `stop` or `length`. Preserve and document the mapping from the engine; never silently classify an unknown or failed generation as finished. |
 | `raw_path` | string | Volume path of the full generation artifact. |
 | `raw_sha256` | string | SHA-256 of the referenced artifact's exact bytes. |
 
@@ -71,6 +78,12 @@ Pipeline and recovery states are shown as recorded. The live editor's `done` fla
 
 Calibration comparison records retain observed/reference accuracy, gap and the prescribed tolerance outcome. A recorded gap stays visible when a circuit-breaker audit permits continuation. Publish the audit file with its checks and unresolved discrepancy; an absent audit is shown explicitly. Runtime metadata and standard-error methods are read from each summary's `provenance` object.
 
+## Independent comparisons and interpretation
+
+Optional `analysis/independent-results.json` supplies the generated independent-results table. Each external row records its primary source, immutable revision where available, retrieved source hash, benchmark coverage, sampling, thinking mode, token cap, engine and comparison limits. Local rows use a `summary` path relative to the results directory, so refreshed tables read the actual measurement. Missing referenced summaries remain pending even if the comparison file contains copied values. Do not pool different benchmarks, forced-close policies, thinking settings or sampling configurations.
+
+Optional `analysis/interpretation.json` supplies the four generated FAQ answers within the existing `RESULTS` section. Paragraph fragments reference summary metrics, source permalinks or contained result artifacts; exact task quotations retain their source links. `within` selects nested variant metadata in a summary. Unmeasured variants remain pending. Source-verification files preserve quotations, calculations and caveats without including private generations. These analysis files and every linked local artifact are included in the report's source-hash receipt. They are orchestrator evidence and must never be sent to the live editor.
+
 The readable transcript is generated from `turns/` and `tool_calls.jsonl`. Each turn retains the editor's explanation, code or forward block and returned result. Redact credentials; link to large outputs by their artifact identity instead of embedding arrays or full datasets. The current Experiment 8 transcript is selected by [`active-live.json`](../replications/exp8/results/active-live.json), presently [`live-runs/codex-20261103/transcript.md`](../replications/exp8/results/live-runs/codex-20261103/transcript.md). The [`live-run/transcript.md`](../replications/exp8/results/live-run/transcript.md) file preserves the earlier API attempt.
 
 ## Add a run by pull request
@@ -81,3 +94,5 @@ The readable transcript is generated from `turns/` and `tool_calls.jsonl`. Each 
 4. Run `uv run pytest -q` and `python scripts/check_secrets.py --all`, then submit the evidence and regenerated tables together.
 
 Do not write numbers directly into the README. Record a failed or incomplete attempt honestly, with its missing stages and resume command. A result from another model or changed protocol belongs under a distinct configuration and must be labeled accordingly.
+
+The [contributor guide](contributing-experiments.md) explains how to add an evaluation cell, mechanical repair variant or replication folder.

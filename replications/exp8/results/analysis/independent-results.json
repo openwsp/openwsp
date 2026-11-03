@@ -1,0 +1,541 @@
+{
+  "schema_version": 1,
+  "accessed_at": "2026-11-03T18:43:59.430172+00:00",
+  "scope": "Published results under their recorded conditions. Rows with different sampling, token caps, engines or benchmarks do not estimate the same effect. These are reference-checkpoint reruns and controls, not completed OpenWSP live-edit results.",
+  "sources": [
+    {
+      "id": "akhaliq_card",
+      "url": "https://huggingface.co/RikiyaT/Qwen3.5-0.8B-weight-space-programming",
+      "immutable_url": "https://huggingface.co/RikiyaT/Qwen3.5-0.8B-weight-space-programming/blob/d1671a178705bcab7644806d23c535517f35723b/README.md",
+      "snapshot_sha256": "cc464ae319a6907a944e5d8920388cba8989d9fe83ea9c9d5eae4ee65c4dd5a3",
+      "exact_excerpt": "The edited model scored **51.0%**, with **31.6%** of answers hitting the token limit."
+    },
+    {
+      "id": "akhaliq_scores",
+      "url": "https://huggingface.co/RikiyaT/Qwen3.5-0.8B-weight-space-programming/blob/d1671a178705bcab7644806d23c535517f35723b/eval/scores_edited_math500.json",
+      "immutable_url": "https://huggingface.co/RikiyaT/Qwen3.5-0.8B-weight-space-programming/blob/d1671a178705bcab7644806d23c535517f35723b/eval/scores_edited_math500.json",
+      "snapshot_sha256": "17c14674b4e6b06f622c0bfbffb243b17f196fda31a57cd6579f23a50fdfdc0c",
+      "exact_excerpt": "\"acc\": 0.51,\n    \"cut_share\": 0.316"
+    },
+    {
+      "id": "akhaliq_base_smoke",
+      "url": "https://huggingface.co/RikiyaT/Qwen3.5-0.8B-weight-space-programming/blob/d1671a178705bcab7644806d23c535517f35723b/eval/scores_base_math500.json",
+      "immutable_url": "https://huggingface.co/RikiyaT/Qwen3.5-0.8B-weight-space-programming/blob/d1671a178705bcab7644806d23c535517f35723b/eval/scores_base_math500.json",
+      "snapshot_sha256": "205171ff45a3ceb859b1c580c5a90ddf98987dc697080a1214a61f9ad22ee2cf",
+      "exact_excerpt": "\"n_problems\": 25"
+    },
+    {
+      "id": "hedwig_article",
+      "url": "https://www.hedwigai.com/blog/weight-edit-math-or-loops",
+      "immutable_url": null,
+      "snapshot_sha256": "9bd3967fd32e86516b5b8a565f43cd5eea3480c247fdf8fa724d53888810afa8",
+      "exact_excerpt": "The thinking-on scores without a budget are the authors’."
+    },
+    {
+      "id": "alisor_article",
+      "url": "https://alisorcorp.github.io/inside-a-reasoning-loop/",
+      "immutable_url": "https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/index.html",
+      "snapshot_sha256": "eb0ca808a8f1213ad6408fda25eb018d4e7cd602320637798672eb114996565e",
+      "exact_excerpt": "Forty problems is a small sample"
+    },
+    {
+      "id": "alisor_scores",
+      "url": "https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/data/eval_summary.txt",
+      "immutable_url": "https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/data/eval_summary.txt",
+      "snapshot_sha256": "b3bf80b9b694ecdab72611f01aa2b0915743269b50ad648093664b5b53e76750",
+      "exact_excerpt": "correct 8/40  finished 8"
+    },
+    {
+      "id": "alisor_eval",
+      "url": "https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/code/eval_gsm8k.py",
+      "immutable_url": "https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/code/eval_gsm8k.py",
+      "snapshot_sha256": "0d26d3a9b62f7a5ab4dfa5372d5857d1dbef87a48b01642a2149926556eec5dc",
+      "exact_excerpt": "A loop counts as wrong, like a cut at the token limit."
+    },
+    {
+      "id": "alisor_finished_definition",
+      "url": "https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/code/summarize_eval.py",
+      "immutable_url": "https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/code/summarize_eval.py",
+      "snapshot_sha256": "db8668606a85fe1873ae29818937f6cee83263d2318df3f854c92b23287e5d95",
+      "exact_excerpt": "fin = [x for x in rows if x[\"status\"] == \"finished\"]"
+    },
+    {
+      "id": "openwsp_control1_config",
+      "url": "https://github.com/openwsp/openwsp/blob/8c383627c7a64a4ee1ebeb238f27e5f269a98e11/replications/exp8/results/control1_nothink/math500/summary.json",
+      "immutable_url": "https://github.com/openwsp/openwsp/blob/8c383627c7a64a4ee1ebeb238f27e5f269a98e11/replications/exp8/results/control1_nothink/math500/summary.json",
+      "snapshot_sha256": "e1faa5bd2a3ce68a84c04cc26b562d00e2a8884728ce413b53b659ca29eb0986",
+      "exact_excerpt": "\"temperature\": 1.0,",
+      "verified_sampling": {
+        "temperature": 1.0,
+        "top_p": 1.0,
+        "top_k": 20,
+        "presence_penalty": 2.0,
+        "max_tokens": 32768,
+        "seed": 0,
+        "min_p": 0.0,
+        "repetition_penalty": 1.0,
+        "n": 1
+      }
+    },
+    {
+      "id": "authors_protocol",
+      "immutable_url": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/README.md#L38-L45",
+      "url": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/README.md#L38-L45",
+      "snapshot_sha256": "473e386ade21ff52240103003b6b125e4362d9fa11010916c1b770ddb0edcbbd"
+    }
+  ],
+  "results": [
+    {
+      "id": "authors_unedited",
+      "label": "Authors / unedited",
+      "researcher": "Authors",
+      "edit": "unedited",
+      "benchmark": "math500",
+      "thinking": true,
+      "token_cap": 32768,
+      "engine": "vLLM (version not reported)",
+      "samples_per_problem": 4,
+      "n": 2000,
+      "accuracy": 0.079,
+      "cut_share": 0.93,
+      "finished_n": null,
+      "accuracy_finished": null,
+      "sources": [
+        "authors_protocol"
+      ],
+      "comparison_label": "Original think35 evaluation; full termination records unavailable",
+      "sampling": {
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "top_k": 20,
+        "presence_penalty": 1.5
+      },
+      "score_source": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/unedited/merged.json",
+      "local_reference": "replications/exp8/reference/unedited.json"
+    },
+    {
+      "id": "authors_p50c",
+      "label": "Authors / p50c",
+      "researcher": "Authors",
+      "edit": "p50c",
+      "benchmark": "math500",
+      "thinking": true,
+      "token_cap": 32768,
+      "engine": "vLLM (version not reported)",
+      "samples_per_problem": 4,
+      "n": 2000,
+      "accuracy": 0.481,
+      "cut_share": 0.3305,
+      "finished_n": null,
+      "accuracy_finished": null,
+      "sources": [
+        "authors_protocol"
+      ],
+      "comparison_label": "Original think35 evaluation; full termination records unavailable",
+      "sampling": {
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "top_k": 20,
+        "presence_penalty": 1.5
+      },
+      "score_source": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/p50c/merged.json",
+      "local_reference": "replications/exp8/reference/p50c.json"
+    },
+    {
+      "id": "akhaliq_p50c_math500",
+      "researcher": "akhaliq",
+      "benchmark": "math500",
+      "model": "Qwen/Qwen3.5-0.8B",
+      "edit": "published p50c",
+      "thinking": true,
+      "sampling": {
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "seed": 0
+      },
+      "token_cap": 32768,
+      "engine": "vLLM 0.33.0",
+      "transformers": "5.20.2",
+      "hardware": "NVIDIA H200",
+      "dtype": "bfloat16",
+      "n_problems": 500,
+      "samples_per_problem": 4,
+      "n": 2000,
+      "correct": 1020,
+      "accuracy": 0.51,
+      "cut_share": 0.316,
+      "finished_n": null,
+      "accuracy_finished": null,
+      "sources": [
+        "akhaliq_scores",
+        "akhaliq_card"
+      ],
+      "verification": "Primary score JSON checked; 1020/2000 independently recomputed from published per-problem grades. No generation or model call performed.",
+      "comparison": "Same think35 sampling and 32768 cap as OpenWSP calibration; four samples rather than one. Transformers and hardware differ; full multimodal checkpoint replaces text-only export, with language tensors reported hash-identical.",
+      "unknowns": [
+        "Per-sample finish reasons were not downloaded; finished-answer accuracy is not inferred from overall accuracy/cut share."
+      ],
+      "comparison_label": "Matched think35 sampling/cap and vLLM version; different samples, Transformers and GPU",
+      "label": "akhaliq / published p50c"
+    },
+    {
+      "id": "hedwig_base_nothink",
+      "researcher": "hedwigai",
+      "benchmark": "math500",
+      "model": "Qwen/Qwen3.5-0.8B",
+      "edit": "unedited",
+      "thinking": false,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5
+      },
+      "token_cap": 8192,
+      "engine": "vLLM (version not reported)",
+      "hardware": "one RTX 3090",
+      "dtype": "bfloat16",
+      "n_problems": 500,
+      "samples_per_problem": 4,
+      "n": 2000,
+      "accuracy": 0.436,
+      "cut_share": null,
+      "finished_n": null,
+      "accuracy_finished": null,
+      "provider_reported_finished_n": 1331,
+      "provider_reported_accuracy_finished": 0.651,
+      "sources": [
+        "hedwig_article",
+        "openwsp_control1_config"
+      ],
+      "comparison": "Different thinking mode, sampling and token cap from think35 calibration. Also differs from OpenWSP control1: temperature 1.0, top_p 1.0, presence_penalty 2.0, cap 32768 there versus 0.7, 0.8, 1.5, cap 8192 here.",
+      "unknowns": [
+        "Only the article was available; no linked per-sample results found. Reported finished metrics are rounded and their termination definition is not independently established."
+      ],
+      "comparison_label": "Changed thinking, sampling and cap; differs from OpenWSP control 1",
+      "label": "hedwigai / unedited"
+    },
+    {
+      "id": "hedwig_p50c_nothink",
+      "researcher": "hedwigai",
+      "benchmark": "math500",
+      "model": "Qwen/Qwen3.5-0.8B",
+      "edit": "published p50c",
+      "thinking": false,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5
+      },
+      "token_cap": 8192,
+      "engine": "vLLM (version not reported)",
+      "hardware": "one RTX 3090",
+      "dtype": "bfloat16",
+      "n_problems": 500,
+      "samples_per_problem": 4,
+      "n": 2000,
+      "accuracy": 0.452,
+      "cut_share": null,
+      "finished_n": null,
+      "accuracy_finished": null,
+      "provider_reported_finished_n": 1371,
+      "provider_reported_accuracy_finished": 0.655,
+      "sources": [
+        "hedwig_article",
+        "openwsp_control1_config"
+      ],
+      "comparison": "Different thinking mode, sampling and token cap from think35 calibration. Also differs from OpenWSP control1: temperature 1.0, top_p 1.0, presence_penalty 2.0, cap 32768 there versus 0.7, 0.8, 1.5, cap 8192 here.",
+      "unknowns": [
+        "Only the article was available; no linked per-sample results found. Reported finished metrics are rounded and their termination definition is not independently established."
+      ],
+      "comparison_label": "Paired with Hedwig base; changed thinking, sampling and cap",
+      "label": "hedwigai / published p50c"
+    },
+    {
+      "id": "hedwig_base_forced_close",
+      "researcher": "hedwigai",
+      "benchmark": "math500",
+      "model": "Qwen/Qwen3.5-0.8B",
+      "edit": "unedited",
+      "thinking": true,
+      "sampling": {
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "top_k": 20,
+        "presence_penalty": 1.5
+      },
+      "thinking_budget": 8192,
+      "answer_token_cap": 4096,
+      "token_cap": null,
+      "engine": "vLLM (version not reported)",
+      "hardware": "one RTX 3090",
+      "dtype": "bfloat16",
+      "n_problems": 500,
+      "samples_per_problem": 2,
+      "n": 1000,
+      "accuracy": 0.343,
+      "cut_share": null,
+      "finished_n": null,
+      "accuracy_finished": null,
+      "sources": [
+        "hedwig_article"
+      ],
+      "comparison": "Forced end-of-thinking followed by answer budget; neither thinking off nor an ordinary generation cap.",
+      "unknowns": [
+        "Article reports 946 still thinking and 53 naturally finished, leaving one of 1000 unclassified in that explanatory breakdown. No missing category is invented."
+      ],
+      "comparison_label": "Forced close plus answer budget; not thinking off",
+      "label": "hedwigai / unedited"
+    },
+    {
+      "id": "alisor_base_gsm8k_subset",
+      "researcher": "alisorcorp",
+      "benchmark": "gsm8k subset",
+      "model": "Qwen/Qwen3.5-0.8B",
+      "edit": "base",
+      "alpha": 0,
+      "thinking": true,
+      "sampling": {
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "repeat_last_n": 17408
+      },
+      "token_cap": 16384,
+      "engine": "llama.cpp (version not reported)",
+      "hardware": "integrated GPU on mini PC (article); specific model not pinned in repository",
+      "dtype": "bfloat16 GGUF",
+      "n_problems": 40,
+      "samples_per_problem": 1,
+      "n": 40,
+      "correct": 8,
+      "accuracy": 0.2,
+      "cut_share": 0.075,
+      "finished_n": null,
+      "accuracy_finished": null,
+      "provider_reported_finished_n": 8,
+      "provider_reported_accuracy_finished": 1.0,
+      "early_loop_aborts": 29,
+      "token_limit_cuts": 3,
+      "sources": [
+        "alisor_scores",
+        "alisor_eval",
+        "alisor_finished_definition",
+        "alisor_article"
+      ],
+      "comparison": "Different benchmark subset, engine and token cap, with an additional early loop-abort detector. Provider finished denominator excludes loop aborts as well as length cuts; incompatible with OpenWSP non-length definition.",
+      "changed_layers": [
+        15,
+        19
+      ],
+      "column_scope": "Unedited base",
+      "comparison_label": "GSM8K subset; llama.cpp with early-loop abort",
+      "label": "alisorcorp / base"
+    },
+    {
+      "id": "alisor_alpha1_gsm8k_subset",
+      "researcher": "alisorcorp",
+      "benchmark": "gsm8k subset",
+      "model": "Qwen/Qwen3.5-0.8B",
+      "edit": "alpha1",
+      "alpha": 1,
+      "thinking": true,
+      "sampling": {
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "repeat_last_n": 17408
+      },
+      "token_cap": 16384,
+      "engine": "llama.cpp (version not reported)",
+      "hardware": "integrated GPU on mini PC (article); specific model not pinned in repository",
+      "dtype": "bfloat16 GGUF",
+      "n_problems": 40,
+      "samples_per_problem": 1,
+      "n": 40,
+      "correct": 13,
+      "accuracy": 0.325,
+      "cut_share": 0.125,
+      "finished_n": null,
+      "accuracy_finished": null,
+      "provider_reported_finished_n": 16,
+      "provider_reported_accuracy_finished": 0.8125,
+      "early_loop_aborts": 19,
+      "token_limit_cuts": 5,
+      "sources": [
+        "alisor_scores",
+        "alisor_eval",
+        "alisor_finished_definition",
+        "alisor_article"
+      ],
+      "comparison": "Different benchmark subset, engine and token cap, with an additional early loop-abort detector. Provider finished denominator excludes loop aborts as well as length cuts; incompatible with OpenWSP non-length definition.",
+      "changed_layers": [
+        15,
+        19
+      ],
+      "column_scope": "The same 64 published columns and direction per layer; dose alone varies.",
+      "comparison_label": "Same subset; coefficient-1 variant and early-loop abort",
+      "label": "alisorcorp / alpha1"
+    },
+    {
+      "id": "alisor_p50c_gsm8k_subset",
+      "researcher": "alisorcorp",
+      "benchmark": "gsm8k subset",
+      "model": "Qwen/Qwen3.5-0.8B",
+      "edit": "p50c",
+      "alpha": 6,
+      "thinking": true,
+      "sampling": {
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "repeat_last_n": 17408
+      },
+      "token_cap": 16384,
+      "engine": "llama.cpp (version not reported)",
+      "hardware": "integrated GPU on mini PC (article); specific model not pinned in repository",
+      "dtype": "bfloat16 GGUF",
+      "n_problems": 40,
+      "samples_per_problem": 1,
+      "n": 40,
+      "correct": 19,
+      "accuracy": 0.475,
+      "cut_share": 0.3,
+      "finished_n": null,
+      "accuracy_finished": null,
+      "provider_reported_finished_n": 24,
+      "provider_reported_accuracy_finished": 0.7916666666666666,
+      "early_loop_aborts": 4,
+      "token_limit_cuts": 12,
+      "sources": [
+        "alisor_scores",
+        "alisor_eval",
+        "alisor_finished_definition",
+        "alisor_article"
+      ],
+      "comparison": "Different benchmark subset, engine and token cap, with an additional early loop-abort detector. Provider finished denominator excludes loop aborts as well as length cuts; incompatible with OpenWSP non-length definition.",
+      "changed_layers": [
+        15,
+        19
+      ],
+      "column_scope": "The same 64 published columns and direction per layer; dose alone varies.",
+      "comparison_label": "Same subset; p50c and early-loop abort",
+      "label": "alisorcorp / p50c"
+    },
+    {
+      "label": "OpenWSP / unedited",
+      "summary": "calibration_base/summary.json",
+      "comparison_label": "think35 sampling/cap; one sample, H100"
+    },
+    {
+      "label": "OpenWSP / published p50c",
+      "summary": "calibration_p50c/summary.json",
+      "comparison_label": "Same local calibration settings as base"
+    },
+    {
+      "label": "OpenWSP / thinking off",
+      "summary": "control1_nothink/math500/summary.json",
+      "comparison_label": "Thinking and sampling both changed; same local cap/engine"
+    },
+    {
+      "label": "OpenWSP / mechanical control",
+      "summary": "control2_mechanical/math500/summary.json",
+      "comparison_label": "think35; direction uses calibration answers and borrowed columns"
+    },
+    {
+      "label": "OpenWSP / repetition penalty",
+      "summary": "control3_repetition/math500/summary.json",
+      "comparison_label": "think35 plus repetition penalty 1.1"
+    }
+  ],
+  "verified_derived_claims": [
+    {
+      "claim": "Early-loop relative reduction, alpha1 vs base",
+      "value": 0.3448275862068966,
+      "basis": "(29 - 19) / 29",
+      "sources": [
+        "alisor_scores"
+      ],
+      "limitation": "40 GSM8K problems; early-loop detector, not token-limit incidence."
+    },
+    {
+      "claim": "Early-loop relative reduction, p50c vs base",
+      "value": 0.8620689655172413,
+      "basis": "(29 - 4) / 29",
+      "sources": [
+        "alisor_scores"
+      ],
+      "limitation": "40 GSM8K problems; early-loop detector, not MATH-500 accuracy or full-protocol replication."
+    }
+  ],
+  "rejected_or_limited_leads": [
+    {
+      "claim": "hedwigai independently reproduced full MATH-500 thinking-on at 48.1%",
+      "status": "contradicted_by_primary_article",
+      "correction": "48.1% is explicitly the authors' reference. Hedwig reports first-100-problem checks at 12% base/51% edited with one answer per problem (n=100). This is a subset, not a full MATH-500 rerun; the exact token cap for this check is not established in that passage."
+    },
+    {
+      "claim": "alisorcorp coefficient 1 cuts loops by about a third; coefficient 6 by 86%",
+      "status": "supported_with_scope",
+      "correction": "Derived relative loop reductions are 34.48% and 86.21% on 40 GSM8K problems with early abort, a 16,384 token cap, llama.cpp and bf16 GGUF."
+    },
+    {
+      "claim": "All independent rows are directly comparable",
+      "status": "unsupported",
+      "correction": "Separate matched think35 MATH-500 from nonthinking, forced-close and GSM8K dose experiments. Do not rank mismatched rows by accuracy alone."
+    },
+    {
+      "claim": "Hedwig and OpenWSP nonthinking results use matched model-card sampling",
+      "status": "contradicted_by_recorded_configurations",
+      "correction": "Both describe model-card defaults, but actual configurations differ in temperature, top_p, presence penalty and cap. Use the recorded settings, not that label."
+    }
+  ],
+  "search_scope": [
+    "Web searches for researcher names with weight-space-programming and stated scores.",
+    "Opened primary Hedwig article, HF edited-checkpoint card and score JSON, Alisor repository/page/eval code and summary.",
+    "Resolved HF revision and GitHub commit; re-fetched pinned bytes to verify card/page/summary identity.",
+    "Did not download model weights, activation arrays or full raw generations."
+  ],
+  "verification_scope": "Primary-source verification and CPU recomputation only. No external model rerun was performed for this table.",
+  "excluded_table_rows": [
+    {
+      "id": "akhaliq_base_smoke",
+      "researcher": "akhaliq",
+      "benchmark": "math500 subset",
+      "model": "Qwen/Qwen3.5-0.8B",
+      "edit": "unedited",
+      "thinking": true,
+      "sampling": {
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "seed": 0
+      },
+      "token_cap": 32768,
+      "engine": "vLLM 0.33.0",
+      "transformers": "5.20.2",
+      "hardware": "NVIDIA H200",
+      "dtype": "bfloat16",
+      "n_problems": 25,
+      "samples_per_problem": 4,
+      "n": 100,
+      "correct": 5,
+      "accuracy": 0.05,
+      "cut_share": 0.95,
+      "finished_n": null,
+      "accuracy_finished": null,
+      "sources": [
+        "akhaliq_base_smoke",
+        "akhaliq_card"
+      ],
+      "comparison": "Smoke subset only, not a full matched baseline for the 500-problem edited score."
+    }
+  ]
+}

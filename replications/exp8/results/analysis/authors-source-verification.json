@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "verified_at_utc": "2026-11-03",
+  "repository": "https://github.com/RikiyaT/lm_understand-logs",
+  "commit": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "method": "Read pinned local primary-source release. Counts and hashes computed locally; scientific result claims transcribed with attribution and not rerun.",
+  "task_sentences": [
+    {
+      "text": "Repairing a specific failure mechanism is in scope: for example, if the model often fails because it repeats itself and never finishes, finding and fixing what drives that repetition counts.",
+      "source": {
+        "path": "exp8_math/runs/p50c/message.txt",
+        "sha256": "ce36e273b668e4edb8fa44effaab055cbece7e3b4acbce7ffcc77dde024c8b74",
+        "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/message.txt#L5",
+        "lines": [
+          5,
+          5
+        ]
+      }
+    },
+    {
+      "text": "Global knobs (making the whole output distribution sharper or flatter) are not what we are looking for, and neither is making the model skip its thinking or close it early regardless of the problem; repairing a specific failure inside the thinking (such as repetition) is in scope.",
+      "source": {
+        "path": "exp8_math/runs/p50c/message.txt",
+        "sha256": "ce36e273b668e4edb8fa44effaab055cbece7e3b4acbce7ffcc77dde024c8b74",
+        "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/message.txt#L5",
+        "lines": [
+          5,
+          5
+        ]
+      }
+    },
+    {
+      "text": "Look at how the model fails on practice problems: a wrong final answer, finishing without an answer, or being cut off at the token limit (often while repeating itself in its thinking).",
+      "source": {
+        "path": "exp8_math/runs/p50c/message.txt",
+        "sha256": "ce36e273b668e4edb8fa44effaab055cbece7e3b4acbce7ffcc77dde024c8b74",
+        "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/message.txt#L19",
+        "lines": [
+          19,
+          19
+        ]
+      }
+    }
+  ],
+  "literal_count_correction": {
+    "literal": "repeats itself and never finishes",
+    "occurrences": 1,
+    "source": {
+      "path": "exp8_math/runs/p50c/message.txt",
+      "sha256": "ce36e273b668e4edb8fa44effaab055cbece7e3b4acbce7ffcc77dde024c8b74",
+      "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/message.txt#L5-L19",
+      "lines": [
+        5,
+        19
+      ]
+    },
+    "correction": "The exact phrase occurs once, not twice. A separate diagnostic sentence mentions being cut off at the token limit, often while repeating itself in its thinking. The task therefore explicitly mentions repetition in both contexts, but these are not two identical quotations."
+  },
+  "prompt_v4": {
+    "source": {
+      "path": "exp8_math/eval/RESULTS_excerpt.md",
+      "sha256": "5f4e24a45b86ada2890ef999b7fca4b07c22765de4816a0aa3255f63288a4881",
+      "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/RESULTS_excerpt.md#L3-L21",
+      "lines": [
+        3,
+        21
+      ]
+    },
+    "release_description": "Verbatim excerpt of the private repository's results table, final version (2026-10-27 15:06): its sections\n\"Experiment 6\" (Qwen3.5-0.8B, thinking on; the post's runs are the prompt-v3 rows p10c / p25c / p50c, 10 / 25 / 50\npasses) and \"Experiment 8\" (Gemma 3 270M IT; the post's runs are the rows \"the lenient grading stated in the prompt\",\ng05b / g10b / g25b / g50b, main column MATH-500 (lenient)). The other rows are runs that are not in the post.\nAccuracy in %, mean over 4 samples per problem (MATH-500, Minerva, OlympiadBench, GPQA), 2 (GSM8K, IFEval), 16 (AIME,\nAMC), 1 (MMLU-Pro); bold = more than 2 points above the unedited model; (used k) = forward passes used.",
+    "config_excerpt": "## Experiment 6: Qwen3.5-0.8B, thinking ON (temperature 0.6, top_p 0.95, top_k 20, presence penalty 1.5, max 32,768); same rules; prompt v3 (512 answers per generation pass, 32,768-token teacher-forced texts) with the thinking-on measurement paragraph; astra effort max; MATH-500 (4 samples) and GSM8K (2 samples)",
+    "rows": [
+      {
+        "prompt": "v3",
+        "passes": 10,
+        "math500_accuracy_percent": 12.3,
+        "gsm8k_accuracy_percent": 25.7,
+        "source": {
+          "path": "exp8_math/eval/RESULTS_excerpt.md",
+          "sha256": "5f4e24a45b86ada2890ef999b7fca4b07c22765de4816a0aa3255f63288a4881",
+          "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/RESULTS_excerpt.md#L17",
+          "lines": [
+            17,
+            17
+          ]
+        },
+        "exact_row": "| Edited, 10 passes (prompt v3: 512 answers / paired passes, max) (used 10) | **12.3** | **25.7** |  |"
+      },
+      {
+        "prompt": "v3",
+        "passes": 25,
+        "math500_accuracy_percent": 14.1,
+        "gsm8k_accuracy_percent": 25.1,
+        "source": {
+          "path": "exp8_math/eval/RESULTS_excerpt.md",
+          "sha256": "5f4e24a45b86ada2890ef999b7fca4b07c22765de4816a0aa3255f63288a4881",
+          "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/RESULTS_excerpt.md#L18",
+          "lines": [
+            18,
+            18
+          ]
+        },
+        "exact_row": "| Edited, 25 passes (prompt v3: 512 answers / paired passes, max) (used 25) | **14.1** | **25.1** |  |"
+      },
+      {
+        "prompt": "v4",
+        "passes": 10,
+        "math500_accuracy_percent": 7.9,
+        "gsm8k_accuracy_percent": 13.8,
+        "edit_status": "no edit submitted (= unedited model)",
+        "source": {
+          "path": "exp8_math/eval/RESULTS_excerpt.md",
+          "sha256": "5f4e24a45b86ada2890ef999b7fca4b07c22765de4816a0aa3255f63288a4881",
+          "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/RESULTS_excerpt.md#L20",
+          "lines": [
+            20,
+            20
+          ]
+        },
+        "exact_row": "| Edited, 10 passes (prompt v4: shorter, DEV/HOLDOUT, no failure example) (used 10) | 7.9 | 13.8 | no edit submitted (= unedited model) |"
+      },
+      {
+        "prompt": "v4",
+        "passes": 25,
+        "math500_accuracy_percent": 14.1,
+        "gsm8k_accuracy_percent": 25.1,
+        "source": {
+          "path": "exp8_math/eval/RESULTS_excerpt.md",
+          "sha256": "5f4e24a45b86ada2890ef999b7fca4b07c22765de4816a0aa3255f63288a4881",
+          "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/RESULTS_excerpt.md#L21",
+          "lines": [
+            21,
+            21
+          ]
+        },
+        "exact_row": "| Edited, 25 passes (prompt v4: shorter, DEV/HOLDOUT, no failure example) (used 25) | **14.1** | **25.1** |  |"
+      }
+    ],
+    "multiple_changed_features": [
+      "shorter prompt",
+      "DEV/HOLDOUT structure",
+      "no failure example"
+    ],
+    "tool_limit_note": {
+      "source": {
+        "path": "exp8_math/code/profiles.py",
+        "sha256": "ba4be365e44c3e165b9c3982af9dbcd8ec94f7fd0430e5fd9de1d57f249a4ae4",
+        "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/code/profiles.py#L109-L111",
+        "lines": [
+          109,
+          111
+        ]
+      },
+      "exact_excerpt": "def limits(run):\n    \"\"\"the v3 limits of a run (None for v1 / v2 runs; every later prompt version keeps them -- 2026-10-24: v4 runs were\n    served with v2 limits, no \"both\" and 128 answers, because this checked for \"v3\" only).\"\"\""
+    },
+    "interpretation_limit": "These rows do not isolate the effect of removing the repetition example. The row labels list several prompt changes, and the source code records that v4 runs were served older limits without both and with 128 answers. The 25-pass v4 row reports 14.1% MATH-500 and 25.1% GSM8K; it is inaccurate to describe all no-example v4 attempts as making no edit or as remaining at baseline."
+  },
+  "p50c_edit": {
+    "final_formula": {
+      "source": {
+        "path": "exp8_math/runs/p50c/tool_calls.jsonl",
+        "sha256": "4d772ae69caeb1099ee8d134375baa5738c8bdce20bc44236acd466d8c76c597",
+        "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/tool_calls.jsonl#L150",
+        "lines": [
+          150,
+          150
+        ]
+      },
+      "record_index_one_based": 150,
+      "field": "code",
+      "field_line_range": [
+        124,
+        130
+      ],
+      "excerpt": "KEEP the frozen top64 alpha6 edit. Only:\nmodel.language_model.layers.15.mlp.down_proj.weight\nmodel.language_model.layers.19.mlp.down_proj.weight\n\nFormula: W = W0 - 6*outer(u, mask64*(u@W0)).\nUnit repetition directions from four matched productive/repetitive original contexts\nat residual outputs16/20;64 selected MLP writer neurons per layer, chosen on original fwd4."
+    },
+    "unit_direction_and_mask_definition": {
+      "source": {
+        "path": "exp8_math/runs/p50c/tool_calls.jsonl",
+        "sha256": "4d772ae69caeb1099ee8d134375baa5738c8bdce20bc44236acd466d8c76c597",
+        "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/tool_calls.jsonl#L128",
+        "lines": [
+          128,
+          128
+        ]
+      },
+      "record_index_one_based": 128,
+      "field": "code",
+      "field_line_range": [
+        10,
+        17
+      ],
+      "excerpt": "CURRENT/BEST: top64 alpha6 in layers15 and19 MLP down_proj only.\nBackup: /work/best_confirmed_top64_a6. No weight changes since before pass33.\nFormula at each layer: W = W0 - 6 * outer(u, mask64 * (u @ W0)).\nu is a unit repetition direction from FOUR matched productive/repetitive original contexts\nin fwd4, residual outputs16/20. Selected64 writers per layer chosen on original fwd4,\nnot held-out correctness. Files repetition_directions.pt/repetition_writer_top64.pt;\nkernel variables retain directions/subsets and base_mlp_weights.\nOnly64 columns in each [1024,3584] matrix change;131072 values total."
+    },
+    "formula_notation": "W_prime = W0 - 6 * outer(u, mask_S(u.T @ W0))",
+    "scope": "Separate unit direction u for each of layers 15 and 19; S is that layer's selected set of 64 MLP down-projection columns.",
+    "manifest": {
+      "source": {
+        "path": "exp8_math/runs/p50c/edit/manifest.json",
+        "sha256": "83185c1db46e3dafb34af645f8c5ce033c09cc99d4512b9e1b8e3aba9d269225",
+        "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/edit/manifest.json#L1-L38",
+        "lines": [
+          1,
+          38
+        ]
+      },
+      "changed_tensors": 2,
+      "changed_entries_total_bfloat16_bits": 130188,
+      "selected_positions_before_bfloat16_rounding": 131072,
+      "rounding_note": "changed_entries counts bfloat16 entries whose bits differ from the base model; an entry the edit touched but that rounds back to the same bfloat16 value is not counted",
+      "tensors": [
+        {
+          "name": "model.language_model.layers.15.mlp.down_proj.weight",
+          "shape": [
+            1024,
+            3584
+          ],
+          "dtype": "bfloat16",
+          "changed_columns": 64,
+          "changed_rows": 1024,
+          "changed_entries": 65260,
+          "base_sha256": "ef60d2c687bab19464dca9c8bfd7777e46ad226df0c9e25643b0bab04b5a1cca",
+          "edited_sha256": "82e2d733ea64feaeb4af93a1e065641d3df98b494a8b7576ef2f52e90fe2ee53"
+        },
+        {
+          "name": "model.language_model.layers.19.mlp.down_proj.weight",
+          "shape": [
+            1024,
+            3584
+          ],
+          "dtype": "bfloat16",
+          "changed_columns": 64,
+          "changed_rows": 1023,
+          "changed_entries": 64928,
+          "base_sha256": "638eedeb701b94aa861f4438e615c07ec6c60ee703db1bfee2de577bb6498c3e",
+          "edited_sha256": "8ef3c61bc36af113ad58e89dbb0a4a14dcba5a45cb750c15ab515c82ddd12eb2"
+        }
+      ]
+    },
+    "coefficient_explanation": {
+      "status": "Mathematical derivation from the documented formula, not an additional measured result.",
+      "assumptions": "u has Euclidean norm one; consider a selected column w_j before finite-precision rounding.",
+      "general_formula": "w_prime_j = w_j - alpha * u * (u.T @ w_j); u.T @ w_prime_j = (1 - alpha) * (u.T @ w_j)",
+      "alpha_1": "For a selected column, coefficient 1 removes its component parallel to u. Its orthogonal component remains unchanged.",
+      "alpha_6": "For a selected column, coefficient 6 reverses that parallel component and scales it by 5. This is an over-subtraction relative to the coefficient-1 orthogonal projection, not the textbook projection itself.",
+      "unselected_columns": "Columns outside the 64-column mask are unchanged by this formula.",
+      "limits": "The algebra assumes a unit direction and exact arithmetic. Stored bfloat16 weights introduce rounding. This derivation alone establishes no accuracy, causal mechanism, or transfer result."
+    }
+  },
+  "profiles_variance_note": {
+    "source": {
+      "path": "exp8_math/code/profiles.py",
+      "sha256": "ba4be365e44c3e165b9c3982af9dbcd8ec94f7fd0430e5fd9de1d57f249a4ae4",
+      "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/code/profiles.py#L37-L42",
+      "lines": [
+        37,
+        42
+      ]
+    },
+    "exact_excerpt": "# prompt v3 (2026-10-23, after the v2 runs measured noise: the unedited model read 55.5 % and 50.8 % in two 128-answer\n# passes): generation passes of up to 512 answers , seeded by problem and\n# optionally paired (\"both\": 256 per model); teacher-forced passes of up to 1,024 texts (dense measurements\n# on many reference solutions; cheap) and long texts (whole failing answers), at most\n# tf_total_tokens per pass. The limits follow the\n# run's state.json (prompt v3, mode = profile), so one server serves v2 and v3 runs of both profiles.",
+    "reported_percentages": [
+      55.5,
+      50.8
+    ],
+    "answers_per_pass": 128,
+    "number_of_passes": 2,
+    "correction": "The comment describes two 128-answer forward passes. It does not identify these as full MATH-500 benchmark evaluations and does not specify enough evaluation provenance to use the pair as a matched benchmark comparison."
+  },
+  "practice_confirmation_optional": {
+    "source": {
+      "path": "exp8_math/runs/p50c/final_answer.md",
+      "sha256": "497ea024210e9bbc10826756997ef41b454dd524390fff1b2d4cdec6782c30d1",
+      "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/final_answer.md#L9-L19",
+      "lines": [
+        9,
+        19
+      ]
+    },
+    "reported_problem_count": 1152,
+    "reported_rescues": 579,
+    "reported_regressions": 5,
+    "reported_rescues_originally_truncated": 576,
+    "exact_rescue_excerpt": "The combined gain was **49.8 percentage points, SE 1.5**, with **579 rescues and five regressions**. Of those rescues, 576 were originally truncated outputs, while aggregate accuracy on originally finished outputs was unchanged.",
+    "exact_scope_caveat": "These are practice results, not unseen benchmark scores; mathematical errors, missing boxes, and some degeneration remain.",
+    "verification_limit": "These figures are reported in the released final answer and were not independently recomputed in this verification. They are held-out practice evidence, not unseen benchmark scores."
+  },
+  "sources": [
+    {
+      "path": "exp8_math/runs/p50c/message.txt",
+      "sha256": "ce36e273b668e4edb8fa44effaab055cbece7e3b4acbce7ffcc77dde024c8b74",
+      "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/message.txt"
+    },
+    {
+      "path": "exp8_math/eval/RESULTS_excerpt.md",
+      "sha256": "5f4e24a45b86ada2890ef999b7fca4b07c22765de4816a0aa3255f63288a4881",
+      "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/RESULTS_excerpt.md"
+    },
+    {
+      "path": "exp8_math/code/profiles.py",
+      "sha256": "ba4be365e44c3e165b9c3982af9dbcd8ec94f7fd0430e5fd9de1d57f249a4ae4",
+      "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/code/profiles.py"
+    },
+    {
+      "path": "exp8_math/runs/p50c/tool_calls.jsonl",
+      "sha256": "4d772ae69caeb1099ee8d134375baa5738c8bdce20bc44236acd466d8c76c597",
+      "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/tool_calls.jsonl"
+    },
+    {
+      "path": "exp8_math/runs/p50c/edit/manifest.json",
+      "sha256": "83185c1db46e3dafb34af645f8c5ce033c09cc99d4512b9e1b8e3aba9d269225",
+      "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/edit/manifest.json"
+    },
+    {
+      "path": "exp8_math/runs/p50c/final_answer.md",
+      "sha256": "497ea024210e9bbc10826756997ef41b454dd524390fff1b2d4cdec6782c30d1",
+      "permalink": "https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/final_answer.md"
+    }
+  ]
+}

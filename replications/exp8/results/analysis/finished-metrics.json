@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "status": "computed_from_published_samples",
+  "method": "openwsp.metrics.finished_metrics",
+  "definition": "Only canonical stop samples are finished; length samples remain in overall accuracy. Zero finished samples means accuracy_finished=null.",
+  "records": [
+    {
+      "summary": "calibration_base/summary.json",
+      "samples": "calibration_base/samples.jsonl",
+      "samples_sha256": "513dfc79c319b6b9d94c30a157e38b13f14a2c57d0ea19d53672acd4f219b6c2",
+      "n": 500,
+      "finished_n": 34,
+      "finished_correct": 34,
+      "accuracy_finished": 1.0
+    },
+    {
+      "summary": "calibration_p50c/summary.json",
+      "samples": "calibration_p50c/samples.jsonl",
+      "samples_sha256": "62da68586520c812a86d65f9506751643786a19cd78f4400a23a3060e4307fd2",
+      "n": 500,
+      "finished_n": 345,
+      "finished_correct": 253,
+      "accuracy_finished": 0.7333333333333333
+    },
+    {
+      "summary": "control1_nothink/math500/summary.json",
+      "samples": "control1_nothink/math500/samples.jsonl",
+      "samples_sha256": "28c7d310ef1d0a1ad0a68e86782cea9e1c87c368a10b4d5473f777cc30cc48cc",
+      "n": 500,
+      "finished_n": 497,
+      "finished_correct": 234,
+      "accuracy_finished": 0.4708249496981891
+    },
+    {
+      "summary": "control2_mechanical/math500/summary.json",
+      "samples": "control2_mechanical/math500/samples.jsonl",
+      "samples_sha256": "9b521218bc7e3c3ff784330cafd55fb7c7a914f03c7abf3e47b4f1cd267d245c",
+      "n": 500,
+      "finished_n": 274,
+      "finished_correct": 228,
+      "accuracy_finished": 0.8321167883211679
+    },
+    {
+      "summary": "control3_repetition/math500/summary.json",
+      "samples": "control3_repetition/math500/samples.jsonl",
+      "samples_sha256": "69cddf451e148c471f100a58f1d2be8d4b6138602b0cbbc0e8626571a00da6b3",
+      "n": 500,
+      "finished_n": 122,
+      "finished_correct": 118,
+      "accuracy_finished": 0.9672131147540983
+    }
+  ]
+}
