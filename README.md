@@ -1,7 +1,14 @@
 # OpenWSP
 
-OpenWSP is open tooling for weight space programming: agents read, edit and version the weights of open models. This is an independent replication of [the work of Rikiya Takehi, Jayden Teoh, Alex Zhang and Omar Khattab](https://rikiyat.github.io/blog/weight-space-programming/), with no affiliation to its authors.
+OpenWSP is open tooling for weight-space programming: to read, edit and version the weights of open models. The term was introduced by [Rikiya Takehi](https://github.com/RikiyaT "Equal contribution"), [Jayden Teoh](https://github.com/JaydenTeoh "Equal contribution"), [Alex Zhang](https://github.com/alexzhang13) and [Omar Khattab](https://github.com/okhat) from the [MIT CSAIL](https://csail.mit.edu) on November 2, 2026 as [a blog post](https://rikiyat.github.io/blog/weight-space-programming/) titled "Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights". They used [GPT-6 Astra](https://openai.com/index/gpt-6-astra/) with natural language and demonstrated and it can read neural network weights, fix them, and write them from scratch. Importantly, GPT-6 Astra demonstrated these capabilities without being allowed to write training loops, it reasoned about the weights demonstrating an alien understanding of neural networks.
 
+I wanted to replicate this groundbreaking approach and realized a lot of the tooling is missing, hence started developing OpenWSP. My goal is to make it easier to read, edit and version LLM weights. I see a future where editing weights of LLMs agentically is as common as we humans were used to reason and commit code. Therefore, there is a lot of tools and services to develop around this new workflow. My first goal is to replicate _Sparks of Weight-Space Programming_'s Experiment 8: "Make a language model better at math". Namely, to edit the [Qwen3.5-0.8B](https://huggingface.co/Qwen/Qwen3.5-0.8B) weights to fix its thinking loops shortcoming to improve its MATH-500 score from 7.9% to about 48.1%, as demonstrated by the MIT researchers.
+
+To get to there, the tools in development are a Python kernel over model weights, a forward-pass service and a versioned edit format, exposed through one API as a CLI, Python SDK and MCP server. To replicate Experiment 8, it is using [OpenAI API](https://developers.openai.com/api/docs/models/gpt-6-astra) to access GPT-6 Astra and [Modal](https://modal.com) for computer, [Hugging Face](https://huggingface.co) to read the open weight LLM and publish its modification.
+
+Once Experiment 8 is replicated, I plan to replicate all of their experiments and have more fun. Email me by my name at my handle dot com only if you're a human.
+
+## Project Status
 <!-- OPENWSP:STATUS:START -->
 | Recorded component | State | Evidence |
 | --- | --- | --- |
