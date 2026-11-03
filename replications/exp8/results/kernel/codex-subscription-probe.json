@@ -1,0 +1,32 @@
+{
+  "status": "passed_synthetic_format_check",
+  "model": "gpt-6-astra",
+  "cli_version": "0.163.0",
+  "reasoning_effort": "max",
+  "verbosity": "low",
+  "billing_route": "chatgpt_subscription",
+  "api_key_env_removed": true,
+  "forced_login_method": "chatgpt",
+  "usage_snapshot": {
+    "input_tokens": 60,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 147,
+    "reasoning_output_tokens": 113
+  },
+  "seconds": 7.664615154266357,
+  "format_valid": true,
+  "characters": 89,
+  "answer_sha256": "bb2ac207ac47415f16791f308ca9eee9e51440ec9af1cba124e29ed0d4b8fbd5",
+  "prompt_sha256": "9d9a170cfe3ac24ba9a96bc867b0d0b4ff912c589199c7b6e034ba48794343d2",
+  "encrypted_reasoning_items_persisted": 1,
+  "code_executed": false,
+  "scientific_inputs_supplied": false,
+  "private_evidence_directory": ".openwsp/codex-subscription-probe",
+  "cost_basis": "Subscription quota; no API invoice or dollar cost is asserted.",
+  "limitations": [
+    "One small fresh conversation does not establish long-run reliability or diagnose the prior loop cause.",
+    "Mock wire fidelity and this real subscription formatting check are separate evidence.",
+    "No transfer of the prior API reasoning chain was attempted."
+  ]
+}
