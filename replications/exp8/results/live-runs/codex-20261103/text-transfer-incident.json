@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "mitigation_tested_resume_pending",
+  "status": "mitigation_verified_on_actual_turn51",
   "run_id": "codex-20261103",
   "failed_driver_call_id": "fc-01M6HCQ89PPXXFSZB647FGB9VF",
   "provider_terminal": {
@@ -37,7 +37,26 @@
     "full_tests_skipped": 3,
     "skip_reason": "Optional JAX fixtures",
     "seconds": 76.36,
-    "test_log_sha256": "d75934251cef95e1e279cb646a06b330a6e180b65c75afe3114bb42f60d1b328"
+    "test_log_sha256": "d75934251cef95e1e279cb646a06b330a6e180b65c75afe3114bb42f60d1b328",
+    "ci": {
+      "source_revision": "7542fe5e15b1d0f8d7cbbb17e21e836a3831c112",
+      "run_id": 41715172623,
+      "url": "https://github.com/openwsp/openwsp/actions/runs/41715172623",
+      "jobs": [
+        {
+          "id": 126193467419,
+          "name": "test (3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 126193467982,
+          "name": "test (3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
   },
   "budget_at_failure": {
     "modal_spent_usd": 65.77025538028428,
@@ -45,5 +64,12 @@
     "modal_available_usd": 66.0497911474935,
     "modal_task_cap_usd": 150
   },
-  "failed_before_editor_admission": true
+  "failed_before_editor_admission": true,
+  "resolution": {
+    "evidence": "resume-text-transfer-20261103.json",
+    "call_id": "fc-01M6HJFWKABFATSH2NKQKVB6FN",
+    "same_attempt": true,
+    "prescribed_notice_delivered_once": true,
+    "text_file_bytes_sha256_verified": true
+  }
 }

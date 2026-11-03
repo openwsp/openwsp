@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "status": "verified_on_actual_turn51",
+  "observed_at": "2026-11-03T20:46:39.234759+00:00",
+  "run_id": "codex-20261103",
+  "editor": "codex",
+  "resume_call_id": "fc-01M6HJFWKABFATSH2NKQKVB6FN",
+  "source_revision": "7542fe5e15b1d0f8d7cbbb17e21e836a3831c112",
+  "worker_pid": 50018,
+  "sandbox_id": "sb-01M6HJGHTRF1G3N5F4PQRQCWZ9",
+  "state": {
+    "turn": 51,
+    "passes": 14,
+    "requests": 22,
+    "runs": 27,
+    "handoffs": 1,
+    "pending": {
+      "kind": "editor",
+      "turn": 52
+    },
+    "notices": [
+      "001_pass_size.txt",
+      "002_tool_facts.txt"
+    ],
+    "done": false
+  },
+  "turn51_prompt_sha256": "dd179e65708c0a9d4a3f50aef0c9db1f921b2ad5ec2a6d81328f3222fcb7deee",
+  "prescribed_notice_occurrences_in_prompt": 1,
+  "prescribed_notice_occurrences_in_state": 1,
+  "eval_prompt_format": {
+    "utf8_bytes": 482,
+    "sha256": "6aff9ff9c1f67cfa071fa85db87d3020acece233e90fcc3d80218587cb9066a4",
+    "matches_pinned_prompt": true
+  },
+  "normal_kernel_restart_notice_present": true,
+  "budget": {
+    "editor": {
+      "spent_usd": 78.292765,
+      "reserved_usd": 0.0,
+      "available_usd": 21.707235
+    },
+    "modal": {
+      "spent_usd": 65.94244142822026,
+      "reserved_usd": 18.345603472222223,
+      "available_usd": 65.66195509955752
+    }
+  },
+  "recovery": "Same saved attempt, conversation and immutable journals; preserved edits, files, counters and costs. No completed response was replayed."
+}
