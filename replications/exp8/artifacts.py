@@ -57,6 +57,10 @@ def collect(data="/data", staging="/data/publication"):
             layer.pop("direction", None)  # derived vectors remain on the volume
         atomic_write(root / "control2_mechanical/method.json", method)
         shutil.copytree(control / "edit", root / "control2_mechanical/edit", dirs_exist_ok=True)
+    random_control = data / "controls/random"
+    if (random_control / "method.json").exists():
+        atomic_write(root / "control4_random/method.json", json.loads((random_control / "method.json").read_text()))
+        shutil.copytree(random_control / "edit", root / "control4_random/edit", dirs_exist_ok=True)
     if (data / "state.json").exists():
         state = json.loads((data / "state.json").read_text())
         atomic_write(root / "pipeline-state.json", {key: state.get(key) for key in

@@ -202,6 +202,29 @@ class TransformerReader:
         return seconds
 
     @modal.method()
+    def generate(self, rows, sampling, thinking=True):
+        """Private second-engine control, with the same rendered user prompts."""
+        if self.load_error:
+            raise RuntimeError(self.load_error)
+        from openwsp.backends.hf_generation import generate
+        from replications.exp8.runtime import INSTRUCTION
+
+        start = time.monotonic()
+        prompts = [self.tokenizer.apply_chat_template(
+            [{"role": "user", "content": row.get("prompt", row.get("problem", "") + "\n" + INSTRUCTION)}],
+            tokenize=False, add_generation_prompt=True, enable_thinking=thinking) for row in rows]
+        result = generate(self.model, self.tokenizer, prompts, **sampling)
+        return {"outputs": [{"id": row["id"], "samples": [sample]}
+                            for row, sample in zip(rows, result["outputs"], strict=True)],
+                "generation_seconds": time.monotonic() - start, "container_seconds": self._seconds(),
+                "gpu": self.gpu_kind, "engine": "transformers==" + result["transformers_version"],
+                "transformers": result["transformers_version"],
+                "engine_settings": {"dtype": "bfloat16", "attention": "sdpa", "text_inputs_only": True,
+                                    "presence_penalty_scope": "generated tokens only",
+                                    "eos_token_ids": result["eos_token_ids"],
+                                    "sampling": result["sampling"]}}
+
+    @modal.method()
     def read(self, request, directory):
         if self.load_error:
             raise RuntimeError(self.load_error)

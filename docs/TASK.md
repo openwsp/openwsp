@@ -138,3 +138,7 @@ Interpretation: match the authors' 96 GiB execution limit; retain their message 
 3. If smoke tests show another supported GPU costs less per completed pass, may GPU choice change even without a 10-minute H100 queue? Default: retain the specified H100 / queue-triggered A100 fallback and stop at the budget cap if necessary.
 
 User replied; answers above supersede the initial defaults. Implementation is authorized.
+
+## Later user steering (2026-11-03)
+
+After the live budget-admission block, the user asked “what to top up? openai and or modal?” and “why is it taking too expensive to run Astra? maybe the approach is to be changed”. Audit the editor cost/output handling and recommend a concrete change before further live spend. No higher editor budget has been authorized; independent controls continue.

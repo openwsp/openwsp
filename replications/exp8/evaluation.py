@@ -5,17 +5,25 @@ import json
 import math
 from pathlib import Path
 
-from replications.exp8.jobs import ProtocolGPUJobs, gpu_instance
 from openwsp.budget import compute_cost
+from replications.exp8.jobs import ProtocolGPUJobs, gpu_instance
 from replications.exp8.runtime import CONFIG, atomic_write, evaluate_outputs, read_rows, write_rows
 
 
-def evaluate(name, checkpoint_dir, benchmark, samples, ledger, checkpoint, *, thinking=True, changes=None):
-    from openwsp.backends.modal_app import Generator
+def evaluate(name, checkpoint_dir, benchmark, samples, ledger, checkpoint, *, thinking=True, changes=None,
+             engine="vllm", problem_limit=None):
+    from openwsp.backends.modal_app import Generator, TransformerReader
+    if engine not in {"vllm", "transformers"}:
+        raise ValueError("Unsupported evaluation engine")
+    if problem_limit is not None and (type(problem_limit) is not int or problem_limit < 1):
+        raise ValueError("Problem limit must be a positive integer")
+    generator = Generator if engine == "vllm" else TransformerReader
     directory = Path("/data/results") / name / benchmark
     if (directory / "summary.json").exists():
         return json.loads((directory / "summary.json").read_text())
     rows = read_rows(Path("/data/benchmarks") / f"{benchmark}.jsonl")
+    if problem_limit is not None:
+        rows = rows[:problem_limit]
     params = {**CONFIG["sampling"], **(changes or {}), "n": samples}
     runner = ProtocolGPUJobs(ledger, "/data/jobs", commit=checkpoint)
     batch_size = max(1, 256 // samples)
@@ -28,9 +36,12 @@ def evaluate(name, checkpoint_dir, benchmark, samples, ledger, checkpoint, *, th
             summary = json.loads((target / "summary.json").read_text())
         else:
             key = f"evaluation/{name}/{benchmark}/{label}"
-            runner.launch(key, lambda gpu, gate: gpu_instance(Generator, gpu, gate, checkpoint=checkpoint_dir).generate.spawn(selected, params, thinking),
-                          fingerprint={"checkpoint": checkpoint_dir, "sampling": params, "thinking": thinking,
-                                       "ids": [row["id"] for row in selected]})
+            fingerprint = {"checkpoint": checkpoint_dir, "sampling": params, "thinking": thinking,
+                           "ids": [row["id"] for row in selected]}
+            if engine != "vllm":
+                fingerprint["engine"] = engine
+            runner.launch(key, lambda gpu, gate, selected=selected: gpu_instance(generator, gpu, gate, checkpoint=checkpoint_dir).generate.spawn(selected, params, thinking),
+                          fingerprint=fingerprint)
             result = runner.result(key, timeout=3600)
             seconds = result.get("_openwsp_gpu", {}).get("billable_seconds", result["container_seconds"] + 122)
             summary = evaluate_outputs(result["outputs"], selected, directory=target, stage=name,
@@ -61,6 +72,9 @@ def evaluate(name, checkpoint_dir, benchmark, samples, ledger, checkpoint, *, th
                                  smoke_included_in_score=False,
                                  batches=[{"gpu": row["provenance"]["gpu"], "seconds": row["seconds"],
                                            "cost_usd": row["cost_usd"]} for row in summaries])
+    if problem_limit is not None:
+        summary["provenance"].update(problem_selection="first problems in saved benchmark order",
+                                     problem_limit=problem_limit, problem_ids=[row["id"] for row in rows])
     write_rows(directory / "samples.jsonl", records)
     atomic_write(directory / "summary.json", summary)
     checkpoint()
