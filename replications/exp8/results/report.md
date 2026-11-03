@@ -67,11 +67,22 @@ Recorded runtime and uncertainty:
 
 | Component | Recorded status | Evidence count | Scope |
 | --- | --- | --- | --- |
+| damage_cpu_validation | [validated](damage_cpu_validation/summary.json) | [6/6 checks passed](damage_cpu_validation/summary.json) | [Analytic CPU array validation only; no model benchmark, training or GPU calls](damage_cpu_validation/summary.json) |
 | eval_grid_cpu_validation | [validated](eval_grid_cpu_validation/summary.json) | [7/7 checks passed](eval_grid_cpu_validation/summary.json) | [Tiny implementation validation only; not a model benchmark.](eval_grid_cpu_validation/summary.json) |
 | Edit inspection | [measured_cpu_only](inspection/summary.json) | [4 tensor measurements](inspection/summary.json) | [Pinned weights and saved edits; no generation or GPU job](inspection/summary.json) |
 | forward_bank_cpu | [passed](forward-bank-cpu.json) | [4/4 checks passed](forward-bank-cpu.json) | [Synthetic CPU cache verification; no scientific model inference or provider calls](forward-bank-cpu.json) |
 
 These records establish the stated CPU measurements or implementation checks. They are not GPU benchmark results or a completed live replication.
+
+Mechanical repair builds:
+
+| Variant | Coefficient | Column rule | Build | Changed entries | Evaluation | Accuracy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2a | [1.0](repair/summary.json) | [all](repair/summary.json) | [built](repair/summary.json) | [6289541](repair/summary.json) | [pending](repair/summary.json) | pending |
+| 2b | [6.0](repair/summary.json) | [all](repair/summary.json) | [built](repair/summary.json) | [7077322](repair/summary.json) | [pending](repair/summary.json) | pending |
+| 2c | [6.0](repair/summary.json) | [topk](repair/summary.json) | [unavailable_input_statistics](repair/summary.json) | pending | [pending](repair/summary.json) | pending |
+
+Building an edit does not establish its benchmark effect. Unavailable inputs and unrun evaluations remain explicit.
 
 ### Independent results
 

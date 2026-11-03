@@ -787,3 +787,25 @@ def test_cpu_inspection_grid_and_bank_are_read_without_benchmark_claims(tmp_path
     assert 'token_state_machine' not in before_cpu and "'revision': 'pinned'" not in text
     assert '[100.0%]' not in text and '[0.0000]' not in text
     assert {str(inspect), str(grid), str(bank)} <= {row['path'] for row in generated['sources']}
+
+
+def test_repair_cpu_builds_never_become_measured_benchmark_rows(tmp_path):
+    results = setup_repo(tmp_path)
+    aggregate = results/'repair/summary.json'
+    built = {'format': 'openwsp.repair.summary', 'build_status': 'built', 'alpha': 1,
+             'column_rule': 'all', 'changed_entries_total': 8,
+             'evaluation_status': 'pending', 'accuracy': None}
+    missing = {'build_status': 'unavailable_input_statistics', 'alpha': 6, 'column_rule': 'topk',
+               'evaluation_status': 'pending', 'accuracy': None}
+    write_json(aggregate, {'format': 'openwsp.repair.variants', 'variants': {'2a': built, '2c': missing}})
+    write_json(results/'repair/2a/summary.json', built)
+    generated = generate_report(tmp_path, results)
+    text = (tmp_path/'README.md').read_text()
+    repair = text.split('Mechanical repair builds:')[1].split('<!-- OPENWSP:RESULTS:END -->')[0]
+    assert repair.count('| 2a |') == 1 and repair.count('| 2c |') == 1
+    assert '[8](replications/exp8/results/repair/summary.json)' in repair
+    assert '[unavailable_input_statistics](replications/exp8/results/repair/summary.json)' in repair
+    assert 'Accuracy' in repair and '[0.0%]' not in repair
+    assert 'does not establish its benchmark effect' in repair
+    assert 'repair/2a/summary.json' not in text.split('### CPU analysis')[0]
+    assert str(aggregate) in {row['path'] for row in generated['sources']}

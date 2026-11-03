@@ -28,7 +28,28 @@ The stage checks the saved active attempt, its actual 50-pass submission and fin
 
 Declare the two contrastive text sets, their source and split, target tensors, direction construction, column-selection rule and coefficient before scoring. The repetition repair uses `W' = W - alpha * outer(u, mask * (u.T @ W))` with a unit contrast direction. Record whether columns are all selected or ranked by projection onto that direction times the mean activation difference. A borrowed column set must be identified explicitly.
 
-The specified variants are all columns at coefficient 1, all columns at coefficient 6, and 64 mechanically selected columns at coefficient 6. Keep each variant and dose separate. The repair builder is under implementation; no repair command is documented as available yet. Its acceptance checks must cover a planted contrast, deterministic column selection, coefficient-zero identity, untouched columns, finite outputs, protected tensors and versioned edit round trips. Export the [v1 edit](edit-format.md) with contrast-source hashes, selected columns and coefficient provenance. Scoring requires separate evaluation evidence.
+The specified variants are all columns at coefficient 1 (`2a`), all columns at coefficient 6 (`2b`), and 64 mechanically selected columns at coefficient 6 (`2c`). Keep each variant and dose separate. The builder ranks the signed projection-times-input-contrast score, with ascending column index for ties. It normalizes the output contrast in float64, submits float32 replacements, then exports the evaluated bfloat16 [v1 edit](edit-format.md). Its CPU checks cover coefficient-zero identity, untouched columns, finite outputs, protected tensors and edit round trips.
+
+Supply a hash-verified activation manifest and a new output directory:
+
+```sh
+uv run python -m replications.exp8.repair --model /path/model.safetensors \
+  --activation-manifest /private/contrast-manifest.json --variant 2c \
+  --output /private/new-repair
+uv run pytest -q tests/test_exp8_repair.py
+```
+
+The [manifest loader](../replications/exp8/repair.py) documents the NPZ array keys, per-example or explicitly counted sum statistics, text-set IDs/hashes and activation-reduction provenance. The `--saved-method` alternative accepts existing mechanical-control directions for `2a` or `2b`; it cannot supply missing input statistics for `2c` and never borrows the published column mask. `--alpha` selects an explicitly declared dose. [Current CPU builds](../replications/exp8/results/repair/summary.json) have no benchmark score; scoring requires separate evaluation evidence.
+
+The damage reducer also has a CPU validation command:
+
+```sh
+uv run python -m replications.exp8.damage validate --output /tmp/openwsp-damage-validation.json
+uv run python -m replications.exp8.damage reduce --manifest /private/logits-manifest.json \
+  --output /private/damage-summary.json
+```
+
+It computes token-weighted `KL(base || edited)` in nats from hashed logits and an already aligned boolean mask. It does not launch inference. Synthetic fixtures are labeled explicitly; a production manifest identifies the fixed neutral reference set, checkpoint/edit hashes and continuation-only scope. Empty selections have an undefined mean. The teacher-forced backend performs the causal next-token mask shift exactly once before reduction.
 
 The implemented inspection command can audit a built edit on CPU:
 
@@ -41,7 +62,16 @@ This repository ships repetition repair only. Refusal-removal texts, edits and d
 
 ## Add a replication folder
 
-Create `replications/<experiment>/` with its own configuration, verbatim prompts, pinned source manifest, reference records, evaluator, tests and results. Record source commits, file hashes and license notices; separate reference numbers from new measurements. The [raw-weight inventory](../replications/raw_weights/inventory.json) and experiment folders 1, 2, 4 and 5 provide source/configuration examples; their runner is under implementation. The pinned release provides rules and results, but no scoring implementation for these experiments, so reconstructed evaluators must disclose missing upstream RNG and version pins. Experiments 3, 6 and 7 remain layout only.
+Create `replications/<experiment>/` with its own configuration, verbatim prompts, pinned source manifest, reference records, evaluator, tests and results. Record source commits, file hashes and license notices; separate reference numbers from new measurements. The [raw-weight inventory](../replications/raw_weights/inventory.json), experiment folders 1, 2, 4 and 5, and [runner guide](../replications/raw_weights/README.md) provide source/configuration examples. Disclose reconstructed scoring, missing evaluation RNG and any missing dependency pins; retain pins found in the released metadata. Experiments 3, 6 and 7 remain layout only.
+
+Verify the inventory without sending an editor request:
+
+```sh
+uv run python -m replications.raw_weights.runner --editor astra_subscription \
+  --state-root .openwsp/raw-weights --output-root replications/raw_weights/results
+```
+
+The explicit `--execute` flag requests one reply per item. `--score-only --rollout` evaluates saved replies without constructing an editor. Follow the runner guide for authentication, pricing and attempt identities.
 
 Preserve the experiment's editor contract. For raw-weight experiments, each item uses a fresh conversation, one reply and no tools or training. Parse the permitted answer or weight format without executing arbitrary editor text. Keep evaluator keys, controls and outside findings out of editor inputs. Use distinct run identities for different editors or protocols; never reset an existing attempt's counters, overwrite its submission or merge its history with another run.
 

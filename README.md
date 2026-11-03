@@ -107,11 +107,22 @@ Recorded runtime and uncertainty:
 
 | Component | Recorded status | Evidence count | Scope |
 | --- | --- | --- | --- |
+| damage_cpu_validation | [validated](replications/exp8/results/damage_cpu_validation/summary.json) | [6/6 checks passed](replications/exp8/results/damage_cpu_validation/summary.json) | [Analytic CPU array validation only; no model benchmark, training or GPU calls](replications/exp8/results/damage_cpu_validation/summary.json) |
 | eval_grid_cpu_validation | [validated](replications/exp8/results/eval_grid_cpu_validation/summary.json) | [7/7 checks passed](replications/exp8/results/eval_grid_cpu_validation/summary.json) | [Tiny implementation validation only; not a model benchmark.](replications/exp8/results/eval_grid_cpu_validation/summary.json) |
 | Edit inspection | [measured_cpu_only](replications/exp8/results/inspection/summary.json) | [4 tensor measurements](replications/exp8/results/inspection/summary.json) | [Pinned weights and saved edits; no generation or GPU job](replications/exp8/results/inspection/summary.json) |
 | forward_bank_cpu | [passed](replications/exp8/results/forward-bank-cpu.json) | [4/4 checks passed](replications/exp8/results/forward-bank-cpu.json) | [Synthetic CPU cache verification; no scientific model inference or provider calls](replications/exp8/results/forward-bank-cpu.json) |
 
 These records establish the stated CPU measurements or implementation checks. They are not GPU benchmark results or a completed live replication.
+
+Mechanical repair builds:
+
+| Variant | Coefficient | Column rule | Build | Changed entries | Evaluation | Accuracy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2a | [1.0](replications/exp8/results/repair/summary.json) | [all](replications/exp8/results/repair/summary.json) | [built](replications/exp8/results/repair/summary.json) | [6289541](replications/exp8/results/repair/summary.json) | [pending](replications/exp8/results/repair/summary.json) | pending |
+| 2b | [6.0](replications/exp8/results/repair/summary.json) | [all](replications/exp8/results/repair/summary.json) | [built](replications/exp8/results/repair/summary.json) | [7077322](replications/exp8/results/repair/summary.json) | [pending](replications/exp8/results/repair/summary.json) | pending |
+| 2c | [6.0](replications/exp8/results/repair/summary.json) | [topk](replications/exp8/results/repair/summary.json) | [unavailable_input_statistics](replications/exp8/results/repair/summary.json) | pending | [pending](replications/exp8/results/repair/summary.json) | pending |
+
+Building an edit does not establish its benchmark effect. Unavailable inputs and unrun evaluations remain explicit.
 
 ### Independent results
 

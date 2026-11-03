@@ -314,6 +314,8 @@ def _cpu_evidence_table(records: list[tuple[Path, dict]], relative_to: Path) -> 
              "| Component | Recorded status | Evidence count | Scope |",
              "| --- | --- | --- | --- |"]
     for path, data in records:
+        if data.get("format") in {"openwsp.repair.summary", "openwsp.repair.variants"}:
+            continue
         if data.get("format") == "openwsp.inspect.summary":
             name = "Edit inspection"
             count = f"{len(data.get('tensors', []))} tensor measurements"
@@ -328,6 +330,24 @@ def _cpu_evidence_table(records: list[tuple[Path, dict]], relative_to: Path) -> 
         lines.append("| " + " | ".join((_text(name), _recorded(data.get("status"), path, relative_to),
                                         _recorded(count, path, relative_to), _recorded(scope, path, relative_to))) + " |")
     lines += ["", "These records establish the stated CPU measurements or implementation checks. They are not GPU benchmark results or a completed live replication."]
+    variants = [(path, data) for path, data in records if data.get("format") == "openwsp.repair.variants"]
+    repairs = [(path, name, row) for path, data in variants for name, row in data.get("variants", {}).items()]
+    if not variants:
+        repairs = [(path, path.parent.name, data) for path, data in records if data.get("format") == "openwsp.repair.summary"]
+    if repairs:
+        lines += ["", "Mechanical repair builds:", "",
+                  "| Variant | Coefficient | Column rule | Build | Changed entries | Evaluation | Accuracy |",
+                  "| --- | --- | --- | --- | --- | --- | --- |"]
+        for path, name, row in repairs:
+            lines.append("| " + " | ".join((
+                _text(name), _metric(row.get("alpha"), path, relative_to),
+                _recorded(row.get("column_rule"), path, relative_to),
+                _recorded(row.get("build_status"), path, relative_to),
+                _metric(row.get("changed_entries_total"), path, relative_to, digits=0),
+                _recorded(row.get("evaluation_status"), path, relative_to),
+                _metric(row.get("accuracy"), path, relative_to, percent=True),
+            )) + " |")
+        lines += ["", "Building an edit does not establish its benchmark effect. Unavailable inputs and unrun evaluations remain explicit."]
     return "\n".join(lines)
 
 
@@ -716,7 +736,8 @@ def generate_report(repo_root: str | Path, results_dir: str | Path) -> dict[str,
             analysis[name] = (path, _read_json(path))
     summary_index = {path.relative_to(results).as_posix(): (path, data) for path, data in summaries}
     cpu_records = [(path, data) for path, data in summaries
-                   if data.get("format") == "openwsp.inspect.summary" or (data.get("provenance") or {}).get("synthetic") is True]
+                   if data.get("format") in {"openwsp.inspect.summary", "openwsp.repair.summary", "openwsp.repair.variants"}
+                   or (data.get("provenance") or {}).get("synthetic") is True]
     cpu_paths = {path for path, _ in cpu_records}
     evaluations = [(path, data) for path, data in summaries if path not in cpu_paths]
     bank_path = results / "forward-bank-cpu.json"
