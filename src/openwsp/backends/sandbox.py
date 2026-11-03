@@ -13,6 +13,7 @@ import json
 import os
 import queue
 import stat
+import tempfile
 import threading
 import time
 import uuid
@@ -761,7 +762,17 @@ class ModalSandboxTransport:
 
     def write_text(self, remote_path: str, text: str) -> None:
         if self.before_activity is not None:
-            self._bounded_text_file(remote_path, text)
+            remote = self._work_path(remote_path)
+            payload = text.encode("utf-8")
+            if len(payload) > 1_048_576:
+                raise ValueError("Text transfer exceeds 1 MiB; use the shared work volume")
+            # Use the same bounded binary receiver as forward artifacts. It
+            # verifies SHA256 and atomically publishes before acknowledging;
+            # each operation obtains its own lease guard without a reload.
+            with tempfile.TemporaryDirectory(prefix="openwsp-text-") as directory:
+                source = Path(directory) / "text.utf8"
+                source.write_bytes(payload)
+                self.publish_file(source, remote)
             return
         remote = self._work_path(remote_path)
         self.sandbox.filesystem.make_directory(str(PurePosixPath(remote).parent))
@@ -783,7 +794,7 @@ class ModalSandboxTransport:
         )
         self._guard_activity("exec", timeout_seconds=55)
         process = self.sandbox.exec(
-            "python", "-c", script, remote, "write" if text is not None else "read", timeout=55
+            "python", "-I", "-c", script, remote, "write" if text is not None else "read", timeout=55
         )
         if text is not None:
             process.stdin.write(text)

@@ -156,6 +156,21 @@ def test_commit_reload_and_artifact_paths(sandbox_setup, tmp_path):
     transport.close()
 
 
+def test_leased_text_read_uses_isolated_python_and_keeps_existing_return_contract():
+    calls = []
+    transport = object.__new__(ModalSandboxTransport)
+    transport.before_activity = lambda operation, **kwargs: calls.append((operation, kwargs))
+
+    def execute(*args, **kwargs):
+        assert calls == [("exec", {"timeout_seconds": 55})]
+        assert args[:3] == ("python", "-I", "-c")
+        assert args[-2:] == ("/work/notes.md", "read") and kwargs == {"timeout": 55}
+        return SimpleNamespace(stdout=SimpleNamespace(read=lambda: "café\n".encode()), wait=lambda: None, returncode=0)
+
+    transport.sandbox = SimpleNamespace(exec=execute)
+    assert transport.read_text("notes.md") == "café\n"
+
+
 @pytest.mark.parametrize(
     "limits",
     [

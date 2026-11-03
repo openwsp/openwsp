@@ -5,6 +5,7 @@ import io
 import json
 import os
 import threading
+from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
@@ -50,6 +51,8 @@ class ReceiverProcess:
             self.sandbox.errors.append(exc)
             return b""
         self.returncode = 0
+        if self.request["op"] == "finish" and self.sandbox.corrupt_finish_receipt:
+            result["sha256"] = "0" * 64
         return json.dumps(result).encode()
 
     def wait(self):
@@ -63,6 +66,7 @@ class ReceiverSandbox:
         self.requests, self.chunk_lengths, self.errors = [], [], []
         self.fail_operation = None
         self.corrupt_finish = False
+        self.corrupt_finish_receipt = False
 
     def exec(self, *args, **kwargs):
         assert args[:3] == ("python", "-I", "-c")
@@ -243,3 +247,89 @@ def test_destination_escape_is_rejected_before_exec(tmp_path, publication, remot
     with pytest.raises(ValueError):
         transport.publish_file(source, remote)
     assert sandbox.requests == []
+
+
+@pytest.mark.parametrize("case", ["utf8", "notice51", "empty", "byte_limit"])
+def test_leased_text_uses_atomic_binary_receiver_and_verified_sha(publication, case):
+    transport, sandbox, guarded = publication
+    notice = Path(__file__).parents[1] / "replications/exp8/prompts/eval_prompt_format.txt"
+    text = {"utf8": "café — λ\n", "notice51": notice.read_text(), "empty": "",
+            "byte_limit": "é" * (1_048_576 // 2)}[case]
+    payload = text.encode("utf-8")
+    if case == "notice51":
+        assert len(payload) == 482
+    captured = []
+    publish = transport.publish_file
+
+    def observe(source, remote):
+        assert source.read_bytes() == payload
+        receipt = publish(source, remote)
+        captured.append((source, receipt))
+        return receipt
+
+    transport.publish_file = observe
+    assert transport.write_text("eval_prompt_format.txt", text) is None
+    assert (sandbox.root / "eval_prompt_format.txt").read_bytes() == payload
+    source, receipt = captured[0]
+    assert not source.exists() and not source.parent.exists()
+    assert receipt == {"path": "/work/eval_prompt_format.txt", "bytes": len(payload),
+                       "sha256": hashlib.sha256(payload).hexdigest()}
+    assert [row["op"] for row in sandbox.requests] == (["init", "chunk", "finish"] if payload else ["init", "finish"])
+    assert len(guarded) == len(sandbox.requests)
+    assert not list(sandbox.root.rglob(".openwsp-artifact-*"))
+
+
+def test_text_byte_ceiling_rejects_multibyte_overflow_before_remote_activity(publication):
+    transport, sandbox, guarded = publication
+    with pytest.raises(ValueError, match="exceeds 1 MiB"):
+        transport.write_text("notice.txt", "é" * (1_048_576 // 2 + 1))
+    assert sandbox.requests == [] and guarded == []
+
+
+@pytest.mark.parametrize("remote", ["../escape", "/tmp/escape", "/work/../escape", "/work"])
+def test_leased_text_path_guard_precedes_publication(publication, remote):
+    transport, sandbox, guarded = publication
+    with pytest.raises(ValueError, match="under /work"):
+        transport.write_text(remote, "notice")
+    assert sandbox.requests == [] and guarded == []
+
+
+def test_leased_text_rejects_hash_failure_and_preserves_existing_destination(publication):
+    transport, sandbox, _ = publication
+    target = sandbox.root / "notice.txt"
+    target.write_bytes(b"previous complete text")
+    sandbox.corrupt_finish = True
+    with pytest.raises(SandboxTransportError, match="Artifact finish failed"):
+        transport.write_text("notice.txt", "new notice")
+    assert target.read_bytes() == b"previous complete text"
+    assert sandbox.requests[-1]["op"] == "abort"
+    assert not list(sandbox.root.rglob(".openwsp-artifact-*"))
+
+
+def test_leased_text_never_accepts_a_mismatched_final_receipt(publication):
+    transport, sandbox, _ = publication
+    sandbox.corrupt_finish_receipt = True
+    with pytest.raises(SandboxTransportError, match="final verification receipt"):
+        transport.write_text("notice.txt", "complete UTF-8 notice: é")
+    # A lost/bad acknowledgement cannot prove the atomic rename did not happen.
+    assert (sandbox.root / "notice.txt").read_text() == "complete UTF-8 notice: é"
+
+
+def test_text_local_temporary_is_cleaned_after_guard_rejection(publication):
+    transport, sandbox, _ = publication
+    sources = []
+    publish = transport.publish_file
+
+    def observe(source, remote):
+        sources.append(source)
+        return publish(source, remote)
+
+    def reject(*args, **kwargs):
+        raise RuntimeError("budget unavailable")
+
+    transport.publish_file = observe
+    transport.before_activity = reject
+    with pytest.raises(RuntimeError, match="budget unavailable"):
+        transport.write_text("notice.txt", "notice")
+    assert sandbox.requests == []
+    assert sources and not sources[0].exists() and not sources[0].parent.exists()

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "status": "mitigation_tested_resume_pending",
+  "run_id": "codex-20261103",
+  "failed_driver_call_id": "fc-01M6HCQ89PPXXFSZB647FGB9VF",
+  "provider_terminal": {
+    "exception_type": "SandboxTransportError",
+    "message": "Text transfer failed with exit code 1",
+    "observed_at": "2026-11-03T20:30:37.304860+00:00",
+    "call_id": "fc-01M6HCQ89PPXXFSZB647FGB9VF",
+    "terminal": true,
+    "provider_result": "failure",
+    "basis": "FunctionCall.get(timeout=0) returned the custom remote SandboxTransportError; the foreground worker log retains the remote traceback."
+  },
+  "operation": "Write prescribed eval_prompt_format.txt before turn51 editor admission",
+  "notice_file": {
+    "path": "replications/exp8/prompts/eval_prompt_format.txt",
+    "utf8_bytes": 482,
+    "sha256": "6aff9ff9c1f67cfa071fa85db87d3020acece233e90fcc3d80218587cb9066a4"
+  },
+  "saved_state": {
+    "turn": 50,
+    "passes": 14,
+    "requests": 22,
+    "runs": 26,
+    "handoffs": 1,
+    "pending": null,
+    "done": false
+  },
+  "cause": "Undetermined. The failed text helper did not retain stderr; the sandbox was later terminated. Exit137 at terminal poll alone does not establish OOM.",
+  "mitigation": "Leased UTF-8 text writes reuse the existing bounded SHA-verified atomic binary artifact receiver, with the existing1MiB limit and per-operation lease guards.",
+  "recovery": "Resume the same attempt from saved state; preserve conversation, journals, files, edits, counters and costs. The recreated kernel receives the existing neutral restart notice.",
+  "validation": {
+    "focused_tests_passed": 71,
+    "independent_review": "No blocking findings",
+    "full_tests_passed": 1166,
+    "full_tests_skipped": 3,
+    "skip_reason": "Optional JAX fixtures",
+    "seconds": 76.36,
+    "test_log_sha256": "d75934251cef95e1e279cb646a06b330a6e180b65c75afe3114bb42f60d1b328"
+  },
+  "budget_at_failure": {
+    "modal_spent_usd": 65.77025538028428,
+    "modal_reserved_usd": 18.129953472222223,
+    "modal_available_usd": 66.0497911474935,
+    "modal_task_cap_usd": 150
+  },
+  "failed_before_editor_admission": true
+}
