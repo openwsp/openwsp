@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "CPU scorer calibration using authors released networks; no new editor inference",
+  "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "scorer": "openwsp-reconstructed-kinetix-v1",
+  "seeds_match_authors": false,
+  "comparisons": [
+    {
+      "network": "shown_base",
+      "result_path": "replications/exp4/calibration/shown_base.json",
+      "result_sha256": "2d2b16afb5f6033e8fff219a964b60a97237780544eee2aed654293c17974420",
+      "episodes": 256,
+      "ours": {
+        "success": 0.0,
+        "red": 0.0,
+        "invalid": 0.0,
+        "timeout": 1.0,
+        "return": 0.15190594393061474,
+        "length": 256.0
+      },
+      "authors": {
+        "success": 0.0,
+        "red": 0.0,
+        "invalid": 0.0,
+        "timeout": 1.0,
+        "return": 0.15190085768699646,
+        "length": 256.0
+      },
+      "authors_reference": "exp4_fix_car/eval/base_result.json",
+      "outcome_rates_match": true,
+      "mean_return_difference": 5.0862436182796955e-06,
+      "mean_length_difference": 0.0
+    },
+    {
+      "network": "authors_repaired",
+      "result_path": "replications/exp4/calibration/authors_repaired.json",
+      "result_sha256": "586ab0a43c745a177a667ba54278549d1889797915336b5076789d74937f426c",
+      "episodes": 1024,
+      "ours": {
+        "success": 1.0,
+        "red": 0.0,
+        "invalid": 0.0,
+        "timeout": 0.0,
+        "return": 1.3738481402397156,
+        "length": 73.0
+      },
+      "authors": {
+        "success": 1.0,
+        "red": 0.0,
+        "invalid": 0.0,
+        "timeout": 0.0,
+        "return": 1.373849868774414,
+        "length": 73.0
+      },
+      "authors_reference": "exp4_fix_car/eval/oneshot_result.json#test",
+      "outcome_rates_match": true,
+      "mean_return_difference": -1.7285346984863281e-06,
+      "mean_length_difference": 0.0
+    }
+  ]
+}

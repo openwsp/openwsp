@@ -84,8 +84,9 @@ def apply_numeric_edits(answer: str, store: WeightStore) -> dict:
                     raise ValueError("Invalid tensor selection")
                 index = _index(target.slice)
                 parsed = _literal(ast.parse(raw, mode="eval").body)
-                rhs = torch.as_tensor(parsed, dtype=value.dtype)
-                selected = value[index]
+                array = value.numpy()
+                rhs = np.asarray(parsed, dtype=array.dtype)
+                selected = array[index]
                 if rhs.ndim and rhs.shape != selected.shape:
                     raise ValueError("List shape must exactly match the selection")
                 if operation == "=":
@@ -96,9 +97,9 @@ def apply_numeric_edits(answer: str, store: WeightStore) -> dict:
                     replacement = selected - rhs
                 else:
                     replacement = selected * rhs
-                if not torch.isfinite(replacement).all():
+                if not np.isfinite(replacement).all():
                     raise ValueError("Nonfinite result")
-                value[index] = replacement
+                array[index] = replacement
             store.save_edit(name, value)
             report["applied"] += 1
         except (ValueError, TypeError, KeyError, IndexError, RuntimeError, SyntaxError, OverflowError) as exc:

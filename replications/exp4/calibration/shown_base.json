@@ -1,0 +1,1581 @@
+{
+  "scorer": "openwsp-reconstructed-kinetix-v1",
+  "provenance": {
+    "repository": "https://github.com/FLAIROx/Kinetix",
+    "revision": "80ee9c292837c825cafaf9889323fdcc212efd1b",
+    "sha256": {
+      "kinetix/levels/l/h2_car_ramp.json": "6616869302884dcfa74ec2e8da37b523c13fdc51f4b829eb3ecd7ba5e0ada6b1",
+      "kinetix/environment/env.py": "3413dcf9c700d0a5e3682e52d32229f7b2238fcfd579b38d87cf75221a503020",
+      "kinetix/environment/spaces.py": "9589b11367a6fe707d1c1326d6c928143f5c489f15d30232546723f005c9d719",
+      "kinetix/render/renderer_symbolic_flat.py": "25e27b496b662975f899873becc57a3ad02ddaadf2dbdee13736d077e61dcbc0",
+      "kinetix/render/renderer_symbolic_common.py": "2326758951bb0ec9addb9110b3f030e5c3b42b1347d013b23366c3be38ecefa1",
+      "pyproject.toml": "16cd7917d100d1912b5796c7bf25992d1b06953f4dba2b4b87ce63affab01a2a"
+    },
+    "jax": "0.4.38",
+    "jax2d": "1.0.1",
+    "backend": "cpu",
+    "dense_reward_scale": 0.2,
+    "frame_skip": 2,
+    "max_steps": 256,
+    "observation_sha256": "e93284ac32346642d6d791228d5257fae8c910db7deb06ebbcb89da3f485d1bd",
+    "jaxlib": "0.4.38",
+    "numpy": "2.5.4"
+  },
+  "episodes": 256,
+  "seed": 20261103,
+  "seed_matches_authors": false,
+  "seed_rule": "jax.random.fold_in(PRNGKey(seed), episode_index)",
+  "mode": "sample",
+  "successes": 0,
+  "success": 0.0,
+  "standard_error": 0.0,
+  "red": 0.0,
+  "invalid": 0.0,
+  "timeout": 1.0,
+  "return": 0.15190594393061474,
+  "length": 256.0,
+  "seconds": 202.87277013199855,
+  "records": [
+    {
+      "episode": 0,
+      "outcome": "timeout",
+      "return": 0.15182986855506897,
+      "length": 256
+    },
+    {
+      "episode": 1,
+      "outcome": "timeout",
+      "return": 0.1519559919834137,
+      "length": 256
+    },
+    {
+      "episode": 2,
+      "outcome": "timeout",
+      "return": 0.15184468030929565,
+      "length": 256
+    },
+    {
+      "episode": 3,
+      "outcome": "timeout",
+      "return": 0.1520756483078003,
+      "length": 256
+    },
+    {
+      "episode": 4,
+      "outcome": "timeout",
+      "return": 0.1522110551595688,
+      "length": 256
+    },
+    {
+      "episode": 5,
+      "outcome": "timeout",
+      "return": 0.1520134061574936,
+      "length": 256
+    },
+    {
+      "episode": 6,
+      "outcome": "timeout",
+      "return": 0.15197260677814484,
+      "length": 256
+    },
+    {
+      "episode": 7,
+      "outcome": "timeout",
+      "return": 0.1520000696182251,
+      "length": 256
+    },
+    {
+      "episode": 8,
+      "outcome": "timeout",
+      "return": 0.15160976350307465,
+      "length": 256
+    },
+    {
+      "episode": 9,
+      "outcome": "timeout",
+      "return": 0.15203335881233215,
+      "length": 256
+    },
+    {
+      "episode": 10,
+      "outcome": "timeout",
+      "return": 0.1520412415266037,
+      "length": 256
+    },
+    {
+      "episode": 11,
+      "outcome": "timeout",
+      "return": 0.1518469899892807,
+      "length": 256
+    },
+    {
+      "episode": 12,
+      "outcome": "timeout",
+      "return": 0.15205392241477966,
+      "length": 256
+    },
+    {
+      "episode": 13,
+      "outcome": "timeout",
+      "return": 0.15212884545326233,
+      "length": 256
+    },
+    {
+      "episode": 14,
+      "outcome": "timeout",
+      "return": 0.15185441076755524,
+      "length": 256
+    },
+    {
+      "episode": 15,
+      "outcome": "timeout",
+      "return": 0.1520683616399765,
+      "length": 256
+    },
+    {
+      "episode": 16,
+      "outcome": "timeout",
+      "return": 0.14407899975776672,
+      "length": 256
+    },
+    {
+      "episode": 17,
+      "outcome": "timeout",
+      "return": 0.1521543562412262,
+      "length": 256
+    },
+    {
+      "episode": 18,
+      "outcome": "timeout",
+      "return": 0.15202797949314117,
+      "length": 256
+    },
+    {
+      "episode": 19,
+      "outcome": "timeout",
+      "return": 0.15200835466384888,
+      "length": 256
+    },
+    {
+      "episode": 20,
+      "outcome": "timeout",
+      "return": 0.15193742513656616,
+      "length": 256
+    },
+    {
+      "episode": 21,
+      "outcome": "timeout",
+      "return": 0.1519964337348938,
+      "length": 256
+    },
+    {
+      "episode": 22,
+      "outcome": "timeout",
+      "return": 0.1520020216703415,
+      "length": 256
+    },
+    {
+      "episode": 23,
+      "outcome": "timeout",
+      "return": 0.15220099687576294,
+      "length": 256
+    },
+    {
+      "episode": 24,
+      "outcome": "timeout",
+      "return": 0.15197595953941345,
+      "length": 256
+    },
+    {
+      "episode": 25,
+      "outcome": "timeout",
+      "return": 0.1518118977546692,
+      "length": 256
+    },
+    {
+      "episode": 26,
+      "outcome": "timeout",
+      "return": 0.15193989872932434,
+      "length": 256
+    },
+    {
+      "episode": 27,
+      "outcome": "timeout",
+      "return": 0.15204539895057678,
+      "length": 256
+    },
+    {
+      "episode": 28,
+      "outcome": "timeout",
+      "return": 0.1518920511007309,
+      "length": 256
+    },
+    {
+      "episode": 29,
+      "outcome": "timeout",
+      "return": 0.15201324224472046,
+      "length": 256
+    },
+    {
+      "episode": 30,
+      "outcome": "timeout",
+      "return": 0.15200470387935638,
+      "length": 256
+    },
+    {
+      "episode": 31,
+      "outcome": "timeout",
+      "return": 0.15190082788467407,
+      "length": 256
+    },
+    {
+      "episode": 32,
+      "outcome": "timeout",
+      "return": 0.15194131433963776,
+      "length": 256
+    },
+    {
+      "episode": 33,
+      "outcome": "timeout",
+      "return": 0.15200479328632355,
+      "length": 256
+    },
+    {
+      "episode": 34,
+      "outcome": "timeout",
+      "return": 0.15194113552570343,
+      "length": 256
+    },
+    {
+      "episode": 35,
+      "outcome": "timeout",
+      "return": 0.1520211398601532,
+      "length": 256
+    },
+    {
+      "episode": 36,
+      "outcome": "timeout",
+      "return": 0.1524456888437271,
+      "length": 256
+    },
+    {
+      "episode": 37,
+      "outcome": "timeout",
+      "return": 0.1518799513578415,
+      "length": 256
+    },
+    {
+      "episode": 38,
+      "outcome": "timeout",
+      "return": 0.1520305871963501,
+      "length": 256
+    },
+    {
+      "episode": 39,
+      "outcome": "timeout",
+      "return": 0.1520230919122696,
+      "length": 256
+    },
+    {
+      "episode": 40,
+      "outcome": "timeout",
+      "return": 0.1521226465702057,
+      "length": 256
+    },
+    {
+      "episode": 41,
+      "outcome": "timeout",
+      "return": 0.15186282992362976,
+      "length": 256
+    },
+    {
+      "episode": 42,
+      "outcome": "timeout",
+      "return": 0.15203817188739777,
+      "length": 256
+    },
+    {
+      "episode": 43,
+      "outcome": "timeout",
+      "return": 0.15205539762973785,
+      "length": 256
+    },
+    {
+      "episode": 44,
+      "outcome": "timeout",
+      "return": 0.15200233459472656,
+      "length": 256
+    },
+    {
+      "episode": 45,
+      "outcome": "timeout",
+      "return": 0.1520780473947525,
+      "length": 256
+    },
+    {
+      "episode": 46,
+      "outcome": "timeout",
+      "return": 0.15199702978134155,
+      "length": 256
+    },
+    {
+      "episode": 47,
+      "outcome": "timeout",
+      "return": 0.15195120871067047,
+      "length": 256
+    },
+    {
+      "episode": 48,
+      "outcome": "timeout",
+      "return": 0.1520622819662094,
+      "length": 256
+    },
+    {
+      "episode": 49,
+      "outcome": "timeout",
+      "return": 0.1520499438047409,
+      "length": 256
+    },
+    {
+      "episode": 50,
+      "outcome": "timeout",
+      "return": 0.1519947648048401,
+      "length": 256
+    },
+    {
+      "episode": 51,
+      "outcome": "timeout",
+      "return": 0.15187600255012512,
+      "length": 256
+    },
+    {
+      "episode": 52,
+      "outcome": "timeout",
+      "return": 0.15200883150100708,
+      "length": 256
+    },
+    {
+      "episode": 53,
+      "outcome": "timeout",
+      "return": 0.15201346576213837,
+      "length": 256
+    },
+    {
+      "episode": 54,
+      "outcome": "timeout",
+      "return": 0.1517210304737091,
+      "length": 256
+    },
+    {
+      "episode": 55,
+      "outcome": "timeout",
+      "return": 0.15222761034965515,
+      "length": 256
+    },
+    {
+      "episode": 56,
+      "outcome": "timeout",
+      "return": 0.15216064453125,
+      "length": 256
+    },
+    {
+      "episode": 57,
+      "outcome": "timeout",
+      "return": 0.15196403861045837,
+      "length": 256
+    },
+    {
+      "episode": 58,
+      "outcome": "timeout",
+      "return": 0.15200479328632355,
+      "length": 256
+    },
+    {
+      "episode": 59,
+      "outcome": "timeout",
+      "return": 0.15191328525543213,
+      "length": 256
+    },
+    {
+      "episode": 60,
+      "outcome": "timeout",
+      "return": 0.1520039588212967,
+      "length": 256
+    },
+    {
+      "episode": 61,
+      "outcome": "timeout",
+      "return": 0.151966854929924,
+      "length": 256
+    },
+    {
+      "episode": 62,
+      "outcome": "timeout",
+      "return": 0.15193070471286774,
+      "length": 256
+    },
+    {
+      "episode": 63,
+      "outcome": "timeout",
+      "return": 0.15198957920074463,
+      "length": 256
+    },
+    {
+      "episode": 64,
+      "outcome": "timeout",
+      "return": 0.15190470218658447,
+      "length": 256
+    },
+    {
+      "episode": 65,
+      "outcome": "timeout",
+      "return": 0.15180404484272003,
+      "length": 256
+    },
+    {
+      "episode": 66,
+      "outcome": "timeout",
+      "return": 0.1518074870109558,
+      "length": 256
+    },
+    {
+      "episode": 67,
+      "outcome": "timeout",
+      "return": 0.15195798873901367,
+      "length": 256
+    },
+    {
+      "episode": 68,
+      "outcome": "timeout",
+      "return": 0.1520947515964508,
+      "length": 256
+    },
+    {
+      "episode": 69,
+      "outcome": "timeout",
+      "return": 0.1520126312971115,
+      "length": 256
+    },
+    {
+      "episode": 70,
+      "outcome": "timeout",
+      "return": 0.15204492211341858,
+      "length": 256
+    },
+    {
+      "episode": 71,
+      "outcome": "timeout",
+      "return": 0.15204618871212006,
+      "length": 256
+    },
+    {
+      "episode": 72,
+      "outcome": "timeout",
+      "return": 0.15211121737957,
+      "length": 256
+    },
+    {
+      "episode": 73,
+      "outcome": "timeout",
+      "return": 0.15202923119068146,
+      "length": 256
+    },
+    {
+      "episode": 74,
+      "outcome": "timeout",
+      "return": 0.15235088765621185,
+      "length": 256
+    },
+    {
+      "episode": 75,
+      "outcome": "timeout",
+      "return": 0.15177710354328156,
+      "length": 256
+    },
+    {
+      "episode": 76,
+      "outcome": "timeout",
+      "return": 0.15194720029830933,
+      "length": 256
+    },
+    {
+      "episode": 77,
+      "outcome": "timeout",
+      "return": 0.1516614854335785,
+      "length": 256
+    },
+    {
+      "episode": 78,
+      "outcome": "timeout",
+      "return": 0.15251512825489044,
+      "length": 256
+    },
+    {
+      "episode": 79,
+      "outcome": "timeout",
+      "return": 0.15206864476203918,
+      "length": 256
+    },
+    {
+      "episode": 80,
+      "outcome": "timeout",
+      "return": 0.15179532766342163,
+      "length": 256
+    },
+    {
+      "episode": 81,
+      "outcome": "timeout",
+      "return": 0.1520364135503769,
+      "length": 256
+    },
+    {
+      "episode": 82,
+      "outcome": "timeout",
+      "return": 0.15252962708473206,
+      "length": 256
+    },
+    {
+      "episode": 83,
+      "outcome": "timeout",
+      "return": 0.15242792665958405,
+      "length": 256
+    },
+    {
+      "episode": 84,
+      "outcome": "timeout",
+      "return": 0.152125284075737,
+      "length": 256
+    },
+    {
+      "episode": 85,
+      "outcome": "timeout",
+      "return": 0.15205836296081543,
+      "length": 256
+    },
+    {
+      "episode": 86,
+      "outcome": "timeout",
+      "return": 0.15205562114715576,
+      "length": 256
+    },
+    {
+      "episode": 87,
+      "outcome": "timeout",
+      "return": 0.15205273032188416,
+      "length": 256
+    },
+    {
+      "episode": 88,
+      "outcome": "timeout",
+      "return": 0.1521417200565338,
+      "length": 256
+    },
+    {
+      "episode": 89,
+      "outcome": "timeout",
+      "return": 0.144998237490654,
+      "length": 256
+    },
+    {
+      "episode": 90,
+      "outcome": "timeout",
+      "return": 0.15251396596431732,
+      "length": 256
+    },
+    {
+      "episode": 91,
+      "outcome": "timeout",
+      "return": 0.15189668536186218,
+      "length": 256
+    },
+    {
+      "episode": 92,
+      "outcome": "timeout",
+      "return": 0.15205346047878265,
+      "length": 256
+    },
+    {
+      "episode": 93,
+      "outcome": "timeout",
+      "return": 0.15214945375919342,
+      "length": 256
+    },
+    {
+      "episode": 94,
+      "outcome": "timeout",
+      "return": 0.1524723917245865,
+      "length": 256
+    },
+    {
+      "episode": 95,
+      "outcome": "timeout",
+      "return": 0.15201900899410248,
+      "length": 256
+    },
+    {
+      "episode": 96,
+      "outcome": "timeout",
+      "return": 0.15210305154323578,
+      "length": 256
+    },
+    {
+      "episode": 97,
+      "outcome": "timeout",
+      "return": 0.15195557475090027,
+      "length": 256
+    },
+    {
+      "episode": 98,
+      "outcome": "timeout",
+      "return": 0.15217188000679016,
+      "length": 256
+    },
+    {
+      "episode": 99,
+      "outcome": "timeout",
+      "return": 0.15174654126167297,
+      "length": 256
+    },
+    {
+      "episode": 100,
+      "outcome": "timeout",
+      "return": 0.15206404030323029,
+      "length": 256
+    },
+    {
+      "episode": 101,
+      "outcome": "timeout",
+      "return": 0.15193910896778107,
+      "length": 256
+    },
+    {
+      "episode": 102,
+      "outcome": "timeout",
+      "return": 0.15232886373996735,
+      "length": 256
+    },
+    {
+      "episode": 103,
+      "outcome": "timeout",
+      "return": 0.15251632034778595,
+      "length": 256
+    },
+    {
+      "episode": 104,
+      "outcome": "timeout",
+      "return": 0.15260091423988342,
+      "length": 256
+    },
+    {
+      "episode": 105,
+      "outcome": "timeout",
+      "return": 0.15252266824245453,
+      "length": 256
+    },
+    {
+      "episode": 106,
+      "outcome": "timeout",
+      "return": 0.15174812078475952,
+      "length": 256
+    },
+    {
+      "episode": 107,
+      "outcome": "timeout",
+      "return": 0.15207724273204803,
+      "length": 256
+    },
+    {
+      "episode": 108,
+      "outcome": "timeout",
+      "return": 0.15193361043930054,
+      "length": 256
+    },
+    {
+      "episode": 109,
+      "outcome": "timeout",
+      "return": 0.15140606462955475,
+      "length": 256
+    },
+    {
+      "episode": 110,
+      "outcome": "timeout",
+      "return": 0.15202993154525757,
+      "length": 256
+    },
+    {
+      "episode": 111,
+      "outcome": "timeout",
+      "return": 0.1519738733768463,
+      "length": 256
+    },
+    {
+      "episode": 112,
+      "outcome": "timeout",
+      "return": 0.15210594236850739,
+      "length": 256
+    },
+    {
+      "episode": 113,
+      "outcome": "timeout",
+      "return": 0.152164027094841,
+      "length": 256
+    },
+    {
+      "episode": 114,
+      "outcome": "timeout",
+      "return": 0.1519208401441574,
+      "length": 256
+    },
+    {
+      "episode": 115,
+      "outcome": "timeout",
+      "return": 0.15246473252773285,
+      "length": 256
+    },
+    {
+      "episode": 116,
+      "outcome": "timeout",
+      "return": 0.15225933492183685,
+      "length": 256
+    },
+    {
+      "episode": 117,
+      "outcome": "timeout",
+      "return": 0.15182946622371674,
+      "length": 256
+    },
+    {
+      "episode": 118,
+      "outcome": "timeout",
+      "return": 0.15192942321300507,
+      "length": 256
+    },
+    {
+      "episode": 119,
+      "outcome": "timeout",
+      "return": 0.15206575393676758,
+      "length": 256
+    },
+    {
+      "episode": 120,
+      "outcome": "timeout",
+      "return": 0.15184645354747772,
+      "length": 256
+    },
+    {
+      "episode": 121,
+      "outcome": "timeout",
+      "return": 0.15198028087615967,
+      "length": 256
+    },
+    {
+      "episode": 122,
+      "outcome": "timeout",
+      "return": 0.15182964503765106,
+      "length": 256
+    },
+    {
+      "episode": 123,
+      "outcome": "timeout",
+      "return": 0.15209956467151642,
+      "length": 256
+    },
+    {
+      "episode": 124,
+      "outcome": "timeout",
+      "return": 0.1520226001739502,
+      "length": 256
+    },
+    {
+      "episode": 125,
+      "outcome": "timeout",
+      "return": 0.15200389921665192,
+      "length": 256
+    },
+    {
+      "episode": 126,
+      "outcome": "timeout",
+      "return": 0.1520434021949768,
+      "length": 256
+    },
+    {
+      "episode": 127,
+      "outcome": "timeout",
+      "return": 0.1519099622964859,
+      "length": 256
+    },
+    {
+      "episode": 128,
+      "outcome": "timeout",
+      "return": 0.15179437398910522,
+      "length": 256
+    },
+    {
+      "episode": 129,
+      "outcome": "timeout",
+      "return": 0.15202723443508148,
+      "length": 256
+    },
+    {
+      "episode": 130,
+      "outcome": "timeout",
+      "return": 0.15376180410385132,
+      "length": 256
+    },
+    {
+      "episode": 131,
+      "outcome": "timeout",
+      "return": 0.15194247663021088,
+      "length": 256
+    },
+    {
+      "episode": 132,
+      "outcome": "timeout",
+      "return": 0.15196751058101654,
+      "length": 256
+    },
+    {
+      "episode": 133,
+      "outcome": "timeout",
+      "return": 0.151992067694664,
+      "length": 256
+    },
+    {
+      "episode": 134,
+      "outcome": "timeout",
+      "return": 0.15190427005290985,
+      "length": 256
+    },
+    {
+      "episode": 135,
+      "outcome": "timeout",
+      "return": 0.15206436812877655,
+      "length": 256
+    },
+    {
+      "episode": 136,
+      "outcome": "timeout",
+      "return": 0.15218447148799896,
+      "length": 256
+    },
+    {
+      "episode": 137,
+      "outcome": "timeout",
+      "return": 0.15196166932582855,
+      "length": 256
+    },
+    {
+      "episode": 138,
+      "outcome": "timeout",
+      "return": 0.1520586758852005,
+      "length": 256
+    },
+    {
+      "episode": 139,
+      "outcome": "timeout",
+      "return": 0.14578351378440857,
+      "length": 256
+    },
+    {
+      "episode": 140,
+      "outcome": "timeout",
+      "return": 0.15214237570762634,
+      "length": 256
+    },
+    {
+      "episode": 141,
+      "outcome": "timeout",
+      "return": 0.15203531086444855,
+      "length": 256
+    },
+    {
+      "episode": 142,
+      "outcome": "timeout",
+      "return": 0.15205815434455872,
+      "length": 256
+    },
+    {
+      "episode": 143,
+      "outcome": "timeout",
+      "return": 0.1520897001028061,
+      "length": 256
+    },
+    {
+      "episode": 144,
+      "outcome": "timeout",
+      "return": 0.15206453204154968,
+      "length": 256
+    },
+    {
+      "episode": 145,
+      "outcome": "timeout",
+      "return": 0.15203899145126343,
+      "length": 256
+    },
+    {
+      "episode": 146,
+      "outcome": "timeout",
+      "return": 0.1520203799009323,
+      "length": 256
+    },
+    {
+      "episode": 147,
+      "outcome": "timeout",
+      "return": 0.15201915800571442,
+      "length": 256
+    },
+    {
+      "episode": 148,
+      "outcome": "timeout",
+      "return": 0.15186898410320282,
+      "length": 256
+    },
+    {
+      "episode": 149,
+      "outcome": "timeout",
+      "return": 0.15216600894927979,
+      "length": 256
+    },
+    {
+      "episode": 150,
+      "outcome": "timeout",
+      "return": 0.15182971954345703,
+      "length": 256
+    },
+    {
+      "episode": 151,
+      "outcome": "timeout",
+      "return": 0.1516239047050476,
+      "length": 256
+    },
+    {
+      "episode": 152,
+      "outcome": "timeout",
+      "return": 0.1516711413860321,
+      "length": 256
+    },
+    {
+      "episode": 153,
+      "outcome": "timeout",
+      "return": 0.15188287198543549,
+      "length": 256
+    },
+    {
+      "episode": 154,
+      "outcome": "timeout",
+      "return": 0.1516929417848587,
+      "length": 256
+    },
+    {
+      "episode": 155,
+      "outcome": "timeout",
+      "return": 0.15196675062179565,
+      "length": 256
+    },
+    {
+      "episode": 156,
+      "outcome": "timeout",
+      "return": 0.15196725726127625,
+      "length": 256
+    },
+    {
+      "episode": 157,
+      "outcome": "timeout",
+      "return": 0.1522601842880249,
+      "length": 256
+    },
+    {
+      "episode": 158,
+      "outcome": "timeout",
+      "return": 0.15207521617412567,
+      "length": 256
+    },
+    {
+      "episode": 159,
+      "outcome": "timeout",
+      "return": 0.15194416046142578,
+      "length": 256
+    },
+    {
+      "episode": 160,
+      "outcome": "timeout",
+      "return": 0.15200673043727875,
+      "length": 256
+    },
+    {
+      "episode": 161,
+      "outcome": "timeout",
+      "return": 0.14394941926002502,
+      "length": 256
+    },
+    {
+      "episode": 162,
+      "outcome": "timeout",
+      "return": 0.15204307436943054,
+      "length": 256
+    },
+    {
+      "episode": 163,
+      "outcome": "timeout",
+      "return": 0.15193025767803192,
+      "length": 256
+    },
+    {
+      "episode": 164,
+      "outcome": "timeout",
+      "return": 0.15209394693374634,
+      "length": 256
+    },
+    {
+      "episode": 165,
+      "outcome": "timeout",
+      "return": 0.151982843875885,
+      "length": 256
+    },
+    {
+      "episode": 166,
+      "outcome": "timeout",
+      "return": 0.15143811702728271,
+      "length": 256
+    },
+    {
+      "episode": 167,
+      "outcome": "timeout",
+      "return": 0.15200939774513245,
+      "length": 256
+    },
+    {
+      "episode": 168,
+      "outcome": "timeout",
+      "return": 0.15219604969024658,
+      "length": 256
+    },
+    {
+      "episode": 169,
+      "outcome": "timeout",
+      "return": 0.1519470065832138,
+      "length": 256
+    },
+    {
+      "episode": 170,
+      "outcome": "timeout",
+      "return": 0.15250831842422485,
+      "length": 256
+    },
+    {
+      "episode": 171,
+      "outcome": "timeout",
+      "return": 0.15210314095020294,
+      "length": 256
+    },
+    {
+      "episode": 172,
+      "outcome": "timeout",
+      "return": 0.15205003321170807,
+      "length": 256
+    },
+    {
+      "episode": 173,
+      "outcome": "timeout",
+      "return": 0.15217794477939606,
+      "length": 256
+    },
+    {
+      "episode": 174,
+      "outcome": "timeout",
+      "return": 0.15201079845428467,
+      "length": 256
+    },
+    {
+      "episode": 175,
+      "outcome": "timeout",
+      "return": 0.15185901522636414,
+      "length": 256
+    },
+    {
+      "episode": 176,
+      "outcome": "timeout",
+      "return": 0.15219181776046753,
+      "length": 256
+    },
+    {
+      "episode": 177,
+      "outcome": "timeout",
+      "return": 0.1511356681585312,
+      "length": 256
+    },
+    {
+      "episode": 178,
+      "outcome": "timeout",
+      "return": 0.15199485421180725,
+      "length": 256
+    },
+    {
+      "episode": 179,
+      "outcome": "timeout",
+      "return": 0.1520492136478424,
+      "length": 256
+    },
+    {
+      "episode": 180,
+      "outcome": "timeout",
+      "return": 0.15212102234363556,
+      "length": 256
+    },
+    {
+      "episode": 181,
+      "outcome": "timeout",
+      "return": 0.1520763635635376,
+      "length": 256
+    },
+    {
+      "episode": 182,
+      "outcome": "timeout",
+      "return": 0.15207423269748688,
+      "length": 256
+    },
+    {
+      "episode": 183,
+      "outcome": "timeout",
+      "return": 0.15202714502811432,
+      "length": 256
+    },
+    {
+      "episode": 184,
+      "outcome": "timeout",
+      "return": 0.15218710899353027,
+      "length": 256
+    },
+    {
+      "episode": 185,
+      "outcome": "timeout",
+      "return": 0.1520668864250183,
+      "length": 256
+    },
+    {
+      "episode": 186,
+      "outcome": "timeout",
+      "return": 0.1521165817975998,
+      "length": 256
+    },
+    {
+      "episode": 187,
+      "outcome": "timeout",
+      "return": 0.15197288990020752,
+      "length": 256
+    },
+    {
+      "episode": 188,
+      "outcome": "timeout",
+      "return": 0.1520756483078003,
+      "length": 256
+    },
+    {
+      "episode": 189,
+      "outcome": "timeout",
+      "return": 0.15204638242721558,
+      "length": 256
+    },
+    {
+      "episode": 190,
+      "outcome": "timeout",
+      "return": 0.15171632170677185,
+      "length": 256
+    },
+    {
+      "episode": 191,
+      "outcome": "timeout",
+      "return": 0.1518038511276245,
+      "length": 256
+    },
+    {
+      "episode": 192,
+      "outcome": "timeout",
+      "return": 0.15192367136478424,
+      "length": 256
+    },
+    {
+      "episode": 193,
+      "outcome": "timeout",
+      "return": 0.15204361081123352,
+      "length": 256
+    },
+    {
+      "episode": 194,
+      "outcome": "timeout",
+      "return": 0.15204700827598572,
+      "length": 256
+    },
+    {
+      "episode": 195,
+      "outcome": "timeout",
+      "return": 0.15257878601551056,
+      "length": 256
+    },
+    {
+      "episode": 196,
+      "outcome": "timeout",
+      "return": 0.1520676463842392,
+      "length": 256
+    },
+    {
+      "episode": 197,
+      "outcome": "timeout",
+      "return": 0.15222349762916565,
+      "length": 256
+    },
+    {
+      "episode": 198,
+      "outcome": "timeout",
+      "return": 0.152024507522583,
+      "length": 256
+    },
+    {
+      "episode": 199,
+      "outcome": "timeout",
+      "return": 0.15182167291641235,
+      "length": 256
+    },
+    {
+      "episode": 200,
+      "outcome": "timeout",
+      "return": 0.15200956165790558,
+      "length": 256
+    },
+    {
+      "episode": 201,
+      "outcome": "timeout",
+      "return": 0.15191495418548584,
+      "length": 256
+    },
+    {
+      "episode": 202,
+      "outcome": "timeout",
+      "return": 0.15197037160396576,
+      "length": 256
+    },
+    {
+      "episode": 203,
+      "outcome": "timeout",
+      "return": 0.1517726629972458,
+      "length": 256
+    },
+    {
+      "episode": 204,
+      "outcome": "timeout",
+      "return": 0.15191510319709778,
+      "length": 256
+    },
+    {
+      "episode": 205,
+      "outcome": "timeout",
+      "return": 0.1520271748304367,
+      "length": 256
+    },
+    {
+      "episode": 206,
+      "outcome": "timeout",
+      "return": 0.1519317477941513,
+      "length": 256
+    },
+    {
+      "episode": 207,
+      "outcome": "timeout",
+      "return": 0.1519966870546341,
+      "length": 256
+    },
+    {
+      "episode": 208,
+      "outcome": "timeout",
+      "return": 0.15200363099575043,
+      "length": 256
+    },
+    {
+      "episode": 209,
+      "outcome": "timeout",
+      "return": 0.15185578167438507,
+      "length": 256
+    },
+    {
+      "episode": 210,
+      "outcome": "timeout",
+      "return": 0.15201154351234436,
+      "length": 256
+    },
+    {
+      "episode": 211,
+      "outcome": "timeout",
+      "return": 0.1520756334066391,
+      "length": 256
+    },
+    {
+      "episode": 212,
+      "outcome": "timeout",
+      "return": 0.152035191655159,
+      "length": 256
+    },
+    {
+      "episode": 213,
+      "outcome": "timeout",
+      "return": 0.15207797288894653,
+      "length": 256
+    },
+    {
+      "episode": 214,
+      "outcome": "timeout",
+      "return": 0.15196743607521057,
+      "length": 256
+    },
+    {
+      "episode": 215,
+      "outcome": "timeout",
+      "return": 0.15199609100818634,
+      "length": 256
+    },
+    {
+      "episode": 216,
+      "outcome": "timeout",
+      "return": 0.15203475952148438,
+      "length": 256
+    },
+    {
+      "episode": 217,
+      "outcome": "timeout",
+      "return": 0.15196435153484344,
+      "length": 256
+    },
+    {
+      "episode": 218,
+      "outcome": "timeout",
+      "return": 0.15174409747123718,
+      "length": 256
+    },
+    {
+      "episode": 219,
+      "outcome": "timeout",
+      "return": 0.15207932889461517,
+      "length": 256
+    },
+    {
+      "episode": 220,
+      "outcome": "timeout",
+      "return": 0.15191730856895447,
+      "length": 256
+    },
+    {
+      "episode": 221,
+      "outcome": "timeout",
+      "return": 0.15193654596805573,
+      "length": 256
+    },
+    {
+      "episode": 222,
+      "outcome": "timeout",
+      "return": 0.15201424062252045,
+      "length": 256
+    },
+    {
+      "episode": 223,
+      "outcome": "timeout",
+      "return": 0.15203869342803955,
+      "length": 256
+    },
+    {
+      "episode": 224,
+      "outcome": "timeout",
+      "return": 0.1519930064678192,
+      "length": 256
+    },
+    {
+      "episode": 225,
+      "outcome": "timeout",
+      "return": 0.15200267732143402,
+      "length": 256
+    },
+    {
+      "episode": 226,
+      "outcome": "timeout",
+      "return": 0.1519927829504013,
+      "length": 256
+    },
+    {
+      "episode": 227,
+      "outcome": "timeout",
+      "return": 0.1516827791929245,
+      "length": 256
+    },
+    {
+      "episode": 228,
+      "outcome": "timeout",
+      "return": 0.15207068622112274,
+      "length": 256
+    },
+    {
+      "episode": 229,
+      "outcome": "timeout",
+      "return": 0.1515032798051834,
+      "length": 256
+    },
+    {
+      "episode": 230,
+      "outcome": "timeout",
+      "return": 0.15203462541103363,
+      "length": 256
+    },
+    {
+      "episode": 231,
+      "outcome": "timeout",
+      "return": 0.15203574299812317,
+      "length": 256
+    },
+    {
+      "episode": 232,
+      "outcome": "timeout",
+      "return": 0.15213356912136078,
+      "length": 256
+    },
+    {
+      "episode": 233,
+      "outcome": "timeout",
+      "return": 0.15220801532268524,
+      "length": 256
+    },
+    {
+      "episode": 234,
+      "outcome": "timeout",
+      "return": 0.15205691754817963,
+      "length": 256
+    },
+    {
+      "episode": 235,
+      "outcome": "timeout",
+      "return": 0.15194086730480194,
+      "length": 256
+    },
+    {
+      "episode": 236,
+      "outcome": "timeout",
+      "return": 0.15201732516288757,
+      "length": 256
+    },
+    {
+      "episode": 237,
+      "outcome": "timeout",
+      "return": 0.15199436247348785,
+      "length": 256
+    },
+    {
+      "episode": 238,
+      "outcome": "timeout",
+      "return": 0.15205255150794983,
+      "length": 256
+    },
+    {
+      "episode": 239,
+      "outcome": "timeout",
+      "return": 0.15196655690670013,
+      "length": 256
+    },
+    {
+      "episode": 240,
+      "outcome": "timeout",
+      "return": 0.15234868228435516,
+      "length": 256
+    },
+    {
+      "episode": 241,
+      "outcome": "timeout",
+      "return": 0.1520751416683197,
+      "length": 256
+    },
+    {
+      "episode": 242,
+      "outcome": "timeout",
+      "return": 0.15204790234565735,
+      "length": 256
+    },
+    {
+      "episode": 243,
+      "outcome": "timeout",
+      "return": 0.15196631848812103,
+      "length": 256
+    },
+    {
+      "episode": 244,
+      "outcome": "timeout",
+      "return": 0.15209552645683289,
+      "length": 256
+    },
+    {
+      "episode": 245,
+      "outcome": "timeout",
+      "return": 0.1520158052444458,
+      "length": 256
+    },
+    {
+      "episode": 246,
+      "outcome": "timeout",
+      "return": 0.1519547998905182,
+      "length": 256
+    },
+    {
+      "episode": 247,
+      "outcome": "timeout",
+      "return": 0.1520845890045166,
+      "length": 256
+    },
+    {
+      "episode": 248,
+      "outcome": "timeout",
+      "return": 0.15185602009296417,
+      "length": 256
+    },
+    {
+      "episode": 249,
+      "outcome": "timeout",
+      "return": 0.15182411670684814,
+      "length": 256
+    },
+    {
+      "episode": 250,
+      "outcome": "timeout",
+      "return": 0.152159184217453,
+      "length": 256
+    },
+    {
+      "episode": 251,
+      "outcome": "timeout",
+      "return": 0.1519199013710022,
+      "length": 256
+    },
+    {
+      "episode": 252,
+      "outcome": "timeout",
+      "return": 0.15214884281158447,
+      "length": 256
+    },
+    {
+      "episode": 253,
+      "outcome": "timeout",
+      "return": 0.15196290612220764,
+      "length": 256
+    },
+    {
+      "episode": 254,
+      "outcome": "timeout",
+      "return": 0.15208090841770172,
+      "length": 256
+    },
+    {
+      "episode": 255,
+      "outcome": "timeout",
+      "return": 0.1519848257303238,
+      "length": 256
+    }
+  ],
+  "validation": "released author network only; not a new editor result",
+  "batch_size": 32,
+  "network_sha256": "54e5328fc9740a6396732b1b38f4c3d9e9f160483eff1b14fffe4a3bb257462b",
+  "source_prompt_sha256": "2ed66051f4fa554d43d0163eb48e4256dc80aef78d875a218826beefeb7d0559",
+  "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f"
+}

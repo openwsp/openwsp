@@ -7,8 +7,12 @@ import fcntl
 import hashlib
 import json
 import os
+import subprocess
+import tempfile
 from dataclasses import replace
 from pathlib import Path
+
+import numpy as np
 
 from openwsp.budget import BudgetLedger, atomic_json
 from openwsp.editors.anthropic import AnthropicTokenRates
@@ -53,9 +57,30 @@ def score_answer(item, answer, prompt, output_dir, *, rollout=False):
     if experiment == "exp5" and rollout:
         from .minatar_score import evaluate
         result["evaluation"] = evaluate(item["item_id"], store)
+    elif experiment == "exp4" and rollout:
+        result["evaluation"] = evaluate_car(store, output_dir)
     else:
         result["evaluation"] = {"status": "pending", "reason": "CPU rollout has not been run"}
     return result
+
+
+def evaluate_car(store, output_dir):
+    """Keep the pinned JAX environment separate from the shared torch installation."""
+    executable = ROOT / ".openwsp/kinetix-venv/bin/python"
+    source_root = ROOT / ".openwsp/kinetix-source"
+    if not executable.is_file() or not source_root.is_dir():
+        raise RuntimeError("Prepare the isolated Kinetix environment in replications/exp4/SCORER.md")
+    output = Path(output_dir).resolve() / "kinetix-evaluation.json"
+    env = {name: os.environ[name] for name in ("PATH", "LANG", "LC_ALL", "LD_LIBRARY_PATH") if name in os.environ}
+    env.update(JAX_PLATFORMS="cpu", MPLCONFIGDIR="/tmp/openwsp-matplotlib", XDG_CACHE_HOME="/tmp/openwsp-cache",
+               OPENBLAS_NUM_THREADS="1", OMP_NUM_THREADS="1")
+    with tempfile.TemporaryDirectory(prefix="openwsp-car-score-") as directory:
+        network = Path(directory) / "actor.npz"
+        np.savez(network, **{name: store.load(name).numpy() for name in store.names})
+        subprocess.run([str(executable), "-m", "replications.raw_weights.kinetix_score", "--network", str(network),
+                        "--source-root", str(source_root), "--output", str(output), "--episodes", "1024",
+                        "--batch-size", "32"], cwd=ROOT, env=env, check=True)
+    return json.loads(output.read_text())
 
 
 def _private(path):
@@ -109,7 +134,14 @@ def run_item(item, *, source_root, state_root, output_root, editor_name, editor_
         try:
             answer = editor.complete(source["prompt"], request_key=request_key)
         except Exception as exc:
-            record.update(status="blocked", error_type=type(exc).__name__)
+            record.update(status="blocked", error_type=type(exc).__name__, receipt=editor.last_response)
+            # Terminal incomplete/refused receipts remain evidence. A saved
+            # partial answer is never treated as complete or scored by this path.
+            partial = (editor.last_response or {}).get("text")
+            if isinstance(partial, str) and partial:
+                data = partial.encode("utf-8")
+                (target / "incomplete-answer.md").write_bytes(data)
+                record.update(incomplete_answer_sha256=hashlib.sha256(data).hexdigest(), incomplete_answer_bytes=len(data))
             atomic_json(record_path, record)
             raise
         data = answer.encode("utf-8")
@@ -184,7 +216,8 @@ def main(argv=None):
             profile = replace(FABLE_5_1_PROFILE, system=instructions, thinking=ThinkingConfig(type="adaptive"),
                               output_effort=item["authors_config"]["effort"])
             return create_editor(profile, state_dir=state / "editor", budget=budget, rates=rates,
-                                 max_input_tokens=bound["max_input_tokens"], max_output_tokens=bound["max_output_tokens"])
+                                 max_input_tokens=bound["max_input_tokens"], max_output_tokens=bound["max_output_tokens"],
+                                 timeout=3600)
     for item in items:
         result = run_item(item, source_root=args.source_root, state_root=args.state_root,
                           output_root=args.output_root, editor_name=args.editor, editor_factory=factory,

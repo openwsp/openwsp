@@ -1,0 +1,50 @@
+{
+  "authors_reference_path": "replications/exp5/reference/minatar_eval.json",
+  "authors_reference_sha256": "bc10c6f957af95cdd52ee4be085acd249046f6117dbdb8c735fd5ddb2195c47c",
+  "basis": "Published author networks only; independent CPU scorer calibration, not new editor results",
+  "rows": [
+    {
+      "absolute_difference_in_combined_standard_errors": 0.17532866385485088,
+      "artifact": "breakout.json",
+      "artifact_sha256": "715427791031ed5fabcc01328245ddad31f5860cfb687f5f7c3ae8ecba1c8cd8",
+      "authors_mean": 517.411,
+      "authors_standard_error": 7.416952829044303,
+      "episodes": 1000,
+      "game": "breakout",
+      "mean": 519.267,
+      "seconds": 260.0456336829993,
+      "seed": 20261103,
+      "standard_error": 7.55305741983916
+    },
+    {
+      "absolute_difference_in_combined_standard_errors": 0.6679637944950947,
+      "artifact": "seaquest.json",
+      "artifact_sha256": "1e2b1e020d940d9f11891bb842fcc2ae7b96f737308f52d77c4f26cb624c5874",
+      "authors_mean": 53.11,
+      "authors_standard_error": 1.3573821814015339,
+      "episodes": 1000,
+      "game": "seaquest",
+      "mean": 51.823,
+      "seconds": 97.25419411799885,
+      "seed": 20261103,
+      "standard_error": 1.3674368557833136
+    },
+    {
+      "absolute_difference_in_combined_standard_errors": 1.3849221288940046,
+      "artifact": "asterix.json",
+      "artifact_sha256": "78dffcbcb0f2a9d0278b039966aa23ec291049dd1054be2e204302c753dd2599",
+      "authors_mean": 53.178,
+      "authors_standard_error": 1.023305169277215,
+      "episodes": 1000,
+      "game": "asterix",
+      "mean": 55.227,
+      "seconds": 39.8956482829999,
+      "seed": 20261103,
+      "standard_error": 1.0685425842025458
+    }
+  ],
+  "schema_version": 1,
+  "seed_matches_authors": false,
+  "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "status": "completed"
+}

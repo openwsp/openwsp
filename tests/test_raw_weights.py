@@ -39,6 +39,13 @@ def test_invalid_statement_is_atomic_and_zero_is_allowed():
     assert torch.equal(store.load("a.W"), torch.tensor([[0., 4.], [0., 0.]]))
 
 
+def test_numeric_ranges_support_negative_steps_and_reject_zero_step():
+    store = WeightStore({"b": torch.zeros(5)}, refuse_rescale=False)
+    result = apply_numeric_edits("```edits\nb[4::-2] = [1, 2, 3]\nb[::0] = 99\nb[3:0:-1] += 1\n```", store)
+    assert result["applied"] == 2 and len(result["errors"]) == 1
+    assert torch.equal(store.load("b"), torch.tensor([3., 1., 3., 1., 1.]))
+
+
 def test_label_scorer_ignores_reasoning_and_ambiguous_final_labels():
     assert score_label("exp1", "freeway", "Reasoning: pong.\n## Game\nFrogger")['correct']
     assert not score_label("exp1", "pong", "I considered Pong.\nGame: Breakout")['correct']
@@ -113,6 +120,97 @@ def test_deferred_scoring_never_constructs_an_editor(tmp_path, monkeypatch):
     assert result["score"]["evaluation"]["episodes"] == 1000
     runner.run_item(item, editor_factory=None, score_only=True, rollout=True, **kwargs)
     assert len(seen) == 1
+
+
+def test_blocked_reply_retains_receipt_without_scoring(tmp_path):
+    from openwsp.editors.base import EditorIncomplete
+    from replications.raw_weights.runner import run_item
+    source = tmp_path / "source"
+    source.mkdir()
+    data = b"fixed source"
+    (source / "prompt.txt").write_bytes(data)
+    item = {"experiment": "exp1", "item_id": "pong", "prompt": {"path": "prompt.txt", "sha256": hashlib.sha256(data).hexdigest()},
+            "instructions": {"path": "prompt.txt", "sha256": hashlib.sha256(data).hexdigest()}}
+    class Editor:
+        def __init__(self):
+            self.last_response = {"outcome": "incomplete", "stop_reason": "max_tokens", "text": "Partial text",
+                                  "usage": {"input_tokens": 20, "output_tokens": 10}, "cost_usd": "0.001"}
+
+        def complete(self, text, *, request_key):
+            raise EditorIncomplete("max_tokens", "message-id")
+    with pytest.raises(EditorIncomplete):
+        run_item(item, source_root=source, state_root=tmp_path / "state", output_root=tmp_path / "out",
+                 editor_name="fable_native_anthropic", editor_factory=lambda *args: Editor())
+    target = tmp_path / "out/fable_native_anthropic/exp1/pong"
+    record = json.loads((target / "result.json").read_text())
+    assert record["status"] == "blocked" and "score" not in record
+    assert record["receipt"]["cost_usd"] == "0.001"
+    assert (target / "incomplete-answer.md").read_text() == "Partial text"
+
+
+def test_car_scoring_subprocess_uses_pinned_cpu_environment(tmp_path, monkeypatch):
+    from replications.raw_weights import runner
+    executable = tmp_path / ".openwsp/kinetix-venv/bin/python"
+    executable.parent.mkdir(parents=True)
+    executable.touch()
+    (tmp_path / ".openwsp/kinetix-source").mkdir()
+    output = tmp_path / "result"
+    output.mkdir()
+    monkeypatch.setattr(runner, "ROOT", tmp_path)
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "fake-test-key-must-not-reach-scorer")
+    def run(args, *, cwd, env, check):
+        import numpy as np
+        assert args[0] == str(executable) and check and cwd == tmp_path
+        assert env["JAX_PLATFORMS"] == "cpu" and "ANTHROPIC_API_KEY" not in env
+        with np.load(args[args.index("--network") + 1], allow_pickle=False) as arrays:
+            assert arrays["w"].dtype == np.float32
+        Path(args[args.index("--output") + 1]).write_text('{"episodes":1024,"success_rate":1.0}')
+    from pathlib import Path
+    monkeypatch.setattr(runner.subprocess, "run", run)
+    assert runner.evaluate_car(WeightStore({"w": torch.ones(2)}), output)["episodes"] == 1024
+
+
+def test_report_preserves_pending_and_verifies_answer_bytes(tmp_path, monkeypatch):
+    from replications.raw_weights import report
+    manifest = {"editors": ["astra_subscription", "fable_native_anthropic"], "revision": "pinned",
+                "items_per_editor": 1, "items": [{"experiment": "exp1", "item_id": "pong", "prompt": {"sha256": "prompt-hash"}}]}
+    monkeypatch.setattr(report, "inventory", lambda: manifest)
+    target = tmp_path / "astra_subscription/exp1/pong"
+    target.mkdir(parents=True)
+    answer = b"Game: Pong"
+    (target / "answer.md").write_bytes(answer)
+    (target / "result.json").write_text(json.dumps({"binding": {"prompt_sha256": "prompt-hash"}, "status": "completed",
+        "answer_sha256": hashlib.sha256(answer).hexdigest(), "score": {"correct": True, "predicted": ["pong"]}}))
+    rows = report.generate(tmp_path)["items"]
+    assert rows[0]["correct"] is True and "cost_usd" not in rows[0]
+    assert rows[1]["reply_status"] == "pending" and "correct" not in rows[1]
+    (target / "answer.md").write_text("Changed answer")
+    with pytest.raises(ValueError, match="scored receipt"):
+        report.generate(tmp_path)
+
+
+def test_fable_limits_count_exact_messages_without_generation(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+
+    from replications.raw_weights import fable_limits
+    data = b"source prompt\n"
+    (tmp_path / "prompt.txt").write_bytes(data)
+    item = {"experiment": "exp5", "item_id": "asterix", "authors_config": {"effort": "xhigh"},
+            "prompt": {"path": "prompt.txt", "sha256": hashlib.sha256(data).hexdigest()},
+            "instructions": {"path": "prompt.txt", "sha256": hashlib.sha256(data).hexdigest()}}
+    monkeypatch.setattr(fable_limits, "inventory", lambda: {"items": [item]})
+    calls = []
+    def count(**request):
+        calls.append(request)
+        return SimpleNamespace(input_tokens=1000)
+    client = SimpleNamespace(models=SimpleNamespace(retrieve=lambda model: SimpleNamespace(id=model, lifecycle="active", max_input_tokens=1000000, max_tokens=128000)),
+                             messages=SimpleNamespace(count_tokens=count))
+    result = fable_limits.prepare(tmp_path, tmp_path / "limits.json", client=client)
+    assert calls[0]["messages"] == [{"role": "user", "content": data.decode()}]
+    assert calls[0]["system"] == data.decode() and calls[0]["tools"] == []
+    assert calls[0]["output_config"] == {"effort": "xhigh"}
+    assert result["exp5/asterix"]["max_input_tokens"] == 2074
+    assert result["exp5/asterix"]["max_output_tokens"] == 32768
 
 
 def test_minatar_input_channels_and_seeded_rollouts():

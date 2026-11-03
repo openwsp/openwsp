@@ -1,0 +1,6188 @@
+{
+  "scorer": "openwsp-reconstructed-kinetix-v1",
+  "provenance": {
+    "repository": "https://github.com/FLAIROx/Kinetix",
+    "revision": "80ee9c292837c825cafaf9889323fdcc212efd1b",
+    "sha256": {
+      "kinetix/levels/l/h2_car_ramp.json": "6616869302884dcfa74ec2e8da37b523c13fdc51f4b829eb3ecd7ba5e0ada6b1",
+      "kinetix/environment/env.py": "3413dcf9c700d0a5e3682e52d32229f7b2238fcfd579b38d87cf75221a503020",
+      "kinetix/environment/spaces.py": "9589b11367a6fe707d1c1326d6c928143f5c489f15d30232546723f005c9d719",
+      "kinetix/render/renderer_symbolic_flat.py": "25e27b496b662975f899873becc57a3ad02ddaadf2dbdee13736d077e61dcbc0",
+      "kinetix/render/renderer_symbolic_common.py": "2326758951bb0ec9addb9110b3f030e5c3b42b1347d013b23366c3be38ecefa1",
+      "pyproject.toml": "16cd7917d100d1912b5796c7bf25992d1b06953f4dba2b4b87ce63affab01a2a"
+    },
+    "jax": "0.4.38",
+    "jaxlib": "0.4.38",
+    "jax2d": "1.0.1",
+    "numpy": "2.5.4",
+    "backend": "cpu",
+    "dense_reward_scale": 0.2,
+    "frame_skip": 2,
+    "max_steps": 256,
+    "observation_sha256": "e93284ac32346642d6d791228d5257fae8c910db7deb06ebbcb89da3f485d1bd"
+  },
+  "episodes": 1024,
+  "batch_size": 32,
+  "seed": 20261103,
+  "seed_matches_authors": false,
+  "seed_rule": "jax.random.fold_in(PRNGKey(seed), episode_index)",
+  "mode": "sample",
+  "successes": 1024,
+  "success": 1.0,
+  "standard_error": 0.0,
+  "red": 0.0,
+  "invalid": 0.0,
+  "timeout": 0.0,
+  "return": 1.3738481402397156,
+  "length": 73.0,
+  "seconds": 229.76655852600015,
+  "records": [
+    {
+      "episode": 0,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 2,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 3,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 4,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 5,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 6,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 7,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 8,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 9,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 10,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 11,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 12,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 13,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 14,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 15,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 16,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 17,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 18,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 19,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 20,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 21,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 22,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 23,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 24,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 25,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 26,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 27,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 28,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 29,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 30,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 31,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 32,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 33,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 34,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 35,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 36,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 37,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 38,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 39,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 40,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 41,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 42,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 43,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 44,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 45,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 46,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 47,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 48,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 49,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 50,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 51,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 52,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 53,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 54,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 55,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 56,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 57,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 58,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 59,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 60,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 61,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 62,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 63,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 64,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 65,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 66,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 67,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 68,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 69,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 70,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 71,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 72,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 73,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 74,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 75,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 76,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 77,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 78,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 79,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 80,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 81,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 82,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 83,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 84,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 85,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 86,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 87,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 88,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 89,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 90,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 91,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 92,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 93,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 94,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 95,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 96,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 97,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 98,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 99,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 100,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 101,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 102,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 103,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 104,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 105,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 106,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 107,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 108,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 109,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 110,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 111,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 112,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 113,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 114,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 115,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 116,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 117,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 118,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 119,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 120,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 121,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 122,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 123,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 124,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 125,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 126,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 127,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 128,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 129,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 130,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 131,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 132,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 133,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 134,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 135,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 136,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 137,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 138,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 139,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 140,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 141,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 142,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 143,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 144,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 145,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 146,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 147,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 148,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 149,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 150,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 151,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 152,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 153,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 154,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 155,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 156,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 157,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 158,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 159,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 160,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 161,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 162,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 163,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 164,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 165,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 166,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 167,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 168,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 169,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 170,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 171,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 172,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 173,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 174,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 175,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 176,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 177,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 178,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 179,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 180,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 181,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 182,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 183,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 184,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 185,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 186,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 187,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 188,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 189,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 190,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 191,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 192,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 193,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 194,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 195,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 196,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 197,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 198,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 199,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 200,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 201,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 202,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 203,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 204,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 205,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 206,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 207,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 208,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 209,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 210,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 211,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 212,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 213,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 214,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 215,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 216,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 217,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 218,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 219,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 220,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 221,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 222,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 223,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 224,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 225,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 226,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 227,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 228,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 229,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 230,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 231,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 232,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 233,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 234,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 235,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 236,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 237,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 238,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 239,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 240,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 241,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 242,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 243,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 244,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 245,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 246,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 247,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 248,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 249,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 250,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 251,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 252,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 253,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 254,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 255,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 256,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 257,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 258,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 259,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 260,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 261,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 262,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 263,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 264,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 265,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 266,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 267,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 268,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 269,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 270,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 271,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 272,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 273,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 274,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 275,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 276,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 277,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 278,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 279,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 280,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 281,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 282,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 283,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 284,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 285,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 286,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 287,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 288,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 289,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 290,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 291,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 292,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 293,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 294,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 295,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 296,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 297,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 298,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 299,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 300,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 301,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 302,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 303,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 304,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 305,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 306,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 307,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 308,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 309,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 310,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 311,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 312,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 313,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 314,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 315,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 316,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 317,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 318,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 319,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 320,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 321,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 322,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 323,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 324,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 325,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 326,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 327,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 328,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 329,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 330,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 331,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 332,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 333,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 334,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 335,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 336,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 337,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 338,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 339,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 340,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 341,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 342,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 343,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 344,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 345,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 346,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 347,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 348,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 349,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 350,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 351,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 352,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 353,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 354,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 355,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 356,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 357,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 358,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 359,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 360,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 361,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 362,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 363,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 364,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 365,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 366,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 367,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 368,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 369,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 370,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 371,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 372,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 373,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 374,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 375,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 376,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 377,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 378,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 379,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 380,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 381,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 382,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 383,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 384,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 385,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 386,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 387,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 388,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 389,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 390,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 391,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 392,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 393,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 394,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 395,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 396,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 397,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 398,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 399,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 400,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 401,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 402,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 403,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 404,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 405,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 406,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 407,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 408,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 409,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 410,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 411,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 412,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 413,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 414,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 415,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 416,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 417,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 418,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 419,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 420,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 421,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 422,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 423,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 424,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 425,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 426,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 427,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 428,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 429,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 430,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 431,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 432,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 433,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 434,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 435,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 436,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 437,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 438,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 439,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 440,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 441,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 442,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 443,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 444,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 445,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 446,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 447,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 448,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 449,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 450,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 451,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 452,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 453,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 454,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 455,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 456,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 457,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 458,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 459,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 460,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 461,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 462,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 463,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 464,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 465,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 466,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 467,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 468,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 469,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 470,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 471,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 472,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 473,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 474,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 475,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 476,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 477,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 478,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 479,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 480,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 481,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 482,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 483,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 484,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 485,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 486,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 487,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 488,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 489,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 490,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 491,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 492,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 493,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 494,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 495,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 496,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 497,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 498,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 499,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 500,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 501,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 502,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 503,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 504,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 505,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 506,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 507,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 508,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 509,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 510,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 511,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 512,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 513,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 514,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 515,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 516,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 517,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 518,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 519,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 520,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 521,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 522,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 523,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 524,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 525,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 526,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 527,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 528,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 529,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 530,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 531,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 532,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 533,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 534,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 535,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 536,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 537,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 538,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 539,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 540,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 541,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 542,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 543,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 544,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 545,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 546,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 547,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 548,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 549,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 550,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 551,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 552,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 553,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 554,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 555,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 556,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 557,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 558,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 559,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 560,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 561,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 562,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 563,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 564,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 565,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 566,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 567,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 568,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 569,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 570,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 571,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 572,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 573,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 574,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 575,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 576,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 577,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 578,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 579,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 580,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 581,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 582,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 583,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 584,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 585,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 586,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 587,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 588,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 589,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 590,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 591,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 592,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 593,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 594,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 595,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 596,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 597,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 598,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 599,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 600,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 601,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 602,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 603,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 604,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 605,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 606,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 607,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 608,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 609,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 610,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 611,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 612,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 613,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 614,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 615,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 616,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 617,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 618,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 619,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 620,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 621,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 622,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 623,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 624,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 625,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 626,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 627,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 628,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 629,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 630,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 631,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 632,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 633,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 634,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 635,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 636,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 637,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 638,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 639,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 640,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 641,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 642,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 643,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 644,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 645,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 646,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 647,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 648,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 649,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 650,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 651,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 652,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 653,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 654,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 655,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 656,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 657,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 658,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 659,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 660,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 661,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 662,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 663,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 664,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 665,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 666,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 667,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 668,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 669,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 670,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 671,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 672,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 673,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 674,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 675,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 676,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 677,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 678,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 679,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 680,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 681,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 682,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 683,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 684,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 685,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 686,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 687,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 688,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 689,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 690,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 691,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 692,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 693,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 694,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 695,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 696,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 697,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 698,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 699,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 700,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 701,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 702,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 703,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 704,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 705,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 706,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 707,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 708,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 709,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 710,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 711,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 712,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 713,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 714,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 715,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 716,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 717,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 718,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 719,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 720,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 721,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 722,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 723,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 724,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 725,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 726,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 727,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 728,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 729,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 730,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 731,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 732,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 733,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 734,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 735,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 736,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 737,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 738,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 739,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 740,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 741,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 742,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 743,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 744,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 745,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 746,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 747,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 748,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 749,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 750,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 751,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 752,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 753,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 754,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 755,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 756,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 757,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 758,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 759,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 760,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 761,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 762,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 763,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 764,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 765,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 766,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 767,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 768,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 769,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 770,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 771,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 772,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 773,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 774,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 775,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 776,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 777,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 778,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 779,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 780,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 781,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 782,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 783,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 784,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 785,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 786,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 787,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 788,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 789,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 790,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 791,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 792,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 793,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 794,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 795,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 796,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 797,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 798,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 799,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 800,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 801,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 802,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 803,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 804,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 805,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 806,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 807,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 808,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 809,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 810,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 811,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 812,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 813,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 814,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 815,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 816,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 817,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 818,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 819,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 820,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 821,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 822,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 823,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 824,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 825,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 826,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 827,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 828,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 829,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 830,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 831,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 832,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 833,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 834,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 835,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 836,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 837,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 838,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 839,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 840,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 841,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 842,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 843,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 844,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 845,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 846,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 847,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 848,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 849,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 850,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 851,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 852,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 853,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 854,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 855,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 856,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 857,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 858,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 859,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 860,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 861,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 862,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 863,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 864,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 865,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 866,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 867,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 868,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 869,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 870,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 871,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 872,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 873,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 874,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 875,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 876,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 877,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 878,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 879,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 880,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 881,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 882,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 883,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 884,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 885,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 886,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 887,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 888,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 889,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 890,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 891,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 892,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 893,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 894,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 895,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 896,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 897,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 898,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 899,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 900,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 901,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 902,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 903,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 904,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 905,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 906,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 907,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 908,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 909,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 910,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 911,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 912,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 913,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 914,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 915,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 916,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 917,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 918,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 919,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 920,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 921,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 922,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 923,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 924,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 925,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 926,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 927,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 928,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 929,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 930,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 931,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 932,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 933,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 934,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 935,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 936,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 937,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 938,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 939,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 940,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 941,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 942,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 943,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 944,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 945,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 946,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 947,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 948,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 949,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 950,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 951,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 952,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 953,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 954,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 955,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 956,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 957,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 958,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 959,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 960,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 961,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 962,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 963,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 964,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 965,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 966,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 967,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 968,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 969,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 970,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 971,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 972,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 973,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 974,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 975,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 976,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 977,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 978,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 979,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 980,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 981,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 982,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 983,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 984,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 985,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 986,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 987,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 988,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 989,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 990,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 991,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 992,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 993,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 994,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 995,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 996,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 997,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 998,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 999,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1000,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1001,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1002,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1003,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1004,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1005,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1006,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1007,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1008,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1009,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1010,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1011,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1012,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1013,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1014,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1015,
+      "outcome": "success",
+      "return": 1.3738481998443604,
+      "length": 73
+    },
+    {
+      "episode": 1016,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 1017,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 1018,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 1019,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 1020,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 1021,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 1022,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    },
+    {
+      "episode": 1023,
+      "outcome": "success",
+      "return": 1.3738479614257812,
+      "length": 73
+    }
+  ],
+  "network_sha256": "610d62dbacdb16389f698cdf7d3bf39b185e410b8c6e03a1ac4833768066060a",
+  "validation": "released author network only; not a new editor result",
+  "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f"
+}
