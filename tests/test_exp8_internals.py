@@ -5,7 +5,7 @@ import pytest
 import torch
 from torch import nn
 
-from replications.exp8.internals import capture, tokenize_request
+from replications.exp8.internals import capture, generation_summary, tokenize_request
 
 
 class Tokenizer:
@@ -92,6 +92,31 @@ class Model(nn.Module):
     @property
     def text_model(self):
         return getattr(self.model, "language_model", self.model)
+
+
+@pytest.mark.parametrize("multimodal", [False, True])
+@pytest.mark.parametrize("prompt_length", [2, 5])
+def test_generation_summary_exactly_matches_saved_arrays(tmp_path, multimodal, prompt_length):
+    torch.manual_seed(31)
+    model = Model(multimodal)
+    text = "1 2 3 4 5"
+    capture(model, Tokenizer(), {"texts": [text], "return": {
+        "hidden_states": [0, 1, 2], "mlp_act": [0, 1]}}, tmp_path)
+
+    def no_logits(*args):
+        raise AssertionError("Activation summaries must not calculate unrequested vocabulary logits")
+
+    hook = model.lm_head.register_forward_pre_hook(no_logits)
+    actual = generation_summary(model, Tokenizer(), text, prompt_length, [0, 1, 2], [0, 1])
+    hook.remove()
+    for key, layers in (("hidden", [0, 1, 2]), ("mlp", [0, 1])):
+        for index, layer in enumerate(layers):
+            name = f"hidden_{layer}" if key == "hidden" else f"mlp_act_{layer}"
+            values = np.load(tmp_path / f"{name}.npy")[0]
+            np.testing.assert_array_equal(actual[f"{key}_last_prompt.npy"][index], values[prompt_length - 1])
+            expected = values[prompt_length:].astype(np.float32).mean(0) if prompt_length < len(values) else np.zeros(values.shape[-1])
+            np.testing.assert_array_equal(actual[f"{key}_mean_answer.npy"][index], expected)
+    assert all(not module._forward_hooks and not module._forward_pre_hooks for module in model.modules())
 
 
 @pytest.mark.parametrize("multimodal", [False, True])

@@ -82,6 +82,63 @@ def _components(model):
     return text_model, head
 
 
+def generation_summary(model, tokenizer, text, prompt_length, hidden_layers, mlp_layers):
+    """Reduce generation activations without writing discarded token arrays.
+
+    Match capture's float16 storage followed by NumPy float32 reduction, while
+    retaining only the two vectors the generation contract actually returns.
+    """
+    import torch
+
+    text_model, _ = _components(model)
+    layers = text_model.layers
+    request = {"texts": [text], "return": {"hidden_states": hidden_layers, "mlp_act": mlp_layers}}
+    ids, _ = tokenize_request(tokenizer, request, num_layers=len(layers),
+                             full_attention_layers=tuple(i for i, layer in enumerate(layers) if hasattr(layer, "self_attn")))
+    if not 0 < prompt_length <= len(ids[0]):
+        raise ValueError("Prompt length is outside the teacher-forced sequence")
+    hidden_size = text_model.embed_tokens.weight.shape[1]
+    mlp_size = layers[mlp_layers[0]].mlp.down_proj.weight.shape[1] if mlp_layers else 0
+    result = {"hidden_last_prompt.npy": np.zeros((len(hidden_layers), hidden_size), dtype=np.float32),
+              "hidden_mean_answer.npy": np.zeros((len(hidden_layers), hidden_size), dtype=np.float32)}
+    if mlp_layers:
+        result.update({"mlp_last_prompt.npy": np.zeros((len(mlp_layers), mlp_size), dtype=np.float32),
+                       "mlp_mean_answer.npy": np.zeros((len(mlp_layers), mlp_size), dtype=np.float32)})
+    hooks = []
+
+    def reduce(key, index, value):
+        if value.shape[:2] != (1, len(ids[0])):
+            raise RuntimeError("Unexpected generation activation shape")
+        values = value[0].detach().float().cpu().numpy().astype(np.float16)
+        result[f"{key}_last_prompt.npy"][index] = values[prompt_length - 1]
+        answer = values[prompt_length:prompt_length + 8192]
+        if len(answer):
+            result[f"{key}_mean_answer.npy"][index] = answer.astype(np.float32).mean(0)
+
+    try:
+        for index, layer in enumerate(hidden_layers):
+            if layer == len(layers):
+                continue
+            module = text_model.embed_tokens if layer == 0 else layers[layer - 1]
+            def hidden_hook(module, arguments, value, index=index):
+                reduce("hidden", index, value[0] if isinstance(value, tuple) else value)
+            hooks.append(module.register_forward_hook(hidden_hook))
+        for index, layer in enumerate(mlp_layers):
+            def mlp_hook(module, arguments, index=index):
+                reduce("mlp", index, arguments[0])
+            hooks.append(layers[layer].mlp.down_proj.register_forward_pre_hook(mlp_hook))
+        model.eval()
+        with torch.inference_mode():
+            tokens = torch.tensor(ids, dtype=torch.long, device=text_model.embed_tokens.weight.device)
+            output = text_model(input_ids=tokens, use_cache=False, output_attentions=False)
+            if len(layers) in hidden_layers:
+                reduce("hidden", hidden_layers.index(len(layers)), output.last_hidden_state)
+        return result
+    finally:
+        for hook in hooks:
+            hook.remove()
+
+
 def capture(model, tokenizer, request, destination):
     import torch
 

@@ -216,11 +216,9 @@ class TransformerReader:
     def generation_activations(self, rows, records, layers, mlp, directory):
         if self.load_error:
             raise RuntimeError(self.load_error)
-        import shutil
-
         import numpy as np
 
-        from replications.exp8.internals import capture
+        from replications.exp8.internals import generation_summary
         from replications.exp8.runtime import INSTRUCTION, atomic_write
         start = time.monotonic()
         output = Path(directory)
@@ -242,19 +240,9 @@ class TransformerReader:
             answer_ids = self.tokenizer.encode(sample["text"], add_special_tokens=False)[:8192]
             # Concatenation follows the tool's raw-text teacher-forcing convention.
             text = prompt + self.tokenizer.decode(answer_ids, skip_special_tokens=False)
-            temporary = output / "temporary"
-            capture(self.model, self.tokenizer,
-                    {"texts": [text], "return": {"hidden_states": layers, "mlp_act": mlp_layers}}, temporary)
-            for key, names in (("hidden", layers), ("mlp", mlp_layers)):
-                for j, layer in enumerate(names):
-                    source = temporary / (f"hidden_{layer}.npy" if key == "hidden" else f"mlp_act_{layer}.npy")
-                    values = np.load(source, mmap_mode="r")[0]
-                    arrays[f"{key}_last_prompt.npy"][i, j] = values[len(pids)-1]
-                    answer_values = values[len(pids):len(pids)+8192]
-                    if len(answer_values):
-                        arrays[f"{key}_mean_answer.npy"][i, j] = answer_values.astype(np.float32).mean(0)
-                    del values
-            shutil.rmtree(temporary)
+            summary = generation_summary(self.model, self.tokenizer, text, len(pids), layers, mlp_layers)
+            for name, value in summary.items():
+                arrays[name][i] = value
             index.append({"item": row["id"], "sample": sample_index, "correct": sample.get("correct"),
                           "tokens": len(answer_ids)})
         for name, array in arrays.items():
