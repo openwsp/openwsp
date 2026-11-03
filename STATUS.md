@@ -1,12 +1,14 @@
-# Status: steering update in progress; same subscription attempt preparing to resume
+# Status: subscription run resumed; steering update in progress
 
 Read [docs/TASK.md](docs/TASK.md) for the task and user steering. Root owns scientific protocol a–g. Main is the authorized target: test each logical change, commit and push directly. The user now requests a README overhaul using commit **0a41b05** as the style reference: no first-person 'I', no em dashes (especially titles). Keep its intent while updating the voice and current subscription facts.
 
 ## Current action
 
-The latest operator message authorizes automatic Modal top-ups within the existing **$150 total task cap** and supersedes the older $42 admission gate. This is explicit funding authorization, not evidence that the provider dashboard already shows a different limit. The saved `codex-20261103` attempt will resume after a tested definition update and the existing allowance command records that authorization. No new live calls have been made yet.
+The same **codex-20261103** subscription attempt is active again. Driver **fc-01M6HCQ89PPXXFSZB647FGB9VF** resumed the saved request2 at turn7, with1/50 counted passes, turn6 and4 Python runs preserved. Snapshot observed at 16:05:56 America/Buenos_Aires on2026-11-03. The operator's automatic-top-up authorization was recorded as `operator-auto-topups-20261103-steering2`, within the unchanged **$150 total Modal task cap**. No provider dashboard increase is claimed. Current estimate: **$32.970126949 spent, $6.397443472 reserved, $110.582429579 available**.
 
-[Steering update 2](docs/STEERING_UPDATE_2.md) is being implemented: inspect, finished-only metrics, evaluation grid, mechanical repair, KL damage, forward reuse, and CPU experiments1/2/4/5. Native Fable is authorized up to$20 for that CPU set; its credential is not configured. The steering, controls and external findings stay outside editor inputs. Run2 still requires fresh operator confirmation.
+Deployed source **e00d48c554a18e02db035ef6719955324c38437b**, frozen snapshot `/tmp/openwsp-release-e00d48c-9mqbqpnn`, passed1005 CPU/MCP tests and [Python3.11/3.12 CI](https://github.com/openwsp/openwsp/actions/runs/41698958400). Local foreground worker runs in exec session36191; log `logs/modal-codex-steering-resume.log`. Its launch receipt was copied to `.openwsp/launch.json`; persistent worker and ChatGPT home paths are unchanged. Do not launch a duplicate driver or worker. [Resume evidence](replications/exp8/results/live-runs/codex-20261103/resume-20261103.json), [allowance receipt](replications/exp8/results/live-runs/codex-20261103/modal-allowance.json).
+
+[Steering update 2](docs/STEERING_UPDATE_2.md) is being implemented: inspect, finished-only metrics, evaluation grid, mechanical repair, KL damage, forward reuse, and CPU experiments1/2/4/5. Native Fable is authorized up to$20 for that CPU set; its credential is not configured. The steering, controls and external findings stay outside editor inputs. Run2 still requires fresh operator confirmation. Inspect and actual CPU geometry results, verified forward reuse, the17734-byte output execution ceiling,11 grid definitions and finished-only metric calculation are implemented. Remaining CPU work includes repair/KL and raw-experiment scorer reconstruction.
 
 ## Last paused snapshot (historical)
 

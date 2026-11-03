@@ -1,0 +1,47 @@
+{
+  "observation_id": "operator-auto-topups-20261103-steering2",
+  "observation": {
+    "observation_id": "operator-auto-topups-20261103-steering2",
+    "cycle_limit": "150",
+    "cycle_usage": "32.80472885879525534012501112",
+    "evidence": {
+      "automatic_topups_authorized": true,
+      "basis": "operator_automatic_topups",
+      "cycle_usage_basis": "Existing conservative ledger floor from direct Modal Volume read; known usage and reservations are preserved.",
+      "interpretation": "Continue the same task using automatic top-ups within the previously authorized $150 total Modal task cap. This supersedes the attachment\u2019s older $42 gate and does not assert an observed provider dashboard limit.",
+      "observed_at": "2026-11-03T19:01:46.660554+00:00",
+      "operator_instruction": "we've 22 dollars more never stop due to that it will top up automatically",
+      "provider_limit_observed": false,
+      "source": "docs/TASK.md: latest direct operator instruction accompanying steering update 2"
+    },
+    "cycle_id": null
+  },
+  "prior_allowance": {
+    "cycle_limit": "42",
+    "cycle_usage": "0.05",
+    "evidence": {
+      "basis": "user report",
+      "source": "docs/TASK.md"
+    },
+    "observed_at": "2026-11-03T05:49:34.302032+00:00",
+    "task_spend_at_observation": "0"
+  },
+  "applied_allowance": {
+    "cycle_limit": "150",
+    "cycle_usage": "32.80472885879525534012501112",
+    "task_spend_at_observation": "32.75472885879525534012501112",
+    "observed_at": "2026-11-03T19:01:46.660554+00:00",
+    "evidence": {
+      "automatic_topups_authorized": true,
+      "basis": "operator_automatic_topups",
+      "cycle_usage_basis": "Existing conservative ledger floor from direct Modal Volume read; known usage and reservations are preserved.",
+      "interpretation": "Continue the same task using automatic top-ups within the previously authorized $150 total Modal task cap. This supersedes the attachment\u2019s older $42 gate and does not assert an observed provider dashboard limit.",
+      "observed_at": "2026-11-03T19:01:46.660554+00:00",
+      "operator_instruction": "we've 22 dollars more never stop due to that it will top up automatically",
+      "provider_limit_observed": false,
+      "source": "docs/TASK.md: latest direct operator instruction accompanying steering update 2"
+    },
+    "cycle_id": null
+  },
+  "applied_at": "2026-11-03T19:02:28.442165+00:00"
+}

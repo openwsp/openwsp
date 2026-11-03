@@ -1,27 +1,21 @@
 {
   "current": {
-    "call_id": "fc-01M6GW82J9KN0T8G4CEXCKEJPS",
+    "call_id": "fc-01M6HCQ89PPXXFSZB647FGB9VF",
     "config": {
       "editor": "codex",
       "run_id": "codex-20261103"
     },
-    "created_at": 1793715339.890846,
-    "dispatched_at": 1793715341.4172251,
-    "error_type": "BudgetExceeded",
+    "created_at": 1793732614.8489194,
+    "dispatched_at": 1793732615.98198,
     "fingerprint": "eab07648334622e04a11b59b63e4e82421f192b04de8b2ae72072ffcccf3e9e5",
-    "no_restart": true,
-    "phase": "blocked",
-    "reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
-    "reservation_id": "driver-4b40974af1c24071a19c0eea758459ef",
-    "result_status": null,
+    "phase": "running",
+    "reservation_id": "driver-b2a8378727b248d596e0b966003704bd",
     "stage": "all",
-    "terminal_at": 1793718114.6885471,
-    "terminal_state": "failed",
     "ticket": {
       "cpu_cores": 1,
       "memory_gib": 4,
-      "prepared_at": 1793715340.7850928,
-      "reservation_id": "driver-4b40974af1c24071a19c0eea758459ef",
+      "prepared_at": 1793732615.4217093,
+      "reservation_id": "driver-b2a8378727b248d596e0b966003704bd",
       "scaledown_seconds": 5,
       "schema_version": 1,
       "stage": "all",
@@ -260,6 +254,46 @@
         "timeout_seconds": 86400,
         "upper_bound_usd": "1.905953472222222222222222222"
       }
+    },
+    {
+      "call_id": "fc-01M6GW82J9KN0T8G4CEXCKEJPS",
+      "config": {
+        "editor": "codex",
+        "run_id": "codex-20261103"
+      },
+      "created_at": 1793715339.890846,
+      "dispatched_at": 1793715341.4172251,
+      "error_type": "BudgetExceeded",
+      "fingerprint": "eab07648334622e04a11b59b63e4e82421f192b04de8b2ae72072ffcccf3e9e5",
+      "manual_resume": {
+        "config": {
+          "editor": "codex",
+          "run_id": "codex-20261103"
+        },
+        "fingerprint": "eab07648334622e04a11b59b63e4e82421f192b04de8b2ae72072ffcccf3e9e5",
+        "reason": "Operator explicitly authorized automatic Modal top-ups within the unchanged $150 task cap; allowance receipt operator-auto-topups-20261103-steering2 recorded after terminal-owner verification. Resume codex-20261103 from its saved request2, same worker/conversation, counters and edits. No prior request was redispatched.",
+        "stage": "all"
+      },
+      "no_restart": true,
+      "phase": "terminal",
+      "reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+      "reservation_id": "driver-4b40974af1c24071a19c0eea758459ef",
+      "result_status": null,
+      "stage": "all",
+      "terminal_at": 1793732613.4128273,
+      "terminal_state": "failed",
+      "ticket": {
+        "cpu_cores": 1,
+        "memory_gib": 4,
+        "prepared_at": 1793715340.7850928,
+        "reservation_id": "driver-4b40974af1c24071a19c0eea758459ef",
+        "scaledown_seconds": 5,
+        "schema_version": 1,
+        "stage": "all",
+        "startup_seconds": 120,
+        "timeout_seconds": 86400,
+        "upper_bound_usd": "1.905953472222222222222222222"
+      }
     }
   ],
   "manual_resumes": [
@@ -298,6 +332,15 @@
       "previous_state_status": "blocked",
       "reason": "The live driver fc-01M6GC9HWAFHZTMEWBB811B23D is confirmed terminal after its next editor reservation exceeded the remaining 100 USD allowance. Complete independent controls 1-3 using existing calibration data and the unchanged 42 USD Modal allowance; preserve the live state and editor ceiling.",
       "stage": "controls"
+    },
+    {
+      "at": 1793732612.7348483,
+      "previous_call_id": "fc-01M6GW82J9KN0T8G4CEXCKEJPS",
+      "previous_coordinator_reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+      "previous_state_error": "BudgetExceeded: modal stage live/codex-20261103/fwd_2/teacher_forced/openwsp-gpu:a9addc225efa46ff8f8450c1570c26cf:0: reserve $2.9870400, only $2.909644918156211473271933328 available",
+      "previous_state_status": "blocked",
+      "reason": "Operator explicitly authorized automatic Modal top-ups within the unchanged $150 task cap; allowance receipt operator-auto-topups-20261103-steering2 recorded after terminal-owner verification. Resume codex-20261103 from its saved request2, same worker/conversation, counters and edits. No prior request was redispatched.",
+      "stage": "all"
     }
   ],
   "restart_counts": {

@@ -3099,6 +3099,94 @@
       "at": "2026-11-03T15:01:55.828422+00:00",
       "event": "settled",
       "id": "driver-4b40974af1c24071a19c0eea758459ef"
+    },
+    {
+      "applied_allowance": {
+        "cycle_id": null,
+        "cycle_limit": "150",
+        "cycle_usage": "32.80472885879525534012501112",
+        "evidence": {
+          "automatic_topups_authorized": true,
+          "basis": "operator_automatic_topups",
+          "cycle_usage_basis": "Existing conservative ledger floor from direct Modal Volume read; known usage and reservations are preserved.",
+          "interpretation": "Continue the same task using automatic top-ups within the previously authorized $150 total Modal task cap. This supersedes the attachment\u2019s older $42 gate and does not assert an observed provider dashboard limit.",
+          "observed_at": "2026-11-03T19:01:46.660554+00:00",
+          "operator_instruction": "we've 22 dollars more never stop due to that it will top up automatically",
+          "provider_limit_observed": false,
+          "source": "docs/TASK.md: latest direct operator instruction accompanying steering update 2"
+        },
+        "observed_at": "2026-11-03T19:01:46.660554+00:00",
+        "task_spend_at_observation": "32.75472885879525534012501112"
+      },
+      "applied_at": "2026-11-03T19:02:28.442165+00:00",
+      "event": "modal_allowance_observed",
+      "observation": {
+        "cycle_id": null,
+        "cycle_limit": "150",
+        "cycle_usage": "32.80472885879525534012501112",
+        "evidence": {
+          "automatic_topups_authorized": true,
+          "basis": "operator_automatic_topups",
+          "cycle_usage_basis": "Existing conservative ledger floor from direct Modal Volume read; known usage and reservations are preserved.",
+          "interpretation": "Continue the same task using automatic top-ups within the previously authorized $150 total Modal task cap. This supersedes the attachment\u2019s older $42 gate and does not assert an observed provider dashboard limit.",
+          "observed_at": "2026-11-03T19:01:46.660554+00:00",
+          "operator_instruction": "we've 22 dollars more never stop due to that it will top up automatically",
+          "provider_limit_observed": false,
+          "source": "docs/TASK.md: latest direct operator instruction accompanying steering update 2"
+        },
+        "observation_id": "operator-auto-topups-20261103-steering2"
+      },
+      "observation_id": "operator-auto-topups-20261103-steering2",
+      "prior_allowance": {
+        "cycle_limit": "42",
+        "cycle_usage": "0.05",
+        "evidence": {
+          "basis": "user report",
+          "source": "docs/TASK.md"
+        },
+        "observed_at": "2026-11-03T05:49:34.302032+00:00",
+        "task_spend_at_observation": "0"
+      }
+    },
+    {
+      "at": "2026-11-03T19:03:35.521373+00:00",
+      "event": "reserved",
+      "id": "driver-b2a8378727b248d596e0b966003704bd"
+    },
+    {
+      "at": "2026-11-03T19:03:56.539358+00:00",
+      "event": "reserved",
+      "id": "9511d5cef2cd4b7593b002cf02dd8892"
+    },
+    {
+      "at": "2026-11-03T19:04:07.289600+00:00",
+      "event": "reserved",
+      "id": "58c5d55afe18465ebbe9f0953dd9373c"
+    },
+    {
+      "at": "2026-11-03T19:04:09.182303+00:00",
+      "event": "settled",
+      "id": "9511d5cef2cd4b7593b002cf02dd8892"
+    },
+    {
+      "at": "2026-11-03T19:04:21.973463+00:00",
+      "event": "reserved",
+      "id": "modal-job-dc7f37f1f10134d3444f4800b0a29c480913dae1d0d052fab849746516df6d04"
+    },
+    {
+      "at": "2026-11-03T19:04:53.348747+00:00",
+      "event": "settled",
+      "id": "modal-job-dc7f37f1f10134d3444f4800b0a29c480913dae1d0d052fab849746516df6d04"
+    },
+    {
+      "at": "2026-11-03T19:05:07.290951+00:00",
+      "event": "reserved",
+      "id": "3cc62d010f7e4694b4c64cf092e30364"
+    },
+    {
+      "at": "2026-11-03T19:05:13.267778+00:00",
+      "event": "settled",
+      "id": "58c5d55afe18465ebbe9f0953dd9373c"
     }
   ],
   "halted": false,
@@ -3107,14 +3195,70 @@
     "modal": "150"
   },
   "modal_allowance": {
-    "cycle_limit": "42",
-    "cycle_usage": "0.05",
+    "cycle_id": null,
+    "cycle_limit": "150",
+    "cycle_usage": "32.80472885879525534012501112",
     "evidence": {
-      "basis": "user report",
-      "source": "docs/TASK.md"
+      "automatic_topups_authorized": true,
+      "basis": "operator_automatic_topups",
+      "cycle_usage_basis": "Existing conservative ledger floor from direct Modal Volume read; known usage and reservations are preserved.",
+      "interpretation": "Continue the same task using automatic top-ups within the previously authorized $150 total Modal task cap. This supersedes the attachment\u2019s older $42 gate and does not assert an observed provider dashboard limit.",
+      "observed_at": "2026-11-03T19:01:46.660554+00:00",
+      "operator_instruction": "we've 22 dollars more never stop due to that it will top up automatically",
+      "provider_limit_observed": false,
+      "source": "docs/TASK.md: latest direct operator instruction accompanying steering update 2"
     },
-    "observed_at": "2026-11-03T05:49:34.302032+00:00",
-    "task_spend_at_observation": "0"
+    "observed_at": "2026-11-03T19:01:46.660554+00:00",
+    "task_spend_at_observation": "32.75472885879525534012501112"
+  },
+  "modal_observations": {
+    "operator-auto-topups-20261103-steering2": {
+      "applied_allowance": {
+        "cycle_id": null,
+        "cycle_limit": "150",
+        "cycle_usage": "32.80472885879525534012501112",
+        "evidence": {
+          "automatic_topups_authorized": true,
+          "basis": "operator_automatic_topups",
+          "cycle_usage_basis": "Existing conservative ledger floor from direct Modal Volume read; known usage and reservations are preserved.",
+          "interpretation": "Continue the same task using automatic top-ups within the previously authorized $150 total Modal task cap. This supersedes the attachment\u2019s older $42 gate and does not assert an observed provider dashboard limit.",
+          "observed_at": "2026-11-03T19:01:46.660554+00:00",
+          "operator_instruction": "we've 22 dollars more never stop due to that it will top up automatically",
+          "provider_limit_observed": false,
+          "source": "docs/TASK.md: latest direct operator instruction accompanying steering update 2"
+        },
+        "observed_at": "2026-11-03T19:01:46.660554+00:00",
+        "task_spend_at_observation": "32.75472885879525534012501112"
+      },
+      "applied_at": "2026-11-03T19:02:28.442165+00:00",
+      "observation": {
+        "cycle_id": null,
+        "cycle_limit": "150",
+        "cycle_usage": "32.80472885879525534012501112",
+        "evidence": {
+          "automatic_topups_authorized": true,
+          "basis": "operator_automatic_topups",
+          "cycle_usage_basis": "Existing conservative ledger floor from direct Modal Volume read; known usage and reservations are preserved.",
+          "interpretation": "Continue the same task using automatic top-ups within the previously authorized $150 total Modal task cap. This supersedes the attachment\u2019s older $42 gate and does not assert an observed provider dashboard limit.",
+          "observed_at": "2026-11-03T19:01:46.660554+00:00",
+          "operator_instruction": "we've 22 dollars more never stop due to that it will top up automatically",
+          "provider_limit_observed": false,
+          "source": "docs/TASK.md: latest direct operator instruction accompanying steering update 2"
+        },
+        "observation_id": "operator-auto-topups-20261103-steering2"
+      },
+      "observation_id": "operator-auto-topups-20261103-steering2",
+      "prior_allowance": {
+        "cycle_limit": "42",
+        "cycle_usage": "0.05",
+        "evidence": {
+          "basis": "user report",
+          "source": "docs/TASK.md"
+        },
+        "observed_at": "2026-11-03T05:49:34.302032+00:00",
+        "task_spend_at_observation": "0"
+      }
+    }
   },
   "modal_prior_usage_floor": "0.05",
   "reservations": {
@@ -4910,6 +5054,22 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "3cc62d010f7e4694b4c64cf092e30364": {
+      "created_at": "2026-11-03T19:05:07.290931+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "stage": "sandbox:heartbeat",
+      "status": "reserved",
+      "upper_bound_usd": "0.215650"
+    },
     "3cfc678fe29a482e8476486864ac5d95": {
       "actual_usd": "0.04313064269738186342166666667",
       "completed_at": "2026-11-03T11:13:26.930099+00:00",
@@ -5865,6 +6025,34 @@
       },
       "seconds": 14.400552129000001,
       "stage": "sandbox:startup",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "58c5d55afe18465ebbe9f0953dd9373c": {
+      "actual_usd": "0.04313078400420100718833333333",
+      "completed_at": "2026-11-03T19:05:13.267734+00:00",
+      "created_at": "2026-11-03T19:04:07.289581+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00109066200001,
+      "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
       "usage": null
@@ -7427,6 +7615,34 @@
       },
       "seconds": 60.00016692100007,
       "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "9511d5cef2cd4b7593b002cf02dd8892": {
+      "actual_usd": "0.007726496357500333333333333333",
+      "completed_at": "2026-11-03T19:04:09.182279+00:00",
+      "created_at": "2026-11-03T19:03:56.539329+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 10.748661754,
+      "stage": "sandbox:startup",
       "status": "settled",
       "upper_bound_usd": "0.215650",
       "usage": null
@@ -10043,6 +10259,31 @@
       "upper_bound_usd": "1.905953472222222222222222222",
       "usage": null
     },
+    "driver-b2a8378727b248d596e0b966003704bd": {
+      "created_at": "2026-11-03T19:03:35.521358+00:00",
+      "kind": "modal",
+      "metadata": {
+        "driver_claimed_at": 1793732620.8799734,
+        "driver_owner_id": "fc-01M6HCQ89PPXXFSZB647FGB9VF",
+        "driver_ticket": {
+          "cpu_cores": 1,
+          "memory_gib": 4,
+          "prepared_at": 1793732615.4217093,
+          "reservation_id": "driver-b2a8378727b248d596e0b966003704bd",
+          "scaledown_seconds": 5,
+          "schema_version": 1,
+          "stage": "all",
+          "startup_seconds": 120,
+          "timeout_seconds": 86400,
+          "upper_bound_usd": "1.905953472222222222222222222"
+        },
+        "invoice": false,
+        "kind": "driver_resource_upper_bound"
+      },
+      "stage": "all",
+      "status": "reserved",
+      "upper_bound_usd": "1.905953472222222222222222222"
+    },
     "driver-f6c6ad59636d48aaa19e75e29cfe7150": {
       "actual_usd": "0.01793714204190174770833333333",
       "completed_at": "2026-11-03T09:17:03.577528+00:00",
@@ -12441,6 +12682,46 @@
       },
       "seconds": 137.335283006,
       "stage": "live/fwd_4/teacher_forced/openwsp-gpu:41436b1da15448efafaef3d2ae8130c0:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-dc7f37f1f10134d3444f4800b0a29c480913dae1d0d052fab849746516df6d04": {
+      "actual_usd": "0.1645408099609866666666666667",
+      "completed_at": "2026-11-03T19:04:53.348695+00:00",
+      "created_at": "2026-11-03T19:04:21.973432+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "2ed9258cd3e3c1c961acf8a61d5969655544a259f9fa446f6b9baf807af7c48b"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1645408099609866666666666667",
+        "call_id": "fc-01M6HCRPNWJDRVEQ73N2J77Z52",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_2/teacher_forced/openwsp-gpu:a9addc225efa46ff8f8450c1570c26cf:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 138.81395666,
+        "startup_seconds": 120.0,
+        "usage_seconds": 16.81395666
+      },
+      "seconds": 138.81395666,
+      "stage": "live/codex-20261103/fwd_2/teacher_forced/openwsp-gpu:a9addc225efa46ff8f8450c1570c26cf:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null

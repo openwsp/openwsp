@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "blocked",
+  "status": "resolved",
   "reason": "modal_budget_admission",
   "run_id": "codex-20261103",
   "editor": "codex",
@@ -55,5 +55,12 @@
     "terminal_state": "failed",
     "terminal_at": 1793718114.6885471,
     "no_restart": true
+  },
+  "historical_status": "blocked",
+  "resolution": {
+    "observation_id": "operator-auto-topups-20261103-steering2",
+    "resume_call_id": "fc-01M6HCQ89PPXXFSZB647FGB9VF",
+    "evidence": "resume-20261103.json",
+    "reason": "Explicit operator authorization for automatic top-ups within the unchanged $150 total task cap; same attempt resumed."
   }
 }

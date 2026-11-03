@@ -1,9 +1,9 @@
 {
-  "status": "blocked",
+  "status": "running",
   "active_stage": "live",
-  "heartbeat": 1793717246.6488118,
-  "error": "BudgetExceeded: modal stage live/codex-20261103/fwd_2/teacher_forced/openwsp-gpu:a9addc225efa46ff8f8450c1570c26cf:0: reserve $2.9870400, only $2.909644918156211473271933328 available",
-  "error_type": "BudgetExceeded",
+  "heartbeat": 1793732713.8988776,
+  "error": null,
+  "error_type": null,
   "budget": {
     "editor": {
       "spent_usd": 78.292765,
@@ -11,9 +11,9 @@
       "available_usd": 21.707235
     },
     "modal": {
-      "spent_usd": 32.69088638217427,
-      "reserved_usd": 6.181793472222222,
-      "available_usd": 3.0773201456035078
+      "spent_usd": 32.97012694911794,
+      "reserved_usd": 6.397443472222222,
+      "available_usd": 110.58242957865984
     }
   },
   "controls_deferred": "Current verified allowance preserves priority for the live run and its evaluation. Controls resume afterward."
