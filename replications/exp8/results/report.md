@@ -11,7 +11,7 @@
 | Forward service | [passed](kernel/forward-verification.json) | [kernel/forward-verification.json](kernel/forward-verification.json) |
 | Weight swap check | [fallback](kernel/weight-swap.json) | [kernel/weight-swap.json](kernel/weight-swap.json) |
 | Recorded diagnostic | [Engine does not expose a compatible weight-reload contract](kernel/weight-swap.json) | See source record. |
-| Live editor | [incomplete](live-run/state.json) | passes: [0](live-run/state.json); turn: [1](live-run/state.json); runs: [1](live-run/state.json) |
+| Live editor | [incomplete](live-run/state.json) | passes: [0](live-run/state.json); turn: [4](live-run/state.json); runs: [2](live-run/state.json) |
 
 States are recorded snapshots; use `openwsp status` to check current liveness.
 
@@ -58,8 +58,9 @@ Budget ledger: [source](costs.json). Reservations are retained bounds, not charg
 
 | Budget / stage | State | Recorded hours | Settled amount (USD) | Reserved bound (USD) | Basis |
 | --- | --- | --- | --- | --- | --- |
-| editor / editor turns | [settled](costs.json) | [0.009](costs.json) | [0.0743](costs.json) | pending | [API usage and recorded token rates](costs.json) |
+| editor / editor turns | [settled](costs.json) | [0.039](costs.json) | [0.4280](costs.json) | pending | [API usage and recorded token rates](costs.json) |
 | modal / all | [reserved](costs.json) | pending | pending | [1.9060](costs.json) | [resource estimate; not invoice](costs.json) |
+| modal / all | [settled](costs.json) | [0.491](costs.json) | [0.0390](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
 | modal / calibration | [settled](costs.json) | [0.906](costs.json) | [0.0718](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
 | modal / calibration_base | [settled](costs.json) | [0.499](costs.json) | [2.1280](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / calibration_base_smoke | [reserved](costs.json) | pending | pending | [2.2758](costs.json) | [resource estimate; not invoice](costs.json) |
@@ -70,10 +71,14 @@ Budget ledger: [source](costs.json). Reservations are retained bounds, not charg
 | modal / kernel | [settled](costs.json) | [0.205](costs.json) | [0.0163](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
 | modal / kernel_verification:heartbeat | [settled](costs.json) | [0.003](costs.json) | [0.0073](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
 | modal / kernel_verification:startup | [settled](costs.json) | [0.004](costs.json) | [0.0092](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
+| modal / live/fwd_1/original/activations/openwsp-gpu:412d8691f5574c15a0b8d5ab47a99415:0 | [settled](costs.json) | [0.700](costs.json) | [2.9870](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / live/fwd_1/original/openwsp-gpu:e382217120784a58b0cb6b8d80fa71e1:0 | [settled](costs.json) | [0.388](costs.json) | [1.6550](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / live/fwd_2/original/openwsp-gpu:6df93dd4a722479d89a783fc1cff9ddd:0 | [reserved](costs.json) | pending | pending | [2.9870](costs.json) | [resource estimate; not invoice](costs.json) |
 | modal / prepare | [settled](costs.json) | [0.010](costs.json) | [0.0016](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / prepare-v2 | [settled](costs.json) | [0.038](costs.json) | [0.0060](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / sandbox:heartbeat | [reserved](costs.json) | pending | pending | [0.2157](costs.json) | [resource estimate; not invoice](costs.json) |
-| modal / sandbox:startup | [settled](costs.json) | [0.005](costs.json) | [0.0120](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
+| modal / sandbox:heartbeat | [settled](costs.json) | [0.934](costs.json) | [2.4163](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
+| modal / sandbox:startup | [settled](costs.json) | [0.009](costs.json) | [0.0226](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
 | modal / verify/attention/openwsp-gpu:5072ca485aba4672a75e1bda85d260bf:0 | [settled](costs.json) | [0.038](costs.json) | [0.1626](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / verify/fresh-reference/openwsp-gpu:3c4cb1f5c3f949cfb7a7dfb258fcdfd9:0 | [settled](costs.json) | [0.086](costs.json) | [0.3677](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / verify/native-swap/openwsp-gpu:14322bc224b641a08e8fe7e8bd3268a7:0 | [settled](costs.json) | [0.097](costs.json) | [0.4123](costs.json) | pending | [resource estimate; not invoice](costs.json) |

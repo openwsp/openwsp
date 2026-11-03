@@ -1,0 +1,17 @@
+{
+  "status": "failed",
+  "counted": false,
+  "request": 1,
+  "request_result": {
+    "ok": false,
+    "error": "RuntimeError: The remote forward execution failed (FunctionTimeoutError); its upper-bound cost was retained"
+  },
+  "provider_log": "logs/modal-live-progress6.log",
+  "observed_input_timeout_seconds": 1800,
+  "provider_input_id": "in-01M6G6Y53M349BSTA1139XRJAM:1793692996753-0",
+  "failure_stage": "generation activations",
+  "generation_completed": true,
+  "recovery": "Driver delivered the failed request without counting a pass. The editor continued and issued request2; no operator-selected request or edit.",
+  "cost_basis": "Failed GPU job settled at its existing conservative reservation upper bound, not provider invoice.",
+  "implementation": "The timed-out input was assigned before the approved rolling activation optimization; no cancellation or duplicate launch was initiated by the operator."
+}
