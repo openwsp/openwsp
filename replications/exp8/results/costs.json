@@ -3187,6 +3187,1101 @@
       "at": "2026-11-03T19:05:13.267778+00:00",
       "event": "settled",
       "id": "58c5d55afe18465ebbe9f0953dd9373c"
+    },
+    {
+      "at": "2026-11-03T19:06:07.290888+00:00",
+      "event": "reserved",
+      "id": "36dae1eef1d2446cab14470b8c0e303b"
+    },
+    {
+      "at": "2026-11-03T19:06:09.736485+00:00",
+      "event": "settled",
+      "id": "3cc62d010f7e4694b4c64cf092e30364"
+    },
+    {
+      "at": "2026-11-03T19:07:07.292256+00:00",
+      "event": "reserved",
+      "id": "0cc137edca6c40c59e5afa4f8adb9a59"
+    },
+    {
+      "at": "2026-11-03T19:07:08.958182+00:00",
+      "event": "settled",
+      "id": "36dae1eef1d2446cab14470b8c0e303b"
+    },
+    {
+      "at": "2026-11-03T19:08:07.294171+00:00",
+      "event": "reserved",
+      "id": "3e2e2687552a4dafa8ce992901a9ad2a"
+    },
+    {
+      "at": "2026-11-03T19:08:10.370295+00:00",
+      "event": "settled",
+      "id": "0cc137edca6c40c59e5afa4f8adb9a59"
+    },
+    {
+      "at": "2026-11-03T19:09:07.295944+00:00",
+      "event": "reserved",
+      "id": "4d6b9d39f92640469d78b49182668881"
+    },
+    {
+      "at": "2026-11-03T19:09:09.199608+00:00",
+      "event": "settled",
+      "id": "3e2e2687552a4dafa8ce992901a9ad2a"
+    },
+    {
+      "at": "2026-11-03T19:09:58.363221+00:00",
+      "event": "reserved",
+      "id": "modal-job-45f71b210dc94bc1a280025bc0de34e4f58540a275ebcf010000d389e046041b"
+    },
+    {
+      "at": "2026-11-03T19:10:04.726257+00:00",
+      "event": "reserved",
+      "id": "modal-job-fbc2c94a4eaa310f2501cac530a1c0d39e0dd22d2aeb9cdc96069b64816dcd86"
+    },
+    {
+      "at": "2026-11-03T19:10:07.349915+00:00",
+      "event": "reserved",
+      "id": "5bae7f9e60d9434091330ef4bfdc5ff9"
+    },
+    {
+      "at": "2026-11-03T19:10:09.422489+00:00",
+      "event": "settled",
+      "id": "4d6b9d39f92640469d78b49182668881"
+    },
+    {
+      "at": "2026-11-03T19:10:29.331937+00:00",
+      "event": "settled",
+      "id": "modal-job-45f71b210dc94bc1a280025bc0de34e4f58540a275ebcf010000d389e046041b"
+    },
+    {
+      "at": "2026-11-03T19:11:07.548265+00:00",
+      "event": "reserved",
+      "id": "3adb1bd3eb1d44879cef6c35444ee36e"
+    },
+    {
+      "at": "2026-11-03T19:11:08.272853+00:00",
+      "event": "reserved",
+      "id": "modal-job-38ad628bbbf00b8f715f4b942f0b54edca12da0e06a40ab279f0361f6fe7546e"
+    },
+    {
+      "at": "2026-11-03T19:11:10.464924+00:00",
+      "event": "settled",
+      "id": "5bae7f9e60d9434091330ef4bfdc5ff9"
+    },
+    {
+      "at": "2026-11-03T19:11:14.798417+00:00",
+      "event": "reserved",
+      "id": "modal-job-9ff62df3c432d930a6a888ca74d05aa4391f0b3fffff2338fedfdae1f50d1d91"
+    },
+    {
+      "at": "2026-11-03T19:11:40.870310+00:00",
+      "event": "settled",
+      "id": "modal-job-38ad628bbbf00b8f715f4b942f0b54edca12da0e06a40ab279f0361f6fe7546e"
+    },
+    {
+      "at": "2026-11-03T19:12:07.297591+00:00",
+      "event": "reserved",
+      "id": "71006591dc444e5fa24c3bc255dea1da"
+    },
+    {
+      "at": "2026-11-03T19:12:09.399829+00:00",
+      "event": "settled",
+      "id": "3adb1bd3eb1d44879cef6c35444ee36e"
+    },
+    {
+      "at": "2026-11-03T19:13:06.480343+00:00",
+      "event": "reserved",
+      "id": "modal-job-7038ddae7f80e14948d4bdd85384a92c33707c9e39a50ac55c8cfeb7c3621602"
+    },
+    {
+      "at": "2026-11-03T19:13:07.528697+00:00",
+      "event": "reserved",
+      "id": "29a42656e27b408d820549f514ec561c"
+    },
+    {
+      "at": "2026-11-03T19:13:09.262586+00:00",
+      "event": "settled",
+      "id": "71006591dc444e5fa24c3bc255dea1da"
+    },
+    {
+      "at": "2026-11-03T19:13:12.475795+00:00",
+      "event": "reserved",
+      "id": "modal-job-e3519f3077ae7d2249927f89da40c2a0104ac660104a4568b4bbbe2b5dbb6a36"
+    },
+    {
+      "at": "2026-11-03T19:13:44.073455+00:00",
+      "event": "settled",
+      "id": "modal-job-7038ddae7f80e14948d4bdd85384a92c33707c9e39a50ac55c8cfeb7c3621602"
+    },
+    {
+      "at": "2026-11-03T19:14:07.300058+00:00",
+      "event": "reserved",
+      "id": "0a7c114aecfa4ff386eda7667472518c"
+    },
+    {
+      "at": "2026-11-03T19:14:08.992472+00:00",
+      "event": "settled",
+      "id": "29a42656e27b408d820549f514ec561c"
+    },
+    {
+      "at": "2026-11-03T19:14:21.873429+00:00",
+      "event": "reserved",
+      "id": "modal-job-e1e477be88f1c6050e7d9dff77682b23847fc33bde2878c91b80d292411a1ad3"
+    },
+    {
+      "at": "2026-11-03T19:14:48.365740+00:00",
+      "event": "settled",
+      "id": "modal-job-e1e477be88f1c6050e7d9dff77682b23847fc33bde2878c91b80d292411a1ad3"
+    },
+    {
+      "at": "2026-11-03T19:15:07.304216+00:00",
+      "event": "reserved",
+      "id": "b9b199484e28440d936e1e2b916e1a73"
+    },
+    {
+      "at": "2026-11-03T19:15:08.932968+00:00",
+      "event": "settled",
+      "id": "0a7c114aecfa4ff386eda7667472518c"
+    },
+    {
+      "at": "2026-11-03T19:15:34.242873+00:00",
+      "event": "reserved",
+      "id": "modal-job-7ecbd0c8497bf0acde4ff5f32e593997d76fddf766e93373158f963d7abf03f2"
+    },
+    {
+      "at": "2026-11-03T19:16:07.136495+00:00",
+      "event": "settled",
+      "id": "modal-job-7ecbd0c8497bf0acde4ff5f32e593997d76fddf766e93373158f963d7abf03f2"
+    },
+    {
+      "at": "2026-11-03T19:16:07.694182+00:00",
+      "event": "reserved",
+      "id": "724e476feed547c189656bbcd3a688da"
+    },
+    {
+      "at": "2026-11-03T19:16:10.475639+00:00",
+      "event": "settled",
+      "id": "b9b199484e28440d936e1e2b916e1a73"
+    },
+    {
+      "at": "2026-11-03T19:16:54.046220+00:00",
+      "event": "reserved",
+      "id": "modal-job-f603a2e0dd54f0e43ce1a9f7ef1cbb50a58b08dcff6d05e5b48fc8e9219a67b7"
+    },
+    {
+      "at": "2026-11-03T19:17:07.306296+00:00",
+      "event": "reserved",
+      "id": "98e3f7d3b35746f4a65b5c9072c347ad"
+    },
+    {
+      "at": "2026-11-03T19:17:08.785097+00:00",
+      "event": "settled",
+      "id": "724e476feed547c189656bbcd3a688da"
+    },
+    {
+      "at": "2026-11-03T19:17:21.321687+00:00",
+      "event": "settled",
+      "id": "modal-job-f603a2e0dd54f0e43ce1a9f7ef1cbb50a58b08dcff6d05e5b48fc8e9219a67b7"
+    },
+    {
+      "at": "2026-11-03T19:18:07.305703+00:00",
+      "event": "reserved",
+      "id": "be93be9874fc41598bebd100f42ff7ae"
+    },
+    {
+      "at": "2026-11-03T19:18:09.004595+00:00",
+      "event": "settled",
+      "id": "98e3f7d3b35746f4a65b5c9072c347ad"
+    },
+    {
+      "at": "2026-11-03T19:18:20.224881+00:00",
+      "event": "reserved",
+      "id": "modal-job-b258234f487d1d71fe066f492884697a50669fa0ddb4c85094602b2c14f12561"
+    },
+    {
+      "at": "2026-11-03T19:18:44.392122+00:00",
+      "event": "settled",
+      "id": "modal-job-b258234f487d1d71fe066f492884697a50669fa0ddb4c85094602b2c14f12561"
+    },
+    {
+      "at": "2026-11-03T19:19:07.307397+00:00",
+      "event": "reserved",
+      "id": "4fbacbfb70d942eab9a57c5527689d65"
+    },
+    {
+      "at": "2026-11-03T19:19:08.773915+00:00",
+      "event": "settled",
+      "id": "be93be9874fc41598bebd100f42ff7ae"
+    },
+    {
+      "at": "2026-11-03T19:20:07.306788+00:00",
+      "event": "reserved",
+      "id": "91936dacec574a2a9b7b8ba88d2b0073"
+    },
+    {
+      "at": "2026-11-03T19:20:09.273719+00:00",
+      "event": "settled",
+      "id": "4fbacbfb70d942eab9a57c5527689d65"
+    },
+    {
+      "at": "2026-11-03T19:21:07.308666+00:00",
+      "event": "reserved",
+      "id": "d8d082d58f93477e8e5186736116070c"
+    },
+    {
+      "at": "2026-11-03T19:21:09.359904+00:00",
+      "event": "settled",
+      "id": "91936dacec574a2a9b7b8ba88d2b0073"
+    },
+    {
+      "at": "2026-11-03T19:21:27.670472+00:00",
+      "event": "reserved",
+      "id": "modal-job-28b05f9c4952f4e9e298c38046211e7ba1a49cded9bb06f5c73ed77e523e60a3"
+    },
+    {
+      "at": "2026-11-03T19:21:32.576889+00:00",
+      "event": "reserved",
+      "id": "modal-job-45bf8282f52d4672d292f9546b4faed8b6b4dee3e45a9fc29e3737f7a2e083f7"
+    },
+    {
+      "at": "2026-11-03T19:22:02.580452+00:00",
+      "event": "settled",
+      "id": "modal-job-28b05f9c4952f4e9e298c38046211e7ba1a49cded9bb06f5c73ed77e523e60a3"
+    },
+    {
+      "at": "2026-11-03T19:22:07.308888+00:00",
+      "event": "reserved",
+      "id": "9e6605b2eefc4798954ab8f8156b05c3"
+    },
+    {
+      "at": "2026-11-03T19:22:13.226994+00:00",
+      "event": "settled",
+      "id": "d8d082d58f93477e8e5186736116070c"
+    },
+    {
+      "at": "2026-11-03T19:23:07.858444+00:00",
+      "event": "reserved",
+      "id": "949ab8cd2de149769c68dd3dd594468f"
+    },
+    {
+      "at": "2026-11-03T19:23:09.642863+00:00",
+      "event": "settled",
+      "id": "9e6605b2eefc4798954ab8f8156b05c3"
+    },
+    {
+      "at": "2026-11-03T19:24:07.422678+00:00",
+      "event": "reserved",
+      "id": "7a34d170567a40ae85ba1e4d368da84a"
+    },
+    {
+      "at": "2026-11-03T19:24:09.087264+00:00",
+      "event": "settled",
+      "id": "949ab8cd2de149769c68dd3dd594468f"
+    },
+    {
+      "at": "2026-11-03T19:25:07.313088+00:00",
+      "event": "reserved",
+      "id": "7de6be8b91374af0b5ca0bb6a7d56cb1"
+    },
+    {
+      "at": "2026-11-03T19:25:09.431567+00:00",
+      "event": "settled",
+      "id": "7a34d170567a40ae85ba1e4d368da84a"
+    },
+    {
+      "at": "2026-11-03T19:25:11.896386+00:00",
+      "event": "reserved",
+      "id": "modal-job-78380c76c45fbc3972d2f2e7746faab491ae23fdcd97a7643d1d98112dda5a04"
+    },
+    {
+      "at": "2026-11-03T19:25:44.698472+00:00",
+      "event": "settled",
+      "id": "modal-job-78380c76c45fbc3972d2f2e7746faab491ae23fdcd97a7643d1d98112dda5a04"
+    },
+    {
+      "at": "2026-11-03T19:26:07.310244+00:00",
+      "event": "reserved",
+      "id": "63894f12b19a469893c01c0978323faf"
+    },
+    {
+      "at": "2026-11-03T19:26:08.862571+00:00",
+      "event": "settled",
+      "id": "7de6be8b91374af0b5ca0bb6a7d56cb1"
+    },
+    {
+      "at": "2026-11-03T19:27:07.311546+00:00",
+      "event": "reserved",
+      "id": "3ddaee1be9a14cc59cab55b4e231f42d"
+    },
+    {
+      "at": "2026-11-03T19:27:10.067244+00:00",
+      "event": "settled",
+      "id": "63894f12b19a469893c01c0978323faf"
+    },
+    {
+      "at": "2026-11-03T19:27:45.804884+00:00",
+      "event": "reserved",
+      "id": "modal-job-3023963acd1558c732045d6a627ba3f59664747c9fee346dbb2e228035f1dc3b"
+    },
+    {
+      "at": "2026-11-03T19:28:07.312764+00:00",
+      "event": "reserved",
+      "id": "c868468a3e194f3f8bad752368fc5fc6"
+    },
+    {
+      "at": "2026-11-03T19:28:17.521114+00:00",
+      "event": "settled",
+      "id": "3ddaee1be9a14cc59cab55b4e231f42d"
+    },
+    {
+      "at": "2026-11-03T19:28:19.136776+00:00",
+      "event": "settled",
+      "id": "modal-job-3023963acd1558c732045d6a627ba3f59664747c9fee346dbb2e228035f1dc3b"
+    },
+    {
+      "at": "2026-11-03T19:29:07.312395+00:00",
+      "event": "reserved",
+      "id": "85d851efdc764ddb87283e94a3df4097"
+    },
+    {
+      "at": "2026-11-03T19:29:08.963374+00:00",
+      "event": "settled",
+      "id": "c868468a3e194f3f8bad752368fc5fc6"
+    },
+    {
+      "at": "2026-11-03T19:30:07.314199+00:00",
+      "event": "reserved",
+      "id": "feb8ef5ab46748eeaee3f65ef71b650d"
+    },
+    {
+      "at": "2026-11-03T19:30:09.696619+00:00",
+      "event": "settled",
+      "id": "85d851efdc764ddb87283e94a3df4097"
+    },
+    {
+      "at": "2026-11-03T19:30:48.591040+00:00",
+      "event": "reserved",
+      "id": "modal-job-3aec8a95210ec1c68de395562a8d6cc6e453d69604b06132a909f684f2fef652"
+    },
+    {
+      "at": "2026-11-03T19:31:07.315678+00:00",
+      "event": "reserved",
+      "id": "fa48d54cd9954ce5b03fce6291098f94"
+    },
+    {
+      "at": "2026-11-03T19:31:09.648625+00:00",
+      "event": "settled",
+      "id": "feb8ef5ab46748eeaee3f65ef71b650d"
+    },
+    {
+      "at": "2026-11-03T19:31:21.901926+00:00",
+      "event": "settled",
+      "id": "modal-job-3aec8a95210ec1c68de395562a8d6cc6e453d69604b06132a909f684f2fef652"
+    },
+    {
+      "at": "2026-11-03T19:32:07.317464+00:00",
+      "event": "reserved",
+      "id": "99411d6dbc134235b82fd39c36bff4c0"
+    },
+    {
+      "at": "2026-11-03T19:32:09.207255+00:00",
+      "event": "settled",
+      "id": "fa48d54cd9954ce5b03fce6291098f94"
+    },
+    {
+      "at": "2026-11-03T19:32:32.110655+00:00",
+      "event": "reserved",
+      "id": "modal-job-39cdc8ea4f00a34c86837cfeac5f9980cb27bdd06a8731ca9aeaa7eb69c31ef1"
+    },
+    {
+      "at": "2026-11-03T19:33:06.181751+00:00",
+      "event": "settled",
+      "id": "modal-job-39cdc8ea4f00a34c86837cfeac5f9980cb27bdd06a8731ca9aeaa7eb69c31ef1"
+    },
+    {
+      "at": "2026-11-03T19:33:07.319191+00:00",
+      "event": "reserved",
+      "id": "b9e9bd9eba6d4cbb8d2a78ec6a0ba019"
+    },
+    {
+      "at": "2026-11-03T19:33:09.862301+00:00",
+      "event": "settled",
+      "id": "99411d6dbc134235b82fd39c36bff4c0"
+    },
+    {
+      "at": "2026-11-03T19:34:07.318459+00:00",
+      "event": "reserved",
+      "id": "6d109f03177a44459fcd1cedd52a5e50"
+    },
+    {
+      "at": "2026-11-03T19:34:09.003220+00:00",
+      "event": "settled",
+      "id": "b9e9bd9eba6d4cbb8d2a78ec6a0ba019"
+    },
+    {
+      "at": "2026-11-03T19:35:07.319954+00:00",
+      "event": "reserved",
+      "id": "f7f0cd164f4a4571ad5e4c4e279b2dc9"
+    },
+    {
+      "at": "2026-11-03T19:35:08.894264+00:00",
+      "event": "settled",
+      "id": "6d109f03177a44459fcd1cedd52a5e50"
+    },
+    {
+      "at": "2026-11-03T19:36:07.320611+00:00",
+      "event": "reserved",
+      "id": "5f36bbfda7ee4672a33a5b3ffc561f1d"
+    },
+    {
+      "at": "2026-11-03T19:36:08.816988+00:00",
+      "event": "settled",
+      "id": "f7f0cd164f4a4571ad5e4c4e279b2dc9"
+    },
+    {
+      "at": "2026-11-03T19:37:07.321454+00:00",
+      "event": "reserved",
+      "id": "cfb1f6ecdb1041dda3e95372393a51a1"
+    },
+    {
+      "at": "2026-11-03T19:37:09.635942+00:00",
+      "event": "settled",
+      "id": "5f36bbfda7ee4672a33a5b3ffc561f1d"
+    },
+    {
+      "at": "2026-11-03T19:38:07.322581+00:00",
+      "event": "reserved",
+      "id": "3599489291be421c90f7e0631f632d8a"
+    },
+    {
+      "at": "2026-11-03T19:38:09.098395+00:00",
+      "event": "settled",
+      "id": "cfb1f6ecdb1041dda3e95372393a51a1"
+    },
+    {
+      "at": "2026-11-03T19:39:07.324657+00:00",
+      "event": "reserved",
+      "id": "5ff81b6e33194e7692d68a12434029a1"
+    },
+    {
+      "at": "2026-11-03T19:39:09.683481+00:00",
+      "event": "settled",
+      "id": "3599489291be421c90f7e0631f632d8a"
+    },
+    {
+      "at": "2026-11-03T19:40:07.324917+00:00",
+      "event": "reserved",
+      "id": "6f45b85fd56b4056aec514f982cb5c1a"
+    },
+    {
+      "at": "2026-11-03T19:40:09.564528+00:00",
+      "event": "settled",
+      "id": "5ff81b6e33194e7692d68a12434029a1"
+    },
+    {
+      "at": "2026-11-03T19:41:07.326757+00:00",
+      "event": "reserved",
+      "id": "2d3b4cef97a944ca8f369eaa89d36e3b"
+    },
+    {
+      "at": "2026-11-03T19:41:08.844373+00:00",
+      "event": "settled",
+      "id": "6f45b85fd56b4056aec514f982cb5c1a"
+    },
+    {
+      "at": "2026-11-03T19:42:07.327260+00:00",
+      "event": "reserved",
+      "id": "bcf3dc6156ef40bca6e8ad91c2604a44"
+    },
+    {
+      "at": "2026-11-03T19:42:10.410590+00:00",
+      "event": "settled",
+      "id": "2d3b4cef97a944ca8f369eaa89d36e3b"
+    },
+    {
+      "at": "2026-11-03T19:43:07.328161+00:00",
+      "event": "reserved",
+      "id": "c531e09472194c44b1b5119ae4656a49"
+    },
+    {
+      "at": "2026-11-03T19:43:10.045441+00:00",
+      "event": "settled",
+      "id": "bcf3dc6156ef40bca6e8ad91c2604a44"
+    },
+    {
+      "at": "2026-11-03T19:43:14.034236+00:00",
+      "event": "reserved",
+      "id": "modal-job-bb0572ddf55017751e08cad879c2ad7e9a11704593f3f2da1f562a876d5a14ee"
+    },
+    {
+      "at": "2026-11-03T19:43:40.187326+00:00",
+      "event": "settled",
+      "id": "modal-job-bb0572ddf55017751e08cad879c2ad7e9a11704593f3f2da1f562a876d5a14ee"
+    },
+    {
+      "at": "2026-11-03T19:44:07.329872+00:00",
+      "event": "reserved",
+      "id": "f618f772c30343d7b9683b6b1e19f1f5"
+    },
+    {
+      "at": "2026-11-03T19:44:09.024062+00:00",
+      "event": "settled",
+      "id": "c531e09472194c44b1b5119ae4656a49"
+    },
+    {
+      "at": "2026-11-03T19:45:07.330408+00:00",
+      "event": "reserved",
+      "id": "66c79e1875364828b5dbdba9603e5cd1"
+    },
+    {
+      "at": "2026-11-03T19:45:09.470569+00:00",
+      "event": "settled",
+      "id": "f618f772c30343d7b9683b6b1e19f1f5"
+    },
+    {
+      "at": "2026-11-03T19:46:07.331043+00:00",
+      "event": "reserved",
+      "id": "c6e422b9676b41ac8e228d5268b587d4"
+    },
+    {
+      "at": "2026-11-03T19:46:12.741007+00:00",
+      "event": "settled",
+      "id": "66c79e1875364828b5dbdba9603e5cd1"
+    },
+    {
+      "at": "2026-11-03T19:46:18.303938+00:00",
+      "event": "reserved",
+      "id": "modal-job-875afb5870aa3f36948ff45318d692e387dd4beb67e5fec02dc484dea3f77aa4"
+    },
+    {
+      "at": "2026-11-03T19:46:43.262417+00:00",
+      "event": "settled",
+      "id": "modal-job-875afb5870aa3f36948ff45318d692e387dd4beb67e5fec02dc484dea3f77aa4"
+    },
+    {
+      "at": "2026-11-03T19:47:07.331603+00:00",
+      "event": "reserved",
+      "id": "4c564f21827b44439557305b096351fd"
+    },
+    {
+      "at": "2026-11-03T19:47:10.002614+00:00",
+      "event": "settled",
+      "id": "c6e422b9676b41ac8e228d5268b587d4"
+    },
+    {
+      "at": "2026-11-03T19:48:07.332604+00:00",
+      "event": "reserved",
+      "id": "e3a0d2a5aaee4e4490715222f1469bcd"
+    },
+    {
+      "at": "2026-11-03T19:48:12.331077+00:00",
+      "event": "settled",
+      "id": "4c564f21827b44439557305b096351fd"
+    },
+    {
+      "at": "2026-11-03T19:48:24.193223+00:00",
+      "event": "reserved",
+      "id": "modal-job-608380500a46dcb079f4c13c99525ca7ff32c17d4a71f02539f3e4ff5f2336ac"
+    },
+    {
+      "at": "2026-11-03T19:48:50.167094+00:00",
+      "event": "settled",
+      "id": "modal-job-608380500a46dcb079f4c13c99525ca7ff32c17d4a71f02539f3e4ff5f2336ac"
+    },
+    {
+      "at": "2026-11-03T19:49:07.333217+00:00",
+      "event": "reserved",
+      "id": "d7186fd0711a4545bfcc4e09fc5e835c"
+    },
+    {
+      "at": "2026-11-03T19:49:09.520092+00:00",
+      "event": "settled",
+      "id": "e3a0d2a5aaee4e4490715222f1469bcd"
+    },
+    {
+      "at": "2026-11-03T19:50:07.335909+00:00",
+      "event": "reserved",
+      "id": "c50e80d6272e43e0946275fb7197cd76"
+    },
+    {
+      "at": "2026-11-03T19:50:09.221690+00:00",
+      "event": "settled",
+      "id": "d7186fd0711a4545bfcc4e09fc5e835c"
+    },
+    {
+      "at": "2026-11-03T19:50:13.230372+00:00",
+      "event": "reserved",
+      "id": "modal-job-f4b8f7cae73281cd67e7f5eccc032b67557bbc8b9d9221bcced8519969848c68"
+    },
+    {
+      "at": "2026-11-03T19:50:37.698033+00:00",
+      "event": "settled",
+      "id": "modal-job-f4b8f7cae73281cd67e7f5eccc032b67557bbc8b9d9221bcced8519969848c68"
+    },
+    {
+      "at": "2026-11-03T19:51:07.336431+00:00",
+      "event": "reserved",
+      "id": "2f4b36ee5bf54c0b8e6f904d7ac2a678"
+    },
+    {
+      "at": "2026-11-03T19:51:09.304614+00:00",
+      "event": "settled",
+      "id": "c50e80d6272e43e0946275fb7197cd76"
+    },
+    {
+      "at": "2026-11-03T19:52:07.336989+00:00",
+      "event": "reserved",
+      "id": "88c957ceaf084af694b6f95c078c5dad"
+    },
+    {
+      "at": "2026-11-03T19:52:08.770914+00:00",
+      "event": "settled",
+      "id": "2f4b36ee5bf54c0b8e6f904d7ac2a678"
+    },
+    {
+      "at": "2026-11-03T19:52:17.700444+00:00",
+      "event": "reserved",
+      "id": "modal-job-808a91ef5c6a6ca1d665065434374b7fdeaccaccdbb90ccbac361978e44a34b1"
+    },
+    {
+      "at": "2026-11-03T19:52:43.097797+00:00",
+      "event": "settled",
+      "id": "modal-job-808a91ef5c6a6ca1d665065434374b7fdeaccaccdbb90ccbac361978e44a34b1"
+    },
+    {
+      "at": "2026-11-03T19:53:07.338249+00:00",
+      "event": "reserved",
+      "id": "6c1ea3216d314b7cb1ea91cd25c2876b"
+    },
+    {
+      "at": "2026-11-03T19:53:09.743495+00:00",
+      "event": "settled",
+      "id": "88c957ceaf084af694b6f95c078c5dad"
+    },
+    {
+      "at": "2026-11-03T19:54:07.339060+00:00",
+      "event": "reserved",
+      "id": "c98fcc4b3352454390e6cb61d2aa7e4f"
+    },
+    {
+      "at": "2026-11-03T19:54:09.118386+00:00",
+      "event": "settled",
+      "id": "6c1ea3216d314b7cb1ea91cd25c2876b"
+    },
+    {
+      "at": "2026-11-03T19:55:07.605390+00:00",
+      "event": "reserved",
+      "id": "f2d3c3c5de9b456b93637c26dd3d8730"
+    },
+    {
+      "at": "2026-11-03T19:55:09.959110+00:00",
+      "event": "settled",
+      "id": "c98fcc4b3352454390e6cb61d2aa7e4f"
+    },
+    {
+      "at": "2026-11-03T19:56:07.340148+00:00",
+      "event": "reserved",
+      "id": "5ea4c6d82e974695a8afe1aa15c81570"
+    },
+    {
+      "at": "2026-11-03T19:56:09.309371+00:00",
+      "event": "settled",
+      "id": "f2d3c3c5de9b456b93637c26dd3d8730"
+    },
+    {
+      "at": "2026-11-03T19:57:07.340872+00:00",
+      "event": "reserved",
+      "id": "25252182ec4e403c817934e9fa30ce5c"
+    },
+    {
+      "at": "2026-11-03T19:57:10.026981+00:00",
+      "event": "settled",
+      "id": "5ea4c6d82e974695a8afe1aa15c81570"
+    },
+    {
+      "at": "2026-11-03T19:57:15.986569+00:00",
+      "event": "reserved",
+      "id": "modal-job-531d3eafa98d8664690b35c8f0ad8a266faa456199f7a9f6ececa3f33c45f432"
+    },
+    {
+      "at": "2026-11-03T19:57:21.452465+00:00",
+      "event": "reserved",
+      "id": "modal-job-82e9909d25d7b85954b8605848e575bd2af9e69a63c038d7a7ed33309cc2b8cc"
+    },
+    {
+      "at": "2026-11-03T19:58:07.342345+00:00",
+      "event": "reserved",
+      "id": "72203cb44f8b41459c4bb654210928f3"
+    },
+    {
+      "at": "2026-11-03T19:58:08.791939+00:00",
+      "event": "settled",
+      "id": "25252182ec4e403c817934e9fa30ce5c"
+    },
+    {
+      "at": "2026-11-03T19:59:07.348087+00:00",
+      "event": "reserved",
+      "id": "83b2d5aead5444e792571dcf279c0344"
+    },
+    {
+      "at": "2026-11-03T19:59:08.907338+00:00",
+      "event": "settled",
+      "id": "72203cb44f8b41459c4bb654210928f3"
+    },
+    {
+      "at": "2026-11-03T20:00:07.348918+00:00",
+      "event": "reserved",
+      "id": "a28eb74c70bd4a81908c35064212cb22"
+    },
+    {
+      "at": "2026-11-03T20:00:09.758215+00:00",
+      "event": "settled",
+      "id": "83b2d5aead5444e792571dcf279c0344"
+    },
+    {
+      "at": "2026-11-03T20:00:10.681113+00:00",
+      "event": "settled",
+      "id": "modal-job-531d3eafa98d8664690b35c8f0ad8a266faa456199f7a9f6ececa3f33c45f432"
+    },
+    {
+      "at": "2026-11-03T20:01:07.359397+00:00",
+      "event": "reserved",
+      "id": "03a84c0318734b4096cb059f12fc2fff"
+    },
+    {
+      "at": "2026-11-03T20:01:09.551856+00:00",
+      "event": "settled",
+      "id": "a28eb74c70bd4a81908c35064212cb22"
+    },
+    {
+      "at": "2026-11-03T20:01:23.675369+00:00",
+      "event": "settled",
+      "id": "modal-job-82e9909d25d7b85954b8605848e575bd2af9e69a63c038d7a7ed33309cc2b8cc"
+    },
+    {
+      "at": "2026-11-03T20:02:07.354447+00:00",
+      "event": "reserved",
+      "id": "e0dff36796a84ce0a29eade48ba41548"
+    },
+    {
+      "at": "2026-11-03T20:02:09.111024+00:00",
+      "event": "settled",
+      "id": "03a84c0318734b4096cb059f12fc2fff"
+    },
+    {
+      "at": "2026-11-03T20:03:07.354308+00:00",
+      "event": "reserved",
+      "id": "7a66af4074474bb4b6c3893f83782170"
+    },
+    {
+      "at": "2026-11-03T20:03:09.026779+00:00",
+      "event": "settled",
+      "id": "e0dff36796a84ce0a29eade48ba41548"
+    },
+    {
+      "at": "2026-11-03T20:03:26.956945+00:00",
+      "event": "reserved",
+      "id": "modal-job-1d4164db722c7fd724600f464abc18e41a69b99a558e787a2c0c84e4ffa5ccb5"
+    },
+    {
+      "at": "2026-11-03T20:03:32.301802+00:00",
+      "event": "reserved",
+      "id": "modal-job-5da857f4be2a9df9399d77b89257559f9f01f2ede8751516a661b38d465ba5a1"
+    },
+    {
+      "at": "2026-11-03T20:04:07.639265+00:00",
+      "event": "reserved",
+      "id": "7ccfa431d10d479aaf685e45e923df51"
+    },
+    {
+      "at": "2026-11-03T20:04:09.816223+00:00",
+      "event": "settled",
+      "id": "7a66af4074474bb4b6c3893f83782170"
+    },
+    {
+      "at": "2026-11-03T20:05:07.355537+00:00",
+      "event": "reserved",
+      "id": "8358fc69a54241f68dccf81aab1c19d8"
+    },
+    {
+      "at": "2026-11-03T20:05:09.094301+00:00",
+      "event": "settled",
+      "id": "7ccfa431d10d479aaf685e45e923df51"
+    },
+    {
+      "at": "2026-11-03T20:06:07.362515+00:00",
+      "event": "reserved",
+      "id": "1f828f7697fc437f910df912a2f9e8df"
+    },
+    {
+      "at": "2026-11-03T20:06:09.246462+00:00",
+      "event": "settled",
+      "id": "8358fc69a54241f68dccf81aab1c19d8"
+    },
+    {
+      "at": "2026-11-03T20:07:07.366740+00:00",
+      "event": "reserved",
+      "id": "c2b0a5627f2a492084f2664cdd36d5ab"
+    },
+    {
+      "at": "2026-11-03T20:07:09.191669+00:00",
+      "event": "settled",
+      "id": "1f828f7697fc437f910df912a2f9e8df"
+    },
+    {
+      "at": "2026-11-03T20:08:07.371426+00:00",
+      "event": "reserved",
+      "id": "b18a1b58096d48ee9989b182fb5b7390"
+    },
+    {
+      "at": "2026-11-03T20:08:09.333176+00:00",
+      "event": "settled",
+      "id": "c2b0a5627f2a492084f2664cdd36d5ab"
+    },
+    {
+      "at": "2026-11-03T20:09:07.378119+00:00",
+      "event": "reserved",
+      "id": "d33592e286f9499f93b6c45387db3f81"
+    },
+    {
+      "at": "2026-11-03T20:09:09.235600+00:00",
+      "event": "settled",
+      "id": "b18a1b58096d48ee9989b182fb5b7390"
+    },
+    {
+      "at": "2026-11-03T20:10:07.383572+00:00",
+      "event": "reserved",
+      "id": "980477d71d50491e8ee14860cf6666d7"
+    },
+    {
+      "at": "2026-11-03T20:10:11.244770+00:00",
+      "event": "settled",
+      "id": "d33592e286f9499f93b6c45387db3f81"
+    },
+    {
+      "at": "2026-11-03T20:11:07.395269+00:00",
+      "event": "reserved",
+      "id": "b825d986c8c74028bc500854d5cfaf1d"
+    },
+    {
+      "at": "2026-11-03T20:11:09.533119+00:00",
+      "event": "settled",
+      "id": "980477d71d50491e8ee14860cf6666d7"
+    },
+    {
+      "at": "2026-11-03T20:12:07.398886+00:00",
+      "event": "reserved",
+      "id": "5b56406b60e340f88a1cd04330e766d5"
+    },
+    {
+      "at": "2026-11-03T20:12:09.142262+00:00",
+      "event": "settled",
+      "id": "b825d986c8c74028bc500854d5cfaf1d"
+    },
+    {
+      "at": "2026-11-03T20:13:07.403130+00:00",
+      "event": "reserved",
+      "id": "4e4556ef605144ce8961b214c18a8382"
+    },
+    {
+      "at": "2026-11-03T20:13:08.966902+00:00",
+      "event": "settled",
+      "id": "5b56406b60e340f88a1cd04330e766d5"
+    },
+    {
+      "at": "2026-11-03T20:14:07.404317+00:00",
+      "event": "reserved",
+      "id": "eef60b57bb72455999e8eadb2521bbb7"
+    },
+    {
+      "at": "2026-11-03T20:14:09.224968+00:00",
+      "event": "settled",
+      "id": "4e4556ef605144ce8961b214c18a8382"
+    },
+    {
+      "at": "2026-11-03T20:15:07.404650+00:00",
+      "event": "reserved",
+      "id": "6610114b2b8f47fca04e4a3ef95c61e9"
+    },
+    {
+      "at": "2026-11-03T20:15:09.436837+00:00",
+      "event": "settled",
+      "id": "eef60b57bb72455999e8eadb2521bbb7"
+    },
+    {
+      "at": "2026-11-03T20:16:07.410775+00:00",
+      "event": "reserved",
+      "id": "ca106d3ed7c3490da8af269078853e17"
+    },
+    {
+      "at": "2026-11-03T20:16:09.637694+00:00",
+      "event": "settled",
+      "id": "6610114b2b8f47fca04e4a3ef95c61e9"
+    },
+    {
+      "at": "2026-11-03T20:17:07.414890+00:00",
+      "event": "reserved",
+      "id": "15da5bdbcc804c3e923e94a87a8dc51f"
+    },
+    {
+      "at": "2026-11-03T20:17:08.935410+00:00",
+      "event": "settled",
+      "id": "ca106d3ed7c3490da8af269078853e17"
+    },
+    {
+      "at": "2026-11-03T20:18:07.416254+00:00",
+      "event": "reserved",
+      "id": "4a06b4380c8241bb9ab04e6cd963e4e4"
+    },
+    {
+      "at": "2026-11-03T20:18:11.526260+00:00",
+      "event": "settled",
+      "id": "15da5bdbcc804c3e923e94a87a8dc51f"
+    },
+    {
+      "at": "2026-11-03T20:18:14.170320+00:00",
+      "event": "settled",
+      "id": "modal-job-1d4164db722c7fd724600f464abc18e41a69b99a558e787a2c0c84e4ffa5ccb5"
+    },
+    {
+      "at": "2026-11-03T20:18:22.597660+00:00",
+      "event": "reserved",
+      "id": "modal-job-4699ec2e8c0d8d43c9a7489e7344c715acdbe8af4ae033265f31f8bed43db036"
+    },
+    {
+      "at": "2026-11-03T20:19:07.421060+00:00",
+      "event": "reserved",
+      "id": "bbab791509344d0f8de60293429e5ae1"
+    },
+    {
+      "at": "2026-11-03T20:19:09.531861+00:00",
+      "event": "settled",
+      "id": "4a06b4380c8241bb9ab04e6cd963e4e4"
+    },
+    {
+      "at": "2026-11-03T20:20:07.423574+00:00",
+      "event": "reserved",
+      "id": "ff6fb82151aa4d3595aa08d1136b28eb"
+    },
+    {
+      "at": "2026-11-03T20:20:09.373835+00:00",
+      "event": "settled",
+      "id": "bbab791509344d0f8de60293429e5ae1"
+    },
+    {
+      "at": "2026-11-03T20:21:07.424540+00:00",
+      "event": "reserved",
+      "id": "2797995522cf49f2a58cb03e189ce5ae"
+    },
+    {
+      "at": "2026-11-03T20:21:08.932460+00:00",
+      "event": "settled",
+      "id": "ff6fb82151aa4d3595aa08d1136b28eb"
+    },
+    {
+      "at": "2026-11-03T20:21:33.926971+00:00",
+      "event": "settled",
+      "id": "modal-job-4699ec2e8c0d8d43c9a7489e7344c715acdbe8af4ae033265f31f8bed43db036"
+    },
+    {
+      "at": "2026-11-03T20:21:41.710480+00:00",
+      "event": "settled",
+      "id": "modal-job-5da857f4be2a9df9399d77b89257559f9f01f2ede8751516a661b38d465ba5a1"
+    },
+    {
+      "at": "2026-11-03T20:21:49.280292+00:00",
+      "event": "reserved",
+      "id": "modal-job-89cf2fec9ef893d6b6cd0709f089b2e0c8db91e5f2253a164182433b957a9bf0"
+    },
+    {
+      "at": "2026-11-03T20:22:07.429167+00:00",
+      "event": "reserved",
+      "id": "f094a8d7a73e44959415a267dc55e0f9"
+    },
+    {
+      "at": "2026-11-03T20:22:09.212632+00:00",
+      "event": "settled",
+      "id": "2797995522cf49f2a58cb03e189ce5ae"
+    },
+    {
+      "at": "2026-11-03T20:23:07.438781+00:00",
+      "event": "reserved",
+      "id": "bcdc831b262645a782dbe16c0d9cd46b"
+    },
+    {
+      "at": "2026-11-03T20:23:09.228877+00:00",
+      "event": "settled",
+      "id": "f094a8d7a73e44959415a267dc55e0f9"
+    },
+    {
+      "at": "2026-11-03T20:24:07.443366+00:00",
+      "event": "reserved",
+      "id": "8a5d302946f8488f98e0b0b82582f746"
+    },
+    {
+      "at": "2026-11-03T20:24:09.264225+00:00",
+      "event": "settled",
+      "id": "bcdc831b262645a782dbe16c0d9cd46b"
+    },
+    {
+      "at": "2026-11-03T20:24:45.086917+00:00",
+      "event": "settled",
+      "id": "modal-job-89cf2fec9ef893d6b6cd0709f089b2e0c8db91e5f2253a164182433b957a9bf0"
+    },
+    {
+      "at": "2026-11-03T20:25:07.958856+00:00",
+      "event": "reserved",
+      "id": "5aad6f7bdd8549238648b9dc9a50badb"
+    },
+    {
+      "at": "2026-11-03T20:25:10.250906+00:00",
+      "event": "settled",
+      "id": "8a5d302946f8488f98e0b0b82582f746"
+    },
+    {
+      "at": "2026-11-03T20:25:51.540241+00:00",
+      "event": "reserved",
+      "id": "modal-job-b2eb880ea336f75e726161d80bd72b34dc340421aa3d1c7a689fd2825af57d2f"
+    },
+    {
+      "at": "2026-11-03T20:26:07.450181+00:00",
+      "event": "reserved",
+      "id": "5a5d9c1de28445e5a66dfccafa090b57"
+    },
+    {
+      "at": "2026-11-03T20:26:08.921431+00:00",
+      "event": "settled",
+      "id": "5aad6f7bdd8549238648b9dc9a50badb"
+    },
+    {
+      "at": "2026-11-03T20:26:13.316555+00:00",
+      "event": "settled",
+      "id": "modal-job-b2eb880ea336f75e726161d80bd72b34dc340421aa3d1c7a689fd2825af57d2f"
+    },
+    {
+      "at": "2026-11-03T20:27:07.638294+00:00",
+      "event": "reserved",
+      "id": "692aa63f692c44b2a7686882d54f788c"
+    },
+    {
+      "at": "2026-11-03T20:27:09.358839+00:00",
+      "event": "settled",
+      "id": "5a5d9c1de28445e5a66dfccafa090b57"
+    },
+    {
+      "at": "2026-11-03T20:27:53.017039+00:00",
+      "event": "reserved",
+      "id": "ed12fa63fa9e441e99e4101274c98edc"
+    },
+    {
+      "at": "2026-11-03T20:27:55.046085+00:00",
+      "event": "settled",
+      "id": "692aa63f692c44b2a7686882d54f788c"
+    },
+    {
+      "at": "2026-11-03T20:27:57.910130+00:00",
+      "event": "settled",
+      "id": "ed12fa63fa9e441e99e4101274c98edc"
     }
   ],
   "halted": false,
@@ -3402,6 +4497,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "03a84c0318734b4096cb059f12fc2fff": {
+      "actual_usd": "0.04313080475548189956866666667",
+      "completed_at": "2026-11-03T20:02:09.110996+00:00",
+      "created_at": "2026-11-03T20:01:07.356966+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.001119530000324,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "03fe8cb82a17445aac22701b8ee197d4": {
       "actual_usd": "0.04313071537358845974533333333",
       "completed_at": "2026-11-03T14:42:19.215595+00:00",
@@ -3577,6 +4700,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "0a7c114aecfa4ff386eda7667472518c": {
+      "actual_usd": "0.04313205070210994968166666667",
+      "completed_at": "2026-11-03T19:15:08.932924+00:00",
+      "created_at": "2026-11-03T19:14:07.300025+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00285281999993,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "0aa15651f9fd4ef38f18046dec4760d7": {
       "actual_usd": "0.04313072726165409478333333333",
       "completed_at": "2026-11-03T14:41:19.353045+00:00",
@@ -3656,6 +4807,34 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.00102199000048,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "0cc137edca6c40c59e5afa4f8adb9a59": {
+      "actual_usd": "0.04313182996205114510166666667",
+      "completed_at": "2026-11-03T19:08:10.370265+00:00",
+      "created_at": "2026-11-03T19:07:07.292227+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00254573899997,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -3898,6 +5077,34 @@
         },
         "total_tokens": 445508
       }
+    },
+    "15da5bdbcc804c3e923e94a87a8dc51f": {
+      "actual_usd": "0.0431310468283570781475",
+      "completed_at": "2026-11-03T20:18:11.526219+00:00",
+      "created_at": "2026-11-03T20:17:07.414865+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.001456287999645,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
     },
     "164de7478bac4305ab713c4ff5d6cd08": {
       "actual_usd": "0.04313038965726617026083333333",
@@ -4165,6 +5372,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "1f828f7697fc437f910df912a2f9e8df": {
+      "actual_usd": "0.043133581096839021565",
+      "completed_at": "2026-11-03T20:07:09.191622+00:00",
+      "created_at": "2026-11-03T20:06:07.362484+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00498181800003,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "21f621704b7e433c865ea172c5b3308c": {
       "actual_usd": "0.04313054802703211070033333333",
       "completed_at": "2026-11-03T10:22:25.449557+00:00",
@@ -4249,6 +5484,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "25252182ec4e403c817934e9fa30ce5c": {
+      "actual_usd": "0.04313112708106713360033333333",
+      "completed_at": "2026-11-03T19:58:08.791903+00:00",
+      "created_at": "2026-11-03T19:57:07.340851+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.001567930999954,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "254cc049490347e9b281037866c1160c": {
       "actual_usd": "0.04313077495193280458",
       "completed_at": "2026-11-03T11:16:26.163109+00:00",
@@ -4272,6 +5535,34 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.00107806899996,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "2797995522cf49f2a58cb03e189ce5ae": {
+      "actual_usd": "0.043134204588432",
+      "completed_at": "2026-11-03T20:22:09.212586+00:00",
+      "created_at": "2026-11-03T20:21:07.424511+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.005849184,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -4431,6 +5722,34 @@
         "total_tokens": 184901
       }
     },
+    "29a42656e27b408d820549f514ec561c": {
+      "actual_usd": "0.04313085352904218104333333333",
+      "completed_at": "2026-11-03T19:14:08.992431+00:00",
+      "created_at": "2026-11-03T19:13:07.528671+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00118738100002,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "2a3e823366c241d8a1ec27d0f0851127": {
       "actual_usd": "0.043130718803142308893",
       "completed_at": "2026-11-03T08:14:36.573948+00:00",
@@ -4510,6 +5829,34 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.000261234999925,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "2d3b4cef97a944ca8f369eaa89d36e3b": {
+      "actual_usd": "0.04313080682140862353666666667",
+      "completed_at": "2026-11-03T19:42:10.410537+00:00",
+      "created_at": "2026-11-03T19:41:07.326720+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00112240399994,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -4650,6 +5997,34 @@
         "sandbox_id": "sb-01M6G6WG94FWM92Z8W9PKQD5R5"
       },
       "seconds": 60.00107583699992,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "2f4b36ee5bf54c0b8e6f904d7ac2a678": {
+      "actual_usd": "0.04313067874974907188333333333",
+      "completed_at": "2026-11-03T19:52:08.770886+00:00",
+      "created_at": "2026-11-03T19:51:07.336403+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.0009442380001,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -4823,6 +6198,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "3599489291be421c90f7e0631f632d8a": {
+      "actual_usd": "0.04313162941330168525366666667",
+      "completed_at": "2026-11-03T19:39:09.683422+00:00",
+      "created_at": "2026-11-03T19:38:07.322561+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.002266746999794,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "35ea2dbee26f41f0a54c14b804278366": {
       "actual_usd": "0.004947604332940417334166666667",
       "completed_at": "2026-11-03T08:45:29.224820+00:00",
@@ -4846,6 +6249,34 @@
         "sandbox_id": "sb-01M6G6WG94FWM92Z8W9PKQD5R5"
       },
       "seconds": 6.882825410999885,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "36dae1eef1d2446cab14470b8c0e303b": {
+      "actual_usd": "0.04313040800836233333333333333",
+      "completed_at": "2026-11-03T19:07:08.958160+00:00",
+      "created_at": "2026-11-03T19:06:07.290862+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000567598,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -4963,6 +6394,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "3adb1bd3eb1d44879cef6c35444ee36e": {
+      "actual_usd": "0.04313060244487181895666666667",
+      "completed_at": "2026-11-03T19:12:09.399774+00:00",
+      "created_at": "2026-11-03T19:11:07.548238+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00083808699998,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "3b9c66f145e8411780a1aa871e5f8193": {
       "actual_usd": "0.04313032372587287646333333333",
       "completed_at": "2026-11-03T09:47:25.103439+00:00",
@@ -5055,6 +6514,8 @@
       "usage": null
     },
     "3cc62d010f7e4694b4c64cf092e30364": {
+      "actual_usd": "0.04313044338502600287533333333",
+      "completed_at": "2026-11-03T19:06:09.736440+00:00",
       "created_at": "2026-11-03T19:05:07.290931+00:00",
       "kind": "modal",
       "metadata": {
@@ -5066,9 +6527,19 @@
         "memory_gib_bound": 96,
         "seconds_bound": 300
       },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000616812000004,
       "stage": "sandbox:heartbeat",
-      "status": "reserved",
-      "upper_bound_usd": "0.215650"
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
     },
     "3cfc678fe29a482e8476486864ac5d95": {
       "actual_usd": "0.04313064269738186342166666667",
@@ -5156,6 +6627,62 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.00077508300001,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "3ddaee1be9a14cc59cab55b4e231f42d": {
+      "actual_usd": "0.04313107071447015229",
+      "completed_at": "2026-11-03T19:28:17.521087+00:00",
+      "created_at": "2026-11-03T19:27:07.311517+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00148951699998,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "3e2e2687552a4dafa8ce992901a9ad2a": {
+      "actual_usd": "0.04313063119389216379133333333",
+      "completed_at": "2026-11-03T19:09:09.199568+00:00",
+      "created_at": "2026-11-03T19:08:07.294151+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000878080999996,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -5602,6 +7129,90 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "4a06b4380c8241bb9ab04e6cd963e4e4": {
+      "actual_usd": "0.04313359161984069860333333333",
+      "completed_at": "2026-11-03T20:19:09.531825+00:00",
+      "created_at": "2026-11-03T20:18:07.416226+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00499645700074,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "4c564f21827b44439557305b096351fd": {
+      "actual_usd": "0.04313035001360764643666666667",
+      "completed_at": "2026-11-03T19:48:12.331044+00:00",
+      "created_at": "2026-11-03T19:47:07.331579+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00048691899974,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "4d6b9d39f92640469d78b49182668881": {
+      "actual_usd": "0.043130688794007173855",
+      "completed_at": "2026-11-03T19:10:09.422458+00:00",
+      "created_at": "2026-11-03T19:09:07.295916+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00095821100001,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "4d85b019edbc415ba3e36e3f437b01b9": {
       "actual_usd": "0.04313051295874782902033333333",
       "completed_at": "2026-11-03T09:10:58.274025+00:00",
@@ -5625,6 +7236,34 @@
         "sandbox_id": "sb-01M6GAGKAVT717P85V4RNWYT50"
       },
       "seconds": 60.000713598999994,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "4e4556ef605144ce8961b214c18a8382": {
+      "actual_usd": "0.04313080605513254898333333333",
+      "completed_at": "2026-11-03T20:14:09.224940+00:00",
+      "created_at": "2026-11-03T20:13:07.403104+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.0011213380003,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -5681,6 +7320,34 @@
         "sandbox_id": "sb-01M6G6WG94FWM92Z8W9PKQD5R5"
       },
       "seconds": 60.00026834200003,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "4fbacbfb70d942eab9a57c5527689d65": {
+      "actual_usd": "0.043130129555331716985",
+      "completed_at": "2026-11-03T19:20:09.273682+00:00",
+      "created_at": "2026-11-03T19:19:07.307367+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00018023000007,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -6085,6 +7752,62 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "5a5d9c1de28445e5a66dfccafa090b57": {
+      "actual_usd": "0.04313086326060814962",
+      "completed_at": "2026-11-03T20:27:09.358771+00:00",
+      "created_at": "2026-11-03T20:26:07.450155+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00120091900044,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "5aad6f7bdd8549238648b9dc9a50badb": {
+      "actual_usd": "0.04313377805501587286916666667",
+      "completed_at": "2026-11-03T20:26:08.921384+00:00",
+      "created_at": "2026-11-03T20:25:07.958800+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.005255815000055,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "5ab8c751bcf74c6b9f80f5f2735723e5": {
       "actual_usd": "0.04313060042566888498666666667",
       "completed_at": "2026-11-03T09:57:25.664415+00:00",
@@ -6136,6 +7859,62 @@
         "sandbox_id": "sb-01M6G6WG94FWM92Z8W9PKQD5R5"
       },
       "seconds": 60.000529160999804,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "5b56406b60e340f88a1cd04330e766d5": {
+      "actual_usd": "0.04313428979462214643666666667",
+      "completed_at": "2026-11-03T20:13:08.966877+00:00",
+      "created_at": "2026-11-03T20:12:07.398852+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00596771799974,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "5bae7f9e60d9434091330ef4bfdc5ff9": {
+      "actual_usd": "0.04313044340155918104333333333",
+      "completed_at": "2026-11-03T19:11:10.464887+00:00",
+      "created_at": "2026-11-03T19:10:07.349884+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00061683500002,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -6225,6 +8004,62 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "5ea4c6d82e974695a8afe1aa15c81570": {
+      "actual_usd": "0.043130188985596326145",
+      "completed_at": "2026-11-03T19:57:10.026950+00:00",
+      "created_at": "2026-11-03T19:56:07.340123+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00026290599999,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "5f36bbfda7ee4672a33a5b3ffc561f1d": {
+      "actual_usd": "0.04313066151931388858083333333",
+      "completed_at": "2026-11-03T19:37:09.635917+00:00",
+      "created_at": "2026-11-03T19:36:07.320592+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000920267999845,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "5f36f84b070e4680afb22002cd4905b6": {
       "actual_usd": "0.728204",
       "completed_at": "2026-11-03T10:16:45.038269+00:00",
@@ -6259,6 +8094,34 @@
         },
         "total_tokens": 316652
       }
+    },
+    "5ff81b6e33194e7692d68a12434029a1": {
+      "actual_usd": "0.04313040159708803460666666667",
+      "completed_at": "2026-11-03T19:40:09.564489+00:00",
+      "created_at": "2026-11-03T19:39:07.324630+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00055867900028,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
     },
     "6198005b06ea4eb6a67d8eb870b2bcee": {
       "actual_usd": "0.004283857480955166666666666667",
@@ -6312,6 +8175,34 @@
       },
       "seconds": 12.796303442,
       "stage": "kernel_verification:startup",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "63894f12b19a469893c01c0978323faf": {
+      "actual_usd": "0.04313022164075700718833333333",
+      "completed_at": "2026-11-03T19:27:10.067194+00:00",
+      "created_at": "2026-11-03T19:26:07.310226+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00030833400001,
+      "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
       "usage": null
@@ -6400,6 +8291,62 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "6610114b2b8f47fca04e4a3ef95c61e9": {
+      "actual_usd": "0.043134411579366148285",
+      "completed_at": "2026-11-03T20:16:09.637658+00:00",
+      "created_at": "2026-11-03T20:15:07.404613+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00613713800067,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "66c79e1875364828b5dbdba9603e5cd1": {
+      "actual_usd": "0.04313080258029202875333333333",
+      "completed_at": "2026-11-03T19:46:12.740972+00:00",
+      "created_at": "2026-11-03T19:45:07.330377+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00111650400004,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "674711efc0ef4141850348f4bb47a0ef": {
       "actual_usd": "0.04313055874483687061",
       "completed_at": "2026-11-03T11:15:26.897545+00:00",
@@ -6423,6 +8370,34 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.00077729399982,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "692aa63f692c44b2a7686882d54f788c": {
+      "actual_usd": "0.03275439251663110556583333333",
+      "completed_at": "2026-11-03T20:27:55.046043+00:00",
+      "created_at": "2026-11-03T20:27:07.638264+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 45.566045698999915,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -6512,6 +8487,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "6c1ea3216d314b7cb1ea91cd25c2876b": {
+      "actual_usd": "0.04313083085991390069833333333",
+      "completed_at": "2026-11-03T19:54:09.118323+00:00",
+      "created_at": "2026-11-03T19:53:07.338215+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00115584499963,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "6cc0d81612fa4ddf896b47fa894f7df4": {
       "actual_usd": "0.043130409798976173855",
       "completed_at": "2026-11-03T14:27:19.448013+00:00",
@@ -6535,6 +8538,34 @@
         "sandbox_id": "sb-01M6GW8SRFWTJTRKPZE71WMSKN"
       },
       "seconds": 60.00057008900001,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "6d109f03177a44459fcd1cedd52a5e50": {
+      "actual_usd": "0.04313141470641123136166666667",
+      "completed_at": "2026-11-03T19:35:08.894228+00:00",
+      "created_at": "2026-11-03T19:34:07.318426+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00196805900009,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -6619,6 +8650,34 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.001169407000134,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "6f45b85fd56b4056aec514f982cb5c1a": {
+      "actual_usd": "0.04313085873195766081333333333",
+      "completed_at": "2026-11-03T19:41:08.844315+00:00",
+      "created_at": "2026-11-03T19:40:07.324897+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00119461899976,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -6736,6 +8795,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "71006591dc444e5fa24c3bc255dea1da": {
+      "actual_usd": "0.0431307750511318584925",
+      "completed_at": "2026-11-03T19:13:09.262535+00:00",
+      "created_at": "2026-11-03T19:12:07.297563+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.001078207000035,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "7195a3e02ae94e98965b4e99f4e40265": {
       "actual_usd": "0.04313024044759352875333333333",
       "completed_at": "2026-11-03T07:43:14.186249+00:00",
@@ -6759,6 +8846,62 @@
         "sandbox_id": "sb-01M6G5ACEGJWQZ16VPRG9PF6W1"
       },
       "seconds": 60.00033449700004,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "72203cb44f8b41459c4bb654210928f3": {
+      "actual_usd": "0.04313432291702461922366666667",
+      "completed_at": "2026-11-03T19:59:08.907318+00:00",
+      "created_at": "2026-11-03T19:58:07.342319+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.006013795999934,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "724e476feed547c189656bbcd3a688da": {
+      "actual_usd": "0.04313083152627270979666666667",
+      "completed_at": "2026-11-03T19:17:08.785066+00:00",
+      "created_at": "2026-11-03T19:16:07.694159+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00115677200006,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -6988,6 +9131,62 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "7a34d170567a40ae85ba1e4d368da84a": {
+      "actual_usd": "0.04313049894581073700966666667",
+      "completed_at": "2026-11-03T19:25:09.431526+00:00",
+      "created_at": "2026-11-03T19:24:07.422647+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000694104999866,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "7a66af4074474bb4b6c3893f83782170": {
+      "actual_usd": "0.043130686498772179503",
+      "completed_at": "2026-11-03T20:04:09.816195+00:00",
+      "created_at": "2026-11-03T20:03:07.354289+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000955017999786,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "7bb3bf59a6b647d78a2a5e3742bca4da": {
       "actual_usd": "0.04313055106769698993633333333",
       "completed_at": "2026-11-03T08:31:34.977411+00:00",
@@ -7016,6 +9215,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "7ccfa431d10d479aaf685e45e923df51": {
+      "actual_usd": "0.04313039667811125138633333333",
+      "completed_at": "2026-11-03T20:05:09.094250+00:00",
+      "created_at": "2026-11-03T20:04:07.639236+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000551835999886,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "7d7247ab048c4a3293e9a61493873178": {
       "actual_usd": "0.0431307820187830997125",
       "completed_at": "2026-11-03T10:31:25.311032+00:00",
@@ -7039,6 +9266,34 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.001087899999675,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "7de6be8b91374af0b5ca0bb6a7d56cb1": {
+      "actual_usd": "0.04313038437384126730333333333",
+      "completed_at": "2026-11-03T19:26:08.862520+00:00",
+      "created_at": "2026-11-03T19:25:07.313054+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00053471900014,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -7184,6 +9439,62 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "8358fc69a54241f68dccf81aab1c19d8": {
+      "actual_usd": "0.04313369351518404313",
+      "completed_at": "2026-11-03T20:06:09.246432+00:00",
+      "created_at": "2026-11-03T20:05:07.355511+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00513820800006,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "83b2d5aead5444e792571dcf279c0344": {
+      "actual_usd": "0.04313014994719564510166666667",
+      "completed_at": "2026-11-03T20:00:09.758184+00:00",
+      "created_at": "2026-11-03T19:59:07.348064+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00020859799997,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "850fe22c6ae9421fbf09dc6434d74cbb": {
       "actual_usd": "0.01196524887262550287533333333",
       "completed_at": "2026-11-03T07:35:14.517507+00:00",
@@ -7212,6 +9523,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "85d851efdc764ddb87283e94a3df4097": {
+      "actual_usd": "0.04313099095272346405833333333",
+      "completed_at": "2026-11-03T19:30:09.696591+00:00",
+      "created_at": "2026-11-03T19:29:07.312360+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00137855699995,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "86f88bfe18ff40c381d856ce75bdce5d": {
       "actual_usd": "0.001598649978998222222222222222",
       "completed_at": "2026-11-03T05:50:20.110278+00:00",
@@ -7225,6 +9564,34 @@
       "stage": "prepare",
       "status": "settled",
       "upper_bound_usd": "1",
+      "usage": null
+    },
+    "88c957ceaf084af694b6f95c078c5dad": {
+      "actual_usd": "0.04313025140405137153416666667",
+      "completed_at": "2026-11-03T19:53:09.743457+00:00",
+      "created_at": "2026-11-03T19:52:07.336961+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000349739000285,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
       "usage": null
     },
     "8951fa0ed87248e68903d7be7928dbfa": {
@@ -7278,6 +9645,34 @@
         "sandbox_id": "sb-01M6G6WG94FWM92Z8W9PKQD5R5"
       },
       "seconds": 60.00109945700001,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "8a5d302946f8488f98e0b0b82582f746": {
+      "actual_usd": "0.04313030416569889936333333333",
+      "completed_at": "2026-11-03T20:25:10.250864+00:00",
+      "created_at": "2026-11-03T20:24:07.443342+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00042313799986,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -7507,6 +9902,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "91936dacec574a2a9b7b8ba88d2b0073": {
+      "actual_usd": "0.04313058603175027582666666667",
+      "completed_at": "2026-11-03T19:21:09.359873+00:00",
+      "created_at": "2026-11-03T19:20:07.306761+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00081525399992,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "926169c884ce4246b7b13b1ca06756bd": {
       "actual_usd": "0.043130876142820064695",
       "completed_at": "2026-11-03T10:40:25.969896+00:00",
@@ -7614,6 +10037,34 @@
         "sandbox_id": "sb-01M6G6WG94FWM92Z8W9PKQD5R5"
       },
       "seconds": 60.00016692100007,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "949ab8cd2de149769c68dd3dd594468f": {
+      "actual_usd": "0.04313049096460446991166666667",
+      "completed_at": "2026-11-03T19:24:09.087231+00:00",
+      "created_at": "2026-11-03T19:23:07.858418+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00068300200019,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -7738,6 +10189,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "980477d71d50491e8ee14860cf6666d7": {
+      "actual_usd": "0.04313516965381079605666666667",
+      "completed_at": "2026-11-03T20:11:09.533083+00:00",
+      "created_at": "2026-11-03T20:10:07.383521+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00719172800018,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "98c70c4d23a541e888da9f64c1bf9551": {
       "actual_usd": "0.043130404128100565003",
       "completed_at": "2026-11-03T10:47:25.580601+00:00",
@@ -7761,6 +10240,62 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.000562200000786,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "98e3f7d3b35746f4a65b5c9072c347ad": {
+      "actual_usd": "0.04313077983209226145",
+      "completed_at": "2026-11-03T19:18:09.004574+00:00",
+      "created_at": "2026-11-03T19:17:07.306261+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.0010848579999,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "99411d6dbc134235b82fd39c36bff4c0": {
+      "actual_usd": "0.043130522606209918053",
+      "completed_at": "2026-11-03T19:33:09.862257+00:00",
+      "created_at": "2026-11-03T19:32:07.317442+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000727019999886,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -7913,6 +10448,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "9e6605b2eefc4798954ab8f8156b05c3": {
+      "actual_usd": "0.04313038202253729739166666667",
+      "completed_at": "2026-11-03T19:23:09.642793+00:00",
+      "created_at": "2026-11-03T19:22:07.308859+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00053144799995,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "a1aeb0998a9a4181bf1b8ad73d9356f2": {
       "actual_usd": "13.43582",
       "completed_at": "2026-11-03T10:47:42.468130+00:00",
@@ -7947,6 +10510,34 @@
         },
         "total_tokens": 573538
       }
+    },
+    "a28eb74c70bd4a81908c35064212cb22": {
+      "actual_usd": "0.04313388742047565229",
+      "completed_at": "2026-11-03T20:01:09.551775+00:00",
+      "created_at": "2026-11-03T20:00:07.348886+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00540795799998,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
     },
     "a2a3dab793124d568e2cc0e656a546fa": {
       "actual_usd": "0.04313023565153757907166666667",
@@ -8438,6 +11029,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "b18a1b58096d48ee9989b182fb5b7390": {
+      "actual_usd": "0.04313415265487988632166666667",
+      "completed_at": "2026-11-03T20:09:09.235555+00:00",
+      "created_at": "2026-11-03T20:08:07.371400+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00577693699961,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "b1c699d0a8c145579aabbcaedd0a2a97": {
       "created_at": "2026-11-03T05:58:02.446778+00:00",
       "kind": "modal",
@@ -8626,6 +11245,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "b825d986c8c74028bc500854d5cfaf1d": {
+      "actual_usd": "0.04313421879401646991166666667",
+      "completed_at": "2026-11-03T20:12:09.142225+00:00",
+      "created_at": "2026-11-03T20:11:07.395217+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00586894600019,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "b97e4425f70a4527817ce001ea320c29": {
       "actual_usd": "0.04313047934753858605466666667",
       "completed_at": "2026-11-03T11:25:26.245867+00:00",
@@ -8649,6 +11296,62 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.000666840999656,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "b9b199484e28440d936e1e2b916e1a73": {
+      "actual_usd": "0.043130569471986852023",
+      "completed_at": "2026-11-03T19:16:10.475610+00:00",
+      "created_at": "2026-11-03T19:15:07.304183+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000792217000026,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "b9e9bd9eba6d4cbb8d2a78ec6a0ba019": {
+      "actual_usd": "0.04313022660142584483466666667",
+      "completed_at": "2026-11-03T19:34:09.003176+00:00",
+      "created_at": "2026-11-03T19:33:07.319156+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000315235000016,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -8710,6 +11413,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "bbab791509344d0f8de60293429e5ae1": {
+      "actual_usd": "0.04313204011369455863633333333",
+      "completed_at": "2026-11-03T20:20:09.373772+00:00",
+      "created_at": "2026-11-03T20:19:07.421034+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.002838089999386,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "bc735b122b8b4dd7a7b57bb262174761": {
       "actual_usd": "0.04313010214406019542",
       "completed_at": "2026-11-03T08:09:35.047198+00:00",
@@ -8733,6 +11464,90 @@
         "sandbox_id": "sb-01M6G6WG94FWM92Z8W9PKQD5R5"
       },
       "seconds": 60.00014209700004,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "bcdc831b262645a782dbe16c0d9cd46b": {
+      "actual_usd": "0.043134539927776221298",
+      "completed_at": "2026-11-03T20:24:09.264181+00:00",
+      "created_at": "2026-11-03T20:23:07.438756+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.006315689000076,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "bcf3dc6156ef40bca6e8ad91c2604a44": {
+      "actual_usd": "0.04313045976076813791333333333",
+      "completed_at": "2026-11-03T19:43:10.045410+00:00",
+      "created_at": "2026-11-03T19:42:07.327241+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00063959299996,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "be93be9874fc41598bebd100f42ff7ae": {
+      "actual_usd": "0.04313054798965268104333333333",
+      "completed_at": "2026-11-03T19:19:08.773879+00:00",
+      "created_at": "2026-11-03T19:18:07.305678+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00076233200002,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -8789,6 +11604,34 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.00036281899975,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "c2b0a5627f2a492084f2664cdd36d5ab": {
+      "actual_usd": "0.04313374072743874009033333333",
+      "completed_at": "2026-11-03T20:08:09.333146+00:00",
+      "created_at": "2026-11-03T20:07:07.366714+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.005203887000334,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -8878,6 +11721,62 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "c50e80d6272e43e0946275fb7197cd76": {
+      "actual_usd": "0.04313131810455598202916666667",
+      "completed_at": "2026-11-03T19:51:09.304576+00:00",
+      "created_at": "2026-11-03T19:50:07.335881+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.001833671999975,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "c531e09472194c44b1b5119ae4656a49": {
+      "actual_usd": "0.043130183887630628055",
+      "completed_at": "2026-11-03T19:44:09.024019+00:00",
+      "created_at": "2026-11-03T19:43:07.328134+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00025581400041,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "c6a57dfe9ba84c3da484e127f18eb363": {
       "actual_usd": "0.04313052041161183333333333333",
       "completed_at": "2026-11-03T14:20:19.685610+00:00",
@@ -8901,6 +11800,34 @@
         "sandbox_id": "sb-01M6GW8SRFWTJTRKPZE71WMSKN"
       },
       "seconds": 60.000723967,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "c6e422b9676b41ac8e228d5268b587d4": {
+      "actual_usd": "0.04313083479768309909633333333",
+      "completed_at": "2026-11-03T19:47:10.002587+00:00",
+      "created_at": "2026-11-03T19:46:07.331008+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.001161322999906,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -8957,6 +11884,34 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.00023114399983,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "c868468a3e194f3f8bad752368fc5fc6": {
+      "actual_usd": "0.043130118296963961183",
+      "completed_at": "2026-11-03T19:29:08.963339+00:00",
+      "created_at": "2026-11-03T19:28:07.312736+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000164567999946,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -9046,6 +12001,62 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "c98fcc4b3352454390e6cb61d2aa7e4f": {
+      "actual_usd": "0.04313061251285153594166666667",
+      "completed_at": "2026-11-03T19:55:09.959084+00:00",
+      "created_at": "2026-11-03T19:54:07.339026+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00085209300005,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "ca106d3ed7c3490da8af269078853e17": {
+      "actual_usd": "0.04313265999171266368866666667",
+      "completed_at": "2026-11-03T20:17:08.935383+00:00",
+      "created_at": "2026-11-03T20:16:07.410750+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.003700428999764,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "cbcaaad1c8d2485080aab5eea2ca7972": {
       "actual_usd": "0.04313020240190164510166666667",
       "completed_at": "2026-11-03T10:11:25.415939+00:00",
@@ -9125,6 +12136,34 @@
         "sandbox_id": "sb-01M6G5ACEGJWQZ16VPRG9PF6W1"
       },
       "seconds": 60.000570957000036,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "cfb1f6ecdb1041dda3e95372393a51a1": {
+      "actual_usd": "0.04313021497285907907166666667",
+      "completed_at": "2026-11-03T19:38:09.098363+00:00",
+      "created_at": "2026-11-03T19:37:07.321436+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00029905800011,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -9424,6 +12463,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "d33592e286f9499f93b6c45387db3f81": {
+      "actual_usd": "0.04313431313514077017866666667",
+      "completed_at": "2026-11-03T20:10:11.244729+00:00",
+      "created_at": "2026-11-03T20:09:07.378088+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.006000188000144,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "d5870f585c2d4fbcae8306bda14902ca": {
       "actual_usd": "0.04313046651780160063666666667",
       "completed_at": "2026-11-03T10:28:25.549383+00:00",
@@ -9480,6 +12547,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "d7186fd0711a4545bfcc4e09fc5e835c": {
+      "actual_usd": "0.04313068995492290655166666667",
+      "completed_at": "2026-11-03T19:50:09.221643+00:00",
+      "created_at": "2026-11-03T19:49:07.333199+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00095982599987,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "d803c3a51fb54385bbd66b4567830537": {
       "actual_usd": "0.04313211827028681895666666667",
       "completed_at": "2026-11-03T07:39:14.362907+00:00",
@@ -9503,6 +12598,34 @@
         "sandbox_id": "sb-01M6G5ACEGJWQZ16VPRG9PF6W1"
       },
       "seconds": 60.00294681699998,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "d8d082d58f93477e8e5186736116070c": {
+      "actual_usd": "0.04313029007728449281166666667",
+      "completed_at": "2026-11-03T19:22:13.226953+00:00",
+      "created_at": "2026-11-03T19:21:07.308628+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00040353899999,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -10370,6 +13493,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "e0dff36796a84ce0a29eade48ba41548": {
+      "actual_usd": "0.04313017288372963431916666667",
+      "completed_at": "2026-11-03T20:03:09.026749+00:00",
+      "created_at": "2026-11-03T20:02:07.354416+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000240505999955,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "e120b51db8904451bbc2b6afbda755c1": {
       "actual_usd": "0.002375870178868847566233333333",
       "completed_at": "2026-11-03T09:13:26.341862+00:00",
@@ -10421,6 +13572,34 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.000283154000044,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "e3a0d2a5aaee4e4490715222f1469bcd": {
+      "actual_usd": "0.04313124637649082481",
+      "completed_at": "2026-11-03T19:49:09.520071+00:00",
+      "created_at": "2026-11-03T19:48:07.332570+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00173388800022,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -10706,6 +13885,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "ed12fa63fa9e441e99e4101274c98edc": {
+      "actual_usd": "0.00351677257585403989525",
+      "completed_at": "2026-11-03T20:27:57.910074+00:00",
+      "created_at": "2026-11-03T20:27:53.017018+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "termination_tail_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 4.8923337480000555,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "ee55ce914b7f44959f29083799a33ccf": {
       "actual_usd": "0.043130742247172656603",
       "completed_at": "2026-11-03T09:40:25.303801+00:00",
@@ -10729,6 +13936,34 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.001032571999986,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "eef60b57bb72455999e8eadb2521bbb7": {
+      "actual_usd": "0.04313055566319794290416666667",
+      "completed_at": "2026-11-03T20:15:09.436782+00:00",
+      "created_at": "2026-11-03T20:14:07.404291+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.000773006999225,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -10874,6 +14109,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "f094a8d7a73e44959415a267dc55e0f9": {
+      "actual_usd": "0.04313577007301041107",
+      "completed_at": "2026-11-03T20:23:09.228847+00:00",
+      "created_at": "2026-11-03T20:22:07.429145+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00802699700034,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "f142d9f7fd0a46cf87f5b3bc75265575": {
       "actual_usd": "0.043130780879432547443",
       "completed_at": "2026-11-03T07:46:14.433009+00:00",
@@ -10930,6 +14193,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "f2d3c3c5de9b456b93637c26dd3d8730": {
+      "actual_usd": "0.04313035348197873855",
+      "completed_at": "2026-11-03T19:56:09.309322+00:00",
+      "created_at": "2026-11-03T19:55:07.605367+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.0004917440001,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "f519f504ac55458697a89cce46e25875": {
       "actual_usd": "0.04313065612518872417333333333",
       "completed_at": "2026-11-03T10:13:25.117680+00:00",
@@ -10953,6 +14244,34 @@
         "sandbox_id": "sb-01M6GCA5H6A195C2ZZCCCMENKW"
       },
       "seconds": 60.00091276400008,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "f618f772c30343d7b9683b6b1e19f1f5": {
+      "actual_usd": "0.04313012293775191374",
+      "completed_at": "2026-11-03T19:45:09.470539+00:00",
+      "created_at": "2026-11-03T19:44:07.329831+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00017102399988,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -11020,6 +14339,34 @@
         },
         "total_tokens": 313573
       }
+    },
+    "f7f0cd164f4a4571ad5e4c4e279b2dc9": {
+      "actual_usd": "0.04313076386680401150133333333",
+      "completed_at": "2026-11-03T19:36:08.816950+00:00",
+      "created_at": "2026-11-03T19:35:07.319934+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.001062648000016,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
     },
     "f84dbda9bb1443d28637211b05926af4": {
       "actual_usd": "0.1077095",
@@ -11119,6 +14466,34 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "fa48d54cd9954ce5b03fce6291098f94": {
+      "actual_usd": "0.04313071426083462220166666667",
+      "completed_at": "2026-11-03T19:32:09.207225+00:00",
+      "created_at": "2026-11-03T19:31:07.315658+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00099363900017,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
     "fb1f54a00d2a49b88815f6b572816bc7": {
       "actual_usd": "0.04313039416003823855",
       "completed_at": "2026-11-03T08:42:34.804591+00:00",
@@ -11142,6 +14517,62 @@
         "sandbox_id": "sb-01M6G6WG94FWM92Z8W9PKQD5R5"
       },
       "seconds": 60.0005483330001,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "feb8ef5ab46748eeaee3f65ef71b650d": {
+      "actual_usd": "0.04313141714325612353666666667",
+      "completed_at": "2026-11-03T19:31:09.648599+00:00",
+      "created_at": "2026-11-03T19:30:07.314170+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00197144899994,
+      "stage": "sandbox:heartbeat",
+      "status": "settled",
+      "upper_bound_usd": "0.215650",
+      "usage": null
+    },
+    "ff6fb82151aa4d3595aa08d1136b28eb": {
+      "actual_usd": "0.04313012009620372550833333333",
+      "completed_at": "2026-11-03T20:21:08.932416+00:00",
+      "created_at": "2026-11-03T20:20:07.423551+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cpu_cores_bound": 2,
+        "idle_timeout": 180,
+        "invoice": false,
+        "kind": "sandbox_resource_upper_bound",
+        "max_exec_seconds": 55,
+        "memory_gib_bound": 96,
+        "seconds_bound": 300
+      },
+      "receipt_metadata": {
+        "billing_basis": "resource_upper_bound_not_invoice",
+        "cpu_cores_bound": 2,
+        "invoice": false,
+        "memory_basis": "configured_hard_limit",
+        "memory_gib_bound": 96,
+        "sandbox_id": "sb-01M6HCQY8QNQZN5JRPJ6W9D83T"
+      },
+      "seconds": 60.00016707099985,
       "stage": "sandbox:heartbeat",
       "status": "settled",
       "upper_bound_usd": "0.215650",
@@ -11380,6 +14811,46 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-1d4164db722c7fd724600f464abc18e41a69b99a558e787a2c0c84e4ffa5ccb5": {
+      "actual_usd": "1.178120501932761333333333333",
+      "completed_at": "2026-11-03T20:18:14.170262+00:00",
+      "created_at": "2026-11-03T20:03:26.956927+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "ec192c01566878acbb8795dfd1de80372fb3f171a36e027cb1338d0039b51136"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.178120501932761333333333333",
+        "call_id": "fc-01M6HG4WB5041QZB32SZE6XTT2",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_21/original/openwsp-gpu:d2de998defef470db65fe4dbcc981f4b:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 993.914934139,
+        "startup_seconds": 120.0,
+        "usage_seconds": 871.914934139
+      },
+      "seconds": 993.914934139,
+      "stage": "live/codex-20261103/fwd_21/original/openwsp-gpu:d2de998defef470db65fe4dbcc981f4b:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-1d98335fda5c3ee8d66f7ce0fbd2345f9351515631f61901955a91e8c4d97dc1": {
       "actual_usd": "0.9671122589056413333333333333",
       "completed_at": "2026-11-03T12:20:34.335006+00:00",
@@ -11442,6 +14913,58 @@
       },
       "seconds": 2520,
       "stage": "live/fwd_1/original/activations/openwsp-gpu:412d8691f5574c15a0b8d5ab47a99415:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-28b05f9c4952f4e9e298c38046211e7ba1a49cded9bb06f5c73ed77e523e60a3": {
+      "actual_usd": "2.9870400",
+      "completed_at": "2026-11-03T19:22:02.580424+00:00",
+      "created_at": "2026-11-03T19:21:27.670445+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "3666a84a1599be02a59adbeceab48f98d13e4182e960b3c19c46544f5ad8e452"
+      },
+      "receipt_metadata": {
+        "call_id": "fc-01M6HDR061WY7DC9ZB1H7SMXKS",
+        "failed_job_upper_bound": true
+      },
+      "seconds": 2520,
+      "stage": "live/codex-20261103/fwd_10/original/openwsp-gpu:b4d372c6daea47e0b3ad85ec4320a19b:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-3023963acd1558c732045d6a627ba3f59664747c9fee346dbb2e228035f1dc3b": {
+      "actual_usd": "2.9870400",
+      "completed_at": "2026-11-03T19:28:19.136713+00:00",
+      "created_at": "2026-11-03T19:27:45.804855+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "be983d290958e001d7c693af36635532372fea79cffea0e61b7cdee934c14fe5"
+      },
+      "receipt_metadata": {
+        "call_id": "fc-01M6HE3HMSN0BGM1T5RTFHRTAY",
+        "failed_job_upper_bound": true
+      },
+      "seconds": 2520,
+      "stage": "live/codex-20261103/fwd_12/original/openwsp-gpu:184b203ec8224231984f354f09c3b7fa:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -11526,6 +15049,32 @@
       "upper_bound_usd": "2.98704",
       "usage": null
     },
+    "modal-job-38ad628bbbf00b8f715f4b942f0b54edca12da0e06a40ab279f0361f6fe7546e": {
+      "actual_usd": "2.9870400",
+      "completed_at": "2026-11-03T19:11:40.870271+00:00",
+      "created_at": "2026-11-03T19:11:08.272835+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "b04adc6982a149a97cdfb61da86970a6d55fceaec9fdcc07889cfd5b18b86475"
+      },
+      "receipt_metadata": {
+        "call_id": "fc-01M6HD54DNW2F8X9RXAHYNKPY8",
+        "failed_job_upper_bound": true
+      },
+      "seconds": 2520,
+      "stage": "live/codex-20261103/fwd_4/original/openwsp-gpu:f97d015711cc43d2b812ef32eb666469:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-38ec2afef133ed40d23931da84387c284ae00c8734bd8ce139684cde61f66ff2": {
       "actual_usd": "0.1800175883544173333333333333",
       "completed_at": "2026-11-03T12:00:12.514840+00:00",
@@ -11566,6 +15115,32 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-39cdc8ea4f00a34c86837cfeac5f9980cb27bdd06a8731ca9aeaa7eb69c31ef1": {
+      "actual_usd": "2.9870400",
+      "completed_at": "2026-11-03T19:33:06.181707+00:00",
+      "created_at": "2026-11-03T19:32:32.110623+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "cdc44975dd7c05d79966bfa3b9306090e2940e79cb612c2191e6096498e61705"
+      },
+      "receipt_metadata": {
+        "call_id": "fc-01M6HEC960CGWXJATT0XSTPWK0",
+        "failed_job_upper_bound": true
+      },
+      "seconds": 2520,
+      "stage": "live/codex-20261103/fwd_14/edited/openwsp-gpu:91649b71a867495a9a985567d003bb1d:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-3ae5bf27780f11654bd0b381d744ff34f7231b7c9271ad82791a6cd7e889fdc7": {
       "actual_usd": "0.1811408666097613333333333333",
       "completed_at": "2026-11-03T12:01:58.980388+00:00",
@@ -11602,6 +15177,46 @@
       },
       "seconds": 152.818503889,
       "stage": "control2/directions/batch_012/openwsp-gpu:065fecec61be45369d672908a610d9bd:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-3aec8a95210ec1c68de395562a8d6cc6e453d69604b06132a909f684f2fef652": {
+      "actual_usd": "0.166958815531536",
+      "completed_at": "2026-11-03T19:31:21.901866+00:00",
+      "created_at": "2026-11-03T19:30:48.591022+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "94f3ddce21057d096b9bd59ac04da4e33067fd6b8edf2dc22e1393f801017528"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.166958815531536",
+        "call_id": "fc-01M6HE944GJ7H5KMBJNXQ2Q7FC",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_13/teacher_forced/openwsp-gpu:abc2d4988ddd4a65a12814937472999a:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 140.853893868,
+        "startup_seconds": 120.0,
+        "usage_seconds": 18.853893868
+      },
+      "seconds": 140.853893868,
+      "stage": "live/codex-20261103/fwd_13/teacher_forced/openwsp-gpu:abc2d4988ddd4a65a12814937472999a:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -11686,6 +15301,90 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-45bf8282f52d4672d292f9546b4faed8b6b4dee3e45a9fc29e3737f7a2e083f7": {
+      "created_at": "2026-11-03T19:21:32.576866+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "5f40b0c6e27ec70daf8d602d8438c370d832d0a97bba3b1c9cfbb6e48943ea0d"
+      },
+      "stage": "live/codex-20261103/fwd_10/edited/openwsp-gpu:08b782ad79794d93a8d574c6f23e2604:0",
+      "status": "reserved",
+      "upper_bound_usd": "2.9870400"
+    },
+    "modal-job-45f71b210dc94bc1a280025bc0de34e4f58540a275ebcf010000d389e046041b": {
+      "actual_usd": "2.9870400",
+      "completed_at": "2026-11-03T19:10:29.331896+00:00",
+      "created_at": "2026-11-03T19:09:58.363203+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "23fc0929dfb316bf1bd2f0b65e68a9ac84be491473fb62c9f7c8e9aa4a6beb77"
+      },
+      "receipt_metadata": {
+        "call_id": "fc-01M6HD2Z7XN1MTKHSGVJ622TQ1",
+        "failed_job_upper_bound": true
+      },
+      "seconds": 2520,
+      "stage": "live/codex-20261103/fwd_3/original/openwsp-gpu:803880b56bbd4d57b33b10fb73dfd25a:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-4699ec2e8c0d8d43c9a7489e7344c715acdbe8af4ae033265f31f8bed43db036": {
+      "actual_usd": "0.36077541982084403556",
+      "completed_at": "2026-11-03T20:21:33.926932+00:00",
+      "created_at": "2026-11-03T20:18:22.597636+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "25c6f7228d63b131f4e51c46c414030b419508d47a7ea716d46810c4edef2be2"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.36077541982084403556",
+        "call_id": "fc-01M6HH07VC2DHYTXVYQ6PKWT2Y",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_21/original/activations/openwsp-gpu:9bd56406094448239ab49b771491deba:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 304.36621469700003,
+        "startup_seconds": 120.0,
+        "usage_seconds": 182.366214697
+      },
+      "seconds": 304.36621469700003,
+      "stage": "live/codex-20261103/fwd_21/original/activations/openwsp-gpu:9bd56406094448239ab49b771491deba:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-47e8c8850834c901ef8e983d39fee7d4391e3eb926016cd9f8f1fa59354aec96": {
       "actual_usd": "1.2511850142476064296",
       "completed_at": "2026-11-03T07:21:17.608124+00:00",
@@ -11766,6 +15465,46 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-531d3eafa98d8664690b35c8f0ad8a266faa456199f7a9f6ececa3f33c45f432": {
+      "actual_usd": "0.339200218080808",
+      "completed_at": "2026-11-03T20:00:10.681083+00:00",
+      "created_at": "2026-11-03T19:57:15.986545+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "4d844caa461e5734c77ae4ded8662c76eb21b668d861d1b3c7fdade9b2f0ddcf"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.339200218080808",
+        "call_id": "fc-01M6HFSHZR6FB8ZEG02741639A",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_20/original/openwsp-gpu:fceef1660b4c4a2b842e91de6a613eed:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 286.164413454,
+        "startup_seconds": 120.0,
+        "usage_seconds": 164.164413454
+      },
+      "seconds": 286.164413454,
+      "stage": "live/codex-20261103/fwd_20/original/openwsp-gpu:fceef1660b4c4a2b842e91de6a613eed:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-595170030c1e0dc70aed0394bc861520b71ede6228ceae8212d146455791fc1e": {
       "actual_usd": "1.072035644182318666666666667",
       "completed_at": "2026-11-03T13:03:50.077677+00:00",
@@ -11802,6 +15541,86 @@
       },
       "seconds": 904.417022651,
       "stage": "evaluation/control3_repetition/math500/batch_001/openwsp-gpu:5764f58b8ad64c86af6b0b93822e43f4:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-5da857f4be2a9df9399d77b89257559f9f01f2ede8751516a661b38d465ba5a1": {
+      "actual_usd": "1.062171070175497451866666667",
+      "completed_at": "2026-11-03T20:21:41.710443+00:00",
+      "created_at": "2026-11-03T20:03:32.301771+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "e416a007b97ad502220187a4e1cc2e096775fbf7b132afddadb1c36e14f91b5d"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.062171070175497451866666667",
+        "call_id": "fc-01M6HG528SF9KTNCBDERYZ9EX7",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_21/edited/openwsp-gpu:8681d056bd4a46e7b4d405b4536ec49e:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 896.0948286070001,
+        "startup_seconds": 120.0,
+        "usage_seconds": 774.0948286070001
+      },
+      "seconds": 896.0948286070001,
+      "stage": "live/codex-20261103/fwd_21/edited/openwsp-gpu:8681d056bd4a46e7b4d405b4536ec49e:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-608380500a46dcb079f4c13c99525ca7ff32c17d4a71f02539f3e4ff5f2336ac": {
+      "actual_usd": "0.1638913798394786666666666667",
+      "completed_at": "2026-11-03T19:48:50.167058+00:00",
+      "created_at": "2026-11-03T19:48:24.193198+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "93e3b7eddf8d54f228920739c8771279bd0de0ba3d598dd165627dee85ac87fa"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1638913798394786666666666667",
+        "call_id": "fc-01M6HF9AQB83SWP1YZ9QS4GW5G",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_17/teacher_forced/openwsp-gpu:1a1fa55db0ca4b0585635b311b69c914:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 138.266068481,
+        "startup_seconds": 120.0,
+        "usage_seconds": 16.266068480999998
+      },
+      "seconds": 138.266068481,
+      "stage": "live/codex-20261103/fwd_17/teacher_forced/openwsp-gpu:1a1fa55db0ca4b0585635b311b69c914:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -11926,6 +15745,32 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-7038ddae7f80e14948d4bdd85384a92c33707c9e39a50ac55c8cfeb7c3621602": {
+      "actual_usd": "2.9870400",
+      "completed_at": "2026-11-03T19:13:44.073416+00:00",
+      "created_at": "2026-11-03T19:13:06.480317+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "68ec19e5837c6c488cd803895175f261c8e7e5a1d3f52f3794d8ceb54025c392"
+      },
+      "receipt_metadata": {
+        "call_id": "fc-01M6HD8PKQJAD3KPATKZFKY6G0",
+        "failed_job_upper_bound": true
+      },
+      "seconds": 2520,
+      "stage": "live/codex-20261103/fwd_5/original/openwsp-gpu:e1d5b36c3ac743e492d281a409b9cc2b:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-7185dfbf4e81ddf49c2ba671e65817d7204ecafcfc30f8502ca5fee8a1b6f23f": {
       "actual_usd": "0.1840874568157986666666666667",
       "completed_at": "2026-11-03T11:51:23.148818+00:00",
@@ -12002,6 +15847,72 @@
       },
       "seconds": 843.586089474,
       "stage": "live/codex-20261103/fwd_1/original/openwsp-gpu:a5401742786f46d59688a615d9d0d894:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-78380c76c45fbc3972d2f2e7746faab491ae23fdcd97a7643d1d98112dda5a04": {
+      "actual_usd": "0.1679523676555106666666666667",
+      "completed_at": "2026-11-03T19:25:44.698436+00:00",
+      "created_at": "2026-11-03T19:25:11.896359+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "46b817b934683835cead9e85e1d23614cee47f5a46a04dbad1b0559126431825"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1679523676555106666666666667",
+        "call_id": "fc-01M6HDYVBPXV7K6EM65W3AK63Z",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_11/teacher_forced/openwsp-gpu:675229d64c324f84b8d38df2364df12e:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 141.692098697,
+        "startup_seconds": 120.0,
+        "usage_seconds": 19.692098697
+      },
+      "seconds": 141.692098697,
+      "stage": "live/codex-20261103/fwd_11/teacher_forced/openwsp-gpu:675229d64c324f84b8d38df2364df12e:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-7ecbd0c8497bf0acde4ff5f32e593997d76fddf766e93373158f963d7abf03f2": {
+      "actual_usd": "2.9870400",
+      "completed_at": "2026-11-03T19:16:07.136457+00:00",
+      "created_at": "2026-11-03T19:15:34.242843+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "8429f2a81da41686a5b29209fd286f66faf048312cdf9f3b772fb6aa0450ffac"
+      },
+      "receipt_metadata": {
+        "call_id": "fc-01M6HDD6V7QZQWFZCDWRS6VXFP",
+        "failed_job_upper_bound": true
+      },
+      "seconds": 2520,
+      "stage": "live/codex-20261103/fwd_7/edited/openwsp-gpu:79bd2821893142bfb406af21a3e59abe:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -12086,6 +15997,126 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-808a91ef5c6a6ca1d665065434374b7fdeaccaccdbb90ccbac361978e44a34b1": {
+      "actual_usd": "0.1607211776178773333333333333",
+      "completed_at": "2026-11-03T19:52:43.097761+00:00",
+      "created_at": "2026-11-03T19:52:17.700414+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "3032913c66be07129a72ea8749da98fd26cd4c4d0f87805bf87e0322d88827f9"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1607211776178773333333333333",
+        "call_id": "fc-01M6HFGEYN5CX1G75BF3YM0A4T",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_19/teacher_forced/openwsp-gpu:7412e45249444aee8e5beeb7fa8c066a:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 135.591544672,
+        "startup_seconds": 120.0,
+        "usage_seconds": 13.591544672
+      },
+      "seconds": 135.591544672,
+      "stage": "live/codex-20261103/fwd_19/teacher_forced/openwsp-gpu:7412e45249444aee8e5beeb7fa8c066a:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-82e9909d25d7b85954b8605848e575bd2af9e69a63c038d7a7ed33309cc2b8cc": {
+      "actual_usd": "0.41990769582292528592",
+      "completed_at": "2026-11-03T20:01:23.675342+00:00",
+      "created_at": "2026-11-03T19:57:21.452438+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "e76f0b5660960f4b3d9be18d82d68fdafc79772d9805d71d3de64428ca725b04"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.41990769582292528592",
+        "call_id": "fc-01M6HFSQCZG7NE1HRFR668QZX0",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_20/edited/openwsp-gpu:149d87c974b643408ec4d806a69ce318:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 354.25283674599996,
+        "startup_seconds": 120.0,
+        "usage_seconds": 232.25283674599999
+      },
+      "seconds": 354.25283674599996,
+      "stage": "live/codex-20261103/fwd_20/edited/openwsp-gpu:149d87c974b643408ec4d806a69ce318:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-875afb5870aa3f36948ff45318d692e387dd4beb67e5fec02dc484dea3f77aa4": {
+      "actual_usd": "0.1638360142103066666666666667",
+      "completed_at": "2026-11-03T19:46:43.262371+00:00",
+      "created_at": "2026-11-03T19:46:18.303919+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "ed361c4f0925178dc60441ac191ed251b2e3d9e545f9e40a1ac14951b4a5a756"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1638360142103066666666666667",
+        "call_id": "fc-01M6HF5FYV96MRERXMFY1KCHPR",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_16/teacher_forced/openwsp-gpu:a73d6c0344bd4381a2739d7cfda9a9f2:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 138.21935957,
+        "startup_seconds": 120.0,
+        "usage_seconds": 16.219359569999998
+      },
+      "seconds": 138.21935957,
+      "stage": "live/codex-20261103/fwd_16/teacher_forced/openwsp-gpu:a73d6c0344bd4381a2739d7cfda9a9f2:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-89bd7efb58d1077d525c8886a13aca40805b047f9ed74c43b7dfba5039f48770": {
       "actual_usd": "0.3048552675133746666666666667",
       "completed_at": "2026-11-03T08:45:15.849600+00:00",
@@ -12122,6 +16153,46 @@
       },
       "seconds": 257.189483279,
       "stage": "live/fwd_2/original/activations/openwsp-gpu:130f7b6a08e04f0c9fa982be8df00e99:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-89cf2fec9ef893d6b6cd0709f089b2e0c8db91e5f2253a164182433b957a9bf0": {
+      "actual_usd": "0.334180220056816",
+      "completed_at": "2026-11-03T20:24:45.086882+00:00",
+      "created_at": "2026-11-03T20:21:49.280267+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "97f0f3c3c04c9f1cdbc2005361db42cfda2b4d91854fd0bc4fa6a30614ae1722"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.334180220056816",
+        "call_id": "fc-01M6HH6HRHZ5PRX23R84WRSP3V",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_21/edited/activations/openwsp-gpu:82e2abb05fd2467991322612f0ff9625:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 281.929319508,
+        "startup_seconds": 120.0,
+        "usage_seconds": 159.929319508
+      },
+      "seconds": 281.929319508,
+      "stage": "live/codex-20261103/fwd_21/edited/activations/openwsp-gpu:82e2abb05fd2467991322612f0ff9625:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -12286,6 +16357,24 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-9ff62df3c432d930a6a888ca74d05aa4391f0b3fffff2338fedfdae1f50d1d91": {
+      "created_at": "2026-11-03T19:11:14.798390+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "c4a128ef103b02975f528b3445d1cc1fd81d29e9d0d35dd42658efede5d4ba1d"
+      },
+      "stage": "live/codex-20261103/fwd_4/edited/openwsp-gpu:7235727434904654ba83a1e1fa21b76a:0",
+      "status": "reserved",
+      "upper_bound_usd": "2.9870400"
+    },
     "modal-job-a526f91b33ef351229d906aa5aa03736f8ffba741cfe0d81deb8d384e467bec8": {
       "actual_usd": "0.496763564374364",
       "completed_at": "2026-11-03T11:44:01.150950+00:00",
@@ -12442,6 +16531,126 @@
       },
       "seconds": 151.970541239,
       "stage": "control2/directions/batch_004/openwsp-gpu:c37e1c6972a844b1b8aee4ad25e61a45:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-b258234f487d1d71fe066f492884697a50669fa0ddb4c85094602b2c14f12561": {
+      "actual_usd": "0.1632675658784053333333333333",
+      "completed_at": "2026-11-03T19:18:44.392098+00:00",
+      "created_at": "2026-11-03T19:18:20.224863+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "03e90226be35027bfe6150f121d799a87c1e518cca2e2e73aa68f2558c495429"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1632675658784053333333333333",
+        "call_id": "fc-01M6HDJ99FNP9WKQ31Z9ATSNGM",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_9/teacher_forced/openwsp-gpu:12d379f91f48457fa4ff5b7edba91383:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 137.739791236,
+        "startup_seconds": 120.0,
+        "usage_seconds": 15.739791235999999
+      },
+      "seconds": 137.739791236,
+      "stage": "live/codex-20261103/fwd_9/teacher_forced/openwsp-gpu:12d379f91f48457fa4ff5b7edba91383:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-b2eb880ea336f75e726161d80bd72b34dc340421aa3d1c7a689fd2825af57d2f": {
+      "actual_usd": "0.1615930836994786666666666667",
+      "completed_at": "2026-11-03T20:26:13.316517+00:00",
+      "created_at": "2026-11-03T20:25:51.540218+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "74e8d4d4547664bcdebeaab040c76441bff066e8b69cbd9a9207aca2a1fd8ec4"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1615930836994786666666666667",
+        "call_id": "fc-01M6HHDXDD9VHKW8DT1ATCGZZ1",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_22/teacher_forced/openwsp-gpu:ebc5ddd4852d49d49e1d71f0cc1f3f98:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 136.327123481,
+        "startup_seconds": 120.0,
+        "usage_seconds": 14.327123481000001
+      },
+      "seconds": 136.327123481,
+      "stage": "live/codex-20261103/fwd_22/teacher_forced/openwsp-gpu:ebc5ddd4852d49d49e1d71f0cc1f3f98:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-bb0572ddf55017751e08cad879c2ad7e9a11704593f3f2da1f562a876d5a14ee": {
+      "actual_usd": "0.160957609044260",
+      "completed_at": "2026-11-03T19:43:40.187294+00:00",
+      "created_at": "2026-11-03T19:43:14.034210+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "fccc3b89f75b99d8726c40f5ba2be120436d070df0c5fdc4f7fac1d6ecc6ba46"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.160957609044260",
+        "call_id": "fc-01M6HEZW6EBQZBV9ECTKN08SWD",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_15/teacher_forced/openwsp-gpu:cff96eee25d34609ab8657a798a95178:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 135.791008755,
+        "startup_seconds": 120.0,
+        "usage_seconds": 13.791008755
+      },
+      "seconds": 135.791008755,
+      "stage": "live/codex-20261103/fwd_15/teacher_forced/openwsp-gpu:cff96eee25d34609ab8657a798a95178:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -12806,6 +17015,46 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-e1e477be88f1c6050e7d9dff77682b23847fc33bde2878c91b80d292411a1ad3": {
+      "actual_usd": "0.1647458399337893333333333333",
+      "completed_at": "2026-11-03T19:14:48.365715+00:00",
+      "created_at": "2026-11-03T19:14:21.873401+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "85981be75996467203246e0b38bad10508fe9ae51c05a5dc5252accaab7a440c"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1647458399337893333333333333",
+        "call_id": "fc-01M6HDB10GJ3HCSY6FG0JEVZ4D",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_6/teacher_forced/openwsp-gpu:15f3b6b450eb4ebbaa9dfcf16b935692:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 138.986929078,
+        "startup_seconds": 120.0,
+        "usage_seconds": 16.986929078
+      },
+      "seconds": 138.986929078,
+      "stage": "live/codex-20261103/fwd_6/teacher_forced/openwsp-gpu:15f3b6b450eb4ebbaa9dfcf16b935692:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-e23db18253d36028469dfbc88f8a3b5eee300b58f8801fd4926225f2f3a17ef3": {
       "actual_usd": "0.9411291184246466666666666667",
       "completed_at": "2026-11-03T12:32:13.215183+00:00",
@@ -12845,6 +17094,24 @@
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
+    },
+    "modal-job-e3519f3077ae7d2249927f89da40c2a0104ac660104a4568b4bbbe2b5dbb6a36": {
+      "created_at": "2026-11-03T19:13:12.475758+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "a6dbc5ad6f6b3d7683e553d5f82499fc5c726343caa26309440b1af398ca5804"
+      },
+      "stage": "live/codex-20261103/fwd_5/edited/openwsp-gpu:2d301d2a4e6049309163a3a9c5000fa8:0",
+      "status": "reserved",
+      "upper_bound_usd": "2.9870400"
     },
     "modal-job-e40a6535052e91afbeef155653eae636d9b2b91d0bae4681c228969ea434196e": {
       "actual_usd": "0.3856330229078413333333333333",
@@ -12966,6 +17233,72 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-f4b8f7cae73281cd67e7f5eccc032b67557bbc8b9d9221bcced8519969848c68": {
+      "actual_usd": "0.1624837116848773333333333333",
+      "completed_at": "2026-11-03T19:50:37.697988+00:00",
+      "created_at": "2026-11-03T19:50:13.230346+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "306a51334bd807b824dc2924d545817d48b14f04ea590524002e73a3bb26ab34"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1624837116848773333333333333",
+        "call_id": "fc-01M6HFCNA7JH3624HW7XJJ821M",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "live/codex-20261103/fwd_18/teacher_forced/openwsp-gpu:6cbc04cb8435400ba2a1821328605e3d:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 137.078496922,
+        "startup_seconds": 120.0,
+        "usage_seconds": 15.078496922000001
+      },
+      "seconds": 137.078496922,
+      "stage": "live/codex-20261103/fwd_18/teacher_forced/openwsp-gpu:6cbc04cb8435400ba2a1821328605e3d:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-f603a2e0dd54f0e43ce1a9f7ef1cbb50a58b08dcff6d05e5b48fc8e9219a67b7": {
+      "actual_usd": "2.9870400",
+      "completed_at": "2026-11-03T19:17:21.321644+00:00",
+      "created_at": "2026-11-03T19:16:54.046185+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "d50928d4d96e37b53ec840593af058eca8394fd8866bf802c52593c1f195ab16"
+      },
+      "receipt_metadata": {
+        "call_id": "fc-01M6HDFMY37EA855HE93HSTRYD",
+        "failed_job_upper_bound": true
+      },
+      "seconds": 2520,
+      "stage": "live/codex-20261103/fwd_8/original/openwsp-gpu:bf9c7c425d52445aaca067e8a2ee6dc1:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-f93f170dd0182e66d4b8c72ff804f553f45efd58996cf55d19fe287ed10ccc91": {
       "actual_usd": "1.655022835474082666666666667",
       "completed_at": "2026-11-03T08:02:54.811286+00:00",
@@ -13005,6 +17338,24 @@
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
+    },
+    "modal-job-fbc2c94a4eaa310f2501cac530a1c0d39e0dd22d2aeb9cdc96069b64816dcd86": {
+      "created_at": "2026-11-03T19:10:04.726231+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "dc3a7cbdf6f5067fdaa582b29977524947fdaca549045a1b791727d34e734f4e"
+      },
+      "stage": "live/codex-20261103/fwd_3/edited/openwsp-gpu:3ee1857cf14946aea2a7fdddee510488:0",
+      "status": "reserved",
+      "upper_bound_usd": "2.9870400"
     },
     "modal-job-fcea3cfaad9fe93f8109d5cd17faeb6f7313e4dc798a6a9d3f93c6a17c639c38": {
       "actual_usd": "0.1825769131615893333333333333",
