@@ -1,9 +1,9 @@
 {
-  "status": "blocked",
+  "status": "running",
   "active_stage": "live",
-  "heartbeat": 1793695532.9133606,
-  "error": "ConflictError: there are open files preventing the operation",
-  "error_type": "ConflictError",
+  "heartbeat": 1793696759.7059448,
+  "error": null,
+  "error_type": null,
   "budget": {
     "editor": {
       "spent_usd": 0.42801,
@@ -11,9 +11,9 @@
       "available_usd": 99.57199
     },
     "modal": {
-      "spent_usd": 13.970297800146598,
-      "reserved_usd": 6.181793472222222,
-      "available_usd": 21.797908727631178
+      "spent_usd": 14.041037899513912,
+      "reserved_usd": 6.397443472222222,
+      "available_usd": 21.511518628263865
     }
   },
   "controls_deferred": "Current verified allowance preserves priority for the live run and its evaluation. Controls resume afterward."

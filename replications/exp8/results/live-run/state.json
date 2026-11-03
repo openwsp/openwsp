@@ -1,10 +1,12 @@
 {
-  "turn": 4,
-  "runs": 2,
-  "passes": 0,
+  "turn": 7,
+  "runs": 3,
+  "passes": 1,
   "requests": 2,
   "handoffs": 0,
   "done": false,
   "submission": null,
-  "base_generation_reuse_requests": []
+  "counted_requests": [
+    2
+  ]
 }

@@ -1,7 +1,6 @@
 {
-  "status": "repair_tested_resume_pending",
+  "status": "recovered",
   "request": 2,
-  "counted": false,
   "error": "ConflictError: there are open files preventing the operation",
   "failure_location": "ModalSandboxTransport.reload_work -> Sandbox.reload_volumes",
   "generation_call_id": "fc-01M6G8RWZRMXWTXH2E65VVKK55",
@@ -56,5 +55,60 @@
     "log_path": "logs/tests-artifact-delivery-full.log",
     "forward_recovery_tests_passed": 14,
     "transport_and_artifact_tests_passed": 58
-  }
+  },
+  "resume_call_id": "fc-01M6GAG2QE40WXX8DYS8WNFDC1",
+  "resume_config": "/tmp/openwsp-resume-delivery.json",
+  "repair_commit": "7a7f8052d7282f7065c20323d2b80f665a8d1a58",
+  "ci_url": "https://github.com/openwsp/openwsp/actions/runs/41607967297",
+  "delivery_receipt": {
+    "request": 2,
+    "volume": "openwsp-exp8-work",
+    "files": [
+      {
+        "path": "/work/gen_2.jsonl",
+        "bytes": 5908413,
+        "sha256": "d1764a6cf1122fc6f8fc01e2aac28adc16a231efc216c5486598afb4462b48c5",
+        "volume_path": "/live/gen_2.jsonl"
+      },
+      {
+        "path": "/work/gen_2_acts/hidden_last_prompt.npy",
+        "bytes": 1572992,
+        "sha256": "1b40035ce644ae4610770f5269aade6efb069fa230f2adefdd630a8fcc533991",
+        "volume_path": "/live/gen_2_acts/hidden_last_prompt.npy"
+      },
+      {
+        "path": "/work/gen_2_acts/hidden_mean_answer.npy",
+        "bytes": 1572992,
+        "sha256": "cd11814e5db09466471ce8f913e5dfb60ecf71f7d5857416157ae784ee967f34",
+        "volume_path": "/live/gen_2_acts/hidden_mean_answer.npy"
+      },
+      {
+        "path": "/work/gen_2_acts/mlp_last_prompt.npy",
+        "bytes": 4587648,
+        "sha256": "39715f1aa4a577a8170192c3d4c8abdd21c0ba88bb79031c4f0744292f67feef",
+        "volume_path": "/live/gen_2_acts/mlp_last_prompt.npy"
+      },
+      {
+        "path": "/work/gen_2_acts/mlp_mean_answer.npy",
+        "bytes": 4587648,
+        "sha256": "8d4bc020b72fe06a1acf4ad8155578bc043da1ad22ffcc0d18460e241e7670db",
+        "volume_path": "/live/gen_2_acts/mlp_mean_answer.npy"
+      },
+      {
+        "path": "/work/gen_2_acts/index.json",
+        "bytes": 7997,
+        "sha256": "3d411130ff5baa8594ad287a4dc8385ac8743db3be158ee90c91b4dc0f96609a",
+        "volume_path": "/live/gen_2_acts/index.json"
+      }
+    ]
+  },
+  "counted_requests_after_recovery": [
+    2
+  ],
+  "passes_after_recovery": 1,
+  "recovery_observed_at": "2026-11-03T09:07:21Z",
+  "completion_source": "logs/request2-completion.json",
+  "state_source": "logs/live-after-delivery-repair.json",
+  "counted_at_interruption": false,
+  "counted_after_recovery": true
 }

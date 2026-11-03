@@ -2,10 +2,8 @@
 
 | Recorded component | State | Evidence |
 | --- | --- | --- |
-| Pipeline | [blocked](pipeline-state.json) | [live](pipeline-state.json) |
-| Recorded blocker | [ConflictError: there are open files preventing the operation](pipeline-state.json) | See source record. |
-| Driver recovery | [blocked](coordinator.json) | [all](coordinator.json) |
-| Recorded blocker | [Pipeline blocked; previous owner reconciled and automatic restart disabled](coordinator.json) | See source record. |
+| Pipeline | [running](pipeline-state.json) | [live](pipeline-state.json) |
+| Driver recovery | [running](coordinator.json) | [all](coordinator.json) |
 | Calibration prompt audit | [passed](calibration-prompt-audit.json) | [calibration-prompt-audit.json](calibration-prompt-audit.json) |
 | Calibration comparison | [passed](calibration-check.json) | [calibration-check.json](calibration-check.json) |
 | Tensor hashes | [passed](kernel/hash-verification.json) | [kernel/hash-verification.json](kernel/hash-verification.json) |
@@ -13,7 +11,7 @@
 | Forward service | [passed](kernel/forward-verification.json) | [kernel/forward-verification.json](kernel/forward-verification.json) |
 | Weight swap check | [fallback](kernel/weight-swap.json) | [kernel/weight-swap.json](kernel/weight-swap.json) |
 | Recorded diagnostic | [Engine does not expose a compatible weight-reload contract](kernel/weight-swap.json) | See source record. |
-| Live editor | [incomplete](live-run/state.json) | passes: [0](live-run/state.json); turn: [4](live-run/state.json); runs: [2](live-run/state.json) |
+| Live editor | [incomplete](live-run/state.json) | passes: [1](live-run/state.json); turn: [7](live-run/state.json); runs: [3](live-run/state.json) |
 
 States are recorded snapshots; use `openwsp status` to check current liveness.
 
