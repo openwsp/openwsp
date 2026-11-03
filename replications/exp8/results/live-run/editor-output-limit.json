@@ -29,7 +29,7 @@
   "partial_executed": false,
   "response_volume": "openwsp-exp8-data",
   "response_volume_path": "/live-run/editor/response_490adc47ada040ca85bf1648d8c82b81.json",
-  "recovery_policy": "Record this terminal response as a non-executed editor turn, retaining the response ID and billed receipt. Continue the same conversation with a neutral API-error result. Do not resample the failed key or execute partial text.",
+  "recovery_policy": "Record each terminal output-limit response as a non-executed editor turn, retaining its response ID and billed receipt. Continue the same conversation with a neutral API-error result. Do not resample failed keys or execute partial text.",
   "model_limit_source": "https://developers.openai.com/api/docs/models/gpt-6-astra",
   "incomplete_response_source": "https://developers.openai.com/api/docs/guides/reasoning#allocating-space-for-reasoning",
   "conversation_source": "https://developers.openai.com/api/docs/guides/conversation-state",
@@ -66,5 +66,46 @@
     "logs/t012-resumed-request.json",
     "logs/live-state-0945.json",
     "logs/editor-limit-launch-receipt.json"
+  ],
+  "subsequent_events": [
+    {
+      "status": "incomplete",
+      "reason": "max_output_tokens",
+      "response_id": "resp_05e27016f3ef07b8006ae9abf6273487d288e8485e557048a5",
+      "executed": false,
+      "usage": {
+        "input_tokens": 56215,
+        "input_tokens_details": {
+          "cache_write_tokens": 1586,
+          "cached_tokens": 54626,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 1586
+          }
+        },
+        "output_tokens": 128000,
+        "output_tokens_details": {
+          "reasoning_tokens": 284
+        },
+        "total_tokens": 184215
+      },
+      "cost_usd": "6.474481",
+      "partial_text_characters": 214198,
+      "partial_text_sha256": "28d19e86ea6d41c12bbf1442bec95f2e3b5172615a186713e3b5e4732611e315",
+      "response_volume": "openwsp-exp8-data",
+      "response_volume_path": "/live-run/editor/response_442caf0057ef4607b4cffe1a28f42358.json",
+      "turn": 14,
+      "next_turn": 15,
+      "next_request": {
+        "previous_response_id": "resp_05e27016f3ef07b8006ae9abf6273487d288e8485e557048a5",
+        "max_output_tokens": 128000,
+        "reasoning": {
+          "effort": "max"
+        },
+        "tools": []
+      },
+      "next_response_status": "completed",
+      "source": "logs/t014-incomplete-recovery.json"
+    }
   ]
 }
