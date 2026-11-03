@@ -41,7 +41,7 @@ def _error_detail(error):
 class AstraEditor:
     def __init__(self, state_dir, budget: BudgetLedger, *, client=None, model="gpt-6-astra",
                  effort="max", max_output_tokens=32768, poll_interval=5,
-                 max_wait_seconds=3600, on_poll=None, sleep=time.sleep):
+                 max_wait_seconds=3600, on_poll=None, sleep=time.sleep, commit=lambda: None):
         if model != "gpt-6-astra":
             raise ValueError("This adapter's verified billing schedule is for gpt-6-astra only")
         if effort not in EFFORTS or not 1 <= max_output_tokens <= 128_000:
@@ -57,6 +57,7 @@ class AstraEditor:
         self.max_output_tokens = max_output_tokens
         self.poll_interval, self.max_wait_seconds = poll_interval, max_wait_seconds
         self.on_poll, self.sleep = on_poll, sleep
+        self.commit = commit
         self.last_response = None
 
     def _get_client(self):
@@ -86,6 +87,7 @@ class AstraEditor:
             new = self._new_state()
             new["handoffs"] = state["handoffs"] + 1
             atomic_json(self.path, new)
+            self.commit()
 
     @staticmethod
     def _input(messages):
@@ -148,17 +150,20 @@ class AstraEditor:
                     request["previous_response_id"] = state["previous_response_id"]
                 request_path = self.root / f"request_{rid}.json"
                 atomic_json(request_path, request)
+                self.commit()  # Volume ledger and request intent must precede billed POST
                 response = self._create(request, state)
                 pending["response_id"] = response["id"]
                 pending["status"] = response.get("status")
                 atomic_json(self.root / f"response_{rid}.json", response)
                 atomic_json(self.path, state)
+                self.commit()  # durably retain response ID before polling/restart
             else:
                 response = self._retrieve(pending["response_id"])
             deadline = time.monotonic() + self.max_wait_seconds
             while response.get("status") in ("queued", "in_progress"):
                 pending["status"] = response["status"]
                 atomic_json(self.path, state)
+                self.commit()
                 if self.on_poll:
                     self.on_poll(dict(pending))
                 if time.monotonic() >= deadline:
@@ -176,6 +181,7 @@ class AstraEditor:
                 detail = _error_detail(error)
                 pending["error"] = detail
                 atomic_json(self.path, state)
+                self.commit()
                 status, code = detail["status_code"], detail["code"]
                 # Rejected effort requests have not generated output. Only this
                 # specific validation error permits changing the requested effort.
@@ -187,11 +193,13 @@ class AstraEditor:
                         pending.setdefault("effort_rejections", []).append(detail)
                         atomic_json(self.path, state)
                         atomic_json(self.root / f"request_{pending['reservation_id']}.json", request)
+                        self.commit()
                         continue
                 if status in (400, 401, 403, 404, 422, 429):
                     self.budget.release(pending["reservation_id"], f"Provider rejected create: HTTP {status}, {code}")
                     state["pending"] = None
                     atomic_json(self.path, state)
+                    self.commit()
                     if status in (401, 403) or code in ("insufficient_quota", "billing_hard_limit_reached"):
                         raise ProviderUnavailable(f"Editor blocked: HTTP {status}, code={code}") from None
                     if code in ("content_filter", "content_policy_violation", "moderation_blocked"):
@@ -226,6 +234,7 @@ class AstraEditor:
         if usage is None:
             pending["status"] = response.get("status")
             atomic_json(self.path, state)
+            self.commit()
             error = response.get("error") or {}
             if error.get("code") in ("insufficient_quota", "billing_hard_limit_reached",
                                      "invalid_api_key", "authentication_error"):
@@ -257,6 +266,7 @@ class AstraEditor:
         state["context_tokens"] = int(usage["input_tokens"]) + int(usage["output_tokens"])
         state["pending"] = None
         atomic_json(self.path, state)
+        self.commit()
         self.last_response = record
         return self._deliver(record)
 

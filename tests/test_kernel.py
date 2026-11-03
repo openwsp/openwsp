@@ -73,6 +73,14 @@ def test_output_bound_and_ascii(kernel):
     assert result["output"].endswith("[output truncated]")
 
 
+def test_exception_text_is_bounded_and_kernel_remains_usable(kernel):
+    result = kernel.run("raise ValueError('é' * 1_100_000)")
+    assert not result["ok"]
+    assert len(result["error"]) <= kernel.output_limit
+    assert result["error"].isascii()
+    assert kernel.run("21 * 2")["output"] == "42\n"
+
+
 def test_timeout_then_reuse(kernel):
     kernel.timeout = 0.05
     result = kernel.run("while True: pass")

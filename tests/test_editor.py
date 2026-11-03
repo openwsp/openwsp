@@ -165,3 +165,23 @@ def test_budget_rejection_happens_before_network_call(tmp_path):
     with pytest.raises(BudgetExceeded):
         e.complete("task")
     assert not fake.calls
+
+
+def test_editor_commits_intent_before_post_and_id_before_poll(tmp_path):
+    fake = FakeResponses([response(status="queued")], [response()])
+    snapshots = []
+    e = editor(tmp_path, fake)
+    e.commit = lambda: snapshots.append(json.loads(e.path.read_text()))
+    original_create, original_retrieve = fake.create, fake.retrieve
+
+    def create(**kwargs):
+        assert snapshots and snapshots[-1]["pending"]["response_id"] is None
+        return original_create(**kwargs)
+
+    def retrieve(response_id):
+        assert snapshots[-1]["pending"]["response_id"] == response_id
+        return original_retrieve(response_id)
+
+    fake.create, fake.retrieve = create, retrieve
+    e.complete("task", request_key="t001")
+    assert snapshots[-1]["pending"] is None and "t001" in snapshots[-1]["completed"]

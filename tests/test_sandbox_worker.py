@@ -170,6 +170,12 @@ def test_namespace_persists_and_edits_survive_explicit_restart(worker_factory):
     status = worker.request("status")
     assert status["runs"] == 3
     assert status["restarts"] == 1
+    usage = status["usage"]
+    assert usage["supervisor_elapsed_seconds"] > 0
+    assert usage["supervisor_peak_rss_bytes"] > 0
+    assert usage["kernel_peak_rss_bytes"] > 0
+    assert usage["tracked_process_cpu_seconds"] >= 0
+    assert "not provider billing" in usage["observation_note"]
 
 
 def test_native_call_is_killed_and_kernel_recovers(worker_factory):
@@ -241,3 +247,116 @@ def test_shutdown_acknowledges_then_exits(worker_factory):
     response = worker.request("shutdown")
     assert response["ok"] is True
     assert worker.process.wait(timeout=5) == 0
+
+
+def test_long_exception_is_bounded_and_transport_remains_usable(worker_factory):
+    worker = worker_factory()
+    failed = worker.request("run", code="raise ValueError('x' * 1_100_000)")
+    assert failed["ok"] is False
+    assert failed["runs"] == 1
+    assert failed["error"].startswith("ValueError:")
+    assert len(failed["error"]) <= 10_000
+    assert len(json.dumps(failed).encode()) < 1_048_576
+    following = worker.request("run", code="6 * 7")
+    assert following["ok"] is True
+    assert following["output"].strip() == "42"
+    assert following["runs"] == 2
+
+
+def test_replayed_request_returns_cached_result_without_executing_again(worker_factory):
+    worker = worker_factory()
+    request = {
+        "id": "durable-cell-1",
+        "op": "run",
+        "code": "counter = globals().get('counter', 0) + 1\nprint(counter)",
+    }
+    original = worker.raw(json.dumps(request))
+    assert original["ok"] is True
+    assert original["output"].strip() == "1"
+    replay = worker.raw(json.dumps(request))
+    assert replay == original
+    assert worker.request("status")["runs"] == 1
+    current = worker.request("run", code="counter")
+    assert current["output"].strip() == "1"
+    assert current["runs"] == 2
+
+
+def test_reusing_request_id_with_different_code_is_refused(worker_factory):
+    worker = worker_factory()
+    request = {"id": "durable-cell-1", "op": "run", "code": "counter = 1\nprint(counter)"}
+    original = worker.raw(json.dumps(request))
+    assert original["ok"] is True
+    conflicting = worker.raw(json.dumps(dict(request, code="counter = 999")))
+    assert conflicting["id"] == request["id"]
+    assert conflicting["ok"] is False
+    assert conflicting["error"]
+    assert conflicting["runs"] == 1
+    assert worker.raw(json.dumps(request)) == original
+    current = worker.request("run", code="counter")
+    assert current["output"].strip() == "1"
+    assert current["runs"] == 2
+
+
+def test_supervisor_refuses_code_even_if_child_guard_is_replaced(worker_factory):
+    worker = worker_factory()
+    changed = worker.request(
+        "run",
+        code="import openwsp.kernel as module, ast\nmodule.validate_code = lambda code: ast.parse(code)",
+    )
+    assert changed["ok"] is True
+    assert changed["runs"] == 1
+    refused = worker.request("run", code="import socket")
+    assert refused["ok"] is False
+    assert refused["runs"] == 1
+    assert refused["error"]
+    assert worker.request("status")["runs"] == 1
+
+
+def test_child_cannot_reset_supervisor_run_budget(worker_factory):
+    worker = worker_factory(max_runs=2)
+    changed = worker.request(
+        "run",
+        code=(
+            "import openwsp.kernel as module\n"
+            "module.Kernel.run = lambda self, code: "
+            "dict(ok=True, output='forged', error=None, seconds=0.0, runs=0)"
+        ),
+    )
+    assert changed["ok"] is True
+    assert changed["runs"] == 1
+    forged = worker.request("run", code="1 + 1")
+    assert forged["runs"] == 2
+    assert worker.request("status")["runs"] == 2
+    exhausted = worker.request("run", code="3 + 3")
+    assert exhausted["ok"] is False
+    assert exhausted["runs"] == 2
+
+
+def test_status_heartbeat_arrives_before_running_cell_finishes(worker_factory):
+    worker = worker_factory()
+    slow = {"id": "slow-cell", "op": "run", "code": "import time\ntime.sleep(1)\n42"}
+    heartbeat = {"id": "heartbeat", "op": "status"}
+    started = time.monotonic()
+    worker.process.stdin.write((json.dumps(slow) + "\n" + json.dumps(heartbeat) + "\n").encode())
+    worker.process.stdin.flush()
+    status = worker.read(timeout=0.8)
+    assert time.monotonic() - started < 0.8
+    assert status["id"] == "heartbeat"
+    assert status["ok"] is True
+    usage = status["usage"]
+    assert type(usage["cgroup_memory_scope_verified"]) is bool
+    for field in (
+        "supervisor_peak_rss_bytes",
+        "kernel_peak_rss_bytes",
+        "exited_kernel_peak_rss_bytes",
+        "cgroup_memory_current_bytes",
+        "cgroup_memory_peak_bytes",
+        "cgroup_memory_limit_bytes",
+    ):
+        value = usage[field]
+        assert value is None or (type(value) is int and value >= 0)
+    finished = worker.read()
+    assert finished["id"] == "slow-cell"
+    assert finished["ok"] is True
+    assert finished["output"].strip() == "42"
+    assert finished["runs"] == 1

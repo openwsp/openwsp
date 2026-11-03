@@ -301,7 +301,8 @@ class Kernel:
                         if value is not None:
                             print(repr(value))
             except (Exception, SystemExit, KeyboardInterrupt) as exc:  # noqa: BLE001 -- return cell errors.
-                error = f"{type(exc).__name__}: {exc}".encode("ascii", errors="replace").decode("ascii")
+                error = f"{type(exc).__name__}: {exc}"[: self.output_limit]
+                error = error.encode("ascii", errors="replace").decode("ascii")
             finally:
                 os.chdir(cwd)
             return {

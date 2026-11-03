@@ -27,6 +27,7 @@ flowchart LR
 | `src/openwsp/cli.py`, `sdk.py`, `mcp_server.py` | Argument parsing or transport around the shared operations. |
 | `src/openwsp/backends/` | Provider-specific forward execution. |
 | `src/openwsp/editors/` | Editor API adapters and response state. |
+| `src/openwsp/publishing.py` | Publish allowlisted result artifacts and regenerate only the README's marked tables. |
 | `replications/` | Experiment configuration, source references and results. Experiments 1–7 are layout placeholders only. |
 | `tests/` | CPU tests, including a real MCP client driving a tiny network. |
 

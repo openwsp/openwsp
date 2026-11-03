@@ -7,6 +7,7 @@ float32; exported public edits and checkpoints describe their bfloat16 evaluatio
 from __future__ import annotations
 
 import os
+import stat
 import tempfile
 import threading
 from collections.abc import Mapping
@@ -124,13 +125,74 @@ class WeightStore:
         with self._lock:
             if self.edit_dir is not None:
                 file = self._edit_path(name)
-                if file.exists():
-                    tensor = torch.from_numpy(np.load(file, allow_pickle=False)).float()
-                    self._validate(name, tensor)
-                    return tensor.detach().clone()
+                if file.exists() or file.is_symlink():
+                    return self._read_submission_file(name, file)
             elif name in self._edits:
                 return self._edits[name].clone()
         return self.load_original(name)
+
+    def _read_submission_file(self, name: str, file: Path) -> torch.Tensor:
+        """Read once into a validated snapshot, without following file symlinks."""
+        try:
+            if not stat.S_ISREG(file.lstat().st_mode):
+                raise EditRefused(f"Submission must be a regular .npy file: {name}")
+            flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+            fd = os.open(file, flags)
+            with os.fdopen(fd, "rb") as handle:
+                before = os.fstat(handle.fileno())
+                array = np.load(handle, allow_pickle=False)
+                if not isinstance(array, np.ndarray):
+                    if hasattr(array, "close"):
+                        array.close()
+                    raise EditRefused(f"Submission must contain one numpy array: {name}")
+                after = os.fstat(handle.fileno())
+                if (before.st_size, before.st_mtime_ns, before.st_ctime_ns) != (
+                    after.st_size,
+                    after.st_mtime_ns,
+                    after.st_ctime_ns,
+                ):
+                    raise EditRefused(f"Submission changed while being read: {name}")
+            # Preserve dtype through validation: casting first would silently
+            # discard the imaginary component of a directly written complex edit.
+            return self._validate(name, array)
+        except EditRefused:
+            raise
+        except (OSError, ValueError, TypeError, EOFError) as exc:
+            raise EditRefused(f"Invalid submission file for {name}: {type(exc).__name__}") from exc
+
+    def validate_submission(self) -> dict[str, torch.Tensor]:
+        """Return fresh, fully validated float32 copies of every submitted tensor.
+
+        Call this outside the editor process before every forward pass and final
+        freeze. The returned snapshot must be used directly: re-reading mutable
+        files after validation would reopen a check/use race. External copies of
+        saved edit directories are supported; no previously loaded value is
+        cached. Unknown, frozen, malformed and invalid direct writes are refused.
+        """
+        with self._lock:
+            names = self.edited()
+            if self.edit_dir is None:
+                return {name: self._validate(name, self._edits[name]) for name in names}
+            try:
+                before = {name: self._edit_path(name).lstat() for name in names}
+            except OSError as exc:
+                raise EditRefused("Submission changed during validation") from exc
+            tensors = {name: self._read_submission_file(name, self._edit_path(name)) for name in names}
+            if names != self.edited():
+                raise EditRefused("Submitted tensor list changed during validation")
+            try:
+                for name in names:
+                    first, last = before[name], self._edit_path(name).lstat()
+                    if (first.st_ino, first.st_size, first.st_mtime_ns, first.st_ctime_ns) != (
+                        last.st_ino,
+                        last.st_size,
+                        last.st_mtime_ns,
+                        last.st_ctime_ns,
+                    ):
+                        raise EditRefused(f"Submission changed during validation: {name}")
+            except OSError as exc:
+                raise EditRefused("Submission changed during validation") from exc
+            return tensors
 
     def _validate(self, name: str, tensor: Any) -> torch.Tensor:
         self._check_name(name)
@@ -142,12 +204,17 @@ class WeightStore:
             raise EditRefused("Edits must be real tensors without gradients")
         if isinstance(tensor, np.ndarray) and np.iscomplexobj(tensor):
             raise EditRefused("Edits must be real tensors")
-        value = torch.as_tensor(tensor).detach().to(device="cpu", dtype=torch.float32).contiguous()
+        try:
+            value = torch.as_tensor(tensor).detach().to(device="cpu", dtype=torch.float32).contiguous()
+        except (TypeError, ValueError, RuntimeError) as exc:
+            raise EditRefused("Edits must contain real numeric values") from exc
         original = self.load_original(name)
         if value.shape != original.shape:
             raise EditRefused(f"Shape mismatch for {name}: {tuple(value.shape)} != {tuple(original.shape)}")
         if not bool(torch.isfinite(value).all()):
             raise EditRefused(f"Non-finite edit values: {name}")
+        if not bool(torch.isfinite(value.to(torch.bfloat16)).all()):
+            raise EditRefused(f"Edit values overflow bfloat16 evaluation: {name}")
         if self.refuse_rescale and not torch.equal(value, original):
             flat = original.reshape(-1)
             denom = torch.dot(flat.double(), flat.double())
@@ -162,6 +229,7 @@ class WeightStore:
         if self.edit_dir is None:
             self._edits[name] = value.clone()
             return
+        self.edit_dir.mkdir(parents=True, exist_ok=True)
         path = self._edit_path(name)
         fd, temporary = tempfile.mkstemp(prefix=".edit-", suffix=".tmp", dir=self.edit_dir)
         try:
@@ -206,9 +274,8 @@ class WeightStore:
         from .edits import tensor_sha256
 
         output = []
-        for name in self.edited():
+        for name, value in self.validate_submission().items():
             original = self.load_original(name)
-            value = self.load(name)
             delta = value - original
             norm = float(original.double().norm())
             changed = value.to(torch.bfloat16) != original.to(torch.bfloat16)
@@ -230,7 +297,7 @@ class WeightStore:
         with self._lock:
             return export_edit(
                 _Originals(self),
-                {name: self.load(name) for name in self.edited()},
+                self.validate_submission(),
                 path,
                 base_model=base_model,
                 revision=revision,
@@ -253,8 +320,23 @@ class WeightStore:
     def export_checkpoint(self, path: str | Path) -> Path:
         """Write the evaluated bfloat16 checkpoint; the base checkpoint is untouched."""
         destination = Path(path)
+        if any(destination.resolve() == source.resolve() for source in set(self._files.values())):
+            raise EditRefused("Cannot overwrite the original model checkpoint")
         destination.parent.mkdir(parents=True, exist_ok=True)
         with self._lock:
-            tensors = {name: self.load(name).to(torch.bfloat16).contiguous() for name in self.names}
-            save_file(tensors, destination, metadata={"format": "pt"})
+            submission = self.validate_submission()
+            tensors = {
+                name: (submission[name] if name in submission else self.load_original(name))
+                .to(torch.bfloat16)
+                .contiguous()
+                for name in self.names
+            }
+            fd, temporary = tempfile.mkstemp(prefix=".checkpoint-", suffix=".tmp", dir=destination.parent)
+            os.close(fd)
+            try:
+                save_file(tensors, temporary, metadata={"format": "pt"})
+                os.replace(temporary, destination)
+            finally:
+                if os.path.exists(temporary):
+                    os.unlink(temporary)
         return destination
