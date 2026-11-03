@@ -70,12 +70,18 @@ def sample(tokens, *, finish="stop"):
     return SimpleNamespace(token_ids=tokens, text="decoded text", finish_reason=finish)
 
 
-def test_loader_uses_explicit_context_sequence_cap_and_registered_processor(generator):
+def test_ordinary_loader_omits_custom_processors(generator):
+    assert "logits_processors" not in generator.calls["loads"][0]
+    assert generator.instance.enable_thinking_close is False
+
+
+def test_loader_uses_explicit_context_sequence_cap_and_opt_in_processor(generator):
     fixture = generator
     assert fixture.calls["loads"][0]["max_model_len"] == 34816
     assert fixture.calls["loads"][0]["max_num_seqs"] == 128
     fixture.instance.max_model_len = 83968
     fixture.instance.max_num_seqs = 32
+    fixture.instance.enable_thinking_close = True
     fixture.instance._load()
     assert fixture.calls["loads"][-1]["max_model_len"] == 83968
     assert fixture.calls["loads"][-1]["max_num_seqs"] == 32
@@ -85,6 +91,7 @@ def test_loader_uses_explicit_context_sequence_cap_and_registered_processor(gene
 
 def test_grid_sampling_seeds_and_per_sample_forced_metadata_are_preserved(generator):
     fixture = generator
+    fixture.instance.enable_thinking_close = True
     fixture.outputs.extend([SimpleNamespace(outputs=[sample([1, 2, 1, 9, 4], finish="length"),
                                                     sample([2, 9, 4])]),
                            SimpleNamespace(outputs=[sample([9, 4]), sample([9, 5])])])
@@ -138,6 +145,7 @@ def test_long_context_retains_full_output_allowance_at_exact_boundary(generator)
     ("close_token", "single-token"), ("seed", "seed scheme")])
 def test_invalid_grid_requests_fail_before_generation(generator, change, match):
     fixture = generator
+    fixture.instance.enable_thinking_close = True
     options = {"decoding_policy": {"kind": "thinking_token_cap", "thinking_tokens": 3}}
     if change == "thinking":
         options["thinking"] = False
@@ -152,7 +160,15 @@ def test_invalid_grid_requests_fail_before_generation(generator, change, match):
 
 def test_output_audit_detects_decoder_that_did_not_enforce_policy(generator):
     fixture = generator
+    fixture.instance.enable_thinking_close = True
     fixture.outputs.append(SimpleNamespace(outputs=[sample([1, 1, 1, 1])]))
     with pytest.raises(ValueError, match="did not enforce"):
         fixture.instance.generate([{"id": "a", "prompt": "answer"}], {"max_tokens": 5},
                                   decoding_policy={"kind": "thinking_token_cap", "thinking_tokens": 3})
+
+
+def test_ordinary_engine_rejects_forced_close_request(generator):
+    with pytest.raises(ValueError, match="explicitly enabled engine"):
+        generator.instance.generate([{"id": "a", "prompt": "answer"}], {"max_tokens": 5},
+                                    decoding_policy={"kind": "thinking_token_cap", "thinking_tokens": 3})
+    assert generator.calls["generate"] == []

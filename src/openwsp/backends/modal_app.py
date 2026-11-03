@@ -72,6 +72,7 @@ class Generator:
     gpu_kind: str = modal.parameter(default="H100")
     max_model_len: int = modal.parameter(default=34816)
     max_num_seqs: int = modal.parameter(default=128)
+    enable_thinking_close: bool = modal.parameter(default=False)
 
     @modal.enter()
     def load(self):
@@ -96,12 +97,15 @@ class Generator:
         from transformers import AutoTokenizer
         from vllm import LLM
 
-        from openwsp.backends.thinking_close import ThinkingCloseLogitsProcessor
+        processor_options = {}
+        if self.enable_thinking_close:
+            from openwsp.backends.thinking_close import ThinkingCloseLogitsProcessor
+            processor_options["logits_processors"] = [ThinkingCloseLogitsProcessor]
         self.tokenizer = AutoTokenizer.from_pretrained(self.checkpoint)
         self.engine = LLM(model=self.checkpoint, dtype="bfloat16", language_model_only=True,
                           max_model_len=self.max_model_len, gpu_memory_utilization=0.85, seed=0,
                           max_num_seqs=self.max_num_seqs, enable_prefix_caching=False, disable_log_stats=False,
-                          logits_processors=[ThinkingCloseLogitsProcessor])
+                          **processor_options)
         self.last_accounted = self.started
         kernel_cache_volume.commit()
 
@@ -154,6 +158,8 @@ class Generator:
             raise ValueError("Unsupported generation seed scheme")
         if decoding_policy is not None and not thinking:
             raise ValueError("Forced thinking close requires thinking enabled")
+        if decoding_policy is not None and not self.enable_thinking_close:
+            raise ValueError("Forced thinking close requires an explicitly enabled engine")
         start = time.monotonic()
         swap = self._swap(edits, edit_id, probe_token_ids, reference) if edits is not None else None
         if swap and not swap["ok"]:
