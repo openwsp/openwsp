@@ -35,7 +35,7 @@ async def test_every_tool_through_stdio(tmp_path):
         tools = {tool.name for tool in (await client.list_tools()).tools}
         assert tools == {
             "list_tensors", "read_tensor", "run_code", "forward", "save_edit",
-            "diff", "apply_edit", "export_edit",
+            "diff", "inspect", "apply_edit", "export_edit",
         }
         listed = decoded(await client.call_tool("list_tensors", {}))
         assert {row["name"] for row in listed["tensors"]} == {
@@ -70,6 +70,11 @@ async def test_every_tool_through_stdio(tmp_path):
         ))
         assert (bundle / "manifest.json").is_file()
         assert (bundle / "edit.npz").is_file()
+        inspected = decoded(await client.call_tool("inspect", {"path": str(bundle), "compare": str(bundle),
+                                                               "top_directions": 1}))
+        assert inspected["format"] == "openwsp.inspect"
+        assert inspected["edits"][0]["tensors"][0]["svd"]["rank"] == 1
+        assert inspected["direction_cosines"][0]["absolute_cosine"] == pytest.approx(1)
         decoded(await client.call_tool("run_code", {"code": "drop_edit('layer1.weight')"}))
         assert decoded(await client.call_tool("diff", {}))["tensors"] == []
         applied = decoded(await client.call_tool("apply_edit", {"path": str(bundle)}))

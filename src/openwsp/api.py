@@ -121,6 +121,25 @@ class OpenWSP:
     def diff(self) -> list[dict[str, Any]]:
         return self.store.diff()
 
+    def inspect(
+        self,
+        path: str | Path | None = None,
+        *,
+        compare: str | Path | None = None,
+        top_directions: int = 3,
+        rank_rtol: float | None = None,
+        embedding_name: str | None = None,
+        token_ids: dict[str, int] | None = None,
+    ) -> dict[str, Any]:
+        return self.store.inspect(
+            path,
+            compare=compare,
+            top_directions=top_directions,
+            rank_rtol=rank_rtol,
+            embedding_name=embedding_name,
+            token_ids=token_ids,
+        )
+
     def apply_edit(self, path: str | Path) -> dict[str, Any]:
         return self.store.apply_edit(path)
 

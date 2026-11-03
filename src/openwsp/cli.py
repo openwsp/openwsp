@@ -162,6 +162,22 @@ def apply_edit(ctx: typer.Context, path: Path) -> None:
     _emit(_api(ctx).apply_edit(path))
 
 
+@app.command("inspect")
+def inspect_edit(ctx: typer.Context, path: Path | None = None, compare: Path | None = None,
+                 top_directions: int = 3, rank_rtol: float | None = None,
+                 embedding_name: str | None = None, token_ids: str | None = None,
+                 output: Path | None = None) -> None:
+    """Inspect a legacy/v1 edit (--path) or current edits, with optional comparison and logit lens."""
+    result = _api(ctx).inspect(path, compare=compare, top_directions=top_directions, rank_rtol=rank_rtol,
+                               embedding_name=embedding_name, token_ids=_json(token_ids) if token_ids else None)
+    if output is None:
+        _emit(result)
+    else:
+        from .budget import atomic_json
+        atomic_json(output, result)
+        _emit({"written": str(output), "format": result["format"]})
+
+
 @app.command("export")
 def export_edit(
     ctx: typer.Context, path: Path, base_model: str | None = None, revision: str | None = None

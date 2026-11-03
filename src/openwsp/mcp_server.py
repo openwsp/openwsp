@@ -48,14 +48,31 @@ def create_server(api: OpenWSP) -> FastMCP:
         return {"tensors": api.diff()}
 
     @server.tool()
+    def inspect(
+        path: str | None = None,
+        compare: str | None = None,
+        top_directions: int = 3,
+        rank_rtol: float | None = None,
+        embedding_name: str | None = None,
+        token_ids: dict[str, int] | None = None,
+    ) -> dict[str, Any]:
+        """Inspect edit geometry on CPU without applying edits or executing the model."""
+        return api.inspect(
+            path,
+            compare=compare,
+            top_directions=top_directions,
+            rank_rtol=rank_rtol,
+            embedding_name=embedding_name,
+            token_ids=token_ids,
+        )
+
+    @server.tool()
     def apply_edit(path: str) -> dict[str, Any]:
         """Validate a manifest and payload against this base, then apply its edit."""
         return api.apply_edit(path)
 
     @server.tool()
-    def export_edit(
-        path: str, base_model: str | None = None, revision: str | None = None
-    ) -> dict[str, Any]:
+    def export_edit(path: str, base_model: str | None = None, revision: str | None = None) -> dict[str, Any]:
         """Write a versioned edit manifest and payload, identified by sha256."""
         return api.export_edit(path, base_model=base_model, revision=revision)
 

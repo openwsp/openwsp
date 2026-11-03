@@ -7,6 +7,7 @@ float32; exported public edits and checkpoints describe their bfloat16 evaluatio
 from __future__ import annotations
 
 import copy
+import hashlib
 import os
 import stat
 import tempfile
@@ -324,6 +325,78 @@ class WeightStore:
                 base_model=base_model,
                 revision=revision,
             )
+
+    def inspect(
+        self,
+        path=None,
+        *,
+        compare=None,
+        top_directions=3,
+        rank_rtol=None,
+        embedding_name=None,
+        token_ids=None,
+    ) -> dict[str, Any]:
+        """Inspect evaluated deltas without applying them or running the model.
+
+        ``path`` and ``compare`` accept v1 or legacy bundles. Omit ``path`` to
+        inspect current submitted edits, rounded to the public bf16 contract.
+        A lens requires explicit vocabulary-row IDs and a caller-selected tied
+        embedding/unembedding tensor; raw weights do not prove model tying.
+        """
+        from .edits import read_edit, tensor_sha256
+        from .inspection import direction_cosines, directions_from_edits, inspect_tensor, logit_lens
+
+        if (embedding_name is None) != (token_ids is None):
+            raise ValueError("Logit lens requires both embedding_name and token_ids")
+        reports = []
+        for label, source in [("primary", path), *([("comparison", compare)] if compare is not None else [])]:
+            if source is None:
+                submitted = self.validate_submission()
+                manifest = {}
+                manifest_hash = None
+            else:
+                manifest, submitted = read_edit(source, _Originals(self))
+                manifest_hash = hashlib.sha256((Path(source) / "manifest.json").read_bytes()).hexdigest()
+            tensors = []
+            for name in sorted(submitted):
+                original = self.load_original(name).to(torch.bfloat16).float()
+                edited = submitted[name].to(torch.bfloat16).float()
+                summary = inspect_tensor(
+                    name, original.numpy(), edited.numpy(), top_directions=top_directions, rank_rtol=rank_rtol
+                )
+                summary.update(base_sha256=tensor_sha256(original), edited_sha256=tensor_sha256(edited))
+                tensors.append(summary)
+            reports.append(
+                {
+                    "label": label,
+                    "source": str(source) if source is not None else "current_submission",
+                    "source_format": manifest.get("format", "legacy" if source is not None else "in_memory"),
+                    "edit_sha256": manifest.get("edit_sha256"),
+                    "manifest_sha256": manifest_hash,
+                    "base_model": manifest.get("base_model"),
+                    "base_revision": manifest.get("base_revision"),
+                    "tensors": tensors,
+                }
+            )
+        directions = directions_from_edits(reports)
+        result = {
+            "format": "openwsp.inspect",
+            "format_version": 1,
+            "analysis_dtype": "float64",
+            "weight_semantics": "evaluated_bfloat16",
+            "edits": reports,
+            "direction_cosines": direction_cosines(directions),
+            "logit_lens": None,
+            "rounding_note": "SVD rank includes bf16 rounding residuals; rank-one energy and projection residual quantify approximation. Base hashes validate listed tensors, not the entire checkpoint.",
+        }
+        if embedding_name is not None:
+            embedding = self.load_original(embedding_name).to(torch.bfloat16).float().numpy()
+            result["logit_lens"] = {
+                "embedding_name": embedding_name,
+                "tying_verification": "Caller must verify this tensor is the unembedding or tied embedding",
+                **logit_lens(directions, embedding, token_ids),
+            }
+        return result
 
     def apply_edit(self, path: str | Path) -> dict:
         """Validate the complete diff before replacing the currently submitted edit."""
