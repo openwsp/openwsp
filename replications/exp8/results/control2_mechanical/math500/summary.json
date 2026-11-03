@@ -51,6 +51,16 @@
         "seconds": 793.978446365,
         "cost_usd": 0.9411291184246466
       }
-    ]
-  }
+    ],
+    "finished_metrics": {
+      "method": "openwsp.metrics.finished_metrics",
+      "finished_reason": "stop",
+      "excluded_reason": "length",
+      "samples_file": "samples.jsonl",
+      "samples_sha256": "9b521218bc7e3c3ff784330cafd55fb7c7a914f03c7abf3e47b4f1cd267d245c"
+    }
+  },
+  "finished_n": 274,
+  "finished_correct": 228,
+  "accuracy_finished": 0.8321167883211679
 }

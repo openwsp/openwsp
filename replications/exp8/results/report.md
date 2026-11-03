@@ -27,30 +27,25 @@ States are recorded snapshots; use `openwsp status` to check current liveness.
 
 Authors' released evaluations:
 
-| Run | MATH-500 | GSM8K | IFEval | MATH-500 hit token limit |
-| --- | --- | --- | --- | --- |
-| unedited | [7.9%](../reference/unedited.json) | [13.8%](../reference/unedited.json) | [21.0%](../reference/unedited.json) | [93.0%](../reference/unedited.json) |
-| p10c | [12.3%](../reference/p10c.json) | [25.7%](../reference/p10c.json) | [49.0%](../reference/p10c.json) | [87.2%](../reference/p10c.json) |
-| p25c | [14.1%](../reference/p25c.json) | [25.1%](../reference/p25c.json) | [39.9%](../reference/p25c.json) | [86.4%](../reference/p25c.json) |
-| p50c | [48.1%](../reference/p50c.json) | [67.1%](../reference/p50c.json) | [62.3%](../reference/p50c.json) | [33.1%](../reference/p50c.json) |
+| Run | MATH-500 | GSM8K | IFEval | MATH-500 finished accuracy | MATH-500 finished samples | MATH-500 hit token limit |
+| --- | --- | --- | --- | --- | --- | --- |
+| unedited | [7.9%](../reference/unedited.json) | [13.8%](../reference/unedited.json) | [21.0%](../reference/unedited.json) | pending | pending | [93.0%](../reference/unedited.json) |
+| p10c | [12.3%](../reference/p10c.json) | [25.7%](../reference/p10c.json) | [49.0%](../reference/p10c.json) | pending | pending | [87.2%](../reference/p10c.json) |
+| p25c | [14.1%](../reference/p25c.json) | [25.1%](../reference/p25c.json) | [39.9%](../reference/p25c.json) | pending | pending | [86.4%](../reference/p25c.json) |
+| p50c | [48.1%](../reference/p50c.json) | [67.1%](../reference/p50c.json) | [62.3%](../reference/p50c.json) | pending | pending | [33.1%](../reference/p50c.json) |
 
-Our evaluations and controls (controls are ours):
+OpenWSP evaluations and controls:
 
-| Stage | Model | Benchmark | Author comparator | Accuracy | Standard error | Samples | Hit token limit | Status |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| calibration_base | Qwen/Qwen3.5-0.8B | math500 | unedited: [7.9%](../reference/unedited.json) | [7.2%](calibration_base/summary.json) | [1.16%](calibration_base/summary.json) | [500](calibration_base/summary.json) | [93.2%](calibration_base/summary.json) | [done](calibration_base/summary.json) |
-| calibration_p50c | Qwen/Qwen3.5-0.8B | math500 | p50c: [48.1%](../reference/p50c.json) | [50.6%](calibration_p50c/summary.json) | [2.24%](calibration_p50c/summary.json) | [500](calibration_p50c/summary.json) | [31.0%](calibration_p50c/summary.json) | [done](calibration_p50c/summary.json) |
-| control1_nothink | Qwen/Qwen3.5-0.8B | math500 | not applicable | [46.8%](control1_nothink/math500/summary.json) | [2.23%](control1_nothink/math500/summary.json) | [500](control1_nothink/math500/summary.json) | [0.6%](control1_nothink/math500/summary.json) | [done](control1_nothink/math500/summary.json) |
-| control2_mechanical | Qwen/Qwen3.5-0.8B | math500 | not applicable | [46.0%](control2_mechanical/math500/summary.json) | [2.23%](control2_mechanical/math500/summary.json) | [500](control2_mechanical/math500/summary.json) | [45.2%](control2_mechanical/math500/summary.json) | [done](control2_mechanical/math500/summary.json) |
-| control3_repetition | Qwen/Qwen3.5-0.8B | math500 | not applicable | [23.8%](control3_repetition/math500/summary.json) | [1.90%](control3_repetition/math500/summary.json) | [500](control3_repetition/math500/summary.json) | [75.6%](control3_repetition/math500/summary.json) | [done](control3_repetition/math500/summary.json) |
-| damage_cpu_validation | pending | pending | pending | pending | pending | pending | pending | [validated](damage_cpu_validation/summary.json) |
-| eval_grid_cpu_validation | pending | token_state_machine | pending | pending | pending | pending | pending | [validated](eval_grid_cpu_validation/summary.json) |
-| pending | {'checkpoint_hash_note': 'HF file includes vision weights; prepare extracts language-model tensors into a different safetensors artifact. Listed edited tensor base hashes were verified against both edit manifests.', 'config_sha256': 'b90b86f35c8e6925ef74ee04d0e758f0a845c83a42089ad82bbaa948de9b4204', 'downloaded_huggingface_checkpoint_sha256': '04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696', 'embedding_name': 'model.language_model.embed_tokens.weight', 'id': 'Qwen/Qwen3.5-0.8B', 'prepared_text_only_checkpoint_sha256': '978661a573971be7257815c2554a28c74913c7b7ea51b0a0b9503fd11eb0d2f8', 'revision': '2fc06364715b967f1860aea9cf38778875588b17', 'tied_embeddings_verified_by_config': True, 'tokenizer_sha256': '5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42'} | pending | pending | pending | pending | pending | pending | [measured_cpu_only](inspection/summary.json) |
-| pending | pending | pending | pending | pending | pending | pending | pending | [unspecified](repair/2a/summary.json) |
-| pending | pending | pending | pending | pending | pending | pending | pending | [unspecified](repair/2b/summary.json) |
-| pending | pending | pending | pending | pending | pending | pending | pending | [cpu_builds_only](repair/summary.json) |
+| Stage | Model | Benchmark | Author comparator | Accuracy | Finished accuracy | Hit token limit | Finished samples | Standard error | Samples | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| calibration_base | Qwen/Qwen3.5-0.8B | math500 | unedited: [7.9%](../reference/unedited.json) | [7.2%](calibration_base/summary.json) | [100.0%](calibration_base/summary.json) | [93.2%](calibration_base/summary.json) | [34](calibration_base/summary.json) | [1.16%](calibration_base/summary.json) | [500](calibration_base/summary.json) | [done](calibration_base/summary.json) |
+| calibration_p50c | Qwen/Qwen3.5-0.8B | math500 | p50c: [48.1%](../reference/p50c.json) | [50.6%](calibration_p50c/summary.json) | [73.3%](calibration_p50c/summary.json) | [31.0%](calibration_p50c/summary.json) | [345](calibration_p50c/summary.json) | [2.24%](calibration_p50c/summary.json) | [500](calibration_p50c/summary.json) | [done](calibration_p50c/summary.json) |
+| control1_nothink | Qwen/Qwen3.5-0.8B | math500 | not applicable | [46.8%](control1_nothink/math500/summary.json) | [47.1%](control1_nothink/math500/summary.json) | [0.6%](control1_nothink/math500/summary.json) | [497](control1_nothink/math500/summary.json) | [2.23%](control1_nothink/math500/summary.json) | [500](control1_nothink/math500/summary.json) | [done](control1_nothink/math500/summary.json) |
+| control2_mechanical | Qwen/Qwen3.5-0.8B | math500 | not applicable | [46.0%](control2_mechanical/math500/summary.json) | [83.2%](control2_mechanical/math500/summary.json) | [45.2%](control2_mechanical/math500/summary.json) | [274](control2_mechanical/math500/summary.json) | [2.23%](control2_mechanical/math500/summary.json) | [500](control2_mechanical/math500/summary.json) | [done](control2_mechanical/math500/summary.json) |
+| control3_repetition | Qwen/Qwen3.5-0.8B | math500 | not applicable | [23.8%](control3_repetition/math500/summary.json) | [96.7%](control3_repetition/math500/summary.json) | [75.6%](control3_repetition/math500/summary.json) | [122](control3_repetition/math500/summary.json) | [1.90%](control3_repetition/math500/summary.json) | [500](control3_repetition/math500/summary.json) | [done](control3_repetition/math500/summary.json) |
 
 Only recorded values are shown. Missing fields remain pending; partial runs retain their recorded status.
+Finished accuracy uses only samples with `finish_reason=stop`; token-limited samples remain in all-sample accuracy. It is undefined when no answers finish, and must be read with the cap-hit rate because the finished subset can change.
 
 Calibration comparison:
 
@@ -68,12 +63,91 @@ Recorded runtime and uncertainty:
 | control1_nothink / math500 | [vllm==0.33.0](control1_nothink/math500/summary.json) | [H100](control1_nothink/math500/summary.json) | [5.17.0](control1_nothink/math500/summary.json) | [binomial_per_sample](control1_nothink/math500/summary.json) |
 | control2_mechanical / math500 | [vllm==0.33.0](control2_mechanical/math500/summary.json) | [H100](control2_mechanical/math500/summary.json) | [5.17.0](control2_mechanical/math500/summary.json) | [binomial_per_sample](control2_mechanical/math500/summary.json) |
 | control3_repetition / math500 | [vllm==0.33.0](control3_repetition/math500/summary.json) | [H100](control3_repetition/math500/summary.json) | [5.17.0](control3_repetition/math500/summary.json) | [binomial_per_sample](control3_repetition/math500/summary.json) |
-| damage_cpu_validation / pending | pending | pending | pending | pending |
-| eval_grid_cpu_validation / token_state_machine | pending | pending | pending | pending |
-| pending / pending | pending | pending | pending | pending |
-| pending / pending | pending | pending | pending | pending |
-| pending / pending | pending | pending | pending | pending |
-| pending / pending | pending | pending | pending | pending |
+
+### CPU analysis and implementation checks
+
+| Component | Recorded status | Evidence count | Scope |
+| --- | --- | --- | --- |
+| damage_cpu_validation | [validated](damage_cpu_validation/summary.json) | [6/6 checks passed](damage_cpu_validation/summary.json) | [Analytic CPU array validation only; no model benchmark, training or GPU calls](damage_cpu_validation/summary.json) |
+| eval_grid_cpu_validation | [validated](eval_grid_cpu_validation/summary.json) | [7/7 checks passed](eval_grid_cpu_validation/summary.json) | [Tiny implementation validation only; not a model benchmark.](eval_grid_cpu_validation/summary.json) |
+| Edit inspection | [measured_cpu_only](inspection/summary.json) | [4 tensor measurements](inspection/summary.json) | [Pinned weights and saved edits; no generation or GPU job](inspection/summary.json) |
+| forward_bank_cpu | [passed](forward-bank-cpu.json) | [4/4 checks passed](forward-bank-cpu.json) | [Synthetic CPU cache verification; no scientific model inference or provider calls](forward-bank-cpu.json) |
+
+These records establish the stated CPU measurements or implementation checks. They are not GPU benchmark results or a completed live replication.
+
+Mechanical repair builds:
+
+| Variant | Coefficient | Column rule | Build | Changed entries | Evaluation | Accuracy |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2a | [1.0](repair/summary.json) | [all](repair/summary.json) | [built](repair/summary.json) | [6289541](repair/summary.json) | [pending](repair/summary.json) | pending |
+| 2b | [6.0](repair/summary.json) | [all](repair/summary.json) | [built](repair/summary.json) | [7077322](repair/summary.json) | [pending](repair/summary.json) | pending |
+| 2c | [6.0](repair/summary.json) | [topk](repair/summary.json) | [unavailable_input_statistics](repair/summary.json) | pending | [pending](repair/summary.json) | pending |
+
+Building an edit does not establish its benchmark effect. Unavailable inputs and unrun evaluations remain explicit.
+
+### Independent results
+
+Published results under their recorded conditions. Rows with different sampling, token caps, engines or benchmarks do not estimate the same effect. These are reference-checkpoint reruns and controls, not completed OpenWSP live-edit results.
+
+| Source / condition | Benchmark / samples | Thinking / token cap | Engine | Accuracy | Finished accuracy | Hit token limit | Finished samples | Comparison |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Authors / unedited ([source](https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/README.md#L38-L45)) | math500 / [2000](analysis/independent-results.json) | [on / 32768](analysis/independent-results.json) | [vLLM (version not reported)](analysis/independent-results.json) | [7.9%](analysis/independent-results.json) | pending | [93.0%](analysis/independent-results.json) | pending | [Original think35 evaluation; full termination records unavailable](analysis/independent-results.json) |
+| Authors / p50c ([source](https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/README.md#L38-L45)) | math500 / [2000](analysis/independent-results.json) | [on / 32768](analysis/independent-results.json) | [vLLM (version not reported)](analysis/independent-results.json) | [48.1%](analysis/independent-results.json) | pending | [33.1%](analysis/independent-results.json) | pending | [Original think35 evaluation; full termination records unavailable](analysis/independent-results.json) |
+| akhaliq / published p50c ([source](https://huggingface.co/RikiyaT/Qwen3.5-0.8B-weight-space-programming/blob/d1671a178705bcab7644806d23c535517f35723b/eval/scores_edited_math500.json)) | math500 / [2000](analysis/independent-results.json) | [on / 32768](analysis/independent-results.json) | [vLLM 0.33.0](analysis/independent-results.json) | [51.0%](analysis/independent-results.json) | pending | [31.6%](analysis/independent-results.json) | pending | [Matched think35 sampling/cap and vLLM version; different samples, Transformers and GPU](analysis/independent-results.json) |
+| hedwigai / unedited ([source](https://www.hedwigai.com/blog/weight-edit-math-or-loops)) | math500 / [2000](analysis/independent-results.json) | [off / 8192](analysis/independent-results.json) | [vLLM (version not reported)](analysis/independent-results.json) | [43.6%](analysis/independent-results.json) | pending | pending | pending | [Changed thinking, sampling and cap; differs from OpenWSP control 1](analysis/independent-results.json) |
+| hedwigai / published p50c ([source](https://www.hedwigai.com/blog/weight-edit-math-or-loops)) | math500 / [2000](analysis/independent-results.json) | [off / 8192](analysis/independent-results.json) | [vLLM (version not reported)](analysis/independent-results.json) | [45.2%](analysis/independent-results.json) | pending | pending | pending | [Paired with Hedwig base; changed thinking, sampling and cap](analysis/independent-results.json) |
+| hedwigai / unedited ([source](https://www.hedwigai.com/blog/weight-edit-math-or-loops)) | math500 / [1000](analysis/independent-results.json) | [forced close 8192 + answer 4096](analysis/independent-results.json) | [vLLM (version not reported)](analysis/independent-results.json) | [34.3%](analysis/independent-results.json) | pending | pending | pending | [Forced close plus answer budget; not thinking off](analysis/independent-results.json) |
+| alisorcorp / base ([source](https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/data/eval_summary.txt)) | gsm8k subset / [40](analysis/independent-results.json) | [on / 16384](analysis/independent-results.json) | [llama.cpp (version not reported)](analysis/independent-results.json) | [20.0%](analysis/independent-results.json) | pending | [7.5%](analysis/independent-results.json) | pending | [GSM8K subset; llama.cpp with early-loop abort](analysis/independent-results.json) |
+| alisorcorp / alpha1 ([source](https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/data/eval_summary.txt)) | gsm8k subset / [40](analysis/independent-results.json) | [on / 16384](analysis/independent-results.json) | [llama.cpp (version not reported)](analysis/independent-results.json) | [32.5%](analysis/independent-results.json) | pending | [12.5%](analysis/independent-results.json) | pending | [Same subset; coefficient-1 variant and early-loop abort](analysis/independent-results.json) |
+| alisorcorp / p50c ([source](https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/data/eval_summary.txt)) | gsm8k subset / [40](analysis/independent-results.json) | [on / 16384](analysis/independent-results.json) | [llama.cpp (version not reported)](analysis/independent-results.json) | [47.5%](analysis/independent-results.json) | pending | [30.0%](analysis/independent-results.json) | pending | [Same subset; p50c and early-loop abort](analysis/independent-results.json) |
+| OpenWSP / unedited | math500 / [500](calibration_base/summary.json) | [on / 32768](calibration_base/summary.json) | [vllm==0.33.0](calibration_base/summary.json) | [7.2%](calibration_base/summary.json) | [100.0%](calibration_base/summary.json) | [93.2%](calibration_base/summary.json) | [34](calibration_base/summary.json) | [think35 sampling/cap; one sample, H100](analysis/independent-results.json) |
+| OpenWSP / published p50c | math500 / [500](calibration_p50c/summary.json) | [on / 32768](calibration_p50c/summary.json) | [vllm==0.33.0](calibration_p50c/summary.json) | [50.6%](calibration_p50c/summary.json) | [73.3%](calibration_p50c/summary.json) | [31.0%](calibration_p50c/summary.json) | [345](calibration_p50c/summary.json) | [Same local calibration settings as base](analysis/independent-results.json) |
+| OpenWSP / thinking off | math500 / [500](control1_nothink/math500/summary.json) | [off / 32768](control1_nothink/math500/summary.json) | [vllm==0.33.0](control1_nothink/math500/summary.json) | [46.8%](control1_nothink/math500/summary.json) | [47.1%](control1_nothink/math500/summary.json) | [0.6%](control1_nothink/math500/summary.json) | [497](control1_nothink/math500/summary.json) | [Thinking and sampling both changed; same local cap/engine](analysis/independent-results.json) |
+| OpenWSP / mechanical control | math500 / [500](control2_mechanical/math500/summary.json) | [on / 32768](control2_mechanical/math500/summary.json) | [vllm==0.33.0](control2_mechanical/math500/summary.json) | [46.0%](control2_mechanical/math500/summary.json) | [83.2%](control2_mechanical/math500/summary.json) | [45.2%](control2_mechanical/math500/summary.json) | [274](control2_mechanical/math500/summary.json) | [think35; direction uses calibration answers and borrowed columns](analysis/independent-results.json) |
+| OpenWSP / repetition penalty | math500 / [500](control3_repetition/math500/summary.json) | [on / 32768](control3_repetition/math500/summary.json) | [vllm==0.33.0](control3_repetition/math500/summary.json) | [23.8%](control3_repetition/math500/summary.json) | [96.7%](control3_repetition/math500/summary.json) | [75.6%](control3_repetition/math500/summary.json) | [122](control3_repetition/math500/summary.json) | [think35 plus repetition penalty 1.1](analysis/independent-results.json) |
+
+[Source verification, exact settings and limitations](analysis/independent-results.json). Different thinking modes, token caps, engines, sample counts and early-stop rules are separate conditions. An unavailable finished metric is not inferred from overall accuracy and cutoff share.
+
+### Questions about the result
+
+**Did the prompt point at the fix?**
+
+Yes. The verbatim task identifies repetition as an in-scope failure and names token-limit cutoffs as a diagnostic. It does not supply a direction or an edit. These are the actual sentences:
+
+> Repairing a specific failure mechanism is in scope: for example, if the model often fails because it repeats itself and never finishes, finding and fixing what drives that repetition counts. [Source](https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/message.txt#L5)
+
+> Global knobs (making the whole output distribution sharper or flatter) are not what we are looking for, and neither is making the model skip its thinking or close it early regardless of the problem; repairing a specific failure inside the thinking (such as repetition) is in scope. [Source](https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/message.txt#L5)
+
+> Look at how the model fails on practice problems: a wrong final answer, finishing without an answer, or being cut off at the token limit (often while repeating itself in its thinking). [Source](https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/message.txt#L19)
+
+[The published excerpt of the authors’ private results table](https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/RESULTS_excerpt.md#L3-L21) records [no submitted edit at 10 passes, but 14.1% MATH-500 at 25 passes](https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/eval/RESULTS_excerpt.md#L20-L21) for prompt v4, labeled shorter, DEV/HOLDOUT and no failure example. [The source also records older limits: 128 answers and no paired “both” request](https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/code/profiles.py#L109-L111). This changes several conditions and does not isolate the effect of removing the repetition example. The faithful run keeps the verbatim message.
+
+[The source audit](analysis/authors-source-verification.json) preserves exact quotations, hashes and the limits of these comparisons.
+
+**Is it abliteration?**
+
+It uses a related directional weight edit, but its coefficient is not the textbook orthogonal projection. The authors recorded [W' = W0 - 6 outer(u, mask64 * (uᵀ W0))](https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/tool_calls.jsonl#L150), with a separate unit direction for each target layer. [The selected 64 columns are in layers 15 and 19](https://github.com/RikiyaT/lm_understand-logs/blob/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/tool_calls.jsonl#L128).
+
+For a selected column and unit u, [uᵀw' = (1 − α)uᵀw](analysis/interpretation.json). Thus [α = 1 removes the parallel component, while α = 6 reverses it and multiplies it by 5](analysis/interpretation.json). This algebra explains the coefficient; it does not establish the behavioral mechanism.
+
+[CPU inspection finds rank 64 after bfloat16 rounding, with over 99.9991% of each p50c delta’s energy in its leading direction](inspection/p50c-vs-control2.json). The edits are approximately rank one, not exactly rank one as stored. [The p50c layer-to-layer absolute cosine is 0.8490; its same-layer cosines with the mechanical control are 0.3293 and 0.3879](inspection/p50c-vs-control2.json).
+
+[The limited logit lens](inspection/p50c-vs-control2.json) does not support strong alignment to the tested Wait, But, Hmm, So or Okay embedding rows, or the mean row. [Maximum named-token absolute cosines are 0.0203, 0.0390; mean-row absolute cosines are 0.0468, 0.0400](inspection/p50c-vs-control2.json). This does not rule out other token directions or a more distributed mechanism.
+
+**What is the primary metric?**
+
+For the mechanism question, report accuracy among finished answers together with the cap-hit rate. The faithful benchmark result remains accuracy over all samples, including capped ones. [accuracy_finished = finished_correct / finished_n](analysis/interpretation.json), where canonical `stop` samples finish and `length` samples hit the cap. An empty finished set has undefined accuracy.
+
+In local calibration, base finished accuracy is [100.0%](calibration_base/summary.json) over [34](calibration_base/summary.json) finished samples; p50c is [73.3%](calibration_p50c/summary.json) over [345](calibration_p50c/summary.json). Their cap-hit rates are [93.2%](calibration_base/summary.json) and [31.0%](calibration_p50c/summary.json). These are different subsets, so the conditional comparison does not establish a paired accuracy regression. [The recomputation audit](analysis/finished-metrics.json) retains sample hashes.
+
+A capped answer can still grade correct, so finished accuracy cannot be recovered by dividing overall accuracy by one minus the cap-hit rate. Full author termination records are unavailable; their finished metric remains pending.
+
+**What does the agent add over a script?**
+
+The released p50c edit reaches [50.6%](calibration_p50c/summary.json) versus [46.0%](control2_mechanical/math500/summary.json) for the mechanical control under the local think35 evaluation. The control borrows p50c’s column set and derives its direction from calibration answers on this benchmark. It is not a held-out discovery experiment.
+
+The agent-free 2c variant will select its own columns; its benchmark accuracy is pending. Until that comparison and the live attempt are complete, these results show that a simple directional intervention recovers much of the reported benchmark gain, not how much an agent adds over a fully independent script.
+
 
 | Stage | Benchmark | Recorded hours | Recorded cost (USD) |
 | --- | --- | --- | --- |
@@ -82,12 +156,6 @@ Recorded runtime and uncertainty:
 | control1_nothink | math500 | [0.236](control1_nothink/math500/summary.json) | [1.0059](control1_nothink/math500/summary.json) |
 | control2_mechanical | math500 | [0.447](control2_mechanical/math500/summary.json) | [1.9082](control2_mechanical/math500/summary.json) |
 | control3_repetition | math500 | [0.514](control3_repetition/math500/summary.json) | [2.1923](control3_repetition/math500/summary.json) |
-| damage_cpu_validation | pending | pending | pending |
-| eval_grid_cpu_validation | token_state_machine | pending | pending |
-| pending | pending | pending | pending |
-| pending | pending | pending | pending |
-| pending | pending | pending | pending |
-| pending | pending | pending | pending |
 
 Costs and durations come from the linked records. Missing costs are not treated as zero; rows are not summed because stages may overlap.
 
