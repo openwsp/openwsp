@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "stage": "damage_cpu_validation",
+  "status": "validated",
+  "checks": {
+    "identical_logits_zero": true,
+    "analytic_two_tokens": true,
+    "padding_excluded": true,
+    "chunk_equivalence": true,
+    "empty_mask_undefined_mean": true,
+    "large_offset_stable": true
+  },
+  "metric": "kl_base_to_edited",
+  "units": "nats",
+  "fixture": {
+    "token_count": 2,
+    "kl_sum": 0.465607322655471,
+    "kl_mean": 0.2328036613277355
+  },
+  "model_measurement": {
+    "status": "pending",
+    "kl_mean": null
+  },
+  "provenance": {
+    "synthetic": true,
+    "scope": "Analytic CPU array validation only; no model benchmark, training or GPU calls",
+    "mask_convention": "valid_mask selects logit positions after the causal next-token shift",
+    "command": "python -m replications.exp8.damage validate --output OUTPUT.json"
+  }
+}

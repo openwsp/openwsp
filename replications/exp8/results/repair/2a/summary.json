@@ -1,0 +1,60 @@
+{
+  "accuracy": null,
+  "accuracy_finished": null,
+  "alpha": 1.0,
+  "artifact_note": "The complete portable edit.npz and manifest.json are kept privately; this public manifest records its identity, not a complete standalone edit bundle.",
+  "build_status": "built",
+  "changed_entries_total": 6289541,
+  "changed_tensors": 2,
+  "column_rule": "all",
+  "edit_sha256": "b2e725c66a4108b12a7b119314ab5bd278851d5daa1a263c94f6d52014c60fb7",
+  "evaluation_status": "pending",
+  "format": "openwsp.repair.summary",
+  "format_version": 1,
+  "method_sha256": "aa1f67890d19c6080a13e390e63af9028263b895b2775809b44a7bb91c60ee42",
+  "private_bundle_path": ".openwsp/repair-build/2a/edit",
+  "provenance": {
+    "activation_reduction": "Equal-weight answer means over first 8192 answer tokens; looping = length-cut and duplicate final-tail 8-gram share >=0.5; finished = stop. No correctness labels used.",
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "base_revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "benchmark_reuse": "MATH-500 calibration answers define this diagnostic control; it is not a held-out estimate.",
+    "counts": {
+      "finished": 34,
+      "looping": 450
+    },
+    "limitation": "Saved directions only; input contrast unavailable. Published columns are ignored.",
+    "saved_method_sha256": "6c0bb6e3e9162cdb302550893e9320dec2c8d1b745768c2148004bce6439428b",
+    "source": ".openwsp/research-control2-method.json"
+  },
+  "provenance_sha256": "85197e9dbd578cb237f1332dc1320ea7c6eb5357a1ab8dbe6d26be4db8bb4eb8",
+  "public_edit_manifest": "edit-manifest.json",
+  "tensor_summaries": [
+    {
+      "base_sha256": "ef60d2c687bab19464dca9c8bfd7777e46ad226df0c9e25643b0bab04b5a1cca",
+      "changed_columns": 3584,
+      "changed_entries": 3176164,
+      "changed_rows": 1024,
+      "edited_sha256": "d061abc1f992d1a5ce4a68eb06cba86cc8d3595d270bc051e784801ec4071ca6",
+      "name": "model.language_model.layers.15.mlp.down_proj.weight",
+      "relative_change": 0.04242553706508685,
+      "shape": [
+        1024,
+        3584
+      ]
+    },
+    {
+      "base_sha256": "638eedeb701b94aa861f4438e615c07ec6c60ee703db1bfee2de577bb6498c3e",
+      "changed_columns": 3583,
+      "changed_entries": 3113377,
+      "changed_rows": 1024,
+      "edited_sha256": "e93c27eb3f4b7003f357eb9d97676e758f7e3cd772c49fb69bb329f949ecd6a1",
+      "name": "model.language_model.layers.19.mlp.down_proj.weight",
+      "relative_change": 0.04363038613679075,
+      "shape": [
+        1024,
+        3584
+      ]
+    }
+  ],
+  "top_k": null
+}

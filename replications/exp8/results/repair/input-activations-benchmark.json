@@ -1,0 +1,115 @@
+{
+  "benchmark_examples": [
+    {
+      "group": "finished",
+      "id": "test/precalculus/807.json",
+      "mean_arrays_sha256": "50732c08befc6469892a89f686f48b3fe14019a3b22c65ade68529931c7c9631",
+      "prompt_sha256": "6f533ecff8ed829f5a77231fd71a61a93c67b84c88e7869ad2f485aac7f647e0",
+      "seconds": 50.38835131200176,
+      "text_sha256": "6b20079330481d0b4110f54b06744baeed31f516fc60204d459205484cbc0e02",
+      "tokens": {
+        "answer_tokens": 4487,
+        "input_ids_sha256": "66fc008b4073d1a39609f560b0d3600e86c72eff9680e9760ab9b466cd579df7",
+        "prompt_tokens": 73
+      }
+    },
+    {
+      "group": "looping",
+      "id": "test/intermediate_algebra/1994.json",
+      "mean_arrays_sha256": "c5bcf1b678b96c6e3b108b99a9f6999d33396d7e098c0a1dcf820ac5d8e49ba2",
+      "prompt_sha256": "e82c96bc2f3cba39a4b7adbb17c82920077905b2422a34d4b682f630acace3f1",
+      "seconds": 96.85976925700015,
+      "text_sha256": "30a463767bf240c1b7d770519672ea187463a7cc5fe7c9d3340219d17f885391",
+      "tokens": {
+        "answer_tokens": 8192,
+        "input_ids_sha256": "f21b70a4381e4a3af314ea47c02add7e316e7302803ed457e91d98e59ace4003",
+        "prompt_tokens": 136
+      }
+    },
+    {
+      "group": "looping",
+      "id": "test/algebra/2584.json",
+      "mean_arrays_sha256": "70004f039c20e5835b6e43c1547e3dee2f2193e953658505c5db4dd03e246adf",
+      "prompt_sha256": "a66cbc69fc22b83754dca90b69751bfe4b7b87e591cb5c8e030173d074d2c657",
+      "seconds": 94.22534543700021,
+      "text_sha256": "3af0c9fa70a51f55ce1714a792b6a6bc0ad2eea2dd0ab13f8ed11ee123038bfc",
+      "tokens": {
+        "answer_tokens": 8192,
+        "input_ids_sha256": "c37dd33fbb32140ecc354776b528a7829191fb65df9ede65953c08ff6ada2b78",
+        "prompt_tokens": 73
+      }
+    },
+    {
+      "group": "looping",
+      "id": "test/number_theory/572.json",
+      "mean_arrays_sha256": "8ca9ac2327856191ed83b170036aa527c441b1109df789c92c539e31fa89679a",
+      "prompt_sha256": "8ef9cb33cf86b26457246222ee20a46d942ee75b6db66ab9173173aef32df07f",
+      "seconds": 122.39738570400004,
+      "text_sha256": "0e940dc1e8cc1465e9689b040743934c1fff816f484d322c321e1e7aeaed6a7e",
+      "tokens": {
+        "answer_tokens": 8192,
+        "input_ids_sha256": "05e7268f6224b0d9a58fe9bb8928527293c2a3843fda7b779bf6157a9b55e6c3",
+        "prompt_tokens": 40
+      }
+    }
+  ],
+  "counts": {
+    "finished": 1,
+    "looping": 3
+  },
+  "estimate_note": "Four selected real examples on two CPU threads. This extrapolation is not a completed full extraction and varies with shared CPU load. One finished example cannot characterize the finished-group length distribution.",
+  "estimated_total_seconds_by_example_count": 44028.37305691026,
+  "estimated_total_seconds_by_group": 48735.57900430812,
+  "extraction_code_sha256": "bf6a0b275ff988192871ec70449254ea0d9899f2cd56f9e19e1282a7ee070401",
+  "format": "openwsp.repair.input-activations.summary",
+  "format_version": 1,
+  "full_extraction_status": "not_started",
+  "input_reduction": "down_proj input float16 intermediate, NumPy float32 per-example answer mean, float64 group sums",
+  "measured_seconds": 363.87085171000217,
+  "measured_tokens": 29385,
+  "model_inference": "CPU text decoder only, no vocabulary logits or generation",
+  "no_new_repair_score": true,
+  "output_directions": "Saved control2 directions held fixed; no direction or column mask fitted on benchmark results.",
+  "private_receipts": ".openwsp/repair-input-means",
+  "processed": 4,
+  "provenance": {
+    "attention": "sdpa",
+    "benchmarks_sha256": "0baf4950c69ab971f1b45437b965927e5a2a8fda0d2c884c408c9b9c087fca84",
+    "checkpoint_files": {
+      "model.safetensors-00001-of-00001.safetensors": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696"
+    },
+    "cpu_threads": 2,
+    "dtype": "bfloat16",
+    "model_assets": {
+      "config.json": "b90b86f35c8e6925ef74ee04d0e758f0a845c83a42089ad82bbaa948de9b4204",
+      "model.safetensors.index.json": "d8a08838a613b025eb7952ed9db11696213e57e76a375661ef5c12f9dd5dcf4e",
+      "preprocessor_config.json": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "49e2b6e395f959f077f1e992b338919c0d4a9732fc6e613995e06557f843500c",
+      "video_preprocessor_config.json": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13",
+      "vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+    },
+    "output_directions": "Saved control2 directions are reused unchanged; no output-direction recomputation",
+    "raw_sha256": "a3747efa060b0850f1896888332a49437825077f8d81540ee29e4cafb0d68aed",
+    "saved_method_sha256": "6c0bb6e3e9162cdb302550893e9320dec2c8d1b745768c2148004bce6439428b",
+    "selection_rule": "stop-finished vs length-cut with duplicate final-tail 8-gram share >=0.5, original calibration order",
+    "torch": "2.15.0+cpu",
+    "transformers": "5.17.0"
+  },
+  "resources": {
+    "cpu.max": "400000 100000",
+    "memory.current": "7830810624",
+    "memory.max": "17179869184",
+    "memory.peak": "8767127552",
+    "peak_process_rss_bytes": 2878922752
+  },
+  "selected": 484,
+  "selected_group_counts": {
+    "finished": 34,
+    "looping": 450
+  },
+  "selection_sha256": "b07811afc9f310b6054e3a83a5b85a4ba322634b2e3ca060c6e7d25ddecc86aa",
+  "stage": "repair_input_activation_cpu_benchmark",
+  "status": "benchmark_only",
+  "template_file_sha256": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80"
+}

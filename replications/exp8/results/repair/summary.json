@@ -1,0 +1,59 @@
+{
+  "dose_sweep": "dose-sweep.json",
+  "format": "openwsp.repair.variants",
+  "format_version": 1,
+  "interpretation": "2a and 2b are actual CPU-built edits on the pinned base using saved mechanical control2 directions. No new model inference, scoring or activation extraction occurred. 2c and all dose scores remain pending.",
+  "status": "cpu_builds_only",
+  "test_evidence": {
+    "command": "OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 .venv/bin/python -m pytest -q tests/test_exp8_repair.py",
+    "passed": 15
+  },
+  "variants": {
+    "2a": {
+      "accuracy": null,
+      "accuracy_finished": null,
+      "alpha": 1.0,
+      "build_status": "built",
+      "changed_entries_total": 6289541,
+      "changed_tensors": 2,
+      "column_rule": "all",
+      "edit_sha256": "b2e725c66a4108b12a7b119314ab5bd278851d5daa1a263c94f6d52014c60fb7",
+      "evaluation_status": "pending",
+      "format": "openwsp.repair.summary",
+      "format_version": 1,
+      "method_sha256": "aa1f67890d19c6080a13e390e63af9028263b895b2775809b44a7bb91c60ee42",
+      "private_bundle_path": ".openwsp/repair-build/2a/edit",
+      "provenance_sha256": "85197e9dbd578cb237f1332dc1320ea7c6eb5357a1ab8dbe6d26be4db8bb4eb8",
+      "summary_path": "2a/summary.json",
+      "top_k": null
+    },
+    "2b": {
+      "accuracy": null,
+      "accuracy_finished": null,
+      "alpha": 6.0,
+      "build_status": "built",
+      "changed_entries_total": 7077322,
+      "changed_tensors": 2,
+      "column_rule": "all",
+      "edit_sha256": "28c2190d11505f90bd924a533165b719d213c2b6549982b8be3a4a1a7709820d",
+      "evaluation_status": "pending",
+      "format": "openwsp.repair.summary",
+      "format_version": 1,
+      "method_sha256": "c690e1b64966daf0c8e3c105261d9d39f716a3804e240b2d15b5b151180f8d49",
+      "private_bundle_path": ".openwsp/repair-build/2b/edit",
+      "provenance_sha256": "85197e9dbd578cb237f1332dc1320ea7c6eb5357a1ab8dbe6d26be4db8bb4eb8",
+      "summary_path": "2b/summary.json",
+      "top_k": null
+    },
+    "2c": {
+      "accuracy": null,
+      "accuracy_finished": null,
+      "alpha": 6.0,
+      "build_status": "unavailable_input_statistics",
+      "column_rule": "topk",
+      "evaluation_status": "pending",
+      "reason": "Saved control2 method supplies output directions but not input activation mean differences. No published column mask is substituted.",
+      "top_k": 64
+    }
+  }
+}
