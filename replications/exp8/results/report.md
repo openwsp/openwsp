@@ -56,32 +56,32 @@ Costs and durations come from the linked records. Missing costs are not treated 
 
 Budget ledger: [source](costs.json). Reservations are retained bounds, not charges.
 
-| Budget / stage | State | Recorded hours | Settled amount (USD) | Reserved bound (USD) | Basis |
-| --- | --- | --- | --- | --- | --- |
-| editor / editor turns | [settled](costs.json) | [0.039](costs.json) | [0.4280](costs.json) | pending | [API usage and recorded token rates](costs.json) |
-| modal / all | [reserved](costs.json) | pending | pending | [1.9060](costs.json) | [resource estimate; not invoice](costs.json) |
-| modal / all | [settled](costs.json) | [0.491](costs.json) | [0.0390](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
-| modal / calibration | [settled](costs.json) | [0.906](costs.json) | [0.0718](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
-| modal / calibration_base | [settled](costs.json) | [0.499](costs.json) | [2.1280](costs.json) | pending | [resource estimate; not invoice](costs.json) |
-| modal / calibration_base_smoke | [reserved](costs.json) | pending | pending | [2.2758](costs.json) | [resource estimate; not invoice](costs.json) |
-| modal / calibration_base_smoke | [settled](costs.json) | [0.105](costs.json) | [0.4496](costs.json) | pending | [resource estimate; not invoice](costs.json) |
-| modal / calibration_p50c | [settled](costs.json) | [0.293](costs.json) | [1.2512](costs.json) | pending | [resource estimate; not invoice](costs.json) |
-| modal / calibration_p50c_smoke | [settled](costs.json) | [0.099](costs.json) | [0.4228](costs.json) | pending | [resource estimate; not invoice](costs.json) |
-| modal / infrastructure | [reserved](costs.json) | pending | pending | [2.0000](costs.json) | [resource estimate; not invoice](costs.json) |
-| modal / kernel | [settled](costs.json) | [0.205](costs.json) | [0.0163](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
-| modal / kernel_verification:heartbeat | [settled](costs.json) | [0.003](costs.json) | [0.0073](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
-| modal / kernel_verification:startup | [settled](costs.json) | [0.004](costs.json) | [0.0092](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
-| modal / live/fwd_1/original/activations/openwsp-gpu:412d8691f5574c15a0b8d5ab47a99415:0 | [settled](costs.json) | [0.700](costs.json) | [2.9870](costs.json) | pending | [resource estimate; not invoice](costs.json) |
-| modal / live/fwd_1/original/openwsp-gpu:e382217120784a58b0cb6b8d80fa71e1:0 | [settled](costs.json) | [0.388](costs.json) | [1.6550](costs.json) | pending | [resource estimate; not invoice](costs.json) |
-| modal / live/fwd_2/original/openwsp-gpu:6df93dd4a722479d89a783fc1cff9ddd:0 | [reserved](costs.json) | pending | pending | [2.9870](costs.json) | [resource estimate; not invoice](costs.json) |
-| modal / prepare | [settled](costs.json) | [0.010](costs.json) | [0.0016](costs.json) | pending | [resource estimate; not invoice](costs.json) |
-| modal / prepare-v2 | [settled](costs.json) | [0.038](costs.json) | [0.0060](costs.json) | pending | [resource estimate; not invoice](costs.json) |
-| modal / sandbox:heartbeat | [reserved](costs.json) | pending | pending | [0.2157](costs.json) | [resource estimate; not invoice](costs.json) |
-| modal / sandbox:heartbeat | [settled](costs.json) | [0.934](costs.json) | [2.4163](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
-| modal / sandbox:startup | [settled](costs.json) | [0.009](costs.json) | [0.0226](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
-| modal / verify/attention/openwsp-gpu:5072ca485aba4672a75e1bda85d260bf:0 | [settled](costs.json) | [0.038](costs.json) | [0.1626](costs.json) | pending | [resource estimate; not invoice](costs.json) |
-| modal / verify/fresh-reference/openwsp-gpu:3c4cb1f5c3f949cfb7a7dfb258fcdfd9:0 | [settled](costs.json) | [0.086](costs.json) | [0.3677](costs.json) | pending | [resource estimate; not invoice](costs.json) |
-| modal / verify/native-swap/openwsp-gpu:14322bc224b641a08e8fe7e8bd3268a7:0 | [settled](costs.json) | [0.097](costs.json) | [0.4123](costs.json) | pending | [resource estimate; not invoice](costs.json) |
-| modal / verify/teacher-forced/openwsp-gpu:7e5f28f65a2246f8ae27081745329234:0 | [settled](costs.json) | [0.038](costs.json) | [0.1635](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| Budget / stage / operation | State | Receipts | Recorded hours | Settled amount (USD) | Reserved bound (USD) | Basis |
+| --- | --- | --- | --- | --- | --- | --- |
+| editor / editor turns | [settled](costs.json) | [5](costs.json) | [0.039](costs.json) | [0.4280](costs.json) | pending | [API usage and recorded token rates](costs.json) |
+| modal / all | [reserved](costs.json) | [1](costs.json) | pending | pending | [1.9060](costs.json) | [resource estimate; not invoice](costs.json) |
+| modal / all | [settled](costs.json) | [1](costs.json) | [0.491](costs.json) | [0.0390](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
+| modal / calibration | [settled](costs.json) | [1](costs.json) | [0.906](costs.json) | [0.0718](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
+| modal / calibration_base | [settled](costs.json) | [1](costs.json) | [0.499](costs.json) | [2.1280](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / calibration_base_smoke | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.2758](costs.json) | [resource estimate; not invoice](costs.json) |
+| modal / calibration_base_smoke | [settled](costs.json) | [1](costs.json) | [0.105](costs.json) | [0.4496](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / calibration_p50c | [settled](costs.json) | [1](costs.json) | [0.293](costs.json) | [1.2512](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / calibration_p50c_smoke | [settled](costs.json) | [1](costs.json) | [0.099](costs.json) | [0.4228](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / infrastructure | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.0000](costs.json) | [resource estimate; not invoice](costs.json) |
+| modal / kernel | [settled](costs.json) | [1](costs.json) | [0.205](costs.json) | [0.0163](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
+| modal / kernel_verification:heartbeat | [settled](costs.json) | [2](costs.json) | [0.003](costs.json) | [0.0073](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
+| modal / kernel_verification:startup | [settled](costs.json) | [1](costs.json) | [0.004](costs.json) | [0.0092](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
+| modal / live / activation extraction / original | [settled](costs.json) | [1](costs.json) | [0.700](costs.json) | [2.9870](costs.json) | pending | [failed job upper bound; not invoice](costs.json) |
+| modal / live / generation / original | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.9870](costs.json) | [resource estimate; not invoice](costs.json) |
+| modal / live / generation / original | [settled](costs.json) | [1](costs.json) | [0.388](costs.json) | [1.6550](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / prepare | [settled](costs.json) | [1](costs.json) | [0.010](costs.json) | [0.0016](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / prepare-v2 | [settled](costs.json) | [1](costs.json) | [0.038](costs.json) | [0.0060](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / sandbox:heartbeat | [reserved](costs.json) | [1](costs.json) | pending | pending | [0.2157](costs.json) | [resource estimate; not invoice](costs.json) |
+| modal / sandbox:heartbeat | [settled](costs.json) | [57](costs.json) | [0.934](costs.json) | [2.4163](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
+| modal / sandbox:startup | [settled](costs.json) | [2](costs.json) | [0.009](costs.json) | [0.0226](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
+| modal / verify / attention | [settled](costs.json) | [1](costs.json) | [0.038](costs.json) | [0.1626](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / verify / fresh-reference | [settled](costs.json) | [1](costs.json) | [0.086](costs.json) | [0.3677](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / verify / native-swap | [settled](costs.json) | [1](costs.json) | [0.097](costs.json) | [0.4123](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / verify / teacher-forced | [settled](costs.json) | [1](costs.json) | [0.038](costs.json) | [0.1635](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 
-Ledger rows and evaluation summaries may describe the same jobs; do not add the two tables. Summed resource hours are not end-to-end wall time. Settled resource estimates remain estimates until reconciled with provider billing.
+Repeated requests, attempts and batches are grouped by stage and operation; the linked ledger retains each receipt. Ledger rows and evaluation summaries may describe the same jobs; do not add the two tables. Summed resource hours are not end-to-end wall time. Settled resource estimates remain estimates until reconciled with provider billing.

@@ -174,6 +174,80 @@ def test_cost_ledger_separates_settled_estimates_and_reserved_bounds(tmp_path):
     assert len(generated["sources"]) == 2
 
 
+def test_costs_aggregate_requests_and_batches_without_merging_conditions_or_bases(tmp_path):
+    results = setup_repo(tmp_path)
+    reservations = {}
+
+    def receipt(stage, amount, *, seconds=1200, status="settled", metadata=None):
+        reservations[str(len(reservations))] = {
+            "kind": "modal", "stage": stage, "status": status, "seconds": seconds,
+            "actual_usd" if status == "settled" else "upper_bound_usd": str(amount),
+            "receipt_metadata": metadata or {},
+        }
+
+    # Two attempts for one request and a later request share one operation row.
+    receipt("live/fwd_1/original/openwsp-gpu:aaa:0", 1)
+    receipt("live/fwd_1/original/openwsp-gpu:aaa:1", 2)
+    receipt("live/fwd_2/original/openwsp-gpu:bbb:0", 3)
+    receipt("live/fwd_3/original/openwsp-gpu:ccc:0", 4, status="reserved", seconds=None)
+    receipt("live/fwd_4/original/openwsp-gpu:ddd:0", 5, metadata={"failed_job_upper_bound": True})
+    receipt("live/fwd_5/original/openwsp-gpu:eee:0", 6, metadata={"invoice": True})
+    receipt("live/fwd_6/original/openwsp-gpu:fff:0", 7,
+            metadata={"source": "cancelled_gpu_resource_upper_bound_not_invoice"})
+    receipt("live/fwd_1/edited/openwsp-gpu:ggg:0", 2)
+    receipt("live/fwd_2/edited/fresh-fallback/openwsp-gpu:hhh:0", 3)
+    receipt("live/fwd_1/original/activations/openwsp-gpu:iii:0", 2)
+    receipt("live/fwd_2/original/activations/openwsp-gpu:jjj:0", 3)
+    receipt("live/fwd_7/teacher_forced/openwsp-gpu:kkk:0", 0.5)
+    receipt("live/fwd_8/teacher_forced/openwsp-gpu:lll:0", 1)
+    for condition, benchmark in [
+        ("live-run", "math500"), ("live-run", "gsm8k"),
+        ("control1_nothink", "math500"), ("control2_mechanical", "math500"),
+        ("calibration_base", "math500"), ("calibration_p50c", "math500"),
+    ]:
+        receipt(f"evaluation/{condition}/{benchmark}/batch_000/openwsp-gpu:mmm:0", 1)
+        receipt(f"evaluation/{condition}/{benchmark}/batch_001/openwsp-gpu:nnn:0", 2)
+    receipt("evaluation/live-run/math500/smoke/openwsp-gpu:ooo:0", 0.25)
+    receipt("control2/directions/batch_000/openwsp-gpu:ppp:0", 0.1)
+    receipt("control2/directions/batch_001/openwsp-gpu:qqq:0", 0.2)
+    receipt("control2/directions/smoke/openwsp-gpu:rrr:0", 0.05)
+    ledger = results / "costs.json"
+    write_json(ledger, {"reservations": reservations})
+    original_ledger = ledger.read_bytes()
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    rows = [line for line in text.splitlines() if line.startswith("| modal /")]
+    source = "replications/exp8/results/costs.json"
+
+    def group(stage, state="settled", basis="resource estimate; not invoice"):
+        matches = [line for line in rows if line.startswith(f"| modal / {stage} | [{state}]")
+                   and f"[{basis}]({source})" in line]
+        assert len(matches) == 1
+        return matches[0]
+
+    generation = group("live / generation / original")
+    assert f"[3]({source})" in generation  # Receipts, including both attempts.
+    assert f"[1.000]({source})" in generation  # Sum of all three resource durations.
+    assert f"[6.0000]({source})" in generation
+    reserved = group("live / generation / original", "reserved")
+    assert f"[1]({source}) | pending | pending | [4.0000]({source})" in reserved
+    assert f"[5.0000]({source})" in group("live / generation / original", basis="failed job upper bound; not invoice")
+    assert f"[6.0000]({source})" in group("live / generation / original", basis="provider invoice")
+    assert f"[7.0000]({source})" in group("live / generation / original", basis="cancelled job upper bound; not invoice")
+    assert f"[5.0000]({source})" in group("live / generation / edited")
+    assert f"[5.0000]({source})" in group("live / activation extraction / original")
+    assert f"[1.5000]({source})" in group("live / teacher-forced")
+    for stage in ("live-run / math500", "live-run / gsm8k", "control1_nothink / math500",
+                  "control2_mechanical / math500", "calibration_base / math500", "calibration_p50c / math500"):
+        assert f"[2]({source})" in group(stage + " / evaluation")
+        assert f"[3.0000]({source})" in group(stage + " / evaluation")
+    assert f"[0.2500]({source})" in group("live-run / math500 / evaluation smoke")
+    assert f"[0.3000]({source})" in group("control2 / directions")
+    assert f"[0.0500]({source})" in group("control2 / directions smoke")
+    assert "openwsp-gpu:" not in text and "fwd_" not in text and "batch_" not in text
+    assert ledger.read_bytes() == original_ledger
+
+
 @pytest.mark.parametrize("amount", ["NaN", "-1", True])
 def test_invalid_settled_ledger_does_not_replace_published_files(tmp_path, amount):
     results = setup_repo(tmp_path)

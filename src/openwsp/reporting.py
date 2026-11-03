@@ -248,6 +248,41 @@ def _results_table(
     return "\n".join(lines)
 
 
+def _cost_stage(stage: str) -> str:
+    """Group known job identities without merging conditions or benchmarks."""
+    stage = re.sub(r"/openwsp-gpu:[A-Za-z0-9_-]+:\d+$", "", stage)
+    live = re.fullmatch(r"live/fwd_\d+/(original|edited)(?:/(activations|fresh-fallback))?", stage)
+    if live:
+        model, operation = live.groups()
+        operation = "activation extraction" if operation == "activations" else "generation"
+        return f"live / {operation} / {model}"
+    if re.fullmatch(r"live/fwd_\d+/teacher_forced", stage):
+        return "live / teacher-forced"
+    evaluation = re.fullmatch(r"evaluation/([^/]+)/([^/]+)/(batch_\d+|smoke)", stage)
+    if evaluation:
+        condition, benchmark, batch = evaluation.groups()
+        operation = "evaluation smoke" if batch == "smoke" else "evaluation"
+        return f"{condition} / {benchmark} / {operation}"
+    directions = re.fullmatch(r"control2/directions/(batch_\d+|smoke)", stage)
+    if directions:
+        return "control2 / directions smoke" if directions[1] == "smoke" else "control2 / directions"
+    return stage.replace("/", " / ")
+
+
+def _cost_basis(row: dict[str, Any], kind: str) -> str:
+    receipt = row.get("receipt_metadata") or {}
+    basis = receipt.get("billing_basis") or receipt.get("cost_basis")
+    if basis:
+        return str(basis)
+    if receipt.get("invoice") is True:
+        return "provider invoice"
+    if receipt.get("failed_job_upper_bound") is True:
+        return "failed job upper bound; not invoice"
+    if receipt.get("source") == "cancelled_gpu_resource_upper_bound_not_invoice":
+        return "cancelled job upper bound; not invoice"
+    return "API usage and recorded token rates" if kind == "editor" else "resource estimate; not invoice"
+
+
 def _costs_table(summaries: list[tuple[Path, dict[str, Any]]], relative_to: Path,
                  ledgers: list[tuple[Path, dict]] | None = None) -> str:
     lines = [
@@ -284,18 +319,13 @@ def _costs_table(summaries: list[tuple[Path, dict[str, Any]]], relative_to: Path
             if not isinstance(row, dict):
                 raise TypeError(f"Cost ledger entries must be objects in {path}")
             kind = row.get("kind", "pending")
-            stage = str(row.get("stage", "pending"))
-            if kind == "editor":
-                stage = "editor turns"
-            receipt = row.get("receipt_metadata") or {}
-            basis = receipt.get("billing_basis") or receipt.get("cost_basis")
-            if not basis:
-                basis = "API usage and recorded token rates" if kind == "editor" else "resource estimate; not invoice"
-            key = (kind, stage, row.get("status", "unspecified"), str(basis))
+            stage = "editor turns" if kind == "editor" else _cost_stage(str(row.get("stage", "pending")))
+            basis = _cost_basis(row, kind)
+            key = (kind, stage, row.get("status", "unspecified"), basis)
             groups.setdefault(key, []).append(row)
         lines += ["", f"Budget ledger: [source]({_link(path, relative_to)}). Reservations are retained bounds, not charges.", "",
-                  "| Budget / stage | State | Recorded hours | Settled amount (USD) | Reserved bound (USD) | Basis |",
-                  "| --- | --- | --- | --- | --- | --- |"]
+                  "| Budget / stage / operation | State | Receipts | Recorded hours | Settled amount (USD) | Reserved bound (USD) | Basis |",
+                  "| --- | --- | --- | --- | --- | --- | --- |"]
         for (kind, stage, status, basis), rows in sorted(groups.items()):
             seconds = [_ledger_number(row.get("seconds"), path) for row in rows]
             duration = sum(seconds) / 3600 if all(value is not None for value in seconds) else None
@@ -305,12 +335,14 @@ def _costs_table(summaries: list[tuple[Path, dict[str, Any]]], relative_to: Path
             reserved = sum(bounds) if status == "reserved" and all(value is not None for value in bounds) else None
             lines.append("| " + " | ".join((
                 _text(f"{kind} / {stage}"), _recorded(status, path, relative_to),
+                _metric(len(rows), path, relative_to, digits=0),
                 _metric(duration, path, relative_to, digits=3), _metric(settled, path, relative_to, digits=4),
                 _metric(reserved, path, relative_to, digits=4), _recorded(basis, path, relative_to),
             )) + " |")
         if not groups:
-            lines.append("| No recorded jobs | pending | pending | pending | pending | Ledger has no receipts. |")
-        lines += ["", ("Ledger rows and evaluation summaries may describe the same jobs; do not add the two tables. "
+            lines.append("| No recorded jobs | pending | pending | pending | pending | pending | Ledger has no receipts. |")
+        lines += ["", ("Repeated requests, attempts and batches are grouped by stage and operation; the linked ledger retains each receipt. "
+                       "Ledger rows and evaluation summaries may describe the same jobs; do not add the two tables. "
                        "Summed resource hours are not end-to-end wall time. Settled resource estimates remain estimates until reconciled with provider billing.")]
     return "\n".join(lines)
 
