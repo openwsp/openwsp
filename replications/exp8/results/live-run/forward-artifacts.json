@@ -701,6 +701,24 @@
           "volume_path": "/live/fwd_4/meta.json"
         }
       ]
+    },
+    {
+      "request": 5,
+      "volume": "openwsp-exp8-work",
+      "files": [
+        {
+          "path": "/work/gen_5_original.jsonl",
+          "bytes": 3253183,
+          "sha256": "d9b9b5fae6a56395c672c02febcd851f3113e76aed719ad52ac92c709d1fa853",
+          "volume_path": "/live/gen_5_original.jsonl"
+        },
+        {
+          "path": "/work/gen_5_edited.jsonl",
+          "bytes": 2937679,
+          "sha256": "d341f379bf927eb944aabc891ce6c8fcf913cb3758edb20eb36c00a76dc87ecd",
+          "volume_path": "/live/gen_5_edited.jsonl"
+        }
+      ]
     }
   ]
 }
