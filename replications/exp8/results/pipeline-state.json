@@ -1,9 +1,9 @@
 {
-  "status": "blocked",
-  "active_stage": "live",
-  "heartbeat": 1793705254.2472003,
-  "error": "BudgetExceeded: editor stage editor:t027: reserve $30.478625, only $21.7072350 available",
-  "error_type": "BudgetExceeded",
+  "status": "stage_done",
+  "active_stage": "publication",
+  "heartbeat": 1793711460.181465,
+  "error": null,
+  "error_type": null,
   "budget": {
     "editor": {
       "spent_usd": 78.292765,
@@ -11,9 +11,9 @@
       "available_usd": 21.707235
     },
     "modal": {
-      "spent_usd": 20.367421013461303,
+      "spent_usd": 29.878994242546476,
       "reserved_usd": 6.181793472222222,
-      "available_usd": 15.400785514316475
+      "available_usd": 5.889212285231301
     }
   },
   "controls_deferred": "Current verified allowance preserves priority for the live run and its evaluation. Controls resume afterward."

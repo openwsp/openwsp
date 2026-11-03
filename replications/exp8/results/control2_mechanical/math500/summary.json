@@ -1,0 +1,56 @@
+{
+  "status": "done",
+  "stage": "control2_mechanical",
+  "model": "Qwen/Qwen3.5-0.8B",
+  "benchmark": "math500",
+  "samples_per_problem": 1,
+  "n": 500,
+  "correct": 230,
+  "accuracy": 0.46,
+  "standard_error": 0.022289010745208053,
+  "mean_tokens": 23049.566,
+  "cut_share": 0.452,
+  "seconds": 1609.877427444,
+  "cost_usd": 1.908241377330288,
+  "provenance": {
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "sampling": {
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "top_k": 20,
+      "presence_penalty": 1.5,
+      "max_tokens": 32768,
+      "seed": 0,
+      "n": 1
+    },
+    "thinking": true,
+    "gpu": "H100",
+    "engine": "vllm==0.33.0",
+    "engine_settings": {
+      "dtype": "bfloat16",
+      "gpu_memory_utilization": 0.85,
+      "language_model_only": true,
+      "max_model_len": 34816,
+      "max_num_seqs": 128,
+      "prefix_caching": false
+    },
+    "seconds_basis": "accounted_resource_seconds_including_margins_and_cancelled_attempts",
+    "container_seconds": 693.898981079,
+    "transformers": "5.17.0",
+    "batch_generations": 256,
+    "standard_error": "binomial_per_sample",
+    "smoke_included_in_score": false,
+    "batches": [
+      {
+        "gpu": "H100",
+        "seconds": 815.898981079,
+        "cost_usd": 0.9671122589056413
+      },
+      {
+        "gpu": "H100",
+        "seconds": 793.978446365,
+        "cost_usd": 0.9411291184246466
+      }
+    ]
+  }
+}

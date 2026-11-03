@@ -6,8 +6,7 @@
 | Live pass requirement | [4](live-run/blocker.json) / [50](live-run/blocker.json) | Recorded turn: [26](live-run/blocker.json) |
 | Live final evaluation | [not_started_no_completed_50_pass_submission](live-run/blocker.json) | See live-run record. |
 | Recorded live blocker | [BudgetExceeded: editor stage editor:t027: reserve $30.478625, only $21.7072350 available](live-run/blocker.json) | See live-run record. |
-| Pipeline | [blocked](pipeline-state.json) | [live](pipeline-state.json) |
-| Recorded blocker | [BudgetExceeded: editor stage editor:t027: reserve $30.478625, only $21.7072350 available](pipeline-state.json) | See source record. |
+| Pipeline | [stage_done](pipeline-state.json) | [publication](pipeline-state.json) |
 | Driver recovery | [blocked](coordinator.json) | [all](coordinator.json) |
 | Recorded blocker | [Pipeline blocked; previous owner reconciled and automatic restart disabled](coordinator.json) | See source record. |
 | Calibration prompt audit | [passed](calibration-prompt-audit.json) | [calibration-prompt-audit.json](calibration-prompt-audit.json) |
@@ -38,6 +37,9 @@ Our evaluations and controls (controls are ours):
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | calibration_base | Qwen/Qwen3.5-0.8B | math500 | unedited: [7.9%](../reference/unedited.json) | [7.2%](calibration_base/summary.json) | [1.16%](calibration_base/summary.json) | [500](calibration_base/summary.json) | [93.2%](calibration_base/summary.json) | [done](calibration_base/summary.json) |
 | calibration_p50c | Qwen/Qwen3.5-0.8B | math500 | p50c: [48.1%](../reference/p50c.json) | [50.6%](calibration_p50c/summary.json) | [2.24%](calibration_p50c/summary.json) | [500](calibration_p50c/summary.json) | [31.0%](calibration_p50c/summary.json) | [done](calibration_p50c/summary.json) |
+| control1_nothink | Qwen/Qwen3.5-0.8B | math500 | not applicable | [46.8%](control1_nothink/math500/summary.json) | [2.23%](control1_nothink/math500/summary.json) | [500](control1_nothink/math500/summary.json) | [0.6%](control1_nothink/math500/summary.json) | [done](control1_nothink/math500/summary.json) |
+| control2_mechanical | Qwen/Qwen3.5-0.8B | math500 | not applicable | [46.0%](control2_mechanical/math500/summary.json) | [2.23%](control2_mechanical/math500/summary.json) | [500](control2_mechanical/math500/summary.json) | [45.2%](control2_mechanical/math500/summary.json) | [done](control2_mechanical/math500/summary.json) |
+| control3_repetition | Qwen/Qwen3.5-0.8B | math500 | not applicable | [23.8%](control3_repetition/math500/summary.json) | [1.90%](control3_repetition/math500/summary.json) | [500](control3_repetition/math500/summary.json) | [75.6%](control3_repetition/math500/summary.json) | [done](control3_repetition/math500/summary.json) |
 
 Only recorded values are shown. Missing fields remain pending; partial runs retain their recorded status.
 
@@ -54,11 +56,17 @@ Recorded runtime and uncertainty:
 | --- | --- | --- | --- | --- |
 | calibration_base / math500 | [vllm==0.33.0](calibration_base/summary.json) | [H100](calibration_base/summary.json) | [5.17.0](calibration_base/summary.json) | pending |
 | calibration_p50c / math500 | [vllm==0.33.0](calibration_p50c/summary.json) | [H100](calibration_p50c/summary.json) | [5.17.0](calibration_p50c/summary.json) | pending |
+| control1_nothink / math500 | [vllm==0.33.0](control1_nothink/math500/summary.json) | [H100](control1_nothink/math500/summary.json) | [5.17.0](control1_nothink/math500/summary.json) | [binomial_per_sample](control1_nothink/math500/summary.json) |
+| control2_mechanical / math500 | [vllm==0.33.0](control2_mechanical/math500/summary.json) | [H100](control2_mechanical/math500/summary.json) | [5.17.0](control2_mechanical/math500/summary.json) | [binomial_per_sample](control2_mechanical/math500/summary.json) |
+| control3_repetition / math500 | [vllm==0.33.0](control3_repetition/math500/summary.json) | [H100](control3_repetition/math500/summary.json) | [5.17.0](control3_repetition/math500/summary.json) | [binomial_per_sample](control3_repetition/math500/summary.json) |
 
 | Stage | Benchmark | Recorded hours | Recorded cost (USD) |
 | --- | --- | --- | --- |
 | calibration_base | math500 | [0.465](calibration_base/summary.json) | [2.1280](calibration_base/summary.json) |
 | calibration_p50c | math500 | [0.259](calibration_p50c/summary.json) | [1.2512](calibration_p50c/summary.json) |
+| control1_nothink | math500 | [0.236](control1_nothink/math500/summary.json) | [1.0059](control1_nothink/math500/summary.json) |
+| control2_mechanical | math500 | [0.447](control2_mechanical/math500/summary.json) | [1.9082](control2_mechanical/math500/summary.json) |
+| control3_repetition | math500 | [0.514](control3_repetition/math500/summary.json) | [2.1923](control3_repetition/math500/summary.json) |
 
 Costs and durations come from the linked records. Missing costs are not treated as zero; rows are not summed because stages may overlap.
 
@@ -67,14 +75,22 @@ Budget ledger: [source](costs.json). Reservations are retained bounds, not charg
 | Budget / stage / operation | State | Receipts | Recorded hours | Settled amount (USD) | Reserved bound (USD) | Basis |
 | --- | --- | --- | --- | --- | --- | --- |
 | editor / editor turns | [settled](costs.json) | [26](costs.json) | [1.815](costs.json) | [78.2928](costs.json) | pending | [API usage and recorded token rates](costs.json) |
-| modal / all | [reserved](costs.json) | [1](costs.json) | pending | pending | [1.9060](costs.json) | [resource estimate; not invoice](costs.json) |
-| modal / all | [settled](costs.json) | [3](costs.json) | [1.505](costs.json) | [0.1194](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
+| modal / all | [settled](costs.json) | [4](costs.json) | [3.457](costs.json) | [0.2741](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
 | modal / calibration | [settled](costs.json) | [1](costs.json) | [0.906](costs.json) | [0.0718](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
 | modal / calibration_base | [settled](costs.json) | [1](costs.json) | [0.499](costs.json) | [2.1280](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / calibration_base_smoke | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.2758](costs.json) | [resource estimate; not invoice](costs.json) |
 | modal / calibration_base_smoke | [settled](costs.json) | [1](costs.json) | [0.105](costs.json) | [0.4496](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / calibration_p50c | [settled](costs.json) | [1](costs.json) | [0.293](costs.json) | [1.2512](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / calibration_p50c_smoke | [settled](costs.json) | [1](costs.json) | [0.099](costs.json) | [0.4228](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / control1_nothink / math500 / evaluation | [settled](costs.json) | [2](costs.json) | [0.236](costs.json) | [1.0059](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / control1_nothink / math500 / evaluation smoke | [settled](costs.json) | [1](costs.json) | [0.066](costs.json) | [0.2833](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / control2 / directions | [settled](costs.json) | [16](costs.json) | [0.681](costs.json) | [2.9042](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / control2 / directions smoke | [settled](costs.json) | [1](costs.json) | [0.038](costs.json) | [0.1613](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / control2_mechanical / math500 / evaluation | [settled](costs.json) | [2](costs.json) | [0.447](costs.json) | [1.9082](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / control2_mechanical / math500 / evaluation smoke | [settled](costs.json) | [1](costs.json) | [0.090](costs.json) | [0.3856](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / control3_repetition / math500 / evaluation | [settled](costs.json) | [2](costs.json) | [0.514](costs.json) | [2.1923](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / control3_repetition / math500 / evaluation smoke | [settled](costs.json) | [1](costs.json) | [0.091](costs.json) | [0.3880](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / controls | [settled](costs.json) | [1](costs.json) | [1.612](costs.json) | [0.1278](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
 | modal / infrastructure | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.0000](costs.json) | [resource estimate; not invoice](costs.json) |
 | modal / kernel | [settled](costs.json) | [1](costs.json) | [0.205](costs.json) | [0.0163](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
 | modal / kernel_verification:heartbeat | [settled](costs.json) | [2](costs.json) | [0.003](costs.json) | [0.0073](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
@@ -86,6 +102,7 @@ Budget ledger: [source](costs.json). Reservations are retained bounds, not charg
 | modal / live / teacher-forced | [settled](costs.json) | [2](costs.json) | [0.079](costs.json) | [0.3373](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / prepare | [settled](costs.json) | [1](costs.json) | [0.010](costs.json) | [0.0016](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / prepare-v2 | [settled](costs.json) | [1](costs.json) | [0.038](costs.json) | [0.0060](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / publish | [reserved](costs.json) | [1](costs.json) | pending | pending | [1.9060](costs.json) | [resource estimate; not invoice](costs.json) |
 | modal / sandbox:heartbeat | [settled](costs.json) | [188](costs.json) | [3.060](costs.json) | [7.9188](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
 | modal / sandbox:startup | [settled](costs.json) | [4](costs.json) | [0.015](costs.json) | [0.0400](costs.json) | pending | [resource_upper_bound_not_invoice](costs.json) |
 | modal / verify / attention | [settled](costs.json) | [1](costs.json) | [0.038](costs.json) | [0.1626](costs.json) | pending | [resource estimate; not invoice](costs.json) |

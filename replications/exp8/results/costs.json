@@ -2454,6 +2454,286 @@
       "at": "2026-11-03T11:27:31.512090+00:00",
       "event": "settled",
       "id": "dabdab14c0d04814bca1d6d56d75f996"
+    },
+    {
+      "at": "2026-11-03T11:31:54.350068+00:00",
+      "event": "settled",
+      "id": "driver-6e838d8f270e4e499e87a429f4a6d5dc"
+    },
+    {
+      "at": "2026-11-03T11:36:10.299684+00:00",
+      "event": "reserved",
+      "id": "driver-128098e888584eb2829c9b132fe517e5"
+    },
+    {
+      "at": "2026-11-03T11:36:26.975429+00:00",
+      "event": "reserved",
+      "id": "modal-job-69ee245b670e56b6411f58a4146a353d010c91a5c2887e9f4eaa22b719ca32bf"
+    },
+    {
+      "at": "2026-11-03T11:38:36.860796+00:00",
+      "event": "settled",
+      "id": "modal-job-69ee245b670e56b6411f58a4146a353d010c91a5c2887e9f4eaa22b719ca32bf"
+    },
+    {
+      "at": "2026-11-03T11:38:48.324020+00:00",
+      "event": "reserved",
+      "id": "modal-job-a526f91b33ef351229d906aa5aa03736f8ffba741cfe0d81deb8d384e467bec8"
+    },
+    {
+      "at": "2026-11-03T11:44:01.150973+00:00",
+      "event": "settled",
+      "id": "modal-job-a526f91b33ef351229d906aa5aa03736f8ffba741cfe0d81deb8d384e467bec8"
+    },
+    {
+      "at": "2026-11-03T11:44:16.022864+00:00",
+      "event": "reserved",
+      "id": "modal-job-d7878aa7168709f45df231564cacb8fe65a0aeb0156f53b7a411e44515497924"
+    },
+    {
+      "at": "2026-11-03T11:49:43.269688+00:00",
+      "event": "settled",
+      "id": "modal-job-d7878aa7168709f45df231564cacb8fe65a0aeb0156f53b7a411e44515497924"
+    },
+    {
+      "at": "2026-11-03T11:50:04.328017+00:00",
+      "event": "reserved",
+      "id": "modal-job-7f97918dc385988cb38800f48e9da01afdc94ea299dcdd0423de66f67d1a64be"
+    },
+    {
+      "at": "2026-11-03T11:50:29.332828+00:00",
+      "event": "settled",
+      "id": "modal-job-7f97918dc385988cb38800f48e9da01afdc94ea299dcdd0423de66f67d1a64be"
+    },
+    {
+      "at": "2026-11-03T11:50:36.463618+00:00",
+      "event": "reserved",
+      "id": "modal-job-7185dfbf4e81ddf49c2ba671e65817d7204ecafcfc30f8502ca5fee8a1b6f23f"
+    },
+    {
+      "at": "2026-11-03T11:51:23.148846+00:00",
+      "event": "settled",
+      "id": "modal-job-7185dfbf4e81ddf49c2ba671e65817d7204ecafcfc30f8502ca5fee8a1b6f23f"
+    },
+    {
+      "at": "2026-11-03T11:51:29.908066+00:00",
+      "event": "reserved",
+      "id": "modal-job-c58ccbd118182001cd23cdbc4e02ce5f87042b09bdfeae34541e13e74b81f344"
+    },
+    {
+      "at": "2026-11-03T11:52:32.000383+00:00",
+      "event": "settled",
+      "id": "modal-job-c58ccbd118182001cd23cdbc4e02ce5f87042b09bdfeae34541e13e74b81f344"
+    },
+    {
+      "at": "2026-11-03T11:52:40.524053+00:00",
+      "event": "reserved",
+      "id": "modal-job-52a9bb199c1360d55e3d5af2f539083f99086a61101ef3950fc42665f30eb7ed"
+    },
+    {
+      "at": "2026-11-03T11:53:20.555837+00:00",
+      "event": "settled",
+      "id": "modal-job-52a9bb199c1360d55e3d5af2f539083f99086a61101ef3950fc42665f30eb7ed"
+    },
+    {
+      "at": "2026-11-03T11:53:29.259175+00:00",
+      "event": "reserved",
+      "id": "modal-job-fcea3cfaad9fe93f8109d5cd17faeb6f7313e4dc798a6a9d3f93c6a17c639c38"
+    },
+    {
+      "at": "2026-11-03T11:54:13.833301+00:00",
+      "event": "settled",
+      "id": "modal-job-fcea3cfaad9fe93f8109d5cd17faeb6f7313e4dc798a6a9d3f93c6a17c639c38"
+    },
+    {
+      "at": "2026-11-03T11:54:20.937579+00:00",
+      "event": "reserved",
+      "id": "modal-job-abdcb2be80015a2c2e27883adbdb33c0d3013b9c16fb19bd6e239522b9975ab3"
+    },
+    {
+      "at": "2026-11-03T11:55:03.419041+00:00",
+      "event": "settled",
+      "id": "modal-job-abdcb2be80015a2c2e27883adbdb33c0d3013b9c16fb19bd6e239522b9975ab3"
+    },
+    {
+      "at": "2026-11-03T11:55:11.082513+00:00",
+      "event": "reserved",
+      "id": "modal-job-7fbfa945ea2259a54061bb8ac3205edeff41679594f3bf8d885abda085b57503"
+    },
+    {
+      "at": "2026-11-03T11:55:55.842298+00:00",
+      "event": "settled",
+      "id": "modal-job-7fbfa945ea2259a54061bb8ac3205edeff41679594f3bf8d885abda085b57503"
+    },
+    {
+      "at": "2026-11-03T11:56:04.070878+00:00",
+      "event": "reserved",
+      "id": "modal-job-a6de7d056cfd08d3d8846a60bc178600a35f35b19c136d14ca85af7e5209e238"
+    },
+    {
+      "at": "2026-11-03T11:56:41.790886+00:00",
+      "event": "settled",
+      "id": "modal-job-a6de7d056cfd08d3d8846a60bc178600a35f35b19c136d14ca85af7e5209e238"
+    },
+    {
+      "at": "2026-11-03T11:56:49.203606+00:00",
+      "event": "reserved",
+      "id": "modal-job-bb5b2da87b700e78d43e92a0e496e3c87f28331d326d99cfe3409a57b144eebf"
+    },
+    {
+      "at": "2026-11-03T11:57:31.357079+00:00",
+      "event": "settled",
+      "id": "modal-job-bb5b2da87b700e78d43e92a0e496e3c87f28331d326d99cfe3409a57b144eebf"
+    },
+    {
+      "at": "2026-11-03T11:57:40.499155+00:00",
+      "event": "reserved",
+      "id": "modal-job-8d813cdfadf32b4f7637542589f557e4814097e6d3dac324b3994e248f8798ce"
+    },
+    {
+      "at": "2026-11-03T11:58:32.667686+00:00",
+      "event": "settled",
+      "id": "modal-job-8d813cdfadf32b4f7637542589f557e4814097e6d3dac324b3994e248f8798ce"
+    },
+    {
+      "at": "2026-11-03T11:58:41.624907+00:00",
+      "event": "reserved",
+      "id": "modal-job-dca986a5ca67d300e4e6aff565978c442ae5d1e620efb225413a920b914c15a0"
+    },
+    {
+      "at": "2026-11-03T11:59:19.623158+00:00",
+      "event": "settled",
+      "id": "modal-job-dca986a5ca67d300e4e6aff565978c442ae5d1e620efb225413a920b914c15a0"
+    },
+    {
+      "at": "2026-11-03T11:59:28.396795+00:00",
+      "event": "reserved",
+      "id": "modal-job-38ec2afef133ed40d23931da84387c284ae00c8734bd8ce139684cde61f66ff2"
+    },
+    {
+      "at": "2026-11-03T12:00:12.514866+00:00",
+      "event": "settled",
+      "id": "modal-job-38ec2afef133ed40d23931da84387c284ae00c8734bd8ce139684cde61f66ff2"
+    },
+    {
+      "at": "2026-11-03T12:00:20.603077+00:00",
+      "event": "reserved",
+      "id": "modal-job-f3c70f79f4ce8f618bb49d6dd2f0b2058758965547391c73111a54cddb12c3db"
+    },
+    {
+      "at": "2026-11-03T12:01:02.841219+00:00",
+      "event": "settled",
+      "id": "modal-job-f3c70f79f4ce8f618bb49d6dd2f0b2058758965547391c73111a54cddb12c3db"
+    },
+    {
+      "at": "2026-11-03T12:01:12.648967+00:00",
+      "event": "reserved",
+      "id": "modal-job-3ae5bf27780f11654bd0b381d744ff34f7231b7c9271ad82791a6cd7e889fdc7"
+    },
+    {
+      "at": "2026-11-03T12:01:58.980412+00:00",
+      "event": "settled",
+      "id": "modal-job-3ae5bf27780f11654bd0b381d744ff34f7231b7c9271ad82791a6cd7e889fdc7"
+    },
+    {
+      "at": "2026-11-03T12:02:08.528942+00:00",
+      "event": "reserved",
+      "id": "modal-job-6b4fc86509643084dd1593799f8fe423794bab953dd4210d3851c5dadac3fbc9"
+    },
+    {
+      "at": "2026-11-03T12:02:53.761201+00:00",
+      "event": "settled",
+      "id": "modal-job-6b4fc86509643084dd1593799f8fe423794bab953dd4210d3851c5dadac3fbc9"
+    },
+    {
+      "at": "2026-11-03T12:03:01.326114+00:00",
+      "event": "reserved",
+      "id": "modal-job-f018dcc2cd3b5758daa18239ad1f70ef745bfdc6330e5e6f9be297ce812e84c6"
+    },
+    {
+      "at": "2026-11-03T12:03:58.481468+00:00",
+      "event": "settled",
+      "id": "modal-job-f018dcc2cd3b5758daa18239ad1f70ef745bfdc6330e5e6f9be297ce812e84c6"
+    },
+    {
+      "at": "2026-11-03T12:04:06.139542+00:00",
+      "event": "reserved",
+      "id": "modal-job-c42eea29f2f0e202a6779b5bda1dc2a9871272982133c52d2ad9b30edb50f722"
+    },
+    {
+      "at": "2026-11-03T12:04:36.163173+00:00",
+      "event": "settled",
+      "id": "modal-job-c42eea29f2f0e202a6779b5bda1dc2a9871272982133c52d2ad9b30edb50f722"
+    },
+    {
+      "at": "2026-11-03T12:04:54.062603+00:00",
+      "event": "reserved",
+      "id": "modal-job-e40a6535052e91afbeef155653eae636d9b2b91d0bae4681c228969ea434196e"
+    },
+    {
+      "at": "2026-11-03T12:08:29.070080+00:00",
+      "event": "settled",
+      "id": "modal-job-e40a6535052e91afbeef155653eae636d9b2b91d0bae4681c228969ea434196e"
+    },
+    {
+      "at": "2026-11-03T12:08:41.059829+00:00",
+      "event": "reserved",
+      "id": "modal-job-1d98335fda5c3ee8d66f7ce0fbd2345f9351515631f61901955a91e8c4d97dc1"
+    },
+    {
+      "at": "2026-11-03T12:20:34.335031+00:00",
+      "event": "settled",
+      "id": "modal-job-1d98335fda5c3ee8d66f7ce0fbd2345f9351515631f61901955a91e8c4d97dc1"
+    },
+    {
+      "at": "2026-11-03T12:20:45.321853+00:00",
+      "event": "reserved",
+      "id": "modal-job-e23db18253d36028469dfbc88f8a3b5eee300b58f8801fd4926225f2f3a17ef3"
+    },
+    {
+      "at": "2026-11-03T12:32:13.215207+00:00",
+      "event": "settled",
+      "id": "modal-job-e23db18253d36028469dfbc88f8a3b5eee300b58f8801fd4926225f2f3a17ef3"
+    },
+    {
+      "at": "2026-11-03T12:32:31.442435+00:00",
+      "event": "reserved",
+      "id": "modal-job-0ad431b02aa147b554c202414fc3a76a652db6839cbef225cf613b97bc691a78"
+    },
+    {
+      "at": "2026-11-03T12:36:08.426434+00:00",
+      "event": "settled",
+      "id": "modal-job-0ad431b02aa147b554c202414fc3a76a652db6839cbef225cf613b97bc691a78"
+    },
+    {
+      "at": "2026-11-03T12:36:19.330664+00:00",
+      "event": "reserved",
+      "id": "modal-job-3399c8e87c53da2475bfb8bfdc79c3dcc046fdd1cc67a8ebf5729741f2db26e2"
+    },
+    {
+      "at": "2026-11-03T12:50:19.177036+00:00",
+      "event": "settled",
+      "id": "modal-job-3399c8e87c53da2475bfb8bfdc79c3dcc046fdd1cc67a8ebf5729741f2db26e2"
+    },
+    {
+      "at": "2026-11-03T12:50:32.990102+00:00",
+      "event": "reserved",
+      "id": "modal-job-595170030c1e0dc70aed0394bc861520b71ede6228ceae8212d146455791fc1e"
+    },
+    {
+      "at": "2026-11-03T13:03:50.077710+00:00",
+      "event": "settled",
+      "id": "modal-job-595170030c1e0dc70aed0394bc861520b71ede6228ceae8212d146455791fc1e"
+    },
+    {
+      "at": "2026-11-03T13:10:50.691772+00:00",
+      "event": "settled",
+      "id": "driver-128098e888584eb2829c9b132fe517e5"
+    },
+    {
+      "at": "2026-11-03T13:10:53.530811+00:00",
+      "event": "reserved",
+      "id": "driver-6345cecb41ad4321a7ffe845ba9456cf"
     }
   ],
   "halted": false,
@@ -8122,6 +8402,64 @@
       "upper_bound_usd": "0.215650",
       "usage": null
     },
+    "driver-128098e888584eb2829c9b132fe517e5": {
+      "actual_usd": "0.12781730738326575025",
+      "completed_at": "2026-11-03T13:10:50.691746+00:00",
+      "created_at": "2026-11-03T11:36:10.299664+00:00",
+      "kind": "modal",
+      "metadata": {
+        "driver_claimed_at": 1793705776.6548758,
+        "driver_finish_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 5264.963270532,
+          "observed_subtotal_usd": "0.1187289131536632222222222222",
+          "owner_id": "fc-01M6GK405JWFKWRJ6GH83K4HN4",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-128098e888584eb2829c9b132fe517e5",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        },
+        "driver_owner_id": "fc-01M6GK405JWFKWRJ6GH83K4HN4",
+        "driver_ticket": {
+          "cpu_cores": 1,
+          "memory_gib": 4,
+          "prepared_at": 1793705770.2245436,
+          "reservation_id": "driver-128098e888584eb2829c9b132fe517e5",
+          "scaledown_seconds": 5,
+          "schema_version": 1,
+          "stage": "controls",
+          "startup_seconds": 120,
+          "timeout_seconds": 86400,
+          "upper_bound_usd": "1.905953472222222222222222222"
+        },
+        "invoice": false,
+        "kind": "driver_resource_upper_bound"
+      },
+      "receipt_metadata": {
+        "billing_basis": "driver_resource_upper_bound_not_invoice",
+        "invoice": false,
+        "provider_completion_evidence": {
+          "elapsed_seconds_bound": 5677.551154851913,
+          "observed_at": "2026-11-03T13:10:48.352127+00:00",
+          "provider_call_id": "fc-01M6GK405JWFKWRJ6GH83K4HN4",
+          "provider_terminal_state": "completed",
+          "source": "modal.FunctionCall.get"
+        },
+        "worker_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 5264.963270532,
+          "observed_subtotal_usd": "0.1187289131536632222222222222",
+          "owner_id": "fc-01M6GK405JWFKWRJ6GH83K4HN4",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-128098e888584eb2829c9b132fe517e5",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        }
+      },
+      "seconds": 5802.551154851913,
+      "stage": "controls",
+      "status": "settled",
+      "upper_bound_usd": "1.905953472222222222222222222",
+      "usage": null
+    },
     "driver-1ca050cdac614601bd57d890789c272c": {
       "actual_usd": "0.01629397517351971744722222222",
       "completed_at": "2026-11-03T07:34:25.130878+00:00",
@@ -8180,11 +8518,47 @@
       "upper_bound_usd": "1.905953472222222222222222222",
       "usage": null
     },
+    "driver-6345cecb41ad4321a7ffe845ba9456cf": {
+      "created_at": "2026-11-03T13:10:53.530790+00:00",
+      "kind": "modal",
+      "metadata": {
+        "driver_claimed_at": 1793711458.661866,
+        "driver_owner_id": "fc-01M6GRHF24VBTCAP8FSZXWXBZW",
+        "driver_ticket": {
+          "cpu_cores": 1,
+          "memory_gib": 4,
+          "prepared_at": 1793711453.3927836,
+          "reservation_id": "driver-6345cecb41ad4321a7ffe845ba9456cf",
+          "scaledown_seconds": 5,
+          "schema_version": 1,
+          "stage": "publish",
+          "startup_seconds": 120,
+          "timeout_seconds": 86400,
+          "upper_bound_usd": "1.905953472222222222222222222"
+        },
+        "invoice": false,
+        "kind": "driver_resource_upper_bound"
+      },
+      "stage": "publish",
+      "status": "reserved",
+      "upper_bound_usd": "1.905953472222222222222222222"
+    },
     "driver-6e838d8f270e4e499e87a429f4a6d5dc": {
+      "actual_usd": "0.1547865740063654003055555556",
+      "completed_at": "2026-11-03T11:31:54.350028+00:00",
       "created_at": "2026-11-03T09:36:48.545255+00:00",
       "kind": "modal",
       "metadata": {
         "driver_claimed_at": 1793698616.6528878,
+        "driver_finish_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 6644.003557415001,
+          "observed_subtotal_usd": "0.1491061061397248831388888889",
+          "owner_id": "fc-01M6GC9HWAFHZTMEWBB811B23D",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-6e838d8f270e4e499e87a429f4a6d5dc",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        },
         "driver_owner_id": "fc-01M6GC9HWAFHZTMEWBB811B23D",
         "driver_ticket": {
           "cpu_cores": 1,
@@ -8201,9 +8575,31 @@
         "invoice": false,
         "kind": "driver_resource_upper_bound"
       },
+      "receipt_metadata": {
+        "billing_basis": "driver_resource_upper_bound_not_invoice",
+        "invoice": false,
+        "provider_completion_evidence": {
+          "elapsed_seconds_bound": 6901.881039381027,
+          "observed_at": "2026-11-03T11:31:53.090215+00:00",
+          "provider_call_id": "fc-01M6GC9HWAFHZTMEWBB811B23D",
+          "provider_terminal_state": "failed",
+          "source": "modal.FunctionCall.get"
+        },
+        "worker_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 6644.003557415001,
+          "observed_subtotal_usd": "0.1491061061397248831388888889",
+          "owner_id": "fc-01M6GC9HWAFHZTMEWBB811B23D",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-6e838d8f270e4e499e87a429f4a6d5dc",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        }
+      },
+      "seconds": 7026.881039381027,
       "stage": "all",
-      "status": "reserved",
-      "upper_bound_usd": "1.905953472222222222222222222"
+      "status": "settled",
+      "upper_bound_usd": "1.905953472222222222222222222",
+      "usage": null
     },
     "driver-866cb8b6cf5d43ecb5d7620b9b8706f0": {
       "actual_usd": "0.03897209020531839812222222222",
@@ -9203,6 +9599,46 @@
       "status": "reserved",
       "upper_bound_usd": "2"
     },
+    "modal-job-0ad431b02aa147b554c202414fc3a76a652db6839cbef225cf613b97bc691a78": {
+      "actual_usd": "0.3880171175164946666666666667",
+      "completed_at": "2026-11-03T12:36:08.426411+00:00",
+      "created_at": "2026-11-03T12:32:31.442418+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "3c874a787fe07aea4cd587d8a81de0748f35eafc63185054375c067c4f28e0a2"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.3880171175164946666666666667",
+        "call_id": "fc-01M6GPB8VZ5WTHEKVPTM4ED9SD",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/control3_repetition/math500/smoke/openwsp-gpu:a248f2d60b0d429696f5e3ea35c8180d:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 327.348524339,
+        "startup_seconds": 120.0,
+        "usage_seconds": 205.348524339
+      },
+      "seconds": 327.348524339,
+      "stage": "evaluation/control3_repetition/math500/smoke/openwsp-gpu:a248f2d60b0d429696f5e3ea35c8180d:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-0d5b3656da4b72f4de4b65df465d0927d14a2618628b3824541cd385de0bfb76": {
       "actual_usd": "0.1744872885358586666666666667",
       "completed_at": "2026-11-03T09:38:41.617713+00:00",
@@ -9323,6 +9759,46 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-1d98335fda5c3ee8d66f7ce0fbd2345f9351515631f61901955a91e8c4d97dc1": {
+      "actual_usd": "0.9671122589056413333333333333",
+      "completed_at": "2026-11-03T12:20:34.335006+00:00",
+      "created_at": "2026-11-03T12:08:41.059811+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "c5b9ddcd23c51679bb826d785f8d30cd0b758e5fb25139567ae5f1bbe5c2c42d"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.9671122589056413333333333333",
+        "call_id": "fc-01M6GMZKV68BMG0K5DDTDNTWY0",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/control2_mechanical/math500/batch_000/openwsp-gpu:df8fef6dae3c40b58f144c2d8139d2ee:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 815.898981079,
+        "startup_seconds": 120.0,
+        "usage_seconds": 693.898981079
+      },
+      "seconds": 815.898981079,
+      "stage": "evaluation/control2_mechanical/math500/batch_000/openwsp-gpu:df8fef6dae3c40b58f144c2d8139d2ee:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-20ab61726ca8f289a85a88450e682fbaa4a01b3c10061cc6380e0afd7c7038ce": {
       "actual_usd": "2.9870400",
       "completed_at": "2026-11-03T08:33:40.821706+00:00",
@@ -9345,6 +9821,46 @@
       },
       "seconds": 2520,
       "stage": "live/fwd_1/original/activations/openwsp-gpu:412d8691f5574c15a0b8d5ab47a99415:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-3399c8e87c53da2475bfb8bfdc79c3dcc046fdd1cc67a8ebf5729741f2db26e2": {
+      "actual_usd": "1.120270038689545333333333333",
+      "completed_at": "2026-11-03T12:50:19.177003+00:00",
+      "created_at": "2026-11-03T12:36:19.330647+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "568cf3992eb0652dca0c2a23d8a0fd6d9adac5278ac61c3bf10b15d2f0f6580d"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.120270038689545333333333333",
+        "call_id": "fc-01M6GPJ7R1AYRFXG6VN5F6CBKP",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/control3_repetition/math500/batch_000/openwsp-gpu:fe42df777ff94e928b3517b4473626d9:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 945.109706431,
+        "startup_seconds": 120.0,
+        "usage_seconds": 823.109706431
+      },
+      "seconds": 945.109706431,
+      "stage": "evaluation/control3_repetition/math500/batch_000/openwsp-gpu:fe42df777ff94e928b3517b4473626d9:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -9387,6 +9903,86 @@
       "stage": "calibration_base_smoke",
       "status": "settled",
       "upper_bound_usd": "2.98704",
+      "usage": null
+    },
+    "modal-job-38ec2afef133ed40d23931da84387c284ae00c8734bd8ce139684cde61f66ff2": {
+      "actual_usd": "0.1800175883544173333333333333",
+      "completed_at": "2026-11-03T12:00:12.514840+00:00",
+      "created_at": "2026-11-03T11:59:28.396776+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "44bc01124c3ffedfc54b6696cc9c526cad810689103421b25958ad5d725bc3a0"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1800175883544173333333333333",
+        "call_id": "fc-01M6GMERCZ13QEDGANSC0JHPKQ",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_010/openwsp-gpu:85ed953089b5469e8e68a81e31ce0186:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 151.870856317,
+        "startup_seconds": 120.0,
+        "usage_seconds": 29.870856317
+      },
+      "seconds": 151.870856317,
+      "stage": "control2/directions/batch_010/openwsp-gpu:85ed953089b5469e8e68a81e31ce0186:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-3ae5bf27780f11654bd0b381d744ff34f7231b7c9271ad82791a6cd7e889fdc7": {
+      "actual_usd": "0.1811408666097613333333333333",
+      "completed_at": "2026-11-03T12:01:58.980388+00:00",
+      "created_at": "2026-11-03T12:01:12.648949+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "d1585256daa282c354602ab4dd8aa6fabcf994d6a4998bca043ec08e2edf5c10"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1811408666097613333333333333",
+        "call_id": "fc-01M6GMHZB9X3ZYDHN18P6JKK73",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_012/openwsp-gpu:065fecec61be45369d672908a610d9bd:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 152.818503889,
+        "startup_seconds": 120.0,
+        "usage_seconds": 30.818503889000002
+      },
+      "seconds": 152.818503889,
+      "stage": "control2/directions/batch_012/openwsp-gpu:065fecec61be45369d672908a610d9bd:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
       "usage": null
     },
     "modal-job-41873ccc1e58f2fe4ee9c03cce785866b052fe1a51e065cb860b98243da45d59": {
@@ -9509,6 +10105,86 @@
       "upper_bound_usd": "2.98704",
       "usage": null
     },
+    "modal-job-52a9bb199c1360d55e3d5af2f539083f99086a61101ef3950fc42665f30eb7ed": {
+      "actual_usd": "0.1772977562223373333333333333",
+      "completed_at": "2026-11-03T11:53:20.555813+00:00",
+      "created_at": "2026-11-03T11:52:40.524034+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "e324b69e5fe1a1659fd2552df19edf5fc960c8e7e43d7f929e222dec545ea9e4"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1772977562223373333333333333",
+        "call_id": "fc-01M6GM2AN9Z6EE4FEHB2745YMF",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_002/openwsp-gpu:6791822eb8df4bf5b98dc5e98517ff62:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 149.576284777,
+        "startup_seconds": 120.0,
+        "usage_seconds": 27.576284777
+      },
+      "seconds": 149.576284777,
+      "stage": "control2/directions/batch_002/openwsp-gpu:6791822eb8df4bf5b98dc5e98517ff62:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-595170030c1e0dc70aed0394bc861520b71ede6228ceae8212d146455791fc1e": {
+      "actual_usd": "1.072035644182318666666666667",
+      "completed_at": "2026-11-03T13:03:50.077677+00:00",
+      "created_at": "2026-11-03T12:50:32.990062+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "290404af902cdbc1a9d48bad957a480d92c46c9387c0d89cdb6c1261e0b37397"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.072035644182318666666666667",
+        "call_id": "fc-01M6GQC99RM659H1FT6FEBZMBC",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/control3_repetition/math500/batch_001/openwsp-gpu:5764f58b8ad64c86af6b0b93822e43f4:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 904.417022651,
+        "startup_seconds": 120.0,
+        "usage_seconds": 782.417022651
+      },
+      "seconds": 904.417022651,
+      "stage": "evaluation/control3_repetition/math500/batch_001/openwsp-gpu:5764f58b8ad64c86af6b0b93822e43f4:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-64b9025b411f919f99ed3b229faa8fcea94fe151a72f00f15367e0d76150286f": {
       "actual_usd": "0.1634800160698786666666666667",
       "completed_at": "2026-11-03T07:32:53.387089+00:00",
@@ -9549,6 +10225,206 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-69ee245b670e56b6411f58a4146a353d010c91a5c2887e9f4eaa22b719ca32bf": {
+      "actual_usd": "0.28332820154244664296",
+      "completed_at": "2026-11-03T11:38:36.860765+00:00",
+      "created_at": "2026-11-03T11:36:26.975409+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "26dd0326f3d124d96df0139fd8858a6ea512c1ce1de89d622d1b71fb87d68a98"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.28332820154244664296",
+        "call_id": "fc-01M6GK4JV9HYRSW6QVSJ24WNYW",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/control1_nothink/math500/smoke/openwsp-gpu:8035e8bbec2f454db7db73dacfd9397d:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 239.02829151499998,
+        "startup_seconds": 120.0,
+        "usage_seconds": 117.02829151499999
+      },
+      "seconds": 239.02829151499998,
+      "stage": "evaluation/control1_nothink/math500/smoke/openwsp-gpu:8035e8bbec2f454db7db73dacfd9397d:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-6b4fc86509643084dd1593799f8fe423794bab953dd4210d3851c5dadac3fbc9": {
+      "actual_usd": "0.181096315294580",
+      "completed_at": "2026-11-03T12:02:53.761179+00:00",
+      "created_at": "2026-11-03T12:02:08.528925+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "d07fc1ece3867077bb956b2bef1d87419b91d2fdb6990eade658aeebce6bd390"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.181096315294580",
+        "call_id": "fc-01M6GMKN82GEWWKVMMRR7XC11H",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_013/openwsp-gpu:57ca5a03058248c7900b5de391cc4491:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 152.780918415,
+        "startup_seconds": 120.0,
+        "usage_seconds": 30.780918415
+      },
+      "seconds": 152.780918415,
+      "stage": "control2/directions/batch_013/openwsp-gpu:57ca5a03058248c7900b5de391cc4491:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-7185dfbf4e81ddf49c2ba671e65817d7204ecafcfc30f8502ca5fee8a1b6f23f": {
+      "actual_usd": "0.1840874568157986666666666667",
+      "completed_at": "2026-11-03T11:51:23.148818+00:00",
+      "created_at": "2026-11-03T11:50:36.463600+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "d64198337fcabb3614dc7b3b2610a40566cf759b4810ddd3effe19b10f2c2d8c"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1840874568157986666666666667",
+        "call_id": "fc-01M6GKYHTH34Z21FMVXWTV3523",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_000/openwsp-gpu:f885b462315f4301b7f9e9d2296449a1:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 155.304378641,
+        "startup_seconds": 120.0,
+        "usage_seconds": 33.304378641
+      },
+      "seconds": 155.304378641,
+      "stage": "control2/directions/batch_000/openwsp-gpu:f885b462315f4301b7f9e9d2296449a1:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-7f97918dc385988cb38800f48e9da01afdc94ea299dcdd0423de66f67d1a64be": {
+      "actual_usd": "0.161313136843236",
+      "completed_at": "2026-11-03T11:50:29.332804+00:00",
+      "created_at": "2026-11-03T11:50:04.327998+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "8d13fc6ddb1a45d86cfdbef308a4fccb86dcdc6bbbc23f8208c4ef6b97381a5c"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.161313136843236",
+        "call_id": "fc-01M6GKXH4X7K387SV5AMXGX4EK",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/smoke/openwsp-gpu:f6a73c7b5a8f4264a5d3a1c96093da36:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 136.090947843,
+        "startup_seconds": 120.0,
+        "usage_seconds": 14.090947842999999
+      },
+      "seconds": 136.090947843,
+      "stage": "control2/directions/smoke/openwsp-gpu:f6a73c7b5a8f4264a5d3a1c96093da36:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-7fbfa945ea2259a54061bb8ac3205edeff41679594f3bf8d885abda085b57503": {
+      "actual_usd": "0.1790760831846839762933333333",
+      "completed_at": "2026-11-03T11:55:55.842274+00:00",
+      "created_at": "2026-11-03T11:55:11.082494+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "7cf265220b22765fd056b256f69977dad298f535650ecfd8534afa6b1e9dd86e"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1790760831846839762933333333",
+        "call_id": "fc-01M6GM6X8XGCJAG8K6HCQMWVE9",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_005/openwsp-gpu:d8e52166da01460daa890bf7d4385133:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 151.07656061699998,
+        "startup_seconds": 120.0,
+        "usage_seconds": 29.076560617
+      },
+      "seconds": 151.07656061699998,
+      "stage": "control2/directions/batch_005/openwsp-gpu:d8e52166da01460daa890bf7d4385133:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-89bd7efb58d1077d525c8886a13aca40805b047f9ed74c43b7dfba5039f48770": {
       "actual_usd": "0.3048552675133746666666666667",
       "completed_at": "2026-11-03T08:45:15.849600+00:00",
@@ -9585,6 +10461,46 @@
       },
       "seconds": 257.189483279,
       "stage": "live/fwd_2/original/activations/openwsp-gpu:130f7b6a08e04f0c9fa982be8df00e99:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-8d813cdfadf32b4f7637542589f557e4814097e6d3dac324b3994e248f8798ce": {
+      "actual_usd": "0.1903750992903573333333333333",
+      "completed_at": "2026-11-03T11:58:32.667663+00:00",
+      "created_at": "2026-11-03T11:57:40.499137+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "fb034cef7b22ac6e10a409ee21bd4c8c146ebe97d3e915dda9f606f26df7fc0f"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1903750992903573333333333333",
+        "call_id": "fc-01M6GMBFG112F6TFS94Z8SSGSW",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_008/openwsp-gpu:22e79249eab34ce2b9bba7c4dc94a760:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 160.608913912,
+        "startup_seconds": 120.0,
+        "usage_seconds": 38.608913912
+      },
+      "seconds": 160.608913912,
+      "stage": "control2/directions/batch_008/openwsp-gpu:22e79249eab34ce2b9bba7c4dc94a760:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -9669,6 +10585,46 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-a526f91b33ef351229d906aa5aa03736f8ffba741cfe0d81deb8d384e467bec8": {
+      "actual_usd": "0.496763564374364",
+      "completed_at": "2026-11-03T11:44:01.150950+00:00",
+      "created_at": "2026-11-03T11:38:48.324002+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "7e2f252b4435942a29b8979a2990e80932b2402d5e11e71a99559d6b11649921"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.496763564374364",
+        "call_id": "fc-01M6GK8XNH3RM1GQWHNJ2R98PD",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/control1_nothink/math500/batch_000/openwsp-gpu:1fe7f06fb2d6437a9b0e87518f1fbaf9:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 419.091870957,
+        "startup_seconds": 120.0,
+        "usage_seconds": 297.091870957
+      },
+      "seconds": 419.091870957,
+      "stage": "evaluation/control1_nothink/math500/batch_000/openwsp-gpu:1fe7f06fb2d6437a9b0e87518f1fbaf9:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-a5cc2cea1dd07cc614c3fe467851103e6fe0ddc65e315f4bbd963d556f509608": {
       "actual_usd": "0.4123491983193426666666666667",
       "completed_at": "2026-11-03T07:32:26.974459+00:00",
@@ -9705,6 +10661,206 @@
       },
       "seconds": 347.876151563,
       "stage": "verify/native-swap/openwsp-gpu:14322bc224b641a08e8fe7e8bd3268a7:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-a6de7d056cfd08d3d8846a60bc178600a35f35b19c136d14ca85af7e5209e238": {
+      "actual_usd": "0.1744927375191186666666666667",
+      "completed_at": "2026-11-03T11:56:41.790862+00:00",
+      "created_at": "2026-11-03T11:56:04.070860+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "83bdd1fde000d20a381e2fd7a49a04d17ec21b660c6b8f0d187e57ef51906a43"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1744927375191186666666666667",
+        "call_id": "fc-01M6GM8J2QG0PYHD7X3JFXHW6G",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_006/openwsp-gpu:b40b72f3e5a248f392830668904c9155:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 147.209846051,
+        "startup_seconds": 120.0,
+        "usage_seconds": 25.209846051
+      },
+      "seconds": 147.209846051,
+      "stage": "control2/directions/batch_006/openwsp-gpu:b40b72f3e5a248f392830668904c9155:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-abdcb2be80015a2c2e27883adbdb33c0d3013b9c16fb19bd6e239522b9975ab3": {
+      "actual_usd": "0.1801357482152946666666666667",
+      "completed_at": "2026-11-03T11:55:03.418959+00:00",
+      "created_at": "2026-11-03T11:54:20.937560+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "b244c570f5d5076aa6ba1d926dac7b5b81c6345f19f2b4c4d2b023bc1fe7d7f6"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1801357482152946666666666667",
+        "call_id": "fc-01M6GM5CMFQXATW7CK01EWF8AK",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_004/openwsp-gpu:c37e1c6972a844b1b8aee4ad25e61a45:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 151.970541239,
+        "startup_seconds": 120.0,
+        "usage_seconds": 29.970541239
+      },
+      "seconds": 151.970541239,
+      "stage": "control2/directions/batch_004/openwsp-gpu:c37e1c6972a844b1b8aee4ad25e61a45:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-bb5b2da87b700e78d43e92a0e496e3c87f28331d326d99cfe3409a57b144eebf": {
+      "actual_usd": "0.178183384610420",
+      "completed_at": "2026-11-03T11:57:31.357037+00:00",
+      "created_at": "2026-11-03T11:56:49.203586+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "3be14e6f000f2055d52c4b6b43f1dfb6aff4caaa665b956d36c2f2dd75dfb84f"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.178183384610420",
+        "call_id": "fc-01M6GM9XGK34HQP3DQ3YWRMFJA",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_007/openwsp-gpu:4cd8160b475a46ff98003df4560ef118:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 150.323440335,
+        "startup_seconds": 120.0,
+        "usage_seconds": 28.323440335
+      },
+      "seconds": 150.323440335,
+      "stage": "control2/directions/batch_007/openwsp-gpu:4cd8160b475a46ff98003df4560ef118:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-c42eea29f2f0e202a6779b5bda1dc2a9871272982133c52d2ad9b30edb50f722": {
+      "actual_usd": "0.164751882369592",
+      "completed_at": "2026-11-03T12:04:36.163149+00:00",
+      "created_at": "2026-11-03T12:04:06.139525+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "e9e5496133a74ce4432e00b23a573c70fa796e86a6c438c81f182d03faf4bca1"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.164751882369592",
+        "call_id": "fc-01M6GMQ940MEESZQ0G03D121X3",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_015/openwsp-gpu:81186bf979fd44359db969f3fd27cd97:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 138.992026746,
+        "startup_seconds": 120.0,
+        "usage_seconds": 16.992026746
+      },
+      "seconds": 138.992026746,
+      "stage": "control2/directions/batch_015/openwsp-gpu:81186bf979fd44359db969f3fd27cd97:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-c58ccbd118182001cd23cdbc4e02ce5f87042b09bdfeae34541e13e74b81f344": {
+      "actual_usd": "0.2016737452768826666666666667",
+      "completed_at": "2026-11-03T11:52:32.000354+00:00",
+      "created_at": "2026-11-03T11:51:29.908047+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "b6441cf74967d6f31145c872ec99ce62f33af8768bf5742bc7d763ff0a9baef0"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.2016737452768826666666666667",
+        "call_id": "fc-01M6GM066S6BC9JQ5Z2KHY33E4",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_001/openwsp-gpu:14897709cb864b30b1debbccad778498:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 170.140954958,
+        "startup_seconds": 120.0,
+        "usage_seconds": 48.140954957999995
+      },
+      "seconds": 170.140954958,
+      "stage": "control2/directions/batch_001/openwsp-gpu:14897709cb864b30b1debbccad778498:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -9749,6 +10905,46 @@
       "upper_bound_usd": "1",
       "usage": null
     },
+    "modal-job-d7878aa7168709f45df231564cacb8fe65a0aeb0156f53b7a411e44515497924": {
+      "actual_usd": "0.50914310817860",
+      "completed_at": "2026-11-03T11:49:43.269656+00:00",
+      "created_at": "2026-11-03T11:44:16.022846+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "f7e7850b678f070505e4208bd5e3d87773ddd4e0802435a57fefacbf2b2e1462"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.50914310817860",
+        "call_id": "fc-01M6GKJXG65100AM8SQ4BWKEFX",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/control1_nothink/math500/batch_001/openwsp-gpu:fd2b003964d847ac8b998c51785133e3:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 429.53580555,
+        "startup_seconds": 120.0,
+        "usage_seconds": 307.53580555
+      },
+      "seconds": 429.53580555,
+      "stage": "evaluation/control1_nothink/math500/batch_001/openwsp-gpu:fd2b003964d847ac8b998c51785133e3:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-db94914c3085dabbbd86c5ababad30ff7af3669c5248e16026921dd1c69873a7": {
       "actual_usd": "0.1627880887897786666666666667",
       "completed_at": "2026-11-03T10:15:23.439735+00:00",
@@ -9785,6 +10981,46 @@
       },
       "seconds": 137.335283006,
       "stage": "live/fwd_4/teacher_forced/openwsp-gpu:41436b1da15448efafaef3d2ae8130c0:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-dca986a5ca67d300e4e6aff565978c442ae5d1e620efb225413a920b914c15a0": {
+      "actual_usd": "0.1743436121560373333333333333",
+      "completed_at": "2026-11-03T11:59:19.623135+00:00",
+      "created_at": "2026-11-03T11:58:41.624889+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "d2ac1db5d126153d90646a6a950d8a2279e03ac688498991748708e7557d4e41"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1743436121560373333333333333",
+        "call_id": "fc-01M6GMDBH19DWB4BJ40V0WW3F3",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_009/openwsp-gpu:238ef93b4eca43dc874a8cf8055be034:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 147.084037252,
+        "startup_seconds": 120.0,
+        "usage_seconds": 25.084037251999998
+      },
+      "seconds": 147.084037252,
+      "stage": "control2/directions/batch_009/openwsp-gpu:238ef93b4eca43dc874a8cf8055be034:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -9829,6 +11065,166 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-e23db18253d36028469dfbc88f8a3b5eee300b58f8801fd4926225f2f3a17ef3": {
+      "actual_usd": "0.9411291184246466666666666667",
+      "completed_at": "2026-11-03T12:32:13.215183+00:00",
+      "created_at": "2026-11-03T12:20:45.321836+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "5828a914aa2041a62d4a66b790965f77bc40fd6aebea80bcd014efbe5f1d2f54"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.9411291184246466666666666667",
+        "call_id": "fc-01M6GNNQWKXNZXFYRP2ZPW46TP",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/control2_mechanical/math500/batch_001/openwsp-gpu:0cd85990d8d6483ea2ce45dfb43f7d68:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 793.978446365,
+        "startup_seconds": 120.0,
+        "usage_seconds": 671.978446365
+      },
+      "seconds": 793.978446365,
+      "stage": "evaluation/control2_mechanical/math500/batch_001/openwsp-gpu:0cd85990d8d6483ea2ce45dfb43f7d68:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-e40a6535052e91afbeef155653eae636d9b2b91d0bae4681c228969ea434196e": {
+      "actual_usd": "0.3856330229078413333333333333",
+      "completed_at": "2026-11-03T12:08:29.070057+00:00",
+      "created_at": "2026-11-03T12:04:54.062585+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "71de3dd7cb5507f70d9fc5f9deb55bffa3c610b80386451cae2fa90f5a0a5b7f"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.3856330229078413333333333333",
+        "call_id": "fc-01M6GMRP58M2GN2XSRRRRM3E76",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/control2_mechanical/math500/smoke/openwsp-gpu:1b2b17ea6c0642f290c82ac7248e98ab:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 325.337195929,
+        "startup_seconds": 120.0,
+        "usage_seconds": 203.33719592900002
+      },
+      "seconds": 325.337195929,
+      "stage": "evaluation/control2_mechanical/math500/smoke/openwsp-gpu:1b2b17ea6c0642f290c82ac7248e98ab:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-f018dcc2cd3b5758daa18239ad1f70ef745bfdc6330e5e6f9be297ce812e84c6": {
+      "actual_usd": "0.1975964674793759881466666667",
+      "completed_at": "2026-11-03T12:03:58.481443+00:00",
+      "created_at": "2026-11-03T12:03:01.326097+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "1824d71be998b2900f92c19dbfa596fa905fee7f6eed1c3117e93fbe7cd63ae2"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1975964674793759881466666667",
+        "call_id": "fc-01M6GMN95JFFK6ZFWT7TE5KMFV",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_014/openwsp-gpu:9d4b77bcf61245158cc49425322e764a:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 166.70118178799999,
+        "startup_seconds": 120.0,
+        "usage_seconds": 44.701181788
+      },
+      "seconds": 166.70118178799999,
+      "stage": "control2/directions/batch_014/openwsp-gpu:9d4b77bcf61245158cc49425322e764a:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-f3c70f79f4ce8f618bb49d6dd2f0b2058758965547391c73111a54cddb12c3db": {
+      "actual_usd": "0.1773784795701613333333333333",
+      "completed_at": "2026-11-03T12:01:02.841190+00:00",
+      "created_at": "2026-11-03T12:00:20.603058+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "11256c77df1da14e784c8cddac3dfa5e1c368113cbc6b1f95f737221e3de7290"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1773784795701613333333333333",
+        "call_id": "fc-01M6GMGBRK86K166EMSR873C4H",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_011/openwsp-gpu:a5f06599bc0d4de6a0bd9e04fa9c2aad:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 149.644386589,
+        "startup_seconds": 120.0,
+        "usage_seconds": 27.644386589
+      },
+      "seconds": 149.644386589,
+      "stage": "control2/directions/batch_011/openwsp-gpu:a5f06599bc0d4de6a0bd9e04fa9c2aad:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-f93f170dd0182e66d4b8c72ff804f553f45efd58996cf55d19fe287ed10ccc91": {
       "actual_usd": "1.655022835474082666666666667",
       "completed_at": "2026-11-03T08:02:54.811286+00:00",
@@ -9865,6 +11261,46 @@
       },
       "seconds": 1396.250986058,
       "stage": "live/fwd_1/original/openwsp-gpu:e382217120784a58b0cb6b8d80fa71e1:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-fcea3cfaad9fe93f8109d5cd17faeb6f7313e4dc798a6a9d3f93c6a17c639c38": {
+      "actual_usd": "0.1825769131615893333333333333",
+      "completed_at": "2026-11-03T11:54:13.833275+00:00",
+      "created_at": "2026-11-03T11:53:29.259158+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "83a3e023da812705b7fe2ebe2a74f69a0ed49889e673b0864fb55b489fb702bb"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.1825769131615893333333333333",
+        "call_id": "fc-01M6GM3STW9JF0SCHGSTJMEA85",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "control2/directions/batch_003/openwsp-gpu:016845cbc6f54a50bd745f3e98c55035:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 154.030016728,
+        "startup_seconds": 120.0,
+        "usage_seconds": 32.030016728
+      },
+      "seconds": 154.030016728,
+      "stage": "control2/directions/batch_003/openwsp-gpu:016845cbc6f54a50bd745f3e98c55035:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
