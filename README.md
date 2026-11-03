@@ -236,7 +236,9 @@ uv run openwsp --help
 uv run pytest -q
 ```
 
-Set the environment variables listed in [.env.example](.env.example) using your environment's secret mechanism. The replication uses Modal for compute, OpenAI for the editor, Hugging Face for model access, and GitHub for the authorized result push. Keep credentials out of repository files and remote URLs.
+For ChatGPT subscription billing, follow the [subscription setup](docs/subscription-replication.md): a persistent local Codex worker supplies editor responses while Modal runs the experiment. The [editor architecture](docs/editor-architecture.md) keeps this route, the existing Responses API adapter and the Fable profile separate from the kernel.
+
+Set the environment variables listed in [.env.example](.env.example) using your environment's secret mechanism. Both routes use Modal for compute, Hugging Face for model access, and GitHub for the authorized result push. `OPENAI_API_KEY` is needed only for the Responses API route. Keep credentials out of repository files and remote URLs.
 
 Before deploying, create its named secrets in the same Modal workspace environment. This command reads the exported values at runtime, maps `GITHUB_ACCESS_TOKEN` to the remote `GITHUB_TOKEN` key, and leaves existing secrets unchanged:
 
@@ -249,9 +251,10 @@ from openwsp.backends.modal_runtime import configure_tls
 configure_tls()
 secrets = {
     "huggingface": {"HF_TOKEN": os.environ["HF_TOKEN"]},
-    "openai": {"OPENAI_API_KEY": os.environ["OPENAI_API_KEY"]},
     "github": {"GITHUB_TOKEN": os.environ["GITHUB_ACCESS_TOKEN"]},
 }
+if os.environ.get("OPENAI_API_KEY"):
+    secrets["openai"] = {"OPENAI_API_KEY": os.environ["OPENAI_API_KEY"]}
 if any(not value for contents in secrets.values() for value in contents.values()):
     raise ValueError("Required secret environment variables must be nonempty")
 for name, contents in secrets.items():
@@ -261,15 +264,17 @@ PY
 
 Existing secret values are retained; update them in Modal if their credentials have changed. See [Modal's secret setup](https://modal.com/docs/guide/secrets). The local CPU examples below require no credentials.
 
-Launch or resume the replication (which starts paid compute and editor calls), inspect its state, and regenerate its report:
+Launch or resume with the private subscription configuration from the setup guide (Modal compute is still paid), inspect its state, and regenerate its report:
 
 ```sh
-uv run openwsp replicate exp8
+uv run openwsp replicate exp8 --config /absolute/private/codex-exp8.json --foreground
 uv run openwsp status exp8
 uv run openwsp report exp8
 ```
 
 Current progress and exact resume commands are in [STATUS.md](STATUS.md).
+
+The original `uv run openwsp replicate exp8` command retains the Responses API route and its API-token billing; it requires the `openai` Modal secret. No automatic switch between billing routes occurs.
 
 For a local CPU example:
 

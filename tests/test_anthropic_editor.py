@@ -178,6 +178,56 @@ def test_real_sdk_serializes_signed_history_without_native_tools(tmp_path):
     ]
 
 
+def test_real_sdk_fable_profile_sends_documented_effort_and_persists_it(tmp_path):
+    from dataclasses import replace
+
+    from openwsp.editors.profiles import FABLE_5_1_PROFILE, ThinkingConfig, create_editor
+
+    anthropic = pytest.importorskip("anthropic")
+    httpx2 = pytest.importorskip("httpx2")
+    requests = []
+
+    def handler(request):
+        body = json.loads(request.content)
+        requests.append(body)
+        assert body["model"] == "claude-fable-5-1"
+        assert body["output_config"] == {"effort": "max"}
+        assert body["thinking"] == {"type": "adaptive"}
+        assert body["tools"] == []
+        return httpx2.Response(200, json={**response(), "model": "claude-fable-5-1"})
+
+    profile = replace(FABLE_5_1_PROFILE, thinking=ThinkingConfig(type="adaptive"), output_effort="max")
+    with httpx2.Client(transport=httpx2.MockTransport(handler)) as http_client:
+        client = anthropic.Anthropic(http_client=http_client, api_key="dummy", max_retries=0)
+        options = {
+            "state_dir": tmp_path / "editor",
+            "budget": BudgetLedger(tmp_path / "budget.json"),
+            "rates": RATES,
+            "max_input_tokens": 200000,
+            "max_output_tokens": 4096,
+            "client": client,
+        }
+        instance = create_editor(profile, **options)
+        assert instance.complete("Task", request_key="one") == "Complete answer"
+        saved = json.loads(next(instance.root.glob("request_*.json")).read_text())
+        assert saved["output_config"] == {"effort": "max"}
+        assert instance.last_response["settings"]["output_config"] == {"effort": "max"}
+        changed = create_editor(replace(profile, output_effort="high"), **options)
+        with pytest.raises(EditorError, match="Settings changed"):
+            changed.complete("Next", request_key="two")
+        assert len(requests) == 1
+
+
+def test_omitted_output_effort_preserves_existing_settings_and_request_shape(tmp_path):
+    fake = FakeMessages()
+    instance = editor(tmp_path, fake, output_effort=None)
+    assert "output_config" not in instance.settings
+    instance.complete("Task", request_key="one")
+    assert "output_config" not in fake.calls[0]
+    assert editor(tmp_path, fake).complete("Task", request_key="one") == "Complete answer"
+    assert len(fake.calls) == 1
+
+
 def test_reservation_and_request_are_committed_before_create(tmp_path):
     checkpoints = []
     fake = FakeMessages()

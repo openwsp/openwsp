@@ -175,16 +175,20 @@ def replicate(
     experiment: str,
     stage: str = "all",
     config: Path | None = None,
-    foreground: bool = False,
+    foreground: Annotated[
+        bool, typer.Option(help="Wait locally for completion; required for editor='codex'.")
+    ] = False,
 ) -> None:
     """Launch or resume a replication pipeline."""
     from .replication import replicate as run_replication
 
-    _emit(
-        run_replication(
+    try:
+        result = run_replication(
             experiment, stage=stage, detach=not foreground, config=str(config) if config else None
         )
-    )
+    except ValueError as error:
+        raise typer.BadParameter(str(error)) from error
+    _emit(result)
 
 
 @app.command("status")

@@ -11,6 +11,50 @@ import pytest
 from replications.exp8 import live
 
 
+def test_new_subscription_attempt_does_not_adopt_old_state_or_work(driver, monkeypatch, tmp_path):
+    from openwsp.backends import editor_bridge, sandbox
+    from openwsp.editors import bridge
+    from openwsp.editors.base import ProviderUnavailable
+    from replications.exp8.run_identity import LiveIdentity
+
+    driver.write_state(passes=4, turn=26, runs=10, next="Previous attempt's private reasoning")
+    old_state = (driver.root / "state.json").read_bytes()
+    old_work = tmp_path / "work/live"
+    old_work.mkdir(parents=True)
+    (old_work / "notes.md").write_text("Previous attempt's private reasoning")
+    observed = {}
+    original_create = sandbox.ModalSandboxTransport.create
+
+    def create(*args, **kwargs):
+        observed["work_subpath"] = kwargs["work_subpath"]
+        return original_create(*args, **kwargs)
+
+    class Editor:
+        last_response = None
+
+        def __init__(self, *args, **kwargs):
+            observed["run_id"] = kwargs["run_id"]
+
+        def complete(self, message, **kwargs):
+            observed["prompt"] = message
+            raise ProviderUnavailable("Synthetic stop before any provider call")
+
+    monkeypatch.setattr(sandbox.ModalSandboxTransport, "create", create)
+    monkeypatch.setattr(editor_bridge, "ModalBridgeStore", lambda: object())
+    monkeypatch.setattr(bridge, "BridgeEditor", Editor)
+    identity = LiveIdentity("codex", "separate-attempt")
+    with pytest.raises(ProviderUnavailable):
+        live.run_live({"stages": {"kernel": {"status": "passed"}}}, object(), lambda: None,
+                      app=object(), identity=identity)
+    assert (driver.root / "state.json").read_bytes() == old_state
+    assert observed["work_subpath"] == "live-runs/separate-attempt"
+    assert observed["run_id"] == "separate-attempt"
+    assert observed["prompt"] == (live.ROOT / "prompts/message.txt").read_text()
+    state = json.loads((tmp_path / "data/live-runs/separate-attempt/state.json").read_text())
+    assert (state["passes"], state["turn"], state["runs"]) == (0, 0, 0)
+    assert not (tmp_path / "work/live-runs/separate-attempt/notes.md").exists()
+
+
 @pytest.fixture
 def driver(monkeypatch, tmp_path):
     root = tmp_path / "data/live-run"

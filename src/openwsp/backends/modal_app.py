@@ -1,5 +1,6 @@
 """Modal implementation. The live editor never receives this module or evaluation data."""
 import json
+import os
 import time
 from pathlib import Path
 
@@ -8,6 +9,9 @@ import modal
 from openwsp.backends.modal_runtime import configure_tls
 
 configure_tls()
+EDITOR_TRANSPORT = os.environ.get("OPENWSP_EDITOR_TRANSPORT", "openai")
+if EDITOR_TRANSPORT not in {"openai", "codex"}:
+    raise ValueError("Unsupported deployed editor transport")
 REPO = Path(__file__).resolve().parents[3] if modal.is_local() else Path("/opt/openwsp")
 SOURCE = REPO / "src/openwsp" if modal.is_local() else REPO / "openwsp"
 app = modal.App("openwsp-exp8")
@@ -23,7 +27,8 @@ common = ["numpy", "safetensors", "transformers==5.17.0", "math-verify==0.9.0", 
 cpu_dependencies = (modal.Image.debian_slim(python_version="3.12")
              .uv_pip_install("torch==2.12.0", index_url="https://download.pytorch.org/whl/cpu")
              .uv_pip_install(*common)
-             .env({"PYTHONPATH": "/opt/openwsp", "HF_HUB_DISABLE_XET": "1"}))
+             .env({"PYTHONPATH": "/opt/openwsp", "HF_HUB_DISABLE_XET": "1",
+                   "OPENWSP_EDITOR_TRANSPORT": EDITOR_TRANSPORT}))
 cpu_image = cpu_dependencies.add_local_dir(SOURCE, "/opt/openwsp/openwsp", copy=True)
 sandbox_image = cpu_dependencies
 for filename in ("__init__.py", "core.py", "edits.py", "kernel.py", "backends/__init__.py", "backends/sandbox_worker.py"):
@@ -38,6 +43,7 @@ gpu_image = (modal.Image.from_registry("nvidia/cuda:13.0.3-devel-ubuntu24.04", a
              .add_local_dir(SOURCE, "/opt/openwsp/openwsp", copy=True)
              .add_local_dir(REPO / "replications", "/opt/openwsp/replications", copy=True)
              .env({"PYTHONPATH": "/opt/openwsp", "HF_HUB_DISABLE_XET": "1",
+                   "OPENWSP_EDITOR_TRANSPORT": EDITOR_TRANSPORT,
                    "VLLM_CACHE_ROOT": "/kernel-cache/vllm", "TRITON_CACHE_DIR": "/kernel-cache/triton",
                    "FLASHINFER_WORKSPACE_BASE": "/kernel-cache/flashinfer"}))
 
@@ -320,11 +326,14 @@ class TransformerReader:
               cpu=(1, 1), memory=(4096, 4096),
               volumes={"/data": data_volume, "/model": model_volume, "/practice": practice_volume,
                        "/work": work_volume},
-              secrets=[modal.Secret.from_name("openai", required_keys=["OPENAI_API_KEY"]),
-                       modal.Secret.from_name("github", required_keys=["GITHUB_TOKEN"])],
+              secrets=([modal.Secret.from_name("openai", required_keys=["OPENAI_API_KEY"])]
+                       if EDITOR_TRANSPORT == "openai" else [])
+                      + [modal.Secret.from_name("github", required_keys=["GITHUB_TOKEN"])],
               max_containers=1)
 def pipeline(stage="all", config=None, driver_ticket=None):
     from replications.exp8.pipeline import run
+    if (config or {}).get("editor", "openai") != EDITOR_TRANSPORT:
+        raise ValueError("Requested editor differs from the deployed authentication configuration")
     return run(stage, config or {}, app=app, driver_ticket=driver_ticket)
 
 
@@ -370,6 +379,15 @@ def public_forward(payload):
 def status():
     path = Path("/data/state.json")
     return json.loads(path.read_text()) if path.exists() else {"status": "not_started"}
+
+
+@app.function(image=driver_image, timeout=120, cpu=(0.25, 0.25), memory=(1024, 1024),
+              scaledown_window=2, max_containers=1, volumes={"/data": data_volume})
+@modal.concurrent(max_inputs=1)
+def editor_exchange(operation, args, kwargs):
+    from openwsp.backends.editor_bridge import exchange
+    return exchange(operation, args, kwargs, directory="/data/editor-bridge",
+                    commit=data_volume.commit, reload=data_volume.reload)
 
 
 @app.function(image=sandbox_image, timeout=60)

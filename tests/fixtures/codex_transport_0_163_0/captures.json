@@ -1,0 +1,137 @@
+[
+  {
+    "path": "/v1/responses",
+    "fake_auth_matches": true,
+    "body": {
+      "model": "gpt-6-astra",
+      "stream": true,
+      "input": [
+        {
+          "type": "message",
+          "id": "msg_4720d29f-a9cd-5ba5-b862-f0ce5e551223",
+          "role": "developer",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "Answer the user's request."
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "id": "msg_01a1a192-e435-7170-890c-1517e5ac904e",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "Return exactly MOCK_OK. This is a local synthetic transport fixture."
+            }
+          ]
+        }
+      ],
+      "tool_choice": "auto",
+      "parallel_tool_calls": false,
+      "reasoning": {
+        "effort": "max",
+        "context": "all_turns"
+      },
+      "store": false,
+      "include": [
+        "reasoning.encrypted_content"
+      ],
+      "prompt_cache_key": "01a1a192-e417-7303-be79-36c83faf7a60",
+      "text": {
+        "verbosity": "low"
+      },
+      "client_metadata": {
+        "session_id": "01a1a192-e417-7303-be79-36c83faf7a60",
+        "x-codex-turn-metadata": "{\"installation_id\":\"7e9355b5-2eaa-4274-9a6c-ac30ddd5e9e2\",\"session_id\":\"01a1a192-e417-7303-be79-36c83faf7a60\",\"thread_id\":\"01a1a192-e417-7303-be79-36c83faf7a60\",\"agent_name\":\"/root\",\"turn_id\":\"01a1a192-e420-7f72-b463-cea15ef2def4\",\"window_id\":\"01a1a192-e417-7303-be79-36c83faf7a60:0\",\"window_number\":0,\"context_window_id\":\"01a1a192-e418-7af1-8fcb-f6bc9651829b\",\"request_kind\":\"turn\",\"history_initialization\":\"new\",\"root_turn_id\":\"01a1a192-e420-7f72-b463-cea15ef2def4\",\"thread_source\":\"user\",\"turn_trigger\":\"exec\",\"sandbox\":\"seccomp\",\"sandbox_mode\":\"read-only\",\"auto_review_enabled\":false,\"node_repl_auto_review_required\":true,\"node_repl_disabled\":false,\"turn_started_at_unix_ms\":1793712120866,\"analytics_enabled\":true,\"model\":\"gpt-6-astra\",\"reasoning_effort\":\"max\"}",
+        "x-codex-installation-id": "7e9355b5-2eaa-4274-9a6c-ac30ddd5e9e2",
+        "thread_id": "01a1a192-e417-7303-be79-36c83faf7a60",
+        "x-codex-window-id": "01a1a192-e417-7303-be79-36c83faf7a60:0",
+        "turn_id": "01a1a192-e420-7f72-b463-cea15ef2def4",
+        "root_turn_id": "01a1a192-e420-7f72-b463-cea15ef2def4"
+      }
+    }
+  },
+  {
+    "path": "/v1/responses",
+    "fake_auth_matches": true,
+    "body": {
+      "model": "gpt-6-astra",
+      "stream": true,
+      "input": [
+        {
+          "type": "message",
+          "id": "msg_4720d29f-a9cd-5ba5-b862-f0ce5e551223",
+          "role": "developer",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "Answer the user's request."
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "id": "msg_01a1a192-e435-7170-890c-1517e5ac904e",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "Return exactly MOCK_OK. This is a local synthetic transport fixture."
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "status": "completed",
+          "id": "msg_mock",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "MOCK_OK",
+              "annotations": []
+            }
+          ],
+          "phase": "final_answer"
+        },
+        {
+          "type": "message",
+          "id": "msg_01a1a192-e4cf-7441-b3ef-9868d93c4837",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "Return exactly MOCK_OK. This is a local synthetic transport fixture."
+            }
+          ]
+        }
+      ],
+      "tool_choice": "auto",
+      "parallel_tool_calls": false,
+      "reasoning": {
+        "effort": "max",
+        "context": "all_turns"
+      },
+      "store": false,
+      "include": [
+        "reasoning.encrypted_content"
+      ],
+      "prompt_cache_key": "01a1a192-e417-7303-be79-36c83faf7a60",
+      "text": {
+        "verbosity": "low"
+      },
+      "client_metadata": {
+        "thread_id": "01a1a192-e417-7303-be79-36c83faf7a60",
+        "x-codex-window-id": "01a1a192-e417-7303-be79-36c83faf7a60:0",
+        "root_turn_id": "01a1a192-e4bd-72d2-86c0-d3f9147d89c9",
+        "turn_id": "01a1a192-e4bd-72d2-86c0-d3f9147d89c9",
+        "x-codex-installation-id": "7e9355b5-2eaa-4274-9a6c-ac30ddd5e9e2",
+        "x-codex-turn-metadata": "{\"installation_id\":\"7e9355b5-2eaa-4274-9a6c-ac30ddd5e9e2\",\"session_id\":\"01a1a192-e417-7303-be79-36c83faf7a60\",\"thread_id\":\"01a1a192-e417-7303-be79-36c83faf7a60\",\"agent_name\":\"/root\",\"turn_id\":\"01a1a192-e4bd-72d2-86c0-d3f9147d89c9\",\"window_id\":\"01a1a192-e417-7303-be79-36c83faf7a60:0\",\"window_number\":0,\"context_window_id\":\"01a1a192-e418-7af1-8fcb-f6bc9651829b\",\"request_kind\":\"turn\",\"history_initialization\":\"cold_resume\",\"root_turn_id\":\"01a1a192-e4bd-72d2-86c0-d3f9147d89c9\",\"thread_source\":\"user\",\"turn_trigger\":\"exec\",\"sandbox\":\"seccomp\",\"sandbox_mode\":\"read-only\",\"auto_review_enabled\":false,\"node_repl_auto_review_required\":true,\"node_repl_disabled\":false,\"turn_started_at_unix_ms\":1793712121024,\"analytics_enabled\":true,\"model\":\"gpt-6-astra\",\"reasoning_effort\":\"max\"}",
+        "session_id": "01a1a192-e417-7303-be79-36c83faf7a60"
+      }
+    }
+  }
+]

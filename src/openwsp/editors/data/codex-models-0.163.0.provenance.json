@@ -1,0 +1,34 @@
+{
+  "cli_version": "0.163.0",
+  "source_command": [
+    "codex",
+    "debug",
+    "models",
+    "--bundled"
+  ],
+  "source_kind": "installed Codex CLI bundled model catalog; no network or login",
+  "source_catalog_sha256": "8fd69ec293bf346635efef2dd9088acd8056bcfcea5e6bb6b05b82fcc51edac9",
+  "source_model_canonical_sha256": "b62992cf13d7d24c9fb2c9ae030f887ebd319cf072b120b8fccd21e051d5845b",
+  "catalog_sha256": "05723cac0f7da85c31f710f602bb0c47a5588d8bdf68aad24e9dd6ac951c7705",
+  "model": "gpt-6-astra",
+  "changes": {
+    "tool_mode": {
+      "before": "code_mode_only",
+      "after": "direct"
+    },
+    "apply_patch_tool_type": {
+      "before": "freeform",
+      "after": null
+    },
+    "experimental_supported_tools": {
+      "before": [
+        "send_user_message_async",
+        "clock"
+      ],
+      "after": [
+        "send_user_message_async"
+      ]
+    }
+  },
+  "instruction_note": "Native metadata is retained verbatim apart from these three tool fields. model_instructions_file replaces default instructions on the wire."
+}

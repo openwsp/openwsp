@@ -58,6 +58,30 @@ def collect(data="/data", staging="/data/publication"):
             shutil.copyfile(live / "final_answer.md", public_live / "final_answer.md")
         if (live / "transport-reviewed.json").exists():
             shutil.copyfile(live / "transport-reviewed.json", public_live / "transport-reviewed.json")
+    # Keep every separately identified attempt; selecting the active pointer
+    # changes the current status display, never deletes the earlier trajectory.
+    for attempt in sorted((data / "live-runs").glob("*")):
+        if not attempt.is_dir():
+            continue
+        from replications.exp8.run_identity import LiveIdentity
+        identity = LiveIdentity("codex", attempt.name)
+        target = root / identity.relative
+        target.mkdir(parents=True, exist_ok=True)
+        if (attempt / "state.json").exists():
+            state = json.loads((attempt / "state.json").read_text())
+            compact = {key: state.get(key) for key in ("turn", "runs", "passes", "requests", "handoffs", "done", "submission")}
+            compact.update(run_id=identity.run_id, editor=identity.editor)
+            compact["base_generation_reuse_requests"] = [p.stem.split(".")[0] for p in (attempt / "requests").glob("*.provenance.json")
+                if json.loads(p.read_text()).get("base_generations_reused")]
+            atomic_write(target / "state.json", compact)
+            render_transcript(attempt, target / "transcript.md")
+        for name in ("identity.json", "final_answer.md"):
+            if (attempt / name).exists():
+                shutil.copyfile(attempt / name, target / name)
+        if (attempt / "edit/manifest.json").exists():
+            shutil.copytree(attempt / "edit", target / "edit", dirs_exist_ok=True)
+    if (data / "active-live.json").exists():
+        shutil.copyfile(data / "active-live.json", root / "active-live.json")
     control = data / "controls/mechanical"
     if (control / "method.json").exists():
         method = json.loads((control / "method.json").read_text())

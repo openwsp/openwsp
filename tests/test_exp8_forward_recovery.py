@@ -88,6 +88,7 @@ def tool_setup(tmp_path, monkeypatch):
         lambda value: tmp_path / "base-cache" if str(value) == "/data/base-generation-cache" else Path(value),
     )
     tool = object.__new__(forward.ForwardTool)
+    tool.job_prefix = "live"
     tool.run_dir, tool.work = run, work
     tool.sandbox = sandbox
     tool.ledger = SimpleNamespace(snapshot=lambda: {"summary": {"modal": {"available_usd": 100}}})
@@ -107,6 +108,18 @@ def tool_setup(tmp_path, monkeypatch):
         source=run / "requests/fwd_1.json.claimed",
         done=run / "requests/fwd_1.done.json",
     )
+
+
+def test_separate_attempt_never_reuses_another_attempt_job_identifier(tool_setup):
+    setup = tool_setup
+    prior = setup.tool.jobs._path("live/fwd_1/original")
+    prior.write_text('{"call_id":"prior-attempt"}')
+    setup.tool.job_prefix = "live/separate-attempt"
+    result = setup.tool.execute(setup.request, 1, 1)
+    assert result["ok"]
+    assert len(setup.dispatched) == 1
+    assert ("new_job", "live/separate-attempt/fwd_1/original") in setup.events
+    assert json.loads(prior.read_text()) == {"call_id": "prior-attempt"}
 
 
 def test_delivery_failure_reuses_gpu_receipt_without_counting_a_failed_request(tool_setup):

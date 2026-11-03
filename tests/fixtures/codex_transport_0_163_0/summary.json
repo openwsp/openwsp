@@ -1,0 +1,76 @@
+{
+  "cli_version": "0.163.0",
+  "catalog_sha256": "05723cac0f7da85c31f710f602bb0c47a5588d8bdf68aad24e9dd6ac951c7705",
+  "provider": "loopback mock only",
+  "real_provider_calls": 0,
+  "requests": [
+    {
+      "model": "gpt-6-astra",
+      "tools_present": false,
+      "input_roles": [
+        "developer",
+        "user"
+      ],
+      "reasoning": {
+        "effort": "max",
+        "context": "all_turns"
+      },
+      "text": {
+        "verbosity": "low"
+      },
+      "store": false,
+      "include": [
+        "reasoning.encrypted_content"
+      ],
+      "max_output_tokens_present": false
+    },
+    {
+      "model": "gpt-6-astra",
+      "tools_present": false,
+      "input_roles": [
+        "developer",
+        "user",
+        "assistant",
+        "user"
+      ],
+      "reasoning": {
+        "effort": "max",
+        "context": "all_turns"
+      },
+      "text": {
+        "verbosity": "low"
+      },
+      "store": false,
+      "include": [
+        "reasoning.encrypted_content"
+      ],
+      "max_output_tokens_present": false
+    }
+  ],
+  "cli_turn_usage": [
+    {
+      "input_tokens": 10,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 2,
+      "reasoning_output_tokens": 0
+    },
+    {
+      "input_tokens": 20,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4,
+      "reasoning_output_tokens": 0
+    }
+  ],
+  "mock_usage_per_response": {
+    "input_tokens": 10,
+    "output_tokens": 2
+  },
+  "resume_requested": true,
+  "thread_id": "01a1a192-e417-7303-be79-36c83faf7a60",
+  "limitations": [
+    "Does not test subscription authentication or model availability",
+    "No inference output cap or prompt-cache TTL appears in captured requests"
+  ]
+}

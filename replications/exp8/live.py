@@ -90,11 +90,13 @@ def verify_kernel(ledger, checkpoint, app):
         checkpoint()
 
 
-def run_live(outer_state, ledger, checkpoint, *, app):
+def run_live(outer_state, ledger, checkpoint, *, app, identity=None):
     from openwsp.backends.modal_app import sandbox_image, model_volume, practice_volume, work_volume, data_volume
     from openwsp.backends.sandbox import ModalSandboxTransport
     from openwsp.backends.sandbox_budget import SandboxBudgetLease
-    root = Path("/data/live-run")
+    from replications.exp8.run_identity import LiveIdentity
+    identity = identity or LiveIdentity()
+    root = Path(str(identity.root))
     root.mkdir(parents=True, exist_ok=True)
     task = (ROOT / "prompts/message.txt").read_text()
     path = root / "state.json"
@@ -106,8 +108,13 @@ def run_live(outer_state, ledger, checkpoint, *, app):
         return state
     if not outer_state["stages"].get("kernel", {}).get("status") == "passed":
         outer_state["stages"]["kernel"] = verify_kernel(ledger, checkpoint, app)
-    work = Path("/work/live")
+    work = Path(str(identity.work))
     work.mkdir(parents=True, exist_ok=True)
+    if identity.editor == "codex" and not path.exists() and any(work.iterdir()):
+        raise ValueError("A fresh Codex attempt requires an empty isolated work namespace")
+    if identity.editor == "codex" and not path.exists():
+        atomic_write(path, state)
+        checkpoint()
     # A claimed cell may have changed files before a lost driver response. Never
     # replay it in a different kernel: keep files and report the unknown outcome.
     old_pending = state.get("pending")
@@ -120,13 +127,15 @@ def run_live(outer_state, ledger, checkpoint, *, app):
     work_volume.commit()
     lease = SandboxBudgetLease(ledger, root / "sandbox-lease.json", commit=checkpoint)
     sandbox = lease.start(lambda: ModalSandboxTransport.create(
-        app, sandbox_image, model_volume, practice_volume, work_volume, work_subpath="live",
+        app, sandbox_image, model_volume, practice_volume, work_volume, work_subpath=identity.work_subpath,
         timeout=86400, idle_timeout=180, initial_runs=initial_runs))
     state["sandbox_id"] = sandbox.sandbox.object_id
 
     def save():
         atomic_write(path, state)
         outer_state["live"] = {key: state[key] for key in ("turn", "runs", "passes", "requests", "done", "sandbox_id")}
+        if identity.run_id:
+            outer_state["live"].update(run_id=identity.run_id, editor=identity.editor)
         checkpoint()
 
     try:
@@ -137,12 +146,18 @@ def run_live(outer_state, ledger, checkpoint, *, app):
             if transport.get("status") != "reviewed_for_resume" or transport.get("editor_options") != {"verbosity": "low", "max_output_tokens": 32768}:
                 raise ValueError("Unrecognized editor transport recovery record")
             editor_options = transport["editor_options"]
-        editor = AstraEditor(root / "editor", ledger, on_poll=lambda _: save(), commit=save, **editor_options)
+        if identity.editor == "codex":
+            from openwsp.backends.editor_bridge import ModalBridgeStore
+            from openwsp.editors.bridge import BridgeEditor
+            editor = BridgeEditor(root / "editor", run_id=identity.run_id, store=ModalBridgeStore(),
+                                  on_poll=lambda _: save(), commit=save)
+        else:
+            editor = AstraEditor(root / "editor", ledger, on_poll=lambda _: save(), commit=save, **editor_options)
         restart_notice_due = bool(state["turn"] or state.get("pending"))
         if state["turn"] and not state.get("pending"):
             state["next"] = "The kernel was restarted; variables were lost, but files in /work and saved edits remain.\n" + state["next"]
             restart_notice_due = False
-        tool = ForwardTool(root, work, sandbox, ledger, save)
+        tool = ForwardTool(root, work, sandbox, ledger, save, job_prefix=identity.job_prefix)
         while not state["done"]:
             lease.check()
             turn = state["turn"] + 1
@@ -198,7 +213,7 @@ def run_live(outer_state, ledger, checkpoint, *, app):
                     "partial_text_characters": len(partial),
                     "partial_text_sha256": hashlib.sha256(partial.encode()).hexdigest(),
                     "response_volume": "openwsp-exp8-data",
-                    "response_volume_path": f"/live-run/editor/{record['response_file']}" if record.get("response_file") else None,
+                    "response_volume_path": f"/{identity.relative}/editor/{record['response_file']}" if record.get("response_file") else None,
                 })
                 state["next"] = ("The editor API returned an incomplete response (max_output_tokens). "
                                  "No code or forward pass from that response was executed.")

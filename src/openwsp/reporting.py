@@ -15,6 +15,8 @@ from urllib.parse import quote
 _REFERENCES = ("unedited", "p10c", "p25c", "p50c")
 _BENCHMARKS = ("math500", "gsm8k", "ifeval")
 _COMPARATORS = {"calibration_base": "unedited", "calibration_p50c": "p50c", "live-run": "p50c"}
+_RUN_ID = re.compile(r"[a-z][a-z0-9_-]{0,63}")
+_LIVE_EVALUATIONS = {"math500": (4, 2000), "gsm8k": (2, 2638), "ifeval": (2, 1082)}
 _SECRET = re.compile(r"(?:sk-|hf_|ak-|as-|ghp_|github_pat_)[A-Za-z0-9_-]{16,}")
 _BEARER = re.compile(r"(?i)(authorization[\"'\s:]+bearer\s+)[A-Za-z0-9._~+/-]+")
 _STATE_FILES = (
@@ -67,9 +69,138 @@ def _recorded(value: Any, path: Path, relative_to: Path) -> str:
     return f"[{_text(_redact(str(value)))}]({_link(path, relative_to)})" if value is not None else "pending"
 
 
-def _status_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path) -> str:
+def _attempt_evidence(results: Path) -> tuple[dict, dict, list[Path]]:
+    """Validate the explicit selection before any generated file is changed."""
+    pointer_path = results / "active-live.json"
+    if not pointer_path.resolve().is_relative_to(results):
+        raise ValueError("Active-live pointer escapes results")
+    pointer = _read_json(pointer_path) if pointer_path.exists() else {}
+    if pointer:
+        run_id = pointer.get("run_id")
+        if (type(pointer.get("schema_version")) is not int or pointer["schema_version"] != 1
+                or not isinstance(run_id, str) or not _RUN_ID.fullmatch(run_id)
+                or pointer.get("relative_path") != f"live-runs/{run_id}"
+                or not isinstance(pointer.get("editor"), str) or not pointer["editor"].strip()
+                or any(not isinstance(pointer.get(key), str) or not re.fullmatch(r"[0-9a-f]{64}", pointer[key])
+                       for key in ("task_sha256", "instructions_sha256"))):
+            raise ValueError("Invalid active-live pointer")
+    elif pointer_path.exists():
+        raise ValueError("Invalid active-live pointer")
+    paths = [pointer_path] if pointer else []
+    names = ({f"live-runs/{path.name}" for path in (results / "live-runs").iterdir() if path.is_dir()}
+             if (results / "live-runs").exists() else set())
+    if pointer:
+        names.add(pointer["relative_path"])
+    names.add("live-run")
+    attempts = {}
+    for name in sorted(names):
+        directory = results / name
+        if name != "live-run" and not _RUN_ID.fullmatch(directory.name):
+            raise ValueError("Invalid live attempt directory name")
+        if not directory.resolve().is_relative_to(results):
+            raise ValueError("Live attempt directory escapes results")
+        records = {}
+        for filename in ("state.json", "identity.json", "blocker.json", "transcript.md"):
+            path = directory / filename
+            if not path.exists():
+                continue
+            if not path.resolve().is_relative_to(directory.resolve()):
+                raise ValueError("Live attempt evidence escapes its directory")
+            data = {} if filename == "transcript.md" else _read_json(path)
+            if name != "live-run" and data.get("run_id", directory.name) != directory.name:
+                raise ValueError("Live attempt evidence run_id mismatch")
+            records[filename] = (path, data)
+            paths.append(path)
+        if records or name != "live-run":
+            attempts[name] = records
+    if pointer:
+        identity = attempts[pointer["relative_path"]].get("identity.json")
+        keys = ("schema_version", "editor", "run_id", "relative_path", "task_sha256", "instructions_sha256",
+                "initialization", "relationship")
+        if identity and (type(identity[1].get("schema_version")) is not int
+                         or any(identity[1].get(key) != pointer[key] for key in keys if key in pointer)):
+            raise ValueError("Active live attempt identity mismatch")
+    return pointer, attempts, paths
+
+
+def _submission_ready(state: dict) -> bool:
+    submission = state.get("submission")
+    return (type(state.get("passes")) is int and state["passes"] == 50 and state.get("done") is True
+            and isinstance(submission, dict) and isinstance(submission.get("checkpoint"), str)
+            and bool(submission["checkpoint"].strip()) and isinstance(submission.get("sha256"), str)
+            and re.fullmatch(r"[0-9a-f]{64}", submission["sha256"]) is not None)
+
+
+def _attempt_evaluations(name: str, records: dict, summaries: list[tuple[Path, dict]]) -> dict[str, Path]:
+    state_item = records.get("state.json")
+    if (state_item is None or not _submission_ready(state_item[1])
+            or (name != "live-run" and "identity.json" not in records)):
+        return {}
+    directory = state_item[0].parent
+    completed = {}
+    for path, summary in summaries:
+        benchmark = summary.get("benchmark")
+        if benchmark not in _LIVE_EVALUATIONS or path != directory / benchmark / "summary.json":
+            continue
+        samples, count = _LIVE_EVALUATIONS[benchmark]
+        provenance = summary.get("provenance") or {}
+        if (summary.get("stage") == name and summary.get("status") in {"done", "complete", "completed"}
+                and type(summary.get("samples_per_problem")) is int and summary["samples_per_problem"] == samples
+                and type(summary.get("n")) is int and summary["n"] == count
+                and type(summary.get("correct")) is int and _number(summary.get("accuracy"))
+                and provenance.get("submission_sha256") == state_item[1]["submission"]["sha256"]
+                and provenance.get("problem_limit") is None and provenance.get("problem_selection") is None):
+            completed[benchmark] = path
+    return completed
+
+
+def _attempt_table(pointer: dict, attempts: dict, summaries: list, relative_to: Path, pointer_path: Path | None) -> str:
+    lines = ["Live attempts:", "", "| Attempt | Selection | Editor | Recorded state | Passes | Turns | Runs | Submission | Final evaluations | Evidence |",
+             "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
+    for name, records in attempts.items():
+        state_item = records.get("state.json")
+        blocker = records.get("blocker.json")
+        identity = records.get("identity.json")
+        source, state = state_item or blocker or identity or (None, {})
+        counts = state if state_item else state.get("live") or {}
+        status = "submission recorded" if _submission_ready(counts) else "incomplete"
+        if blocker and blocker[1].get("status") == "blocked":
+            status = "blocked"
+        state_cell = (_recorded(status, blocker[0] if status == "blocked" else source, relative_to)
+                      if state_item or blocker else "pending: state missing")
+        editor = _recorded(identity[1].get("editor"), identity[0], relative_to) if identity else "pending"
+        if not identity and name == pointer.get("relative_path"):
+            editor = _recorded(pointer["editor"], pointer_path, relative_to)
+        completed = _attempt_evaluations(name, records, summaries)
+        evaluation = "; ".join(f"{benchmark}: " + (_recorded("recorded", completed[benchmark], relative_to)
+                                if benchmark in completed else "pending") for benchmark in _BENCHMARKS)
+        links = "; ".join(f"[{filename}]({_link(path, relative_to)})" for filename, (path, _) in records.items()) or "pending"
+        selection = ("active" if name == pointer.get("relative_path") else "historical" if pointer
+                     else "current (legacy default)" if name == "live-run" else "unselected")
+        cells = [name, selection,
+                 editor, state_cell, *[_recorded(counts.get(key), source, relative_to) for key in ("passes", "turn", "runs")],
+                 _recorded("recorded", source, relative_to) if _submission_ready(counts) else "not established", evaluation, links]
+        lines.append("| " + " | ".join(cells) + " |")
+    return "\n".join(lines)
+
+
+def _status_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path, *, pointer: dict | None = None,
+                  attempts: dict | None = None, summaries: list | None = None) -> str:
+    pointer, attempts, summaries = pointer or {}, attempts or {}, summaries or []
     lines = ["| Recorded component | State | Evidence |", "| --- | --- | --- |"]
-    live_blocker = evidence.get("live-run/blocker.json")
+    live_blocker = evidence.get("live-run/blocker.json") if not pointer else None
+    if pointer:
+        selected = attempts[pointer["relative_path"]]
+        source, state = selected.get("state.json", evidence["active-live.json"])
+        ready = "state.json" in selected and _submission_ready(state)
+        evaluations = _attempt_evaluations(pointer["relative_path"], selected, summaries)
+        status = "submission and final evaluations recorded" if ready and len(evaluations) == 3 else "live goal unmet"
+        detail = "submission recorded; final evaluation pending" if ready else "submission requirement pending"
+        if "state.json" not in selected:
+            detail = "pending: active state missing"
+        elif "identity.json" not in selected:
+            detail = "pending: active identity missing"
+        lines.append(f"| Required live run | {_recorded(status, source, relative_to)} | Active attempt: {_recorded(pointer['run_id'], evidence['active-live.json'][0], relative_to)}; {detail if len(evaluations) != 3 else 'see linked attempt evidence'} |")
     if live_blocker:
         path, data = live_blocker
         state = data.get("status")
@@ -111,7 +242,7 @@ def _status_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path) -> 
         if diagnostic:
             label = "Recorded blocker" if state in {"blocked", "failed", "error"} else "Recorded diagnostic"
             lines.append(f"| {label} | {_recorded(str(diagnostic)[:500], path, relative_to)} | See source record. |")
-    if "live-run/state.json" in evidence:
+    if "live-run/state.json" in evidence and not pointer:
         path, data = evidence["live-run/state.json"]
         state = "submission recorded" if data.get("done") is True else "incomplete"
         counts = [f"{key}: {_metric(data.get(key), path, relative_to, digits=0)}" for key in ("passes", "turn", "runs")]
@@ -125,6 +256,10 @@ def _status_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path) -> 
         lines.append("| Pipeline | pending: no published pipeline state | Component checks do not establish overall completion. |")
     if live_blocker and live_blocker[1].get("status") == "blocked":
         lines += ["", "Completed controls or publication do not satisfy the blocked live-run goal."]
+    if pointer or any(name != "live-run" for name in attempts):
+        lines += ["", _attempt_table(pointer, attempts, summaries, relative_to, evidence.get("active-live.json", (None,))[0])]
+        if pointer:
+            lines += ["", "The active pointer selects the current attempt. Historical blockers and completed controls do not establish its completion."]
     return "\n".join(lines) + "\n\nStates are recorded snapshots; use `openwsp status` to check current liveness."
 
 
@@ -239,7 +374,7 @@ def _results_table(
     ]
     for path, data in summaries:
         stage, benchmark = data.get("stage"), data.get("benchmark")
-        reference = data.get("reference", _COMPARATORS.get(stage))
+        reference = data.get("reference", "p50c" if str(stage).startswith("live-runs/") else _COMPARATORS.get(stage))
         comparator = "not applicable" if str(stage).startswith("control") else "pending"
         if reference in references:
             ref_path, ref_data = references[reference]
@@ -395,6 +530,7 @@ def generate_report(repo_root: str | Path, results_dir: str | Path) -> dict[str,
     repo = Path(repo_root).resolve()
     results = Path(results_dir)
     results = results.resolve() if results.is_absolute() else (repo / results).resolve()
+    pointer, attempts, attempt_sources = _attempt_evidence(results)
     references = {}
     reference_dir = repo / "replications" / "exp8" / "reference"
     for name in _REFERENCES:
@@ -403,10 +539,17 @@ def generate_report(repo_root: str | Path, results_dir: str | Path) -> dict[str,
             references[name] = (path, _read_json(path))
     summaries = []
     for path in sorted(results.rglob("summary.json")):
+        parts = path.relative_to(results).parts
+        if len(parts) >= 3 and parts[0] == "live-runs":
+            attempt_dir = results / parts[0] / parts[1]
+            if not path.resolve().is_relative_to(attempt_dir.resolve()):
+                raise ValueError("Live evaluation summary escapes its attempt directory")
         data = _read_json(path)
         _validate_summary(data, path)
         summaries.append((path, data))
     evidence = {name: (results / name, _read_json(results / name)) for name in _STATE_FILES if (results / name).exists()}
+    if pointer:
+        evidence["active-live.json"] = (results / "active-live.json", pointer)
     ledgers = [(path, _read_json(path)) for path in sorted(results.rglob("costs.json"))]
     extra_costs = []
     for path in sorted(results.rglob("cost.json")):
@@ -414,14 +557,16 @@ def generate_report(repo_root: str | Path, results_dir: str | Path) -> dict[str,
         _validate_summary(data, path)
         extra_costs.append((path, data))
     def result_body(relative_to):
-        return "\n\n".join((_status_table(evidence, relative_to), _results_table(references, summaries, relative_to),
+        return "\n\n".join((status_body(relative_to), _results_table(references, summaries, relative_to),
                             _calibration_table(evidence, relative_to), _runtime_table(summaries, relative_to)))
+    def status_body(relative_to):
+        return _status_table(evidence, relative_to, pointer=pointer, attempts=attempts, summaries=summaries)
     def cost_body(relative_to):
         return _costs_table(summaries + extra_costs, relative_to, ledgers)
     readme_path = repo / "README.md"
     readme = readme_path.read_text() if readme_path.exists() else "# OpenWSP\n"
     if "<!-- OPENWSP:STATUS:" in readme:
-        readme = _replace_section(readme, "STATUS", _status_table(evidence, repo))
+        readme = _replace_section(readme, "STATUS", status_body(repo))
     readme = _replace_section(readme, "RESULTS", result_body(repo))
     readme = _replace_section(readme, "COSTS", cost_body(repo))
     report_path = results / "report.md"
@@ -436,8 +581,9 @@ def generate_report(repo_root: str | Path, results_dir: str | Path) -> dict[str,
         "summaries": len(summaries),
         "sources": [
             {"path": str(path), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
-            for path in [*(item[0] for item in references.values()), *(item[0] for item in summaries),
-                         *(item[0] for item in evidence.values()), *(item[0] for item in ledgers), *(item[0] for item in extra_costs)]
+            for path in dict.fromkeys([*(item[0] for item in references.values()), *(item[0] for item in summaries),
+                         *(item[0] for item in evidence.values()), *attempt_sources,
+                         *(item[0] for item in ledgers), *(item[0] for item in extra_costs)])
         ],
     }
 

@@ -81,6 +81,29 @@ def evaluate(name, checkpoint_dir, benchmark, samples, ledger, checkpoint, *, th
     return summary
 
 
-def evaluate_live(submission, ledger, checkpoint):
-    return {benchmark: evaluate("live-run", submission["checkpoint"], benchmark, samples, ledger, checkpoint)
-            for benchmark, samples in CONFIG["samples"].items()}
+def evaluate_live(submission, ledger, checkpoint, *, stage="live-run"):
+    results = {}
+    for benchmark, samples in CONFIG["samples"].items():
+        if stage != "live-run":
+            directory = Path("/data/results") / stage / benchmark
+            binding = directory / "submission.json"
+            expected = {"checkpoint": submission["checkpoint"], "submission_sha256": submission["sha256"],
+                        "stage": stage, "benchmark": benchmark, "samples_per_problem": samples}
+            if binding.exists():
+                if json.loads(binding.read_text()) != expected:
+                    raise ValueError("Evaluation is bound to a different submitted edit")
+            else:
+                if directory.exists() and any(directory.iterdir()):
+                    raise ValueError("Cannot attach a submission hash to pre-existing unbound evaluations")
+                atomic_write(binding, expected)
+                checkpoint()
+        summary = evaluate(stage, submission["checkpoint"], benchmark, samples, ledger, checkpoint)
+        if stage != "live-run":
+            prior = summary.get("provenance", {}).get("submission_sha256")
+            if prior is not None and prior != submission["sha256"]:
+                raise ValueError("Evaluation belongs to a different submitted edit")
+            summary.setdefault("provenance", {})["submission_sha256"] = submission["sha256"]
+            atomic_write(Path("/data/results") / stage / benchmark / "summary.json", summary)
+            checkpoint()
+        results[benchmark] = summary
+    return results

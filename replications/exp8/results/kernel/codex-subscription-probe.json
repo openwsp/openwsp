@@ -28,5 +28,61 @@
     "One small fresh conversation does not establish long-run reliability or diagnose the prior loop cause.",
     "Mock wire fidelity and this real subscription formatting check are separate evidence.",
     "No transfer of the prior API reasoning chain was attempted."
-  ]
+  ],
+  "adapter_resume_probe": {
+    "status": "passed",
+    "same_thread": true,
+    "cases": [
+      {
+        "case": 1,
+        "format_valid": true,
+        "characters": 67,
+        "answer_sha256": "598280d8ed355acd121e0569f76524713c66b5144ffc992cff386eb1110cd3d7",
+        "usage_snapshot": {
+          "cumulative": {
+            "input_tokens": 60,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 140,
+            "reasoning_output_tokens": 108
+          },
+          "delta": {
+            "input_tokens": 60,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 140,
+            "reasoning_output_tokens": 108
+          },
+          "basis": "new_thread_total"
+        }
+      },
+      {
+        "case": 2,
+        "format_valid": true,
+        "characters": 91,
+        "answer_sha256": "b6f5664b853bbf06a26c492c0e9e48dc8c0e8d799e296d1cebade7876d52691a",
+        "usage_snapshot": {
+          "cumulative": {
+            "input_tokens": 307,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 288,
+            "reasoning_output_tokens": 229
+          },
+          "delta": {
+            "input_tokens": 247,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 148,
+            "reasoning_output_tokens": 121
+          },
+          "basis": "same_thread_cumulative_difference"
+        }
+      }
+    ],
+    "private_evidence_directory": ".openwsp/codex-adapter-probe",
+    "catalog_sha256": "05723cac0f7da85c31f710f602bb0c47a5588d8bdf68aad24e9dd6ac951c7705",
+    "code_executed": false,
+    "scientific_inputs_supplied": false
+  }
 }

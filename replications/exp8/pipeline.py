@@ -20,10 +20,14 @@ def run(stage, overrides, *, app, driver_ticket=None):
     if stage not in {"all", "prepare", "calibration", "smoke", "kernel", "live", "evaluate", "controls", "control4", "control5", "editor_probe", "review_live", "publish"}:
         raise ValueError("Unknown replication stage")
     if overrides:
-        unknown = set(overrides) - {"publish_results"}
+        unknown = set(overrides) - {"publish_results", "editor", "run_id"}
         if unknown:
             raise ValueError("Protocol overrides are disabled for this pinned replication: " + ", ".join(sorted(unknown)))
     settings = {**CONFIG, **overrides}
+    from replications.exp8.run_identity import live_identity
+    # CONFIG['editor'] is the pinned model name; only caller transport
+    # overrides select a backend or a separately identified attempt.
+    identity = live_identity(overrides or {})
     data = Path("/data")
     # The serialized launcher committed this invocation's ticket after any
     # predecessor finished. A warm worker must see that new Volume snapshot.
@@ -147,19 +151,26 @@ def run(stage, overrides, *, app, driver_ticket=None):
         if stage in ("all", "live"):
             from replications.exp8.live import run_live
             state["active_stage"] = "live"
+            if identity.run_id:
+                active = identity.record()
+                atomic_write(data / "active-live.json", active)
+                state["active_live"] = active
             checkpoint()
             state["controls_deferred"] = "Current verified allowance preserves priority for the live run and its evaluation. Controls resume afterward."
-            result = run_live(state, ledger, checkpoint, app=app)
+            result = run_live(state, ledger, checkpoint, app=app, identity=identity)
             state["live"] = {key: result.get(key) for key in ("turn", "runs", "passes", "requests", "done", "submission")}
+            if identity.run_id:
+                state["live"].update(run_id=identity.run_id, editor=identity.editor)
             checkpoint()
         if stage in ("all", "evaluate"):
             from replications.exp8.evaluation import evaluate_live
-            live_state = json.loads((data / "live-run/state.json").read_text())
+            live_state = json.loads((identity.root / "state.json").read_text())
             if not live_state.get("done") or live_state.get("passes") != 50:
                 raise ValueError("Required evaluation waits for the actual completed 50-pass submission")
             state["active_stage"] = "evaluation"
             checkpoint()
-            state["stages"]["live_evaluation"] = evaluate_live(live_state["submission"], ledger, checkpoint)
+            state["stages"]["live_evaluation"] = evaluate_live(live_state["submission"], ledger, checkpoint,
+                                                               stage=identity.evaluation_stage)
         if stage in ("all", "controls"):
             from replications.exp8.controls import run_controls
             state["active_stage"] = "controls"

@@ -94,9 +94,10 @@ def base_cache_key(row, sampling):
 
 
 class ForwardTool:
-    def __init__(self, run_dir, work_dir, sandbox, ledger, checkpoint):
+    def __init__(self, run_dir, work_dir, sandbox, ledger, checkpoint, *, job_prefix="live"):
         self.run_dir, self.work = Path(run_dir), Path(work_dir)
         self.sandbox, self.ledger, self.checkpoint = sandbox, ledger, checkpoint
+        self.job_prefix = job_prefix
         self.practice = {row["id"]: row for p in Path("/practice").glob("*.jsonl") for row in read_rows(p)}
         self.grade = grader()
         self.jobs = ProtocolGPUJobs(ledger, self.run_dir / "jobs", commit=checkpoint)
@@ -217,7 +218,7 @@ class ForwardTool:
                 probes = [self.tokenizer.encode(text, add_special_tokens=False) for text in
                           ("One plus one equals two.", "If x = 3, then x squared is 9.",
                            "The sum of 5 and 7 is 12.", "We can solve this equation step by step.")]
-                reference_key = f"live/fwd_{number}/fresh-reference"
+                reference_key = f"{self.job_prefix}/fwd_{number}/fresh-reference"
                 self._launch(reference_key, lambda gpu, gate: gpu_instance(Generator, gpu, gate, checkpoint=frozen, slot="fresh-reference").reference.spawn(probes, edit_id),
                              {"edit": edit_id, "probes": probes})
                 reference = self._result(reference_key)
@@ -229,7 +230,7 @@ class ForwardTool:
             running = []
             # Check combined bounds before either dispatch; the journal reserves each.
             bound = float(compute_cost(2520, gpu="H100", cpu_cores=4, memory_gib=16))
-            missing = sum(not self.jobs.has_job(f"live/fwd_{number}/{mode}") for mode in modes
+            missing = sum(not self.jobs.has_job(f"{self.job_prefix}/fwd_{number}/{mode}") for mode in modes
                           if not (reuse_base and mode == "original"))
             if self.ledger.snapshot()["summary"]["modal"]["available_usd"] < bound * missing:
                 raise BudgetExceeded("Insufficient reserved capacity for this paired pass")
@@ -238,7 +239,7 @@ class ForwardTool:
                     running.append((mode, None))
                     continue
                 model_path = "/data/original" if mode == "original" else frozen
-                key = f"live/fwd_{number}/{mode}"
+                key = f"{self.job_prefix}/fwd_{number}/{mode}"
                 arguments = swap_arguments if mode == "edited" else {}
                 if arguments:
                     model_path = "/data/original"
@@ -254,7 +255,7 @@ class ForwardTool:
                                       live_failure=response["swap_failure"], failed_request=number)
                     atomic_write(swap_path, prior_swap)
                     self.checkpoint()
-                    fallback_key = f"live/fwd_{number}/{mode}/fresh-fallback"
+                    fallback_key = f"{self.job_prefix}/fwd_{number}/{mode}/fresh-fallback"
                     self._launch(fallback_key, lambda gpu, gate: gpu_instance(Generator, gpu, gate, checkpoint=frozen, slot="fresh-fallback").generate.spawn(rows, sampling, True, True),
                                  {"request": request, "edit": edit_id, "reason": response["swap_failure"]})
                     atomic_write(self.run_dir / "requests" / f"fwd_{number}.swap-fallback.json", response["swap_failure"])
@@ -295,7 +296,7 @@ class ForwardTool:
                     params = request["activations"]
                     folder = self.work / f"gen_{number}{suffix}_acts"
                     model_path = "/data/original" if mode == "original" else frozen
-                    key = f"live/fwd_{number}/{mode}/activations"
+                    key = f"{self.job_prefix}/fwd_{number}/{mode}/activations"
                     self._launch(key, lambda gpu, gate: gpu_instance(TransformerReader, gpu, gate, checkpoint=model_path).generation_activations.spawn(
                         rows, records, params.get("layers", []), params.get("mlp", False), str(folder)),
                         {"request": request, "mode": mode, "edit": edit_id if mode == "edited" else "original"})
@@ -335,7 +336,7 @@ class ForwardTool:
             if byte_bound > 6*1024**3:
                 raise ValueError("Teacher-forced outputs exceed 6 GiB")
             model_path = "/data/original" if request["model"] == "original" else frozen
-            key = f"live/fwd_{number}/teacher_forced"
+            key = f"{self.job_prefix}/fwd_{number}/teacher_forced"
             self._launch(key, lambda gpu, gate: gpu_instance(TransformerReader, gpu, gate, checkpoint=model_path, eager=bool(request.get("return", {}).get("attn_layers"))).read.spawn(
                 request, str(self.work / f"fwd_{number}")), {"request": request, "edit": edit_id if request["model"] == "edited" else "original"})
             result = self._result(key)

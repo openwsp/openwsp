@@ -179,6 +179,250 @@ def test_explicitly_resolved_live_blocker_is_not_reported_as_unmet_goal(tmp_path
     assert "Completed controls or publication do not satisfy" not in text
 
 
+def active_attempt(results, *, run_id="codex-first", state=None):
+    name = f"live-runs/{run_id}"
+    identity = {"schema_version": 1, "editor": "codex", "run_id": run_id, "relative_path": name,
+                "task_sha256": "b" * 64, "instructions_sha256": "c" * 64}
+    write_json(results / "active-live.json", identity)
+    write_json(results / name / "identity.json", identity)
+    if state is not None:
+        write_json(results / name / "state.json", state)
+    return results / name
+
+
+def submitted_state(**changes):
+    return {"passes": 50, "turn": 72, "runs": 20, "done": True,
+            "submission": {"checkpoint": "/data/submissions/final", "sha256": "a" * 64}, **changes}
+
+
+def final_summaries(directory):
+    for benchmark, samples, n in (("math500", 4, 2000), ("gsm8k", 2, 2638), ("ifeval", 2, 1082)):
+        write_json(directory / benchmark / "summary.json", {
+            "stage": f"live-runs/{directory.name}", "benchmark": benchmark, "status": "done",
+            "samples_per_problem": samples, "n": n, "correct": n // 2, "accuracy": 0.5,
+            "provenance": {"submission_sha256": "a" * 64},
+        })
+
+
+def test_active_attempt_supersedes_historical_goal_but_preserves_every_attempt(tmp_path):
+    results = setup_repo(tmp_path)
+    write_json(results / "live-run/state.json", {"passes": 4, "turn": 26, "runs": 10, "done": False})
+    blocker = results / "live-run/blocker.json"
+    write_json(blocker, {"status": "blocked", "reason": "editor_budget_admission", "required_live_passes": 50})
+    legacy = blocker.read_bytes()
+    selected = active_attempt(results, state={"passes": 7, "turn": 12, "runs": 5, "done": False})
+    transcript = selected / "transcript.md"
+    transcript.write_text("# Saved transcript\n")
+    write_json(results / "live-runs/codex-earlier/state.json", {"passes": 1, "turn": 2, "runs": 1, "done": False})
+    write_json(results / "pipeline-state.json", {"status": "complete", "active_stage": "publication"})
+    generated = generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "| Required live run | [live goal unmet](replications/exp8/results/live-runs/codex-first/state.json)" in text
+    assert "| live-run | historical | pending | [blocked](replications/exp8/results/live-run/blocker.json)" in text
+    assert "| live-runs/codex-first | active | [codex]" in text
+    assert "| live-runs/codex-earlier | historical |" in text
+    assert "[7](replications/exp8/results/live-runs/codex-first/state.json)" in text
+    assert "[4](replications/exp8/results/live-run/state.json)" in text
+    assert "[transcript.md](replications/exp8/results/live-runs/codex-first/transcript.md)" in text
+    assert "Completed controls or publication do not satisfy the blocked live-run goal" not in text
+    assert "Before." in text and "Between." in text and "After." in text
+    assert blocker.read_bytes() == legacy
+    assert str(transcript) in {row["path"] for row in generated["sources"]}
+    assert "[7](live-runs/codex-first/state.json)" in (results / "report.md").read_text()
+
+
+@pytest.mark.parametrize("identity_exists", [False, True])
+def test_missing_active_state_never_falls_back_to_old_blocker(tmp_path, identity_exists):
+    results = setup_repo(tmp_path)
+    selected = active_attempt(results)
+    if not identity_exists:
+        (selected / "identity.json").unlink()
+        selected.rmdir()
+    write_json(results / "live-run/blocker.json", {"status": "blocked"})
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "| Required live run | [live goal unmet](replications/exp8/results/active-live.json)" in text
+    assert "pending: active state missing" in text and "pending: state missing" in text
+    assert "[0]" not in text
+
+
+def test_unselected_attempt_does_not_override_legacy_goal_without_pointer(tmp_path):
+    results = setup_repo(tmp_path)
+    selected = active_attempt(results, state=submitted_state())
+    (results / "active-live.json").unlink()
+    final_summaries(selected)
+    write_json(results / "live-run/blocker.json", {"status": "blocked", "reason": "legacy blocker"})
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "| Required live run | [blocked](replications/exp8/results/live-run/blocker.json)" in text
+    assert "| live-run | current (legacy default) |" in text
+    assert "| live-runs/codex-first | unselected |" in text
+    assert "Completed controls or publication do not satisfy the blocked live-run goal" in text
+
+
+@pytest.mark.parametrize("changes", [
+    {"passes": 49}, {"passes": 51}, {"passes": 49.5}, {"passes": 50.0}, {"passes": True},
+    {"done": 1}, {"submission": None}, {"submission": True}, {"submission": {}},
+    {"submission": {"checkpoint": " ", "sha256": "a" * 64}},
+    {"submission": {"checkpoint": "/data/submission", "sha256": "pending"}},
+])
+def test_active_submission_requires_exact_passes_done_and_concrete_identity(tmp_path, changes):
+    results = setup_repo(tmp_path)
+    selected = active_attempt(results, state=submitted_state(**changes))
+    final_summaries(selected)
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "live goal unmet" in text
+    assert "submission and final evaluations recorded" not in text
+
+
+def test_active_submission_without_final_evaluations_stays_unmet(tmp_path):
+    results = setup_repo(tmp_path)
+    active_attempt(results, state=submitted_state())
+    final_summaries(results / "live-runs/other")
+    final_summaries(results / "live-run")
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "live goal unmet" in text and "submission recorded; final evaluation pending" in text
+
+
+def test_only_full_matching_attempt_evaluations_establish_recorded_completion(tmp_path):
+    results = setup_repo(tmp_path)
+    selected = active_attempt(results, state=submitted_state())
+    final_summaries(selected)
+    write_json(results / "live-run/blocker.json", {"status": "blocked"})
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "submission and final evaluations recorded" in text
+    assert "live goal unmet" not in text
+    assert "| live-run | historical | pending | [blocked]" in text
+    for benchmark in ("math500", "gsm8k", "ifeval"):
+        assert f"{benchmark}: [recorded](replications/exp8/results/live-runs/codex-first/{benchmark}/summary.json)" in text
+
+
+def test_missing_active_identity_keeps_complete_state_and_evaluations_pending(tmp_path):
+    results = setup_repo(tmp_path)
+    selected = active_attempt(results, state=submitted_state())
+    final_summaries(selected)
+    (selected / "identity.json").unlink()
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "live goal unmet" in text and "pending: active identity missing" in text
+    assert "submission and final evaluations recorded" not in text
+    for benchmark in ("math500", "gsm8k", "ifeval"):
+        assert f"{benchmark}: pending" in text
+
+
+@pytest.mark.parametrize("outside_results", [False, True])
+def test_final_evaluation_symlink_outside_attempt_is_rejected_before_reading(tmp_path, monkeypatch, outside_results):
+    results = setup_repo(tmp_path)
+    selected = active_attempt(results, state=submitted_state())
+    final_summaries(selected)
+    summary = selected / "math500/summary.json"
+    outside = tmp_path / "outside.json" if outside_results else results / "other-summary.json"
+    summary.rename(outside)
+    summary.symlink_to(outside)
+    readme_before = (tmp_path / "README.md").read_bytes()
+    report = results / "report.md"
+    report.write_text("Previously published report.\n")
+
+    from openwsp import reporting
+    original_read = reporting._read_json
+
+    def guarded_read(path):
+        assert path != summary, "External summary must be rejected before its contents are read"
+        return original_read(path)
+
+    monkeypatch.setattr(reporting, "_read_json", guarded_read)
+    with pytest.raises(ValueError, match="summary escapes its attempt directory"):
+        generate_report(tmp_path, results)
+    assert (tmp_path / "README.md").read_bytes() == readme_before
+    assert report.read_text() == "Previously published report.\n"
+
+
+@pytest.mark.parametrize("change", [
+    {"status": "partial"}, {"stage": "live-run"}, {"samples_per_problem": 2},
+    {"n": 4, "correct": 2}, {"correct": None}, {"accuracy": None},
+    {"provenance": {}}, {"provenance": {"submission_sha256": "b" * 64}},
+    {"provenance": {"submission_sha256": "a" * 64, "problem_limit": 500}},
+    {"provenance": {"submission_sha256": "a" * 64, "problem_selection": "subset"}},
+])
+def test_partial_or_mismatched_evaluation_cannot_complete_active_goal(tmp_path, change):
+    results = setup_repo(tmp_path)
+    selected = active_attempt(results, state=submitted_state())
+    final_summaries(selected)
+    summary = selected / "math500/summary.json"
+    write_json(summary, {**json.loads(summary.read_text()), **change})
+    generate_report(tmp_path, results)
+    text = (tmp_path / "README.md").read_text()
+    assert "live goal unmet" in text and "math500: pending" in text
+    assert "submission and final evaluations recorded" not in text
+
+
+def test_batch_summary_cannot_replace_attempt_aggregate(tmp_path):
+    results = setup_repo(tmp_path)
+    selected = active_attempt(results, state=submitted_state())
+    final_summaries(selected)
+    summary = selected / "math500/summary.json"
+    write_json(selected / "math500/batch_000/summary.json", json.loads(summary.read_text()))
+    summary.unlink()
+    generate_report(tmp_path, results)
+    assert "live goal unmet" in (tmp_path / "README.md").read_text()
+
+
+@pytest.mark.parametrize("change", [
+    {"schema_version": 2}, {"schema_version": True}, {"run_id": "../escape"},
+    {"run_id": "Upper"}, {"run_id": "a" * 65}, {"editor": ""},
+    {"relative_path": "/tmp/outside"}, {"relative_path": "live-runs/../codex-first"},
+    {"relative_path": "live-runs/other"}, {"relative_path": "live-runs\\codex-first"},
+    {"task_sha256": None}, {"instructions_sha256": "not-a-digest"},
+])
+def test_invalid_active_pointer_does_not_change_published_files(tmp_path, change):
+    results = setup_repo(tmp_path)
+    active_attempt(results)
+    pointer = results / "active-live.json"
+    write_json(pointer, {**json.loads(pointer.read_text()), **change})
+    before = (tmp_path / "README.md").read_bytes()
+    with pytest.raises(ValueError, match="active-live pointer"):
+        generate_report(tmp_path, results)
+    assert (tmp_path / "README.md").read_bytes() == before
+    assert not (results / "report.md").exists()
+
+
+@pytest.mark.parametrize("change", [{"run_id": "other"}, {"editor": "astra"},
+                                     {"task_sha256": "d" * 64}, {"instructions_sha256": "e" * 64},
+                                     {"schema_version": True}])
+def test_active_identity_must_match_selection(tmp_path, change):
+    results = setup_repo(tmp_path)
+    selected = active_attempt(results)
+    identity_path = selected / "identity.json"
+    write_json(identity_path, {**json.loads(identity_path.read_text()), **change})
+    with pytest.raises(ValueError, match="mismatch"):
+        generate_report(tmp_path, results)
+
+
+@pytest.mark.parametrize("target", ["directory", "state", "pointer"])
+def test_attempt_symlink_escape_is_rejected_before_publication(tmp_path, target):
+    results = setup_repo(tmp_path)
+    selected = active_attempt(results)
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    write_json(outside / "state.json", submitted_state())
+    if target == "directory":
+        (selected / "identity.json").unlink()
+        selected.rmdir()
+        selected.symlink_to(outside, target_is_directory=True)
+    elif target == "state":
+        (selected / "state.json").symlink_to(outside / "state.json")
+    else:
+        pointer = results / "active-live.json"
+        pointer.rename(outside / "pointer.json")
+        pointer.symlink_to(outside / "pointer.json")
+    with pytest.raises(ValueError, match="escapes"):
+        generate_report(tmp_path, results)
+    assert not (results / "report.md").exists()
+
+
 def test_calibration_gap_audit_and_runtime_are_source_linked(tmp_path):
     results = setup_repo(tmp_path)
     write_json(results / "calibration-check.json", {

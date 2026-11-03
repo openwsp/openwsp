@@ -128,6 +128,7 @@ class AnthropicEditor:
         max_input_tokens: int,
         client=None,
         thinking=None,
+        output_effort: str | None = None,
         system: str | None = None,
         timeout: float = 900,
         commit=lambda: None,
@@ -138,6 +139,8 @@ class AnthropicEditor:
             raise ValueError("Input/context ceiling and output limit must be positive integers")
         if system is not None and not isinstance(system, str):
             raise ValueError("system must be text")
+        if output_effort not in (None, "low", "medium", "high", "xhigh", "max"):
+            raise ValueError("output_effort must be low, medium, high, xhigh, max, or omitted")
         if isinstance(timeout, bool) or not math.isfinite(timeout) or timeout <= 0:
             raise ValueError("timeout must be finite and positive")
         if thinking is not None:
@@ -172,6 +175,10 @@ class AnthropicEditor:
             "thinking": copy.deepcopy(thinking),
             "system": system,
         }
+        # Omission preserves existing conversation fingerprints. This is the
+        # SDK's documented shape, not a promise every model accepts each level.
+        if output_effort is not None:
+            self.settings["output_config"] = {"effort": output_effort}
 
     def _get_client(self):
         if self.client is None:
@@ -311,6 +318,8 @@ class AnthropicEditor:
             for name in ("system", "thinking"):
                 if self.settings[name] is not None:
                     request[name] = copy.deepcopy(self.settings[name])
+            if "output_config" in self.settings:
+                request["output_config"] = copy.deepcopy(self.settings["output_config"])
             atomic_json(self.root / f"request_{rid}.json", request)
             self._save(state)  # reservation + intent precede the possibly billed POST
             try:

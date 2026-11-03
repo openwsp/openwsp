@@ -7,6 +7,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from contextlib import nullcontext
 from pathlib import Path
 
 
@@ -22,29 +23,52 @@ def repository():
 def replicate(experiment, *, stage="all", detach=True, config=None):
     if experiment != "exp8":
         raise ValueError("Only exp8 is implemented; experiments 1–7 are layout only")
-    root = repository()
     settings = json.loads(Path(config).read_text()) if config else {}
+    from openwsp.backends.codex_worker import CodexWorker, split_codex_settings
+    settings, local = split_codex_settings(settings, detach=detach)
+    root = repository()
+    worker = CodexWorker(settings["run_id"], **local) if local is not None else None
+    if local is not None:
+        for key in ("home", "state_dir", "work_dir"):
+            if key in local and any(Path(local[key]).resolve().is_relative_to(root.resolve() / name)
+                                    for name in ("src", "replications", "scripts")):
+                raise ValueError("Local Codex directories must be outside the deployed source directories")
     from openwsp.backends.modal_runtime import configure_tls
     configure_tls()
-    # Image builds can take minutes while development continues. Modal rejects
-    # mutated source mounts; snapshot precisely the files this deployment uses.
-    with tempfile.TemporaryDirectory(prefix="openwsp-deploy-") as temporary:
-        snapshot = Path(temporary)
-        for name in ("src", "replications", "scripts"):
-            shutil.copytree(root / name, snapshot / name,
-                            ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
-        environment = {**os.environ, "PYTHONPATH": str(snapshot / "src")}
-        subprocess.run([sys.executable, str(snapshot / "scripts/modal_cli.py"), "deploy",
-                        "-m", "openwsp.backends.modal_app"], cwd=snapshot, env=environment, check=True)
-    import modal
-    result = modal.Function.from_name("openwsp-exp8", "launch").remote(stage, settings)
-    result["experiment"] = experiment
-    if not detach and result.get("call_id"):
-        result = modal.FunctionCall.from_id(result["call_id"]).get(timeout=86400)
-    path = root / ".openwsp/launch.json"
-    path.parent.mkdir(exist_ok=True)
-    path.write_text(json.dumps(result, indent=2) + "\n")
-    return result
+    with worker.locked() if worker is not None else nullcontext():
+        # Image builds can take minutes while development continues. Modal rejects
+        # mutated source mounts; snapshot precisely the files this deployment uses.
+        with tempfile.TemporaryDirectory(prefix="openwsp-deploy-") as temporary:
+            snapshot = Path(temporary)
+            for name in ("src", "replications", "scripts"):
+                shutil.copytree(root / name, snapshot / name,
+                                ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+            # A caller may keep its config in a mounted source tree. Strip local
+            # paths there too, rather than sending the original config file.
+            if local is not None and config:
+                try:
+                    relative = Path(config).resolve().relative_to(root.resolve())
+                except ValueError:
+                    relative = None
+                if relative is not None and (snapshot / relative).is_file():
+                    (snapshot / relative).write_text(json.dumps(settings, indent=2) + "\n")
+            environment = {**os.environ, "PYTHONPATH": str(snapshot / "src"),
+                           "OPENWSP_EDITOR_TRANSPORT": settings.get("editor", "openai")}
+            subprocess.run([sys.executable, str(snapshot / "scripts/modal_cli.py"), "deploy",
+                            "-m", "openwsp.backends.modal_app"], cwd=snapshot, env=environment, check=True)
+        import modal
+        result = modal.Function.from_name("openwsp-exp8", "launch").remote(stage, settings)
+        result["experiment"] = experiment
+        from openwsp.budget import atomic_json
+        path = root / ".openwsp/launch.json"
+        path.parent.mkdir(exist_ok=True)
+        # Preserve the provider ID before a foreground worker can be interrupted.
+        atomic_json(path, result)
+        if not detach and result.get("call_id"):
+            call = modal.FunctionCall.from_id(result["call_id"])
+            result = worker.run(call) if worker is not None else call.get(timeout=86400)
+            atomic_json(path, result)
+        return result
 
 
 def status(experiment="exp8"):

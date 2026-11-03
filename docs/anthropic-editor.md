@@ -40,7 +40,7 @@ The example's `verified_*` variables and `authorized_editor_budget` are caller-p
  + max_output_tokens × configured output rate) / 1,000,000
 ```
 
-`thinking=None` omits the thinking setting and leaves the provider's model-specific default in effect. Explicit settings are `{"type": "disabled"}`, `{"type": "adaptive"}`, or `{"type": "enabled", "budget_tokens": ...}`. Manual thinking requires a budget of at least 1,024 and less than `max_output_tokens`; thinking consumes the output-token allowance. Model support varies, so select a compatible model and setting. Rejected settings are recorded without silently changing the requested behavior. This adapter does not expose adaptive-effort overrides.
+`thinking=None` omits the thinking setting and leaves the provider's model-specific default in effect. Explicit settings are `{"type": "disabled"}`, `{"type": "adaptive"}`, or `{"type": "enabled", "budget_tokens": ...}`. Manual thinking requires a budget of at least 1,024 and less than `max_output_tokens`; thinking consumes the output-token allowance. Model support varies, so select a compatible model and setting. Rejected settings are recorded without silently changing the requested behavior. Optional `output_effort` accepts `low`, `medium`, `high`, `xhigh`, or `max`, sends the documented `output_config={"effort": ...}` shape, and persists that choice; verify the selected model's support before using it.
 
 Requests use `service_tier="standard_only"` and `tools=[]`. The adapter does not expose prompt-cache controls, priority or fast-mode selection, built-in tools, or tool execution. Provider-reported cache usage is still accounted for.
 
