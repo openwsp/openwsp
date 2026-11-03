@@ -77,6 +77,10 @@ def collect(data="/data", staging="/data/publication"):
         identity = LiveIdentity("codex", attempt.name)
         target = root / identity.relative
         target.mkdir(parents=True, exist_ok=True)
+        deliveries = sorted((attempt / "requests").glob("*.delivery.json"))
+        if deliveries:
+            atomic_write(target / "forward-artifacts.json",
+                         {"receipts": [json.loads(path.read_text()) for path in deliveries]})
         if (attempt / "state.json").exists():
             state = json.loads((attempt / "state.json").read_text())
             compact = {key: state.get(key) for key in ("turn", "runs", "passes", "requests", "handoffs", "done", "submission")}

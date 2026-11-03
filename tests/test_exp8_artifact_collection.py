@@ -3,6 +3,8 @@
 import hashlib
 import json
 
+import pytest
+
 from openwsp.publishing import _validate_file
 from replications.exp8.artifacts import collect
 
@@ -27,19 +29,25 @@ def test_collect_recomputes_finished_metrics_from_compact_samples_without_changi
     assert summary.read_bytes() == original
 
 
-def test_collect_publishes_verified_file_references_without_raw_responses(tmp_path):
+@pytest.mark.parametrize("attempt", ["live-run", "live-runs/codex-20261103"])
+def test_collect_publishes_recorded_file_references_verbatim_without_raw_responses(tmp_path, attempt):
     data, staging = tmp_path / "data", tmp_path / "staging"
-    requests = data / "live-run/requests"
+    requests = data / attempt / "requests"
     requests.mkdir(parents=True)
     receipt = {"request": 7, "volume": "openwsp-exp8-work", "files": [
         {"path": "/work/gen_7.jsonl", "volume_path": "/live/gen_7.jsonl",
          "bytes": 14, "sha256": "a" * 64},
     ]}
     (requests / "fwd_7.delivery.json").write_text(json.dumps(receipt))
+    original = (requests / "fwd_7.delivery.json").read_bytes()
     (requests / "private-response.json").write_text('{"generated_text":"private generation"}')
     _, paths = collect(data, staging)
-    manifest = staging / "replications/exp8/results/live-run/forward-artifacts.json"
+    manifest = staging / "replications/exp8/results" / attempt / "forward-artifacts.json"
     assert json.loads(manifest.read_text()) == {"receipts": [receipt]}
+    # Historical raw locators stay verbatim, including legacy-prefixed records
+    # in named attempts. Any verified correction belongs in separate evidence.
+    assert json.loads(manifest.read_text())["receipts"][0]["files"][0]["volume_path"] == "/live/gen_7.jsonl"
+    assert (requests / "fwd_7.delivery.json").read_bytes() == original
     assert all("private-response" not in path for path in paths)
     for relative in paths:
         published = staging / relative

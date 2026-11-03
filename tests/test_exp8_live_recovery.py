@@ -48,6 +48,7 @@ def test_new_subscription_attempt_does_not_adopt_old_state_or_work(driver, monke
                       app=object(), identity=identity)
     assert (driver.root / "state.json").read_bytes() == old_state
     assert observed["work_subpath"] == "live-runs/separate-attempt"
+    assert driver.tool_options == [{"job_prefix": "live/separate-attempt", "work_subpath": "live-runs/separate-attempt"}]
     assert observed["run_id"] == "separate-attempt"
     assert observed["prompt"] == (live.ROOT / "prompts/message.txt").read_text()
     state = json.loads((tmp_path / "data/live-runs/separate-attempt/state.json").read_text())
@@ -76,7 +77,7 @@ def driver(monkeypatch, tmp_path):
         "next": "Continue",
         "pending": None,
     }
-    initial_runs, editor_messages, tool_calls = [], [], []
+    initial_runs, editor_messages, tool_calls, tool_options = [], [], [], []
     replies = {"t001": "The submitted edit is final."}
     volume = SimpleNamespace(commit=lambda: None, reload=lambda: None)
     application = ModuleType("openwsp.backends.modal_app")
@@ -138,7 +139,7 @@ def driver(monkeypatch, tmp_path):
 
     class Tool:
         def __init__(self, *args, **kwargs):
-            pass
+            tool_options.append(kwargs)
 
         def counts_as_pass(self, number):
             return True
@@ -178,6 +179,7 @@ def driver(monkeypatch, tmp_path):
         initial_runs=initial_runs,
         editor_messages=editor_messages,
         tool_calls=tool_calls,
+        tool_options=tool_options,
     )
 
 

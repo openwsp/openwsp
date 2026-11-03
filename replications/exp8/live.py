@@ -163,7 +163,8 @@ def run_live(outer_state, ledger, checkpoint, *, app, identity=None):
         if state["turn"] and not state.get("pending"):
             state["next"] = "The kernel was restarted; variables were lost, but files in /work and saved edits remain.\n" + state["next"]
             restart_notice_due = False
-        tool = ForwardTool(root, work, sandbox, ledger, save, job_prefix=identity.job_prefix)
+        tool = ForwardTool(root, work, sandbox, ledger, save, job_prefix=identity.job_prefix,
+                           work_subpath=identity.work_subpath)
         while not state["done"]:
             lease.check()
             turn = state["turn"] + 1

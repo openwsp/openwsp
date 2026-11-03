@@ -8,7 +8,7 @@ import math
 import re
 import shutil
 import time
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 import numpy as np
 
@@ -101,7 +101,11 @@ def base_cache_key(row, sampling):
 
 
 class ForwardTool:
-    def __init__(self, run_dir, work_dir, sandbox, ledger, checkpoint, *, job_prefix="live"):
+    def __init__(self, run_dir, work_dir, sandbox, ledger, checkpoint, *, job_prefix="live", work_subpath="live"):
+        namespace = PurePosixPath(work_subpath)
+        if namespace.is_absolute() or not namespace.parts or ".." in namespace.parts:
+            raise ValueError("Forward artifact volume namespace must be a relative work subpath")
+        self.work_subpath = namespace.as_posix()
         self.run_dir, self.work = Path(run_dir), Path(work_dir)
         self.sandbox, self.ledger, self.checkpoint = sandbox, ledger, checkpoint
         self.job_prefix = job_prefix
@@ -283,7 +287,7 @@ class ForwardTool:
             receipts = []
             for relative in artifacts:
                 receipt = self.sandbox.publish_file(self.work / relative, f"/work/{relative.as_posix()}")
-                receipts.append({**receipt, "volume_path": f"/live/{relative.as_posix()}"})
+                receipts.append({**receipt, "volume_path": f"/{self.work_subpath}/{relative.as_posix()}"})
             atomic_write(self.run_dir / "requests" / f"fwd_{number}.delivery.json",
                          {"request": number, "volume": "openwsp-exp8-work", "files": receipts})
             self.checkpoint()

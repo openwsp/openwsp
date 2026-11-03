@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "status": "verified_on_completed_paired_forward",
+  "observed_at": "2026-11-03T21:11:16.721145+00:00",
+  "run_id": "codex-20261103",
+  "request": 23,
+  "turn": 52,
+  "count_pass": true,
+  "request_body_sha256": "699dec6319ef631521a9ef805a2fb500e830f240d4bc9c742f498613d62ef42f",
+  "effective_request_sha256": "d808fa53eb5d91394c244ae2e688651300480b450ab6d208b16cc7663d1a9ef5",
+  "base_problems": 128,
+  "cached_base_problems": 128,
+  "source_requests": [
+    21
+  ],
+  "base_gpu_dispatch_required": false,
+  "edited_result_ok": true,
+  "completed_passes_after_request": 15,
+  "delivery": {
+    "volume": "openwsp-exp8-work",
+    "files": [
+      {
+        "sandbox_path": "/work/gen_23_original.jsonl",
+        "recorded_volume_path": "/live/gen_23_original.jsonl",
+        "verified_volume_path": "/live-runs/codex-20261103/gen_23_original.jsonl",
+        "bytes": 23922041,
+        "sha256": "8814c9b74fda335e86faa965eff33e9ea7605978117d2382a256c9828af8a3ed"
+      },
+      {
+        "sandbox_path": "/work/gen_23_edited.jsonl",
+        "recorded_volume_path": "/live/gen_23_edited.jsonl",
+        "verified_volume_path": "/live-runs/codex-20261103/gen_23_edited.jsonl",
+        "bytes": 19568879,
+        "sha256": "38cf0cb92828bc284d664fffce0649c36a7fd84b6aa654e0c662f4c95a6371ad"
+      }
+    ],
+    "locator_correction": "Historical delivery receipts hardcoded /live. Actual named-attempt files were streamed and SHA256-verified at /live-runs/codex-20261103. Original receipt locators are retained here; no remote file or journal was changed."
+  },
+  "source_evidence_sha256": {
+    "notice-resume-requests-fwd_23.provenance.json": "db09ba333d7da7b61344d0d7e9225139e8467421796509fa1c12d25b4272f19e",
+    "notice-resume-requests-fwd_23.done.json": "ca4f4478a594fe627cac1846309d129c05c25e803b7bef749c9315046b80be81",
+    "notice-resume-requests-fwd_23.delivery.json": "de388779c7401bbfd304f27fa307b29777d3c193a95fae7410cdae1dc132007a"
+  },
+  "scope": "Practice forward evidence, not final benchmark evaluation. No generation text or full weights included.",
+  "source_records": {
+    "volume": "openwsp-exp8-data",
+    "paths": [
+      "/live-runs/codex-20261103/requests/fwd_23.provenance.json",
+      "/live-runs/codex-20261103/requests/fwd_23.done.json",
+      "/live-runs/codex-20261103/requests/fwd_23.delivery.json"
+    ]
+  },
+  "locator_fix": {
+    "status": "tested_not_deployed_to_active_driver",
+    "focused_tests_passed": 54,
+    "independent_review": "No blocking findings",
+    "source_sha256": {
+      "replications/exp8/forward.py": "f212507ac5478d7b2fda479744c95d858822764405226e54714fe828e5a38992",
+      "replications/exp8/live.py": "1c39d60dab237bd4d25d21666683a92162b6d1a70ae3a5bc2f19406e163b1766",
+      "replications/exp8/artifacts.py": "f99ca550b8a3e0f1b5f6e620d428f5ffc1eb54a37d66024a2eecc62243925ca5"
+    },
+    "historical_records": "Preserved verbatim; the verified correction above is separate evidence."
+  }
+}

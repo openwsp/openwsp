@@ -96,6 +96,7 @@ def tool_setup(tmp_path, monkeypatch):
     )
     tool = object.__new__(forward.ForwardTool)
     tool.job_prefix = "live"
+    tool.work_subpath = "live"
     tool.run_dir, tool.work = run, work
     tool.sandbox = sandbox
     tool.ledger = SimpleNamespace(snapshot=lambda: {"summary": {"modal": {"available_usd": 100}}})
@@ -170,6 +171,40 @@ def test_cached_success_publishes_artifacts_without_launching_jobs(tool_setup):
     assert receipt["files"][0]["volume_path"] == "/live/gen_1.jsonl"
     assert receipt["files"][0]["sha256"] == hashlib.sha256(setup.delivered["/work/gen_1.jsonl"]).hexdigest()
     assert setup.dispatched == []
+
+
+@pytest.mark.parametrize("namespace", [None, "live-runs/codex-20261103"])
+def test_delivery_receipts_bind_the_actual_volume_namespace_and_preserve_bytes(tool_setup, monkeypatch, namespace):
+    setup = tool_setup
+    monkeypatch.setattr(forward, "grader", lambda: object())
+    monkeypatch.setattr(forward, "ProtocolGPUJobs", lambda *args, **kwargs: object())
+    options = {} if namespace is None else {"work_subpath": namespace}
+    tool = forward.ForwardTool(setup.tool.run_dir, setup.tool.work, setup.tool.sandbox, setup.tool.ledger,
+                               setup.tool.checkpoint, job_prefix="a-different-job-prefix", **options)
+    payloads = {"input_ids.npy": b"exact input array", "hidden_0.npy": b"exact hidden array", "meta.json": b'{"synthetic":true}'}
+    folder = tool.work / "fwd_23"
+    folder.mkdir()
+    for name, payload in payloads.items():
+        (folder / name).write_bytes(payload)
+    tool._deliver_artifacts({"type": "teacher_forced"}, 23,
+                            {"ok": True, "files": {"input_ids": [1, 2], "hidden_0": [1, 2, 3]}})
+    receipt = json.loads((tool.run_dir / "requests/fwd_23.delivery.json").read_text())
+    assert receipt["volume"] == "openwsp-exp8-work" and receipt["request"] == 23
+    expected_namespace = namespace or "live"
+    assert {row["volume_path"] for row in receipt["files"]} == {f"/{expected_namespace}/fwd_23/{name}" for name in payloads}
+    for row in receipt["files"]:
+        name = row["path"].rsplit("/", 1)[1]
+        assert row["path"] == f"/work/fwd_23/{name}"
+        assert row["bytes"] == len(payloads[name])
+        assert row["sha256"] == hashlib.sha256(payloads[name]).hexdigest()
+    assert setup.dispatched == []
+
+
+@pytest.mark.parametrize("namespace", ["", ".", "/live", "../live", "live/../other"])
+def test_invalid_volume_namespace_fails_before_tool_setup(tmp_path, namespace):
+    with pytest.raises(ValueError, match="relative work subpath"):
+        forward.ForwardTool(tmp_path / "run", tmp_path / "work", None, None, lambda: None, work_subpath=namespace)
+    assert not (tmp_path / "run").exists() and not (tmp_path / "work").exists()
 
 
 def test_delivery_copies_only_the_named_paired_generation_artifacts(tool_setup):
