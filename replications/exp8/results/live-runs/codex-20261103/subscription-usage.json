@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261103",
+  "observed_at": "2026-11-03T14:56:54.630629+00:00",
+  "billing": "chatgpt_subscription_no_api_price_inferred",
+  "receipts": [
+    {
+      "status": "completed",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "input_sha256": "3c63882671f0f732fb0eac53af3f9a0f5bc9b387816998319750027bff5a8e64",
+      "thread_id": "01a1a1cb-a0cb-7cf0-9751-a33765ee0efd",
+      "recorded_at": 1793715870.1137094,
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 2494,
+        "output_tokens": 675,
+        "reasoning_output_tokens": 166
+      },
+      "exit": {
+        "reason": null,
+        "returncode": 0,
+        "seconds": 30.990683355999863,
+        "violation": null
+      },
+      "request_key": "bridge:b7a2e0dab24b6b1b3b59b142d6f38a6f9c147389dbefc6df008ed630dfb6f93d",
+      "conversation_index": 0,
+      "usage_snapshot": {
+        "basis": "new_thread_total",
+        "cumulative": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 2494,
+          "output_tokens": 675,
+          "reasoning_output_tokens": 166
+        },
+        "delta": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 2494,
+          "output_tokens": 675,
+          "reasoning_output_tokens": 166
+        }
+      }
+    },
+    {
+      "status": "completed",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "input_sha256": "6b318a847029f15061c62b0cba2fbbd5c045e46784891fa92f6767e90c0aac7b",
+      "thread_id": "01a1a1cb-a0cb-7cf0-9751-a33765ee0efd",
+      "recorded_at": 1793715941.63035,
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 5778,
+        "output_tokens": 1211,
+        "reasoning_output_tokens": 189
+      },
+      "exit": {
+        "reason": null,
+        "returncode": 0,
+        "seconds": 14.781486209999457,
+        "violation": null
+      },
+      "request_key": "bridge:53df3be31e881c350f79533e7ecf1eb5ce8c5d12889adedfbc98c89d2065fde9",
+      "conversation_index": 0,
+      "usage_snapshot": {
+        "basis": "same_thread_cumulative_difference",
+        "cumulative": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 5778,
+          "output_tokens": 1211,
+          "reasoning_output_tokens": 189
+        },
+        "delta": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 3284,
+          "output_tokens": 536,
+          "reasoning_output_tokens": 23
+        }
+      }
+    },
+    {
+      "status": "completed",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "input_sha256": "db8fbcdf5e5bd0934ac6f6f00446d5474a4d155bffe4a835d69788327f435a50",
+      "thread_id": "01a1a1cb-a0cb-7cf0-9751-a33765ee0efd",
+      "recorded_at": 1793716001.2250593,
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 12136,
+        "output_tokens": 2946,
+        "reasoning_output_tokens": 265
+      },
+      "exit": {
+        "reason": null,
+        "returncode": 0,
+        "seconds": 31.01318399000047,
+        "violation": null
+      },
+      "request_key": "bridge:42a3fff20d7f5de4ebd931a27c91dfe346f32c554b4a2fb9b86f260c118b626d",
+      "conversation_index": 0,
+      "usage_snapshot": {
+        "basis": "same_thread_cumulative_difference",
+        "cumulative": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 12136,
+          "output_tokens": 2946,
+          "reasoning_output_tokens": 265
+        },
+        "delta": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 6358,
+          "output_tokens": 1735,
+          "reasoning_output_tokens": 76
+        }
+      }
+    },
+    {
+      "status": "completed",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "input_sha256": "ce842ba9eac79f7b28ebd257f951d2ec28d22e7640fddbbe855d62caca4da56a",
+      "thread_id": "01a1a1cb-a0cb-7cf0-9751-a33765ee0efd",
+      "recorded_at": 1793717065.8622198,
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 3584,
+        "input_tokens": 20474,
+        "output_tokens": 3396,
+        "reasoning_output_tokens": 286
+      },
+      "exit": {
+        "reason": null,
+        "returncode": 0,
+        "seconds": 17.473524635999638,
+        "violation": null
+      },
+      "request_key": "bridge:7cecc1af26adf3d78dd865e1f1d642890e5fbed34962ff6d8f451877bcf0ccc3",
+      "conversation_index": 0,
+      "usage_snapshot": {
+        "basis": "same_thread_cumulative_difference",
+        "cumulative": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 3584,
+          "input_tokens": 20474,
+          "output_tokens": 3396,
+          "reasoning_output_tokens": 286
+        },
+        "delta": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 3584,
+          "input_tokens": 8338,
+          "output_tokens": 450,
+          "reasoning_output_tokens": 21
+        }
+      }
+    },
+    {
+      "status": "completed",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "input_sha256": "2e9e5743f307a94294395392ad2b1ccd54777b607ce3a77e0303659dd252925c",
+      "thread_id": "01a1a1cb-a0cb-7cf0-9751-a33765ee0efd",
+      "recorded_at": 1793717102.8215563,
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 12160,
+        "input_tokens": 32944,
+        "output_tokens": 4007,
+        "reasoning_output_tokens": 295
+      },
+      "exit": {
+        "reason": null,
+        "returncode": 0,
+        "seconds": 19.937261822999062,
+        "violation": null
+      },
+      "request_key": "bridge:fb503eea294a7ee25f30d93b5a21ff087d900d815dfe35130a89a398a46a256f",
+      "conversation_index": 0,
+      "usage_snapshot": {
+        "basis": "same_thread_cumulative_difference",
+        "cumulative": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 12160,
+          "input_tokens": 32944,
+          "output_tokens": 4007,
+          "reasoning_output_tokens": 295
+        },
+        "delta": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 8576,
+          "input_tokens": 12470,
+          "output_tokens": 611,
+          "reasoning_output_tokens": 9
+        }
+      }
+    },
+    {
+      "status": "completed",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "input_sha256": "17e91b984a9c56f4996707ed724be3ef1cb00f8c6df7eced9c87a59ee7362489",
+      "thread_id": "01a1a1cb-a0cb-7cf0-9751-a33765ee0efd",
+      "recorded_at": 1793717163.7640882,
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 25088,
+        "input_tokens": 49463,
+        "output_tokens": 4981,
+        "reasoning_output_tokens": 565
+      },
+      "exit": {
+        "reason": null,
+        "returncode": 0,
+        "seconds": 37.131383989000824,
+        "violation": null
+      },
+      "request_key": "bridge:c9ffef900ec4652819425ee97e6fd5938fbcbcd43d8f4e432a2732b3fdc9d19a",
+      "conversation_index": 0,
+      "usage_snapshot": {
+        "basis": "same_thread_cumulative_difference",
+        "cumulative": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 25088,
+          "input_tokens": 49463,
+          "output_tokens": 4981,
+          "reasoning_output_tokens": 565
+        },
+        "delta": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 12928,
+          "input_tokens": 16519,
+          "output_tokens": 974,
+          "reasoning_output_tokens": 270
+        }
+      }
+    },
+    {
+      "status": "completed",
+      "billing": "chatgpt_subscription_no_api_price_inferred",
+      "input_sha256": "3a93b88373bd2e913be21f5c13c0afabdc1f322af803a4b56f2a7449ece4fc34",
+      "thread_id": "01a1a1cb-a0cb-7cf0-9751-a33765ee0efd",
+      "recorded_at": 1793717227.8892102,
+      "usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 42368,
+        "input_tokens": 70466,
+        "output_tokens": 6148,
+        "reasoning_output_tokens": 787
+      },
+      "exit": {
+        "reason": null,
+        "returncode": 0,
+        "seconds": 34.72915231600018,
+        "violation": null
+      },
+      "request_key": "bridge:f4239c4907896d0faf7d837f60b4b71b03c0c407aa5e59589c3412909d74ac3e",
+      "conversation_index": 0,
+      "usage_snapshot": {
+        "basis": "same_thread_cumulative_difference",
+        "cumulative": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 42368,
+          "input_tokens": 70466,
+          "output_tokens": 6148,
+          "reasoning_output_tokens": 787
+        },
+        "delta": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 17280,
+          "input_tokens": 21003,
+          "output_tokens": 1167,
+          "reasoning_output_tokens": 222
+        }
+      }
+    }
+  ],
+  "conversations": [
+    {
+      "conversation_index": 0,
+      "thread_id": "01a1a1cb-a0cb-7cf0-9751-a33765ee0efd",
+      "pending": null,
+      "blocked": null,
+      "completed_requests": 7,
+      "usage_cumulative": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 42368,
+        "input_tokens": 70466,
+        "output_tokens": 6148,
+        "reasoning_output_tokens": 787
+      }
+    }
+  ],
+  "note": "Counters are cumulative within each conversation; do not sum them or assign an API dollar price. API editor ledger remains unchanged at78.292765."
+}

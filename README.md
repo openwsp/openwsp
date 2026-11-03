@@ -2,7 +2,7 @@
 
 OpenWSP is open tooling for weight-space programming: reading, editing and versioning the weights of open models. It is an independent replication of the work of [Rikiya Takehi](https://github.com/RikiyaT "Equal contribution"), [Jayden Teoh](https://github.com/JaydenTeoh "Equal contribution"), [Alex Zhang](https://github.com/alexzhang13) and [Omar Khattab](https://github.com/okhat) at [MIT CSAIL](https://csail.mit.edu), with no affiliation to the authors.
 
-**Experiment 8 is still running.** The current [`codex-20261103` attempt](replications/exp8/results/live-runs/codex-20261103/identity.json) uses GPT-6 Astra through Codex and a ChatGPT Pro subscription. It has begun forward-pass work; no final edit or live benchmark result is available. The earlier API attempt remains recorded separately at [4 of 50 passes](replications/exp8/results/live-run/blocker.json).
+**Experiment 8 is paused at the current compute-budget limit.** The current [`codex-20261103` attempt](replications/exp8/results/live-runs/codex-20261103/identity.json) uses GPT-6 Astra through Codex and a ChatGPT Pro subscription. It completed [1 of 50 passes](replications/exp8/results/live-runs/codex-20261103/blocker.json) before the next GPU reservation exceeded available budget. No final edit or live benchmark result is available. The earlier API attempt remains recorded separately at [4 of 50 passes](replications/exp8/results/live-run/blocker.json).
 
 The authors introduced the term in ["Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights"](https://rikiyat.github.io/blog/weight-space-programming/). Their experiments used [GPT-6 Astra](https://openai.com/index/gpt-6-astra/) to read weights, repair networks and construct them from scratch, without writing training loops. The editor reasons about the weights and writes changes directly.
 
@@ -19,7 +19,8 @@ After Experiment 8, the plan is to reproduce the remaining experiments. For huma
 | Required live run | [live goal unmet](replications/exp8/results/live-runs/codex-20261103/state.json) | Active attempt: [codex-20261103](replications/exp8/results/active-live.json); submission requirement pending |
 | Pipeline | [blocked](replications/exp8/results/pipeline-state.json) | [live](replications/exp8/results/pipeline-state.json) |
 | Recorded blocker | [BudgetExceeded: modal stage live/codex-20261103/fwd_2/teacher_forced/openwsp-gpu:a9addc225efa46ff8f8450c1570c26cf:0: reserve $2.9870400, only $2.909644918156211473271933328 available](replications/exp8/results/pipeline-state.json) | See source record. |
-| Driver recovery | [running](replications/exp8/results/coordinator.json) | [all](replications/exp8/results/coordinator.json) |
+| Driver recovery | [blocked](replications/exp8/results/coordinator.json) | [all](replications/exp8/results/coordinator.json) |
+| Recorded blocker | [Pipeline blocked; previous owner reconciled and automatic restart disabled](replications/exp8/results/coordinator.json) | See source record. |
 | Calibration prompt audit | [passed](replications/exp8/results/calibration-prompt-audit.json) | [calibration-prompt-audit.json](replications/exp8/results/calibration-prompt-audit.json) |
 | Calibration comparison | [passed](replications/exp8/results/calibration-check.json) | [calibration-check.json](replications/exp8/results/calibration-check.json) |
 | Tensor hashes | [passed](replications/exp8/results/kernel/hash-verification.json) | [kernel/hash-verification.json](replications/exp8/results/kernel/hash-verification.json) |
@@ -33,7 +34,7 @@ Live attempts:
 | Attempt | Selection | Editor | Recorded state | Passes | Turns | Runs | Submission | Final evaluations | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | live-run | historical | pending | [blocked](replications/exp8/results/live-run/blocker.json) | [4](replications/exp8/results/live-run/state.json) | [26](replications/exp8/results/live-run/state.json) | [10](replications/exp8/results/live-run/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](replications/exp8/results/live-run/state.json); [blocker.json](replications/exp8/results/live-run/blocker.json); [transcript.md](replications/exp8/results/live-run/transcript.md) |
-| live-runs/codex-20261103 | active | [codex](replications/exp8/results/live-runs/codex-20261103/identity.json) | [incomplete](replications/exp8/results/live-runs/codex-20261103/state.json) | [1](replications/exp8/results/live-runs/codex-20261103/state.json) | [6](replications/exp8/results/live-runs/codex-20261103/state.json) | [4](replications/exp8/results/live-runs/codex-20261103/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](replications/exp8/results/live-runs/codex-20261103/state.json); [identity.json](replications/exp8/results/live-runs/codex-20261103/identity.json); [transcript.md](replications/exp8/results/live-runs/codex-20261103/transcript.md) |
+| live-runs/codex-20261103 | active | [codex](replications/exp8/results/live-runs/codex-20261103/identity.json) | [blocked](replications/exp8/results/live-runs/codex-20261103/blocker.json) | [1](replications/exp8/results/live-runs/codex-20261103/state.json) | [6](replications/exp8/results/live-runs/codex-20261103/state.json) | [4](replications/exp8/results/live-runs/codex-20261103/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](replications/exp8/results/live-runs/codex-20261103/state.json); [identity.json](replications/exp8/results/live-runs/codex-20261103/identity.json); [blocker.json](replications/exp8/results/live-runs/codex-20261103/blocker.json); [transcript.md](replications/exp8/results/live-runs/codex-20261103/transcript.md) |
 
 The active pointer selects the current attempt. Historical blockers and completed controls do not establish its completion.
 
@@ -44,7 +45,7 @@ The tables distinguish calibration, controls and each live attempt. A completed 
 
 ## Experiment 8
 
-**TL;DR:** [Calibration passed](replications/exp8/results/calibration-check.json), and the [required controls](#openwsp-controls) have results. The subscription attempt is running from the original weights. The earlier API attempt stopped at [4 of 50 passes](replications/exp8/results/live-run/blocker.json), before a final submission, because the next response could exceed its remaining budget. Neither attempt has a final live-edit benchmark result.
+**TL;DR:** [Calibration passed](replications/exp8/results/calibration-check.json), and the [required controls](#openwsp-controls) have results. The subscription attempt started from the original weights and is now [paused at 1 of 50 passes](replications/exp8/results/live-runs/codex-20261103/blocker.json) by the compute-budget check. The earlier API attempt stopped at [4 of 50 passes](replications/exp8/results/live-run/blocker.json), before a final submission, because the next response could exceed its remaining budget. Neither attempt has a final live-edit benchmark result.
 
 ### Setup
 
@@ -58,38 +59,13 @@ The [task message](replications/exp8/prompts/message.txt) defines what the edito
 - **Evaluation:** the authors' [`think35` protocol](replications/exp8/vendor/evaluate.py): thinking on, temperature [0.6](replications/exp8/vendor/evaluate.py), top-p [0.95](replications/exp8/vendor/evaluate.py), top-k [20](replications/exp8/vendor/evaluate.py), presence penalty [1.5](replications/exp8/vendor/evaluate.py), and up to [32,768 new tokens](replications/exp8/vendor/evaluate.py). Math uses the last boxed answer and math-verify. IFEval uses strict prompt-level grading after the thinking block.
 - **Final samples per problem:** [MATH-500: 4; GSM8K: 2; IFEval: 2](replications/exp8/vendor/evaluate.py). Calibration and the required controls use [one sample per problem](docs/TASK.md).
 - **Editor billing:** the current route uses the [ChatGPT Pro subscription](docs/TASK.md). Subscription quota is recorded separately from API charges. The retained API route has an [explicit additional allocation and protected Plan B reserve](replications/exp8/authorizations/editor-budget-20261103.json); it is never selected automatically when subscription quota runs out.
-- **Compute budget:** Modal remains capped at the confirmed [$42 billing-cycle allowance](docs/TASK.md). The task permits [up to $150 total](docs/TASK.md) only after an increase is confirmed. Job estimates precede launches, and unresolved reservations remain in the ledger.
+- **Compute budget:** Modal remains capped at the confirmed [$42 billing-cycle allowance](docs/TASK.md). The task permits [up to $150 total](docs/TASK.md) only after an increase is confirmed. Job estimates precede launches, and unresolved reservations remain in the ledger. [Recording a confirmed allowance](docs/modal-budget.md) is separate from resuming the run.
 
 ### Results
 
 `openwsp report exp8` generates these tables from the [authors' reference files](replications/exp8/reference) and [OpenWSP evaluation files](replications/exp8/results). Every number links to its source. Missing measurements remain pending, and unfinished attempts remain visible alongside completed evaluations. The calibrated p50c score measures the authors' released edit; it is not a result from an OpenWSP live editor.
 
 <!-- OPENWSP:RESULTS:START -->
-| Recorded component | State | Evidence |
-| --- | --- | --- |
-| Required live run | [live goal unmet](replications/exp8/results/live-runs/codex-20261103/state.json) | Active attempt: [codex-20261103](replications/exp8/results/active-live.json); submission requirement pending |
-| Pipeline | [blocked](replications/exp8/results/pipeline-state.json) | [live](replications/exp8/results/pipeline-state.json) |
-| Recorded blocker | [BudgetExceeded: modal stage live/codex-20261103/fwd_2/teacher_forced/openwsp-gpu:a9addc225efa46ff8f8450c1570c26cf:0: reserve $2.9870400, only $2.909644918156211473271933328 available](replications/exp8/results/pipeline-state.json) | See source record. |
-| Driver recovery | [running](replications/exp8/results/coordinator.json) | [all](replications/exp8/results/coordinator.json) |
-| Calibration prompt audit | [passed](replications/exp8/results/calibration-prompt-audit.json) | [calibration-prompt-audit.json](replications/exp8/results/calibration-prompt-audit.json) |
-| Calibration comparison | [passed](replications/exp8/results/calibration-check.json) | [calibration-check.json](replications/exp8/results/calibration-check.json) |
-| Tensor hashes | [passed](replications/exp8/results/kernel/hash-verification.json) | [kernel/hash-verification.json](replications/exp8/results/kernel/hash-verification.json) |
-| Sandbox and first cell | [passed](replications/exp8/results/kernel/sandbox-verification.json) | [kernel/sandbox-verification.json](replications/exp8/results/kernel/sandbox-verification.json) |
-| Forward service | [passed](replications/exp8/results/kernel/forward-verification.json) | [kernel/forward-verification.json](replications/exp8/results/kernel/forward-verification.json) |
-| Weight swap check | [fallback](replications/exp8/results/kernel/weight-swap.json) | [kernel/weight-swap.json](replications/exp8/results/kernel/weight-swap.json) |
-| Recorded diagnostic | [Engine does not expose a compatible weight-reload contract](replications/exp8/results/kernel/weight-swap.json) | See source record. |
-
-Live attempts:
-
-| Attempt | Selection | Editor | Recorded state | Passes | Turns | Runs | Submission | Final evaluations | Evidence |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| live-run | historical | pending | [blocked](replications/exp8/results/live-run/blocker.json) | [4](replications/exp8/results/live-run/state.json) | [26](replications/exp8/results/live-run/state.json) | [10](replications/exp8/results/live-run/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](replications/exp8/results/live-run/state.json); [blocker.json](replications/exp8/results/live-run/blocker.json); [transcript.md](replications/exp8/results/live-run/transcript.md) |
-| live-runs/codex-20261103 | active | [codex](replications/exp8/results/live-runs/codex-20261103/identity.json) | [incomplete](replications/exp8/results/live-runs/codex-20261103/state.json) | [1](replications/exp8/results/live-runs/codex-20261103/state.json) | [6](replications/exp8/results/live-runs/codex-20261103/state.json) | [4](replications/exp8/results/live-runs/codex-20261103/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](replications/exp8/results/live-runs/codex-20261103/state.json); [identity.json](replications/exp8/results/live-runs/codex-20261103/identity.json); [transcript.md](replications/exp8/results/live-runs/codex-20261103/transcript.md) |
-
-The active pointer selects the current attempt. Historical blockers and completed controls do not establish its completion.
-
-States are recorded snapshots; use `openwsp status` to check current liveness.
-
 Authors' released evaluations:
 
 | Run | MATH-500 | GSM8K | IFEval | MATH-500 hit token limit |
@@ -151,11 +127,13 @@ The subscription attempt started from the original pinned weights, empty working
 
 The API attempt stopped at its [editor budget admission check](replications/exp8/results/live-run/blocker.json). A later audit found [seven output-limit responses](replications/exp8/results/live-run/editor-format-loop.json) that wrote a complete fenced action and then repeated backticks and blank lines. Their trailing loops contain about [49,000 to 213,000 characters each](replications/exp8/results/live-run/editor-format-loop.json). None of those incomplete actions was executed. Raising the output limit did not solve the loop, and retaining the responses enlarged subsequent context. The [API recovery work](docs/editor-recovery.md) remains available separately.
 
+The subscription attempt paused when its next GPU request needed a [$2.98704 reservation with $2.90964 available](replications/exp8/results/live-runs/codex-20261103/blocker.json). That request was not dispatched. The [saved state and recovery notes](STATUS.md) preserve the same attempt for continuation after the compute-budget constraint is resolved.
+
 No final live edit has been submitted. Candidate edits remain the editor's choices; the operator does not choose a winner or alter its weights. Before live editing, [kernel verification](replications/exp8/results/kernel/hash-verification.json) reproduced the released p50c tensor hashes, and the [sandbox check](replications/exp8/results/kernel/sandbox-verification.json) ran the authors' first Python cell unmodified.
 
 ### Cost and time
 
-The cost records distinguish the earlier API charges, Modal resource estimates and unresolved reservations. Subscription usage is recorded as quota and token counters, without assigning an API price or treating it as free. Each duration retains its measurement basis. Adding resource time across jobs does not give end-to-end elapsed time.
+The cost records distinguish the earlier API charges, Modal resource estimates and unresolved reservations. Subscription usage has its own [token receipts](replications/exp8/results/live-runs/codex-20261103/subscription-usage.json), without assigning an API price or treating it as free. Each duration retains its measurement basis. Adding resource time across jobs does not give end-to-end elapsed time.
 
 <!-- OPENWSP:COSTS:START -->
 | Stage | Benchmark | Recorded hours | Recorded cost (USD) |
@@ -173,8 +151,7 @@ Budget ledger: [source](replications/exp8/results/costs.json). Reservations are 
 | Budget / stage / operation | State | Receipts | Recorded hours | Settled amount (USD) | Reserved bound (USD) | Basis |
 | --- | --- | --- | --- | --- | --- | --- |
 | editor / editor turns | [settled](replications/exp8/results/costs.json) | [26](replications/exp8/results/costs.json) | [1.815](replications/exp8/results/costs.json) | [78.2928](replications/exp8/results/costs.json) | pending | [API usage and recorded token rates](replications/exp8/results/costs.json) |
-| modal / all | [reserved](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | pending | pending | [1.9060](replications/exp8/results/costs.json) | [resource estimate; not invoice](replications/exp8/results/costs.json) |
-| modal / all | [settled](replications/exp8/results/costs.json) | [4](replications/exp8/results/costs.json) | [3.457](replications/exp8/results/costs.json) | [0.2741](replications/exp8/results/costs.json) | pending | [driver_resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
+| modal / all | [settled](replications/exp8/results/costs.json) | [5](replications/exp8/results/costs.json) | [4.262](replications/exp8/results/costs.json) | [0.3380](replications/exp8/results/costs.json) | pending | [driver_resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
 | modal / calibration | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.906](replications/exp8/results/costs.json) | [0.0718](replications/exp8/results/costs.json) | pending | [driver_resource_upper_bound_not_invoice](replications/exp8/results/costs.json) |
 | modal / calibration_base | [settled](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | [0.499](replications/exp8/results/costs.json) | [2.1280](replications/exp8/results/costs.json) | pending | [resource estimate; not invoice](replications/exp8/results/costs.json) |
 | modal / calibration_base_smoke | [reserved](replications/exp8/results/costs.json) | [1](replications/exp8/results/costs.json) | pending | pending | [2.2758](replications/exp8/results/costs.json) | [resource estimate; not invoice](replications/exp8/results/costs.json) |
@@ -315,7 +292,7 @@ Editors sit behind a separate `complete(messages)` interface. The [profile and t
 
 This replication does not train the model or compute gradients. The live editor receives no benchmark data, reference edit or control outcomes, and its final edit is not selected by an operator. The original API attempt was not relabeled as a completed run when the subscription attempt began.
 
-The remaining experiments have layout placeholders only. There is no hosted service, web UI, package-registry release or Hugging Face publication of a new live edit. The optional controls, extra evaluations and Fable comparison have no published results. Those are further work, separate from the running Experiment 8 attempt.
+The remaining experiments have layout placeholders only. There is no hosted service, web UI, package-registry release or Hugging Face publication of a new live edit. The optional controls, extra evaluations and Fable comparison have no published results. Those are further work, separate from the paused Experiment 8 attempt.
 
 ## Add a result
 

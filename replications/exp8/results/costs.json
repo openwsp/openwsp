@@ -3094,6 +3094,11 @@
       "at": "2026-11-03T14:47:24.104548+00:00",
       "event": "settled",
       "id": "5d87ace97e054dc3bae5cc53a9487e06"
+    },
+    {
+      "at": "2026-11-03T15:01:55.828422+00:00",
+      "event": "settled",
+      "id": "driver-4b40974af1c24071a19c0eea758459ef"
     }
   ],
   "halted": false,
@@ -9691,10 +9696,21 @@
       "usage": null
     },
     "driver-4b40974af1c24071a19c0eea758459ef": {
+      "actual_usd": "0.0638424766209854013",
+      "completed_at": "2026-11-03T15:01:55.828396+00:00",
       "created_at": "2026-11-03T14:15:40.862491+00:00",
       "kind": "modal",
       "metadata": {
         "driver_claimed_at": 1793715344.8982346,
+        "driver_finish_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 1911.548763428,
+          "observed_subtotal_usd": "0.04486064359440011111111111111",
+          "owner_id": "fc-01M6GW82J9KN0T8G4CEXCKEJPS",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-4b40974af1c24071a19c0eea758459ef",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        },
         "driver_owner_id": "fc-01M6GW82J9KN0T8G4CEXCKEJPS",
         "driver_ticket": {
           "cpu_cores": 1,
@@ -9711,9 +9727,31 @@
         "invoice": false,
         "kind": "driver_resource_upper_bound"
       },
+      "receipt_metadata": {
+        "billing_basis": "driver_resource_upper_bound_not_invoice",
+        "invoice": false,
+        "provider_completion_evidence": {
+          "elapsed_seconds_bound": 2773.2713220119476,
+          "observed_at": "2026-11-03T15:01:54.688547+00:00",
+          "provider_call_id": "fc-01M6GW82J9KN0T8G4CEXCKEJPS",
+          "provider_terminal_state": "failed",
+          "source": "modal.FunctionCall.get"
+        },
+        "worker_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 1911.548763428,
+          "observed_subtotal_usd": "0.04486064359440011111111111111",
+          "owner_id": "fc-01M6GW82J9KN0T8G4CEXCKEJPS",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-4b40974af1c24071a19c0eea758459ef",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        }
+      },
+      "seconds": 2898.2713220119476,
       "stage": "all",
-      "status": "reserved",
-      "upper_bound_usd": "1.905953472222222222222222222"
+      "status": "settled",
+      "upper_bound_usd": "1.905953472222222222222222222",
+      "usage": null
     },
     "driver-6345cecb41ad4321a7ffe845ba9456cf": {
       "actual_usd": "0.01066261181629366309166666667",

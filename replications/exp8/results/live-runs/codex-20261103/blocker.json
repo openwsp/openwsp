@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "status": "blocked",
+  "reason": "modal_budget_admission",
+  "run_id": "codex-20261103",
+  "editor": "codex",
+  "required_live_passes": 50,
+  "live": {
+    "turn": 6,
+    "runs": 4,
+    "passes": 1,
+    "requests": 2,
+    "handoffs": 0,
+    "done": false,
+    "submission": null,
+    "run_id": "codex-20261103",
+    "editor": "codex",
+    "base_generation_reuse_requests": []
+  },
+  "error": "BudgetExceeded: modal stage live/codex-20261103/fwd_2/teacher_forced/openwsp-gpu:a9addc225efa46ff8f8450c1570c26cf:0: reserve $2.9870400, only $2.909644918156211473271933328 available",
+  "provider_terminal": {
+    "terminal": true,
+    "error_type": "BudgetExceeded",
+    "error": "modal stage live/codex-20261103/fwd_2/teacher_forced/openwsp-gpu:a9addc225efa46ff8f8450c1570c26cf:0: reserve $2.9870400, only $2.909644918156211473271933328 available",
+    "call_id": "fc-01M6GW82J9KN0T8G4CEXCKEJPS",
+    "observed_at": "2026-11-03T14:49:58.127114+00:00"
+  },
+  "budget_at_publication": {
+    "editor": {
+      "spent_usd": 78.292765,
+      "reserved_usd": 0.0,
+      "available_usd": 21.707235
+    },
+    "modal": {
+      "spent_usd": 32.69088638217427,
+      "reserved_usd": 6.181793472222222,
+      "available_usd": 3.0773201456035078
+    }
+  },
+  "next_gpu_reservation_usd": 2.98704,
+  "available_usd_at_rejection": 2.9096449181562116,
+  "next_gpu_job_dispatched": false,
+  "final_evaluation_status": "not_started_no_completed_50_pass_submission",
+  "remaining_work": "Resume this same attempt only after resolving the recorded compute-budget constraint. Preserve all state, pass counts, request journals and prior costs; no partial edit is selected.",
+  "budget_after_watchdog_reconciliation": {
+    "spent_usd": 32.754728858795254,
+    "reserved_usd": 4.27584,
+    "available_usd": 4.919431141204744
+  },
+  "coordinator_terminal": {
+    "observed_at": "2026-11-03T15:05:37.879552+00:00",
+    "call_id": "fc-01M6GW82J9KN0T8G4CEXCKEJPS",
+    "phase": "blocked",
+    "reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+    "terminal_state": "failed",
+    "terminal_at": 1793718114.6885471,
+    "no_restart": true
+  }
+}
