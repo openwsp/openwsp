@@ -258,6 +258,6 @@ Results are evidence files, not hand-edited table cells. Add a run directory und
 
 ## Dual use
 
-The method that removes a loop can remove safety behavior too. This repository ships no such edits. Every public edit is a SHA-256-addressed diff against a pinned base, so anyone can verify which weights changed.
+The method that removes a loop can remove safety behavior too. This repository ships no such edits. The Experiment 8 base model is pinned. OpenWSP v1 edits are SHA-256-addressed diffs that validate only the listed tensors. Callers must separately verify the complete base checkpoint and revision; optional model/revision labels do not enforce either.
 
 OpenWSP code is [MIT licensed](LICENSE). The authors' scripts, logs and edits retain their respective licenses; see [third-party notices](THIRD_PARTY_NOTICES.md).

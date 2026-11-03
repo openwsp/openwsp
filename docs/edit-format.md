@@ -1,8 +1,8 @@
 # OpenWSP edit format, version 1
 
-An edit is a directory containing `manifest.json` and `edit.npz`. It records replacement values against a pinned base. It contains no full checkpoint. Version 1 preserves the authors' tensor payload convention and adds a version, provenance fields and a content address.
+An edit is a directory containing `manifest.json` and `edit.npz`. It records tensor replacements against a base model. It contains no full checkpoint. Version 1 preserves the authors' tensor payload convention and adds a version, provenance fields and a content address.
 
-The edit represents the **evaluated bfloat16 checkpoint**. The store retains float32 submissions separately; entries that round back to the base bfloat16 value do not appear in the exported diff.
+The edit represents **evaluated bfloat16 changes to the listed tensors**. The store retains float32 submissions separately; entries that round back to the base bfloat16 value do not appear in the exported diff.
 
 ## Manifest
 
@@ -10,7 +10,7 @@ The edit represents the **evaluated bfloat16 checkpoint**. The store retains flo
 | --- | --- |
 | `format` | Exactly `openwsp.edit`. |
 | `format_version` | Integer `1`. Unknown versions are rejected. |
-| `base_model`, `base_revision` | Optional provenance for the model identifier and pinned revision. Tensor hashes enforce base compatibility. |
+| `base_model`, `base_revision` | Optional provenance labels, included in the address but not checked against the loaded model. |
 | `tensors` | Ordered tensor records; the record's index determines its payload array names. |
 | `changed_tensors` | Number of tensor records. |
 | `changed_entries_total` | Total bfloat16 entries whose bits changed. |
@@ -18,6 +18,8 @@ The edit represents the **evaluated bfloat16 checkpoint**. The store retains flo
 | `edit_sha256` | Content address of the canonical manifest, excluding this field itself. |
 
 Each tensor record retains the authors' fields: `name`, `shape`, `dtype`, `form`, `changed_entries`, `base_sha256` and `edited_sha256`. Additional statistics can describe the changed rows, columns and relative change. Tensor hashes are SHA-256 over the tensor's contiguous, C-order, little-endian bfloat16 bit patterns; each element occupies two bytes.
+
+Version 1 checks base compatibility only for tensors listed in the manifest. Callers must separately verify the complete base checkpoint and its pinned revision; unlisted tensors are not checked.
 
 The address commits to the manifest, including provenance and the payload digest. It does not authenticate the author or establish an edit's effect.
 
