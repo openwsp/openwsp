@@ -2,7 +2,7 @@
   "schema_version": 1,
   "recorded_at": "2026-11-03T19:45:17.464824+00:00",
   "run_id": "codex-20261103",
-  "status": "mitigation_deployed_ordinary_generation_verification_pending",
+  "status": "mitigation_deployed_base_generation_verified_paired_result_pending",
   "driver_call_id": "fc-01M6HCQ89PPXXFSZB647FGB9VF",
   "cause": "Custom ThinkingCloseLogitsProcessor was registered unconditionally. Its old V1 AdapterLogitsProcessor base is incompatible with the default V2 runner in pinned vLLM0.33.0.",
   "observed_error": "ThinkingCloseLogitsProcessor is not a subclass of vllm.v1.worker.gpu.sample.logits_processor.LogitsProcessor",
@@ -39,7 +39,14 @@
       "requests": 15,
       "last_success": "teacher_forced"
     },
-    "ordinary_generation": "awaiting next editor generation request"
+    "ordinary_generation": {
+      "request": 20,
+      "original": "complete",
+      "edited": "pending",
+      "original_call_id": "fc-01M6HFSHZR6FB8ZEG02741639A",
+      "edited_call_id": "fc-01M6HFSQCZG7NE1HRFR668QZX0",
+      "note": "Read directly from existing job journals; no validation request was added or failed request retried."
+    }
   },
   "accounting": "Provider audit confirmed all 12 affected calls terminal: eight failed-call bounds were already settled and four edited-partner bounds remain reserved. Every bound is retained because billed container duration is unavailable; these are resource estimates, not invoices. The audit made no ledger changes.",
   "protocol_effect": "Eight neutral forward-failure messages are part of this trajectory. This attempt was not restarted and its failure history will be disclosed.",
