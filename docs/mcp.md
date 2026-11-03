@@ -76,6 +76,17 @@ uv run --project /absolute/path/openwsp --no-sync openwsp-mcp \
 
 The server process must receive the `OPENWSP_MODAL_*` configuration from the setup example. For desktop clients, put those non-secret settings in that MCP server's `env` object; use the normal Modal credential configuration for authentication. The `OPENWSP_MODAL_WORK_DIR` should be beneath the agent's local working directory so downloaded arrays are accessible to its kernel. Omit `OPENWSP_MODAL_ENABLED=1` to keep forward execution disabled while using the tensor and edit tools.
 
+### Client timeouts for long calls
+
+The tiny CPU example and local tensor tools need no paid compute. A Modal `forward` call can wait up to 3,720 seconds with the documented resource bounds, followed by artifact downloads. The server sends no progress notifications while waiting. Configure a two-hour client timeout before using that backend:
+
+- **Codex:** add `tool_timeout_sec = 7200` inside the existing `[mcp_servers.openwsp]` table in `~/.codex/config.toml`, alongside `command` and `args`. Its default is 60 seconds. See [Codex's MCP configuration](https://developers.openai.com/codex/mcp/).
+- **Claude Code:** add `"timeout": 7200000` alongside `command`, `args` and `env` in the existing `openwsp` server entry. This value is in milliseconds and also raises the stdio idle-timeout floor from its default of 30 minutes. The registration above uses local scope, stored in `~/.claude.json`; edit that existing entry so another scope does not shadow it. See [Claude Code's tool-call time limits](https://code.claude.com/docs/en/mcp#time-limits-on-mcp-tool-calls).
+
+These settings also allow longer local `run_code` calls, whose kernel limit is 900 seconds. For Cursor or another client that cannot accommodate a long tool call, use the [SDK or CLI forward interface](architecture.md#built-in-modal-forward-backend). A client timeout does not cancel an already-dispatched Modal job. Retry with the same request ID and edit to retrieve its recorded result without launching another inference job.
+
+### First paid forward
+
 Ask the agent to read a bounded slice of `model.language_model.layers.15.mlp.down_proj.weight`, make and save an edit, inspect `diff`, then invoke `forward` with:
 
 ```json

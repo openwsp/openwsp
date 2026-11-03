@@ -1,5 +1,7 @@
 # OpenWSP
 
+OpenWSP is open tooling for weight space programming: agents read, edit and version the weights of open models. This is an independent replication of [the work of Rikiya Takehi, Jayden Teoh, Alex Zhang and Omar Khattab](https://rikiyat.github.io/blog/weight-space-programming/), with no affiliation to its authors.
+
 <!-- OPENWSP:STATUS:START -->
 | Recorded component | State | Evidence |
 | --- | --- | --- |
@@ -16,8 +18,6 @@
 
 States are recorded snapshots; use `openwsp status` to check current liveness.
 <!-- OPENWSP:STATUS:END -->
-
-OpenWSP is open tooling for weight space programming: agents read, edit and version the weights of open models. This is an independent replication of [the work of Rikiya Takehi, Jayden Teoh, Alex Zhang and Omar Khattab](https://rikiyat.github.io/blog/weight-space-programming/), with no affiliation to its authors.
 
 The tools are a Python kernel over model weights, a forward-pass service and a versioned edit format, exposed through one API as a CLI, Python SDK and MCP server. The test is Experiment 8: can an editor diagnose a model's math failures and repair its weights without gradients or training?
 
@@ -198,7 +198,30 @@ uv run pytest -q
 
 Set the environment variables listed in [.env.example](.env.example) using your environment's secret mechanism. The replication uses Modal for compute, OpenAI for the editor, Hugging Face for model access, and GitHub for the authorized result push. Keep credentials out of repository files and remote URLs.
 
-Launch or resume the replication, inspect its state, and regenerate its report:
+Before deploying, create its named secrets in the same Modal workspace environment. This command reads the exported values at runtime, maps `GITHUB_ACCESS_TOKEN` to the remote `GITHUB_TOKEN` key, and leaves existing secrets unchanged:
+
+```sh
+uv run --no-sync python - <<'PY'
+import os
+import modal
+from openwsp.backends.modal_runtime import configure_tls
+
+configure_tls()
+secrets = {
+    "huggingface": {"HF_TOKEN": os.environ["HF_TOKEN"]},
+    "openai": {"OPENAI_API_KEY": os.environ["OPENAI_API_KEY"]},
+    "github": {"GITHUB_TOKEN": os.environ["GITHUB_ACCESS_TOKEN"]},
+}
+if any(not value for contents in secrets.values() for value in contents.values()):
+    raise ValueError("Required secret environment variables must be nonempty")
+for name, contents in secrets.items():
+    modal.Secret.objects.create(name, contents, allow_existing=True)
+PY
+```
+
+Existing secret values are retained; update them in Modal if their credentials have changed. See [Modal's secret setup](https://modal.com/docs/guide/secrets). The local CPU examples below require no credentials.
+
+Launch or resume the replication (which starts paid compute and editor calls), inspect its state, and regenerate its report:
 
 ```sh
 uv run openwsp replicate exp8
