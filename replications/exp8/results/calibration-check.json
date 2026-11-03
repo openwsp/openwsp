@@ -1,0 +1,17 @@
+{
+  "calibration_base": {
+    "accuracy": 0.072,
+    "reference_accuracy": 0.079,
+    "reference_standard_error": 0.012,
+    "gap": -0.007000000000000006,
+    "within_two_standard_errors": true
+  },
+  "calibration_p50c": {
+    "accuracy": 0.506,
+    "reference_accuracy": 0.481,
+    "reference_standard_error": 0.022,
+    "gap": 0.025000000000000022,
+    "within_two_standard_errors": true
+  },
+  "status": "passed"
+}

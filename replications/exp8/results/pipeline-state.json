@@ -1,7 +1,7 @@
 {
   "status": "running",
-  "active_stage": "calibration_p50c",
-  "heartbeat": 1793690370.8771102,
+  "active_stage": "forward_verification",
+  "heartbeat": 1793690699.296298,
   "budget": {
     "editor": {
       "spent_usd": 0.0,
@@ -9,10 +9,9 @@
       "available_usd": 100.0
     },
     "modal": {
-      "spent_usd": 3.0081075466752343,
-      "reserved_usd": 7.1688334722222224,
-      "available_usd": 31.773058981102544
+      "spent_usd": 4.347653703346948,
+      "reserved_usd": 6.181793472222222,
+      "available_usd": 31.420552824430832
     }
-  },
-  "observation_note": "The legacy deployment retains an error from the earlier resumed grader failure. It is not the current running stage; new deployments clear stale errors on entry."
+  }
 }

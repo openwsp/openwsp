@@ -1,0 +1,103 @@
+{
+  "status": "passed",
+  "first_cell": {
+    "ok": true,
+    "output": "gsm8k 7469 example fields: ['answer', 'id', 'problem', 'solution', 'source'] example id: gsm8k_train_0\nmath 7275 example fields: ['answer', 'id', 'level', 'problem', 'solution', 'source', 'subject'] example id: math_train_algebra_0\naime 714 example fields: ['answer', 'id', 'problem', 'source', 'year'] example id: aime_1983-1\nDiagnostic ids: [\"gsm8k_train_2805\", \"gsm8k_train_1766\", \"gsm8k_train_5410\", \"gsm8k_train_1024\", \"gsm8k_train_2520\", \"gsm8k_train_3513\", \"gsm8k_train_2364\", \"gsm8k_train_1928\", \"gsm8k_train_6876\", \"gsm8k_train_6653\", \"gsm8k_train_5477\", \"gsm8k_train_6029\", \"gsm8k_train_2804\", \"gsm8k_train_3165\", \"gsm8k_train_3272\", \"gsm8k_train_967\", \"gsm8k_train_5982\", \"gsm8k_train_6737\", \"gsm8k_train_5716\", \"gsm8k_train_3529\", \"gsm8k_train_2403\", \"gsm8k_train_4239\", \"gsm8k_train_5399\", \"gsm8k_train_2899\", \"gsm8k_train_4554\", \"gsm8k_train_4538\", \"gsm8k_train_4843\", \"gsm8k_train_637\", \"gsm8k_train_5646\", \"gsm8k_train_66\", \"gsm8k_train_3090\", \"gsm8k_train_4181\", \"math_train_number_theory_184\", \"math_train_number_theory_80\", \"math_train_number_theory_148\", \"math_train_algebra_479\", \"math_train_prealgebra_866\", \"math_train_precalculus_357\", \"math_train_algebra_466\", \"math_train_geometry_437\", \"math_train_intermediate_algebra_738\", \"math_train_number_theory_250\", \"math_train_algebra_1133\", \"math_train_number_theory_338\", \"math_train_algebra_419\", \"math_train_intermediate_algebra_459\", \"math_train_algebra_460\", \"math_train_algebra_1346\", \"math_train_precalculus_227\", \"math_train_prealgebra_265\", \"math_train_intermediate_algebra_734\", \"math_train_precalculus_201\", \"math_train_prealgebra_392\", \"math_train_intermediate_algebra_356\", \"math_train_algebra_1290\", \"math_train_counting_and_probability_520\", \"math_train_prealgebra_699\", \"math_train_number_theory_74\", \"math_train_precalculus_535\", \"math_train_intermediate_algebra_760\", \"math_train_algebra_1530\", \"math_train_counting_and_probability_210\", \"math_train_geometry_567\", \"math_train_number_theory_133\", \"math_train_intermediate_algebra_663\", \"math_train_algebra_268\", \"math_train_counting_and_probability_481\", \"math_train_number_theory_113\", \"math_train_algebra_992\", \"math_train_prealgebra_775\", \"math_train_prealgebra_327\", \"math_train_intermediate_algebra_1279\", \"math_train_intermediate_algebra_1215\", \"math_train_intermediate_algebra_601\", \"math_train_counting_and_probability_384\", \"math_train_number_theory_364\", \"math_train_intermediate_algebra_219\", \"math_train_prealgebra_422\", \"math_train_algebra_502\", \"math_train_number_theory_771\", \"math_train_intermediate_algebra_77\", \"math_train_intermediate_algebra_820\", \"math_train_counting_and_probability_639\", \"math_train_prealgebra_128\", \"math_train_algebra_1579\", \"math_train_geometry_335\", \"math_train_intermediate_algebra_366\", \"math_train_number_theory_337\", \"math_train_algebra_887\", \"math_train_precalculus_673\", \"math_train_algebra_808\", \"math_train_number_theory_517\", \"math_train_counting_and_probability_193\", \"math_train_counting_and_probability_67\", \"math_train_counting_and_probability_202\", \"math_train_number_theory_417\"]\nTensor count: 320\nmodel.language_model.embed_tokens.weight\nmodel.language_model.layers.0.input_layernorm.weight\nmodel.language_model.layers.0.linear_attn.A_log\nmodel.language_model.layers.0.linear_attn.conv1d.weight\nmodel.language_model.layers.0.linear_attn.dt_bias\nmodel.language_model.layers.0.linear_attn.in_proj_a.weight\nmodel.language_model.layers.0.linear_attn.in_proj_b.weight\nmodel.language_model.layers.0.linear_attn.in_proj_qkv.weight\nmodel.language_model.layers.0.linear_attn.in_proj_z.weight\nmodel.language_model.layers.0.linear_attn.norm.weight\nmodel.language_model.layers.0.linear_attn.out_proj.weight\nmodel.language_model.layers.0.mlp.down_proj.weight\nmodel.language_model.layers.0.mlp.gate_proj.weight\nmodel.language_model.layers.0.mlp.up_proj.weight\nmodel.language_model.layers.0.post_attention_layernorm.weight\nmodel.language_model.layers.1.input_layernorm.weight\nmodel.language_model.layers.1.linear_attn.A_log\nmodel.language_model.layers.1.linear_attn.conv1d.weight\nmodel.language_model.layers.1.linear_attn.dt_bias\nmodel.language_model.layers.1.linear_attn.in_proj_a.weight\nmodel.language_model.layers.1.linear_attn.in_proj_b.weight\nmodel.language_model.layers.1.linear_attn.in_proj_qkv.weight\nmodel.language_model.layers.1.linear_attn.in_proj_z.weight\nmodel.language_model.layers.1.linear_attn.norm.weight\nmodel.language_model.layers.1.linear_attn.out_proj.weight\nmodel.language_model.layers.1.mlp.down_proj.weight\nmodel.language_model.layers.1.mlp.gate_proj.weight\nmodel.language_model.layers.1.mlp.up_proj.weight\nmodel.language_model.layers.1.post_attention_layernorm.weight\nmodel.language_model.layers.10.input_layernorm.weight\nmodel.language_model.layers.10.linear_attn.A_log\nmodel.language_model.layers.10.linear_attn.conv1d.weight\nmodel.language_model.layers.10.linear_attn.dt_bias\nmodel.language_model.layers.10.linear_attn.in_proj_a.weight\nmodel.language_model.layers.10.linear_attn.in_proj_b.weight\nmodel.language_model.layers.10.linear_attn.in_proj_qkv.weight\nmodel.language_model.layers.10.linear_attn.in_proj_z.weight\nmodel.language_model.layers.10.linear_attn.norm.weight\nmodel.language_model.layers.10.linear_attn.out_proj.weight\nmodel.language_model.layers.10.mlp.down_proj.weight\nmodel.language_model.layers.10.mlp.gate_proj.weight\nmodel.language_model.layers.10.mlp.up_proj.weight\nmodel.language_model.layers.10.post_attention_layernorm.weight\nmodel.language_model.layers.11.input_layernorm.weight\nmodel.language_model.layers.11.mlp.down_proj.weight\nExisting edits: []\n",
+    "error": null,
+    "seconds": 0.29434447399999897,
+    "runs": 1,
+    "id": "authors-first-cell",
+    "restarted": false,
+    "variables_lost": false
+  },
+  "refusals": {
+    "frozen_norm": {
+      "refused": true,
+      "error": "EditRefused: Frozen tensor (final norm, embedding or output layer): model.language_model.norm.weight"
+    },
+    "frozen_embedding": {
+      "refused": true,
+      "error": "EditRefused: Frozen tensor (final norm, embedding or output layer): model.language_model.embed_tokens.weight"
+    },
+    "frozen_output": {
+      "refused": true,
+      "error": "EditRefused: Unknown tensor: lm_head.weight"
+    },
+    "rescale": {
+      "refused": true,
+      "error": "EditRefused: Whole-tensor scalar rescaling is forbidden: model.language_model.layers.15.mlp.down_proj.weight"
+    },
+    "nonfinite": {
+      "refused": true,
+      "error": "EditRefused: Non-finite edit values: model.language_model.layers.15.mlp.down_proj.weight"
+    },
+    "shape": {
+      "refused": true,
+      "error": "EditRefused: Shape mismatch for model.language_model.layers.15.mlp.down_proj.weight: (1,) != (1024, 3584)"
+    },
+    "gradient": {
+      "refused": true,
+      "error": "ProtocolRefused: Operation not allowed by the analysis protocol: backward"
+    },
+    "optimizer": {
+      "refused": true,
+      "error": "ProtocolRefused: Operation not allowed by the analysis protocol: optim"
+    },
+    "model_forward": {
+      "refused": true,
+      "error": "ProtocolRefused: Running model layers in the kernel is forbidden; use the forward tool"
+    },
+    "network": {
+      "refused": true,
+      "error": "ProtocolRefused: Import not allowed by the analysis protocol: urllib.request"
+    }
+  },
+  "isolation": {
+    "network": {
+      "target": "1.1.1.1:443",
+      "timeout_seconds": 2,
+      "connected": false,
+      "error_type": "OSError",
+      "errno": 101,
+      "seconds": 0.0032805880000008614,
+      "scope": "One outbound TCP connection probe; does not establish policy for other destinations."
+    },
+    "mounts": {
+      "/model": {
+        "write_denied": true,
+        "expected_denial": true,
+        "error_type": "OSError",
+        "errno": 30
+      },
+      "/practice": {
+        "write_denied": true,
+        "expected_denial": true,
+        "error_type": "OSError",
+        "errno": 30
+      }
+    },
+    "secret_environment": {
+      "checked_names": [
+        "ANTHROPIC_API_KEY",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_SESSION_TOKEN",
+        "AZURE_CLIENT_SECRET",
+        "GEMINI_API_KEY",
+        "GH_TOKEN",
+        "GITHUB_ACCESS_TOKEN",
+        "GITHUB_TOKEN",
+        "GOOGLE_API_KEY",
+        "HF_TOKEN",
+        "HUGGING_FACE_HUB_TOKEN",
+        "MODAL_IDENTITY_TOKEN",
+        "MODAL_TOKEN_ID",
+        "MODAL_TOKEN_SECRET",
+        "OPENAI_API_KEY"
+      ],
+      "present_names": []
+    },
+    "cuda_available": false
+  },
+  "block_network_configured": true
+}

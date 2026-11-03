@@ -1,0 +1,436 @@
+{
+  "events": [
+    {
+      "at": "2026-11-03T05:49:41.595821+00:00",
+      "event": "reserved",
+      "id": "86f88bfe18ff40c381d856ce75bdce5d"
+    },
+    {
+      "at": "2026-11-03T05:50:20.110357+00:00",
+      "event": "settled",
+      "id": "86f88bfe18ff40c381d856ce75bdce5d"
+    },
+    {
+      "at": "2026-11-03T05:58:02.446817+00:00",
+      "event": "reserved",
+      "id": "b1c699d0a8c145579aabbcaedd0a2a97"
+    },
+    {
+      "at": "2026-11-03T06:17:47.058226+00:00",
+      "event": "reserved",
+      "id": "modal-job-37712ba514eb7fa61e3cd94631dbf4a508352a781641c4e164165b1f23881e01"
+    },
+    {
+      "at": "2026-11-03T06:22:59.294939+00:00",
+      "event": "settled",
+      "id": "modal-job-37712ba514eb7fa61e3cd94631dbf4a508352a781641c4e164165b1f23881e01"
+    },
+    {
+      "at": "2026-11-03T06:31:48.683858+00:00",
+      "event": "reserved",
+      "id": "driver-9e22f7411e4e486c8cfebce8a39a4ffd"
+    },
+    {
+      "at": "2026-11-03T06:31:56.053066+00:00",
+      "event": "reserved",
+      "id": "modal-job-c6f895a60eb7dc313894a3bfb900c37a87d60b4280def55ee279f5c46bb56270"
+    },
+    {
+      "at": "2026-11-03T06:32:12.982886+00:00",
+      "event": "settled",
+      "id": "modal-job-c6f895a60eb7dc313894a3bfb900c37a87d60b4280def55ee279f5c46bb56270"
+    },
+    {
+      "at": "2026-11-03T06:32:22.614242+00:00",
+      "event": "reserved",
+      "id": "modal-job-41873ccc1e58f2fe4ee9c03cce785866b052fe1a51e065cb860b98243da45d59"
+    },
+    {
+      "at": "2026-11-03T07:00:52.831785+00:00",
+      "event": "settled",
+      "id": "modal-job-41873ccc1e58f2fe4ee9c03cce785866b052fe1a51e065cb860b98243da45d59"
+    },
+    {
+      "at": "2026-11-03T07:00:59.407528+00:00",
+      "event": "reserved",
+      "id": "modal-job-8f6d754231254325b8ed31188bef6c66cba3ef355ad255befbaebd2367fe3a75"
+    },
+    {
+      "at": "2026-11-03T07:05:15.443334+00:00",
+      "event": "settled",
+      "id": "modal-job-8f6d754231254325b8ed31188bef6c66cba3ef355ad255befbaebd2367fe3a75"
+    },
+    {
+      "at": "2026-11-03T07:05:21.582473+00:00",
+      "event": "reserved",
+      "id": "modal-job-47e8c8850834c901ef8e983d39fee7d4391e3eb926016cd9f8f1fa59354aec96"
+    },
+    {
+      "at": "2026-11-03T07:21:17.608144+00:00",
+      "event": "settled",
+      "id": "modal-job-47e8c8850834c901ef8e983d39fee7d4391e3eb926016cd9f8f1fa59354aec96"
+    },
+    {
+      "at": "2026-11-03T07:24:05.389177+00:00",
+      "event": "reserved",
+      "id": "infrastructure-headroom"
+    },
+    {
+      "at": "2026-11-03T07:24:05.930267+00:00",
+      "event": "settled",
+      "id": "driver-9e22f7411e4e486c8cfebce8a39a4ffd"
+    },
+    {
+      "at": "2026-11-03T07:24:07.312892+00:00",
+      "event": "reserved",
+      "id": "driver-1ca050cdac614601bd57d890789c272c"
+    }
+  ],
+  "halted": false,
+  "limits": {
+    "editor": "100",
+    "modal": "150"
+  },
+  "modal_allowance": {
+    "cycle_limit": "42",
+    "cycle_usage": "0.05",
+    "evidence": {
+      "basis": "user report",
+      "source": "docs/TASK.md"
+    },
+    "observed_at": "2026-11-03T05:49:34.302032+00:00",
+    "task_spend_at_observation": "0"
+  },
+  "modal_prior_usage_floor": "0.05",
+  "reservations": {
+    "86f88bfe18ff40c381d856ce75bdce5d": {
+      "actual_usd": "0.001598649978998222222222222222",
+      "completed_at": "2026-11-03T05:50:20.110278+00:00",
+      "created_at": "2026-11-03T05:49:41.595799+00:00",
+      "kind": "modal",
+      "metadata": {
+        "estimated_seconds": 1800
+      },
+      "receipt_metadata": {},
+      "seconds": 36.287136976,
+      "stage": "prepare",
+      "status": "settled",
+      "upper_bound_usd": "1",
+      "usage": null
+    },
+    "b1c699d0a8c145579aabbcaedd0a2a97": {
+      "created_at": "2026-11-03T05:58:02.446778+00:00",
+      "kind": "modal",
+      "metadata": {
+        "estimated_gpu_seconds": 1800,
+        "problems": 4,
+        "sampling": {
+          "max_tokens": 32768,
+          "n": 1,
+          "presence_penalty": 1.5,
+          "seed": 0,
+          "temperature": 0.6,
+          "top_k": 20,
+          "top_p": 0.95
+        }
+      },
+      "stage": "calibration_base_smoke",
+      "status": "reserved",
+      "upper_bound_usd": "2.27584"
+    },
+    "driver-1ca050cdac614601bd57d890789c272c": {
+      "created_at": "2026-11-03T07:24:07.312879+00:00",
+      "kind": "modal",
+      "metadata": {
+        "driver_claimed_at": 1793690653.2523396,
+        "driver_owner_id": "fc-01M6G4PFQQDTK55MZ0K0MPT21B",
+        "driver_ticket": {
+          "cpu_cores": 1,
+          "memory_gib": 4,
+          "prepared_at": 1793690647.2565773,
+          "reservation_id": "driver-1ca050cdac614601bd57d890789c272c",
+          "scaledown_seconds": 5,
+          "schema_version": 1,
+          "stage": "kernel",
+          "startup_seconds": 120,
+          "timeout_seconds": 86400,
+          "upper_bound_usd": "1.905953472222222222222222222"
+        },
+        "invoice": false,
+        "kind": "driver_resource_upper_bound"
+      },
+      "stage": "kernel",
+      "status": "reserved",
+      "upper_bound_usd": "1.905953472222222222222222222"
+    },
+    "driver-9e22f7411e4e486c8cfebce8a39a4ffd": {
+      "actual_usd": "0.071814487843367789",
+      "completed_at": "2026-11-03T07:24:05.930252+00:00",
+      "created_at": "2026-11-03T06:31:48.683841+00:00",
+      "kind": "modal",
+      "metadata": {
+        "driver_claimed_at": 1793687513.2252135,
+        "driver_finish_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 2976.032219943,
+          "observed_subtotal_usd": "0.06830884862263330555555555556",
+          "owner_id": "fc-01M6G1PPP266WAAV5S8J975H8H",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-9e22f7411e4e486c8cfebce8a39a4ffd",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        },
+        "driver_owner_id": "fc-01M6G1PPP266WAAV5S8J975H8H",
+        "driver_ticket": {
+          "cpu_cores": 1,
+          "memory_gib": 4,
+          "prepared_at": 1793687508.6238885,
+          "reservation_id": "driver-9e22f7411e4e486c8cfebce8a39a4ffd",
+          "scaledown_seconds": 5,
+          "schema_version": 1,
+          "stage": "calibration",
+          "startup_seconds": 120,
+          "timeout_seconds": 86400,
+          "upper_bound_usd": "1.905953472222222222222222222"
+        },
+        "invoice": false,
+        "kind": "driver_resource_upper_bound"
+      },
+      "receipt_metadata": {
+        "billing_basis": "driver_resource_upper_bound_not_invoice",
+        "invoice": false,
+        "provider_completion_evidence": {
+          "elapsed_seconds_bound": 3135.178514957428,
+          "observed_at": "2026-11-03T07:24:04.304913+00:00",
+          "provider_call_id": "fc-01M6G1PPP266WAAV5S8J975H8H",
+          "provider_terminal_state": "completed",
+          "source": "modal.FunctionCall.get"
+        },
+        "worker_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 2976.032219943,
+          "observed_subtotal_usd": "0.06830884862263330555555555556",
+          "owner_id": "fc-01M6G1PPP266WAAV5S8J975H8H",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-9e22f7411e4e486c8cfebce8a39a4ffd",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        }
+      },
+      "seconds": 3260.178514957428,
+      "stage": "calibration",
+      "status": "settled",
+      "upper_bound_usd": "1.905953472222222222222222222",
+      "usage": null
+    },
+    "infrastructure-headroom": {
+      "created_at": "2026-11-03T07:24:05.389163+00:00",
+      "kind": "modal",
+      "metadata": {
+        "basis": "conservative headroom for builds, status, coordinator, watchdog, volume and network; reconcile against provider billing"
+      },
+      "stage": "infrastructure",
+      "status": "reserved",
+      "upper_bound_usd": "2"
+    },
+    "modal-job-37712ba514eb7fa61e3cd94631dbf4a508352a781641c4e164165b1f23881e01": {
+      "actual_usd": "0.4496234762098893688933333333",
+      "completed_at": "2026-11-03T06:22:59.294918+00:00",
+      "created_at": "2026-11-03T06:17:47.058210+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "b6e22b6aa1cac6df51d3c7041a39d70caef366edb4c6bef2597457e480ec164f"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.4496234762098893688933333333",
+        "call_id": "fc-01M6G0X163CJMWC9G5XM5CACXC",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "calibration_base_smoke",
+        "scaledown_seconds": 2.0,
+        "seconds": 379.32239275300003,
+        "startup_seconds": 120.0,
+        "usage_seconds": 257.32239275300003
+      },
+      "seconds": 379.32239275300003,
+      "stage": "calibration_base_smoke",
+      "status": "settled",
+      "upper_bound_usd": "2.98704",
+      "usage": null
+    },
+    "modal-job-41873ccc1e58f2fe4ee9c03cce785866b052fe1a51e065cb860b98243da45d59": {
+      "actual_usd": "2.128023597464062666666666667",
+      "completed_at": "2026-11-03T07:00:52.831763+00:00",
+      "created_at": "2026-11-03T06:32:22.614225+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "3345e5285794e6fd4ade9d14cfb79d018a8fc9363484872d3d132d7bfc692e76"
+      },
+      "receipt_metadata": {
+        "actual_usd": "2.128023597464062666666666667",
+        "call_id": "fc-01M6G1QSKMY8J3CCQM9DBDGXWT",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "calibration_base",
+        "scaledown_seconds": 2.0,
+        "seconds": 1795.295498423,
+        "startup_seconds": 120.0,
+        "usage_seconds": 1673.295498423
+      },
+      "seconds": 1795.295498423,
+      "stage": "calibration_base",
+      "status": "settled",
+      "upper_bound_usd": "2.98704",
+      "usage": null
+    },
+    "modal-job-47e8c8850834c901ef8e983d39fee7d4391e3eb926016cd9f8f1fa59354aec96": {
+      "actual_usd": "1.2511850142476064296",
+      "completed_at": "2026-11-03T07:21:17.608124+00:00",
+      "created_at": "2026-11-03T07:05:21.582456+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "7ef74dc0c3840915d2bd1a11db3c8ac30f8b934a903d6661d37d7e02ec5a1721"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.2511850142476064296",
+        "call_id": "fc-01M6G3M5N6V4YHRZYGZ5406Y03",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "calibration_p50c",
+        "scaledown_seconds": 2.0,
+        "seconds": 1055.5554113449998,
+        "startup_seconds": 120.0,
+        "usage_seconds": 933.5554113449999
+      },
+      "seconds": 1055.5554113449998,
+      "stage": "calibration_p50c",
+      "status": "settled",
+      "upper_bound_usd": "2.98704",
+      "usage": null
+    },
+    "modal-job-8f6d754231254325b8ed31188bef6c66cba3ef355ad255befbaebd2367fe3a75": {
+      "actual_usd": "0.42283361048128671408",
+      "completed_at": "2026-11-03T07:05:15.443314+00:00",
+      "created_at": "2026-11-03T07:00:59.407510+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "fae5d75a0eed730dcb42fe73d9bf1db094b92c9ddbca87a4b9dfaf0940e9936c"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.42283361048128671408",
+        "call_id": "fc-01M6G3C5BSGSQSHHNEZXD8F3B3",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "calibration_p50c_smoke",
+        "scaledown_seconds": 2.0,
+        "seconds": 356.72126868500004,
+        "startup_seconds": 120.0,
+        "usage_seconds": 234.721268685
+      },
+      "seconds": 356.72126868500004,
+      "stage": "calibration_p50c_smoke",
+      "status": "settled",
+      "upper_bound_usd": "2.98704",
+      "usage": null
+    },
+    "modal-job-c6f895a60eb7dc313894a3bfb900c37a87d60b4280def55ee279f5c46bb56270": {
+      "actual_usd": "0.006028212540997399162222222222",
+      "completed_at": "2026-11-03T06:32:12.982866+00:00",
+      "created_at": "2026-11-03T06:31:56.053049+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 2.0,
+          "gpu": null,
+          "memory_gib": 8.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "91331c2111f69b958f99b75171ed99ec199c94dbf92845d7dacd9505e7f9625b"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.006028212540997399162222222222",
+        "call_id": "fc-01M6G1PYVPN6D240HQ0C5FZ393",
+        "cost_options": {
+          "cpu_cores": 2.0,
+          "gpu": null,
+          "memory_gib": 8.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "elapsed_wall_upper_estimate",
+        "key": "prepare-v2",
+        "scaledown_seconds": 2.0,
+        "seconds": 136.83206272125244,
+        "startup_seconds": 120.0,
+        "usage_seconds": 14.832062721252441
+      },
+      "seconds": 136.83206272125244,
+      "stage": "prepare-v2",
+      "status": "settled",
+      "upper_bound_usd": "1",
+      "usage": null
+    }
+  },
+  "schema_version": 1
+}
