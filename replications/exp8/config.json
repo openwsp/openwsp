@@ -1,0 +1,20 @@
+{
+  "model": "Qwen/Qwen3.5-0.8B",
+  "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+  "source_revision": "4d09ba6d6a7e891dd8063974dfe81b3d78e3494f",
+  "editor": "gpt-6-astra",
+  "reasoning_effort": "max",
+  "passes": 50,
+  "code_runs": 300,
+  "handoff_turns": 40,
+  "notices": {"46": "001_pass_size.txt", "51": "002_tool_facts.txt"},
+  "gpu": "H100",
+  "engine": "vllm==0.33.0",
+  "transformers": "5.17.0",
+  "sampling": {"temperature": 0.6, "top_p": 0.95, "top_k": 20, "presence_penalty": 1.5, "max_tokens": 32768, "seed": 0},
+  "editor_budget_usd": 100,
+  "modal_task_budget_usd": 150,
+  "modal_initial_cycle_limit_usd": 42,
+  "max_job_seconds": 1800,
+  "samples": {"math500": 4, "gsm8k": 2, "ifeval": 2}
+}

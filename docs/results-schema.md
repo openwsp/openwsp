@@ -1,0 +1,67 @@
+# Result records and contributions
+
+`openwsp report exp8` reads evaluation files and regenerates the README's marked result and cost tables. It does not infer success from the presence of a run directory. Missing measurements remain pending, and an interrupted or blocked run must retain its status.
+
+## Layout
+
+Place one run under `replications/exp8/results/<run-id>/`. Keep a separate `summary.json` for each stage, model condition and benchmark, for example `<run-id>/evaluation/<condition>/<benchmark>/summary.json`. The reporter discovers `summary.json` files recursively under the results directory.
+
+Commit compact per-sample records, summaries, configuration/provenance, the edit manifest and diff, and the readable transcript. Do not commit weights, checkpoints, activations or full generated text. Full text remains on the volume, referenced by path and SHA-256. Preserve the original artifacts when a run is repeated; do not overwrite a lower result.
+
+## Evaluation summary
+
+A summary is one JSON object. Rates use fractions in the file; the report formats them as percentages. Omitted numeric fields mean unavailable, not zero.
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `stage` | string | The stage or condition, such as calibration, live evaluation or a named control. |
+| `model` | string | Model/condition identifier, with exact checkpoint provenance recorded separately. |
+| `benchmark` | string | Benchmark key, such as `math500`, `gsm8k` or `ifeval`. |
+| `samples_per_problem` | integer | Number of samples requested per problem. |
+| `n` | integer | Number of scored samples actually present. |
+| `correct` | integer | Number of those samples graded correct. |
+| `accuracy` | number | `correct / n`, on the interval from zero to one. |
+| `standard_error` | number | Standard error as a fraction, using the method declared in provenance. |
+| `mean_tokens` | number | Mean generated token count over scored samples. |
+| `cut_share` | number | Fraction of scored samples that reached the generation token limit. |
+| `seconds` | number | Measured duration for this record, with its scope stated in provenance. |
+| `cost_usd` | number | Cost allocated to this stage in US dollars; distinguish measured charges from estimates. |
+| `status` | string | Explicit run state. Never label partial evaluation complete. |
+| `provenance` | object | Sources, configuration, runtime versions, hardware, sample files, cost method and deviations. |
+| `reference` | string, optional | Explicit author comparison: `unedited`, `p10c`, `p25c` or `p50c`. |
+
+The reference comparison must describe the intended comparator. It does not assert that a different control is a reproduction of that condition. The authors' table is generated separately from `replications/exp8/reference/*.json`.
+
+Record problem coverage as well as sample count in provenance. Multiple samples of the same problem are not independent problems: report the uncertainty method and preserve the per-problem grouping. An exact ratio with no uncertainty method is insufficient for a calibration claim.
+
+## Per-sample record
+
+Use JSON Lines, one object for every scored sample:
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `problem_id` | string | Stable benchmark problem identifier. |
+| `sample_index` | integer | Sample index within the problem. |
+| `answer` | string or null | Extracted final answer, not the full generated reasoning. |
+| `correct` | boolean | Grade under the recorded official protocol. |
+| `token_count` | integer | Generated tokens for this sample. |
+| `finish_reason` | string | Engine termination reason, including token-limit termination. |
+| `raw_path` | string | Volume path of the full generation artifact. |
+| `raw_sha256` | string | SHA-256 of the referenced artifact's exact bytes. |
+
+If a shared raw artifact contains multiple samples, record how the problem ID and sample index locate the row. Do not silently drop unsuccessful generations or retries. Record failures separately so reported coverage and spend can be reconciled.
+
+## Cost and transcript records
+
+Stage summaries may contain `seconds` and `cost_usd`. A separate `cost.json` can record billing for a stage that has no evaluation summary, with `stage`, `seconds`, `cost_usd`, and provenance identifying the job and measurement method. Avoid counting the same charge in both files. Store GPU seconds, CPU/memory use or rate assumptions, and the pre-launch estimate with the underlying job record.
+
+The readable transcript is generated from `turns/` and `tool_calls.jsonl`. Each turn retains the editor's explanation, code or forward block and returned result. Redact credentials; link to large outputs by their artifact identity instead of embedding arrays or full datasets. Experiment 8's primary transcript is at `replications/exp8/results/live-run/transcript.md`.
+
+## Add a run by pull request
+
+1. Choose a new run ID and commit its exact model revision, editor settings, prompt/source hashes, dataset revisions and code revision.
+2. Include all sample records and summaries for that run, the final edit identity, runtime provenance, costs and every departure from the prescribed protocol.
+3. Run `uv run openwsp report exp8`. Review the generated table's links and verify that counts and ratios match the sample files.
+4. Run `uv run pytest -q` and `python scripts/check_secrets.py --all`, then submit the evidence and regenerated tables together.
+
+Do not write numbers directly into the README. Record a failed or incomplete attempt honestly, with its missing stages and resume command. A result from another model or changed protocol belongs under a distinct configuration and must be labeled accordingly.
