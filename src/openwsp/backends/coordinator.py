@@ -181,9 +181,9 @@ class DriverCoordinator:
         write the ledger; ambiguous ownership leaves every file untouched. The
         ledger applies any task-cap authorization and allowance in one write.
         """
-        observation = validate_modal_allowance_observation(observation)
         if task_authorization is not None:
             task_authorization = validate_modal_task_authorization(task_authorization)
+        observation = validate_modal_allowance_observation(observation, task_authorization=task_authorization)
         with self._locked():
             ledger = self.ledger_source
             if not isinstance(ledger, BudgetLedger) or not ledger.path.is_file():

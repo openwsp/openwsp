@@ -140,6 +140,13 @@ def modal_task_authorization():
                          "authorized_at": datetime.now(UTC).isoformat()}}
 
 
+def automatic_topup_observation():
+    observation = allowance_observation(observation_id="operator-topups-225", cycle_limit=225, cycle_usage="50.25")
+    observation["evidence"].update(basis="operator_automatic_topups", automatic_topups_authorized=True,
+                                   provider_limit_observed=False)
+    return observation
+
+
 def prohibit_launch_side_effects(coordinator, monkeypatch):
     def forbidden(*args, **kwargs):
         pytest.fail("Allowance observation must not launch, cancel, reconcile, or settle")
@@ -205,8 +212,54 @@ def test_combined_cap_and_provider_anchor_preserve_costs_after_positive_terminal
     assert ledger.path.read_bytes() == stable
 
 
+def test_authorized_automatic_envelope_preserves_known_usage_and_ownership(setup, monkeypatch):
+    ledger, _, calls, _, _, spawn, factory, _ = setup
+    start(factory, spawn)
+    ledger.observe_modal_allowance(**allowance_observation(cycle_limit=150, cycle_usage="0.05"))
+    rid = ledger.reserve("modal", "104.89", "past conservative compute estimates")
+    ledger.settle(rid, "104.89")
+    ledger.reserve("modal", "18.13", "retained job bounds")
+    calls[0].complete = True
+    coordinator = factory()
+    prohibit_launch_side_effects(coordinator, monkeypatch)
+    before = ledger.snapshot()
+    journal, pipeline = coordinator.path.read_bytes(), coordinator.state_path.read_bytes()
+    observation, authorization = automatic_topup_observation(), modal_task_authorization()
+    receipt = coordinator.observe_modal_allowance(observation, task_authorization=authorization)
+    after = ledger.snapshot()
+    assert after["limits"] == {**before["limits"], "modal": "225"}
+    assert after["modal_allowance"]["cycle_limit"] == "225"
+    assert after["modal_allowance"]["cycle_usage"] == "104.94"
+    assert "provider_usage_anchor_id" not in after["modal_allowance"]
+    for key in ("reservations", "halted", "modal_prior_usage_floor"):
+        assert after[key] == before[key]
+    assert after["events"][:len(before["events"])] == before["events"]
+    assert coordinator.path.read_bytes() == journal and coordinator.state_path.read_bytes() == pipeline
+    assert calls[0].events == ["get"] and len(calls) == 1 and not calls[0].cancelled
+    stable = ledger.path.read_bytes()
+    assert coordinator.observe_modal_allowance(observation, task_authorization=authorization) == receipt
+    assert ledger.path.read_bytes() == stable
+
+
+@pytest.mark.parametrize("authorization_limit", [None, "200"])
+def test_automatic_envelope_requires_covering_authorization_before_provider_poll(setup, authorization_limit):
+    ledger, _, calls, _, _, spawn, factory, reloads = setup
+    start(factory, spawn)
+    coordinator = factory()
+    authorization = modal_task_authorization() if authorization_limit else None
+    if authorization is not None:
+        authorization["total_limit"] = authorization_limit
+    before = ledger.path.read_bytes(), coordinator.path.read_bytes(), coordinator.state_path.read_bytes()
+    reload_count = len(reloads)
+    with pytest.raises(ValueError):
+        coordinator.observe_modal_allowance(automatic_topup_observation(), task_authorization=authorization)
+    assert (ledger.path.read_bytes(), coordinator.path.read_bytes(), coordinator.state_path.read_bytes()) == before
+    assert calls[0].events == [] and len(reloads) == reload_count
+
+
+@pytest.mark.parametrize("automatic", [False, True])
 @pytest.mark.parametrize("outcome", ["running", "unknown", "auth"])
-def test_combined_cap_update_cannot_mutate_a_live_or_ambiguous_owner(setup, monkeypatch, outcome):
+def test_combined_cap_update_cannot_mutate_a_live_or_ambiguous_owner(setup, monkeypatch, outcome, automatic):
     ledger, _, calls, _, _, spawn, factory, _ = setup
     start(factory, spawn)
     coordinator = factory()
@@ -217,7 +270,8 @@ def test_combined_cap_update_cannot_mutate_a_live_or_ambiguous_owner(setup, monk
         calls[0].get_error = RuntimeError("401 Unauthorized")
     before = ledger.path.read_bytes(), coordinator.path.read_bytes(), coordinator.state_path.read_bytes()
     with pytest.raises(ValueError, match="terminal"):
-        coordinator.observe_modal_allowance(allowance_observation(), task_authorization=modal_task_authorization())
+        observation = automatic_topup_observation() if automatic else allowance_observation()
+        coordinator.observe_modal_allowance(observation, task_authorization=modal_task_authorization())
     assert (ledger.path.read_bytes(), coordinator.path.read_bytes(), coordinator.state_path.read_bytes()) == before
     assert len(calls) == 1 and not calls[0].cancelled
 

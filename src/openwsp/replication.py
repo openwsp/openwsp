@@ -81,7 +81,7 @@ def status(experiment="exp8"):
 
 
 def record_modal_allowance(experiment="exp8", *, observation, task_authorization=None):
-    """Record dashboard evidence and an optional explicit cumulative task cap.
+    """Record funding evidence and an optional explicit cumulative task cap.
 
     The existing serialized owner verifies idle ownership and records both
     together. This command never deploys, creates a ledger, or restarts work.
@@ -92,15 +92,18 @@ def record_modal_allowance(experiment="exp8", *, observation, task_authorization
     if not path.is_absolute():
         raise ValueError("--observation must be an absolute path to a JSON evidence file")
     from openwsp.budget import validate_modal_allowance_observation, validate_modal_task_authorization
-    value = validate_modal_allowance_observation(json.loads(path.read_text()))
-    kwargs = {"allowance_observation": value}
+    authorization = None
     if task_authorization is not None:
         authorization_path = Path(task_authorization)
         if not authorization_path.is_absolute():
             raise ValueError("--task-authorization must be an absolute path to a JSON evidence file")
-        kwargs["modal_task_authorization"] = validate_modal_task_authorization(
+        authorization = validate_modal_task_authorization(
             json.loads(authorization_path.read_text())
         )
+    value = validate_modal_allowance_observation(json.loads(path.read_text()), task_authorization=authorization)
+    kwargs = {"allowance_observation": value}
+    if authorization is not None:
+        kwargs["modal_task_authorization"] = authorization
     from openwsp.backends.modal_runtime import configure_tls
     configure_tls()
     import modal

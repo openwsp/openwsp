@@ -230,9 +230,14 @@ def test_local_entrypoint_validates_then_makes_exactly_one_allowance_rpc(tmp_pat
     assert json.loads(path.read_text()) == observation
 
 
+@pytest.mark.parametrize("basis", ["user_confirmed_dashboard", "operator_automatic_topups"])
 def test_local_combined_funding_validates_both_files_then_makes_one_rpc(
-    tmp_path, observation, task_authorization, fake_rpc
+    tmp_path, observation, task_authorization, fake_rpc, basis
 ):
+    if basis == "operator_automatic_topups":
+        observation["cycle_limit"] = "225"
+        observation["evidence"].update(basis=basis, automatic_topups_authorized=True,
+                                       provider_limit_observed=False)
     path, authorization_path = tmp_path / "observation.json", tmp_path / "authorization.json"
     path.write_text(json.dumps(observation))
     authorization_path.write_text(json.dumps(task_authorization))
@@ -243,6 +248,25 @@ def test_local_combined_funding_validates_both_files_then_makes_one_rpc(
         "tls", ("function", "openwsp-exp8", "launch"),
         ("rpc", (), {"allowance_observation": observation, "modal_task_authorization": task_authorization}),
     ]
+
+
+@pytest.mark.parametrize("authorization_limit", [None, "200"])
+def test_automatic_envelope_above_default_needs_covering_task_authorization_before_rpc(
+    tmp_path, observation, task_authorization, fake_rpc, authorization_limit
+):
+    observation["cycle_limit"] = "225"
+    observation["evidence"].update(basis="operator_automatic_topups", automatic_topups_authorized=True,
+                                   provider_limit_observed=False)
+    path = tmp_path / "observation.json"
+    path.write_text(json.dumps(observation))
+    authorization_path = None
+    if authorization_limit is not None:
+        task_authorization["total_limit"] = authorization_limit
+        authorization_path = tmp_path / "authorization.json"
+        authorization_path.write_text(json.dumps(task_authorization))
+    with pytest.raises(ValueError):
+        replication.record_modal_allowance(observation=path, task_authorization=authorization_path)
+    assert fake_rpc.calls == []
 
 
 @pytest.mark.parametrize("invalid", ["relative", "malformed", "inferred", "missing_id", "extra_key"])

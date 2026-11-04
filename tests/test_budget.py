@@ -639,3 +639,92 @@ def test_concurrent_funding_updates_record_one_cap_and_one_observation(tmp_path)
     assert len(after["modal_authorizations"]) == 1
     assert len(after["modal_observations"]) == len(before["modal_observations"]) + 1
     assert len(after["events"]) == len(before["events"]) + 2
+
+
+def _authorized_topup_envelope(tmp_path):
+    ledger, observation, authorization = _conservative_modal_history(tmp_path)
+    observation.update(observation_id="operator-topups-225", cycle_limit=225, cycle_usage=0)
+    observation["evidence"].pop("usage_anchor")
+    observation["evidence"].update(basis="operator_automatic_topups", automatic_topups_authorized=True,
+                                    provider_limit_observed=False)
+    return ledger, observation, authorization
+
+
+def test_explicit_combined_topup_envelope_preserves_estimated_usage_and_reservations(tmp_path):
+    ledger, observation, authorization = _authorized_topup_envelope(tmp_path)
+    before = ledger.snapshot()
+    original = ledger.path.read_bytes()
+    validated = validate_modal_allowance_observation(observation, task_authorization=authorization)
+    assert "task_authorization" not in validated  # Passed separately to the atomic application.
+    assert ledger.preview_modal_allowance(validated, task_authorization=authorization) is None
+    assert ledger.path.read_bytes() == original
+    receipt = ledger.observe_modal_allowance(**validated, task_authorization=authorization)
+    after = ledger.snapshot()
+    assert after["limits"] == {"editor": "100", "modal": "225"}
+    assert after["modal_allowance"]["cycle_limit"] == "225"
+    assert Decimal(after["modal_allowance"]["cycle_usage"]) == Decimal("104.94222352871018")
+    assert "provider_usage_anchor_id" not in after["modal_allowance"]
+    assert after["summary"]["modal"]["available_usd"] == pytest.approx(
+        before["summary"]["modal"]["available_usd"] + 75,
+    )
+    for field in ("reservations", "halted", "modal_prior_usage_floor"):
+        assert after[field] == before[field]
+    assert after["summary"]["editor"] == before["summary"]["editor"]
+    assert after["events"][:-2] == before["events"]
+    assert receipt["observation"]["task_authorization"] == authorization
+    assert receipt["task_authorization"] == after["modal_authorizations"]["modal-total-225"]
+    assert receipt["applied_allowance"]["evidence"]["provider_limit_observed"] is False
+
+
+def test_larger_topup_envelope_cannot_borrow_an_unbound_existing_authorization(tmp_path):
+    ledger, observation, authorization = _authorized_topup_envelope(tmp_path)
+    ledger.authorize_modal_limit(**authorization)
+    before = ledger.path.read_bytes()
+    for operation in (
+        lambda: validate_modal_allowance_observation(observation),
+        lambda: ledger.preview_modal_allowance(observation),
+        lambda: ledger.observe_modal_allowance(**observation),
+    ):
+        with pytest.raises(ValueError, match="bound explicit task authorization"):
+            operation()
+        assert ledger.path.read_bytes() == before
+
+
+@pytest.mark.parametrize("limit,authorized", [(226, 225), (225, 200), (151, 150), (150, 149), (140, 130)])
+def test_topup_envelope_cannot_exceed_its_bound_authorization(tmp_path, limit, authorized):
+    ledger, observation, authorization = _authorized_topup_envelope(tmp_path)
+    observation["cycle_limit"] = limit
+    authorization["total_limit"] = authorized
+    before = ledger.path.read_bytes()
+    for operation in (
+        lambda: validate_modal_allowance_observation(observation, task_authorization=authorization),
+        lambda: ledger.preview_modal_allowance(observation, task_authorization=authorization),
+        lambda: ledger.observe_modal_allowance(**observation, task_authorization=authorization),
+    ):
+        with pytest.raises(ValueError, match="covering the funding envelope"):
+            operation()
+        assert ledger.path.read_bytes() == before
+
+
+def test_topup_envelope_replay_cannot_restore_an_old_cap_or_change_authorization(tmp_path, monkeypatch):
+    ledger, observation, authorization = _authorized_topup_envelope(tmp_path)
+    receipt = ledger.observe_modal_allowance(**observation, task_authorization=authorization)
+    later = ledger.reserve("modal", 4, "later-work")
+    ledger.settle(later, 3)
+    ledger.authorize_modal_limit(200, authorization_id="later-cap", evidence=authorization_evidence())
+    future = datetime.now(UTC) + timedelta(hours=2)
+
+    class Later(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return future
+
+    monkeypatch.setattr("openwsp.budget.datetime", Later)
+    before = ledger.path.read_bytes()
+    assert ledger.preview_modal_allowance(observation, task_authorization=authorization) == receipt
+    assert ledger.observe_modal_allowance(**observation, task_authorization=authorization) == receipt
+    assert ledger.path.read_bytes() == before
+    changed = {**authorization, "authorization_id": "unbound-new-cap"}
+    with pytest.raises(ValueError, match="different payload"):
+        ledger.observe_modal_allowance(**observation, task_authorization=changed)
+    assert ledger.path.read_bytes() == before

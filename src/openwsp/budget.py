@@ -83,7 +83,21 @@ def _provider_usage_anchor(binding):
     return estimate
 
 
-def validate_modal_allowance_observation(observation):
+def _check_operator_topups(binding, task_authorization=None):
+    if binding["evidence"].get("basis") != "operator_automatic_topups":
+        return
+    evidence = binding["evidence"]
+    if (evidence.get("automatic_topups_authorized") is not True
+            or evidence.get("provider_limit_observed") is not False):
+        raise ValueError("Automatic top-ups require explicit authorization, not a provider-limit claim")
+    limit = _money(binding["cycle_limit"])
+    if ((task_authorization is None and limit > 150)
+            or (task_authorization is not None and _money(task_authorization["total_limit"]) < limit)):
+        raise ValueError("Automatic top-ups require a bound explicit task authorization covering the funding envelope; "
+                         "the standalone task cap is $150")
+
+
+def validate_modal_allowance_observation(observation, *, task_authorization=None):
     """Validate dashboard evidence or explicit operator funding authorization.
 
     Freshness belongs to the ledger: an identical acknowledged observation may
@@ -104,14 +118,11 @@ def validate_modal_allowance_observation(observation):
     basis = binding["evidence"].get("basis")
     if basis not in {"user_confirmed_dashboard", "operator_automatic_topups"}:
         raise ValueError("Observation requires user_confirmed_dashboard or operator_automatic_topups evidence")
-    if basis == "operator_automatic_topups":
-        # This is spending authorization, not a claim about the provider's
-        # current dashboard. Keep the existing task cap and known usage floor.
-        evidence = binding["evidence"]
-        if (evidence.get("automatic_topups_authorized") is not True
-                or evidence.get("provider_limit_observed") is not False
-                or _money(binding["cycle_limit"]) > 150):
-            raise ValueError("Automatic top-ups require explicit authorization within the $150 task cap, not a provider-limit claim")
+    authorization = (validate_modal_task_authorization(task_authorization)
+                     if task_authorization is not None else None)
+    # A larger funding envelope is permitted only with the separately bound
+    # explicit task authorization. It remains distinct from a provider limit.
+    _check_operator_topups(binding, authorization)
     observed = datetime.fromisoformat(binding["evidence"]["observed_at"])
     if observed.utcoffset().total_seconds() != 0:
         raise ValueError("Allowance evidence timestamp must be UTC")
@@ -369,6 +380,7 @@ class BudgetLedger:
         if (binding["cycle_id"] is not None and allowance.get("cycle_id") is not None
                 and binding["cycle_id"] != allowance["cycle_id"]):
             raise ValueError("A different billing cycle requires explicit rollover handling")
+        _check_operator_topups(binding, binding.get("task_authorization"))
         estimate = _provider_usage_anchor(binding)
         if estimate is not None and estimate != cls._totals(state, "modal")[0]:
             raise ValueError("Provider usage anchor does not match current settled task estimates")
@@ -378,7 +390,7 @@ class BudgetLedger:
 
     def preview_modal_allowance(self, observation, *, task_authorization=None):
         """Validate an observation against existing state without writing files."""
-        binding = validate_modal_allowance_observation(observation)
+        binding = validate_modal_allowance_observation(observation, task_authorization=task_authorization)
         if task_authorization is not None:
             binding["task_authorization"] = validate_modal_task_authorization(task_authorization)
         state = json.loads(self.path.read_text())

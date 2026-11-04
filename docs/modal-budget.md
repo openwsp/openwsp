@@ -1,10 +1,10 @@
 # Recording Modal funding evidence
 
 New ledgers start with a **$42 billing-cycle allowance** and a separate **$150
-cumulative task cap**. These are initial defaults. A confirmed account-limit
-observation can change the allowance; only an explicit task authorization can
-change the task cap. Expected payments and automatic limit increases are not
-observations that those events occurred.
+cumulative task cap**. These are initial defaults. Confirmed account evidence or
+explicit automatic top-up authority can change the funding allowance; only an
+explicit task authorization can change the task cap. Expected payments and
+automatic limit increases are not observations that those events occurred.
 
 `record-modal-allowance` records evidence through the existing serialized
 coordinator. It does not deploy, create a ledger, launch or restart a driver,
@@ -109,7 +109,7 @@ OPENWSP_EDITOR_TRANSPORT=codex .venv/bin/python scripts/modal_cli.py deploy -m o
 ```
 
 Record both files together, or omit `--task-authorization` to record only the
-account observation:
+funding observation within its existing authorization:
 
 ```sh
 openwsp record-modal-allowance exp8 \
@@ -136,12 +136,21 @@ coordinator first so an existing watchdog recovery is attached to rather than
 duplicated. Never replace the run ID or editor journal to bypass an uncertain
 owner or budget boundary.
 
-## Earlier automatic top-up authorization
+## Authorized automatic top-ups
 
 The earlier [operator top-up record](../replications/exp8/authorizations/modal-topups-20261103.json)
 uses `basis: "operator_automatic_topups"`, `automatic_topups_authorized: true`
-and `provider_limit_observed: false` inside `evidence`. That existing route accepts
-a funding envelope of at most $150; it does not observe a provider limit or raise
-the cumulative task cap. A larger explicitly authorized task cap uses the
-separate authorization above. Neither route infers permission from a successful
-charge or an expected future limit increase.
+and `provider_limit_observed: false` inside `evidence`. Here `cycle_limit` records
+the operator's funding envelope, not an observed provider limit. Without a joint
+task authorization this route remains limited to $150. A larger envelope requires
+`--task-authorization` in the same update, with an explicitly authorized
+`total_limit` at least as large as the envelope. Both records are validated and
+applied atomically after the same terminal-owner checks. An envelope larger than
+its accompanying authorization is rejected.
+
+This route preserves the greater known-usage floor and every outstanding
+reservation; no provider-usage anchor is needed. Existing automatic top-up
+authority can accompany a later explicit cumulative cap, but neither a successful
+charge nor an expected account-limit increase grants that authority. Record the
+authorization and funding envelope separately from dashboard facts, and preserve
+their IDs and evidence for exact retries.
