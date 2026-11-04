@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-11-04T10:37:15.459041+00:00",
+  "source": "Read-only direct Modal Volume metadata; no function invocation",
+  "run_id": "codex-20261103",
+  "current_call_id": "fc-01M6K04PS9VADJFZRXYY6KDQB3",
+  "status": "running",
+  "active_stage": "live",
+  "heartbeat": 1793788617.5626907,
+  "live": {
+    "turn": 105,
+    "passes": 39,
+    "runs": 55,
+    "requests": 48,
+    "handoffs": 2,
+    "pending": {
+      "kind": "forward",
+      "request": 48,
+      "turn": 106
+    },
+    "done": false,
+    "submission": null
+  },
+  "budget_estimates": {
+    "editor": {
+      "spent_usd": 78.292765,
+      "reserved_usd": 0.0,
+      "available_usd": 21.707235
+    },
+    "modal": {
+      "spent_usd": 110.72639778205932,
+      "reserved_usd": 24.319683472222223,
+      "available_usd": 14.903918745718448
+    }
+  },
+  "authorization_applied": false,
+  "current_ledger_task_cap_usd": "150",
+  "authorized_task_cap_usd": "225",
+  "note": "Progress observation only. Full public transcript remains at its previously published checkpoint."
+}
