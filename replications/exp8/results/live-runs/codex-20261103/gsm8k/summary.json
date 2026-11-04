@@ -1,0 +1,114 @@
+{
+  "status": "done",
+  "stage": "live-runs/codex-20261103",
+  "model": "Qwen/Qwen3.5-0.8B",
+  "benchmark": "gsm8k",
+  "samples_per_problem": 2,
+  "n": 2638,
+  "correct": 657,
+  "accuracy": 0.24905231235784686,
+  "standard_error": 0.008420012490267513,
+  "mean_tokens": 25609.711902956784,
+  "cut_share": 0.7005307050796058,
+  "finished_n": 790,
+  "finished_correct": 624,
+  "accuracy_finished": 0.789873417721519,
+  "seconds": 9379.895704483,
+  "cost_usd": 11.11830304171385,
+  "provenance": {
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "sampling": {
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "top_k": 20,
+      "presence_penalty": 1.5,
+      "max_tokens": 32768,
+      "seed": 0,
+      "n": 2
+    },
+    "thinking": true,
+    "gpu": "H100",
+    "engine": "vllm==0.33.0",
+    "engine_settings": {
+      "dtype": "bfloat16",
+      "gpu_memory_utilization": 0.85,
+      "language_model_only": true,
+      "max_model_len": 34816,
+      "max_num_seqs": 128,
+      "prefix_caching": false
+    },
+    "seconds_basis": "accounted_resource_seconds_including_margins_and_cancelled_attempts",
+    "container_seconds": 794.2384613600001,
+    "transformers": "5.17.0",
+    "batch_generations": 256,
+    "standard_error": "binomial_per_sample",
+    "smoke_included_in_score": false,
+    "smoke_seconds": 281.775736721,
+    "smoke_cost_usd": 0.3339981732599587,
+    "batches": [
+      {
+        "gpu": "H100",
+        "seconds": 916.2384613600001,
+        "cost_usd": 1.0860479895320534
+      },
+      {
+        "gpu": "H100",
+        "seconds": 915.883271907,
+        "cost_usd": 1.085626971633764
+      },
+      {
+        "gpu": "H100",
+        "seconds": 933.165569086,
+        "cost_usd": 1.1061122545566053
+      },
+      {
+        "gpu": "H100",
+        "seconds": 864.623393737,
+        "cost_usd": 1.0248669293762573
+      },
+      {
+        "gpu": "H100",
+        "seconds": 856.463263663,
+        "cost_usd": 1.0151944551952092
+      },
+      {
+        "gpu": "H100",
+        "seconds": 911.444001268,
+        "cost_usd": 1.0803649561696693
+      },
+      {
+        "gpu": "H100",
+        "seconds": 856.744729033,
+        "cost_usd": 1.0155280854804494
+      },
+      {
+        "gpu": "H100",
+        "seconds": 852.3828706820001,
+        "cost_usd": 1.0103578293817308
+      },
+      {
+        "gpu": "H100",
+        "seconds": 906.5663385280001,
+        "cost_usd": 1.0745832999351894
+      },
+      {
+        "gpu": "H100",
+        "seconds": 927.3686016089999,
+        "cost_usd": 1.0992409157738678
+      },
+      {
+        "gpu": "H100",
+        "seconds": 439.01520360999996,
+        "cost_usd": 0.5203793546790533
+      }
+    ],
+    "submission_sha256": "46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec",
+    "finished_metrics": {
+      "method": "openwsp.metrics.finished_metrics",
+      "finished_reason": "stop",
+      "excluded_reason": "length",
+      "samples_file": "samples.jsonl",
+      "samples_sha256": "2226718e787e4b597480efc39d463aced9e7abb7ea8e1232d59fafed47a96085"
+    }
+  }
+}

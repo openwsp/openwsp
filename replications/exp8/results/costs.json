@@ -10462,6 +10462,171 @@
       "at": "2026-11-04T16:14:19.735974+00:00",
       "event": "reserved",
       "id": "modal-job-59653b595b50ddf3b87c3b7fe8e2466e591c53bf967c24763bd7e7eca654bf5c"
+    },
+    {
+      "at": "2026-11-04T16:27:54.721323+00:00",
+      "event": "settled",
+      "id": "modal-job-59653b595b50ddf3b87c3b7fe8e2466e591c53bf967c24763bd7e7eca654bf5c"
+    },
+    {
+      "at": "2026-11-04T16:28:05.097729+00:00",
+      "event": "reserved",
+      "id": "modal-job-3ff866202864759491e994ab9beba9f787afcbf83e1f443a28c90ca272f37c61"
+    },
+    {
+      "at": "2026-11-04T16:41:36.570524+00:00",
+      "event": "settled",
+      "id": "modal-job-3ff866202864759491e994ab9beba9f787afcbf83e1f443a28c90ca272f37c61"
+    },
+    {
+      "at": "2026-11-04T16:41:45.500458+00:00",
+      "event": "reserved",
+      "id": "modal-job-413842ec81db35083d8ea45ec288379703d05dd7b09a0487eb4da49b897fa75a"
+    },
+    {
+      "at": "2026-11-04T16:55:33.887908+00:00",
+      "event": "settled",
+      "id": "modal-job-413842ec81db35083d8ea45ec288379703d05dd7b09a0487eb4da49b897fa75a"
+    },
+    {
+      "at": "2026-11-04T16:55:46.002480+00:00",
+      "event": "reserved",
+      "id": "modal-job-a4a62f19c25b89fece9d8304d4f9768a486d452d3dde47e9cb4934ec80178ee5"
+    },
+    {
+      "at": "2026-11-04T17:08:33.032718+00:00",
+      "event": "settled",
+      "id": "modal-job-a4a62f19c25b89fece9d8304d4f9768a486d452d3dde47e9cb4934ec80178ee5"
+    },
+    {
+      "at": "2026-11-04T17:08:50.926530+00:00",
+      "event": "reserved",
+      "id": "modal-job-e0b813dd5e37bb061c6c2d67ce0d8354ecfc9ae4bc3af0bda8fcef9448d2e672"
+    },
+    {
+      "at": "2026-11-04T17:21:26.015886+00:00",
+      "event": "settled",
+      "id": "modal-job-e0b813dd5e37bb061c6c2d67ce0d8354ecfc9ae4bc3af0bda8fcef9448d2e672"
+    },
+    {
+      "at": "2026-11-04T17:21:39.549507+00:00",
+      "event": "reserved",
+      "id": "modal-job-54c7b54cf2aaf61e1ddcb6814719e94746b0dd96b62760a8bf88f15a5a8b3c60"
+    },
+    {
+      "at": "2026-11-04T17:35:17.352533+00:00",
+      "event": "settled",
+      "id": "modal-job-54c7b54cf2aaf61e1ddcb6814719e94746b0dd96b62760a8bf88f15a5a8b3c60"
+    },
+    {
+      "at": "2026-11-04T17:35:32.195948+00:00",
+      "event": "reserved",
+      "id": "modal-job-75a471767db3e9a71314ee1a9db05a146b17aeef701dfe88dbabff6da6c3c609"
+    },
+    {
+      "at": "2026-11-04T17:48:01.608108+00:00",
+      "event": "settled",
+      "id": "modal-job-75a471767db3e9a71314ee1a9db05a146b17aeef701dfe88dbabff6da6c3c609"
+    },
+    {
+      "at": "2026-11-04T17:48:07.845754+00:00",
+      "event": "reserved",
+      "id": "modal-job-44b018b10a6c6015f146b18c963ea8dd576c491e39ace85c70121f207b09a704"
+    },
+    {
+      "at": "2026-11-04T18:00:47.521271+00:00",
+      "event": "settled",
+      "id": "modal-job-44b018b10a6c6015f146b18c963ea8dd576c491e39ace85c70121f207b09a704"
+    },
+    {
+      "at": "2026-11-04T18:01:30.041247+00:00",
+      "event": "reserved",
+      "id": "modal-job-2c16ca3947d8aebae94f17372df893257d82a737926224ae088fa66423a51ef6"
+    },
+    {
+      "at": "2026-11-04T18:15:19.745947+00:00",
+      "event": "settled",
+      "id": "modal-job-2c16ca3947d8aebae94f17372df893257d82a737926224ae088fa66423a51ef6"
+    },
+    {
+      "at": "2026-11-04T18:15:47.062305+00:00",
+      "event": "reserved",
+      "id": "modal-job-0e4657e113fb242eb7a2739927b2b94372303e2acb7eaf06e6913c3614c503bb"
+    },
+    {
+      "at": "2026-11-04T18:29:33.792253+00:00",
+      "event": "settled",
+      "id": "modal-job-0e4657e113fb242eb7a2739927b2b94372303e2acb7eaf06e6913c3614c503bb"
+    },
+    {
+      "at": "2026-11-04T18:29:44.987697+00:00",
+      "event": "reserved",
+      "id": "modal-job-79802253bfc368125f28f4f0732f8e010ad98da02bc2a68eb86d81f210d7f0d7"
+    },
+    {
+      "at": "2026-11-04T18:35:29.148834+00:00",
+      "event": "settled",
+      "id": "modal-job-79802253bfc368125f28f4f0732f8e010ad98da02bc2a68eb86d81f210d7f0d7"
+    },
+    {
+      "at": "2026-11-04T18:35:55.461092+00:00",
+      "event": "reserved",
+      "id": "modal-job-dd822cf22bfc820c20f752a08454fc507f8fdf0b28105cdc2859228449f93891"
+    },
+    {
+      "at": "2026-11-04T18:38:32.982770+00:00",
+      "event": "settled",
+      "id": "modal-job-dd822cf22bfc820c20f752a08454fc507f8fdf0b28105cdc2859228449f93891"
+    },
+    {
+      "at": "2026-11-04T18:38:40.728017+00:00",
+      "event": "reserved",
+      "id": "modal-job-ab82d9a90089fdf42a5e234290dd7ae796fa72a6716bca863d0ea4434aea69ca"
+    },
+    {
+      "at": "2026-11-04T18:45:44.799053+00:00",
+      "event": "settled",
+      "id": "modal-job-ab82d9a90089fdf42a5e234290dd7ae796fa72a6716bca863d0ea4434aea69ca"
+    },
+    {
+      "at": "2026-11-04T18:46:10.444156+00:00",
+      "event": "reserved",
+      "id": "modal-job-e79e7bef1716f780232bb843a55ced3eb079447f7d574627441a6cbc0d2cf0a5"
+    },
+    {
+      "at": "2026-11-04T18:55:42.449112+00:00",
+      "event": "settled",
+      "id": "modal-job-e79e7bef1716f780232bb843a55ced3eb079447f7d574627441a6cbc0d2cf0a5"
+    },
+    {
+      "at": "2026-11-04T18:55:57.230732+00:00",
+      "event": "reserved",
+      "id": "modal-job-1968a291c94af421e5495b1757c07aa5b9b8ec74133992d008d55eb44c541b7b"
+    },
+    {
+      "at": "2026-11-04T19:03:44.179900+00:00",
+      "event": "settled",
+      "id": "modal-job-1968a291c94af421e5495b1757c07aa5b9b8ec74133992d008d55eb44c541b7b"
+    },
+    {
+      "at": "2026-11-04T19:03:58.734227+00:00",
+      "event": "reserved",
+      "id": "modal-job-657c2c029eef11848a091a7646b39b6dfa1eca79ab74f3b40340200b1ad34632"
+    },
+    {
+      "at": "2026-11-04T19:11:41.660839+00:00",
+      "event": "settled",
+      "id": "modal-job-657c2c029eef11848a091a7646b39b6dfa1eca79ab74f3b40340200b1ad34632"
+    },
+    {
+      "at": "2026-11-04T19:11:51.748909+00:00",
+      "event": "reserved",
+      "id": "modal-job-c50213feb91e4b796a763fbab66bee13d1e1c2b1bece085b4d794ba7c87de6a9"
+    },
+    {
+      "at": "2026-11-04T19:15:38.854617+00:00",
+      "event": "settled",
+      "id": "modal-job-c50213feb91e4b796a763fbab66bee13d1e1c2b1bece085b4d794ba7c87de6a9"
     }
   ],
   "halted": false,
@@ -36222,6 +36387,46 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-0e4657e113fb242eb7a2739927b2b94372303e2acb7eaf06e6913c3614c503bb": {
+      "actual_usd": "1.099240915773867881466666667",
+      "completed_at": "2026-11-04T18:29:33.792209+00:00",
+      "created_at": "2026-11-04T18:15:47.062285+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "c1feab4f99c65760c5f8ac1c0f41651789e4f82655cc178ca6bd02de06586043"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.099240915773867881466666667",
+        "call_id": "fc-01M6KWCKBF0MAKCZ1H3PP18J59",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/gsm8k/batch_009/openwsp-gpu:a10faa730bb543c7981e82d2038e156f:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 927.3686016089999,
+        "startup_seconds": 120.0,
+        "usage_seconds": 805.3686016089999
+      },
+      "seconds": 927.3686016089999,
+      "stage": "evaluation/live-runs/codex-20261103/gsm8k/batch_009/openwsp-gpu:a10faa730bb543c7981e82d2038e156f:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-0efa7b8985c8fbfdaaf7542a1e67199a7462d4fb317414a1d06afbbcbe4fba00": {
       "actual_usd": "0.3677001694865146666666666667",
       "completed_at": "2026-11-03T07:28:30.418737+00:00",
@@ -36502,6 +36707,46 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-1968a291c94af421e5495b1757c07aa5b9b8ec74133992d008d55eb44c541b7b": {
+      "actual_usd": "0.6822966809470466666666666667",
+      "completed_at": "2026-11-04T19:03:44.179871+00:00",
+      "created_at": "2026-11-04T18:55:57.230715+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "65fe70ce82806dbe32a6c980932111b6696090426d6788440e2575e1ae082147"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.6822966809470466666666666667",
+        "call_id": "fc-01M6KYP19AAVEEK2T7QXZXWKRS",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/ifeval/batch_002/openwsp-gpu:fd7792d3ef284a4192aa6932b7040ed4:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 575.615872565,
+        "startup_seconds": 120.0,
+        "usage_seconds": 453.615872565
+      },
+      "seconds": 575.615872565,
+      "stage": "evaluation/live-runs/codex-20261103/ifeval/batch_002/openwsp-gpu:fd7792d3ef284a4192aa6932b7040ed4:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-1d4164db722c7fd724600f464abc18e41a69b99a558e787a2c0c84e4ffa5ccb5": {
       "actual_usd": "1.178120501932761333333333333",
       "completed_at": "2026-11-03T20:18:14.170262+00:00",
@@ -36710,6 +36955,46 @@
       },
       "seconds": 2520,
       "stage": "live/codex-20261103/fwd_10/original/openwsp-gpu:b4d372c6daea47e0b3ad85ec4320a19b:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-2c16ca3947d8aebae94f17372df893257d82a737926224ae088fa66423a51ef6": {
+      "actual_usd": "1.074583299935189451866666667",
+      "completed_at": "2026-11-04T18:15:19.745915+00:00",
+      "created_at": "2026-11-04T18:01:30.041228+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "22e2a9fec16e4f627ff20794b1e787c393f23ab2b2ee7e77d4ae0ad3faded0ea"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.074583299935189451866666667",
+        "call_id": "fc-01M6KVJWTDEADKJXD9AAM3S61P",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/gsm8k/batch_008/openwsp-gpu:e4ccd8f9a40b415babba43ce9bcf2984:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 906.5663385280001,
+        "startup_seconds": 120.0,
+        "usage_seconds": 784.5663385280001
+      },
+      "seconds": 906.5663385280001,
+      "stage": "evaluation/live-runs/codex-20261103/gsm8k/batch_008/openwsp-gpu:e4ccd8f9a40b415babba43ce9bcf2984:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -37272,6 +37557,86 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-3ff866202864759491e994ab9beba9f787afcbf83e1f443a28c90ca272f37c61": {
+      "actual_usd": "1.085626971633764",
+      "completed_at": "2026-11-04T16:41:36.570493+00:00",
+      "created_at": "2026-11-04T16:28:05.097707+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "de70a4d3840444395a8c6c78b94f2830fe0cfdff545032b0f634e5b5b28f988c"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.085626971633764",
+        "call_id": "fc-01M6KP79TN651M0DVZJQC7KQ1P",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/gsm8k/batch_001/openwsp-gpu:2ac2dda0a4764a0da16aa5851c698bf9:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 915.883271907,
+        "startup_seconds": 120.0,
+        "usage_seconds": 793.883271907
+      },
+      "seconds": 915.883271907,
+      "stage": "evaluation/live-runs/codex-20261103/gsm8k/batch_001/openwsp-gpu:2ac2dda0a4764a0da16aa5851c698bf9:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-413842ec81db35083d8ea45ec288379703d05dd7b09a0487eb4da49b897fa75a": {
+      "actual_usd": "1.106112254556605333333333333",
+      "completed_at": "2026-11-04T16:55:33.887879+00:00",
+      "created_at": "2026-11-04T16:41:45.500439+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "7a7fcea1d6fa8088624197518cfcae1763870066b0bead8b1b9938449fdc9fe5"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.106112254556605333333333333",
+        "call_id": "fc-01M6KQ0A40W90VETJ9Q7NTTH7N",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/gsm8k/batch_002/openwsp-gpu:b8c85f9cc8cf44e9b40d121d50760397:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 933.165569086,
+        "startup_seconds": 120.0,
+        "usage_seconds": 811.165569086
+      },
+      "seconds": 933.165569086,
+      "stage": "evaluation/live-runs/codex-20261103/gsm8k/batch_002/openwsp-gpu:b8c85f9cc8cf44e9b40d121d50760397:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-41873ccc1e58f2fe4ee9c03cce785866b052fe1a51e065cb860b98243da45d59": {
       "actual_usd": "2.128023597464062666666666667",
       "completed_at": "2026-11-03T07:00:52.831763+00:00",
@@ -37388,6 +37753,46 @@
       },
       "seconds": 398.127203075,
       "stage": "live/fwd_5/edited/openwsp-gpu:327f14272494452195a0bd0ef12ef0bc:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-44b018b10a6c6015f146b18c963ea8dd576c491e39ace85c70121f207b09a704": {
+      "actual_usd": "1.0103578293817307852",
+      "completed_at": "2026-11-04T18:00:47.521217+00:00",
+      "created_at": "2026-11-04T17:48:07.845736+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "4c3ba8a782659aab808c2b1f17e08df8aa74d1b8e0784a815e4c7f9b62990536"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.0103578293817307852",
+        "call_id": "fc-01M6KTSVKW2WP4ADAPC40K7M2K",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/gsm8k/batch_007/openwsp-gpu:87e2ac9498294833800d5ba2a93a85df:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 852.3828706820001,
+        "startup_seconds": 120.0,
+        "usage_seconds": 730.3828706820001
+      },
+      "seconds": 852.3828706820001,
+      "stage": "evaluation/live-runs/codex-20261103/gsm8k/batch_007/openwsp-gpu:87e2ac9498294833800d5ba2a93a85df:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -37956,6 +38361,46 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-54c7b54cf2aaf61e1ddcb6814719e94746b0dd96b62760a8bf88f15a5a8b3c60": {
+      "actual_usd": "1.080364956169669333333333333",
+      "completed_at": "2026-11-04T17:35:17.352487+00:00",
+      "created_at": "2026-11-04T17:21:39.549483+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "6ad85824936d323d25e9c53b191083771bf00a46eed5cef70e1b4f008e854ca5"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.080364956169669333333333333",
+        "call_id": "fc-01M6KS9E621T16WCG3QEVQJ5E1",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/gsm8k/batch_005/openwsp-gpu:185f9adfa5274d0e81521fe8dfdf6694:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 911.444001268,
+        "startup_seconds": 120.0,
+        "usage_seconds": 789.444001268
+      },
+      "seconds": 911.444001268,
+      "stage": "evaluation/live-runs/codex-20261103/gsm8k/batch_005/openwsp-gpu:185f9adfa5274d0e81521fe8dfdf6694:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-5561cc4ed9cd28a3b116471aecd7f9590687f9e181f92b077028b58166d3d3d9": {
       "actual_usd": "1.148797084647277333333333333",
       "completed_at": "2026-11-04T10:31:33.919030+00:00",
@@ -38077,6 +38522,8 @@
       "usage": null
     },
     "modal-job-59653b595b50ddf3b87c3b7fe8e2466e591c53bf967c24763bd7e7eca654bf5c": {
+      "actual_usd": "1.086047989532053451866666667",
+      "completed_at": "2026-11-04T16:27:54.721297+00:00",
       "created_at": "2026-11-04T16:14:19.735950+00:00",
       "kind": "modal",
       "metadata": {
@@ -38090,9 +38537,29 @@
         },
         "fingerprint_sha256": "f44afd69ae76adbd498cdb7ea7c8d4673d0a7b9c9c4e9bd428d26226de350729"
       },
+      "receipt_metadata": {
+        "actual_usd": "1.086047989532053451866666667",
+        "call_id": "fc-01M6KNE3R7JRHG3R6E3Q8RVVZJ",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/gsm8k/batch_000/openwsp-gpu:3e1136c973d8488396f83e9f5ce5ba8d:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 916.2384613600001,
+        "startup_seconds": 120.0,
+        "usage_seconds": 794.2384613600001
+      },
+      "seconds": 916.2384613600001,
       "stage": "evaluation/live-runs/codex-20261103/gsm8k/batch_000/openwsp-gpu:3e1136c973d8488396f83e9f5ce5ba8d:0",
-      "status": "reserved",
-      "upper_bound_usd": "2.9870400"
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
     },
     "modal-job-5da857f4be2a9df9399d77b89257559f9f01f2ede8751516a661b38d465ba5a1": {
       "actual_usd": "1.062171070175497451866666667",
@@ -38330,6 +38797,46 @@
       },
       "seconds": 915.561573093,
       "stage": "live/codex-20261103/fwd_52/edited/openwsp-gpu:0fac3a47dc0b4bb88ae12cd6d0a67548:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-657c2c029eef11848a091a7646b39b6dfa1eca79ab74f3b40340200b1ad34632": {
+      "actual_usd": "0.672126251072724",
+      "completed_at": "2026-11-04T19:11:41.660806+00:00",
+      "created_at": "2026-11-04T19:03:58.734208+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "ff306774be3cc13267c51db94c9229a330c95c0fab9d64940f6e868b50e72398"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.672126251072724",
+        "call_id": "fc-01M6KZ4TT5N6N77SX4E7T0DN57",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/ifeval/batch_003/openwsp-gpu:63b43e28e2534a7a9b057a559ddcebfb:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 567.035644887,
+        "startup_seconds": 120.0,
+        "usage_seconds": 445.035644887
+      },
+      "seconds": 567.035644887,
+      "stage": "evaluation/live-runs/codex-20261103/ifeval/batch_003/openwsp-gpu:63b43e28e2534a7a9b057a559ddcebfb:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -38840,6 +39347,46 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-75a471767db3e9a71314ee1a9db05a146b17aeef701dfe88dbabff6da6c3c609": {
+      "actual_usd": "1.015528085480449333333333333",
+      "completed_at": "2026-11-04T17:48:01.608078+00:00",
+      "created_at": "2026-11-04T17:35:32.195920+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "1acbf76f5a0bd2f848c88c367e6c763fbb0341895bbb3aea3c8b4041315e4fce"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.015528085480449333333333333",
+        "call_id": "fc-01M6KT2VH896JBKTTNJ4JDABAV",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/gsm8k/batch_006/openwsp-gpu:6bbf7dd89bd5484292af0e268e34712f:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 856.744729033,
+        "startup_seconds": 120.0,
+        "usage_seconds": 734.744729033
+      },
+      "seconds": 856.744729033,
+      "stage": "evaluation/live-runs/codex-20261103/gsm8k/batch_006/openwsp-gpu:6bbf7dd89bd5484292af0e268e34712f:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-75ee9e0317c17903cf26d87f0505fce60b0d328596757ed92f200cf9fbe56bf6": {
       "actual_usd": "1.1284637586023012148",
       "completed_at": "2026-11-04T14:07:02.020710+00:00",
@@ -38916,6 +39463,46 @@
       },
       "seconds": 141.692098697,
       "stage": "live/codex-20261103/fwd_11/teacher_forced/openwsp-gpu:675229d64c324f84b8d38df2364df12e:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-79802253bfc368125f28f4f0732f8e010ad98da02bc2a68eb86d81f210d7f0d7": {
+      "actual_usd": "0.52037935467905328592",
+      "completed_at": "2026-11-04T18:35:29.148804+00:00",
+      "created_at": "2026-11-04T18:29:44.987679+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "bf062b8f6bb7822b8d5a7bb9b06771b991023148ac0ef278383396cef8640f99"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.52037935467905328592",
+        "call_id": "fc-01M6KX62JMN6S5DCQ6J3000M04",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/gsm8k/batch_010/openwsp-gpu:c10a2cc75e5849699fbbbd7129d2225e:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 439.01520360999996,
+        "startup_seconds": 120.0,
+        "usage_seconds": 317.01520360999996
+      },
+      "seconds": 439.01520360999996,
+      "stage": "evaluation/live-runs/codex-20261103/gsm8k/batch_010/openwsp-gpu:c10a2cc75e5849699fbbbd7129d2225e:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -39884,6 +40471,46 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-a4a62f19c25b89fece9d8304d4f9768a486d452d3dde47e9cb4934ec80178ee5": {
+      "actual_usd": "1.024866929376257333333333333",
+      "completed_at": "2026-11-04T17:08:33.032693+00:00",
+      "created_at": "2026-11-04T16:55:46.002458+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "d50e158912946826a814210cb75f1be337b8cf87b76e32fc36332b9bed1d1215"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.024866929376257333333333333",
+        "call_id": "fc-01M6KQT0R5S1KA7NWDCJAEFXAH",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/gsm8k/batch_003/openwsp-gpu:4651ed18c96d4ba3838fc27e6940c69c:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 864.623393737,
+        "startup_seconds": 120.0,
+        "usage_seconds": 742.623393737
+      },
+      "seconds": 864.623393737,
+      "stage": "evaluation/live-runs/codex-20261103/gsm8k/batch_003/openwsp-gpu:4651ed18c96d4ba3838fc27e6940c69c:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-a526f91b33ef351229d906aa5aa03736f8ffba741cfe0d81deb8d384e467bec8": {
       "actual_usd": "0.496763564374364",
       "completed_at": "2026-11-03T11:44:01.150950+00:00",
@@ -40120,6 +40747,46 @@
       },
       "seconds": 986.977939168,
       "stage": "evaluation/live-runs/codex-20261103/math500/batch_000/openwsp-gpu:4ceb549c4db64033bc15036872ba224b:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-ab82d9a90089fdf42a5e234290dd7ae796fa72a6716bca863d0ea4434aea69ca": {
+      "actual_usd": "0.618360938014792",
+      "completed_at": "2026-11-04T18:45:44.799029+00:00",
+      "created_at": "2026-11-04T18:38:40.728000+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "1c833ae7f5a85a66bd4b753b4c91ac6e979cea7b847952025e2a6956caf9771b"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.618360938014792",
+        "call_id": "fc-01M6KXPDAYJW5CD2V63VHQS0Z9",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/ifeval/batch_000/openwsp-gpu:646ca37946f940cd887ed7388c24fa6d:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 521.676831846,
+        "startup_seconds": 120.0,
+        "usage_seconds": 399.676831846
+      },
+      "seconds": 521.676831846,
+      "stage": "evaluation/live-runs/codex-20261103/ifeval/batch_000/openwsp-gpu:646ca37946f940cd887ed7388c24fa6d:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null
@@ -40604,6 +41271,46 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-c50213feb91e4b796a763fbab66bee13d1e1c2b1bece085b4d794ba7c87de6a9": {
+      "actual_usd": "0.3821715150224720474133333333",
+      "completed_at": "2026-11-04T19:15:38.854591+00:00",
+      "created_at": "2026-11-04T19:11:51.748883+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "b16797f28d315f2788c2e0be3cc10db696113497d26cd05fd501a2601c768f97"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.3821715150224720474133333333",
+        "call_id": "fc-01M6KZKDD6CDAX540NYQ6VY1DR",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/ifeval/batch_004/openwsp-gpu:c1b8389b9c4147c89aaaf1daa81c1cd1:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 322.41691368600004,
+        "startup_seconds": 120.0,
+        "usage_seconds": 200.41691368600002
+      },
+      "seconds": 322.41691368600004,
+      "stage": "evaluation/live-runs/codex-20261103/ifeval/batch_004/openwsp-gpu:c1b8389b9c4147c89aaaf1daa81c1cd1:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-c58ccbd118182001cd23cdbc4e02ce5f87042b09bdfeae34541e13e74b81f344": {
       "actual_usd": "0.2016737452768826666666666667",
       "completed_at": "2026-11-03T11:52:32.000354+00:00",
@@ -41004,6 +41711,86 @@
       "upper_bound_usd": "2.9870400",
       "usage": null
     },
+    "modal-job-dd822cf22bfc820c20f752a08454fc507f8fdf0b28105cdc2859228449f93891": {
+      "actual_usd": "0.3186964693003933333333333333",
+      "completed_at": "2026-11-04T18:38:32.982744+00:00",
+      "created_at": "2026-11-04T18:35:55.461070+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "d724599201830e27b2c813dd96cf03f2a424581c38726607d71c949a5605a839"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.3186964693003933333333333333",
+        "call_id": "fc-01M6KXHD8KQAYTF2SNTZ4GR89Y",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/ifeval/smoke/openwsp-gpu:28e58767e0cf4669afc3462cab05f0a6:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 268.866537655,
+        "startup_seconds": 120.0,
+        "usage_seconds": 146.866537655
+      },
+      "seconds": 268.866537655,
+      "stage": "evaluation/live-runs/codex-20261103/ifeval/smoke/openwsp-gpu:28e58767e0cf4669afc3462cab05f0a6:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-e0b813dd5e37bb061c6c2d67ce0d8354ecfc9ae4bc3af0bda8fcef9448d2e672": {
+      "actual_usd": "1.015194455195209333333333333",
+      "completed_at": "2026-11-04T17:21:26.015849+00:00",
+      "created_at": "2026-11-04T17:08:50.926505+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "a95c97194765897bbdab50233bd6d9553ea5c7b36e826fc19f35e2f36e7b316f"
+      },
+      "receipt_metadata": {
+        "actual_usd": "1.015194455195209333333333333",
+        "call_id": "fc-01M6KRJ4J7VPTW3X9S5KXCCHQW",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/gsm8k/batch_004/openwsp-gpu:e53c3a4191e44228b9b112d3d0518def:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 856.463263663,
+        "startup_seconds": 120.0,
+        "usage_seconds": 734.463263663
+      },
+      "seconds": 856.463263663,
+      "stage": "evaluation/live-runs/codex-20261103/gsm8k/batch_004/openwsp-gpu:e53c3a4191e44228b9b112d3d0518def:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
     "modal-job-e1e477be88f1c6050e7d9dff77682b23847fc33bde2878c91b80d292411a1ad3": {
       "actual_usd": "0.1647458399337893333333333333",
       "completed_at": "2026-11-03T19:14:48.365715+00:00",
@@ -41258,6 +42045,46 @@
       },
       "seconds": 989.500860593,
       "stage": "evaluation/live-runs/codex-20261103/math500/batch_003/openwsp-gpu:79d56d6091414db8b0b7f17773b26b30:0",
+      "status": "settled",
+      "upper_bound_usd": "2.9870400",
+      "usage": null
+    },
+    "modal-job-e79e7bef1716f780232bb843a55ced3eb079447f7d574627441a6cbc0d2cf0a5": {
+      "actual_usd": "0.7984256543856972148",
+      "completed_at": "2026-11-04T18:55:42.449082+00:00",
+      "created_at": "2026-11-04T18:46:10.444138+00:00",
+      "kind": "modal",
+      "metadata": {
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "fingerprint_sha256": "717443a1f7f76638bd18ec22f86c64be08bf8b07fd0ecaf9852076080049617c"
+      },
+      "receipt_metadata": {
+        "actual_usd": "0.7984256543856972148",
+        "call_id": "fc-01M6KY44AXQBNTMYNZT5X4RT0Z",
+        "cost_options": {
+          "cpu_cores": 4.0,
+          "gpu": "H100",
+          "memory_gib": 16.0,
+          "sandbox": false,
+          "scaledown_seconds": 2.0,
+          "startup_seconds": 120.0
+        },
+        "duration_source": "container_seconds",
+        "key": "evaluation/live-runs/codex-20261103/ifeval/batch_001/openwsp-gpu:9f8fb50a7f5742f6a0c4c8f67f0c8d14:0",
+        "scaledown_seconds": 2.0,
+        "seconds": 673.5874474569999,
+        "startup_seconds": 120.0,
+        "usage_seconds": 551.5874474569999
+      },
+      "seconds": 673.5874474569999,
+      "stage": "evaluation/live-runs/codex-20261103/ifeval/batch_001/openwsp-gpu:9f8fb50a7f5742f6a0c4c8f67f0c8d14:0",
       "status": "settled",
       "upper_bound_usd": "2.9870400",
       "usage": null

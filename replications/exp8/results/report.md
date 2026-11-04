@@ -2,8 +2,8 @@
 
 | Recorded component | State | Evidence |
 | --- | --- | --- |
-| Required live run | [live goal unmet](live-runs/codex-20261103/state.json) | Active attempt: [codex-20261103](active-live.json); submission recorded; final evaluation pending |
-| Pipeline | [running](pipeline-state.json) | [evaluation](pipeline-state.json) |
+| Required live run | [submission and final evaluations recorded](live-runs/codex-20261103/state.json) | Active attempt: [codex-20261103](active-live.json); see linked attempt evidence |
+| Pipeline | [complete](pipeline-state.json) | [publication](pipeline-state.json) |
 | Driver recovery | [running](coordinator.json) | [all](coordinator.json) |
 | Calibration prompt audit | [passed](calibration-prompt-audit.json) | [calibration-prompt-audit.json](calibration-prompt-audit.json) |
 | Calibration comparison | [passed](calibration-check.json) | [calibration-check.json](calibration-check.json) |
@@ -18,7 +18,7 @@ Live attempts:
 | Attempt | Selection | Editor | Recorded state | Passes | Turns | Runs | Submission | Final evaluations | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | live-run | historical | pending | [blocked](live-run/blocker.json) | [4](live-run/state.json) | [26](live-run/state.json) | [10](live-run/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](live-run/state.json); [blocker.json](live-run/blocker.json); [transcript.md](live-run/transcript.md) |
-| live-runs/codex-20261103 | active | [codex](live-runs/codex-20261103/identity.json) | [submission recorded](live-runs/codex-20261103/state.json) | [50](live-runs/codex-20261103/state.json) | [133](live-runs/codex-20261103/state.json) | [69](live-runs/codex-20261103/state.json) | [recorded](live-runs/codex-20261103/state.json) | math500: [recorded](live-runs/codex-20261103/math500/summary.json); gsm8k: pending; ifeval: pending | [state.json](live-runs/codex-20261103/state.json); [identity.json](live-runs/codex-20261103/identity.json); [blocker.json](live-runs/codex-20261103/blocker.json); [transcript.md](live-runs/codex-20261103/transcript.md) |
+| live-runs/codex-20261103 | active | [codex](live-runs/codex-20261103/identity.json) | [submission recorded](live-runs/codex-20261103/state.json) | [50](live-runs/codex-20261103/state.json) | [133](live-runs/codex-20261103/state.json) | [69](live-runs/codex-20261103/state.json) | [recorded](live-runs/codex-20261103/state.json) | math500: [recorded](live-runs/codex-20261103/math500/summary.json); gsm8k: [recorded](live-runs/codex-20261103/gsm8k/summary.json); ifeval: [recorded](live-runs/codex-20261103/ifeval/summary.json) | [state.json](live-runs/codex-20261103/state.json); [identity.json](live-runs/codex-20261103/identity.json); [blocker.json](live-runs/codex-20261103/blocker.json); [transcript.md](live-runs/codex-20261103/transcript.md) |
 
 The active pointer selects the current attempt. Historical blockers and completed controls do not establish its completion.
 
@@ -42,6 +42,8 @@ OpenWSP evaluations and controls:
 | control1_nothink | Qwen/Qwen3.5-0.8B | math500 | not applicable | [46.8%](control1_nothink/math500/summary.json) | [47.1%](control1_nothink/math500/summary.json) | [0.6%](control1_nothink/math500/summary.json) | [497](control1_nothink/math500/summary.json) | [2.23%](control1_nothink/math500/summary.json) | [500](control1_nothink/math500/summary.json) | [done](control1_nothink/math500/summary.json) |
 | control2_mechanical | Qwen/Qwen3.5-0.8B | math500 | not applicable | [46.0%](control2_mechanical/math500/summary.json) | [83.2%](control2_mechanical/math500/summary.json) | [45.2%](control2_mechanical/math500/summary.json) | [274](control2_mechanical/math500/summary.json) | [2.23%](control2_mechanical/math500/summary.json) | [500](control2_mechanical/math500/summary.json) | [done](control2_mechanical/math500/summary.json) |
 | control3_repetition | Qwen/Qwen3.5-0.8B | math500 | not applicable | [23.8%](control3_repetition/math500/summary.json) | [96.7%](control3_repetition/math500/summary.json) | [75.6%](control3_repetition/math500/summary.json) | [122](control3_repetition/math500/summary.json) | [1.90%](control3_repetition/math500/summary.json) | [500](control3_repetition/math500/summary.json) | [done](control3_repetition/math500/summary.json) |
+| live-runs/codex-20261103 | Qwen/Qwen3.5-0.8B | gsm8k | p50c: [67.1%](../reference/p50c.json) | [24.9%](live-runs/codex-20261103/gsm8k/summary.json) | [79.0%](live-runs/codex-20261103/gsm8k/summary.json) | [70.1%](live-runs/codex-20261103/gsm8k/summary.json) | [790](live-runs/codex-20261103/gsm8k/summary.json) | [0.84%](live-runs/codex-20261103/gsm8k/summary.json) | [2638](live-runs/codex-20261103/gsm8k/summary.json) | [done](live-runs/codex-20261103/gsm8k/summary.json) |
+| live-runs/codex-20261103 | Qwen/Qwen3.5-0.8B | ifeval | p50c: [62.3%](../reference/p50c.json) | [38.5%](live-runs/codex-20261103/ifeval/summary.json) | [54.1%](live-runs/codex-20261103/ifeval/summary.json) | [29.8%](live-runs/codex-20261103/ifeval/summary.json) | [760](live-runs/codex-20261103/ifeval/summary.json) | [1.48%](live-runs/codex-20261103/ifeval/summary.json) | [1082](live-runs/codex-20261103/ifeval/summary.json) | [done](live-runs/codex-20261103/ifeval/summary.json) |
 | live-runs/codex-20261103 | Qwen/Qwen3.5-0.8B | math500 | p50c: [48.1%](../reference/p50c.json) | [12.9%](live-runs/codex-20261103/math500/summary.json) | [79.7%](live-runs/codex-20261103/math500/summary.json) | [84.2%](live-runs/codex-20261103/math500/summary.json) | [315](live-runs/codex-20261103/math500/summary.json) | [0.75%](live-runs/codex-20261103/math500/summary.json) | [2000](live-runs/codex-20261103/math500/summary.json) | [done](live-runs/codex-20261103/math500/summary.json) |
 
 Only recorded values are shown. Missing fields remain pending; partial runs retain their recorded status.
@@ -63,6 +65,8 @@ Recorded runtime and uncertainty:
 | control1_nothink / math500 | [vllm==0.33.0](control1_nothink/math500/summary.json) | [H100](control1_nothink/math500/summary.json) | [5.17.0](control1_nothink/math500/summary.json) | [binomial_per_sample](control1_nothink/math500/summary.json) |
 | control2_mechanical / math500 | [vllm==0.33.0](control2_mechanical/math500/summary.json) | [H100](control2_mechanical/math500/summary.json) | [5.17.0](control2_mechanical/math500/summary.json) | [binomial_per_sample](control2_mechanical/math500/summary.json) |
 | control3_repetition / math500 | [vllm==0.33.0](control3_repetition/math500/summary.json) | [H100](control3_repetition/math500/summary.json) | [5.17.0](control3_repetition/math500/summary.json) | [binomial_per_sample](control3_repetition/math500/summary.json) |
+| live-runs/codex-20261103 / gsm8k | [vllm==0.33.0](live-runs/codex-20261103/gsm8k/summary.json) | [H100](live-runs/codex-20261103/gsm8k/summary.json) | [5.17.0](live-runs/codex-20261103/gsm8k/summary.json) | [binomial_per_sample](live-runs/codex-20261103/gsm8k/summary.json) |
+| live-runs/codex-20261103 / ifeval | [vllm==0.33.0](live-runs/codex-20261103/ifeval/summary.json) | [H100](live-runs/codex-20261103/ifeval/summary.json) | [5.17.0](live-runs/codex-20261103/ifeval/summary.json) | [binomial_per_sample](live-runs/codex-20261103/ifeval/summary.json) |
 | live-runs/codex-20261103 / math500 | [vllm==0.33.0](live-runs/codex-20261103/math500/summary.json) | [H100](live-runs/codex-20261103/math500/summary.json) | [5.17.0](live-runs/codex-20261103/math500/summary.json) | [binomial_per_sample](live-runs/codex-20261103/math500/summary.json) |
 
 ### CPU analysis and implementation checks
@@ -170,6 +174,8 @@ The [agent-free 2c build](repair/2c/summary.json) selects its own columns from [
 | control1_nothink | math500 | [0.236](control1_nothink/math500/summary.json) | [1.0059](control1_nothink/math500/summary.json) |
 | control2_mechanical | math500 | [0.447](control2_mechanical/math500/summary.json) | [1.9082](control2_mechanical/math500/summary.json) |
 | control3_repetition | math500 | [0.514](control3_repetition/math500/summary.json) | [2.1923](control3_repetition/math500/summary.json) |
+| live-runs/codex-20261103 | gsm8k | [2.606](live-runs/codex-20261103/gsm8k/summary.json) | [11.1183](live-runs/codex-20261103/gsm8k/summary.json) |
+| live-runs/codex-20261103 | ifeval | [0.739](live-runs/codex-20261103/ifeval/summary.json) | [3.1534](live-runs/codex-20261103/ifeval/summary.json) |
 | live-runs/codex-20261103 | math500 | [2.145](live-runs/codex-20261103/math500/summary.json) | [9.1541](live-runs/codex-20261103/math500/summary.json) |
 
 Costs and durations come from the linked records. Missing costs are not treated as zero; rows are not summed because stages may overlap.
@@ -197,8 +203,24 @@ Budget ledger: [source](costs.json). Reservations are retained bounds, not charg
 | modal / control3_repetition / math500 / evaluation | [settled](costs.json) | [2](costs.json) | [0.514](costs.json) | [2.1923](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / control3_repetition / math500 / evaluation smoke | [settled](costs.json) | [1](costs.json) | [0.091](costs.json) | [0.3880](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / controls | [settled](costs.json) | [1](costs.json) | [1.612](costs.json) | [0.1278](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
-| modal / evaluation / live-runs / codex-20261103 / gsm8k / batch_000 | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.9870](costs.json) | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / gsm8k / batch_000 | [settled](costs.json) | [1](costs.json) | [0.255](costs.json) | [1.0860](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / gsm8k / batch_001 | [settled](costs.json) | [1](costs.json) | [0.254](costs.json) | [1.0856](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / gsm8k / batch_002 | [settled](costs.json) | [1](costs.json) | [0.259](costs.json) | [1.1061](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / gsm8k / batch_003 | [settled](costs.json) | [1](costs.json) | [0.240](costs.json) | [1.0249](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / gsm8k / batch_004 | [settled](costs.json) | [1](costs.json) | [0.238](costs.json) | [1.0152](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / gsm8k / batch_005 | [settled](costs.json) | [1](costs.json) | [0.253](costs.json) | [1.0804](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / gsm8k / batch_006 | [settled](costs.json) | [1](costs.json) | [0.238](costs.json) | [1.0155](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / gsm8k / batch_007 | [settled](costs.json) | [1](costs.json) | [0.237](costs.json) | [1.0104](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / gsm8k / batch_008 | [settled](costs.json) | [1](costs.json) | [0.252](costs.json) | [1.0746](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / gsm8k / batch_009 | [settled](costs.json) | [1](costs.json) | [0.258](costs.json) | [1.0992](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / gsm8k / batch_010 | [settled](costs.json) | [1](costs.json) | [0.122](costs.json) | [0.5204](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / evaluation / live-runs / codex-20261103 / gsm8k / smoke | [settled](costs.json) | [1](costs.json) | [0.078](costs.json) | [0.3340](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / ifeval / batch_000 | [settled](costs.json) | [1](costs.json) | [0.145](costs.json) | [0.6184](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / ifeval / batch_001 | [settled](costs.json) | [1](costs.json) | [0.187](costs.json) | [0.7984](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / ifeval / batch_002 | [settled](costs.json) | [1](costs.json) | [0.160](costs.json) | [0.6823](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / ifeval / batch_003 | [settled](costs.json) | [1](costs.json) | [0.158](costs.json) | [0.6721](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / ifeval / batch_004 | [settled](costs.json) | [1](costs.json) | [0.090](costs.json) | [0.3822](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / ifeval / smoke | [settled](costs.json) | [1](costs.json) | [0.075](costs.json) | [0.3187](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / evaluation / live-runs / codex-20261103 / math500 / batch_000 | [settled](costs.json) | [1](costs.json) | [0.274](costs.json) | [1.1699](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / evaluation / live-runs / codex-20261103 / math500 / batch_001 | [settled](costs.json) | [1](costs.json) | [0.274](costs.json) | [1.1699](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / evaluation / live-runs / codex-20261103 / math500 / batch_002 | [settled](costs.json) | [1](costs.json) | [0.263](costs.json) | [1.1227](costs.json) | pending | [resource estimate; not invoice](costs.json) |

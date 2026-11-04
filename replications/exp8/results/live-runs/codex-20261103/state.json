@@ -15,14 +15,14 @@
   "run_id": "codex-20261103",
   "editor": "codex",
   "base_generation_reuse_requests": [
+    "fwd_23",
+    "fwd_24",
     "fwd_26",
+    "fwd_28",
+    "fwd_31",
     "fwd_32",
     "fwd_40",
-    "fwd_42",
     "fwd_41",
-    "fwd_31",
-    "fwd_24",
-    "fwd_23",
-    "fwd_28"
+    "fwd_42"
   ]
 }

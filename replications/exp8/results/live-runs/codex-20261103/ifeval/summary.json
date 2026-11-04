@@ -1,0 +1,84 @@
+{
+  "status": "done",
+  "stage": "live-runs/codex-20261103",
+  "model": "Qwen/Qwen3.5-0.8B",
+  "benchmark": "ifeval",
+  "samples_per_problem": 2,
+  "n": 1082,
+  "correct": 417,
+  "accuracy": 0.3853974121996303,
+  "standard_error": 0.014795783197718206,
+  "mean_tokens": 12752.531423290204,
+  "cut_share": 0.2975970425138632,
+  "finished_n": 760,
+  "finished_correct": 411,
+  "accuracy_finished": 0.5407894736842105,
+  "seconds": 2660.332710441,
+  "cost_usd": 3.1533810394427317,
+  "provenance": {
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "sampling": {
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "top_k": 20,
+      "presence_penalty": 1.5,
+      "max_tokens": 32768,
+      "seed": 0,
+      "n": 2
+    },
+    "thinking": true,
+    "gpu": "H100",
+    "engine": "vllm==0.33.0",
+    "engine_settings": {
+      "dtype": "bfloat16",
+      "gpu_memory_utilization": 0.85,
+      "language_model_only": true,
+      "max_model_len": 34816,
+      "max_num_seqs": 128,
+      "prefix_caching": false
+    },
+    "seconds_basis": "accounted_resource_seconds_including_margins_and_cancelled_attempts",
+    "container_seconds": 399.676831846,
+    "transformers": "5.17.0",
+    "batch_generations": 256,
+    "standard_error": "binomial_per_sample",
+    "smoke_included_in_score": false,
+    "smoke_seconds": 268.866537655,
+    "smoke_cost_usd": 0.31869646930039336,
+    "batches": [
+      {
+        "gpu": "H100",
+        "seconds": 521.676831846,
+        "cost_usd": 0.618360938014792
+      },
+      {
+        "gpu": "H100",
+        "seconds": 673.5874474569999,
+        "cost_usd": 0.7984256543856972
+      },
+      {
+        "gpu": "H100",
+        "seconds": 575.615872565,
+        "cost_usd": 0.6822966809470467
+      },
+      {
+        "gpu": "H100",
+        "seconds": 567.035644887,
+        "cost_usd": 0.672126251072724
+      },
+      {
+        "gpu": "H100",
+        "seconds": 322.41691368600004,
+        "cost_usd": 0.38217151502247204
+      }
+    ],
+    "submission_sha256": "46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec",
+    "finished_metrics": {
+      "method": "openwsp.metrics.finished_metrics",
+      "finished_reason": "stop",
+      "excluded_reason": "length",
+      "samples_file": "samples.jsonl",
+      "samples_sha256": "df4a39c80a3d70941faa532f608a4475ea991d9d9dd2d31b4dd078fd9ddc28ce"
+    }
+  }
+}
