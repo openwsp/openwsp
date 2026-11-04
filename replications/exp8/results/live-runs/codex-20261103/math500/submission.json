@@ -1,0 +1,7 @@
+{
+  "checkpoint": "/data/submissions/46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec",
+  "submission_sha256": "46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec",
+  "stage": "live-runs/codex-20261103",
+  "benchmark": "math500",
+  "samples_per_problem": 4
+}

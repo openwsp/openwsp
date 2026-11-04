@@ -166,6 +166,37 @@
           " retains sample hashes."
         ],
         [
+          "For the live edit, finished accuracy is ",
+          {
+            "summary": "live-runs/codex-20261103/math500/summary.json",
+            "metric": "accuracy_finished",
+            "percent": true,
+            "digits": 1
+          },
+          " over ",
+          {
+            "summary": "live-runs/codex-20261103/math500/summary.json",
+            "metric": "finished_n",
+            "percent": false,
+            "digits": 0
+          },
+          " finished samples, while ",
+          {
+            "summary": "live-runs/codex-20261103/math500/summary.json",
+            "metric": "cut_share",
+            "percent": true,
+            "digits": 2
+          },
+          " of all samples hit the token limit. Accuracy over all samples is ",
+          {
+            "summary": "live-runs/codex-20261103/math500/summary.json",
+            "metric": "accuracy",
+            "percent": true,
+            "digits": 1
+          },
+          ". The finished subset remains a small part of the evaluation."
+        ],
+        [
           "A capped answer can still grade correct, so finished accuracy cannot be recovered by dividing overall accuracy by one minus the cap-hit rate. Full author termination records are unavailable; their finished metric remains pending."
         ]
       ]
@@ -173,6 +204,37 @@
     {
       "question": "What does the agent add over a script?",
       "paragraphs": [
+        [
+          "The submitted live edit scores ",
+          {
+            "summary": "live-runs/codex-20261103/math500/summary.json",
+            "metric": "accuracy",
+            "percent": true,
+            "digits": 1
+          },
+          " on MATH-500 over ",
+          {
+            "summary": "live-runs/codex-20261103/math500/summary.json",
+            "metric": "n",
+            "percent": false,
+            "digits": 0
+          },
+          " answers, with ",
+          {
+            "summary": "live-runs/codex-20261103/math500/summary.json",
+            "metric": "samples_per_problem",
+            "percent": false,
+            "digits": 0
+          },
+          " samples per problem. The local p50c and mechanical measurements below use ",
+          {
+            "summary": "calibration_p50c/summary.json",
+            "metric": "samples_per_problem",
+            "percent": false,
+            "digits": 0
+          },
+          " sample per problem. This single live run has lower measured accuracy than both local comparisons."
+        ],
         [
           "The released p50c edit reaches ",
           {
@@ -222,7 +284,7 @@
               "2c"
             ]
           },
-          ". Until that comparison and the live attempt are complete, these results show that a simple directional intervention recovers much of the reported benchmark gain, not how much an agent adds over a fully independent script."
+          ". The 2c build selects its own columns, but its direction and column selection still use calibration answers from this benchmark. Its score remains unmeasured. GSM8K and IFEval results for the live submission are also pending, so its required final evaluation is incomplete."
         ]
       ]
     }

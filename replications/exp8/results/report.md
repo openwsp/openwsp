@@ -18,7 +18,7 @@ Live attempts:
 | Attempt | Selection | Editor | Recorded state | Passes | Turns | Runs | Submission | Final evaluations | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | live-run | historical | pending | [blocked](live-run/blocker.json) | [4](live-run/state.json) | [26](live-run/state.json) | [10](live-run/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](live-run/state.json); [blocker.json](live-run/blocker.json); [transcript.md](live-run/transcript.md) |
-| live-runs/codex-20261103 | active | [codex](live-runs/codex-20261103/identity.json) | [submission recorded](live-runs/codex-20261103/state.json) | [50](live-runs/codex-20261103/state.json) | [133](live-runs/codex-20261103/state.json) | [69](live-runs/codex-20261103/state.json) | [recorded](live-runs/codex-20261103/state.json) | math500: pending; gsm8k: pending; ifeval: pending | [state.json](live-runs/codex-20261103/state.json); [identity.json](live-runs/codex-20261103/identity.json); [blocker.json](live-runs/codex-20261103/blocker.json); [transcript.md](live-runs/codex-20261103/transcript.md) |
+| live-runs/codex-20261103 | active | [codex](live-runs/codex-20261103/identity.json) | [submission recorded](live-runs/codex-20261103/state.json) | [50](live-runs/codex-20261103/state.json) | [133](live-runs/codex-20261103/state.json) | [69](live-runs/codex-20261103/state.json) | [recorded](live-runs/codex-20261103/state.json) | math500: [recorded](live-runs/codex-20261103/math500/summary.json); gsm8k: pending; ifeval: pending | [state.json](live-runs/codex-20261103/state.json); [identity.json](live-runs/codex-20261103/identity.json); [blocker.json](live-runs/codex-20261103/blocker.json); [transcript.md](live-runs/codex-20261103/transcript.md) |
 
 The active pointer selects the current attempt. Historical blockers and completed controls do not establish its completion.
 
@@ -42,6 +42,7 @@ OpenWSP evaluations and controls:
 | control1_nothink | Qwen/Qwen3.5-0.8B | math500 | not applicable | [46.8%](control1_nothink/math500/summary.json) | [47.1%](control1_nothink/math500/summary.json) | [0.6%](control1_nothink/math500/summary.json) | [497](control1_nothink/math500/summary.json) | [2.23%](control1_nothink/math500/summary.json) | [500](control1_nothink/math500/summary.json) | [done](control1_nothink/math500/summary.json) |
 | control2_mechanical | Qwen/Qwen3.5-0.8B | math500 | not applicable | [46.0%](control2_mechanical/math500/summary.json) | [83.2%](control2_mechanical/math500/summary.json) | [45.2%](control2_mechanical/math500/summary.json) | [274](control2_mechanical/math500/summary.json) | [2.23%](control2_mechanical/math500/summary.json) | [500](control2_mechanical/math500/summary.json) | [done](control2_mechanical/math500/summary.json) |
 | control3_repetition | Qwen/Qwen3.5-0.8B | math500 | not applicable | [23.8%](control3_repetition/math500/summary.json) | [96.7%](control3_repetition/math500/summary.json) | [75.6%](control3_repetition/math500/summary.json) | [122](control3_repetition/math500/summary.json) | [1.90%](control3_repetition/math500/summary.json) | [500](control3_repetition/math500/summary.json) | [done](control3_repetition/math500/summary.json) |
+| live-runs/codex-20261103 | Qwen/Qwen3.5-0.8B | math500 | p50c: [48.1%](../reference/p50c.json) | [12.9%](live-runs/codex-20261103/math500/summary.json) | [79.7%](live-runs/codex-20261103/math500/summary.json) | [84.2%](live-runs/codex-20261103/math500/summary.json) | [315](live-runs/codex-20261103/math500/summary.json) | [0.75%](live-runs/codex-20261103/math500/summary.json) | [2000](live-runs/codex-20261103/math500/summary.json) | [done](live-runs/codex-20261103/math500/summary.json) |
 
 Only recorded values are shown. Missing fields remain pending; partial runs retain their recorded status.
 Finished accuracy uses only samples with `finish_reason=stop`; token-limited samples remain in all-sample accuracy. It is undefined when no answers finish, and must be read with the cap-hit rate because the finished subset can change.
@@ -62,6 +63,7 @@ Recorded runtime and uncertainty:
 | control1_nothink / math500 | [vllm==0.33.0](control1_nothink/math500/summary.json) | [H100](control1_nothink/math500/summary.json) | [5.17.0](control1_nothink/math500/summary.json) | [binomial_per_sample](control1_nothink/math500/summary.json) |
 | control2_mechanical / math500 | [vllm==0.33.0](control2_mechanical/math500/summary.json) | [H100](control2_mechanical/math500/summary.json) | [5.17.0](control2_mechanical/math500/summary.json) | [binomial_per_sample](control2_mechanical/math500/summary.json) |
 | control3_repetition / math500 | [vllm==0.33.0](control3_repetition/math500/summary.json) | [H100](control3_repetition/math500/summary.json) | [5.17.0](control3_repetition/math500/summary.json) | [binomial_per_sample](control3_repetition/math500/summary.json) |
+| live-runs/codex-20261103 / math500 | [vllm==0.33.0](live-runs/codex-20261103/math500/summary.json) | [H100](live-runs/codex-20261103/math500/summary.json) | [5.17.0](live-runs/codex-20261103/math500/summary.json) | [binomial_per_sample](live-runs/codex-20261103/math500/summary.json) |
 
 ### CPU analysis and implementation checks
 
@@ -148,13 +150,17 @@ For the mechanism question, report accuracy among finished answers together with
 
 In local calibration, base finished accuracy is [100.0%](calibration_base/summary.json) over [34](calibration_base/summary.json) finished samples; p50c is [73.3%](calibration_p50c/summary.json) over [345](calibration_p50c/summary.json). Their cap-hit rates are [93.2%](calibration_base/summary.json) and [31.0%](calibration_p50c/summary.json). These are different subsets, so the conditional comparison does not establish a paired accuracy regression. [The recomputation audit](analysis/finished-metrics.json) retains sample hashes.
 
+For the live edit, finished accuracy is [79.7%](live-runs/codex-20261103/math500/summary.json) over [315](live-runs/codex-20261103/math500/summary.json) finished samples, while [84.25%](live-runs/codex-20261103/math500/summary.json) of all samples hit the token limit. Accuracy over all samples is [12.9%](live-runs/codex-20261103/math500/summary.json). The finished subset remains a small part of the evaluation.
+
 A capped answer can still grade correct, so finished accuracy cannot be recovered by dividing overall accuracy by one minus the cap-hit rate. Full author termination records are unavailable; their finished metric remains pending.
 
 **What does the agent add over a script?**
 
+The submitted live edit scores [12.9%](live-runs/codex-20261103/math500/summary.json) on MATH-500 over [2000](live-runs/codex-20261103/math500/summary.json) answers, with [4](live-runs/codex-20261103/math500/summary.json) samples per problem. The local p50c and mechanical measurements below use [1](calibration_p50c/summary.json) sample per problem. This single live run has lower measured accuracy than both local comparisons.
+
 The released p50c edit reaches [50.6%](calibration_p50c/summary.json) versus [46.0%](control2_mechanical/math500/summary.json) for the mechanical control under the local think35 evaluation. The control borrows p50c’s column set and derives its direction from calibration answers on this benchmark. It is not a held-out discovery experiment.
 
-The [agent-free 2c build](repair/2c/summary.json) selects its own columns from [450 looping and 34 finished base answers](repair/2c/verification.json). Its mask shares [25 of 64 columns in layer 15 and 18 of 64 in layer 19](repair/2c/column-comparison.json) with the p50c mask used by the earlier control. [All seven fixed-mask dose bundles](repair/dose-sweep.json) are built; benchmark accuracy is pending. Until that comparison and the live attempt are complete, these results show that a simple directional intervention recovers much of the reported benchmark gain, not how much an agent adds over a fully independent script.
+The [agent-free 2c build](repair/2c/summary.json) selects its own columns from [450 looping and 34 finished base answers](repair/2c/verification.json). Its mask shares [25 of 64 columns in layer 15 and 18 of 64 in layer 19](repair/2c/column-comparison.json) with the p50c mask used by the earlier control. [All seven fixed-mask dose bundles](repair/dose-sweep.json) are built; benchmark accuracy is pending. The 2c build selects its own columns, but its direction and column selection still use calibration answers from this benchmark. Its score remains unmeasured. GSM8K and IFEval results for the live submission are also pending, so its required final evaluation is incomplete.
 
 
 | Stage | Benchmark | Recorded hours | Recorded cost (USD) |
@@ -164,6 +170,7 @@ The [agent-free 2c build](repair/2c/summary.json) selects its own columns from [
 | control1_nothink | math500 | [0.236](control1_nothink/math500/summary.json) | [1.0059](control1_nothink/math500/summary.json) |
 | control2_mechanical | math500 | [0.447](control2_mechanical/math500/summary.json) | [1.9082](control2_mechanical/math500/summary.json) |
 | control3_repetition | math500 | [0.514](control3_repetition/math500/summary.json) | [2.1923](control3_repetition/math500/summary.json) |
+| live-runs/codex-20261103 | math500 | [2.145](live-runs/codex-20261103/math500/summary.json) | [9.1541](live-runs/codex-20261103/math500/summary.json) |
 
 Costs and durations come from the linked records. Missing costs are not treated as zero; rows are not summed because stages may overlap.
 
@@ -190,7 +197,16 @@ Budget ledger: [source](costs.json). Reservations are retained bounds, not charg
 | modal / control3_repetition / math500 / evaluation | [settled](costs.json) | [2](costs.json) | [0.514](costs.json) | [2.1923](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / control3_repetition / math500 / evaluation smoke | [settled](costs.json) | [1](costs.json) | [0.091](costs.json) | [0.3880](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / controls | [settled](costs.json) | [1](costs.json) | [1.612](costs.json) | [0.1278](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |
-| modal / evaluation / live-runs / codex-20261103 / math500 / batch_000 | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.9870](costs.json) | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / gsm8k / batch_000 | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.9870](costs.json) | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / gsm8k / smoke | [settled](costs.json) | [1](costs.json) | [0.078](costs.json) | [0.3340](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / math500 / batch_000 | [settled](costs.json) | [1](costs.json) | [0.274](costs.json) | [1.1699](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / math500 / batch_001 | [settled](costs.json) | [1](costs.json) | [0.274](costs.json) | [1.1699](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / math500 / batch_002 | [settled](costs.json) | [1](costs.json) | [0.263](costs.json) | [1.1227](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / math500 / batch_003 | [settled](costs.json) | [1](costs.json) | [0.275](costs.json) | [1.1729](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / math500 / batch_004 | [settled](costs.json) | [1](costs.json) | [0.279](costs.json) | [1.1922](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / math500 / batch_005 | [settled](costs.json) | [1](costs.json) | [0.277](costs.json) | [1.1812](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / math500 / batch_006 | [settled](costs.json) | [1](costs.json) | [0.267](costs.json) | [1.1413](costs.json) | pending | [resource estimate; not invoice](costs.json) |
+| modal / evaluation / live-runs / codex-20261103 / math500 / batch_007 | [settled](costs.json) | [1](costs.json) | [0.235](costs.json) | [1.0041](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / evaluation / live-runs / codex-20261103 / math500 / smoke | [settled](costs.json) | [1](costs.json) | [0.103](costs.json) | [0.4384](costs.json) | pending | [resource estimate; not invoice](costs.json) |
 | modal / infrastructure | [reserved](costs.json) | [1](costs.json) | pending | pending | [2.0000](costs.json) | [resource estimate; not invoice](costs.json) |
 | modal / kernel | [settled](costs.json) | [1](costs.json) | [0.205](costs.json) | [0.0163](costs.json) | pending | [driver_resource_upper_bound_not_invoice](costs.json) |

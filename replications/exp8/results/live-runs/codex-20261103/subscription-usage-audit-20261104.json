@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-04T16:03:24.753043+00:00",
+  "status": "passed",
+  "candidate": "replications/exp8/results/live-runs/codex-20261103/subscription-usage.json",
+  "candidate_sha256": "630b751336fb7a0954e833222b5b120ac5789bc08d2d9070dc75ae54f01e99ef",
+  "candidate_bytes": 214815,
+  "source_metadata_bytes": 666236,
+  "completed_receipts": 133,
+  "conversation_counts": [
+    40,
+    40,
+    40,
+    13
+  ],
+  "snapshot_bases": {
+    "new_thread_total": 4,
+    "same_thread_cumulative_difference": 129
+  },
+  "total_incremental_usage": {
+    "cache_write_input_tokens": 0,
+    "cached_input_tokens": 4675840,
+    "input_tokens": 4880494,
+    "output_tokens": 122422,
+    "reasoning_output_tokens": 30736
+  },
+  "same_totals_from_independent_sum_of_final_conversation_counters": true,
+  "prior_public_receipts_unchanged": true,
+  "source_receipt_hashes_in_candidate": true,
+  "tracked_evidence_modified": true,
+  "network_or_inference_called": false,
+  "publication_transformation": "Only prior_public_snapshot.path changed to the byte-identical archived public snapshot; counters and per-reply source records are unchanged."
+}

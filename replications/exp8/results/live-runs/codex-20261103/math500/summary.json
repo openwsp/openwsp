@@ -1,0 +1,99 @@
+{
+  "status": "done",
+  "stage": "live-runs/codex-20261103",
+  "model": "Qwen/Qwen3.5-0.8B",
+  "benchmark": "math500",
+  "samples_per_problem": 4,
+  "n": 2000,
+  "correct": 258,
+  "accuracy": 0.129,
+  "standard_error": 0.007495298526409739,
+  "mean_tokens": 29282.6405,
+  "cut_share": 0.8425,
+  "finished_n": 315,
+  "finished_correct": 251,
+  "accuracy_finished": 0.7968253968253968,
+  "seconds": 7722.818463045,
+  "cost_usd": 9.15411415152934,
+  "provenance": {
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "sampling": {
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "top_k": 20,
+      "presence_penalty": 1.5,
+      "max_tokens": 32768,
+      "seed": 0,
+      "n": 4
+    },
+    "thinking": true,
+    "gpu": "H100",
+    "engine": "vllm==0.33.0",
+    "engine_settings": {
+      "dtype": "bfloat16",
+      "gpu_memory_utilization": 0.85,
+      "language_model_only": true,
+      "max_model_len": 34816,
+      "max_num_seqs": 128,
+      "prefix_caching": false
+    },
+    "seconds_basis": "accounted_resource_seconds_including_margins_and_cancelled_attempts",
+    "container_seconds": 864.977939168,
+    "transformers": "5.17.0",
+    "batch_generations": 256,
+    "standard_error": "binomial_per_sample",
+    "smoke_included_in_score": false,
+    "smoke_seconds": 369.815092056,
+    "smoke_cost_usd": 0.438354155783712,
+    "batches": [
+      {
+        "gpu": "H100",
+        "seconds": 986.977939168,
+        "cost_usd": 1.1698978505604694
+      },
+      {
+        "gpu": "H100",
+        "seconds": 986.988422864,
+        "cost_usd": 1.1699102772347947
+      },
+      {
+        "gpu": "H100",
+        "seconds": 947.118812707,
+        "cost_usd": 1.1226514993286973
+      },
+      {
+        "gpu": "H100",
+        "seconds": 989.500860593,
+        "cost_usd": 1.1728883534229027
+      },
+      {
+        "gpu": "H100",
+        "seconds": 1005.829044585,
+        "cost_usd": 1.19224269418142
+      },
+      {
+        "gpu": "H100",
+        "seconds": 996.478479613,
+        "cost_usd": 1.1811591578346092
+      },
+      {
+        "gpu": "H100",
+        "seconds": 962.819574309,
+        "cost_usd": 1.141262135414268
+      },
+      {
+        "gpu": "H100",
+        "seconds": 847.1053292060001,
+        "cost_usd": 1.0041021835521788
+      }
+    ],
+    "submission_sha256": "46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec",
+    "finished_metrics": {
+      "method": "openwsp.metrics.finished_metrics",
+      "finished_reason": "stop",
+      "excluded_reason": "length",
+      "samples_file": "samples.jsonl",
+      "samples_sha256": "c63cc8ba765236a85b62ac6b4bd063266a2b89d21d5141c9e49861a9bfb89f7f"
+    }
+  }
+}

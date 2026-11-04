@@ -1,0 +1,72 @@
+{
+  "benchmark": "math500",
+  "capture_receipts": [
+    {
+      "bytes": 289,
+      "path": "results/live-runs/codex-20261103/math500/submission.json",
+      "sha256": "716e3c95bfb927bf7cff178d737b68a8df86dc53aa34a0912d071e8493e708bc"
+    },
+    {
+      "bytes": 2371,
+      "path": "results/live-runs/codex-20261103/math500/summary.json",
+      "sha256": "e62aeba0afd91a426d47f4b5435c6218829e9936758c0d7bac4ce54138798ce2"
+    },
+    {
+      "bytes": 647664,
+      "path": "results/live-runs/codex-20261103/math500/samples.jsonl",
+      "sha256": "c63cc8ba765236a85b62ac6b4bd063266a2b89d21d5141c9e49861a9bfb89f7f"
+    }
+  ],
+  "dataset_reference": {
+    "basis": "Bounded direct Volume capture; no new remote verification",
+    "bytes": 137571,
+    "n": 500,
+    "observed_at_utc": "2026-11-04T15:04:22.165966+00:00",
+    "ordered_problem_ids_sha256": "a6e6d41a968b7a3ff9b3c87f3165fd46c8e3493347a1bb1d7fb97ccc6d155565",
+    "receipt_sha256": "451bf9be9b7776cbc82638ad1579091d78f1b2ebf2a93d891049621d39959ba4",
+    "remote_path": "benchmarks/math500.jsonl",
+    "sha256": "0baf4950c69ab971f1b45437b965927e5a2a8fda0d2c884c408c9b9c087fca84"
+  },
+  "observed_at_utc": "2026-11-04T16:13:11.617283+00:00",
+  "run_id": "codex-20261103",
+  "schema_version": 1,
+  "scope": "One complete MATH-500 evaluation only; GSM8K and IFEval still pending",
+  "source": "bounded read-only Modal Volume capture; existing collector and offline verifier",
+  "submission_sha256": "46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec",
+  "verification": {
+    "dataset_identities_verified": true,
+    "metrics": {
+      "accuracy": 0.129,
+      "accuracy_finished": 0.7968253968253968,
+      "correct": 258,
+      "cut_share": 0.8425,
+      "finished_correct": 251,
+      "finished_n": 315,
+      "mean_tokens": 29282.6405,
+      "n": 2000,
+      "standard_error": 0.007495298526409739
+    },
+    "ordered_problem_ids_sha256": "a6e6d41a968b7a3ff9b3c87f3165fd46c8e3493347a1bb1d7fb97ccc6d155565",
+    "predispatch_binding": {
+      "sha256": "716e3c95bfb927bf7cff178d737b68a8df86dc53aa34a0912d071e8493e708bc"
+    },
+    "problems": 500,
+    "raw_hash_check": "Format, path and per-batch consistency only; raw file bytes remain remote",
+    "raw_sources": {
+      "/data/results/live-runs/codex-20261103/math500/batch_000/raw_generations.jsonl": "a476213379d42b311b54a7b952b77ada34037d055e8b43ad776becbc240a2b69",
+      "/data/results/live-runs/codex-20261103/math500/batch_001/raw_generations.jsonl": "97f258fb0f6a4c07d4d93b58542f75a6704a0f4dfc03e76d8c92370e029575e9",
+      "/data/results/live-runs/codex-20261103/math500/batch_002/raw_generations.jsonl": "bf58d8bc0342a3c3a3501881d552318f8427e621016c671da5754a11d88f4648",
+      "/data/results/live-runs/codex-20261103/math500/batch_003/raw_generations.jsonl": "95cf0af5293f0929dd32c54564f638a3cd1fba969307b324a93d0bfa5dc577b4",
+      "/data/results/live-runs/codex-20261103/math500/batch_004/raw_generations.jsonl": "e256d408edf8b8fba889ea8621a2f14d8bda186f3880ee6f04d25d0be37bafde",
+      "/data/results/live-runs/codex-20261103/math500/batch_005/raw_generations.jsonl": "634e8cbb5251955fb31b2dd8dcabc003ab5a1df07a74620fec0363455812fdec",
+      "/data/results/live-runs/codex-20261103/math500/batch_006/raw_generations.jsonl": "f2a50fe1680c67f6de5660cf54fb148e6cd1002ce2416adfd731977fadcd2a14",
+      "/data/results/live-runs/codex-20261103/math500/batch_007/raw_generations.jsonl": "cc22980acc1c7241cdc89b4fb2d0ae3c7c62c96ad006b7ed9584de535c1d71ac"
+    },
+    "samples_per_problem": 4,
+    "samples_sha256": "c63cc8ba765236a85b62ac6b4bd063266a2b89d21d5141c9e49861a9bfb89f7f",
+    "scored_batches": 8,
+    "smoke_check": "Explicit exclusion flag, separate smoke accounting, exact scored totals and only scored-batch raw paths",
+    "status": "passed",
+    "summary_sha256": "3edd5953c29365321b972b62daa66f85494fc0a66871c135a5daf154209b27ee"
+  }
+}
