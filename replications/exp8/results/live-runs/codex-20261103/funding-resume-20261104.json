@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261103",
+  "recorded_at_utc": "2026-11-04T12:19:27.651042+00:00",
+  "status": "funding_applied_same_attempt_resumed",
+  "task_cap_usd": "225",
+  "provider_limit_observed_usd": "100",
+  "provider_limit_increase_claimed": false,
+  "provider_usage_anchor_applied": false,
+  "source_commit": "c0ea3f776d8cb276e518e7514dd8494533388293",
+  "prior_driver_call_id": "fc-01M6K04PS9VADJFZRXYY6KDQB3",
+  "boundary": {
+    "passes": 44,
+    "turn": 115,
+    "runs": 60,
+    "requests": 53,
+    "pending_forward_request": 53,
+    "pending_turn": 116,
+    "error_type": "BudgetExceeded",
+    "error": "Insufficient reserved capacity for this paired pass",
+    "dispatch_status": "rejected_before_either_gpu_dispatch",
+    "terminal_evidence": "modal.FunctionCall.get returned BudgetExceeded; supplemental provider metadata recorded zero pending and one failed input"
+  },
+  "funding_receipt": "modal-allowance-225.json",
+  "task_authorization": "../../../authorizations/modal-budget-20261104.json",
+  "funding_observation": "../../../authorizations/modal-topups-20261104.json",
+  "ledger_verification": {
+    "before_sha256": "3167de8560515892e874a6feda2dcaf657b13abdde40e1f64e9ff33bfcfd759d",
+    "after_sha256": "b145e127171461875bd7eb9d7cd4152772bc7851ceaa8dc19a24d82f2b2d626b",
+    "historical_event_prefix_preserved": true,
+    "all_reservation_ids_preserved": true,
+    "unrelated_reservations_unchanged": true,
+    "halt_state_unchanged": true,
+    "prior_estimated_spent_usd": "126.3630954039118399431775944",
+    "prior_reserved_usd": "18.12995347222222222222222222",
+    "post_estimated_spent_usd": "126.5438282532228605832887055",
+    "post_reserved_usd": "16.2240000",
+    "independent_driver_settlement": {
+      "actual_usd": "0.1807328493110206401111111111",
+      "completed_at": "2026-11-04T12:16:54.067435+00:00",
+      "created_at": "2026-11-04T10:02:11.065214+00:00",
+      "kind": "modal",
+      "metadata": {
+        "driver_claimed_at": 1793786539.3250802,
+        "driver_finish_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 7600.941848662,
+          "observed_subtotal_usd": "0.1701853301663601666666666667",
+          "owner_id": "fc-01M6K04PS9VADJFZRXYY6KDQB3",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-0ee74da1eec14155b9382b382fc85195",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        },
+        "driver_owner_id": "fc-01M6K04PS9VADJFZRXYY6KDQB3",
+        "driver_ticket": {
+          "cpu_cores": 1,
+          "memory_gib": 4,
+          "prepared_at": 1793786530.6645026,
+          "reservation_id": "driver-0ee74da1eec14155b9382b382fc85195",
+          "scaledown_seconds": 5,
+          "schema_version": 1,
+          "stage": "all",
+          "startup_seconds": 120,
+          "timeout_seconds": 86400,
+          "upper_bound_usd": "1.905953472222222222222222222"
+        },
+        "invoice": false,
+        "kind": "driver_resource_upper_bound"
+      },
+      "receipt_metadata": {
+        "billing_basis": "driver_resource_upper_bound_not_invoice",
+        "invoice": false,
+        "provider_completion_evidence": {
+          "elapsed_seconds_bound": 8079.769956111908,
+          "observed_at": "2026-11-04T12:16:52.630253+00:00",
+          "provider_call_id": "fc-01M6K04PS9VADJFZRXYY6KDQB3",
+          "provider_terminal_state": "failed",
+          "source": "modal.FunctionCall.get"
+        },
+        "worker_receipt": {
+          "billing_basis": "resource_upper_bound_not_invoice",
+          "observed_driver_seconds": 7600.941848662,
+          "observed_subtotal_usd": "0.1701853301663601666666666667",
+          "owner_id": "fc-01M6K04PS9VADJFZRXYY6KDQB3",
+          "receipt_status": "awaiting_provider_completion",
+          "reservation_id": "driver-0ee74da1eec14155b9382b382fc85195",
+          "reservation_upper_bound_usd": "1.905953472222222222222222222"
+        }
+      },
+      "seconds": 8204.769956111908,
+      "stage": "all",
+      "status": "settled",
+      "upper_bound_usd": "1.905953472222222222222222222",
+      "usage": null
+    },
+    "new_events": [
+      {
+        "at": "2026-11-04T12:16:54.067454+00:00",
+        "event": "settled",
+        "id": "driver-0ee74da1eec14155b9382b382fc85195"
+      },
+      {
+        "applied_at": "2026-11-04T12:17:19.491424+00:00",
+        "authorization_id": "user-2026-11-04-exp8-modal-225",
+        "event": "modal_limit_authorized",
+        "evidence": {
+          "authorized_at": "2026-11-04T10:11:16.934808+00:00",
+          "basis": "explicit_user_authorization",
+          "operator_instruction": "Raise the total Modal cap to $225",
+          "prior_task_cap_usd": "150",
+          "protected_openai_plan_b_usd": "160.85",
+          "scope": "Absolute cumulative Modal task cap, not additional225USD and not a provider usage-limit claim. Preserve all charges, reservations and priority order.",
+          "source": "docs/TASK.md: Modal task-cap increase and account restoration (2026-11-04)"
+        },
+        "new_limit_usd": "225",
+        "prior_limit_usd": "150"
+      },
+      {
+        "applied_allowance": {
+          "cycle_id": null,
+          "cycle_limit": "225",
+          "cycle_usage": "126.5938282532228605832887055",
+          "evidence": {
+            "automatic_topups_authorized": true,
+            "basis": "operator_automatic_topups",
+            "cycle_usage_basis": "Existing conservative ledger usage floor from a direct Volume read. Preserve every prior charge and reservation; no provider-usage anchor is applied.",
+            "interpretation": "Continue the same task under automatic top-ups within the separately authorized $225 cumulative Modal task cap. This is a funding envelope, not an observation that the provider account limit increased.",
+            "observed_at": "2026-11-04T12:13:10.084288+00:00",
+            "observed_provider_limit_record": "replications/exp8/authorizations/modal-dashboard-20261104.json",
+            "operator_instruction": "we've 22 dollars more never stop due to that it will top up automatically",
+            "provider_limit_observed": false,
+            "source": "docs/TASK.md: continuing automatic top-up instruction and explicit $225 cumulative task authorization; replications/exp8/authorizations/modal-budget-20261104.json",
+            "task_authorization_id": "user-2026-11-04-exp8-modal-225",
+            "task_cap_instruction": "Raise the total Modal cap to $225"
+          },
+          "observed_at": "2026-11-04T12:13:10.084288+00:00",
+          "task_spend_at_observation": "126.5438282532228605832887055"
+        },
+        "applied_at": "2026-11-04T12:17:19.490747+00:00",
+        "event": "modal_allowance_observed",
+        "observation": {
+          "cycle_id": null,
+          "cycle_limit": "225",
+          "cycle_usage": "126.4130954039118399431775944",
+          "evidence": {
+            "automatic_topups_authorized": true,
+            "basis": "operator_automatic_topups",
+            "cycle_usage_basis": "Existing conservative ledger usage floor from a direct Volume read. Preserve every prior charge and reservation; no provider-usage anchor is applied.",
+            "interpretation": "Continue the same task under automatic top-ups within the separately authorized $225 cumulative Modal task cap. This is a funding envelope, not an observation that the provider account limit increased.",
+            "observed_at": "2026-11-04T12:13:10.084288+00:00",
+            "observed_provider_limit_record": "replications/exp8/authorizations/modal-dashboard-20261104.json",
+            "operator_instruction": "we've 22 dollars more never stop due to that it will top up automatically",
+            "provider_limit_observed": false,
+            "source": "docs/TASK.md: continuing automatic top-up instruction and explicit $225 cumulative task authorization; replications/exp8/authorizations/modal-budget-20261104.json",
+            "task_authorization_id": "user-2026-11-04-exp8-modal-225",
+            "task_cap_instruction": "Raise the total Modal cap to $225"
+          },
+          "observation_id": "operator-auto-topups-20261104-modal225",
+          "task_authorization": {
+            "authorization_id": "user-2026-11-04-exp8-modal-225",
+            "evidence": {
+              "authorized_at": "2026-11-04T10:11:16.934808+00:00",
+              "basis": "explicit_user_authorization",
+              "operator_instruction": "Raise the total Modal cap to $225",
+              "prior_task_cap_usd": "150",
+              "protected_openai_plan_b_usd": "160.85",
+              "scope": "Absolute cumulative Modal task cap, not additional225USD and not a provider usage-limit claim. Preserve all charges, reservations and priority order.",
+              "source": "docs/TASK.md: Modal task-cap increase and account restoration (2026-11-04)"
+            },
+            "total_limit": "225"
+          }
+        },
+        "observation_id": "operator-auto-topups-20261104-modal225",
+        "prior_allowance": {
+          "cycle_id": null,
+          "cycle_limit": "150",
+          "cycle_usage": "32.80472885879525534012501112",
+          "evidence": {
+            "automatic_topups_authorized": true,
+            "basis": "operator_automatic_topups",
+            "cycle_usage_basis": "Existing conservative ledger floor from direct Modal Volume read; known usage and reservations are preserved.",
+            "interpretation": "Continue the same task using automatic top-ups within the previously authorized $150 total Modal task cap. This supersedes the attachment\u2019s older $42 gate and does not assert an observed provider dashboard limit.",
+            "observed_at": "2026-11-03T19:01:46.660554+00:00",
+            "operator_instruction": "we've 22 dollars more never stop due to that it will top up automatically",
+            "provider_limit_observed": false,
+            "source": "docs/TASK.md: latest direct operator instruction accompanying steering update 2"
+          },
+          "observed_at": "2026-11-03T19:01:46.660554+00:00",
+          "task_spend_at_observation": "32.75472885879525534012501112"
+        },
+        "task_authorization": {
+          "applied_at": "2026-11-04T12:17:19.491424+00:00",
+          "authorization_id": "user-2026-11-04-exp8-modal-225",
+          "evidence": {
+            "authorized_at": "2026-11-04T10:11:16.934808+00:00",
+            "basis": "explicit_user_authorization",
+            "operator_instruction": "Raise the total Modal cap to $225",
+            "prior_task_cap_usd": "150",
+            "protected_openai_plan_b_usd": "160.85",
+            "scope": "Absolute cumulative Modal task cap, not additional225USD and not a provider usage-limit claim. Preserve all charges, reservations and priority order.",
+            "source": "docs/TASK.md: Modal task-cap increase and account restoration (2026-11-04)"
+          },
+          "new_limit_usd": "225",
+          "prior_limit_usd": "150"
+        }
+      }
+    ]
+  },
+  "protected_openai_plan_b_usd": "160.85",
+  "notes": [
+    "Task ledger amounts are conservative resource estimates, not a provider invoice.",
+    "The previous driver settled through the existing serialized terminal-reconciliation path before the funding transaction. The funding command itself did not settle or release reservations.",
+    "The normal foreground replicate command resumed the existing run identity and private editor journal. The pending request is executing; later request completion is recorded separately."
+  ],
+  "resume_observation": {
+    "observed_at_utc": "2026-11-04T12:19:51.205090+00:00",
+    "driver": {
+      "call_id": "fc-01M6K7YW39YKEK7P5K1C16VX8P",
+      "config": {
+        "editor": "codex",
+        "publish_results": true,
+        "run_id": "codex-20261103"
+      },
+      "created_at": 1793794730.2683659,
+      "dispatched_at": 1793794731.7495358,
+      "fingerprint": "adda0457aafba3c8f17a8a18a6d5f8b4d715b4ec5d32390a5e4d40ce05adb12c",
+      "phase": "running",
+      "reservation_id": "driver-7781f6f1f9ac46e2a9bad61383326af5",
+      "stage": "all",
+      "ticket": {
+        "cpu_cores": 1,
+        "memory_gib": 4,
+        "prepared_at": 1793794730.8639808,
+        "reservation_id": "driver-7781f6f1f9ac46e2a9bad61383326af5",
+        "scaledown_seconds": 5,
+        "schema_version": 1,
+        "stage": "all",
+        "startup_seconds": 120,
+        "timeout_seconds": 86400,
+        "upper_bound_usd": "1.905953472222222222222222222"
+      }
+    },
+    "live_counters": {
+      "turn": 115,
+      "passes": 44,
+      "runs": 60,
+      "requests": 53,
+      "handoffs": 2,
+      "done": false,
+      "pending": {
+        "kind": "forward",
+        "request": 53,
+        "turn": 116
+      }
+    },
+    "pipeline_status": "running",
+    "active_stage": "live",
+    "budget_estimates": {
+      "editor": {
+        "spent_usd": 78.292765,
+        "reserved_usd": 0.0,
+        "available_usd": 21.707235
+      },
+      "modal": {
+        "spent_usd": 126.55116404177953,
+        "reserved_usd": 24.319683472222223,
+        "available_usd": 74.07915248599825
+      }
+    }
+  }
+}

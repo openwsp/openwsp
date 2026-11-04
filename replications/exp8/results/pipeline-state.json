@@ -1,458 +1,265 @@
 {
-  "active_live": {
-    "editor": "codex",
-    "initialization": "Original pinned weights, empty isolated work namespace, zero live counters.",
-    "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
-    "relationship": "Separate attempt; no prior API response history, partial edit or control result is supplied.",
-    "relative_path": "live-runs/codex-20261103",
-    "run_id": "codex-20261103",
-    "schema_version": 1,
-    "task_sha256": "ce36e273b668e4edb8fa44effaab055cbece7e3b4acbce7ffcc77dde024c8b74"
-  },
-  "active_stage": "live",
-  "budget": {
-    "editor": {
-      "available_usd": 21.707235,
-      "reserved_usd": 0.0,
-      "spent_usd": 78.292765
-    },
-    "modal": {
-      "available_usd": 24.278247623491662,
-      "reserved_usd": 18.345603472222223,
-      "spent_usd": 107.32614890428611
-    }
-  },
-  "calibration": {
-    "calibration_base": {
-      "accuracy": 0.072,
-      "gap": -0.007000000000000006,
-      "reference_accuracy": 0.079,
-      "reference_standard_error": 0.012,
-      "within_two_standard_errors": true
-    },
-    "calibration_p50c": {
-      "accuracy": 0.506,
-      "gap": 0.025000000000000022,
-      "reference_accuracy": 0.481,
-      "reference_standard_error": 0.022,
-      "within_two_standard_errors": true
-    },
-    "status": "passed"
-  },
-  "controls_deferred": "Current verified allowance preserves priority for the live run and its evaluation. Controls resume afterward.",
-  "driver_receipt": {
-    "billing_basis": "resource_upper_bound_not_invoice",
-    "observed_driver_seconds": 17355.518322787,
-    "observed_subtotal_usd": "0.38505697305472475",
-    "owner_id": "fc-01M6HJFWKABFATSH2NKQKVB6FN",
-    "receipt_status": "awaiting_provider_completion",
-    "reservation_id": "driver-eb75be295e724031a4730c4308c21c8e",
-    "reservation_upper_bound_usd": "1.905953472222222222222222222"
-  },
-  "heartbeat": 1793787333.4668443,
-  "live": {
-    "done": false,
-    "editor": "codex",
-    "passes": 38,
-    "requests": 46,
-    "run_id": "codex-20261103",
-    "runs": 53,
-    "sandbox_id": "sb-01M6K05FX9Y490928QPSJR9248",
-    "turn": 102
-  },
-  "publication": {
-    "attempts": 1,
-    "commit": "b1ac8a33df1ce777f0ead5d3b5014a27c29d24fd",
-    "paths": [
-      "README.md",
-      "replications/exp8/results/calibration_base/summary.json",
-      "replications/exp8/results/calibration_p50c/summary.json",
-      "replications/exp8/results/control1_nothink/math500/summary.json",
-      "replications/exp8/results/control2_mechanical/math500/summary.json",
-      "replications/exp8/results/control3_repetition/math500/summary.json",
-      "replications/exp8/results/costs.json",
-      "replications/exp8/results/live-runs/codex-20261103/state.json",
-      "replications/exp8/results/live-runs/codex-20261103/transcript.md",
-      "replications/exp8/results/pipeline-state.json",
-      "replications/exp8/results/report.md"
-    ],
-    "status": "pushed"
-  },
   "stages": {
-    "calibration_base": {
-      "accuracy": 0.072,
-      "benchmark": "math500",
-      "correct": 36,
-      "cost_usd": 2.128023597464063,
-      "cut_share": 0.932,
-      "mean_tokens": 30958.67,
-      "model": "Qwen/Qwen3.5-0.8B",
-      "n": 500,
-      "provenance": {
-        "engine": "vllm==0.33.0",
-        "gpu": "H100",
-        "revision": "2fc06364715b967f1860aea9cf38778875588b17",
-        "sampling": {
-          "max_tokens": 32768,
-          "n": 1,
-          "presence_penalty": 1.5,
-          "seed": 0,
-          "temperature": 0.6,
-          "top_k": 20,
-          "top_p": 0.95
-        },
-        "thinking": true,
-        "transformers": "5.17.0"
+    "prepare": {
+      "model_revision": "2fc06364715b967f1860aea9cf38778875588b17",
+      "model_sha256": "978661a573971be7257815c2554a28c74913c7b7ea51b0a0b9503fd11eb0d2f8",
+      "practice": {
+        "aime.jsonl": "9f6f26b89e65c7123e6106a9dce51137783eb339547f974f2ab1413165122f56",
+        "gsm8k_train.jsonl": "06d0dd560a908c2c2883bfb7d27ab55a87b213ff0d625f5cd734836aeac9a3e5",
+        "math_train.jsonl": "abe7982b4d8c98394fe185fb152568a2c784a4157a75fe42b9c01857e71f0c6e"
       },
-      "samples_per_problem": 1,
-      "seconds": 1673.295498423,
-      "stage": "calibration_base",
-      "standard_error": 0.011559930795640603,
+      "seconds": 10.311959593,
       "status": "done"
     },
     "calibration_base_smoke": {
-      "accuracy": 0.0,
-      "benchmark": "math500",
-      "correct": 0,
-      "cost_usd": 0.44962347620988935,
-      "cut_share": 1.0,
-      "mean_tokens": 32768.0,
-      "model": "Qwen/Qwen3.5-0.8B",
-      "n": 4,
-      "provenance": {
-        "engine": "vllm==0.33.0",
-        "gpu": "H100",
-        "revision": "2fc06364715b967f1860aea9cf38778875588b17",
-        "sampling": {
-          "max_tokens": 32768,
-          "n": 1,
-          "presence_penalty": 1.5,
-          "seed": 0,
-          "temperature": 0.6,
-          "top_k": 20,
-          "top_p": 0.95
-        },
-        "thinking": true,
-        "transformers": "5.17.0"
-      },
-      "samples_per_problem": 1,
-      "seconds": 257.32239275300003,
+      "status": "done",
       "stage": "calibration_base_smoke",
-      "standard_error": 0.0,
-      "status": "done"
-    },
-    "calibration_p50c": {
-      "accuracy": 0.506,
-      "benchmark": "math500",
-      "correct": 253,
-      "cost_usd": 1.2511850142476064,
-      "cut_share": 0.31,
-      "mean_tokens": 21325.514,
       "model": "Qwen/Qwen3.5-0.8B",
-      "n": 500,
-      "provenance": {
-        "engine": "vllm==0.33.0",
-        "gpu": "H100",
-        "revision": "2fc06364715b967f1860aea9cf38778875588b17",
-        "sampling": {
-          "max_tokens": 32768,
-          "n": 1,
-          "presence_penalty": 1.5,
-          "seed": 0,
-          "temperature": 0.6,
-          "top_k": 20,
-          "top_p": 0.95
-        },
-        "thinking": true,
-        "transformers": "5.17.0"
-      },
+      "benchmark": "math500",
       "samples_per_problem": 1,
-      "seconds": 933.5554113449999,
-      "stage": "calibration_p50c",
-      "standard_error": 0.02235906974809104,
-      "status": "done"
-    },
-    "calibration_p50c_smoke": {
-      "accuracy": 1.0,
-      "benchmark": "math500",
-      "correct": 4,
-      "cost_usd": 0.4228336104812867,
-      "cut_share": 0.0,
-      "mean_tokens": 14094.25,
-      "model": "Qwen/Qwen3.5-0.8B",
       "n": 4,
+      "correct": 0,
+      "accuracy": 0.0,
+      "standard_error": 0.0,
+      "mean_tokens": 32768.0,
+      "cut_share": 1.0,
+      "seconds": 257.32239275300003,
+      "cost_usd": 0.44962347620988935,
       "provenance": {
-        "engine": "vllm==0.33.0",
-        "gpu": "H100",
         "revision": "2fc06364715b967f1860aea9cf38778875588b17",
         "sampling": {
-          "max_tokens": 32768,
-          "n": 1,
-          "presence_penalty": 1.5,
-          "seed": 0,
           "temperature": 0.6,
+          "top_p": 0.95,
           "top_k": 20,
-          "top_p": 0.95
+          "presence_penalty": 1.5,
+          "max_tokens": 32768,
+          "seed": 0,
+          "n": 1
         },
         "thinking": true,
+        "gpu": "H100",
+        "engine": "vllm==0.33.0",
         "transformers": "5.17.0"
-      },
-      "samples_per_problem": 1,
-      "seconds": 234.721268685,
-      "stage": "calibration_p50c_smoke",
-      "standard_error": 0.0,
-      "status": "done"
-    },
-    "controls": {
-      "control1_nothink": {
-        "accuracy": 0.468,
-        "benchmark": "math500",
-        "correct": 234,
-        "cost_usd": 1.005906672552964,
-        "cut_share": 0.006,
-        "mean_tokens": 9217.878,
-        "model": "Qwen/Qwen3.5-0.8B",
-        "n": 500,
-        "provenance": {
-          "batch_generations": 256,
-          "batches": [
-            {
-              "cost_usd": 0.496763564374364,
-              "gpu": "H100",
-              "seconds": 419.091870957
-            },
-            {
-              "cost_usd": 0.5091431081786,
-              "gpu": "H100",
-              "seconds": 429.53580555
-            }
-          ],
-          "container_seconds": 297.091870957,
-          "engine": "vllm==0.33.0",
-          "engine_settings": {
-            "dtype": "bfloat16",
-            "gpu_memory_utilization": 0.85,
-            "language_model_only": true,
-            "max_model_len": 34816,
-            "max_num_seqs": 128,
-            "prefix_caching": false
-          },
-          "gpu": "H100",
-          "revision": "2fc06364715b967f1860aea9cf38778875588b17",
-          "sampling": {
-            "max_tokens": 32768,
-            "min_p": 0.0,
-            "n": 1,
-            "presence_penalty": 2.0,
-            "repetition_penalty": 1.0,
-            "seed": 0,
-            "temperature": 1.0,
-            "top_k": 20,
-            "top_p": 1.0
-          },
-          "seconds_basis": "accounted_resource_seconds_including_margins_and_cancelled_attempts",
-          "smoke_included_in_score": false,
-          "standard_error": "binomial_per_sample",
-          "thinking": false,
-          "transformers": "5.17.0"
-        },
-        "samples_per_problem": 1,
-        "seconds": 848.627676507,
-        "stage": "control1_nothink",
-        "standard_error": 0.022314838112789438,
-        "status": "done"
-      },
-      "control2_mechanical": {
-        "accuracy": 0.46,
-        "benchmark": "math500",
-        "correct": 230,
-        "cost_usd": 1.908241377330288,
-        "cut_share": 0.452,
-        "mean_tokens": 23049.566,
-        "model": "Qwen/Qwen3.5-0.8B",
-        "n": 500,
-        "provenance": {
-          "batch_generations": 256,
-          "batches": [
-            {
-              "cost_usd": 0.9671122589056413,
-              "gpu": "H100",
-              "seconds": 815.898981079
-            },
-            {
-              "cost_usd": 0.9411291184246466,
-              "gpu": "H100",
-              "seconds": 793.978446365
-            }
-          ],
-          "container_seconds": 693.898981079,
-          "engine": "vllm==0.33.0",
-          "engine_settings": {
-            "dtype": "bfloat16",
-            "gpu_memory_utilization": 0.85,
-            "language_model_only": true,
-            "max_model_len": 34816,
-            "max_num_seqs": 128,
-            "prefix_caching": false
-          },
-          "gpu": "H100",
-          "revision": "2fc06364715b967f1860aea9cf38778875588b17",
-          "sampling": {
-            "max_tokens": 32768,
-            "n": 1,
-            "presence_penalty": 1.5,
-            "seed": 0,
-            "temperature": 0.6,
-            "top_k": 20,
-            "top_p": 0.95
-          },
-          "seconds_basis": "accounted_resource_seconds_including_margins_and_cancelled_attempts",
-          "smoke_included_in_score": false,
-          "standard_error": "binomial_per_sample",
-          "thinking": true,
-          "transformers": "5.17.0"
-        },
-        "samples_per_problem": 1,
-        "seconds": 1609.877427444,
-        "stage": "control2_mechanical",
-        "standard_error": 0.022289010745208053,
-        "status": "done"
-      },
-      "control3_repetition": {
-        "accuracy": 0.238,
-        "benchmark": "math500",
-        "correct": 119,
-        "cost_usd": 2.192305682871864,
-        "cut_share": 0.756,
-        "mean_tokens": 27114.094,
-        "model": "Qwen/Qwen3.5-0.8B",
-        "n": 500,
-        "provenance": {
-          "batch_generations": 256,
-          "batches": [
-            {
-              "cost_usd": 1.1202700386895454,
-              "gpu": "H100",
-              "seconds": 945.109706431
-            },
-            {
-              "cost_usd": 1.0720356441823187,
-              "gpu": "H100",
-              "seconds": 904.417022651
-            }
-          ],
-          "container_seconds": 823.109706431,
-          "engine": "vllm==0.33.0",
-          "engine_settings": {
-            "dtype": "bfloat16",
-            "gpu_memory_utilization": 0.85,
-            "language_model_only": true,
-            "max_model_len": 34816,
-            "max_num_seqs": 128,
-            "prefix_caching": false
-          },
-          "gpu": "H100",
-          "revision": "2fc06364715b967f1860aea9cf38778875588b17",
-          "sampling": {
-            "max_tokens": 32768,
-            "n": 1,
-            "presence_penalty": 1.5,
-            "repetition_penalty": 1.1,
-            "seed": 0,
-            "temperature": 0.6,
-            "top_k": 20,
-            "top_p": 0.95
-          },
-          "seconds_basis": "accounted_resource_seconds_including_margins_and_cancelled_attempts",
-          "smoke_included_in_score": false,
-          "standard_error": "binomial_per_sample",
-          "thinking": true,
-          "transformers": "5.17.0"
-        },
-        "samples_per_problem": 1,
-        "seconds": 1849.526729082,
-        "stage": "control3_repetition",
-        "standard_error": 0.01904499934365974,
-        "status": "done"
       }
     },
-    "forward_verification": {
-      "internals": {
-        "attention": {
-          "_openwsp_gpu": {
-            "actual_gpu": "H100",
-            "attempt_count": 1,
-            "billable_seconds": 137.14082306,
-            "cost_basis": "resource_estimate_not_provider_invoice",
-            "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound",
-            "total_settled_cost_usd": 0.16255758893378666
-          },
-          "bytes": 7008,
-          "container_seconds": 15.14082306,
-          "files": {
-            "attn_11.npy": [
-              2,
-              8,
-              6,
-              6
-            ],
-            "attn_15.npy": [
-              2,
-              8,
-              6,
-              6
-            ],
-            "attn_19.npy": [
-              2,
-              8,
-              6,
-              6
-            ],
-            "attn_23.npy": [
-              2,
-              8,
-              6,
-              6
-            ],
-            "attn_3.npy": [
-              2,
-              8,
-              6,
-              6
-            ],
-            "attn_7.npy": [
-              2,
-              8,
-              6,
-              6
-            ],
-            "input_ids.npy": [
-              2,
-              6
-            ]
-          },
-          "lengths": [
-            6,
-            6
-          ],
-          "mean_token_logprob": [
-            -3.258798599243164,
-            -4.04314079284668
-          ],
-          "ok": true,
-          "s": 4.147893221,
-          "type": "teacher_forced"
+    "calibration_base": {
+      "status": "done",
+      "stage": "calibration_base",
+      "model": "Qwen/Qwen3.5-0.8B",
+      "benchmark": "math500",
+      "samples_per_problem": 1,
+      "n": 500,
+      "correct": 36,
+      "accuracy": 0.072,
+      "standard_error": 0.011559930795640603,
+      "mean_tokens": 30958.67,
+      "cut_share": 0.932,
+      "seconds": 1673.295498423,
+      "cost_usd": 2.128023597464063,
+      "provenance": {
+        "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+        "sampling": {
+          "temperature": 0.6,
+          "top_p": 0.95,
+          "top_k": 20,
+          "presence_penalty": 1.5,
+          "max_tokens": 32768,
+          "seed": 0,
+          "n": 1
         },
+        "thinking": true,
+        "gpu": "H100",
+        "engine": "vllm==0.33.0",
+        "transformers": "5.17.0"
+      }
+    },
+    "calibration_p50c_smoke": {
+      "status": "done",
+      "stage": "calibration_p50c_smoke",
+      "model": "Qwen/Qwen3.5-0.8B",
+      "benchmark": "math500",
+      "samples_per_problem": 1,
+      "n": 4,
+      "correct": 4,
+      "accuracy": 1.0,
+      "standard_error": 0.0,
+      "mean_tokens": 14094.25,
+      "cut_share": 0.0,
+      "seconds": 234.721268685,
+      "cost_usd": 0.4228336104812867,
+      "provenance": {
+        "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+        "sampling": {
+          "temperature": 0.6,
+          "top_p": 0.95,
+          "top_k": 20,
+          "presence_penalty": 1.5,
+          "max_tokens": 32768,
+          "seed": 0,
+          "n": 1
+        },
+        "thinking": true,
+        "gpu": "H100",
+        "engine": "vllm==0.33.0",
+        "transformers": "5.17.0"
+      }
+    },
+    "calibration_p50c": {
+      "status": "done",
+      "stage": "calibration_p50c",
+      "model": "Qwen/Qwen3.5-0.8B",
+      "benchmark": "math500",
+      "samples_per_problem": 1,
+      "n": 500,
+      "correct": 253,
+      "accuracy": 0.506,
+      "standard_error": 0.02235906974809104,
+      "mean_tokens": 21325.514,
+      "cut_share": 0.31,
+      "seconds": 933.5554113449999,
+      "cost_usd": 1.2511850142476064,
+      "provenance": {
+        "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+        "sampling": {
+          "temperature": 0.6,
+          "top_p": 0.95,
+          "top_k": 20,
+          "presence_penalty": 1.5,
+          "max_tokens": 32768,
+          "seed": 0,
+          "n": 1
+        },
+        "thinking": true,
+        "gpu": "H100",
+        "engine": "vllm==0.33.0",
+        "transformers": "5.17.0"
+      }
+    },
+    "kernel": {
+      "status": "passed",
+      "first_cell": {
+        "ok": true,
+        "output": "gsm8k 7469 example fields: ['answer', 'id', 'problem', 'solution', 'source'] example id: gsm8k_train_0\nmath 7275 example fields: ['answer', 'id', 'level', 'problem', 'solution', 'source', 'subject'] example id: math_train_algebra_0\naime 714 example fields: ['answer', 'id', 'problem', 'source', 'year'] example id: aime_1983-1\nDiagnostic ids: [\"gsm8k_train_2805\", \"gsm8k_train_1766\", \"gsm8k_train_5410\", \"gsm8k_train_1024\", \"gsm8k_train_2520\", \"gsm8k_train_3513\", \"gsm8k_train_2364\", \"gsm8k_train_1928\", \"gsm8k_train_6876\", \"gsm8k_train_6653\", \"gsm8k_train_5477\", \"gsm8k_train_6029\", \"gsm8k_train_2804\", \"gsm8k_train_3165\", \"gsm8k_train_3272\", \"gsm8k_train_967\", \"gsm8k_train_5982\", \"gsm8k_train_6737\", \"gsm8k_train_5716\", \"gsm8k_train_3529\", \"gsm8k_train_2403\", \"gsm8k_train_4239\", \"gsm8k_train_5399\", \"gsm8k_train_2899\", \"gsm8k_train_4554\", \"gsm8k_train_4538\", \"gsm8k_train_4843\", \"gsm8k_train_637\", \"gsm8k_train_5646\", \"gsm8k_train_66\", \"gsm8k_train_3090\", \"gsm8k_train_4181\", \"math_train_number_theory_184\", \"math_train_number_theory_80\", \"math_train_number_theory_148\", \"math_train_algebra_479\", \"math_train_prealgebra_866\", \"math_train_precalculus_357\", \"math_train_algebra_466\", \"math_train_geometry_437\", \"math_train_intermediate_algebra_738\", \"math_train_number_theory_250\", \"math_train_algebra_1133\", \"math_train_number_theory_338\", \"math_train_algebra_419\", \"math_train_intermediate_algebra_459\", \"math_train_algebra_460\", \"math_train_algebra_1346\", \"math_train_precalculus_227\", \"math_train_prealgebra_265\", \"math_train_intermediate_algebra_734\", \"math_train_precalculus_201\", \"math_train_prealgebra_392\", \"math_train_intermediate_algebra_356\", \"math_train_algebra_1290\", \"math_train_counting_and_probability_520\", \"math_train_prealgebra_699\", \"math_train_number_theory_74\", \"math_train_precalculus_535\", \"math_train_intermediate_algebra_760\", \"math_train_algebra_1530\", \"math_train_counting_and_probability_210\", \"math_train_geometry_567\", \"math_train_number_theory_133\", \"math_train_intermediate_algebra_663\", \"math_train_algebra_268\", \"math_train_counting_and_probability_481\", \"math_train_number_theory_113\", \"math_train_algebra_992\", \"math_train_prealgebra_775\", \"math_train_prealgebra_327\", \"math_train_intermediate_algebra_1279\", \"math_train_intermediate_algebra_1215\", \"math_train_intermediate_algebra_601\", \"math_train_counting_and_probability_384\", \"math_train_number_theory_364\", \"math_train_intermediate_algebra_219\", \"math_train_prealgebra_422\", \"math_train_algebra_502\", \"math_train_number_theory_771\", \"math_train_intermediate_algebra_77\", \"math_train_intermediate_algebra_820\", \"math_train_counting_and_probability_639\", \"math_train_prealgebra_128\", \"math_train_algebra_1579\", \"math_train_geometry_335\", \"math_train_intermediate_algebra_366\", \"math_train_number_theory_337\", \"math_train_algebra_887\", \"math_train_precalculus_673\", \"math_train_algebra_808\", \"math_train_number_theory_517\", \"math_train_counting_and_probability_193\", \"math_train_counting_and_probability_67\", \"math_train_counting_and_probability_202\", \"math_train_number_theory_417\"]\nTensor count: 320\nmodel.language_model.embed_tokens.weight\nmodel.language_model.layers.0.input_layernorm.weight\nmodel.language_model.layers.0.linear_attn.A_log\nmodel.language_model.layers.0.linear_attn.conv1d.weight\nmodel.language_model.layers.0.linear_attn.dt_bias\nmodel.language_model.layers.0.linear_attn.in_proj_a.weight\nmodel.language_model.layers.0.linear_attn.in_proj_b.weight\nmodel.language_model.layers.0.linear_attn.in_proj_qkv.weight\nmodel.language_model.layers.0.linear_attn.in_proj_z.weight\nmodel.language_model.layers.0.linear_attn.norm.weight\nmodel.language_model.layers.0.linear_attn.out_proj.weight\nmodel.language_model.layers.0.mlp.down_proj.weight\nmodel.language_model.layers.0.mlp.gate_proj.weight\nmodel.language_model.layers.0.mlp.up_proj.weight\nmodel.language_model.layers.0.post_attention_layernorm.weight\nmodel.language_model.layers.1.input_layernorm.weight\nmodel.language_model.layers.1.linear_attn.A_log\nmodel.language_model.layers.1.linear_attn.conv1d.weight\nmodel.language_model.layers.1.linear_attn.dt_bias\nmodel.language_model.layers.1.linear_attn.in_proj_a.weight\nmodel.language_model.layers.1.linear_attn.in_proj_b.weight\nmodel.language_model.layers.1.linear_attn.in_proj_qkv.weight\nmodel.language_model.layers.1.linear_attn.in_proj_z.weight\nmodel.language_model.layers.1.linear_attn.norm.weight\nmodel.language_model.layers.1.linear_attn.out_proj.weight\nmodel.language_model.layers.1.mlp.down_proj.weight\nmodel.language_model.layers.1.mlp.gate_proj.weight\nmodel.language_model.layers.1.mlp.up_proj.weight\nmodel.language_model.layers.1.post_attention_layernorm.weight\nmodel.language_model.layers.10.input_layernorm.weight\nmodel.language_model.layers.10.linear_attn.A_log\nmodel.language_model.layers.10.linear_attn.conv1d.weight\nmodel.language_model.layers.10.linear_attn.dt_bias\nmodel.language_model.layers.10.linear_attn.in_proj_a.weight\nmodel.language_model.layers.10.linear_attn.in_proj_b.weight\nmodel.language_model.layers.10.linear_attn.in_proj_qkv.weight\nmodel.language_model.layers.10.linear_attn.in_proj_z.weight\nmodel.language_model.layers.10.linear_attn.norm.weight\nmodel.language_model.layers.10.linear_attn.out_proj.weight\nmodel.language_model.layers.10.mlp.down_proj.weight\nmodel.language_model.layers.10.mlp.gate_proj.weight\nmodel.language_model.layers.10.mlp.up_proj.weight\nmodel.language_model.layers.10.post_attention_layernorm.weight\nmodel.language_model.layers.11.input_layernorm.weight\nmodel.language_model.layers.11.mlp.down_proj.weight\nExisting edits: []\n",
+        "error": null,
+        "seconds": 0.29434447399999897,
+        "runs": 1,
+        "id": "authors-first-cell",
+        "restarted": false,
+        "variables_lost": false
+      },
+      "refusals": {
+        "frozen_norm": {
+          "refused": true,
+          "error": "EditRefused: Frozen tensor (final norm, embedding or output layer): model.language_model.norm.weight"
+        },
+        "frozen_embedding": {
+          "refused": true,
+          "error": "EditRefused: Frozen tensor (final norm, embedding or output layer): model.language_model.embed_tokens.weight"
+        },
+        "frozen_output": {
+          "refused": true,
+          "error": "EditRefused: Unknown tensor: lm_head.weight"
+        },
+        "rescale": {
+          "refused": true,
+          "error": "EditRefused: Whole-tensor scalar rescaling is forbidden: model.language_model.layers.15.mlp.down_proj.weight"
+        },
+        "nonfinite": {
+          "refused": true,
+          "error": "EditRefused: Non-finite edit values: model.language_model.layers.15.mlp.down_proj.weight"
+        },
+        "shape": {
+          "refused": true,
+          "error": "EditRefused: Shape mismatch for model.language_model.layers.15.mlp.down_proj.weight: (1,) != (1024, 3584)"
+        },
+        "gradient": {
+          "refused": true,
+          "error": "ProtocolRefused: Operation not allowed by the analysis protocol: backward"
+        },
+        "optimizer": {
+          "refused": true,
+          "error": "ProtocolRefused: Operation not allowed by the analysis protocol: optim"
+        },
+        "model_forward": {
+          "refused": true,
+          "error": "ProtocolRefused: Running model layers in the kernel is forbidden; use the forward tool"
+        },
+        "network": {
+          "refused": true,
+          "error": "ProtocolRefused: Import not allowed by the analysis protocol: urllib.request"
+        }
+      },
+      "isolation": {
+        "network": {
+          "target": "1.1.1.1:443",
+          "timeout_seconds": 2,
+          "connected": false,
+          "error_type": "OSError",
+          "errno": 101,
+          "seconds": 0.0032805880000008614,
+          "scope": "One outbound TCP connection probe; does not establish policy for other destinations."
+        },
+        "mounts": {
+          "/model": {
+            "write_denied": true,
+            "expected_denial": true,
+            "error_type": "OSError",
+            "errno": 30
+          },
+          "/practice": {
+            "write_denied": true,
+            "expected_denial": true,
+            "error_type": "OSError",
+            "errno": 30
+          }
+        },
+        "secret_environment": {
+          "checked_names": [
+            "ANTHROPIC_API_KEY",
+            "AWS_ACCESS_KEY_ID",
+            "AWS_SECRET_ACCESS_KEY",
+            "AWS_SESSION_TOKEN",
+            "AZURE_CLIENT_SECRET",
+            "GEMINI_API_KEY",
+            "GH_TOKEN",
+            "GITHUB_ACCESS_TOKEN",
+            "GITHUB_TOKEN",
+            "GOOGLE_API_KEY",
+            "HF_TOKEN",
+            "HUGGING_FACE_HUB_TOKEN",
+            "MODAL_IDENTITY_TOKEN",
+            "MODAL_TOKEN_ID",
+            "MODAL_TOKEN_SECRET",
+            "OPENAI_API_KEY"
+          ],
+          "present_names": []
+        },
+        "cuda_available": false
+      },
+      "block_network_configured": true
+    },
+    "forward_verification": {
+      "status": "passed",
+      "weight_swap": {
+        "status": "fallback",
+        "mode": "fresh_engine_per_pass",
+        "container_seconds": 225.87615156299998,
+        "error": "Engine does not expose a compatible weight-reload contract",
+        "evidence": {},
+        "fallback": "fresh_engine_per_pass",
+        "ok": false,
+        "_openwsp_gpu": {
+          "actual_gpu": "H100",
+          "attempt_count": 1,
+          "total_settled_cost_usd": 0.4123491983193427,
+          "billable_seconds": 347.876151563,
+          "cost_basis": "resource_estimate_not_provider_invoice",
+          "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
+        }
+      },
+      "internals": {
         "status": "passed",
         "teacher_forced": {
-          "_openwsp_gpu": {
-            "actual_gpu": "H100",
-            "attempt_count": 1,
-            "billable_seconds": 137.919023681,
-            "cost_basis": "resource_estimate_not_provider_invoice",
-            "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound",
-            "total_settled_cost_usd": 0.16348001606987866
-          },
           "bytes": 410544,
           "container_seconds": 15.919023681,
           "files": {
@@ -514,142 +321,321 @@
           ],
           "ok": true,
           "s": 2.6683454289999986,
-          "type": "teacher_forced"
-        }
-      },
-      "status": "passed",
-      "weight_swap": {
-        "_openwsp_gpu": {
-          "actual_gpu": "H100",
-          "attempt_count": 1,
-          "billable_seconds": 347.876151563,
-          "cost_basis": "resource_estimate_not_provider_invoice",
-          "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound",
-          "total_settled_cost_usd": 0.4123491983193427
-        },
-        "container_seconds": 225.87615156299998,
-        "error": "Engine does not expose a compatible weight-reload contract",
-        "evidence": {},
-        "fallback": "fresh_engine_per_pass",
-        "mode": "fresh_engine_per_pass",
-        "ok": false,
-        "status": "fallback"
-      }
-    },
-    "kernel": {
-      "block_network_configured": true,
-      "first_cell": {
-        "error": null,
-        "id": "authors-first-cell",
-        "ok": true,
-        "output": "gsm8k 7469 example fields: ['answer', 'id', 'problem', 'solution', 'source'] example id: gsm8k_train_0\nmath 7275 example fields: ['answer', 'id', 'level', 'problem', 'solution', 'source', 'subject'] example id: math_train_algebra_0\naime 714 example fields: ['answer', 'id', 'problem', 'source', 'year'] example id: aime_1983-1\nDiagnostic ids: [\"gsm8k_train_2805\", \"gsm8k_train_1766\", \"gsm8k_train_5410\", \"gsm8k_train_1024\", \"gsm8k_train_2520\", \"gsm8k_train_3513\", \"gsm8k_train_2364\", \"gsm8k_train_1928\", \"gsm8k_train_6876\", \"gsm8k_train_6653\", \"gsm8k_train_5477\", \"gsm8k_train_6029\", \"gsm8k_train_2804\", \"gsm8k_train_3165\", \"gsm8k_train_3272\", \"gsm8k_train_967\", \"gsm8k_train_5982\", \"gsm8k_train_6737\", \"gsm8k_train_5716\", \"gsm8k_train_3529\", \"gsm8k_train_2403\", \"gsm8k_train_4239\", \"gsm8k_train_5399\", \"gsm8k_train_2899\", \"gsm8k_train_4554\", \"gsm8k_train_4538\", \"gsm8k_train_4843\", \"gsm8k_train_637\", \"gsm8k_train_5646\", \"gsm8k_train_66\", \"gsm8k_train_3090\", \"gsm8k_train_4181\", \"math_train_number_theory_184\", \"math_train_number_theory_80\", \"math_train_number_theory_148\", \"math_train_algebra_479\", \"math_train_prealgebra_866\", \"math_train_precalculus_357\", \"math_train_algebra_466\", \"math_train_geometry_437\", \"math_train_intermediate_algebra_738\", \"math_train_number_theory_250\", \"math_train_algebra_1133\", \"math_train_number_theory_338\", \"math_train_algebra_419\", \"math_train_intermediate_algebra_459\", \"math_train_algebra_460\", \"math_train_algebra_1346\", \"math_train_precalculus_227\", \"math_train_prealgebra_265\", \"math_train_intermediate_algebra_734\", \"math_train_precalculus_201\", \"math_train_prealgebra_392\", \"math_train_intermediate_algebra_356\", \"math_train_algebra_1290\", \"math_train_counting_and_probability_520\", \"math_train_prealgebra_699\", \"math_train_number_theory_74\", \"math_train_precalculus_535\", \"math_train_intermediate_algebra_760\", \"math_train_algebra_1530\", \"math_train_counting_and_probability_210\", \"math_train_geometry_567\", \"math_train_number_theory_133\", \"math_train_intermediate_algebra_663\", \"math_train_algebra_268\", \"math_train_counting_and_probability_481\", \"math_train_number_theory_113\", \"math_train_algebra_992\", \"math_train_prealgebra_775\", \"math_train_prealgebra_327\", \"math_train_intermediate_algebra_1279\", \"math_train_intermediate_algebra_1215\", \"math_train_intermediate_algebra_601\", \"math_train_counting_and_probability_384\", \"math_train_number_theory_364\", \"math_train_intermediate_algebra_219\", \"math_train_prealgebra_422\", \"math_train_algebra_502\", \"math_train_number_theory_771\", \"math_train_intermediate_algebra_77\", \"math_train_intermediate_algebra_820\", \"math_train_counting_and_probability_639\", \"math_train_prealgebra_128\", \"math_train_algebra_1579\", \"math_train_geometry_335\", \"math_train_intermediate_algebra_366\", \"math_train_number_theory_337\", \"math_train_algebra_887\", \"math_train_precalculus_673\", \"math_train_algebra_808\", \"math_train_number_theory_517\", \"math_train_counting_and_probability_193\", \"math_train_counting_and_probability_67\", \"math_train_counting_and_probability_202\", \"math_train_number_theory_417\"]\nTensor count: 320\nmodel.language_model.embed_tokens.weight\nmodel.language_model.layers.0.input_layernorm.weight\nmodel.language_model.layers.0.linear_attn.A_log\nmodel.language_model.layers.0.linear_attn.conv1d.weight\nmodel.language_model.layers.0.linear_attn.dt_bias\nmodel.language_model.layers.0.linear_attn.in_proj_a.weight\nmodel.language_model.layers.0.linear_attn.in_proj_b.weight\nmodel.language_model.layers.0.linear_attn.in_proj_qkv.weight\nmodel.language_model.layers.0.linear_attn.in_proj_z.weight\nmodel.language_model.layers.0.linear_attn.norm.weight\nmodel.language_model.layers.0.linear_attn.out_proj.weight\nmodel.language_model.layers.0.mlp.down_proj.weight\nmodel.language_model.layers.0.mlp.gate_proj.weight\nmodel.language_model.layers.0.mlp.up_proj.weight\nmodel.language_model.layers.0.post_attention_layernorm.weight\nmodel.language_model.layers.1.input_layernorm.weight\nmodel.language_model.layers.1.linear_attn.A_log\nmodel.language_model.layers.1.linear_attn.conv1d.weight\nmodel.language_model.layers.1.linear_attn.dt_bias\nmodel.language_model.layers.1.linear_attn.in_proj_a.weight\nmodel.language_model.layers.1.linear_attn.in_proj_b.weight\nmodel.language_model.layers.1.linear_attn.in_proj_qkv.weight\nmodel.language_model.layers.1.linear_attn.in_proj_z.weight\nmodel.language_model.layers.1.linear_attn.norm.weight\nmodel.language_model.layers.1.linear_attn.out_proj.weight\nmodel.language_model.layers.1.mlp.down_proj.weight\nmodel.language_model.layers.1.mlp.gate_proj.weight\nmodel.language_model.layers.1.mlp.up_proj.weight\nmodel.language_model.layers.1.post_attention_layernorm.weight\nmodel.language_model.layers.10.input_layernorm.weight\nmodel.language_model.layers.10.linear_attn.A_log\nmodel.language_model.layers.10.linear_attn.conv1d.weight\nmodel.language_model.layers.10.linear_attn.dt_bias\nmodel.language_model.layers.10.linear_attn.in_proj_a.weight\nmodel.language_model.layers.10.linear_attn.in_proj_b.weight\nmodel.language_model.layers.10.linear_attn.in_proj_qkv.weight\nmodel.language_model.layers.10.linear_attn.in_proj_z.weight\nmodel.language_model.layers.10.linear_attn.norm.weight\nmodel.language_model.layers.10.linear_attn.out_proj.weight\nmodel.language_model.layers.10.mlp.down_proj.weight\nmodel.language_model.layers.10.mlp.gate_proj.weight\nmodel.language_model.layers.10.mlp.up_proj.weight\nmodel.language_model.layers.10.post_attention_layernorm.weight\nmodel.language_model.layers.11.input_layernorm.weight\nmodel.language_model.layers.11.mlp.down_proj.weight\nExisting edits: []\n",
-        "restarted": false,
-        "runs": 1,
-        "seconds": 0.29434447399999897,
-        "variables_lost": false
-      },
-      "isolation": {
-        "cuda_available": false,
-        "mounts": {
-          "/model": {
-            "errno": 30,
-            "error_type": "OSError",
-            "expected_denial": true,
-            "write_denied": true
-          },
-          "/practice": {
-            "errno": 30,
-            "error_type": "OSError",
-            "expected_denial": true,
-            "write_denied": true
+          "type": "teacher_forced",
+          "_openwsp_gpu": {
+            "actual_gpu": "H100",
+            "attempt_count": 1,
+            "total_settled_cost_usd": 0.16348001606987866,
+            "billable_seconds": 137.919023681,
+            "cost_basis": "resource_estimate_not_provider_invoice",
+            "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
           }
         },
-        "network": {
-          "connected": false,
-          "errno": 101,
-          "error_type": "OSError",
-          "scope": "One outbound TCP connection probe; does not establish policy for other destinations.",
-          "seconds": 0.0032805880000008614,
-          "target": "1.1.1.1:443",
-          "timeout_seconds": 2
-        },
-        "secret_environment": {
-          "checked_names": [
-            "ANTHROPIC_API_KEY",
-            "AWS_ACCESS_KEY_ID",
-            "AWS_SECRET_ACCESS_KEY",
-            "AWS_SESSION_TOKEN",
-            "AZURE_CLIENT_SECRET",
-            "GEMINI_API_KEY",
-            "GH_TOKEN",
-            "GITHUB_ACCESS_TOKEN",
-            "GITHUB_TOKEN",
-            "GOOGLE_API_KEY",
-            "HF_TOKEN",
-            "HUGGING_FACE_HUB_TOKEN",
-            "MODAL_IDENTITY_TOKEN",
-            "MODAL_TOKEN_ID",
-            "MODAL_TOKEN_SECRET",
-            "OPENAI_API_KEY"
+        "attention": {
+          "bytes": 7008,
+          "container_seconds": 15.14082306,
+          "files": {
+            "attn_11.npy": [
+              2,
+              8,
+              6,
+              6
+            ],
+            "attn_15.npy": [
+              2,
+              8,
+              6,
+              6
+            ],
+            "attn_19.npy": [
+              2,
+              8,
+              6,
+              6
+            ],
+            "attn_23.npy": [
+              2,
+              8,
+              6,
+              6
+            ],
+            "attn_3.npy": [
+              2,
+              8,
+              6,
+              6
+            ],
+            "attn_7.npy": [
+              2,
+              8,
+              6,
+              6
+            ],
+            "input_ids.npy": [
+              2,
+              6
+            ]
+          },
+          "lengths": [
+            6,
+            6
           ],
-          "present_names": []
+          "mean_token_logprob": [
+            -3.258798599243164,
+            -4.04314079284668
+          ],
+          "ok": true,
+          "s": 4.147893221,
+          "type": "teacher_forced",
+          "_openwsp_gpu": {
+            "actual_gpu": "H100",
+            "attempt_count": 1,
+            "total_settled_cost_usd": 0.16255758893378666,
+            "billable_seconds": 137.14082306,
+            "cost_basis": "resource_estimate_not_provider_invoice",
+            "duration_basis": "container_seconds_plus_margins_or_cancelled_full_bound"
+          }
         }
-      },
-      "refusals": {
-        "frozen_embedding": {
-          "error": "EditRefused: Frozen tensor (final norm, embedding or output layer): model.language_model.embed_tokens.weight",
-          "refused": true
-        },
-        "frozen_norm": {
-          "error": "EditRefused: Frozen tensor (final norm, embedding or output layer): model.language_model.norm.weight",
-          "refused": true
-        },
-        "frozen_output": {
-          "error": "EditRefused: Unknown tensor: lm_head.weight",
-          "refused": true
-        },
-        "gradient": {
-          "error": "ProtocolRefused: Operation not allowed by the analysis protocol: backward",
-          "refused": true
-        },
-        "model_forward": {
-          "error": "ProtocolRefused: Running model layers in the kernel is forbidden; use the forward tool",
-          "refused": true
-        },
-        "network": {
-          "error": "ProtocolRefused: Import not allowed by the analysis protocol: urllib.request",
-          "refused": true
-        },
-        "nonfinite": {
-          "error": "EditRefused: Non-finite edit values: model.language_model.layers.15.mlp.down_proj.weight",
-          "refused": true
-        },
-        "optimizer": {
-          "error": "ProtocolRefused: Operation not allowed by the analysis protocol: optim",
-          "refused": true
-        },
-        "rescale": {
-          "error": "EditRefused: Whole-tensor scalar rescaling is forbidden: model.language_model.layers.15.mlp.down_proj.weight",
-          "refused": true
-        },
-        "shape": {
-          "error": "EditRefused: Shape mismatch for model.language_model.layers.15.mlp.down_proj.weight: (1,) != (1024, 3584)",
-          "refused": true
-        }
-      },
-      "status": "passed"
+      }
     },
-    "prepare": {
-      "model_revision": "2fc06364715b967f1860aea9cf38778875588b17",
-      "model_sha256": "978661a573971be7257815c2554a28c74913c7b7ea51b0a0b9503fd11eb0d2f8",
-      "practice": {
-        "aime.jsonl": "9f6f26b89e65c7123e6106a9dce51137783eb339547f974f2ab1413165122f56",
-        "gsm8k_train.jsonl": "06d0dd560a908c2c2883bfb7d27ab55a87b213ff0d625f5cd734836aeac9a3e5",
-        "math_train.jsonl": "abe7982b4d8c98394fe185fb152568a2c784a4157a75fe42b9c01857e71f0c6e"
+    "controls": {
+      "control1_nothink": {
+        "status": "done",
+        "stage": "control1_nothink",
+        "model": "Qwen/Qwen3.5-0.8B",
+        "benchmark": "math500",
+        "samples_per_problem": 1,
+        "n": 500,
+        "correct": 234,
+        "accuracy": 0.468,
+        "standard_error": 0.022314838112789438,
+        "mean_tokens": 9217.878,
+        "cut_share": 0.006,
+        "seconds": 848.627676507,
+        "cost_usd": 1.005906672552964,
+        "provenance": {
+          "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+          "sampling": {
+            "temperature": 1.0,
+            "top_p": 1.0,
+            "top_k": 20,
+            "presence_penalty": 2.0,
+            "max_tokens": 32768,
+            "seed": 0,
+            "min_p": 0.0,
+            "repetition_penalty": 1.0,
+            "n": 1
+          },
+          "thinking": false,
+          "gpu": "H100",
+          "engine": "vllm==0.33.0",
+          "engine_settings": {
+            "dtype": "bfloat16",
+            "gpu_memory_utilization": 0.85,
+            "language_model_only": true,
+            "max_model_len": 34816,
+            "max_num_seqs": 128,
+            "prefix_caching": false
+          },
+          "seconds_basis": "accounted_resource_seconds_including_margins_and_cancelled_attempts",
+          "container_seconds": 297.091870957,
+          "transformers": "5.17.0",
+          "batch_generations": 256,
+          "standard_error": "binomial_per_sample",
+          "smoke_included_in_score": false,
+          "batches": [
+            {
+              "gpu": "H100",
+              "seconds": 419.091870957,
+              "cost_usd": 0.496763564374364
+            },
+            {
+              "gpu": "H100",
+              "seconds": 429.53580555,
+              "cost_usd": 0.5091431081786
+            }
+          ]
+        }
       },
-      "seconds": 10.311959593,
-      "status": "done"
+      "control2_mechanical": {
+        "status": "done",
+        "stage": "control2_mechanical",
+        "model": "Qwen/Qwen3.5-0.8B",
+        "benchmark": "math500",
+        "samples_per_problem": 1,
+        "n": 500,
+        "correct": 230,
+        "accuracy": 0.46,
+        "standard_error": 0.022289010745208053,
+        "mean_tokens": 23049.566,
+        "cut_share": 0.452,
+        "seconds": 1609.877427444,
+        "cost_usd": 1.908241377330288,
+        "provenance": {
+          "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+          "sampling": {
+            "temperature": 0.6,
+            "top_p": 0.95,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "max_tokens": 32768,
+            "seed": 0,
+            "n": 1
+          },
+          "thinking": true,
+          "gpu": "H100",
+          "engine": "vllm==0.33.0",
+          "engine_settings": {
+            "dtype": "bfloat16",
+            "gpu_memory_utilization": 0.85,
+            "language_model_only": true,
+            "max_model_len": 34816,
+            "max_num_seqs": 128,
+            "prefix_caching": false
+          },
+          "seconds_basis": "accounted_resource_seconds_including_margins_and_cancelled_attempts",
+          "container_seconds": 693.898981079,
+          "transformers": "5.17.0",
+          "batch_generations": 256,
+          "standard_error": "binomial_per_sample",
+          "smoke_included_in_score": false,
+          "batches": [
+            {
+              "gpu": "H100",
+              "seconds": 815.898981079,
+              "cost_usd": 0.9671122589056413
+            },
+            {
+              "gpu": "H100",
+              "seconds": 793.978446365,
+              "cost_usd": 0.9411291184246466
+            }
+          ]
+        }
+      },
+      "control3_repetition": {
+        "status": "done",
+        "stage": "control3_repetition",
+        "model": "Qwen/Qwen3.5-0.8B",
+        "benchmark": "math500",
+        "samples_per_problem": 1,
+        "n": 500,
+        "correct": 119,
+        "accuracy": 0.238,
+        "standard_error": 0.01904499934365974,
+        "mean_tokens": 27114.094,
+        "cut_share": 0.756,
+        "seconds": 1849.526729082,
+        "cost_usd": 2.192305682871864,
+        "provenance": {
+          "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+          "sampling": {
+            "temperature": 0.6,
+            "top_p": 0.95,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "max_tokens": 32768,
+            "seed": 0,
+            "repetition_penalty": 1.1,
+            "n": 1
+          },
+          "thinking": true,
+          "gpu": "H100",
+          "engine": "vllm==0.33.0",
+          "engine_settings": {
+            "dtype": "bfloat16",
+            "gpu_memory_utilization": 0.85,
+            "language_model_only": true,
+            "max_model_len": 34816,
+            "max_num_seqs": 128,
+            "prefix_caching": false
+          },
+          "seconds_basis": "accounted_resource_seconds_including_margins_and_cancelled_attempts",
+          "container_seconds": 823.109706431,
+          "transformers": "5.17.0",
+          "batch_generations": 256,
+          "standard_error": "binomial_per_sample",
+          "smoke_included_in_score": false,
+          "batches": [
+            {
+              "gpu": "H100",
+              "seconds": 945.109706431,
+              "cost_usd": 1.1202700386895454
+            },
+            {
+              "gpu": "H100",
+              "seconds": 904.417022651,
+              "cost_usd": 1.0720356441823187
+            }
+          ]
+        }
+      }
     }
   },
-  "status": "running"
+  "status": "running",
+  "active_stage": "live",
+  "heartbeat": 1793794781.885396,
+  "budget": {
+    "editor": {
+      "spent_usd": 78.292765,
+      "reserved_usd": 0.0,
+      "available_usd": 21.707235
+    },
+    "modal": {
+      "spent_usd": 126.55116404177953,
+      "reserved_usd": 24.319683472222223,
+      "available_usd": 74.07915248599825
+    }
+  },
+  "calibration": {
+    "calibration_base": {
+      "accuracy": 0.072,
+      "reference_accuracy": 0.079,
+      "reference_standard_error": 0.012,
+      "gap": -0.007000000000000006,
+      "within_two_standard_errors": true
+    },
+    "calibration_p50c": {
+      "accuracy": 0.506,
+      "reference_accuracy": 0.481,
+      "reference_standard_error": 0.022,
+      "gap": 0.025000000000000022,
+      "within_two_standard_errors": true
+    },
+    "status": "passed"
+  },
+  "driver_receipt": {
+    "reservation_id": "driver-0ee74da1eec14155b9382b382fc85195",
+    "owner_id": "fc-01M6K04PS9VADJFZRXYY6KDQB3",
+    "reservation_upper_bound_usd": "1.905953472222222222222222222",
+    "observed_subtotal_usd": "0.1701853301663601666666666667",
+    "observed_driver_seconds": 7600.941848662,
+    "receipt_status": "awaiting_provider_completion",
+    "billing_basis": "resource_upper_bound_not_invoice"
+  },
+  "controls_deferred": "Current verified allowance preserves priority for the live run and its evaluation. Controls resume afterward.",
+  "live": {
+    "turn": 115,
+    "runs": 60,
+    "passes": 44,
+    "requests": 53,
+    "done": false,
+    "sandbox_id": "sb-01M6K7ZGPS59WWFTZEQVY3GTBC",
+    "run_id": "codex-20261103",
+    "editor": "codex"
+  },
+  "publication": {
+    "status": "blocked",
+    "error_type": "PublishingError"
+  },
+  "active_live": {
+    "schema_version": 1,
+    "editor": "codex",
+    "run_id": "codex-20261103",
+    "relative_path": "live-runs/codex-20261103",
+    "task_sha256": "ce36e273b668e4edb8fa44effaab055cbece7e3b4acbce7ffcc77dde024c8b74",
+    "instructions_sha256": "b33fe0624137cd6f190e42a8659046baf16261f3c29cd6455734523ba473afeb",
+    "initialization": "Original pinned weights, empty isolated work namespace, zero live counters.",
+    "relationship": "Separate attempt; no prior API response history, partial edit or control result is supplied."
+  }
 }

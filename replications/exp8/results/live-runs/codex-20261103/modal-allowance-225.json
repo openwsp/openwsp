@@ -1,0 +1,88 @@
+{
+  "observation_id": "operator-auto-topups-20261104-modal225",
+  "observation": {
+    "observation_id": "operator-auto-topups-20261104-modal225",
+    "cycle_limit": "225",
+    "cycle_usage": "126.4130954039118399431775944",
+    "evidence": {
+      "automatic_topups_authorized": true,
+      "basis": "operator_automatic_topups",
+      "cycle_usage_basis": "Existing conservative ledger usage floor from a direct Volume read. Preserve every prior charge and reservation; no provider-usage anchor is applied.",
+      "interpretation": "Continue the same task under automatic top-ups within the separately authorized $225 cumulative Modal task cap. This is a funding envelope, not an observation that the provider account limit increased.",
+      "observed_at": "2026-11-04T12:13:10.084288+00:00",
+      "observed_provider_limit_record": "replications/exp8/authorizations/modal-dashboard-20261104.json",
+      "operator_instruction": "we've 22 dollars more never stop due to that it will top up automatically",
+      "provider_limit_observed": false,
+      "source": "docs/TASK.md: continuing automatic top-up instruction and explicit $225 cumulative task authorization; replications/exp8/authorizations/modal-budget-20261104.json",
+      "task_authorization_id": "user-2026-11-04-exp8-modal-225",
+      "task_cap_instruction": "Raise the total Modal cap to $225"
+    },
+    "cycle_id": null,
+    "task_authorization": {
+      "total_limit": "225",
+      "authorization_id": "user-2026-11-04-exp8-modal-225",
+      "evidence": {
+        "authorized_at": "2026-11-04T10:11:16.934808+00:00",
+        "basis": "explicit_user_authorization",
+        "operator_instruction": "Raise the total Modal cap to $225",
+        "prior_task_cap_usd": "150",
+        "protected_openai_plan_b_usd": "160.85",
+        "scope": "Absolute cumulative Modal task cap, not additional225USD and not a provider usage-limit claim. Preserve all charges, reservations and priority order.",
+        "source": "docs/TASK.md: Modal task-cap increase and account restoration (2026-11-04)"
+      }
+    }
+  },
+  "prior_allowance": {
+    "cycle_id": null,
+    "cycle_limit": "150",
+    "cycle_usage": "32.80472885879525534012501112",
+    "evidence": {
+      "automatic_topups_authorized": true,
+      "basis": "operator_automatic_topups",
+      "cycle_usage_basis": "Existing conservative ledger floor from direct Modal Volume read; known usage and reservations are preserved.",
+      "interpretation": "Continue the same task using automatic top-ups within the previously authorized $150 total Modal task cap. This supersedes the attachment\u2019s older $42 gate and does not assert an observed provider dashboard limit.",
+      "observed_at": "2026-11-03T19:01:46.660554+00:00",
+      "operator_instruction": "we've 22 dollars more never stop due to that it will top up automatically",
+      "provider_limit_observed": false,
+      "source": "docs/TASK.md: latest direct operator instruction accompanying steering update 2"
+    },
+    "observed_at": "2026-11-03T19:01:46.660554+00:00",
+    "task_spend_at_observation": "32.75472885879525534012501112"
+  },
+  "applied_allowance": {
+    "cycle_limit": "225",
+    "cycle_usage": "126.5938282532228605832887055",
+    "task_spend_at_observation": "126.5438282532228605832887055",
+    "observed_at": "2026-11-04T12:13:10.084288+00:00",
+    "evidence": {
+      "automatic_topups_authorized": true,
+      "basis": "operator_automatic_topups",
+      "cycle_usage_basis": "Existing conservative ledger usage floor from a direct Volume read. Preserve every prior charge and reservation; no provider-usage anchor is applied.",
+      "interpretation": "Continue the same task under automatic top-ups within the separately authorized $225 cumulative Modal task cap. This is a funding envelope, not an observation that the provider account limit increased.",
+      "observed_at": "2026-11-04T12:13:10.084288+00:00",
+      "observed_provider_limit_record": "replications/exp8/authorizations/modal-dashboard-20261104.json",
+      "operator_instruction": "we've 22 dollars more never stop due to that it will top up automatically",
+      "provider_limit_observed": false,
+      "source": "docs/TASK.md: continuing automatic top-up instruction and explicit $225 cumulative task authorization; replications/exp8/authorizations/modal-budget-20261104.json",
+      "task_authorization_id": "user-2026-11-04-exp8-modal-225",
+      "task_cap_instruction": "Raise the total Modal cap to $225"
+    },
+    "cycle_id": null
+  },
+  "applied_at": "2026-11-04T12:17:19.490747+00:00",
+  "task_authorization": {
+    "authorization_id": "user-2026-11-04-exp8-modal-225",
+    "prior_limit_usd": "150",
+    "new_limit_usd": "225",
+    "evidence": {
+      "authorized_at": "2026-11-04T10:11:16.934808+00:00",
+      "basis": "explicit_user_authorization",
+      "operator_instruction": "Raise the total Modal cap to $225",
+      "prior_task_cap_usd": "150",
+      "protected_openai_plan_b_usd": "160.85",
+      "scope": "Absolute cumulative Modal task cap, not additional225USD and not a provider usage-limit claim. Preserve all charges, reservations and priority order.",
+      "source": "docs/TASK.md: Modal task-cap increase and account restoration (2026-11-04)"
+    },
+    "applied_at": "2026-11-04T12:17:19.491424+00:00"
+  }
+}

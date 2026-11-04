@@ -1,22 +1,22 @@
 {
   "current": {
-    "call_id": "fc-01M6K04PS9VADJFZRXYY6KDQB3",
+    "call_id": "fc-01M6K7YW39YKEK7P5K1C16VX8P",
     "config": {
       "editor": "codex",
       "publish_results": true,
       "run_id": "codex-20261103"
     },
-    "created_at": 1793786528.1960251,
-    "dispatched_at": 1793786532.8602972,
+    "created_at": 1793794730.2683659,
+    "dispatched_at": 1793794731.7495358,
     "fingerprint": "adda0457aafba3c8f17a8a18a6d5f8b4d715b4ec5d32390a5e4d40ce05adb12c",
     "phase": "running",
-    "reservation_id": "driver-0ee74da1eec14155b9382b382fc85195",
+    "reservation_id": "driver-7781f6f1f9ac46e2a9bad61383326af5",
     "stage": "all",
     "ticket": {
       "cpu_cores": 1,
       "memory_gib": 4,
-      "prepared_at": 1793786530.6645026,
-      "reservation_id": "driver-0ee74da1eec14155b9382b382fc85195",
+      "prepared_at": 1793794730.8639808,
+      "reservation_id": "driver-7781f6f1f9ac46e2a9bad61383326af5",
       "scaledown_seconds": 5,
       "schema_version": 1,
       "stage": "all",
@@ -368,6 +368,48 @@
         "timeout_seconds": 86400,
         "upper_bound_usd": "1.905953472222222222222222222"
       }
+    },
+    {
+      "call_id": "fc-01M6K04PS9VADJFZRXYY6KDQB3",
+      "config": {
+        "editor": "codex",
+        "publish_results": true,
+        "run_id": "codex-20261103"
+      },
+      "created_at": 1793786528.1960251,
+      "dispatched_at": 1793786532.8602972,
+      "error_type": "BudgetExceeded",
+      "fingerprint": "adda0457aafba3c8f17a8a18a6d5f8b4d715b4ec5d32390a5e4d40ce05adb12c",
+      "manual_resume": {
+        "config": {
+          "editor": "codex",
+          "publish_results": true,
+          "run_id": "codex-20261103"
+        },
+        "fingerprint": "adda0457aafba3c8f17a8a18a6d5f8b4d715b4ec5d32390a5e4d40ce05adb12c",
+        "reason": "Continue the same attempt after applying the operator-auto-topups-20261104-modal225 funding observation and explicit user-2026-11-04-exp8-modal-225 task authorization at a verified idle boundary. Preserve all counters, costs, completed requests and the existing editor journal.",
+        "stage": "all"
+      },
+      "no_restart": true,
+      "phase": "terminal",
+      "reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+      "reservation_id": "driver-0ee74da1eec14155b9382b382fc85195",
+      "result_status": null,
+      "stage": "all",
+      "terminal_at": 1793794729.2103279,
+      "terminal_state": "failed",
+      "ticket": {
+        "cpu_cores": 1,
+        "memory_gib": 4,
+        "prepared_at": 1793786530.6645026,
+        "reservation_id": "driver-0ee74da1eec14155b9382b382fc85195",
+        "scaledown_seconds": 5,
+        "schema_version": 1,
+        "stage": "all",
+        "startup_seconds": 120,
+        "timeout_seconds": 86400,
+        "upper_bound_usd": "1.905953472222222222222222222"
+      }
     }
   ],
   "manual_resumes": [
@@ -423,6 +465,15 @@
       "previous_state_error": "SandboxTransportError: Text transfer failed with exit code 1",
       "previous_state_status": "blocked",
       "reason": "Provider-confirmed terminal SandboxTransportError before turn51 editor admission (fc-01M6HCQ89PPXXFSZB647FGB9VF). Resume codex-20261103 at saved turn50, passes14, requests22 and runs26 after replacing leased text writes with the existing bounded SHA-verified atomic artifact receiver. Same conversation, journals, saved edits and work files; normal neutral kernel-restart notice. No failed request is redispatched and no counter or cost is reset.",
+      "stage": "all"
+    },
+    {
+      "at": 1793794728.5255811,
+      "previous_call_id": "fc-01M6K04PS9VADJFZRXYY6KDQB3",
+      "previous_coordinator_reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
+      "previous_state_error": "BudgetExceeded: Insufficient reserved capacity for this paired pass",
+      "previous_state_status": "blocked",
+      "reason": "Continue the same attempt after applying the operator-auto-topups-20261104-modal225 funding observation and explicit user-2026-11-04-exp8-modal-225 task authorization at a verified idle boundary. Preserve all counters, costs, completed requests and the existing editor journal.",
       "stage": "all"
     }
   ],

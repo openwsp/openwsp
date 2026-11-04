@@ -1,0 +1,245 @@
+{
+  "observed_at": "2026-11-04T12:24:23.228872+00:00",
+  "run_id": "codex-20261103",
+  "volume": "openwsp-exp8-data",
+  "method": "bounded direct Volume.read_file/listdir; no Function calls or remote writes",
+  "state": {
+    "turn": 115,
+    "runs": 60,
+    "passes": 44,
+    "requests": 53,
+    "handoffs": 2,
+    "done": false,
+    "submission": null,
+    "run_id": "codex-20261103",
+    "editor": "codex",
+    "base_generation_reuse_requests": [
+      "fwd_23",
+      "fwd_24",
+      "fwd_26",
+      "fwd_28",
+      "fwd_31",
+      "fwd_32",
+      "fwd_40",
+      "fwd_41",
+      "fwd_42"
+    ]
+  },
+  "pending": {
+    "kind": "forward",
+    "request": 53,
+    "turn": 116
+  },
+  "last_rendered_turn": 116,
+  "source_state_sha256": "2feaa2984ecb4d7734f623f934fc4206b164f73e337b02e083e0a381e289be04",
+  "transcript_sha256": "bbb16df060efd6c863babf90ebd566ea531f279a41a5c5aa9d556516f309815f",
+  "transcript_bytes": 800299,
+  "prior_transcript_sha256": "352c73a0f9792b7299af948ad6848e4db9da804a475dcaa9ea31b4a2eb170ecf",
+  "prior_transcript_prefix_preserved": true,
+  "turns_1_through_74_prefix_sha256": "5f54b63058b257c2f19b0eef4a2b5a4577e8e51b33ffe3f8a2bbc6128f55fd43",
+  "omissions_record_sha256": "ccc39a5e1ea0dd22dd698d94f3f52f3672dee580f02824a768a835e01d1a7456",
+  "new_omission_markers": [],
+  "publication_guard": "passed",
+  "transferred_bytes": 643773,
+  "reads": [
+    {
+      "path": "/live-runs/codex-20261103/state.json",
+      "bytes": 4115,
+      "sha256": "2feaa2984ecb4d7734f623f934fc4206b164f73e337b02e083e0a381e289be04"
+    },
+    {
+      "path": "/live-runs/codex-20261103/tool_calls.jsonl",
+      "bytes": 434174,
+      "sha256": "71e8a5730437c9123632f243a3776ec60c3ddb3abdc7ddb2c00e058c32c5a655"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t102/answer.md",
+      "bytes": 2466,
+      "sha256": "11d6ec4c84ff6cb8e292704edd9eed861b7cd6cd0664519c635f7ce85746079a"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t102/prompt.txt",
+      "bytes": 916,
+      "sha256": "135a6cf2f030f129459882caa3a738f8bf32b33a5d4b07e8b62811e1b30fe30d"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t103/answer.md",
+      "bytes": 3825,
+      "sha256": "37169fb3ed5e467d0b0e100bfbb175ed2a08d16f0209659b0c17994075e12f37"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t103/prompt.txt",
+      "bytes": 181,
+      "sha256": "8c22c0113e40dcac59d8d61620352e3d649944feb80e2347ead5b9e1c0a0e849"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t104/answer.md",
+      "bytes": 3545,
+      "sha256": "5137eae05be76a5f1e6c1c6cd0459d9b2341988abe4194f84331e2d8723beb9f"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t104/prompt.txt",
+      "bytes": 4024,
+      "sha256": "bf95b65fb03b6742b1d1af8ddb23cc87e2f7d6600a28833f634d921a93781a93"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t105/answer.md",
+      "bytes": 948,
+      "sha256": "ee6ea7a31202b87e4c659dd1f27f1c1301c941ddf55a81863f53c3a40d42f2ea"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t105/prompt.txt",
+      "bytes": 922,
+      "sha256": "e84060ebe921eb09d954c6ec4318f9dfcad88b84aa6aecf6a696bfac3d50adac"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t106/answer.md",
+      "bytes": 2545,
+      "sha256": "c35b5f70ba685c18bfaeb0db5c88ac79ba9be64fc5d7e33baf82326600749110"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t106/prompt.txt",
+      "bytes": 3935,
+      "sha256": "4fc98bb060be3f97f40e966176e9124ae0bf6de0fa0be0483456d76c6d14ff73"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t107/answer.md",
+      "bytes": 739,
+      "sha256": "2e8f0a0d74242d2a0fd05b8b04d542bbe8d3a41bf095ab40f0a476b36bf7fb87"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t107/prompt.txt",
+      "bytes": 826,
+      "sha256": "b731cbfd5956c788c365fe3cca72ca1669fdef372f06b94096a7555512ee8e01"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t108/answer.md",
+      "bytes": 3592,
+      "sha256": "6a297c61f16f34e8f4aea24ab51a951afdac6d3d5829d1b93e6d3be5cedf538a"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t108/prompt.txt",
+      "bytes": 4025,
+      "sha256": "20a5cf9ba05fd15e22d66e40ca47dac41866835b0ac22987109f8fa4219e12df"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t109/answer.md",
+      "bytes": 1185,
+      "sha256": "e1201231b422f9e438da6800e69c7f07db9b40b0ea1e8e3f48ece965e137e1b7"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t109/prompt.txt",
+      "bytes": 916,
+      "sha256": "4a058fd3a95b418b6fc7e2e6ae2bdcbb14576a2b39d564748142da4344718977"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t110/answer.md",
+      "bytes": 3745,
+      "sha256": "57e32747d5b322f6d1798efb99da580cb11a6b6e0e58a165eb002b0f6e420bc8"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t110/prompt.txt",
+      "bytes": 4994,
+      "sha256": "6e3d6f118f6e786f9adb3a44fd798ef28e89e7dba0681724477911360bd5d042"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t111/answer.md",
+      "bytes": 936,
+      "sha256": "ca109dfdd4da3e3bc0189ec86805c35a12733598eeb3eab1b8ebb43fb8067711"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t111/prompt.txt",
+      "bytes": 924,
+      "sha256": "bb632bdc69aaa5902ce9c44166f3df1acc8783333375e8c183b7ed3d5312f7a7"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t112/answer.md",
+      "bytes": 3665,
+      "sha256": "2fa8510db93914f664a202aa1e4edd7c9c054f6d8c826d01f951fd31ba159b0f"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t112/prompt.txt",
+      "bytes": 4490,
+      "sha256": "bbaf5304ab2c26e3a7c2a77ca1706f272579a853c78635ee6bba1a3979fbbd5e"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t113/answer.md",
+      "bytes": 1795,
+      "sha256": "409dc1c78880dd0e71310f55845e732c7af314c9d199f0301614ace0b6524f93"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t113/prompt.txt",
+      "bytes": 923,
+      "sha256": "9ae4399af8dbf9af197e2ac929e984fb4890a4cd3b1667a4a67eebacfd05ecaa"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t114/answer.md",
+      "bytes": 3724,
+      "sha256": "a349d344132b09951b8dd876f000f5b4e6730d3fa9bbfe4eb8467295e0fa2b6c"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t114/prompt.txt",
+      "bytes": 4673,
+      "sha256": "2dfca1c05998518b393a95a33b159ec893c9ad0b0c3acf7fee01e65ef04830e3"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t115/answer.md",
+      "bytes": 944,
+      "sha256": "2038231c06fb1aca03c005f019258278ec3094c29295043a06c48838c8ded264"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t115/prompt.txt",
+      "bytes": 929,
+      "sha256": "226e505002f714d02286f793149106463af3bf071467e7e76324a8ec76d74cc7"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t116/answer.md",
+      "bytes": 2563,
+      "sha256": "1b9fca7f82b83102e79761ad2c5ecc1aa2a083395e38fea26db5530b85267a0c"
+    },
+    {
+      "path": "/live-runs/codex-20261103/turns/t116/prompt.txt",
+      "bytes": 3048,
+      "sha256": "5ed86e1b595ec61dccde0dfe48ecc5320da08aab6e87d62356ff35c81e634b17"
+    },
+    {
+      "path": "/live-runs/codex-20261103/requests/fwd_47.provenance.json",
+      "bytes": 21571,
+      "sha256": "547bff94ace699e15fdc6cad8594fed107959262ab91ffa0ad34f20490541a56"
+    },
+    {
+      "path": "/live-runs/codex-20261103/requests/fwd_48.provenance.json",
+      "bytes": 21571,
+      "sha256": "0ab290efb92050ad197ab1af21b7fb384edf99ca40fdeaded73522abb2b71919"
+    },
+    {
+      "path": "/live-runs/codex-20261103/requests/fwd_49.provenance.json",
+      "bytes": 21571,
+      "sha256": "b36cdf4276a736eabe551b2b50797ef0646ce102b6514b0def96fb677b142a2b"
+    },
+    {
+      "path": "/live-runs/codex-20261103/requests/fwd_50.provenance.json",
+      "bytes": 21571,
+      "sha256": "f7a110432d6182eda3a783580e693de5a5d5a9f6d3e15f1830536ee13856fc00"
+    },
+    {
+      "path": "/live-runs/codex-20261103/requests/fwd_51.provenance.json",
+      "bytes": 21571,
+      "sha256": "ac6b5f907686781fba7eec2707edf6189a0d80c9d6975b02bb2b032b059c28dc"
+    },
+    {
+      "path": "/live-runs/codex-20261103/requests/fwd_52.provenance.json",
+      "bytes": 21571,
+      "sha256": "1625ff11f5123285f3cfc067aeef2bc4f54341dc43c554e6fa192bc930c0478a"
+    },
+    {
+      "path": "/live-runs/codex-20261103/state.json",
+      "bytes": 4115,
+      "sha256": "2feaa2984ecb4d7734f623f934fc4206b164f73e337b02e083e0a381e289be04"
+    }
+  ],
+  "publication_files": [
+    "replications/exp8/results/live-runs/codex-20261103/state.json",
+    "replications/exp8/results/live-runs/codex-20261103/transcript.md"
+  ]
+}
