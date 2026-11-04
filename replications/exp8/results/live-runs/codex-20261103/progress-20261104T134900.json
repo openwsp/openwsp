@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-11-04T13:49:00.164561+00:00",
+  "source": "read-only sequential direct Modal Volume metadata reads",
+  "run_id": "codex-20261103",
+  "driver_call_id": "fc-01M6K7YW39YKEK7P5K1C16VX8P",
+  "pipeline": {
+    "status": "running",
+    "active_stage": "live",
+    "heartbeat": 1793800139.7130482,
+    "budget": {
+      "editor": {
+        "spent_usd": 78.292765,
+        "reserved_usd": 0.0,
+        "available_usd": 21.707235
+      },
+      "modal": {
+        "spent_usd": 139.67263272237548,
+        "reserved_usd": 24.319683472222223,
+        "available_usd": 60.95768380540228
+      }
+    },
+    "error": null
+  },
+  "live": {
+    "turn": 128,
+    "runs": 67,
+    "passes": 48,
+    "requests": 57,
+    "handoffs": 3,
+    "done": false,
+    "pending": {
+      "kind": "forward",
+      "request": 57,
+      "turn": 129
+    }
+  },
+  "qualification": "Progress observation only. The full published state/transcript remains the 44-pass checkpoint; no final submission or evaluation is claimed."
+}

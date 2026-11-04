@@ -233,5 +233,116 @@
     "paid_compute_launched": false,
     "remote_mutations": false,
     "external_messages_sent": false
+  },
+  "h200_followup": {
+    "recorded_at": "2026-11-04T13:49:40.466794+00:00",
+    "scope": "Read-only source comparison requested during the unchanged H100 run; no H200 probe, deployment, model call or billing mutation.",
+    "availability": {
+      "supported_modal_gpu_argument": "H200",
+      "documentation_url": "https://modal.com/docs/guide/gpu",
+      "pricing_url": "https://modal.com/pricing",
+      "public_sources_checked_on": "2026-11-04",
+      "public_gpu_price_usd_per_second_rounded": 0.001261,
+      "limitation": "A supported GPU type does not establish instantaneous account-specific capacity or queue time."
+    },
+    "local_source_provenance": {
+      "rates": {
+        "path": "logs/modal-billing-observation.json",
+        "sha256": "e62e2306bd590a45c17dfc9389b45eb4427dceb0d54bd007677e87ab003b2b77",
+        "bytes": 1632
+      },
+      "samples": {
+        "path": "replications/exp8/results/calibration_p50c/samples.jsonl",
+        "sha256": "62da68586520c812a86d65f9506751643786a19cd78f4400a23a3060e4307fd2",
+        "bytes": 148762
+      },
+      "summary": {
+        "path": "replications/exp8/results/calibration_p50c/summary.json",
+        "sha256": "61baa52a3c2fa8a9ca7cbaa361d2b539388a06b383e10a1e7613556a4c3bfb1f",
+        "bytes": 1083
+      },
+      "receipt": {
+        "path": "logs/modal-restoration-budget.json",
+        "sha256": "1993ffa613c7039a9477803179236bcbe4e96f429ac8778ec73e61246647b899",
+        "bytes": 1006419
+      }
+    },
+    "provider_rates": {
+      "source": "modal.Workspace.billing.summary/rates",
+      "observed_at": "2026-11-03T05:41:51.650397+00:00",
+      "h100_gpu_usd_per_hour": "3.95000",
+      "h200_gpu_usd_per_hour": "4.54000",
+      "cpu_usd_per_core_hour": "0.04730",
+      "memory_usd_per_gib_hour": "0.00800",
+      "cpu_cores": 4,
+      "memory_gib": 16,
+      "cpu_memory_usd_per_hour": "0.31720",
+      "h100_gpu_cpu_memory_usd_per_hour": "4.26720",
+      "h200_gpu_cpu_memory_usd_per_hour": "4.85720",
+      "scope": "Function resource rates, not sandbox rates. Exact provider hourly observation agrees with the rounded current public pricing page. Storage, network and other independently billed resources are outside this sum."
+    },
+    "local_calibration": {
+      "stage": "calibration_p50c",
+      "samples": 500,
+      "generated_tokens": 10662757,
+      "token_total_method": "Sum token_count across every nonempty JSONL row; independently equal to n * mean_tokens in summary.json. Sample SHA256 matches the summary finished_metrics provenance.",
+      "reported_container_seconds": 933.5554113449999,
+      "duration_source": "container_seconds",
+      "duration_scope": "Generator container accounting interval, including initialization accounted since worker entry; not pure decoding time or GPU utilization time.",
+      "reservation_id": "modal-job-47e8c8850834c901ef8e983d39fee7d4391e3eb926016cd9f8f1fa59354aec96",
+      "call_id": "fc-01M6G3M5N6V4YHRZYGZ5406Y03",
+      "startup_margin_seconds": 120.0,
+      "scaledown_margin_seconds": 2.0,
+      "combined_margin_seconds": 122.0,
+      "accounted_seconds": 1055.5554113449998,
+      "settled_resource_estimate_usd": "1.2511850142476064296",
+      "cost_scope": "List-price resource estimate including fixed margins, not provider invoice attribution."
+    },
+    "external_comparison": {
+      "source_ref": "akhaliq_h200",
+      "commit": "d1671a178705bcab7644806d23c535517f35723b",
+      "url": "https://huggingface.co/RikiyaT/Qwen3.5-0.8B-weight-space-programming/blob/d1671a178705bcab7644806d23c535517f35723b/README.md",
+      "generated_tokens_rounded": 43400000,
+      "elapsed_minutes_reported": 51,
+      "elapsed_seconds_derived": 3060,
+      "samples": 2000,
+      "problems": 500,
+      "samples_per_problem": 4,
+      "timing_scope": "Published elapsed-time scope does not establish matching initialization, queueing or billable-resource boundaries."
+    },
+    "formulas": {
+      "resource_hourly_total": "GPU hourly + 4 * CPU core hourly + 16 * memory GiB hourly",
+      "throughput_tokens_per_second": "generated_tokens / reported_seconds",
+      "h200_break_even_duration_multiple": "H100 resource hourly total / H200 resource hourly total",
+      "h200_required_throughput_increase_fraction": "H200 resource hourly total / H100 resource hourly total - 1",
+      "h100_normalized_elapsed_seconds": "43400000 / (10662757 / 933.5554113449999)",
+      "elapsed_window_cost": "normalized or reported elapsed seconds * resource hourly total / 3600",
+      "illustrative_saving_fraction": "1 - H200 elapsed-window cost / H100 normalized elapsed-window cost",
+      "local_settled_estimate": "(933.5554113449999 + 120 + 2) * 4.2672 / 3600"
+    },
+    "derived_comparison": {
+      "h100_observed_tokens_per_second": 11421.664820771,
+      "h200_reported_tokens_per_second": 14183.006535948,
+      "h200_observed_throughput_increase_fraction": 0.241763505,
+      "h200_hourly_premium_fraction": 0.138263967,
+      "h200_break_even_duration_multiple_of_h100": 0.878530841,
+      "h100_elapsed_minutes_normalized_to_43_4m_tokens": 63.329938733,
+      "h100_modeled_elapsed_window_cost_43_4m_tokens_usd": 4.504025243,
+      "h200_modeled_elapsed_window_cost_43_4m_tokens_usd": 4.12862,
+      "illustrative_equal_token_cost_saving_fraction": 0.083348832
+    },
+    "interpretation": {
+      "assessment": "H200 is a credible future candidate alongside A100-80GB. Its published throughput advantage exceeds its hourly premium in this unmatched comparison, suggesting an approximately 8.3 percent opportunity at equal generated-token volume. This is not demonstrated cost savings or a reason to change the active H100 run.",
+      "comparison_caveats": [
+        "External token count is rounded; the two reported timing boundaries are not proven equivalent.",
+        "Both runs use BF16, vLLM 0.33, thinking enabled and the same think35 sampling and output cap; Transformers differs: local 5.17.0 versus external 5.20.2.",
+        "Local evaluation has one sample per problem and external evaluation four. Batch scheduling, max_num_seqs, checkpoint packaging and initialization can differ.",
+        "Equal-token normalization assumes throughput scales across workloads; different lengths, batch utilization and fixed overheads can invalidate that assumption.",
+        "The illustrative elapsed-window costs exclude added startup/scaledown margins. Do not compare the local margin-inclusive $1.251185 receipt directly with the external elapsed-only cost.",
+        "Current dispatch and rate code support H100 and A100-80GB. H200 adoption would require reviewed implementation support and representative validation; availability alone does not enable a configuration-only switch."
+      ],
+      "active_run_decision": "Keep the existing H100 worker unchanged.",
+      "future_measurement": "If later justified, compare representative work under unchanged model, sampling, seed and full-cap requirements, including initialization and scale-down in measured resource cost."
+    }
   }
 }
