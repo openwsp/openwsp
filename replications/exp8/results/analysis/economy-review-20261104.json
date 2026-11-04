@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "title": "Economy review of Experiment 8 replications",
+  "created_at": "2026-11-04T10:15:51.370542+00:00",
+  "sources_reviewed_on": "2026-11-04",
+  "scope": "Read-only primary-source research and local arithmetic. No GPU probe, model call, external rerun, or paid API call was made for this review. Reported external measurements were not independently benchmarked.",
+  "decision": {
+    "active_run": "Continue the already active frozen H100 worker with exact base-generation reuse, short scale-down and persistent compilation cache. Do not rerun completed calibrations.",
+    "extra_gpu_probe": "No extra paid GPU probe recommended for the remaining 12 passes at the review decision point and subsequent evaluation.",
+    "reason": "No reviewed source demonstrates lower all-in cost for a matched faithful run. A four-problem A100 probe cannot establish the cost of 128 simultaneous long generations; startup, steady-state throughput and memory-dependent batch capacity can differ.",
+    "not_claimed": "H100 is not proven cheapest. Continuing the active worker avoids a speculative migration whose savings remain unmeasured.",
+    "future_candidate": "A100-80GB is the least disruptive candidate for a future representative batch comparison because its memory capacity matches H100. Include startup, generation, idle scale-down and CPU/RAM in any comparison, and keep scientific scoring separate from hardware probes.",
+    "protocol_constraints": "Keep model revision, BF16, generation engine, thinking, sampling, full token/context limits and per-problem seeds fixed. Shorter caps, forced thinking closure, early loop aborts, quantization, changed subsets or editor hints are changed experiments."
+  },
+  "local_evidence": {
+    "repository_commit": "aecf390e49387428e2120c54f604247df2889311",
+    "independent_results_path": "replications/exp8/results/analysis/independent-results.json",
+    "rate_source": {
+      "path": "src/openwsp/budget.py",
+      "symbols": [
+        "GPU_USD_PER_HOUR",
+        "compute_cost"
+      ],
+      "immutable_url": "https://github.com/openwsp/openwsp/blob/aecf390e49387428e2120c54f604247df2889311/src/openwsp/budget.py",
+      "provenance": "Function docstring records exact hourly rates obtained from Workspace.billing.rates() on 2026-11-03; displayed public per-second prices are rounded."
+    },
+    "worker_source": {
+      "path": "src/openwsp/backends/modal_app.py",
+      "symbol": "Generator",
+      "immutable_url": "https://github.com/openwsp/openwsp/blob/aecf390e49387428e2120c54f604247df2889311/src/openwsp/backends/modal_app.py",
+      "cpu_cores": 4,
+      "memory_gib": 16,
+      "scaledown_seconds": 2,
+      "max_num_seqs": 128,
+      "max_model_len": 34816,
+      "kernel_cache_volume": "/kernel-cache",
+      "deterministic_startup_errors_returned_without_enter_retry": true
+    },
+    "calibrations": [
+      {
+        "path": "replications/exp8/results/calibration_base/summary.json",
+        "sha256": "64ff294dafc9e974572475e662b68e3feca0387bb913a73d10a0070fe51f81d6",
+        "n": 500,
+        "seconds": 1673.295498423,
+        "cost_usd": 2.128023597464063,
+        "mean_tokens": 30958.67,
+        "gpu": "H100",
+        "engine": "vllm==0.33.0",
+        "transformers": "5.17.0",
+        "samples_per_problem": 1,
+        "token_cap": 32768,
+        "thinking": true
+      },
+      {
+        "path": "replications/exp8/results/calibration_p50c/summary.json",
+        "sha256": "61baa52a3c2fa8a9ca7cbaa361d2b539388a06b383e10a1e7613556a4c3bfb1f",
+        "n": 500,
+        "seconds": 933.5554113449999,
+        "cost_usd": 1.2511850142476064,
+        "mean_tokens": 21325.514,
+        "gpu": "H100",
+        "engine": "vllm==0.33.0",
+        "transformers": "5.17.0",
+        "samples_per_problem": 1,
+        "token_cap": 32768,
+        "thinking": true
+      }
+    ],
+    "limitations": "Summary cost_usd values are recorded estimates, not provider invoice measurements. Calibration seconds and external elapsed times do not establish identical startup or billing boundaries. These calibration generation seeds are seed 0; do not substitute their rows into live requests whose per-problem seeds differ."
+  },
+  "cost_arithmetic": {
+    "currency": "USD",
+    "allocation": "One GPU plus 4 physical CPU cores and 16 GiB RAM, Modal function rates, not sandbox rates.",
+    "cpu_usd_per_core_hour": 0.0473,
+    "memory_usd_per_gib_hour": 0.008,
+    "cpu_memory_usd_per_hour": 0.3172,
+    "formulas": {
+      "hourly_total": "gpu_hourly + 4 * 0.04730 + 16 * 0.00800",
+      "break_even_duration_multiple": "H100_hourly_total / candidate_hourly_total; candidate must finish strictly faster than this multiple to save money",
+      "all_in_cost": "allocated_resource_hourly_total * billable_lifetime_seconds / 3600; add any other billed resources",
+      "equal_time_a100_saving_fraction": "1 - 2.8172 / 4.2672"
+    },
+    "hardware": [
+      {
+        "gpu": "H100",
+        "gpu_usd_per_hour": 3.95,
+        "total_usd_per_hour": 4.2672,
+        "break_even_duration_multiple_of_h100": 1.0
+      },
+      {
+        "gpu": "A100-80GB",
+        "gpu_usd_per_hour": 2.5,
+        "total_usd_per_hour": 2.8172,
+        "break_even_duration_multiple_of_h100": 1.514695442
+      },
+      {
+        "gpu": "L40S",
+        "gpu_usd_per_hour": 1.95,
+        "total_usd_per_hour": 2.2672,
+        "break_even_duration_multiple_of_h100": 1.882145378
+      },
+      {
+        "gpu": "L4",
+        "gpu_usd_per_hour": 0.8,
+        "total_usd_per_hour": 1.1172,
+        "break_even_duration_multiple_of_h100": 3.819548872
+      }
+    ],
+    "a100_equal_time_saving_fraction": 0.339801275,
+    "illustrative_a100_equal_time_saving_per_500_generations_usd": {
+      "p50c": 0.425154,
+      "base": 0.723105
+    },
+    "limitation": "The equal-time amounts illustrate scale only. They are not measured or predicted A100 savings, and are not a task budget forecast. A100 slowdown reduces savings; lower-VRAM alternatives may require smaller batches.",
+    "public_price_check_url": "https://modal.com/pricing"
+  },
+  "external_sources": [
+    {
+      "id": "akhaliq_h200",
+      "commit": "d1671a178705bcab7644806d23c535517f35723b",
+      "url": "https://huggingface.co/RikiyaT/Qwen3.5-0.8B-weight-space-programming/blob/d1671a178705bcab7644806d23c535517f35723b/README.md",
+      "measurements": {
+        "gpu": "H200",
+        "dtype": "bfloat16",
+        "engine": "vLLM 0.33.0",
+        "transformers": "5.20.2",
+        "benchmark": "MATH-500",
+        "problems": 500,
+        "samples_per_problem": 4,
+        "generations": 2000,
+        "generated_tokens_rounded": 43400000,
+        "elapsed_minutes": 51,
+        "thinking": true,
+        "token_cap": 32768,
+        "accuracy": 0.51,
+        "cut_share": 0.316
+      },
+      "comparison": "Closest reviewed throughput reference. Same think35 sampling and cap as local calibration; different samples, Transformers, GPU and potentially batch configuration. README example does not explicitly fix max_num_seqs; no evaluation script was found in its model repository.",
+      "local_2000_generation_elapsed_minutes_if_four_identical_p50c_batches": 62.237027,
+      "conclusion": "The extrapolation is not a matched benchmark. Higher H200 hourly price and unknown billing boundaries prevent inferring a demonstrated all-in saving."
+    },
+    {
+      "id": "hedwig_3090",
+      "commit": null,
+      "url": "https://www.hedwigai.com/blog/weight-edit-math-or-loops#method",
+      "measurements": {
+        "gpu": "one RTX 3090",
+        "dtype": "bfloat16",
+        "engine": "vLLM, version unreported",
+        "ordinary_thinking_subset_problems": 100,
+        "ordinary_thinking_subset_base_accuracy": 0.12,
+        "ordinary_thinking_subset_edited_accuracy": 0.51
+      },
+      "comparison": "Main comparisons use thinking off with an 8192-token cap or forced closure after 8192 thinking tokens followed by 4096 answer tokens. Full ordinary-thinking 32768-token MATH-500 figures are attributed to the original authors. The cap of the first-100 ordinary-thinking check is not established by that passage.",
+      "missing": [
+        "elapsed time",
+        "batch size",
+        "price",
+        "vLLM version",
+        "immutable article revision"
+      ],
+      "conclusion": "Establishes lower-memory GPU feasibility, not measured lower cost for the faithful protocol."
+    },
+    {
+      "id": "kidikaros_t4",
+      "commit": "67ead0d46877df1909c43406a6bec26e82feb17a",
+      "url": "https://github.com/KidIkaros/wsp-reproduction/blob/67ead0d46877df1909c43406a6bec26e82feb17a/README.md",
+      "measurements": {
+        "hardware": "Kaggle T4s",
+        "total_gpu_hours_approx": 2.7,
+        "stage1_gpu_hours_approx": 1.6,
+        "stage2_gpu_hours_approx": 1.1,
+        "problems": 18,
+        "problem_mix": "16 GSM8K plus 2 MATH train",
+        "token_cap": 16384,
+        "samples_per_problem": 1,
+        "engine": "Hugging Face generate"
+      },
+      "comparison": "Scripted mechanism replication with no frontier editor; different benchmark size, cap and engine. Free Kaggle quota is not evidence of lower billed Modal cost.",
+      "conclusion": "Not a replacement for the remaining faithful live-edit passes or full evaluation."
+    },
+    {
+      "id": "tdotlab_1070",
+      "commit": "1996624997a4ed882adcbb8ea7fb7e4f8fba2121",
+      "url": "https://github.com/tdotlab/weight-space-programming/blob/1996624997a4ed882adcbb8ea7fb7e4f8fba2121/docs/STATUS.md",
+      "measurements": {
+        "gpu": "GTX 1070",
+        "engine": "llama.cpp",
+        "evaluation_precision": "Q8_0",
+        "slots_in_sampling_comparison": 40,
+        "cpu_sampling_tokens_per_second": 365,
+        "gpu_sampling_tokens_per_second": 715,
+        "long_context_tokens_per_second_per_slot": "11-12",
+        "elapsed_minutes_100_looping_problems_approx": 60,
+        "f16_slowdown_relative_to_q8_0_approx": 1.7
+      },
+      "comparison": "Quantized engine, subset experiments, altered edits and different contexts/batches. GPU sampling is already used by current vLLM, so the published sampling gain is not an additional expected speedup here.",
+      "conclusion": "Useful implementation evidence, but no matched BF16/vLLM cloud-cost measurement."
+    },
+    {
+      "id": "alisor_igpu",
+      "commit": "5542f0fdf87a95778c5d4999d5948e388d8752c6",
+      "url": "https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/code/campaign.sh",
+      "supporting_urls": [
+        "https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/code/eval_gsm8k.py",
+        "https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/data/eval_summary.txt",
+        "https://github.com/alisorcorp/inside-a-reasoning-loop/blob/5542f0fdf87a95778c5d4999d5948e388d8752c6/index.html"
+      ],
+      "measurements": {
+        "hardware": "mini-PC integrated GPU, model unspecified",
+        "engine": "llama.cpp",
+        "dtype": "BF16 GGUF",
+        "parallel_slots": 8,
+        "context": 17408,
+        "token_cap": 16384,
+        "problems": 40,
+        "benchmark": "GSM8K subset",
+        "early_loop_abort": true,
+        "p50c_bf16_correct": 19,
+        "p50c_q4_k_m_correct": 16
+      },
+      "comparison": "Different engine, subset, cap and termination policy. Evaluation seed shuffles problem selection; no generation seed appears in the request body. The quantized comparison changes observed accuracy.",
+      "missing": [
+        "elapsed time",
+        "monetary cost",
+        "specific GPU model"
+      ],
+      "conclusion": "No measured faithful cost advantage; early abort and quantization cannot be adopted as protocol-neutral savings."
+    }
+  ],
+  "verification": {
+    "method": "Inspected primary repository/card/article sources, resolved available immutable commits, read local calibration summaries and exact rate implementation, and recomputed arithmetic with Decimal. JSON structure, local hashes and arithmetic validated after writing.",
+    "paid_compute_launched": false,
+    "remote_mutations": false,
+    "external_messages_sent": false
+  }
+}

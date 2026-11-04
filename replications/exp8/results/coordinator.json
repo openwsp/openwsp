@@ -1,22 +1,22 @@
 {
   "current": {
-    "call_id": "fc-01M6HJFWKABFATSH2NKQKVB6FN",
+    "call_id": "fc-01M6K04PS9VADJFZRXYY6KDQB3",
     "config": {
       "editor": "codex",
       "publish_results": true,
       "run_id": "codex-20261103"
     },
-    "created_at": 1793738661.5018787,
-    "dispatched_at": 1793738665.503003,
+    "created_at": 1793786528.1960251,
+    "dispatched_at": 1793786532.8602972,
     "fingerprint": "adda0457aafba3c8f17a8a18a6d5f8b4d715b4ec5d32390a5e4d40ce05adb12c",
     "phase": "running",
-    "reservation_id": "driver-eb75be295e724031a4730c4308c21c8e",
+    "reservation_id": "driver-0ee74da1eec14155b9382b382fc85195",
     "stage": "all",
     "ticket": {
       "cpu_cores": 1,
       "memory_gib": 4,
-      "prepared_at": 1793738662.7403998,
-      "reservation_id": "driver-eb75be295e724031a4730c4308c21c8e",
+      "prepared_at": 1793786530.6645026,
+      "reservation_id": "driver-0ee74da1eec14155b9382b382fc85195",
       "scaledown_seconds": 5,
       "schema_version": 1,
       "stage": "all",
@@ -335,6 +335,39 @@
         "timeout_seconds": 86400,
         "upper_bound_usd": "1.905953472222222222222222222"
       }
+    },
+    {
+      "call_id": "fc-01M6HJFWKABFATSH2NKQKVB6FN",
+      "cancel_requested_at": 1793786515.4931817,
+      "config": {
+        "editor": "codex",
+        "publish_results": true,
+        "run_id": "codex-20261103"
+      },
+      "created_at": 1793738661.5018787,
+      "dispatched_at": 1793738665.503003,
+      "error_type": "RemoteError",
+      "fingerprint": "adda0457aafba3c8f17a8a18a6d5f8b4d715b4ec5d32390a5e4d40ce05adb12c",
+      "no_restart": false,
+      "phase": "terminal",
+      "reservation_id": "driver-eb75be295e724031a4730c4308c21c8e",
+      "result_status": null,
+      "stage": "all",
+      "stale_stage": "live",
+      "terminal_at": 1793786519.3814318,
+      "terminal_state": "failed",
+      "ticket": {
+        "cpu_cores": 1,
+        "memory_gib": 4,
+        "prepared_at": 1793738662.7403998,
+        "reservation_id": "driver-eb75be295e724031a4730c4308c21c8e",
+        "scaledown_seconds": 5,
+        "schema_version": 1,
+        "stage": "all",
+        "startup_seconds": 120,
+        "timeout_seconds": 86400,
+        "upper_bound_usd": "1.905953472222222222222222222"
+      }
     }
   ],
   "manual_resumes": [
@@ -394,7 +427,7 @@
     }
   ],
   "restart_counts": {
-    "live": 1
+    "live": 2
   },
   "schema_version": 1
 }

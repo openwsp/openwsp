@@ -3,10 +3,8 @@
 | Recorded component | State | Evidence |
 | --- | --- | --- |
 | Required live run | [live goal unmet](live-runs/codex-20261103/state.json) | Active attempt: [codex-20261103](active-live.json); submission requirement pending |
-| Active attempt blocker | [blocked](live-runs/codex-20261103/blocker.json) | [modal_workspace_disabled](live-runs/codex-20261103/blocker.json) |
-| Recorded live blocker | [ConflictError: Modal workspace is disabled](live-runs/codex-20261103/blocker.json) | See active attempt record. |
-| Pipeline | [last persisted: running](pipeline-state.json) | [live](pipeline-state.json) |
-| Driver recovery | [last persisted: running](coordinator.json) | [all](coordinator.json) |
+| Pipeline | [running](pipeline-state.json) | [live](pipeline-state.json) |
+| Driver recovery | [running](coordinator.json) | [all](coordinator.json) |
 | Calibration prompt audit | [passed](calibration-prompt-audit.json) | [calibration-prompt-audit.json](calibration-prompt-audit.json) |
 | Calibration comparison | [passed](calibration-check.json) | [calibration-check.json](calibration-check.json) |
 | Tensor hashes | [passed](kernel/hash-verification.json) | [kernel/hash-verification.json](kernel/hash-verification.json) |
@@ -15,14 +13,12 @@
 | Weight swap check | [fallback](kernel/weight-swap.json) | [kernel/weight-swap.json](kernel/weight-swap.json) |
 | Recorded diagnostic | [Engine does not expose a compatible weight-reload contract](kernel/weight-swap.json) | See source record. |
 
-Completed controls or publication do not satisfy the blocked live-run goal.
-
 Live attempts:
 
 | Attempt | Selection | Editor | Recorded state | Passes | Turns | Runs | Submission | Final evaluations | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | live-run | historical | pending | [blocked](live-run/blocker.json) | [4](live-run/state.json) | [26](live-run/state.json) | [10](live-run/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](live-run/state.json); [blocker.json](live-run/blocker.json); [transcript.md](live-run/transcript.md) |
-| live-runs/codex-20261103 | active | [codex](live-runs/codex-20261103/identity.json) | [blocked](live-runs/codex-20261103/blocker.json) | [38](live-runs/codex-20261103/state.json) | [101](live-runs/codex-20261103/state.json) | [52](live-runs/codex-20261103/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](live-runs/codex-20261103/state.json); [identity.json](live-runs/codex-20261103/identity.json); [blocker.json](live-runs/codex-20261103/blocker.json); [transcript.md](live-runs/codex-20261103/transcript.md) |
+| live-runs/codex-20261103 | active | [codex](live-runs/codex-20261103/identity.json) | [incomplete](live-runs/codex-20261103/state.json) | [38](live-runs/codex-20261103/state.json) | [101](live-runs/codex-20261103/state.json) | [52](live-runs/codex-20261103/state.json) | not established | math500: pending; gsm8k: pending; ifeval: pending | [state.json](live-runs/codex-20261103/state.json); [identity.json](live-runs/codex-20261103/identity.json); [blocker.json](live-runs/codex-20261103/blocker.json); [transcript.md](live-runs/codex-20261103/transcript.md) |
 
 The active pointer selects the current attempt. Historical blockers and completed controls do not establish its completion.
 

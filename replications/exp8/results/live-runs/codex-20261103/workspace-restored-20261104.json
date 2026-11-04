@@ -1,0 +1,71 @@
+{
+  "current_call_id": "fc-01M6K04PS9VADJFZRXYY6KDQB3",
+  "driver_origin": "Existing watchdog recovery before manual CLI attach; no duplicate driver spawned by attach",
+  "editor": "codex",
+  "funding": {
+    "authorized_task_cap_usd": "225",
+    "current_ledger_task_cap_usd": "150",
+    "current_observed_provider_usage_limit_usd": "100",
+    "new_authorization_applied": false,
+    "reason_pending": "Existing driver owns the ledger; audited funding update waits for a verified idle boundary."
+  },
+  "live_checkpoint": {
+    "done": false,
+    "handoffs": 2,
+    "passes": 38,
+    "pending": {
+      "kind": "editor",
+      "turn": 103
+    },
+    "requests": 46,
+    "runs": 53,
+    "submission": null,
+    "turn": 102
+  },
+  "observed_at_utc": "2026-11-04T10:15:37.325866+00:00",
+  "pipeline_checkpoint": {
+    "active_stage": "live",
+    "budget": {
+      "editor": {
+        "available_usd": 21.707235,
+        "reserved_usd": 0.0,
+        "spent_usd": 78.292765
+      },
+      "modal": {
+        "available_usd": 24.278247623491662,
+        "reserved_usd": 18.345603472222223,
+        "spent_usd": 107.32614890428611
+      }
+    },
+    "heartbeat": 1793787333.4668443,
+    "status": "running"
+  },
+  "previous_call_id": "fc-01M6HJFWKABFATSH2NKQKVB6FN",
+  "previous_incident": "workspace-disabled-blocker-20261104.json",
+  "previous_incident_sha256": "f7e18829922b778b247690da134598b1c2c74f1f1db15807a8fb727761a59d1d",
+  "protocol": "Same run, conversation, queued request and counters; no external findings supplied to the editor.",
+  "provider_access": "restored",
+  "queued_turn102_completion": {
+    "exit": {
+      "reason": null,
+      "returncode": 0,
+      "seconds": 41.99488715599,
+      "violation": null
+    },
+    "final_text_sha256": "11d6ec4c84ff6cb8e292704edd9eed861b7cd6cd0664519c635f7ce85746079a",
+    "input_sha256": "dae3d9abda6f883004a57da8c254c5f4fd84ce05f96ceb66af692bd6a9539411",
+    "receipt_sha256": "f3d1bf19d0c23d14beeb04baf421c137c6d2f3c500ac5420a6ccfc1c58e2f7b1",
+    "recorded_at_utc": "2026-11-04T10:14:48.990724+00:00",
+    "request_hash": "60cd36cf9c6da17bdb824714192b8ded96c92c1e72181bff0be7deff1f472ff5",
+    "status": "completed"
+  },
+  "remote_configuration_equal": true,
+  "restoration_basis": "Operator confirmed raising the account limit; existing watchdog resumed a driver and the original queued editor request completed.",
+  "run_id": "codex-20261103",
+  "schema_version": 1,
+  "source_deployed_for_worker_attach": "aecf390e49387428e2120c54f604247df2889311",
+  "status": "running",
+  "watchdog_restart_counts": {
+    "live": 2
+  }
+}
