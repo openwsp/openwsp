@@ -49,3 +49,5 @@ At 21:54 America/Buenos_Aires on 2026-11-03, the faithful run had 33/50 passes, 
 ## Modal workspace disabled
 
 After the saved 38th pass, Modal rejected the worker and a status invocation with a generic disabled-workspace error. The provider confirms the driver failed at 22:35 on November 3 with zero pending inputs. A separate async question asks the operator to check account/workspace status and report when calls are accepted again. No billing, payment or quota cause is established. Continue the original local CPU extraction and preserve the saved attempt. Resume with the existing serialized route once the external restriction is resolved, within the authorized task cap; do not blindly retry disabled invocations.
+
+At 23:02, a read-only provider billing summary reported $51.37595920 metered usage and $20.41000000 after credits/allowances, below conservative ledger estimates. The $225 question remains unanswered; no increase is applied or inferred as necessary from the older estimate. Account/workspace restoration is a separate pending question. App/hour billing rows cannot identify individual unresolved job charges.

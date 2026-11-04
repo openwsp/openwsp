@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "source": "Modal Workspace.billing.summary and Workspace.billing.report, read-only",
+  "scope": "Current workspace billing cycle; this is provider-reported usage, separate from per-job conservative ledger estimates.",
+  "summary_observation": {
+    "observed_at_utc": "2026-11-04T02:02:59.060930+00:00",
+    "source": "modal.Workspace.from_context().billing.summary(2026-11)",
+    "read_only": true,
+    "summary": {
+      "start": "2026-11-01 00:00:00+00:00",
+      "end": "2026-12-01 00:00:00+00:00",
+      "metered_cost": "51.37595920",
+      "metered_cost_breakdown": {
+        "Ephemeral Apps": "0.02383559",
+        "Volumes": "0.85579633",
+        "Network Egress": "0.11016287",
+        "LLM Tokens": "0E-8",
+        "Deployed Apps": "50.38312302"
+      },
+      "adjustments": {
+        "Plan Cost": "0E-8",
+        "Reservation Adjustment": "-0E-8",
+        "Free Storage": "-0.85579633",
+        "Network Egress Allowance": "-0.11016287",
+        "Credits": "-30.00000000"
+      },
+      "billed_cost": "20.41000000"
+    }
+  },
+  "hourly_report": {
+    "observed_at_utc": "2026-11-04T02:05:18.612164+00:00",
+    "read_only": true,
+    "start_utc": "2026-11-03T00:00:00+00:00",
+    "resolution": "h",
+    "partial_final_intervals_excluded": true,
+    "rows": [
+      {
+        "object_id": "ap-T68J8bpR91zJ9QRhY3OgU2",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 05:00:00+00:00",
+        "cost": "0.15121661",
+        "cost_by_resource": {
+          "Network Egress": "0.00055530",
+          "H100": "0.11850169",
+          "Memory": "0.00925135",
+          "CPU": "0.02290828"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-rkAkSrwHuuzbIw9A34Dsls",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 05:00:00+00:00",
+        "cost": "0.00023995",
+        "cost_by_resource": {
+          "Network Egress": "0.00005131",
+          "Memory": "0.00000333",
+          "CPU": "0.00018531"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-LnIFsgn5cSifp18w2GM6BG",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 06:00:00+00:00",
+        "cost": "0.00649568",
+        "cost_by_resource": {
+          "Network Egress": "0.00013310",
+          "Memory": "0.00026583",
+          "CPU": "0.00609676"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-T68J8bpR91zJ9QRhY3OgU2",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 06:00:00+00:00",
+        "cost": "0.70503305",
+        "cost_by_resource": {
+          "Network Egress": "0.00000187",
+          "H100": "0.64088089",
+          "Memory": "0.02579613",
+          "CPU": "0.03835416"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 06:00:00+00:00",
+        "cost": "2.36697284",
+        "cost_by_resource": {
+          "Network Egress": "0.00017067",
+          "H100": "2.13519309",
+          "Memory": "0.08992993",
+          "CPU": "0.14167914"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 07:00:00+00:00",
+        "cost": "4.15478720",
+        "cost_by_resource": {
+          "Network Egress": "0.00877741",
+          "H100": "3.59363764",
+          "Memory": "0.22202132",
+          "CPU": "0.33035083"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 08:00:00+00:00",
+        "cost": "3.34560343",
+        "cost_by_resource": {
+          "Network Egress": "0.00188699",
+          "H100": "2.72223822",
+          "Memory": "0.25018565",
+          "CPU": "0.37129257"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 09:00:00+00:00",
+        "cost": "0.35442848",
+        "cost_by_resource": {
+          "Network Egress": "0.00722374",
+          "H100": "0.05626214",
+          "Memory": "0.11669046",
+          "CPU": "0.17425215"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 10:00:00+00:00",
+        "cost": "0.60319397",
+        "cost_by_resource": {
+          "Network Egress": "0.00655373",
+          "H100": "0.03511145",
+          "Memory": "0.22600826",
+          "CPU": "0.33552052"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 11:00:00+00:00",
+        "cost": "2.54422251",
+        "cost_by_resource": {
+          "Network Egress": "0.00205165",
+          "H100": "2.08492380",
+          "Memory": "0.18391104",
+          "CPU": "0.27333603"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 12:00:00+00:00",
+        "cost": "4.25729636",
+        "cost_by_resource": {
+          "Network Egress": "0.00239585",
+          "H100": "3.86181037",
+          "Memory": "0.15803263",
+          "CPU": "0.23505750"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 13:00:00+00:00",
+        "cost": "0.32859205",
+        "cost_by_resource": {
+          "Network Egress": "0.00075342",
+          "H100": "0.29478595",
+          "Memory": "0.01294316",
+          "CPU": "0.02010952"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 14:00:00+00:00",
+        "cost": "1.50958904",
+        "cost_by_resource": {
+          "Network Egress": "0.00372700",
+          "H100": "1.11378276",
+          "Memory": "0.15777774",
+          "CPU": "0.23430153"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 15:00:00+00:00",
+        "cost": "0.00209535",
+        "cost_by_resource": {
+          "Network Egress": "7.9E-7",
+          "Memory": "0.00061324",
+          "CPU": "0.00148132"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 16:00:00+00:00",
+        "cost": "0.00237351",
+        "cost_by_resource": {
+          "Network Egress": "8.5E-7",
+          "Memory": "0.00072813",
+          "CPU": "0.00164453"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 17:00:00+00:00",
+        "cost": "0.00231799",
+        "cost_by_resource": {
+          "Network Egress": "7.8E-7",
+          "Memory": "0.00070045",
+          "CPU": "0.00161676"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 18:00:00+00:00",
+        "cost": "0.00245936",
+        "cost_by_resource": {
+          "Network Egress": "8.1E-7",
+          "Memory": "0.00074584",
+          "CPU": "0.00171271"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 19:00:00+00:00",
+        "cost": "2.14936897",
+        "cost_by_resource": {
+          "Network Egress": "0.01319562",
+          "H100": "1.47773284",
+          "Memory": "0.26516502",
+          "CPU": "0.39327550"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 20:00:00+00:00",
+        "cost": "3.97431750",
+        "cost_by_resource": {
+          "Network Egress": "0.00615507",
+          "H100": "3.28711228",
+          "Memory": "0.27437893",
+          "CPU": "0.40667122"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 21:00:00+00:00",
+        "cost": "4.06563424",
+        "cost_by_resource": {
+          "Network Egress": "0.01012552",
+          "H100": "3.22005939",
+          "Memory": "0.33665888",
+          "CPU": "0.49879045"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 22:00:00+00:00",
+        "cost": "5.13402223",
+        "cost_by_resource": {
+          "Network Egress": "0.00898263",
+          "H100": "4.20938379",
+          "Memory": "0.36890106",
+          "CPU": "0.54675475"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-03 23:00:00+00:00",
+        "cost": "6.23011020",
+        "cost_by_resource": {
+          "Network Egress": "0.01001098",
+          "H100": "5.22302822",
+          "Memory": "0.40175511",
+          "CPU": "0.59531589"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-04 00:00:00+00:00",
+        "cost": "5.49995107",
+        "cost_by_resource": {
+          "Network Egress": "0.01781178",
+          "H100": "4.54077407",
+          "Memory": "0.37933478",
+          "CPU": "0.56203043"
+        },
+        "tags": {}
+      },
+      {
+        "object_id": "ap-ZXFTV2opLgJKJzpuw7SGgP",
+        "description": "openwsp-exp8",
+        "environment_name": "main",
+        "interval_start": "2026-11-04 01:00:00+00:00",
+        "cost": "2.97094713",
+        "cost_by_resource": {
+          "Network Egress": "0.00959602",
+          "H100": "2.44039329",
+          "Memory": "0.20991264",
+          "CPU": "0.31104518"
+        },
+        "tags": {}
+      }
+    ]
+  },
+  "interpretation": {
+    "metered_cost_is_before_credits_and_allowances": true,
+    "billed_cost_is_provider_current_cycle_summary_not_payment_confirmation": true,
+    "hourly_rows_are_app_aggregates_not_individual_function_calls": true,
+    "partial_final_hours_are_excluded": true,
+    "ledger_modified": false,
+    "workspace_disabled_cause_established": false,
+    "current_provider_usage_limit_established": false
+  }
+}

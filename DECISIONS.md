@@ -82,3 +82,8 @@ At 22:35 on November 3, Modal confirmed the current driver failed with zero pend
 The original CPU extraction and its bound continuation keep running locally. The $150 total Modal cap remains unchanged while a separate question about raising it to $225 is pending. Protected OpenAI funds remain untouched. The public report preserves stale pipeline/coordinator snapshots as recorded and labels their phases as last persisted while displaying the newer active blocker.
 
 The transcript publication check found a nested generated-answer payload in turn 83 stdout and its turn 84 prompt echo. Public rendering omits that payload with a byte count and SHA256, while original private journals and editor input remain unchanged. Preserve protocol examples, compact metadata, code and replies. The guard belongs in the existing renderer so later automatic publication cannot restore the dump. [Omission evidence](replications/exp8/results/live-runs/codex-20261103/transcript-omissions.json).
+
+
+## Provider billing snapshot
+
+The supported read-only Modal billing API reports $51.37595920 metered usage and $20.41000000 after credits and allowances for the current workspace cycle at 23:02 on November 3. Its app/hour report attributes all 24 returned completed-interval rows to openwsp-exp8, totaling $50.36126872. Publish these provider figures separately from the $104.89222352871018 conservative ledger estimate. The report is aggregated, so it cannot settle individual unresolved reservations or establish the current usage limit, payment status or disabled-workspace cause. No ledger limit, charge or reservation is changed. [Billing evidence](replications/exp8/results/provider-billing-20261104.json).

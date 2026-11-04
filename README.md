@@ -233,6 +233,8 @@ No final live edit has been submitted. Candidate edits remain the editor's choic
 
 The cost records distinguish the earlier API charges, Modal resource estimates and unresolved reservations. Subscription usage has its own [token receipts](replications/exp8/results/live-runs/codex-20261103/subscription-usage.json), without assigning an API price or treating it as free. Each duration retains its measurement basis. Adding resource time across jobs does not give end-to-end elapsed time.
 
+Modal reported [$51.38 in metered usage and $20.41 after credits and allowances](replications/exp8/results/provider-billing-20261104.json) for the current workspace billing cycle, observed on November 3 at 23:02 Buenos Aires time. The ledger below retains conservative job estimates, including worst-case failure and resource bounds. Provider billing rows aggregate by app and hour, so they cannot settle individual unresolved job reservations. This billing snapshot does not establish the workspace-disabled cause or its current usage limit.
+
 <!-- OPENWSP:COSTS:START -->
 | Stage | Benchmark | Recorded hours | Recorded cost (USD) |
 | --- | --- | --- | --- |
@@ -364,7 +366,7 @@ Repeated requests, attempts and batches are grouped by stage and operation; the 
 
 **What tools did the editor have?** The kernel, practice files and bounded forward-pass interface listed above. It does not see test sets, the reference edit, calibration outcomes, control results or the internet. The live experiment uses the authors' text-block protocol. The public MCP server exposes the core operations for other agent workflows.
 
-**What did it cost?** The stopped API attempt incurred [$78.292765](replications/exp8/results/live-run/editor-cost-analysis.json) in editor charges before its next response failed the budget check. The incomplete requests account for [$60.234243 including input](replications/exp8/results/live-run/editor-cost-analysis.json). The current attempt uses a [ChatGPT Pro subscription](docs/TASK.md), whose quota counters do not establish a dollar cost per run. Modal computation is still paid and appears separately in the generated table. The [budget policy](docs/TASK.md) sets spending limits; it is not a cost measurement.
+**What did it cost?** The stopped API attempt incurred [$78.292765](replications/exp8/results/live-run/editor-cost-analysis.json) in editor charges before its next response failed the budget check. The incomplete requests account for [$60.234243 including input](replications/exp8/results/live-run/editor-cost-analysis.json). The current attempt uses a [ChatGPT Pro subscription](docs/TASK.md), whose quota counters do not establish a dollar cost per run. Modal reported [$51.38 metered and $20.41 after credits and allowances](replications/exp8/results/provider-billing-20261104.json) at the recorded snapshot; conservative per-job estimates appear separately in the generated table. The [budget policy](docs/TASK.md) sets spending limits; it is not a cost measurement.
 
 ### Differences from the authors' setup
 
