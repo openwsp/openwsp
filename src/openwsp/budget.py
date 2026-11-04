@@ -62,6 +62,27 @@ def _allowance_binding(cycle_limit, cycle_usage, evidence, *, observation_id=Non
     return {"observation_id": observation_id, **binding}
 
 
+def _provider_usage_anchor(binding):
+    """Validate the explicit distinction between provider usage and estimates."""
+    evidence = binding["evidence"]
+    if "usage_anchor" not in evidence:
+        return None
+    anchor = evidence["usage_anchor"]
+    required = {"basis", "settled_task_estimate_usd", "all_dispatch_terminal"}
+    if (evidence.get("basis") != "user_confirmed_dashboard"
+            or not isinstance(anchor, dict) or set(anchor) != required
+            or anchor["basis"] != "provider_actual_cycle_usage"
+            or anchor["all_dispatch_terminal"] is not True):
+        raise ValueError("Provider usage anchors require explicit dashboard evidence and terminal-work confirmation")
+    try:
+        estimate = _money(anchor["settled_task_estimate_usd"])
+    except (InvalidOperation, TypeError, ValueError) as error:
+        raise ValueError("Provider usage anchor needs a finite settled task estimate") from error
+    if _money(binding["cycle_usage"]) >= estimate:
+        raise ValueError("A provider usage anchor is only needed below conservative settled estimates")
+    return estimate
+
+
 def validate_modal_allowance_observation(observation):
     """Validate dashboard evidence or explicit operator funding authorization.
 
@@ -94,6 +115,37 @@ def validate_modal_allowance_observation(observation):
     observed = datetime.fromisoformat(binding["evidence"]["observed_at"])
     if observed.utcoffset().total_seconds() != 0:
         raise ValueError("Allowance evidence timestamp must be UTC")
+    _provider_usage_anchor(binding)
+    return binding
+
+
+def _task_authorization_binding(kind, total_limit, *, authorization_id, evidence):
+    if not isinstance(authorization_id, str) or not authorization_id.strip():
+        raise ValueError("A nonempty stable authorization_id is required")
+    try:
+        limit = _money(total_limit)
+    except (InvalidOperation, TypeError, ValueError) as error:
+        raise ValueError(f"The cumulative {kind} limit must be finite and nonnegative") from error
+    if (not isinstance(evidence, dict) or not isinstance(evidence.get("source"), str)
+            or not evidence["source"].strip() or not isinstance(evidence.get("authorized_at"), str)
+            or evidence.get("basis") != "explicit_user_authorization"):
+        raise ValueError("Evidence requires source, authorized_at, and explicit_user_authorization basis")
+    try:
+        authorized_at = datetime.fromisoformat(evidence["authorized_at"])
+        serialized = json.dumps(evidence, sort_keys=True, allow_nan=False)
+    except (TypeError, ValueError) as error:
+        raise ValueError("Authorization evidence must have a valid timestamp and JSON values") from error
+    if authorized_at.tzinfo is None:
+        raise ValueError("Authorization timestamp must include a timezone")
+    return {"total_limit": str(limit), "authorization_id": authorization_id, "evidence": json.loads(serialized)}
+
+
+def validate_modal_task_authorization(authorization):
+    """Validate a detached Modal task-cap authorization without reading a ledger."""
+    if not isinstance(authorization, dict) or set(authorization) != {"total_limit", "authorization_id", "evidence"}:
+        raise ValueError("Task authorization requires total_limit, authorization_id and evidence")
+    binding = _task_authorization_binding("modal", **authorization)
+    binding["total_limit"] = format(_money(binding["total_limit"]).normalize(), "f")
     return binding
 
 
@@ -248,57 +300,60 @@ class BudgetLedger:
         returns its original audit record without changing the current cap,
         even if another authorization has since changed it.
         """
-        if not isinstance(authorization_id, str) or not authorization_id.strip():
-            raise ValueError("A nonempty stable authorization_id is required")
-        try:
-            limit = _money(total_limit)
-        except (InvalidOperation, TypeError, ValueError) as error:
-            raise ValueError("The cumulative editor limit must be finite and nonnegative") from error
-        if (
-            not isinstance(evidence, dict)
-            or not isinstance(evidence.get("source"), str)
-            or not evidence["source"].strip()
-            or not isinstance(evidence.get("authorized_at"), str)
-            or evidence.get("basis") != "explicit_user_authorization"
-        ):
-            raise ValueError("Evidence requires source, authorized_at, and explicit_user_authorization basis")
-        try:
-            authorized_at = datetime.fromisoformat(evidence["authorized_at"])
-            serialized = json.dumps(evidence, sort_keys=True, allow_nan=False)
-        except (TypeError, ValueError) as error:
-            raise ValueError("Authorization evidence must have a valid timestamp and JSON values") from error
-        if authorized_at.tzinfo is None:
-            raise ValueError("Authorization timestamp must include a timezone")
-        evidence = json.loads(serialized)
-        with self._locked() as state:
-            previous = state.get("editor_authorizations", {}).get(authorization_id)
-            if previous is not None:
-                if (
-                    _money(previous["new_limit_usd"]) != limit
-                    or json.dumps(previous["evidence"], sort_keys=True, allow_nan=False) != serialized
-                ):
-                    raise ValueError("Authorization ID was already used with a different payload")
-                return json.loads(json.dumps(previous))
-            spent, reserved = self._totals(state, "editor")
-            if limit < spent + reserved:
-                raise ValueError("The editor limit cannot be below settled spend plus retained reservations")
-            record = {
-                "authorization_id": authorization_id,
-                "prior_limit_usd": state["limits"]["editor"],
-                "new_limit_usd": str(limit),
-                "evidence": evidence,
-                "applied_at": _utc(),
-            }
-            state["limits"]["editor"] = str(limit)
-            state.setdefault("editor_authorizations", {})[authorization_id] = record
-            state["events"].append({"event": "editor_limit_authorized", **record})
-            return json.loads(json.dumps(record))
+        return self._authorize_limit("editor", total_limit, authorization_id=authorization_id, evidence=evidence)
 
-    @staticmethod
-    def _check_modal_observation(state, binding):
+    def authorize_modal_limit(self, total_limit, *, authorization_id, evidence):
+        """Authorize a cumulative Modal task cap without changing its allowance.
+
+        Uses the same immutable authorization rules as the editor cap. A task
+        authorization does not assert or raise a provider account limit, settle
+        any prior job, or clear a measured-overrun halt.
+        """
+        return self._authorize_limit("modal", total_limit, authorization_id=authorization_id, evidence=evidence)
+
+    def _authorize_limit(self, kind, total_limit, *, authorization_id, evidence):
+        binding = _task_authorization_binding(kind, total_limit, authorization_id=authorization_id, evidence=evidence)
+        with self._locked() as state:
+            return self._apply_limit_authorization(state, kind, binding)
+
+    @classmethod
+    def _check_limit_authorization(cls, state, kind, binding):
+        limit = _money(binding["total_limit"])
+        previous = state.get(f"{kind}_authorizations", {}).get(binding["authorization_id"])
+        if previous is not None:
+            if (_money(previous["new_limit_usd"]) != limit
+                    or json.dumps(previous["evidence"], sort_keys=True, allow_nan=False)
+                    != json.dumps(binding["evidence"], sort_keys=True, allow_nan=False)):
+                raise ValueError("Authorization ID was already used with a different payload")
+            return json.loads(json.dumps(previous))
+        spent, reserved = cls._totals(state, kind)
+        if limit < spent + reserved:
+            raise ValueError(f"The {kind} limit cannot be below settled spend plus retained reservations")
+        return None
+
+    @classmethod
+    def _apply_limit_authorization(cls, state, kind, binding):
+        previous = cls._check_limit_authorization(state, kind, binding)
+        if previous is not None:
+            return previous
+        record = {
+            "authorization_id": binding["authorization_id"],
+            "prior_limit_usd": state["limits"][kind],
+            "new_limit_usd": binding["total_limit"],
+            "evidence": binding["evidence"],
+            "applied_at": _utc(),
+        }
+        state["limits"][kind] = binding["total_limit"]
+        state.setdefault(f"{kind}_authorizations", {})[binding["authorization_id"]] = record
+        state["events"].append({"event": f"{kind}_limit_authorized", **record})
+        return json.loads(json.dumps(record))
+
+    @classmethod
+    def _check_modal_observation(cls, state, binding):
         previous = state.get("modal_observations", {}).get(binding["observation_id"])
         if previous is not None:
-            if previous.get("observation") != binding:
+            if (json.dumps(previous.get("observation"), sort_keys=True, allow_nan=False)
+                    != json.dumps(binding, sort_keys=True, allow_nan=False)):
                 raise ValueError("Observation ID was already used with a different payload")
             return json.loads(json.dumps(previous))
         observed = datetime.fromisoformat(binding["evidence"]["observed_at"])
@@ -314,44 +369,72 @@ class BudgetLedger:
         if (binding["cycle_id"] is not None and allowance.get("cycle_id") is not None
                 and binding["cycle_id"] != allowance["cycle_id"]):
             raise ValueError("A different billing cycle requires explicit rollover handling")
+        estimate = _provider_usage_anchor(binding)
+        if estimate is not None and estimate != cls._totals(state, "modal")[0]:
+            raise ValueError("Provider usage anchor does not match current settled task estimates")
+        if "task_authorization" in binding:
+            cls._check_limit_authorization(state, "modal", binding["task_authorization"])
         return None
 
-    def preview_modal_allowance(self, observation):
+    def preview_modal_allowance(self, observation, *, task_authorization=None):
         """Validate an observation against existing state without writing files."""
         binding = validate_modal_allowance_observation(observation)
+        if task_authorization is not None:
+            binding["task_authorization"] = validate_modal_task_authorization(task_authorization)
         state = json.loads(self.path.read_text())
         if state.get("schema_version") != 1:
             raise ValueError("Unsupported budget ledger version")
         return self._check_modal_observation(state, binding)
 
-    def observe_modal_allowance(self, cycle_limit, cycle_usage, evidence, *, observation_id=None, cycle_id=None):
+    def observe_modal_allowance(self, cycle_limit, cycle_usage, evidence, *, observation_id=None, cycle_id=None,
+                               task_authorization=None, idle_owner_verified=False):
         """Apply fresh billing evidence or explicit operator funding authorization.
 
         Evidence requires source and observed_at; its payload is retained for audit.
         Funding authorization is distinguished from observed provider limits in
         evidence; successful jobs or usage thresholds never authorize an increase.
         Stable IDs bind immutable receipts; identical retries never reapply an old
-        observation. Known usage and all reservations survive decreases or increases.
+        observation. A task authorization, when supplied, is applied atomically
+        with this observation. A provider-usage anchor additionally requires the
+        serialized caller to verify every driver owner is idle/terminal; it never
+        rewrites job estimates or removes reservations.
         """
         binding = _allowance_binding(cycle_limit, cycle_usage, evidence,
                                      observation_id=observation_id, cycle_id=cycle_id)
+        if task_authorization is not None:
+            binding["task_authorization"] = validate_modal_task_authorization(task_authorization)
         with self._locked() as state:
             previous = self._check_modal_observation(state, binding)
             if previous is not None:
                 return previous
+            estimate = _provider_usage_anchor(binding)
+            if estimate is not None and idle_owner_verified is not True:
+                raise ValueError("A provider usage anchor requires independently verified idle ownership")
             spent, _ = self._totals(state, "modal")
             prior = state["modal_allowance"]
             known_usage = (_money(prior["cycle_usage"]) + spent
                            - _money(prior["task_spend_at_observation"]))
-            usage = max(_money(binding["cycle_usage"]), known_usage,
-                        spent + _money(state.get("modal_prior_usage_floor", "0.05")))
+            anchor_id = prior.get("provider_usage_anchor_id")
+            if estimate is not None:
+                usage = _money(binding["cycle_usage"])
+                anchor_id = binding["observation_id"]
+            else:
+                usage = max(_money(binding["cycle_usage"]), known_usage)
+                if anchor_id is None:
+                    usage = max(usage, spent + _money(state.get("modal_prior_usage_floor", "0.05")))
             applied = {"cycle_limit": binding["cycle_limit"], "cycle_usage": str(usage),
                        "task_spend_at_observation": str(spent),
                        "observed_at": binding["evidence"]["observed_at"], "evidence": binding["evidence"],
                        "cycle_id": cycle_id or prior.get("cycle_id")}
+            if anchor_id is not None:
+                applied["provider_usage_anchor_id"] = anchor_id
             receipt = {"observation_id": binding["observation_id"], "observation": binding,
                        "prior_allowance": json.loads(json.dumps(prior)), "applied_allowance": applied,
                        "applied_at": _utc()}
+            if task_authorization is not None:
+                receipt["task_authorization"] = self._apply_limit_authorization(
+                    state, "modal", binding["task_authorization"],
+                )
             state["modal_allowance"] = applied
             state.setdefault("modal_observations", {})[binding["observation_id"]] = receipt
             state["events"].append({"event": "modal_allowance_observed", **receipt})

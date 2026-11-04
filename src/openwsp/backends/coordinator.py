@@ -24,7 +24,13 @@ from contextlib import contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
 
-from ..budget import BudgetExceeded, BudgetLedger, atomic_json, validate_modal_allowance_observation
+from ..budget import (
+    BudgetExceeded,
+    BudgetLedger,
+    atomic_json,
+    validate_modal_allowance_observation,
+    validate_modal_task_authorization,
+)
 from .driver_budget import DriverBudgetLease, DriverLeaseError
 
 
@@ -166,20 +172,23 @@ class DriverCoordinator:
                     or not (self._has_terminal_proof(owner) or call_id in observed_terminal)):
                 raise ValueError("Retained driver owner is not confirmed terminal; allowance remains unchanged")
 
-    def observe_modal_allowance(self, observation):
-        """Record allowance evidence only; never launch, reconcile, or unblock work.
+    def observe_modal_allowance(self, observation, *, task_authorization=None):
+        """Record allowance and optional task authorization without dispatching.
 
         Route this operation through the same serialized owner as launch/recover.
         Supply BudgetLedger.from_existing(), not a factory with initialization or
         reservation side effects. Provider reads establish that no driver can still
-        write the ledger; ambiguous ownership leaves every file untouched.
+        write the ledger; ambiguous ownership leaves every file untouched. The
+        ledger applies any task-cap authorization and allowance in one write.
         """
         observation = validate_modal_allowance_observation(observation)
+        if task_authorization is not None:
+            task_authorization = validate_modal_task_authorization(task_authorization)
         with self._locked():
             ledger = self.ledger_source
             if not isinstance(ledger, BudgetLedger) or not ledger.path.is_file():
                 raise ValueError("Allowance updates require an existing ledger object, not a ledger factory")
-            ledger.preview_modal_allowance(observation)
+            ledger.preview_modal_allowance(observation, task_authorization=task_authorization)
             current = self.record["current"]
             observed_terminal = set()
             if not current:
@@ -212,7 +221,9 @@ class DriverCoordinator:
                         if self._read(self.path) != self.record:
                             raise ValueError("Coordinator ownership changed during the observation")
             self._check_allowance_driver_owners(self._read(ledger.path), observed_terminal)
-            receipt = ledger.observe_modal_allowance(**observation)
+            receipt = ledger.observe_modal_allowance(
+                **observation, task_authorization=task_authorization, idle_owner_verified=True,
+            )
             self.commit()  # Recommit identical retries after a lost acknowledgement.
             return receipt
 

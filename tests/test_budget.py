@@ -12,6 +12,7 @@ from openwsp.budget import (
     astra_upper_bound,
     compute_cost,
     validate_modal_allowance_observation,
+    validate_modal_task_authorization,
 )
 
 
@@ -399,3 +400,242 @@ def test_concurrent_authorization_replays_add_one_event(tmp_path):
     snapshot = BudgetLedger(path).snapshot()
     assert snapshot["limits"]["editor"] == "200"
     assert len(snapshot["editor_authorizations"]) == len(snapshot["events"]) == 1
+
+
+def test_modal_task_authorization_preserves_account_limit_and_all_history(tmp_path):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    ledger.observe_modal_allowance(**modal_observation(limit=150, usage=0))
+    settled = ledger.reserve("modal", 105, "earlier-compute")
+    ledger.settle(settled, "104.89222352871018", metadata={"basis": "conservative estimate"})
+    ledger.reserve("modal", "18.129953472222223", "retained-uncertain-jobs")
+    editor = ledger.reserve("editor", 80, "historical-api")
+    ledger.settle(editor, "78.292765")
+    before = ledger.snapshot()
+
+    record = ledger.authorize_modal_limit(
+        "225", authorization_id="modal-total-225", evidence=authorization_evidence(),
+    )
+    after = ledger.snapshot()
+    assert record["prior_limit_usd"] == "150" and record["new_limit_usd"] == "225"
+    assert after["limits"] == {"editor": "100", "modal": "225"}
+    for field in ("modal_allowance", "modal_prior_usage_floor", "reservations", "halted"):
+        assert after[field] == before[field]
+    # The lower independent account allowance still binds; a task-cap increase
+    # cannot manufacture provider headroom or remove an uncertain reservation.
+    assert after["summary"] == before["summary"]
+    assert after["events"][:-1] == before["events"]
+    assert after["events"][-1] == {"event": "modal_limit_authorized", **record}
+    assert after["modal_authorizations"] == {"modal-total-225": record}
+    record["evidence"]["source"] = "caller mutation"
+    assert BudgetLedger.from_existing(ledger.path).snapshot() == after
+    with pytest.raises(ValueError, match="authorized task budgets"):
+        BudgetLedger(tmp_path / "unapproved.json", modal_task_limit=225)
+
+
+def test_modal_authorization_replay_cannot_restore_an_older_cap_or_change_payload(tmp_path):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    evidence = authorization_evidence()
+    original = ledger.authorize_modal_limit(225, authorization_id="first", evidence=evidence)
+    rid = ledger.reserve("modal", 2, "compute-after-authorization")
+    ledger.settle(rid, 1)
+    ledger.authorize_modal_limit(200, authorization_id="later", evidence=evidence)
+    before = ledger.snapshot()
+    assert ledger.authorize_modal_limit("225.00", authorization_id="first", evidence=evidence) == original
+    assert ledger.snapshot() == before
+    for limit, changed in ((226, evidence), (225, {**evidence, "source": "different"})):
+        with pytest.raises(ValueError, match="different payload"):
+            ledger.authorize_modal_limit(limit, authorization_id="first", evidence=changed)
+        assert ledger.snapshot() == before
+
+
+def test_modal_authorization_cannot_erase_reservations_or_clear_global_halt(tmp_path):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    settled = ledger.reserve("modal", 1, "overrun")
+    with pytest.raises(BudgetOverrun):
+        ledger.settle(settled, 2)
+    before = ledger.snapshot()
+    with pytest.raises(ValueError, match="settled spend plus retained reservations"):
+        ledger.authorize_modal_limit(1, authorization_id="too-low", evidence=authorization_evidence())
+    assert ledger.snapshot() == before
+    ledger.authorize_modal_limit(225, authorization_id="raised", evidence=authorization_evidence())
+    assert ledger.snapshot()["halted"] is True
+    with pytest.raises(BudgetExceeded, match="halted"):
+        ledger.reserve("modal", 1, "still-blocked")
+
+
+def _apply_same_modal_authorization(path):
+    return BudgetLedger.from_existing(path).authorize_modal_limit(
+        225, authorization_id="one-modal-authorization", evidence=authorization_evidence(),
+    )
+
+
+def test_concurrent_modal_authorizations_create_one_immutable_event(tmp_path):
+    path = str(tmp_path / "budget.json")
+    BudgetLedger(path)
+    with ProcessPoolExecutor(max_workers=3) as pool:
+        records = list(pool.map(_apply_same_modal_authorization, [path] * 6))
+    assert all(record == records[0] for record in records)
+    snapshot = BudgetLedger.from_existing(path).snapshot()
+    assert snapshot["limits"] == {"editor": "100", "modal": "225"}
+    assert len(snapshot["modal_authorizations"]) == len(snapshot["events"]) == 1
+
+
+def _conservative_modal_history(tmp_path):
+    ledger = BudgetLedger(tmp_path / "budget.json")
+    at = datetime.now(UTC) - timedelta(seconds=10)
+    ledger.observe_modal_allowance(**modal_observation(key="prior", at=at, limit=150, usage=0))
+    charged = ledger.reserve("modal", 105, "prior-compute")
+    ledger.settle(charged, "104.89222352871018", metadata={"basis": "conservative estimate"})
+    ledger.reserve("modal", "18.129953472222223", "uncertain-retained")
+    observation = modal_observation(key="provider-actual", at=at + timedelta(seconds=1),
+                                    limit=100, usage="50.25")
+    observation["evidence"]["usage_anchor"] = {
+        "basis": "provider_actual_cycle_usage", "settled_task_estimate_usd": "104.89222352871018",
+        "all_dispatch_terminal": True,
+    }
+    authorization = {"total_limit": "225", "authorization_id": "modal-total-225",
+                     "evidence": authorization_evidence()}
+    return ledger, observation, authorization
+
+
+def test_idle_provider_anchor_and_task_cap_apply_atomically_without_rewriting_costs(tmp_path):
+    ledger, observation, authorization = _conservative_modal_history(tmp_path)
+    before = ledger.snapshot()
+    before_bytes = ledger.path.read_bytes()
+    assert ledger.preview_modal_allowance(observation, task_authorization=authorization) is None
+    assert ledger.path.read_bytes() == before_bytes
+    receipt = ledger.observe_modal_allowance(**observation, task_authorization=authorization,
+                                             idle_owner_verified=True)
+    after = ledger.snapshot()
+    assert after["limits"] == {"modal": "225", "editor": "100"}
+    assert after["modal_allowance"]["cycle_limit"] == "100"
+    assert after["modal_allowance"]["cycle_usage"] == "50.25"
+    assert after["modal_allowance"]["task_spend_at_observation"] == "104.89222352871018"
+    assert after["modal_allowance"]["provider_usage_anchor_id"] == "provider-actual"
+    assert after["summary"]["modal"] == {
+        "spent_usd": 104.89222352871018, "reserved_usd": 18.129953472222223,
+        "available_usd": pytest.approx(31.620046527777777),
+    }
+    for field in ("reservations", "halted", "modal_prior_usage_floor"):
+        assert after[field] == before[field]
+    assert after["summary"]["editor"] == before["summary"]["editor"]
+    assert after["events"][:-2] == before["events"]
+    assert [event["event"] for event in after["events"][-2:]] == [
+        "modal_limit_authorized", "modal_allowance_observed",
+    ]
+    assert receipt["task_authorization"] == after["modal_authorizations"]["modal-total-225"]
+    assert receipt["observation"]["task_authorization"] == authorization
+
+
+def test_following_observation_keeps_provider_anchor_and_adds_later_estimated_spend(tmp_path):
+    ledger, observation, authorization = _conservative_modal_history(tmp_path)
+    ledger.observe_modal_allowance(**observation, task_authorization=authorization, idle_owner_verified=True)
+    rid = ledger.reserve("modal", 4, "new-compute")
+    ledger.settle(rid, 3)
+    after = datetime.fromisoformat(observation["evidence"]["observed_at"]) + timedelta(seconds=1)
+    ledger.observe_modal_allowance(**modal_observation(key="later", at=after, limit=90, usage=50))
+    state = ledger.snapshot()
+    assert state["modal_allowance"]["cycle_usage"] == "53.25000000000000"
+    assert state["modal_allowance"]["provider_usage_anchor_id"] == "provider-actual"
+    assert state["summary"]["modal"]["spent_usd"] == pytest.approx(107.89222352871018)
+    assert state["summary"]["modal"]["available_usd"] == pytest.approx(18.620046527777777)
+    with pytest.raises(BudgetExceeded):
+        ledger.reserve("modal", 19, "account-bound")
+
+
+@pytest.mark.parametrize("failure", ["not-idle", "stale-observation", "changed-estimate", "low-cap", "bad-auth"])
+def test_combined_funding_failure_leaves_both_cap_and_observation_unchanged(tmp_path, failure):
+    ledger, observation, authorization = _conservative_modal_history(tmp_path)
+    if failure == "stale-observation":
+        observation["evidence"]["observed_at"] = (datetime.now(UTC) - timedelta(hours=1)).isoformat()
+    elif failure == "changed-estimate":
+        observation["evidence"]["usage_anchor"]["settled_task_estimate_usd"] = "104"
+    elif failure == "low-cap":
+        authorization["total_limit"] = "120"
+    elif failure == "bad-auth":
+        authorization["evidence"]["basis"] = "provider balance"
+    before = ledger.path.read_bytes()
+    with pytest.raises(ValueError):
+        ledger.observe_modal_allowance(**observation, task_authorization=authorization,
+                                       idle_owner_verified=failure != "not-idle")
+    assert ledger.path.read_bytes() == before
+
+
+def test_combined_funding_replay_is_bound_and_cannot_restore_an_old_cap(tmp_path, monkeypatch):
+    ledger, observation, authorization = _conservative_modal_history(tmp_path)
+    receipt = ledger.observe_modal_allowance(**observation, task_authorization=authorization,
+                                             idle_owner_verified=True)
+    ledger.authorize_modal_limit(200, authorization_id="later-cap", evidence=authorization_evidence())
+    rid = ledger.reserve("modal", 4, "new-work")
+    ledger.settle(rid, 3)
+    future = datetime.now(UTC) + timedelta(hours=2)
+
+    class Later(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return future
+
+    monkeypatch.setattr("openwsp.budget.datetime", Later)
+    before = ledger.path.read_bytes()
+    assert ledger.preview_modal_allowance(observation, task_authorization=authorization) == receipt
+    # No idle claim is needed to return an existing immutable acknowledgment.
+    assert ledger.observe_modal_allowance(**observation, task_authorization=authorization) == receipt
+    assert ledger.path.read_bytes() == before
+    for changed in (None, {**authorization, "total_limit": 226},
+                    {**authorization, "authorization_id": "different"}):
+        with pytest.raises(ValueError, match="different payload"):
+            ledger.observe_modal_allowance(**observation, task_authorization=changed, idle_owner_verified=True)
+        assert ledger.path.read_bytes() == before
+
+
+def test_anchor_replay_does_not_treat_boolean_and_number_evidence_as_identical(tmp_path):
+    ledger, observation, authorization = _conservative_modal_history(tmp_path)
+    ledger.observe_modal_allowance(**observation, task_authorization=authorization, idle_owner_verified=True)
+    before = ledger.path.read_bytes()
+    observation["evidence"]["usage_anchor"]["all_dispatch_terminal"] = 1
+    with pytest.raises(ValueError, match="different payload"):
+        ledger.observe_modal_allowance(**observation, task_authorization=authorization, idle_owner_verified=True)
+    assert ledger.path.read_bytes() == before
+
+
+@pytest.mark.parametrize("change", [
+    {"basis": "unverified"}, {"all_dispatch_terminal": False}, {"all_dispatch_terminal": 1},
+    {"settled_task_estimate_usd": "NaN"}, {"settled_task_estimate_usd": "50.25"}, {"extra": True},
+])
+def test_provider_anchor_requires_explicit_typed_finite_evidence(tmp_path, change):
+    _, observation, _ = _conservative_modal_history(tmp_path)
+    observation["evidence"]["usage_anchor"].update(change)
+    with pytest.raises(ValueError):
+        validate_modal_allowance_observation(observation)
+
+
+def test_task_authorization_validation_normalizes_detaches_and_rejects_extra_fields():
+    source = {"total_limit": "225.00", "authorization_id": "operator-225",
+              "evidence": authorization_evidence()}
+    normalized = validate_modal_task_authorization(source)
+    assert normalized["total_limit"] == "225"
+    normalized["evidence"]["source"] = "changed"
+    assert source["evidence"]["source"] == "user-message:explicit-budget-change"
+    with pytest.raises(ValueError):
+        validate_modal_task_authorization({**source, "extra": True})
+
+
+def _apply_same_modal_funding(arguments):
+    path, observation, authorization = arguments
+    return BudgetLedger.from_existing(path).observe_modal_allowance(
+        **observation, task_authorization=authorization, idle_owner_verified=True,
+    )
+
+
+def test_concurrent_funding_updates_record_one_cap_and_one_observation(tmp_path):
+    ledger, observation, authorization = _conservative_modal_history(tmp_path)
+    before = ledger.snapshot()
+    args = (str(ledger.path), observation, authorization)
+    with ProcessPoolExecutor(max_workers=3) as pool:
+        receipts = list(pool.map(_apply_same_modal_funding, [args] * 6))
+    assert all(receipt == receipts[0] for receipt in receipts)
+    after = ledger.snapshot()
+    assert after["reservations"] == before["reservations"]
+    assert len(after["modal_authorizations"]) == 1
+    assert len(after["modal_observations"]) == len(before["modal_observations"]) + 1
+    assert len(after["events"]) == len(before["events"]) + 2

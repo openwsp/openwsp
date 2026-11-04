@@ -30,6 +30,19 @@ def observation():
     }
 
 
+@pytest.fixture
+def task_authorization():
+    return {
+        "total_limit": "225",
+        "authorization_id": "modal-task-cap-225",
+        "evidence": {
+            "source": "explicit operator reply",
+            "basis": "explicit_user_authorization",
+            "authorized_at": datetime.now(UTC).isoformat(),
+        },
+    }
+
+
 def _launch_function(volume):
     source = Path(__file__).resolve().parents[1] / "src/openwsp/backends/modal_app.py"
     node = next(
@@ -89,8 +102,9 @@ def remote_harness(monkeypatch):
             assert commit is volume.commit and reload is volume.reload
             calls.append("coordinator")
 
-        def observe_modal_allowance(self, value):
-            calls.append(("observe", copy.deepcopy(value)))
+        def observe_modal_allowance(self, value, **kwargs):
+            event = ("observe", copy.deepcopy(value))
+            calls.append((*event, copy.deepcopy(kwargs)) if kwargs else event)
             return receipt
 
         launch = recover = forbidden
@@ -115,6 +129,24 @@ def test_remote_allowance_branch_only_reloads_existing_ledger_and_records(remote
     assert observation == original
     assert remote_harness.decorators["concurrent"] == {"max_inputs": 1}
     assert remote_harness.decorators["function"]["max_containers"] == 1
+
+
+def test_remote_combined_funding_update_uses_same_serialized_owner(
+    remote_harness, observation, task_authorization
+):
+    assert remote_harness.launch(
+        allowance_observation=observation, modal_task_authorization=task_authorization,
+    ) is remote_harness.receipt
+    assert remote_harness.calls == [
+        "reload", "existing_ledger", "coordinator",
+        ("observe", observation, {"task_authorization": task_authorization}),
+    ]
+
+
+def test_task_authorization_without_allowance_cannot_fall_through_to_dispatch(remote_harness, task_authorization):
+    with pytest.raises(ValueError):
+        remote_harness.launch(modal_task_authorization=task_authorization)
+    assert remote_harness.calls == []
 
 
 @pytest.mark.parametrize(
@@ -198,6 +230,42 @@ def test_local_entrypoint_validates_then_makes_exactly_one_allowance_rpc(tmp_pat
     assert json.loads(path.read_text()) == observation
 
 
+def test_local_combined_funding_validates_both_files_then_makes_one_rpc(
+    tmp_path, observation, task_authorization, fake_rpc
+):
+    path, authorization_path = tmp_path / "observation.json", tmp_path / "authorization.json"
+    path.write_text(json.dumps(observation))
+    authorization_path.write_text(json.dumps(task_authorization))
+    assert replication.record_modal_allowance(
+        observation=path, task_authorization=authorization_path,
+    ) is fake_rpc.result
+    assert fake_rpc.calls == [
+        "tls", ("function", "openwsp-exp8", "launch"),
+        ("rpc", (), {"allowance_observation": observation, "modal_task_authorization": task_authorization}),
+    ]
+
+
+@pytest.mark.parametrize("invalid", ["relative", "malformed", "inferred", "missing_id", "extra_key"])
+def test_invalid_task_authorization_fails_before_any_rpc(
+    tmp_path, observation, task_authorization, fake_rpc, invalid
+):
+    path, authorization_path = tmp_path / "observation.json", tmp_path / "authorization.json"
+    path.write_text(json.dumps(observation))
+    if invalid == "inferred":
+        task_authorization["evidence"]["basis"] = "estimated affordability"
+    elif invalid == "missing_id":
+        task_authorization.pop("authorization_id")
+    elif invalid == "extra_key":
+        task_authorization["recover"] = True
+    authorization_path.write_text("{" if invalid == "malformed" else json.dumps(task_authorization))
+    with pytest.raises(ValueError):
+        replication.record_modal_allowance(
+            observation=path,
+            task_authorization="authorization.json" if invalid == "relative" else authorization_path,
+        )
+    assert fake_rpc.calls == []
+
+
 @pytest.mark.parametrize(
     "invalid",
     [
@@ -262,6 +330,23 @@ def test_cli_routes_only_observation_and_default_experiment(tmp_path, monkeypatc
     assert result.exit_code == 0, result.output
     assert json.loads(result.output) == {"status": "allowance_recorded"}
     assert calls == [("exp8", path)]
+
+
+def test_cli_routes_optional_task_authorization_without_execution_flags(tmp_path, monkeypatch):
+    path, authorization_path = tmp_path / "observation.json", tmp_path / "authorization.json"
+    calls = []
+
+    def record(experiment="exp8", *, observation, task_authorization):
+        calls.append((experiment, Path(observation), Path(task_authorization)))
+        return {"status": "allowance_recorded"}
+
+    monkeypatch.setattr(replication, "record_modal_allowance", record)
+    result = CliRunner().invoke(cli.app, [
+        "record-modal-allowance", "exp8", "--observation", str(path),
+        "--task-authorization", str(authorization_path),
+    ])
+    assert result.exit_code == 0, result.output
+    assert calls == [("exp8", path, authorization_path)]
 
 
 def test_cli_requires_explicit_observation_file(monkeypatch):

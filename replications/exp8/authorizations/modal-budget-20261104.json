@@ -1,0 +1,13 @@
+{
+  "authorization_id": "user-2026-11-04-exp8-modal-225",
+  "total_limit": "225",
+  "evidence": {
+    "source": "docs/TASK.md: Modal task-cap increase and account restoration (2026-11-04)",
+    "authorized_at": "2026-11-04T10:11:16.934808+00:00",
+    "basis": "explicit_user_authorization",
+    "operator_instruction": "Raise the total Modal cap to $225",
+    "prior_task_cap_usd": "150",
+    "protected_openai_plan_b_usd": "160.85",
+    "scope": "Absolute cumulative Modal task cap, not additional225USD and not a provider usage-limit claim. Preserve all charges, reservations and priority order."
+  }
+}

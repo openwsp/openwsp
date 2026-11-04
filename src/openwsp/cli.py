@@ -231,12 +231,18 @@ def report(experiment: Annotated[str, typer.Argument()] = "exp8") -> None:
 def record_modal_allowance(
     observation: Annotated[Path, typer.Option(help="Absolute path to user-confirmed dashboard evidence JSON.")],
     experiment: Annotated[str, typer.Argument()] = "exp8",
+    task_authorization: Annotated[
+        Path | None, typer.Option(help="Absolute path to an explicit cumulative Modal task-cap authorization JSON.")
+    ] = None,
 ) -> None:
-    """Record Modal allowance evidence without deploying or restarting work."""
+    """Record Modal funding evidence without deploying or restarting work."""
     from .replication import record_modal_allowance as record_allowance
 
     try:
-        result = record_allowance(experiment, observation=observation)
+        kwargs = {"observation": observation}
+        if task_authorization is not None:
+            kwargs["task_authorization"] = task_authorization
+        result = record_allowance(experiment, **kwargs)
     except (OSError, ValueError) as error:
         raise typer.BadParameter(str(error)) from error
     _emit(result)

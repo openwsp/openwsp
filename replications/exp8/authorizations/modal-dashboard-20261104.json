@@ -1,0 +1,13 @@
+{
+  "recorded_at_utc": "2026-11-04T10:11:16.934808+00:00",
+  "source": "Operator message and attached Modal Usage & billing screenshot, November4",
+  "operator_report": "it was over limit; i had to update the limit again; the max allowed was $100 and that's what i set now.",
+  "usage_limit_including_credits_usd": "100",
+  "spend_limit_excluding_credits_usd": "100",
+  "displayed_total_usage_usd": "50.25",
+  "displayed_credits_usd": "30",
+  "displayed_charges_usd": "20.25",
+  "next_payment_at_charges_usd": "30",
+  "dashboard_notice": "your limit auto-rises after",
+  "interpretation": "Current observed limits only. No later increase or payment clearance is assumed; this record alone does not authorize ledger mutation while a driver owns it."
+}

@@ -80,22 +80,31 @@ def status(experiment="exp8"):
     return modal.Function.from_name("openwsp-exp8", "status").remote()
 
 
-def record_modal_allowance(experiment="exp8", *, observation):
-    """Record explicit dashboard evidence through the existing serialized owner.
+def record_modal_allowance(experiment="exp8", *, observation, task_authorization=None):
+    """Record dashboard evidence and an optional explicit cumulative task cap.
 
-    This command never deploys, creates a ledger, or launches/restarts work.
+    The existing serialized owner verifies idle ownership and records both
+    together. This command never deploys, creates a ledger, or restarts work.
     """
     if experiment != "exp8":
         raise ValueError("Only exp8 supports Modal allowance observations")
     path = Path(observation)
     if not path.is_absolute():
         raise ValueError("--observation must be an absolute path to a JSON evidence file")
-    from openwsp.budget import validate_modal_allowance_observation
+    from openwsp.budget import validate_modal_allowance_observation, validate_modal_task_authorization
     value = validate_modal_allowance_observation(json.loads(path.read_text()))
+    kwargs = {"allowance_observation": value}
+    if task_authorization is not None:
+        authorization_path = Path(task_authorization)
+        if not authorization_path.is_absolute():
+            raise ValueError("--task-authorization must be an absolute path to a JSON evidence file")
+        kwargs["modal_task_authorization"] = validate_modal_task_authorization(
+            json.loads(authorization_path.read_text())
+        )
     from openwsp.backends.modal_runtime import configure_tls
     configure_tls()
     import modal
-    return modal.Function.from_name("openwsp-exp8", "launch").remote(allowance_observation=value)
+    return modal.Function.from_name("openwsp-exp8", "launch").remote(**kwargs)
 
 
 def report(experiment="exp8"):

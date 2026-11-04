@@ -134,6 +134,12 @@ def allowance_observation(*, at=None, **changes):
                          "observed_at": (at or datetime.now(UTC)).isoformat()}, **changes}
 
 
+def modal_task_authorization():
+    return {"total_limit": "225", "authorization_id": "operator-modal-225",
+            "evidence": {"source": "explicit operator reply", "basis": "explicit_user_authorization",
+                         "authorized_at": datetime.now(UTC).isoformat()}}
+
+
 def prohibit_launch_side_effects(coordinator, monkeypatch):
     def forbidden(*args, **kwargs):
         pytest.fail("Allowance observation must not launch, cancel, reconcile, or settle")
@@ -162,6 +168,72 @@ def test_allowance_only_update_observes_terminal_owner_without_changing_driver_o
     for key in ("reservations", "limits", "halted", "modal_prior_usage_floor"):
         assert after[key] == before_ledger[key]
     assert receipt["applied_allowance"] == after["modal_allowance"]
+
+
+def test_combined_cap_and_provider_anchor_preserve_costs_after_positive_terminal_proof(setup, monkeypatch):
+    ledger, _, calls, _, _, spawn, factory, _ = setup
+    start(factory, spawn)
+    ledger.observe_modal_allowance(**allowance_observation(cycle_limit=150, cycle_usage="0.05"))
+    rid = ledger.reserve("modal", "104.89", "past conservative compute estimates")
+    ledger.settle(rid, "104.89")
+    ledger.reserve("modal", "18.13", "retained job bounds")
+    calls[0].complete = True
+    coordinator = factory()
+    prohibit_launch_side_effects(coordinator, monkeypatch)
+    observation = allowance_observation(observation_id="actual-provider-usage", cycle_usage="50.25")
+    observation["evidence"]["usage_anchor"] = {
+        "basis": "provider_actual_cycle_usage", "settled_task_estimate_usd": "104.89",
+        "all_dispatch_terminal": True,
+    }
+    authorization = modal_task_authorization()
+    before = ledger.snapshot()
+    journal, pipeline = coordinator.path.read_bytes(), coordinator.state_path.read_bytes()
+    receipt = coordinator.observe_modal_allowance(observation, task_authorization=authorization)
+    after = ledger.snapshot()
+    assert after["limits"] == {**before["limits"], "modal": "225"}
+    assert after["reservations"] == before["reservations"]
+    assert after["events"][:len(before["events"])] == before["events"]
+    assert after["modal_allowance"]["cycle_limit"] == "100"
+    assert after["modal_allowance"]["cycle_usage"] == "50.25"
+    assert after["modal_allowance"]["task_spend_at_observation"] == "104.89"
+    assert after["halted"] == before["halted"]
+    assert receipt["task_authorization"]["new_limit_usd"] == "225"
+    assert coordinator.path.read_bytes() == journal and coordinator.state_path.read_bytes() == pipeline
+    assert calls[0].events == ["get"] and len(calls) == 1 and not calls[0].cancelled
+    stable = ledger.path.read_bytes()
+    assert coordinator.observe_modal_allowance(observation, task_authorization=authorization) == receipt
+    assert ledger.path.read_bytes() == stable
+
+
+@pytest.mark.parametrize("outcome", ["running", "unknown", "auth"])
+def test_combined_cap_update_cannot_mutate_a_live_or_ambiguous_owner(setup, monkeypatch, outcome):
+    ledger, _, calls, _, _, spawn, factory, _ = setup
+    start(factory, spawn)
+    coordinator = factory()
+    prohibit_launch_side_effects(coordinator, monkeypatch)
+    if outcome == "unknown":
+        calls[0].get_error = ConnectionError("provider state unavailable")
+    elif outcome == "auth":
+        calls[0].get_error = RuntimeError("401 Unauthorized")
+    before = ledger.path.read_bytes(), coordinator.path.read_bytes(), coordinator.state_path.read_bytes()
+    with pytest.raises(ValueError, match="terminal"):
+        coordinator.observe_modal_allowance(allowance_observation(), task_authorization=modal_task_authorization())
+    assert (ledger.path.read_bytes(), coordinator.path.read_bytes(), coordinator.state_path.read_bytes()) == before
+    assert len(calls) == 1 and not calls[0].cancelled
+
+
+def test_invalid_cap_authorization_is_rejected_before_provider_poll_or_any_mutation(setup):
+    ledger, _, calls, _, _, spawn, factory, reloads = setup
+    start(factory, spawn)
+    coordinator = factory()
+    authorization = modal_task_authorization()
+    authorization["evidence"]["basis"] = "predicted automatic top-up"
+    before = ledger.path.read_bytes(), coordinator.path.read_bytes(), coordinator.state_path.read_bytes()
+    reload_count = len(reloads)
+    with pytest.raises(ValueError):
+        coordinator.observe_modal_allowance(allowance_observation(), task_authorization=authorization)
+    assert (ledger.path.read_bytes(), coordinator.path.read_bytes(), coordinator.state_path.read_bytes()) == before
+    assert calls[0].events == [] and len(reloads) == reload_count
 
 
 @pytest.mark.parametrize("outcome", ["running", "unknown", "auth", "lookup"])

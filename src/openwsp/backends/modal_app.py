@@ -398,10 +398,12 @@ def pipeline(stage="all", config=None, driver_ticket=None):
               cpu=(0.25, 0.25), memory=(1024, 1024), max_containers=1,
               volumes={"/data": data_volume})
 @modal.concurrent(max_inputs=1)
-def launch(stage="all", config=None, recover=False, *, allowance_observation=None):
+def launch(stage="all", config=None, recover=False, *, allowance_observation=None, modal_task_authorization=None):
     from openwsp.backends.coordinator import DriverCoordinator
     from openwsp.budget import BudgetLedger
-    if allowance_observation is not None:
+    if allowance_observation is not None or modal_task_authorization is not None:
+        if allowance_observation is None:
+            raise ValueError("A task authorization requires an explicit allowance observation")
         if stage != "all" or config is not None or recover is not False:
             raise ValueError("Allowance observations cannot be combined with stage, config, or recovery")
         data_volume.reload()
@@ -409,7 +411,9 @@ def launch(stage="all", config=None, recover=False, *, allowance_observation=Non
         coordinator = DriverCoordinator(ledger, "/data/coordinator.json",
                                         state_path="/data/state.json", commit=data_volume.commit,
                                         reload=data_volume.reload)
-        return coordinator.observe_modal_allowance(allowance_observation)
+        kwargs = ({"task_authorization": modal_task_authorization}
+                  if modal_task_authorization is not None else {})
+        return coordinator.observe_modal_allowance(allowance_observation, **kwargs)
     def ledger_owner():
         ledger = BudgetLedger("/data/budget.json")
         if "infrastructure-headroom" not in ledger.snapshot()["reservations"]:
