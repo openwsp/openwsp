@@ -1,11 +1,12 @@
 """Reporting must preserve evidence, pending states and source provenance."""
 
+import hashlib
 import json
 from pathlib import Path
 
 import pytest
 
-from openwsp.reporting import generate_report, render_transcript
+from openwsp.reporting import _compact_output_text, generate_report, render_transcript
 
 
 def write_json(path: Path, value):
@@ -301,6 +302,52 @@ def test_active_attempt_supersedes_historical_goal_but_preserves_every_attempt(t
     assert blocker.read_bytes() == legacy
     assert str(transcript) in {row["path"] for row in generated["sources"]}
     assert "[7](live-runs/codex-first/state.json)" in (results / "report.md").read_text()
+
+
+def test_active_blocker_distinguishes_stale_running_snapshots(tmp_path):
+    results = setup_repo(tmp_path)
+    selected = active_attempt(results, state={"passes": 38, "turn": 101, "runs": 52, "done": False})
+    blocker = selected / "blocker.json"
+    pipeline = results / "pipeline-state.json"
+    coordinator = results / "coordinator.json"
+    write_json(blocker, {"status": "blocked", "reason": "modal_workspace_disabled",
+                         "error": "ConflictError: workspace is disabled"})
+    write_json(pipeline, {"status": "running", "active_stage": "live"})
+    write_json(coordinator, {"current": {"phase": "running", "stage": "all"}})
+    recorded = {path: path.read_bytes() for path in (blocker, pipeline, coordinator)}
+
+    generated = generate_report(tmp_path, results)
+
+    text = (tmp_path / "README.md").read_text()
+    source = "replications/exp8/results/live-runs/codex-first/blocker.json"
+    assert f"| Active attempt blocker | [blocked]({source}) | [modal_workspace_disabled]({source}) |" in text
+    assert f"| Recorded live blocker | [ConflictError: workspace is disabled]({source})" in text
+    assert "| Pipeline | [last persisted: running](replications/exp8/results/pipeline-state.json)" in text
+    assert "| Driver recovery | [last persisted: running](replications/exp8/results/coordinator.json)" in text
+    assert "| Pipeline | [running]" not in text and "| Driver recovery | [running]" not in text
+    assert "Completed controls or publication do not satisfy the blocked live-run goal" in text
+    assert "| Active attempt blocker | [blocked](live-runs/codex-first/blocker.json)" in (results / "report.md").read_text()
+    assert str(blocker) in {item["path"] for item in generated["sources"]}
+    assert all(path.read_bytes() == data for path, data in recorded.items())
+
+
+@pytest.mark.parametrize("blocker_status", [None, "resolved"])
+def test_unblocked_active_attempt_keeps_normal_snapshot_labels(tmp_path, blocker_status):
+    results = setup_repo(tmp_path)
+    selected = active_attempt(results, state={"passes": 38, "turn": 101, "runs": 52, "done": False})
+    write_json(results / "live-run/blocker.json", {"status": "blocked", "error": "Historical failure"})
+    if blocker_status:
+        write_json(selected / "blocker.json", {"status": blocker_status, "error": "Resolved failure"})
+    write_json(results / "pipeline-state.json", {"status": "running", "active_stage": "live"})
+    write_json(results / "coordinator.json", {"current": {"phase": "running", "stage": "all"}})
+
+    generate_report(tmp_path, results)
+
+    text = (tmp_path / "README.md").read_text()
+    assert "| Pipeline | [running](replications/exp8/results/pipeline-state.json)" in text
+    assert "| Driver recovery | [running](replications/exp8/results/coordinator.json)" in text
+    assert "last persisted:" not in text and "| Active attempt blocker |" not in text
+    assert "| Recorded live blocker |" not in text
 
 
 @pytest.mark.parametrize("identity_exists", [False, True])
@@ -657,6 +704,82 @@ def test_transcript_contains_actual_turns_tools_and_redacts_tokens(tmp_path):
     assert credential not in text and "[REDACTED]" in text
     assert "RAW GENERATION" not in text
     assert '"accuracy": 0.25' in text
+
+
+@pytest.mark.parametrize("serialize", [repr, json.dumps])
+def test_printed_raw_payloads_are_omitted_without_losing_outer_metadata(serialize):
+    payload = serialize([{"text": "PRIVATE café ] } \\\" quoted ' text", "nested": {"values": [1, 2]}}])
+    text = "before {'id': 'kept', 'samples': " + payload + ", 'count': 2, 'shape': [3, 4]} after"
+    compact = _compact_output_text(text)
+    assert "PRIVATE" not in compact and "nested" not in compact
+    assert "'id': 'kept'" in compact and "'count': 2, 'shape': [3, 4]} after" in compact
+    assert f"{len(payload.encode('utf-8'))} UTF-8 bytes" in compact
+    assert "sha256=" + hashlib.sha256(payload.encode("utf-8")).hexdigest() in compact
+    assert "truncated value" not in compact
+
+
+@pytest.mark.parametrize("suffix", ["", "\n[output truncated]", "\n[output truncated]\n\n```"])
+def test_truncated_printed_payload_omits_remainder_and_preserves_output_notice(suffix):
+    payload = "[{'text': 'PRIVATE café \\' ] still inside the unclosed string"
+    text = "metadata {'id': 'kept', 'samples': " + payload + suffix
+    compact = _compact_output_text(text)
+    assert "PRIVATE" not in compact and "still inside" not in compact
+    assert "metadata {'id': 'kept', 'samples': " in compact
+    assert "truncated value" in compact
+    assert f"{len(payload.encode('utf-8'))} UTF-8 bytes" in compact
+    assert "sha256=" + hashlib.sha256(payload.encode("utf-8")).hexdigest() in compact
+    assert compact.endswith(suffix)
+
+
+def test_printed_raw_field_filter_preserves_counts_and_quoted_diagnostics():
+    harmless = (
+        "Generation fields: ['id', 'samples']\n"
+        "{'samples': 2, 'generations': 256, 'shape': [2, 3], "
+        "'note': \"literal 'samples': [keep this]\", 'other': 'quoted \\\"generations\\\": [keep too]'}\n"
+        "It's a diagnostic about samples, not a raw payload."
+    )
+    assert _compact_output_text(harmless) == harmless
+
+
+@pytest.mark.parametrize("tail", ["]}", ", {'item': '\n[output truncated]", ", {\n\n"])
+def test_compact_sample_metadata_stays_readable_when_complete_or_truncated(tail):
+    text = "Metadata: {'samples': [{'item': 'practice_1', 'sample': 0, 'correct': False, 'tokens': 8192}" + tail
+    assert _compact_output_text(text) == text
+
+
+@pytest.mark.parametrize("prefix", ["Original task:\n", "Original task and handoff notes:\n"])
+def test_transcript_keeps_protocol_examples_in_task_and_handoff_prompts(tmp_path, prefix):
+    run = tmp_path / "run"
+    turn = run / "turns/t001"
+    turn.mkdir(parents=True)
+    prompt = prefix + 'Use {"prompts": ["example prompt"], "samples": [{"text": "example"}]}.'
+    (turn / "prompt.txt").write_text(prompt)
+    text = render_transcript(run, run / "transcript.md").read_text()
+    assert prompt in text
+    assert "Raw content omitted" not in text
+
+
+def test_transcript_compacts_printed_payload_in_nested_output_and_echoed_prompt_before_length_limit(tmp_path):
+    run = tmp_path / "run"
+    first, second = run / "turns/t001", run / "turns/t002"
+    first.mkdir(parents=True)
+    second.mkdir()
+    payload = repr([{"text": "PRIVATE GENERATED ANSWER " * 1100}])
+    output = "{'id': 'kept', 'generations': " + payload + ", 'finished': 1}"
+    (first / "prompt.txt").write_text("Inspect the result.")
+    editor_text = "Keep editor prose and code verbatim: {'samples': ['EDITOR EXAMPLE']}"
+    (first / "answer.md").write_text(editor_text)
+    (second / "prompt.txt").write_text("TOOL RESULT:\n```text\n" + output + "\n```")
+    code = "print({'samples': ['EDITOR CODE']})"
+    (run / "tool_calls.jsonl").write_text(json.dumps({"turn": 1, "code": code, "result": {"output": output}}) + "\n")
+
+    text = render_transcript(run, run / "transcript.md").read_text()
+
+    assert "PRIVATE GENERATED ANSWER" not in text
+    assert text.count(hashlib.sha256(payload.encode("utf-8")).hexdigest()) == 2
+    assert text.count("'finished': 1}") == 2
+    assert editor_text in text and code in text
+    assert "Long input omitted" not in text and "Long tool output omitted" not in text
 
 
 def test_transcript_records_incomplete_editor_event_without_reading_private_response(tmp_path, monkeypatch):

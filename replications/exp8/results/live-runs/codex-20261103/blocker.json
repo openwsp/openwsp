@@ -1,30 +1,55 @@
 {
   "schema_version": 1,
-  "status": "resolved",
-  "reason": "modal_budget_admission",
+  "status": "blocked",
+  "reason": "modal_workspace_disabled",
   "run_id": "codex-20261103",
   "editor": "codex",
   "required_live_passes": 50,
+  "observed_at_utc": "2026-11-04T01:37:46.938879+00:00",
+  "error": "ConflictError: Modal workspace is disabled",
+  "error_scope": "Provider rejects new invocations; the available error does not establish billing, payment or quota as the cause.",
   "live": {
-    "turn": 6,
-    "runs": 4,
-    "passes": 1,
-    "requests": 2,
-    "handoffs": 0,
+    "turn": 101,
+    "runs": 52,
+    "passes": 38,
+    "requests": 46,
+    "handoffs": 2,
+    "pending": {
+      "kind": "editor",
+      "turn": 102
+    },
     "done": false,
-    "submission": null,
-    "run_id": "codex-20261103",
-    "editor": "codex",
-    "base_generation_reuse_requests": []
+    "submission": null
   },
-  "error": "BudgetExceeded: modal stage live/codex-20261103/fwd_2/teacher_forced/openwsp-gpu:a9addc225efa46ff8f8450c1570c26cf:0: reserve $2.9870400, only $2.909644918156211473271933328 available",
   "provider_terminal": {
     "terminal": true,
-    "error_type": "BudgetExceeded",
-    "error": "modal stage live/codex-20261103/fwd_2/teacher_forced/openwsp-gpu:a9addc225efa46ff8f8450c1570c26cf:0: reserve $2.9870400, only $2.909644918156211473271933328 available",
-    "call_id": "fc-01M6GW82J9KN0T8G4CEXCKEJPS",
-    "observed_at": "2026-11-03T14:49:58.127114+00:00"
+    "call_id": "fc-01M6HJFWKABFATSH2NKQKVB6FN",
+    "failed_inputs": 1,
+    "pending_inputs": 0,
+    "finished_at_utc": "2026-11-04T01:35:04.494263+00:00",
+    "evidence": "workspace-disabled-provider-20261104.json",
+    "qualification": "The older output endpoint reported a contradictory unfinished count; FunctionCallGetInfo and the call graph agree on terminal failure."
   },
+  "gpu_children": {
+    "success": 37,
+    "pending": 0,
+    "scope": "This driver only; earlier failures and accounting bounds remain."
+  },
+  "pending_editor": {
+    "request_key": "t102",
+    "conversation_index": 2,
+    "request_hash": "60cd36cf9c6da17bdb824714192b8ded96c92c1e72181bff0be7deff1f472ff5",
+    "prompt_sha256": "135a6cf2f030f129459882caa3a738f8bf32b33a5d4b07e8b62811e1b30fe30d",
+    "broker_status": "queued",
+    "claimed_by": null,
+    "dispatch": null,
+    "completion": null,
+    "blocked_error": null,
+    "local_launch_intent_present": false,
+    "local_completed_response_present": false,
+    "interpretation": "The exact turn102 bridge intent is queued but has never been dispatched to the editor. Resuming will admit its first model request, not replay an earlier inference."
+  },
+  "editor_journal_audit": "workspace-disabled-editor-audit-20261104.json",
   "budget_at_publication": {
     "editor": {
       "spent_usd": 78.292765,
@@ -32,35 +57,24 @@
       "available_usd": 21.707235
     },
     "modal": {
-      "spent_usd": 32.69088638217427,
-      "reserved_usd": 6.181793472222222,
-      "available_usd": 3.0773201456035078
+      "spent_usd": 104.89222352871018,
+      "reserved_usd": 18.129953472222223,
+      "available_usd": 26.927822999067608
     }
   },
-  "next_gpu_reservation_usd": 2.98704,
-  "available_usd_at_rejection": 2.9096449181562116,
-  "next_gpu_job_dispatched": false,
+  "budget_limits": {
+    "editor": "100",
+    "modal": "150"
+  },
   "final_evaluation_status": "not_started_no_completed_50_pass_submission",
-  "remaining_work": "Resume this same attempt only after resolving the recorded compute-budget constraint. Preserve all state, pass counts, request journals and prior costs; no partial edit is selected.",
-  "budget_after_watchdog_reconciliation": {
-    "spent_usd": 32.754728858795254,
-    "reserved_usd": 4.27584,
-    "available_usd": 4.919431141204744
-  },
-  "coordinator_terminal": {
-    "observed_at": "2026-11-03T15:05:37.879552+00:00",
-    "call_id": "fc-01M6GW82J9KN0T8G4CEXCKEJPS",
-    "phase": "blocked",
-    "reason": "Pipeline blocked; previous owner reconciled and automatic restart disabled",
-    "terminal_state": "failed",
-    "terminal_at": 1793718114.6885471,
-    "no_restart": true
-  },
-  "historical_status": "blocked",
-  "resolution": {
-    "observation_id": "operator-auto-topups-20261103-steering2",
-    "resume_call_id": "fc-01M6HCQ89PPXXFSZB647FGB9VF",
-    "evidence": "resume-20261103.json",
-    "reason": "Explicit operator authorization for automatic top-ups within the unchanged $150 total task cap; same attempt resumed."
-  }
+  "prior_resolved_budget_blocker": "budget-blocker-20261103.json",
+  "persisted_state_qualification": "Remote pipeline/coordinator snapshots still record running from before provider termination; they are preserved unchanged. This blocker records the newer provider observation.",
+  "resume_command": ".venv/bin/openwsp replicate exp8 --stage all --config /workspace/openwsp/.openwsp/codex-workspace-resume.json --foreground",
+  "resume_prerequisites": [
+    "Modal accepts new calls again",
+    "Retain the same worker journal, run identity, conversation, queued t102 intent, counters, edits and accounting",
+    "Use the existing serialized launch path to reconcile the terminal driver owner"
+  ],
+  "cpu_work": "The original local 484-example extraction and one-shot completion continue.",
+  "task_cap_question": "A separate request to raise the total Modal cap from150 to225 is pending; the cap remains150 until an explicit answer."
 }

@@ -1,9 +1,9 @@
 {
-  "turn": 74,
-  "runs": 39,
-  "passes": 25,
-  "requests": 34,
-  "handoffs": 1,
+  "turn": 101,
+  "runs": 52,
+  "passes": 38,
+  "requests": 46,
+  "handoffs": 2,
   "done": false,
   "submission": null,
   "run_id": "codex-20261103",
@@ -14,6 +14,9 @@
     "fwd_26",
     "fwd_28",
     "fwd_31",
-    "fwd_32"
+    "fwd_32",
+    "fwd_40",
+    "fwd_41",
+    "fwd_42"
   ]
 }

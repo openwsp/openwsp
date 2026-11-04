@@ -1,7 +1,7 @@
 {
   "status": "running",
   "active_stage": "live",
-  "heartbeat": 1793748050.3767495,
+  "heartbeat": 1793756028.0647264,
   "error": null,
   "error_type": null,
   "budget": {
@@ -11,9 +11,9 @@
       "available_usd": 21.707235
     },
     "modal": {
-      "spent_usd": 85.19742313904841,
-      "reserved_usd": 18.345603472222223,
-      "available_usd": 46.40697338872936
+      "spent_usd": 104.89222352871018,
+      "reserved_usd": 18.129953472222223,
+      "available_usd": 26.927822999067608
     }
   },
   "controls_deferred": "Current verified allowance preserves priority for the live run and its evaluation. Controls resume afterward."

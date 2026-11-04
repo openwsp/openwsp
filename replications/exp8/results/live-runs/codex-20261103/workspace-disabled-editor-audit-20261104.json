@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-11-04T01:38:54.208458+00:00",
+  "run_id": "codex-20261103",
+  "scope": "Read-only audit of preserved local editor journals and direct Volume snapshots; no editor request or resume was made.",
+  "checkpoint": {
+    "turn": 101,
+    "runs": 52,
+    "passes": 38,
+    "requests": 46,
+    "handoffs": 2,
+    "pending": {
+      "kind": "editor",
+      "turn": 102
+    },
+    "done": false,
+    "submission": null
+  },
+  "pending_editor": {
+    "request_key": "t102",
+    "conversation_index": 2,
+    "request_hash": "60cd36cf9c6da17bdb824714192b8ded96c92c1e72181bff0be7deff1f472ff5",
+    "prompt_sha256": "135a6cf2f030f129459882caa3a738f8bf32b33a5d4b07e8b62811e1b30fe30d",
+    "broker_status": "queued",
+    "claimed_by": null,
+    "dispatch": null,
+    "completion": null,
+    "blocked_error": null,
+    "local_launch_intent_present": false,
+    "local_completed_response_present": false,
+    "interpretation": "The exact turn102 bridge intent is queued but has never been dispatched to the editor. Resuming will admit its first model request, not replay an earlier inference."
+  },
+  "local_journal_validation": {
+    "request_intents": 101,
+    "validated_completed_receipts": 101,
+    "completed_by_conversation": {
+      "0": 40,
+      "1": 40,
+      "2": 21
+    },
+    "all_local_pending_null": true,
+    "all_local_blocked_null": true,
+    "request_key_input_hash_response_id_links_match": true,
+    "all_process_exits_zero_and_uninterrupted": true,
+    "all_final_texts_match_receipts": true,
+    "recorded_editor_processes_remaining": 0,
+    "missing_receipts": 0
+  },
+  "source_snapshots": {
+    "logs/modal-workspace-disabled-live-state.json": "647d5b6758afb579069968e08b1025e0d2cdd07dc6d7fe533e3c3feea30f46c8",
+    "logs/modal-workspace-disabled-bridge-editor-state.json": "28bc8c50210c2cf7f9c95c4523d56df5908836836ab6f1d16583988e9d63e2f0",
+    "logs/modal-workspace-disabled-broker.json": "39d3f3e96a4b9cbc1d0d7caaab33bf76e974c80bfa2e80b112a7299ce219890b"
+  },
+  "resume": {
+    "prerequisites": [
+      "Modal workspace accepts calls again",
+      "Existing driver is positively confirmed terminal by provider evidence",
+      "Existing total task cap and retained reservations permit admission"
+    ],
+    "route": "Normal openwsp replicate exp8 --stage all --config <incident-specific local JSON> --foreground",
+    "preserve": [
+      "run_id codex-20261103",
+      "existing worker identity and private local directories",
+      "conversation index2 and its existing Codex thread",
+      "t102 request hash and prompt",
+      "all counters, saved edits, costs and reservations"
+    ],
+    "reason": "Use an incident-specific resume_reason; the earlier turn51 transfer-repair reason is stale.",
+    "existing_behavior": "BridgeEditor resubmits the same immutable intent idempotently. The same worker claims this queued request and makes its first model call. Completed prior keys return saved receipts. Dispatched requests without a local intent fail closed instead of relaunching.",
+    "kernel_restart_notice": "Existing run_live preserves this pending prompt and adds its neutral kernel-restart notice after processing the pending action; do not rewrite the queued intent manually."
+  }
+}

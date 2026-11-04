@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261103",
+  "purpose": "Public transcript omission evidence. Original editor prompts, replies, tool outputs and private journals are unchanged.",
+  "renderer": "openwsp.reporting.render_transcript",
+  "scope": "Omit the generated sample payload from the diagnostic output and its next-turn echo, preserving protocol text, compact sample metadata, code, replies and the truncation notice.",
+  "omissions": [
+    {
+      "turn": 83,
+      "location": "tool_output",
+      "omitted_content": "Nested generated sample text printed in a Python diagnostic; the recorded output was truncated mid-value.",
+      "omitted_utf8_bytes": 8421,
+      "omitted_sha256": "a1c13bed3f6913678dacfc2daddea24617e9460920afa94aa92173f2df17df80",
+      "source_text_sha256": "faa9b8223d6b3516d44b557967526c7caca8fbe922b42bd3d658a3e10ae463bd",
+      "source_volume": "openwsp-exp8-data",
+      "source_path": "/live-runs/codex-20261103/tool_calls.jsonl",
+      "source_record_canonical_json_sha256": "0b417c00a1df5cfad48bc7d392002f66d6d8407a5b223039174ec8475378e269"
+    },
+    {
+      "turn": 84,
+      "location": "input",
+      "omitted_content": "Nested generated sample text printed in a Python diagnostic; the recorded output was truncated mid-value.",
+      "omitted_utf8_bytes": 8421,
+      "omitted_sha256": "a1c13bed3f6913678dacfc2daddea24617e9460920afa94aa92173f2df17df80",
+      "source_text_sha256": "e7fd73dfc73877e466cc68f159647901f2670405b88b47317049fa8957dc28ac",
+      "source_volume": "openwsp-exp8-data",
+      "source_path": "/live-runs/codex-20261103/turns/t084/prompt.txt"
+    }
+  ]
+}

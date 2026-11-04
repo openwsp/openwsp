@@ -1,0 +1,424 @@
+{
+  "observed_at": "2026-11-04T01:35:41.648752+00:00",
+  "read_only": true,
+  "driver_call_id": "fc-01M6HJFWKABFATSH2NKQKVB6FN",
+  "source": "FunctionGetCallGraph, FunctionGetOutputs(clear_on_success=False,timeout=0), FunctionGet lookup, FunctionCallGetInfo; no payload decoding or get/retry/start/cancel",
+  "call_graph_best_effort_truncated": false,
+  "input_count": 417,
+  "status_counts": {
+    "GENERIC_STATUS_SUCCESS": 415,
+    "GENERIC_STATUS_FAILURE": 2
+  },
+  "selected_terminal_records": [
+    {
+      "input_id": "in-01M6HJFWKMF3XMH1QKBH919S83",
+      "function_call_id": "fc-01M6HJFWKABFATSH2NKQKVB6FN",
+      "task_id": "",
+      "status": "GENERIC_STATUS_FAILURE",
+      "function_name": "backends.modal_app.pipeline",
+      "parent_input_id": "in-01M6HJFB2BNT060ZHZ8VVP1B2J",
+      "num_unfinished_inputs": 1,
+      "outputs": []
+    },
+    {
+      "input_id": "in-01M6J31BTG03WK3YXDVTZ3M3KB",
+      "function_call_id": "fc-01M6J31BTDV2C688QBBNWD6NPW",
+      "task_id": "",
+      "status": "GENERIC_STATUS_FAILURE",
+      "function_name": "backends.modal_app.editor_exchange",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83",
+      "metadata_error": {
+        "type": "NotFoundError",
+        "message": "No Function Call with ID 'fc-01M6J31BTDV2C688QBBNWD6NPW' found."
+      }
+    },
+    {
+      "input_id": "in-01M6J25ARTGDB4RVF362C9VD86",
+      "function_call_id": "fc-01M6J25ARHY3X9493JY57W1VN0",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83",
+      "num_unfinished_inputs": 0,
+      "outputs": [
+        {
+          "status": "GENERIC_STATUS_SUCCESS",
+          "input_id": "in-01M6J25ARTGDB4RVF362C9VD86",
+          "task_id": "ta-01M6J25B6Z4JMMMY79YMDMHSBR",
+          "input_started_at": 1793755177.880325,
+          "output_created_at": 1793755977.0529273,
+          "retry_count": 0,
+          "exception": "",
+          "exception_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "exception_markers": [],
+          "propagation_reason": "",
+          "exitcode": 0,
+          "payload_bytes": 0,
+          "payload_decoded": false
+        }
+      ]
+    },
+    {
+      "input_id": "in-01M6J25FT7JH7A4Q746EM0AAQF",
+      "function_call_id": "fc-01M6J25FT0BJ25XQTKSQSJGC7G",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83",
+      "num_unfinished_inputs": 0,
+      "outputs": [
+        {
+          "status": "GENERIC_STATUS_SUCCESS",
+          "input_id": "in-01M6J25FT7JH7A4Q746EM0AAQF",
+          "task_id": "ta-01M6J25G22VB5RNDGTD7DV16AR",
+          "input_started_at": 1793755198.6167605,
+          "output_created_at": 1793755938.0134013,
+          "retry_count": 0,
+          "exception": "",
+          "exception_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "exception_markers": [],
+          "propagation_reason": "",
+          "exitcode": 0,
+          "payload_bytes": 0,
+          "payload_decoded": false
+        }
+      ]
+    }
+  ],
+  "gpu_children": [
+    {
+      "input_id": "in-01M6HJN95JVYSD1PW4WVTKGE23",
+      "function_call_id": "fc-01M6HJN958ZDAXDZ4K7XD7XVHV",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HKNHJY4A3083Z5YYET3QGB",
+      "function_call_id": "fc-01M6HKNHJQS22CH1WHNRADPY3Y",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HMN089HVFCF3Y741AYPXP4",
+      "function_call_id": "fc-01M6HMN081C5HVQEM9VRW0SCPE",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HMRGTQ1YFQME9S5GBQDT6C",
+      "function_call_id": "fc-01M6HMRGTG1J2989W6TAXSFWSN",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HNQ3MQWB4MAKQFE0RWZZZ4",
+      "function_call_id": "fc-01M6HNQ3MF5S0VYXT8S289G17R",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HNVMEFPNGSYHRZQYGZVA7W",
+      "function_call_id": "fc-01M6HNVME5HQGNZ175TGY4ZQT7",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HPTRBX7NC83CV2KG0PV9GC",
+      "function_call_id": "fc-01M6HPTRBN2SPRQWR55JD51YMN",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HPZ4KWN8YAFCF2M79QX2J7",
+      "function_call_id": "fc-01M6HPZ4KJAFFYT352TDSNST08",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HPZB1VSWY36R4FPDEMW2DA",
+      "function_call_id": "fc-01M6HPZB1P7PCYYHTHFTFPQYYC",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HQZ4WYZ4KY6VHPJXP89GFF",
+      "function_call_id": "fc-01M6HQZ4WRSPYZ27MEGQR1RS3E",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HRZ25YEGJBARCYJYTW5XMQ",
+      "function_call_id": "fc-01M6HRZ25R4AE117E03643DY2T",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HSY057WAQJYFAJNH7PSREB",
+      "function_call_id": "fc-01M6HSY04ZJMTTRYF4B4H9R4CB",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HSY57JM7FRHXF1J9TT931Z",
+      "function_call_id": "fc-01M6HSY579X1H8MGBVQAY5G4DG",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HTRPNRCQGYZFPVM8H8QAPG",
+      "function_call_id": "fc-01M6HTRPNE0AQ5J0ATEA8NNJ37",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HTYWX8MKT4RQDP46XT3XR3",
+      "function_call_id": "fc-01M6HTYWX1394RFXW876BQAVGZ",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HVC8BC8MX8TX4A9JPDFCS5",
+      "function_call_id": "fc-01M6HVC8B0BYASRHTP44RYW6K4",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HVFXT80EZ1CZNW0TXFG50Z",
+      "function_call_id": "fc-01M6HVFXS9A0F3CAXZR7QEF6CY",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HVK75MMBDY6ATCW0BJ69BM",
+      "function_call_id": "fc-01M6HVK75C5RK7Z8X4S6P0746W",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HVVMZ8BNR4BF7VXWF7G5C4",
+      "function_call_id": "fc-01M6HVVMYZ014QDZKDSZR8PREM",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HW1265B1NHBBQQWXPX9WFW",
+      "function_call_id": "fc-01M6HW125WBQNV6ETKS2Z4FWZN",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HW1803BKMT7E20JJ6FC9PA",
+      "function_call_id": "fc-01M6HW17ZV4TCNZV8K8WJ1EH72",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HX0CX47DTTVFKVV42GEEWY",
+      "function_call_id": "fc-01M6HX0CWZQT38JX7V40HR96NC",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HX0J917QCPTFJBV8WDMTE1",
+      "function_call_id": "fc-01M6HX0J8WG66M0KFDFE20X3S3",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HY1762S8J6FRQJQDYN30AC",
+      "function_call_id": "fc-01M6HY175VDP7KDE3E1TGWZARQ",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HY1F32XX3K53PNVPENXBNE",
+      "function_call_id": "fc-01M6HY1F2P3H5G1G1Q0ADSXAHC",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HYXP7DK4BYY4KZ598ZKX9D",
+      "function_call_id": "fc-01M6HYXP6Z7KDGF2DP4GX7BB8M",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HZ7PDGSE8BF5GJZ6K5ZC3C",
+      "function_call_id": "fc-01M6HZ7PD8PER0SVGQSDZD6WF4",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6HZ7WZDVX01RPJDC378MXXJ",
+      "function_call_id": "fc-01M6HZ7WZ651J1RM717HMJTGMV",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6J04JAWVFY0M7Z0YTMZJ2K6",
+      "function_call_id": "fc-01M6J04JAJ7FQ8P9H8GNVWZHVH",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6J0FH8FH09E0434PPA5GDYK",
+      "function_call_id": "fc-01M6J0FH87M2QQFT4VNF92RN4N",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6J0FQ1GX19YY5AQKGFFXCWF",
+      "function_call_id": "fc-01M6J0FQ18Q3SQ50F7YKXRX70H",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6J1906N1GZ7FD4R0XXM71T5",
+      "function_call_id": "fc-01M6J1906C8Q8T99BM3MAP1SZQ",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6J1JZW78H0SVKWBD2W6A5TY",
+      "function_call_id": "fc-01M6J1JZVY5JNXV8G13X838Q71",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6J1PXYEG80Q678V0N0R87Z3",
+      "function_call_id": "fc-01M6J1PXY52WY8B22ME86461FZ",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6J1ZZWEC2NYYCJKB9MXXSE5",
+      "function_call_id": "fc-01M6J1ZZW4RA2A29EMDFY4C2RQ",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.TransformerReader.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6J25ARTGDB4RVF362C9VD86",
+      "function_call_id": "fc-01M6J25ARHY3X9493JY57W1VN0",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    },
+    {
+      "input_id": "in-01M6J25FT7JH7A4Q746EM0AAQF",
+      "function_call_id": "fc-01M6J25FT0BJ25XQTKSQSJGC7G",
+      "task_id": "",
+      "status": "GENERIC_STATUS_SUCCESS",
+      "function_name": "backends.modal_app.Generator.*",
+      "parent_input_id": "in-01M6HJFWKMF3XMH1QKBH919S83"
+    }
+  ],
+  "updated_at": "2026-11-04T01:37:46.938879+00:00",
+  "interpretation": {
+    "driver": "FunctionCallGetInfo confirms one failed input, zero pending/succeeded/timeout/cancelled inputs; terminal failure at recorded finished_at. This agrees with call graph. Older FunctionGetOutputs endpoint reports stale unfinished count and no payload.",
+    "latest_gpu_children": "Both direct outputs SUCCESS, zero unfinished inputs.",
+    "workspace_disabled_reason": "Only generic disabled error established; no billing-specific cause in available metadata.",
+    "sdk_path": "Local traceback reached _InputPlaneInvocation.run_function internal-failure retry at modal/_functions.py:508, then AttemptRetry raised ConflictError; no manual retry performed."
+  },
+  "driver_function_id": "fu-CnNR3evYrwV3zXfcomKri6",
+  "driver_call_info": {
+    "info": {
+      "function_call_id": "fc-01M6HJFWKABFATSH2NKQKVB6FN",
+      "idx": 12,
+      "created_at": 1793738666.612262,
+      "pending_inputs": {},
+      "failed_inputs": {
+        "total": 1,
+        "latest": [
+          {
+            "input_id": "in-01M6HJFWKMF3XMH1QKBH919S83",
+            "task_id": "ta-01M6J31Y0EKT9TAC40TNNKW82R",
+            "started_at": 1793756039.932663,
+            "finished_at": 1793756104.494263,
+            "task_startup_time": 4.789373595
+          }
+        ]
+      },
+      "succeeded_inputs": {},
+      "timeout_inputs": {},
+      "cancelled_inputs": {},
+      "total_inputs": 1
+    }
+  },
+  "earlier_read_only_probe_error": {
+    "type": "InvalidError",
+    "message": "'' is not a valid Function ID."
+  },
+  "driver_finished_at_utc": "2026-11-04T01:35:04.494263+00:00",
+  "driver_started_at_utc": "2026-11-04T01:33:59.932663+00:00"
+}

@@ -21,6 +21,9 @@ _RUN_ID = re.compile(r"[a-z][a-z0-9_-]{0,63}")
 _LIVE_EVALUATIONS = {"math500": (4, 2000), "gsm8k": (2, 2638), "ifeval": (2, 1082)}
 _SECRET = re.compile(r"(?:sk-|hf_|ak-|as-|ghp_|github_pat_)[A-Za-z0-9_-]{16,}")
 _BEARER = re.compile(r"(?i)(authorization[\"'\s:]+bearer\s+)[A-Za-z0-9._~+/-]+")
+_RAW_CONTENT_FIELDS = frozenset({"texts", "chats", "prompts", "samples", "token_ids", "raw_text", "generated_text"})
+_FIELD_SEPARATOR = re.compile(r"\s*:\s*")
+_TRUNCATED_OUTPUT_SUFFIX = re.compile(r"\n\[output truncated\](?:\s*\n[ \t]*`{3,})?\s*\Z")
 _STATE_FILES = (
     "pipeline-state.json", "coordinator.json", "live-run/state.json", "live-run/blocker.json", "calibration-check.json", "calibration-prompt-audit.json",
     "calibration-gap-audit.json", "kernel/hash-verification.json", "kernel/sandbox-verification.json",
@@ -191,6 +194,7 @@ def _status_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path, *, 
     pointer, attempts, summaries = pointer or {}, attempts or {}, summaries or []
     lines = ["| Recorded component | State | Evidence |", "| --- | --- | --- |"]
     live_blocker = evidence.get("live-run/blocker.json") if not pointer else None
+    active_blocker = None
     if pointer:
         selected = attempts[pointer["relative_path"]]
         source, state = selected.get("state.json", evidence["active-live.json"])
@@ -203,6 +207,13 @@ def _status_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path, *, 
         elif "identity.json" not in selected:
             detail = "pending: active identity missing"
         lines.append(f"| Required live run | {_recorded(status, source, relative_to)} | Active attempt: {_recorded(pointer['run_id'], evidence['active-live.json'][0], relative_to)}; {detail if len(evaluations) != 3 else 'see linked attempt evidence'} |")
+        blocker = selected.get("blocker.json")
+        if blocker and blocker[1].get("status") == "blocked":
+            active_blocker = blocker
+            path, data = blocker
+            lines.append(f"| Active attempt blocker | {_recorded('blocked', path, relative_to)} | {_recorded(data.get('reason'), path, relative_to)} |")
+            if data.get("error"):
+                lines.append(f"| Recorded live blocker | {_recorded(str(data['error'])[:500], path, relative_to)} | See active attempt record. |")
     if live_blocker:
         path, data = live_blocker
         state = data.get("status")
@@ -240,7 +251,10 @@ def _status_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path, *, 
             state = current.get("phase", state)
             diagnostic = current.get("reason") or diagnostic
             details = current.get("stage") or details
-        lines.append(f"| {label} | {_recorded(state, path, relative_to)} | {_recorded(details, path, relative_to)} |")
+        display_state = state
+        if active_blocker and name in {"pipeline-state.json", "coordinator.json"} and state is not None:
+            display_state = f"last persisted: {state}"
+        lines.append(f"| {label} | {_recorded(display_state, path, relative_to)} | {_recorded(details, path, relative_to)} |")
         if diagnostic:
             label = "Recorded blocker" if state in {"blocked", "failed", "error"} else "Recorded diagnostic"
             lines.append(f"| {label} | {_recorded(str(diagnostic)[:500], path, relative_to)} | See source record. |")
@@ -256,7 +270,7 @@ def _status_table(evidence: dict[str, tuple[Path, dict]], relative_to: Path, *, 
         lines.append("| Pipeline | pending: no published state record | No completion claim. |")
     elif pipeline is None:
         lines.append("| Pipeline | pending: no published pipeline state | Component checks do not establish overall completion. |")
-    if live_blocker and live_blocker[1].get("status") == "blocked":
+    if active_blocker or live_blocker and live_blocker[1].get("status") == "blocked":
         lines += ["", "Completed controls or publication do not satisfy the blocked live-run goal."]
     if pointer or any(name != "live-run" for name in attempts):
         lines += ["", _attempt_table(pointer, attempts, summaries, relative_to, evidence.get("active-live.json", (None,))[0])]
@@ -874,23 +888,110 @@ def _fence(text: str, language: str = "") -> str:
     return f"{fence}{language}\n{_redact(text).rstrip()}\n{fence}"
 
 
+def _quoted_end(text: str, start: int) -> int | None:
+    quote, index = text[start], start + 1
+    while index < len(text):
+        if text[index] == "\\":
+            index += 2
+        elif text[index] == quote:
+            return index + 1
+        else:
+            index += 1
+    return None
+
+
+def _payload_end(text: str, start: int) -> int | None:
+    """Find a literal's end without interpreting or evaluating its contents."""
+    if text[start] in "\"'":
+        return _quoted_end(text, start)
+    pairs, stack, index = {"[": "]", "{": "}", "(": ")"}, [], start
+    while index < len(text):
+        char = text[index]
+        if char in "\"'":
+            end = _quoted_end(text, index)
+            if end is None:
+                return None
+            index = end
+            continue
+        if char in pairs:
+            stack.append(pairs[char])
+        elif char in "]})":
+            if not stack or stack.pop() != char:
+                return None
+            if not stack:
+                return index + 1
+        index += 1
+    return None
+
+
+def _has_raw_sample_payload(value: str) -> bool:
+    """Distinguish generated sample content from compact per-sample metadata."""
+    body = value.lstrip()
+    if body.startswith("[") and body[1:].lstrip().startswith(("'", '"')):
+        return True
+    index = 0
+    while index < len(value):
+        if value[index] not in "\"'":
+            index += 1
+            continue
+        end = _quoted_end(value, index)
+        if end is None:
+            return False
+        field = value[index + 1:end - 1].lower()
+        separator = _FIELD_SEPARATOR.match(value, end)
+        index = end
+        if field in {"text", "generated_text", "raw_text", "token_ids", "chats", "prompts"} and separator:
+            start = separator.end()
+            if start < len(value) and value[start] in "[{(\"'":
+                return True
+    return False
+
+
+def _compact_output_text(text: str) -> str:
+    """Omit quoted raw-content fields in printed Python/JSON data, not arbitrary prose."""
+    parts, copied, index = [], 0, 0
+    while index < len(text):
+        char = text[index]
+        if char not in "\"'" or (char == "'" and index and text[index - 1].isalnum()):
+            index += 1
+            continue
+        end = _quoted_end(text, index)
+        if end is None:
+            index += 1
+            continue
+        field = text[index + 1:end - 1].lower()
+        separator = _FIELD_SEPARATOR.match(text, end)
+        index = end
+        if field not in _RAW_CONTENT_FIELDS | {"generations"} or separator is None:
+            continue
+        start = separator.end()
+        if start == len(text) or text[start] not in "[{(\"'" or field == "generations" and text[start] != "[":
+            continue
+        finish = _payload_end(text, start)
+        truncated = finish is None
+        if truncated:
+            suffix = _TRUNCATED_OUTPUT_SUFFIX.search(text, start)
+            finish = suffix.start() if suffix else len(text)
+        if field in {"samples", "generations"} and not _has_raw_sample_payload(text[start:finish]):
+            index = finish
+            continue
+        removed = text[start:finish].encode("utf-8")
+        marker = (f"[Raw content omitted; {len(removed)} UTF-8 bytes; sha256={hashlib.sha256(removed).hexdigest()}; "
+                  + ("truncated value; " if truncated else "") + "see run volume.]")
+        parts.extend((text[copied:start], json.dumps(marker)))
+        copied = index = finish
+    return "".join(parts) + text[copied:]
+
+
 def _compact(value: Any) -> Any:
-    """Keep shapes, counts and paths while excluding structured raw text/array payloads."""
+    """Keep shapes, counts and paths while excluding named raw text/array payloads."""
     if isinstance(value, dict):
         result = {}
         for key, item in value.items():
             lowered = key.lower()
             if lowered in {"api_key", "access_token", "token_secret", "password", "authorization"}:
                 result[key] = "[REDACTED]"
-            elif lowered in {
-                "texts",
-                "chats",
-                "prompts",
-                "samples",
-                "token_ids",
-                "raw_text",
-                "generated_text",
-            }:
+            elif lowered in _RAW_CONTENT_FIELDS:
                 result[key] = "[Raw content omitted; see run volume.]"
             elif lowered == "generations" and isinstance(item, list):
                 result[key] = "[Raw generations omitted; see run volume.]"
@@ -899,6 +1000,8 @@ def _compact(value: Any) -> Any:
         return result
     if isinstance(value, list):
         return [_compact(item) for item in value]
+    if isinstance(value, str):
+        return _compact_output_text(value)
     return value
 
 
@@ -908,8 +1011,8 @@ def _tool_record(record: dict[str, Any]) -> str:
         parts.append(_fence(str(record["code"]), "python"))
     for key in ("out", "output", "error", "result"):
         if record.get(key) is not None:
-            value = record[key]
-            text = value if isinstance(value, str) else json.dumps(_compact(value), indent=2)
+            value = _compact(record[key])
+            text = value if isinstance(value, str) else json.dumps(value, indent=2)
             if len(text) > 20000:
                 text = text[:20000] + "\n[Long tool output omitted; see source record.]"
             parts.append(_fence(text, "text"))
@@ -962,6 +1065,8 @@ def render_transcript(run_dir: str | Path, output_path: str | Path) -> Path:
         prompt = directory / "prompt.txt"
         if prompt.exists():
             text = prompt.read_text()
+            if text.startswith(("OUTPUT of Python run ", "FORWARD PASS ", "TOOL RESULT:")):
+                text = _compact_output_text(text)
             if len(text) > 20000:
                 text = text[:20000] + "\n[Long input omitted; see source record.]"
             parts += ["### Input", _fence(text, "text")]
