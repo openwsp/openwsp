@@ -3,7 +3,7 @@
   "historical_incident": "workspace-disabled-blocker-20261104.json",
   "historical_incident_sha256": "f7e18829922b778b247690da134598b1c2c74f1f1db15807a8fb727761a59d1d",
   "operator_reported_cause": "Account over its usage limit; operator raised the currently offered total usage limit to100USD.",
-  "qualification": "The original provider error was generic; the later operator report supplies the account-limit explanation. The live run is still incomplete.",
+  "qualification": "The original provider error was generic; the later operator report supplies the account-limit explanation. The run was incomplete at that historical incident. Its later 50-pass submission and ongoing final evaluation are recorded separately.",
   "reason": "modal_workspace_disabled",
   "resolution": "workspace-restored-20261104.json",
   "resolved_observed_at_utc": "2026-11-04T10:15:37.325866+00:00",

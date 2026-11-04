@@ -1,0 +1,25 @@
+{
+  "observed_at_utc": "2026-11-04T14:15:38.163624+00:00",
+  "source": "modal.Workspace.from_context().billing.summary()",
+  "read_only": true,
+  "summary": {
+    "start": "2026-11-01 00:00:00+00:00",
+    "end": "2026-12-01 00:00:00+00:00",
+    "metered_cost": "79.45792635",
+    "metered_cost_breakdown": {
+      "Deployed Apps": "78.42668640",
+      "Volumes": "0.85579633",
+      "Ephemeral Apps": "0.02383559",
+      "Network Egress": "0.15213002",
+      "LLM Tokens": "0E-8"
+    },
+    "adjustments": {
+      "Free Storage": "-0.85579633",
+      "Credits": "-30.00000000",
+      "Network Egress Allowance": "-0.15213002",
+      "Plan Cost": "0E-8",
+      "Reservation Adjustment": "-0E-8"
+    },
+    "billed_cost": "48.45000000"
+  }
+}

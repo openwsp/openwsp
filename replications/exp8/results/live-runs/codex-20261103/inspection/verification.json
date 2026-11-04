@@ -1,0 +1,39 @@
+{
+  "archive_sha256": "2ef81eabb4f71caecfa409f8be6a591bfd4cd9a10e6b9fef1bb121471039acc6",
+  "base_sha256": "1866748ce87d32cfee34891d2fa393fdfeee77447935f6a31d036e4b80332a48",
+  "capture_evidence_sha256": "eb65f2e763c78d5522a21ef47e9b0cbfaa55c224227ddbec9b40206699ec1cee",
+  "changed_columns": 3582,
+  "changed_entries": 2485126,
+  "changed_rows": 1024,
+  "checkpoint_scope": "Pinned downloaded Hugging Face shard, including vision weights; only named tensors loaded",
+  "checkpoint_sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696",
+  "checks": {
+    "captured_manifest_and_archive_hashes": true,
+    "completed_50_pass_capture_identity": true,
+    "existing_inspector_validated_versioned_payload_and_tensor_hashes": true,
+    "independent_relative_frobenius_change": true,
+    "independent_sparse_bf16_reconstruction_hashes_and_changed_counts": true,
+    "pinned_full_checkpoint_config_and_tokenizer_hashes": true,
+    "reused_reference_report_hash_and_base_tensors": true,
+    "tied_embedding_declared_by_pinned_config": true
+  },
+  "cpu_threads": 2,
+  "edit_sha256": "a49dd3c1ddd3efdd9d42faaac9065110acf8029f43d35a6b19185a65118558a2",
+  "edited_sha256": "0ba3836e8fda70208ec551649d79ad5e8c75bde2ce4f1059f3faa6ba917ba01a",
+  "identity_note": "Frozen submitted-tensor identity and exported BF16 edit identity address different representations. Their equality is not asserted.",
+  "manifest_sha256": "2e86ef54e37c91b92b22c1f8a2edf8f06d07716f9446f82f24cb1edb044cd98d",
+  "public_report_sha256": "3b0f04ea6c83fac8c6e95099b5ac75b206fcef8c7b73a02cb4d38bd76cee8a17",
+  "public_serialization_note": "The inspector's logit_lens.token_ids map is named vocabulary_row_ids here to distinguish five named vocabulary rows from raw generation token sequences. Numeric results are unchanged.",
+  "raw_inspector_output_sha256": "1458710c2a6a5b0e07fec05537eeecc374c7a6c8ce058ae728ac0d5a65bdb696",
+  "reference_base_tensor_sha256": {
+    "model.language_model.layers.15.mlp.down_proj.weight": "ef60d2c687bab19464dca9c8bfd7777e46ad226df0c9e25643b0bab04b5a1cca",
+    "model.language_model.layers.19.mlp.down_proj.weight": "638eedeb701b94aa861f4438e615c07ec6c60ee703db1bfee2de577bb6498c3e"
+  },
+  "reference_report_sha256": "374c1bf7c5f1e45c0a1094dc2bc73cbf2904e910ff9f1c29b79c72648b60d29c",
+  "run_id": "codex-20261103",
+  "schema_version": 1,
+  "scope": "Local CPU reconstruction and evidence binding; no model forward, GPU job or remote call",
+  "source_state_sha256": "98808b560bcadfd93841700e814c7d32b3aa81fc567df48fb453333156aa888a",
+  "status": "passed",
+  "submission_sha256": "46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec"
+}

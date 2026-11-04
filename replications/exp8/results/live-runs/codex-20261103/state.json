@@ -1,22 +1,28 @@
 {
-  "turn": 115,
-  "runs": 60,
-  "passes": 44,
-  "requests": 53,
-  "handoffs": 2,
-  "done": false,
-  "submission": null,
+  "turn": 133,
+  "runs": 69,
+  "passes": 50,
+  "requests": 58,
+  "handoffs": 3,
+  "done": true,
+  "submission": {
+    "checkpoint": "/data/submissions/46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec",
+    "sha256": "46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec",
+    "tensors": [
+      "model.language_model.layers.23.mlp.down_proj.weight"
+    ]
+  },
   "run_id": "codex-20261103",
   "editor": "codex",
   "base_generation_reuse_requests": [
-    "fwd_23",
-    "fwd_24",
     "fwd_26",
-    "fwd_28",
-    "fwd_31",
     "fwd_32",
     "fwd_40",
+    "fwd_42",
     "fwd_41",
-    "fwd_42"
+    "fwd_31",
+    "fwd_24",
+    "fwd_23",
+    "fwd_28"
   ]
 }

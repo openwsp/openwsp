@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20261103",
+  "observed_at": "2026-11-04T14:16:25.747391+00:00",
+  "status": "submission_recorded",
+  "final_evaluations": "pending separate completed evidence",
+  "frozen_submission": {
+    "checkpoint": "/data/submissions/46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec",
+    "sha256": "46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec",
+    "tensors": [
+      "model.language_model.layers.23.mlp.down_proj.weight"
+    ]
+  },
+  "immutable_marker": {
+    "volume": "openwsp-exp8-data",
+    "path": "/submissions/46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec/openwsp-complete.json",
+    "sha256": "e0bc71ed9cc1c2b4374307ebf89da2931a9ea0cfd281cde8dc2c03d50abdf9a0",
+    "record": {
+      "edit_id": "46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec",
+      "tensors": [
+        "model.language_model.layers.23.mlp.down_proj.weight"
+      ]
+    }
+  },
+  "exported_edit": {
+    "edit_sha256": "a49dd3c1ddd3efdd9d42faaac9065110acf8029f43d35a6b19185a65118558a2",
+    "payload_sha256": "bcc60819ddd77b6b51c1b1f6c2fd2e3afbffc6c2bb889d275af962c7b859377e",
+    "archive_sha256": "2ef81eabb4f71caecfa409f8be6a591bfd4cd9a10e6b9fef1bb121471039acc6",
+    "manifest_sha256": "2e86ef54e37c91b92b22c1f8a2edf8f06d07716f9446f82f24cb1edb044cd98d",
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "base_revision": "2fc06364715b967f1860aea9cf38778875588b17"
+  },
+  "identity_note": "Frozen submitted-tensor identity and exported BF16 edit identity address different representations. Their equality is not asserted.",
+  "binding_basis": "Stable completed driver state, matching immutable completion marker and final reply; versioned exported payload validated independently.",
+  "source_state_sha256": "98808b560bcadfd93841700e814c7d32b3aa81fc567df48fb453333156aa888a",
+  "final_answer_sha256": "0e92ccfc63c975818afd765ff4ddf2d0d6bb9680b208e256cdd498f0c3722f46",
+  "transcript_sha256": "78e329c532a90491085a3b4338ee9a931157b40681ab5e9d9461084527915944",
+  "prior_transcript_sha256": "bbb16df060efd6c863babf90ebd566ea531f279a41a5c5aa9d556516f309815f",
+  "prior_transcript_prefix_preserved": true,
+  "omissions_record_sha256": "ccc39a5e1ea0dd22dd698d94f3f52f3672dee580f02824a768a835e01d1a7456"
+}

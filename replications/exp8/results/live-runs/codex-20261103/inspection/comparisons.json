@@ -1,0 +1,82 @@
+{
+  "format": "openwsp.inspect.comparisons",
+  "format_version": 1,
+  "interpretation": "Every live-to-reference comparison is across different layers. Absolute cosines remove arbitrary SVD sign; alignment does not establish a shared causal mechanism.",
+  "leading_direction_cosines": [
+    {
+      "absolute_cosine": 0.31036854865535973,
+      "comparison_scope": "Across different layers in the same 1024-dimensional residual coordinate space",
+      "cosine": -0.31036854865535973,
+      "left": {
+        "edit": "live",
+        "index": 0,
+        "tensor": "model.language_model.layers.23.mlp.down_proj.weight"
+      },
+      "left_layer": 23,
+      "right": {
+        "edit": "p50c",
+        "index": 0,
+        "tensor": "model.language_model.layers.15.mlp.down_proj.weight"
+      },
+      "right_layer": 15
+    },
+    {
+      "absolute_cosine": 0.43618218769225736,
+      "comparison_scope": "Across different layers in the same 1024-dimensional residual coordinate space",
+      "cosine": 0.43618218769225736,
+      "left": {
+        "edit": "live",
+        "index": 0,
+        "tensor": "model.language_model.layers.23.mlp.down_proj.weight"
+      },
+      "left_layer": 23,
+      "right": {
+        "edit": "p50c",
+        "index": 0,
+        "tensor": "model.language_model.layers.19.mlp.down_proj.weight"
+      },
+      "right_layer": 19
+    },
+    {
+      "absolute_cosine": 0.17279685835838826,
+      "comparison_scope": "Across different layers in the same 1024-dimensional residual coordinate space",
+      "cosine": 0.17279685835838826,
+      "left": {
+        "edit": "live",
+        "index": 0,
+        "tensor": "model.language_model.layers.23.mlp.down_proj.weight"
+      },
+      "left_layer": 23,
+      "right": {
+        "edit": "control2",
+        "index": 0,
+        "tensor": "model.language_model.layers.15.mlp.down_proj.weight"
+      },
+      "right_layer": 15
+    },
+    {
+      "absolute_cosine": 0.35338505976412615,
+      "comparison_scope": "Across different layers in the same 1024-dimensional residual coordinate space",
+      "cosine": 0.35338505976412615,
+      "left": {
+        "edit": "live",
+        "index": 0,
+        "tensor": "model.language_model.layers.23.mlp.down_proj.weight"
+      },
+      "left_layer": 23,
+      "right": {
+        "edit": "control2",
+        "index": 0,
+        "tensor": "model.language_model.layers.19.mlp.down_proj.weight"
+      },
+      "right_layer": 19
+    }
+  ],
+  "live_report": "live.json",
+  "live_report_sha256": "3b0f04ea6c83fac8c6e95099b5ac75b206fcef8c7b73a02cb4d38bd76cee8a17",
+  "method": "Existing directions_from_edits and direction_cosines; only leading left singular directions. Reference vectors reused without new SVD.",
+  "reference_report": "../../../inspection/p50c-vs-control2.json",
+  "reference_report_sha256": "374c1bf7c5f1e45c0a1094dc2bc73cbf2904e910ff9f1c29b79c72648b60d29c",
+  "run_id": "codex-20261103",
+  "status": "measured_cpu_only"
+}

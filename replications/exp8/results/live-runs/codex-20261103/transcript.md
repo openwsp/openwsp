@@ -9981,3 +9981,2038 @@ The primary aggregate now gains 7.32 points across 1,408 held-out problems, with
 ```forward
 {"type":"generate","model":"both","problems":["aime_2019-I-9","aime_2014-I-4","aime_2004-II-3","aime_2014-II-1","aime_1993-4","aime_1986-2","aime_1984-5","aime_2022-I-6","aime_2015-I-13","aime_2016-II-1","aime_2013-I-8","aime_2016-II-14","aime_2013-II-6","aime_1998-15","aime_2014-II-9","aime_1991-5","aime_2012-II-8","aime_2000-I-8","aime_2000-I-13","aime_2012-II-4","aime_2001-I-14","aime_2005-I-2","aime_2012-II-7","aime_2015-II-9","aime_2015-II-13","aime_2012-I-5","aime_2016-I-3","aime_1985-4","aime_2019-I-5","aime_1990-6","aime_2008-II-13","aime_2007-I-12","aime_1990-15","aime_2007-II-9","aime_1986-10","aime_2016-I-14","aime_2021-I-5","aime_1993-11","aime_1985-11","aime_2003-I-5","aime_2023-II-11","aime_1988-3","aime_1998-7","aime_2019-II-8","aime_1986-7","aime_2016-II-3","aime_2009-II-12","aime_2021-I-6","aime_2013-I-11","aime_1984-13","aime_2015-II-14","aime_2013-II-7","aime_2016-I-7","aime_2003-II-5","aime_1987-10","aime_2015-I-8","aime_2003-II-9","aime_1988-8","aime_2007-I-4","aime_2022-I-8","aime_2021-I-10","aime_2009-I-9","aime_2018-II-2","aime_2016-I-13","aime_2023-I-5","aime_1992-12","aime_2018-II-12","aime_1991-13","aime_2003-I-3","aime_2011-II-6","aime_2022-II-9","aime_1988-10","aime_2006-II-12","aime_1984-12","aime_2017-I-14","aime_2005-II-6","aime_2005-I-9","aime_2012-I-14","aime_1999-5","aime_1988-5","aime_1999-11","aime_2018-II-1","aime_1999-7","aime_2015-II-3","aime_1984-7","aime_2004-II-1","aime_2023-II-3","aime_1983-4","aime_1986-13","aime_2014-I-1","aime_2007-I-8","aime_2009-I-5","aime_2018-I-8","aime_2009-I-11","aime_2002-II-3","aime_2010-II-12","aime_2020-I-4","aime_1997-7","aime_2008-I-9","aime_2007-I-5","aime_1985-14","aime_2021-I-15","aime_1996-6","aime_2015-I-6","aime_2011-II-7","aime_2015-I-3","aime_2020-II-5","aime_2021-II-4","aime_2008-II-2","aime_2019-I-6","aime_2021-I-4","aime_2015-II-5","aime_1985-2","aime_2011-I-1","aime_2009-II-11","aime_2012-I-2","aime_1990-1","aime_2013-II-1","aime_1985-12","aime_2018-II-5","aime_2000-I-9","aime_2012-II-6","aime_2009-I-2","aime_2000-I-12","aime_2000-II-10","aime_2003-I-9","aime_2017-I-7","aime_2000-II-9"],"n":2,"max_tokens":32768}
 ```
+
+### Tool result
+
+```text
+{
+  "files": {
+    "original": "/work/gen_53_original.jsonl",
+    "edited": "/work/gen_53_edited.jsonl"
+  },
+  "activations": null,
+  "original": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.0,
+    "accuracy_by_source": {
+      "aime": 0.0
+    },
+    "mean_tokens": 32768.0,
+    "cut_share": 1.0,
+    "failures": {
+      "wrong_answer": 0,
+      "no_answer_finished": 0,
+      "cut_at_max_tokens": 256
+    }
+  },
+  "edited": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.0,
+    "accuracy_by_source": {
+      "aime": 0.0
+    },
+    "mean_tokens": 32325.16015625,
+    "cut_share": 0.9765625,
+    "failures": {
+      "wrong_answer": 0,
+      "no_answer_finished": 6,
+      "cut_at_max_tokens": 250
+    }
+  },
+  "paired": {
+    "items": 128,
+    "accuracy_difference": 0.0,
+    "standard_error": 0.0,
+    "samples_wrong_to_right": 0,
+    "samples_right_to_wrong": 0
+  },
+  "ok": true,
+  "type": "generate",
+  "model": "both",
+  "s": 967.311162275
+}
+```
+
+## Turn 117
+
+### Input
+
+````text
+The kernel was restarted; variables were lost, but files in /work and saved edits remain.
+FORWARD PASS 45 of 50:
+```json
+{"files": {"original": "/work/gen_53_original.jsonl", "edited": "/work/gen_53_edited.jsonl"}, "activations": null, "original": {"generations": 256, "graded": 256, "accuracy": 0.0, "accuracy_by_source": {"aime": 0.0}, "mean_tokens": 32768.0, "cut_share": 1.0, "failures": {"wrong_answer": 0, "no_answer_finished": 0, "cut_at_max_tokens": 256}}, "edited": {"generations": 256, "graded": 256, "accuracy": 0.0, "accuracy_by_source": {"aime": 0.0}, "mean_tokens": 32325.16015625, "cut_share": 0.9765625, "failures": {"wrong_answer": 0, "no_answer_finished": 6, "cut_at_max_tokens": 250}}, "paired": {"items": 128, "accuracy_difference": 0.0, "standard_error": 0.0, "samples_wrong_to_right": 0, "samples_right_to_wrong": 0}, "ok": true, "type": "generate", "model": "both", "s": 967.311162275}
+```
+````
+
+### Editor
+
+The second AIME batch also had zero correct answers from either model, confirming that no AIME gain was observed in these tests. The kernel restarted again, but the evaluation completed and its files were saved. I will restore the analysis helpers from persisted records, verify the candidate tensor, and prepare the final five primary-source batches. These remaining tests will not change the edit.
+
+```python
+# Hypothesis: the frozen repair's demonstrated benefit is limited to the primary sources, not AIME transfer.
+import os, json, numpy as np, torch, pandas as pd, hashlib
+helper_source = '''
+import os, json, numpy as np, torch, pandas as pd, hashlib
+name23="model.language_model.layers.23.mlp.down_proj.weight"
+best_saved=torch.from_numpy(np.load("/work/best_subtract4/"+name23+".npy")).float()
+final_plan=json.load(open("/work/final_confirmation_plan.json"))
+manifest=json.load(open("/work/final_evaluation_manifest.json"))
+primary_gens=manifest["primary"]; aime_gens=manifest["aime"]; final_pass_files=manifest["pass_files"]
+frame_cache={}
+if os.path.exists("/work/confirmation_results.csv"):
+    cached=pd.read_csv("/work/confirmation_results.csv")
+    frame_cache.update({int(k):g.copy() for k,g in cached.groupby("batch")})
+def pair_rows(k):
+    def readsmall(path):
+        out={}
+        for line in open(path):
+            r=json.loads(line)
+            out[r["id"]]={"source":r["source"],"samples":[{a:b for a,b in s.items() if a!="text"} for s in r["samples"]]}
+        return out
+    aa=readsmall(f"/work/gen_{k}_original.jsonl")
+    bb=readsmall(f"/work/gen_{k}_edited.jsonl")
+    out=[]
+    for id,a in aa.items():
+        b=bb[id]
+        for j,(x,y) in enumerate(zip(a["samples"],b["samples"])):
+            out.append(dict(batch=k,id=id,source=a["source"],sample=j,
+                original=int(x["correct"]),edited=int(y["correct"]),
+                cut_original=int(x["cut"]),cut_edited=int(y["cut"]),
+                tokens_original=x["tokens"],tokens_edited=y["tokens"],
+                noanswer_original=int(not x["pred"] and not x["cut"]),
+                noanswer_edited=int(not y["pred"] and not y["cut"])))
+    return pd.DataFrame(out)
+def item_summary(df):
+    z=df.groupby(["id","source"])[["original","edited","cut_original","cut_edited","tokens_original","tokens_edited"]].mean().reset_index()
+    d=z.edited-z.original
+    return {"problems":len(z),"samples":len(df),
+            "original":round(float(z.original.mean()),6),"edited":round(float(z.edited.mean()),6),
+            "gain":round(float(d.mean()),6),"SE":round(float(d.std(ddof=1)/np.sqrt(len(d))),6),
+            "cut_original":round(float(z.cut_original.mean()),6),"cut_edited":round(float(z.cut_edited.mean()),6)}
+def getframe(k):
+    if k not in frame_cache: frame_cache[k]=pair_rows(k)
+    return frame_cache[k]
+def record_final_batch(passnum,k,nextpass=None):
+    frame=getframe(k)
+    assert set(frame.id)==set(final_plan[str(passnum)])
+    target=aime_gens if set(frame.source)=={"aime"} else primary_gens
+    if k not in target: target.append(k)
+    final_pass_files[str(passnum)]=k
+    primary=pd.concat([getframe(j) for j in primary_gens],ignore_index=True)
+    print("Latest batch:",item_summary(frame))
+    print("Primary aggregate:",item_summary(primary))
+    print("Primary by source:",{s:item_summary(d) for s,d in primary.groupby("source")})
+    primary.to_csv("/work/confirmation_results.csv",index=False)
+    json.dump({"primary":primary_gens,"aime":aime_gens,"pass_files":final_pass_files},open("/work/final_evaluation_manifest.json","w"))
+    with open("/work/notes.md","a") as f:
+        f.write(f"\\nPass{passnum} gen{k} frozen simple4: "+json.dumps(item_summary(frame))+".\\n")
+        f.write("Primary equal-problem aggregate: "+json.dumps(item_summary(primary))+".\\n")
+        if nextpass is not None:
+            f.write(f"NEXT pass{nextpass}: unchanged exact single L23 simple4; both on final_confirmation_plan entry {nextpass}, n2 max32768. No fitting/tuning.\\n")
+    if nextpass is not None: print("Next ids:",json.dumps(final_plan[str(nextpass)]))
+'''
+open("/work/analysis_helpers.py","w").write(helper_source)
+exec(compile(helper_source,"/work/analysis_helpers.py","exec"))
+assert edited()==[name23] and torch.equal(load(name23),best_saved)
+record_final_batch(45,53,46)
+print("AIME pooled:",item_summary(pd.concat([getframe(k) for k in aime_gens],ignore_index=True)))
+with open("/work/notes.md","a") as f:
+    f.write("Second AIME batch also0% both. Across256 unique AIME x2 =512 generations/model, no correct samples in either model. Kernel restarted; recover future helpers with exec(open('/work/analysis_helpers.py').read()). Exact frozen candidate verified.\n")
+```
+
+### Tool result
+
+```python
+# Hypothesis: the frozen repair's demonstrated benefit is limited to the primary sources, not AIME transfer.
+import os, json, numpy as np, torch, pandas as pd, hashlib
+helper_source = '''
+import os, json, numpy as np, torch, pandas as pd, hashlib
+name23="model.language_model.layers.23.mlp.down_proj.weight"
+best_saved=torch.from_numpy(np.load("/work/best_subtract4/"+name23+".npy")).float()
+final_plan=json.load(open("/work/final_confirmation_plan.json"))
+manifest=json.load(open("/work/final_evaluation_manifest.json"))
+primary_gens=manifest["primary"]; aime_gens=manifest["aime"]; final_pass_files=manifest["pass_files"]
+frame_cache={}
+if os.path.exists("/work/confirmation_results.csv"):
+    cached=pd.read_csv("/work/confirmation_results.csv")
+    frame_cache.update({int(k):g.copy() for k,g in cached.groupby("batch")})
+def pair_rows(k):
+    def readsmall(path):
+        out={}
+        for line in open(path):
+            r=json.loads(line)
+            out[r["id"]]={"source":r["source"],"samples":[{a:b for a,b in s.items() if a!="text"} for s in r["samples"]]}
+        return out
+    aa=readsmall(f"/work/gen_{k}_original.jsonl")
+    bb=readsmall(f"/work/gen_{k}_edited.jsonl")
+    out=[]
+    for id,a in aa.items():
+        b=bb[id]
+        for j,(x,y) in enumerate(zip(a["samples"],b["samples"])):
+            out.append(dict(batch=k,id=id,source=a["source"],sample=j,
+                original=int(x["correct"]),edited=int(y["correct"]),
+                cut_original=int(x["cut"]),cut_edited=int(y["cut"]),
+                tokens_original=x["tokens"],tokens_edited=y["tokens"],
+                noanswer_original=int(not x["pred"] and not x["cut"]),
+                noanswer_edited=int(not y["pred"] and not y["cut"])))
+    return pd.DataFrame(out)
+def item_summary(df):
+    z=df.groupby(["id","source"])[["original","edited","cut_original","cut_edited","tokens_original","tokens_edited"]].mean().reset_index()
+    d=z.edited-z.original
+    return {"problems":len(z),"samples":len(df),
+            "original":round(float(z.original.mean()),6),"edited":round(float(z.edited.mean()),6),
+            "gain":round(float(d.mean()),6),"SE":round(float(d.std(ddof=1)/np.sqrt(len(d))),6),
+            "cut_original":round(float(z.cut_original.mean()),6),"cut_edited":round(float(z.cut_edited.mean()),6)}
+def getframe(k):
+    if k not in frame_cache: frame_cache[k]=pair_rows(k)
+    return frame_cache[k]
+def record_final_batch(passnum,k,nextpass=None):
+    frame=getframe(k)
+    assert set(frame.id)==set(final_plan[str(passnum)])
+    target=aime_gens if set(frame.source)=={"aime"} else primary_gens
+    if k not in target: target.append(k)
+    final_pass_files[str(passnum)]=k
+    primary=pd.concat([getframe(j) for j in primary_gens],ignore_index=True)
+    print("Latest batch:",item_summary(frame))
+    print("Primary aggregate:",item_summary(primary))
+    print("Primary by source:",{s:item_summary(d) for s,d in primary.groupby("source")})
+    primary.to_csv("/work/confirmation_results.csv",index=False)
+    json.dump({"primary":primary_gens,"aime":aime_gens,"pass_files":final_pass_files},open("/work/final_evaluation_manifest.json","w"))
+    with open("/work/notes.md","a") as f:
+        f.write(f"\\nPass{passnum} gen{k} frozen simple4: "+json.dumps(item_summary(frame))+".\\n")
+        f.write("Primary equal-problem aggregate: "+json.dumps(item_summary(primary))+".\\n")
+        if nextpass is not None:
+            f.write(f"NEXT pass{nextpass}: unchanged exact single L23 simple4; both on final_confirmation_plan entry {nextpass}, n2 max32768. No fitting/tuning.\\n")
+    if nextpass is not None: print("Next ids:",json.dumps(final_plan[str(nextpass)]))
+'''
+open("/work/analysis_helpers.py","w").write(helper_source)
+exec(compile(helper_source,"/work/analysis_helpers.py","exec"))
+assert edited()==[name23] and torch.equal(load(name23),best_saved)
+record_final_batch(45,53,46)
+print("AIME pooled:",item_summary(pd.concat([getframe(k) for k in aime_gens],ignore_index=True)))
+with open("/work/notes.md","a") as f:
+    f.write("Second AIME batch also0% both. Across256 unique AIME x2 =512 generations/model, no correct samples in either model. Kernel restarted; recover future helpers with exec(open('/work/analysis_helpers.py').read()). Exact frozen candidate verified.\n")
+```
+
+```text
+
+```
+
+```text
+ProtocolRefused: Dynamic execution or interactive input is forbidden: exec
+```
+
+## Turn 118
+
+### Input
+
+````text
+OUTPUT of Python run 60 of at most 300:
+```
+
+ProtocolRefused: Dynamic execution or interactive input is forbidden: exec
+```
+````
+
+### Editor
+
+The recovery helper was rejected because dynamic execution is forbidden, so it produced no new experimental result. I will redefine the small analysis functions directly instead. The last completed result remains the second null AIME comparison, and the saved candidate is unchanged. After verifying it, I will resume the five remaining precommitted primary-source tests.
+
+```python
+# Hypothesis: direct reconstruction of analysis state preserves the frozen evaluation plan without dynamic execution.
+import os, json, numpy as np, torch, pandas as pd, hashlib
+name23="model.language_model.layers.23.mlp.down_proj.weight"
+best_saved=torch.from_numpy(np.load("/work/best_subtract4/"+name23+".npy")).float()
+final_plan=json.load(open("/work/final_confirmation_plan.json"))
+manifest=json.load(open("/work/final_evaluation_manifest.json"))
+primary_gens=manifest["primary"]; aime_gens=manifest["aime"]; final_pass_files=manifest["pass_files"]
+frame_cache={}
+if os.path.exists("/work/confirmation_results.csv"):
+    cached=pd.read_csv("/work/confirmation_results.csv")
+    frame_cache.update({int(k):g.copy() for k,g in cached.groupby("batch")})
+def pair_rows(k):
+    def readsmall(path):
+        out={}
+        for line in open(path):
+            r=json.loads(line)
+            out[r["id"]]={"source":r["source"],"samples":[{a:b for a,b in s.items() if a!="text"} for s in r["samples"]]}
+        return out
+    aa=readsmall(f"/work/gen_{k}_original.jsonl"); bb=readsmall(f"/work/gen_{k}_edited.jsonl")
+    out=[]
+    for id,a in aa.items():
+        b=bb[id]
+        for j,(x,y) in enumerate(zip(a["samples"],b["samples"])):
+            out.append(dict(batch=k,id=id,source=a["source"],sample=j,
+                original=int(x["correct"]),edited=int(y["correct"]),
+                cut_original=int(x["cut"]),cut_edited=int(y["cut"]),
+                tokens_original=x["tokens"],tokens_edited=y["tokens"],
+                noanswer_original=int(not x["pred"] and not x["cut"]),
+                noanswer_edited=int(not y["pred"] and not y["cut"])))
+    return pd.DataFrame(out)
+def item_summary(df):
+    z=df.groupby(["id","source"])[["original","edited","cut_original","cut_edited","tokens_original","tokens_edited"]].mean().reset_index()
+    d=z.edited-z.original
+    return {"problems":len(z),"samples":len(df),
+            "original":round(float(z.original.mean()),6),"edited":round(float(z.edited.mean()),6),
+            "gain":round(float(d.mean()),6),"SE":round(float(d.std(ddof=1)/np.sqrt(len(d))),6),
+            "cut_original":round(float(z.cut_original.mean()),6),"cut_edited":round(float(z.cut_edited.mean()),6)}
+def getframe(k):
+    if k not in frame_cache: frame_cache[k]=pair_rows(k)
+    return frame_cache[k]
+def record_final_batch(passnum,k,nextpass=None):
+    frame=getframe(k)
+    assert set(frame.id)==set(final_plan[str(passnum)])
+    target=aime_gens if set(frame.source)=={"aime"} else primary_gens
+    if k not in target: target.append(k)
+    final_pass_files[str(passnum)]=k
+    primary=pd.concat([getframe(j) for j in primary_gens],ignore_index=True)
+    print("Latest batch:",item_summary(frame))
+    print("Primary aggregate:",item_summary(primary))
+    print("Primary by source:",{s:item_summary(d) for s,d in primary.groupby("source")})
+    primary.to_csv("/work/confirmation_results.csv",index=False)
+    json.dump({"primary":primary_gens,"aime":aime_gens,"pass_files":final_pass_files},open("/work/final_evaluation_manifest.json","w"))
+    with open("/work/notes.md","a") as f:
+        f.write(f"\nPass{passnum} gen{k} frozen simple4: "+json.dumps(item_summary(frame))+".\n")
+        f.write("Primary equal-problem aggregate: "+json.dumps(item_summary(primary))+".\n")
+        if nextpass is not None:
+            f.write(f"NEXT pass{nextpass}: unchanged exact single L23 simple4; both on final_confirmation_plan entry {nextpass}, n2 max32768. No fitting/tuning.\n")
+    if nextpass is not None: print("Next ids:",json.dumps(final_plan[str(nextpass)]))
+assert edited()==[name23] and torch.equal(load(name23),best_saved)
+record_final_batch(45,53,46)
+print("AIME pooled:",item_summary(pd.concat([getframe(k) for k in aime_gens],ignore_index=True)))
+with open("/work/notes.md","a") as f:
+    f.write("Second AIME batch also0% both. Across256 unique AIME x2 =512 generations/model, no correct samples in either model. Kernel restarted; state reconstructed directly. Exact frozen candidate verified. No dynamic execution.\n")
+```
+
+### Tool result
+
+```python
+# Hypothesis: direct reconstruction of analysis state preserves the frozen evaluation plan without dynamic execution.
+import os, json, numpy as np, torch, pandas as pd, hashlib
+name23="model.language_model.layers.23.mlp.down_proj.weight"
+best_saved=torch.from_numpy(np.load("/work/best_subtract4/"+name23+".npy")).float()
+final_plan=json.load(open("/work/final_confirmation_plan.json"))
+manifest=json.load(open("/work/final_evaluation_manifest.json"))
+primary_gens=manifest["primary"]; aime_gens=manifest["aime"]; final_pass_files=manifest["pass_files"]
+frame_cache={}
+if os.path.exists("/work/confirmation_results.csv"):
+    cached=pd.read_csv("/work/confirmation_results.csv")
+    frame_cache.update({int(k):g.copy() for k,g in cached.groupby("batch")})
+def pair_rows(k):
+    def readsmall(path):
+        out={}
+        for line in open(path):
+            r=json.loads(line)
+            out[r["id"]]={"source":r["source"],"samples":[{a:b for a,b in s.items() if a!="text"} for s in r["samples"]]}
+        return out
+    aa=readsmall(f"/work/gen_{k}_original.jsonl"); bb=readsmall(f"/work/gen_{k}_edited.jsonl")
+    out=[]
+    for id,a in aa.items():
+        b=bb[id]
+        for j,(x,y) in enumerate(zip(a["samples"],b["samples"])):
+            out.append(dict(batch=k,id=id,source=a["source"],sample=j,
+                original=int(x["correct"]),edited=int(y["correct"]),
+                cut_original=int(x["cut"]),cut_edited=int(y["cut"]),
+                tokens_original=x["tokens"],tokens_edited=y["tokens"],
+                noanswer_original=int(not x["pred"] and not x["cut"]),
+                noanswer_edited=int(not y["pred"] and not y["cut"])))
+    return pd.DataFrame(out)
+def item_summary(df):
+    z=df.groupby(["id","source"])[["original","edited","cut_original","cut_edited","tokens_original","tokens_edited"]].mean().reset_index()
+    d=z.edited-z.original
+    return {"problems":len(z),"samples":len(df),
+            "original":round(float(z.original.mean()),6),"edited":round(float(z.edited.mean()),6),
+            "gain":round(float(d.mean()),6),"SE":round(float(d.std(ddof=1)/np.sqrt(len(d))),6),
+            "cut_original":round(float(z.cut_original.mean()),6),"cut_edited":round(float(z.cut_edited.mean()),6)}
+def getframe(k):
+    if k not in frame_cache: frame_cache[k]=pair_rows(k)
+    return frame_cache[k]
+def record_final_batch(passnum,k,nextpass=None):
+    frame=getframe(k)
+    assert set(frame.id)==set(final_plan[str(passnum)])
+    target=aime_gens if set(frame.source)=={"aime"} else primary_gens
+    if k not in target: target.append(k)
+    final_pass_files[str(passnum)]=k
+    primary=pd.concat([getframe(j) for j in primary_gens],ignore_index=True)
+    print("Latest batch:",item_summary(frame))
+    print("Primary aggregate:",item_summary(primary))
+    print("Primary by source:",{s:item_summary(d) for s,d in primary.groupby("source")})
+    primary.to_csv("/work/confirmation_results.csv",index=False)
+    json.dump({"primary":primary_gens,"aime":aime_gens,"pass_files":final_pass_files},open("/work/final_evaluation_manifest.json","w"))
+    with open("/work/notes.md","a") as f:
+        f.write(f"\nPass{passnum} gen{k} frozen simple4: "+json.dumps(item_summary(frame))+".\n")
+        f.write("Primary equal-problem aggregate: "+json.dumps(item_summary(primary))+".\n")
+        if nextpass is not None:
+            f.write(f"NEXT pass{nextpass}: unchanged exact single L23 simple4; both on final_confirmation_plan entry {nextpass}, n2 max32768. No fitting/tuning.\n")
+    if nextpass is not None: print("Next ids:",json.dumps(final_plan[str(nextpass)]))
+assert edited()==[name23] and torch.equal(load(name23),best_saved)
+record_final_batch(45,53,46)
+print("AIME pooled:",item_summary(pd.concat([getframe(k) for k in aime_gens],ignore_index=True)))
+with open("/work/notes.md","a") as f:
+    f.write("Second AIME batch also0% both. Across256 unique AIME x2 =512 generations/model, no correct samples in either model. Kernel restarted; state reconstructed directly. Exact frozen candidate verified. No dynamic execution.\n")
+```
+
+```text
+Latest batch: {'problems': 128, 'samples': 256, 'original': 0.0, 'edited': 0.0, 'gain': 0.0, 'SE': 0.0, 'cut_original': 1.0, 'cut_edited': 0.976562}
+Primary aggregate: {'problems': 1408, 'samples': 2304, 'original': 0.120739, 'edited': 0.193892, 'gain': 0.073153, 'SE': 0.009478, 'cut_original': 0.889915, 'cut_edited': 0.755682}
+Primary by source: {'gsm8k': {'problems': 704, 'samples': 1152, 'original': 0.152699, 'edited': 0.260653, 'gain': 0.107955, 'SE': 0.015329, 'cut_original': 0.858665, 'cut_edited': 0.664062}, 'math': {'problems': 704, 'samples': 1152, 'original': 0.088778, 'edited': 0.127131, 'gain': 0.038352, 'SE': 0.011007, 'cut_original': 0.921165, 'cut_edited': 0.847301}}
+Next ids: ["gsm8k_train_920", "gsm8k_train_4166", "gsm8k_train_1032", "gsm8k_train_7347", "gsm8k_train_6923", "gsm8k_train_3614", "gsm8k_train_1674", "gsm8k_train_4331", "gsm8k_train_3838", "gsm8k_train_6625", "gsm8k_train_510", "gsm8k_train_3783", "gsm8k_train_3997", "gsm8k_train_358", "gsm8k_train_1961", "gsm8k_train_4255", "gsm8k_train_3434", "gsm8k_train_5326", "gsm8k_train_1210", "gsm8k_train_4564", "gsm8k_train_3526", "gsm8k_train_7234", "gsm8k_train_3980", "gsm8k_train_1310", "gsm8k_train_137", "gsm8k_train_6450", "gsm8k_train_2255", "gsm8k_train_2143", "gsm8k_train_3348", "gsm8k_train_3951", "gsm8k_train_7435", "gsm8k_train_5368", "gsm8k_train_3822", "gsm8k_train_2494", "gsm8k_train_4746", "gsm8k_train_4920", "gsm8k_train_7151", "gsm8k_train_6422", "gsm8k_train_6160", "gsm8k_train_378", "gsm8k_train_408", "gsm8k_train_6175", "gsm8k_train_1734", "gsm8k_train_5948", "gsm8k_train_1207", "gsm8k_train_4820", "gsm8k_train_3660", "gsm8k_train_7275", "gsm8k_train_3645", "gsm8k_train_3414", "gsm8k_train_1179", "gsm8k_train_2284", "gsm8k_train_3926", "gsm8k_train_11", "gsm8k_train_5433", "gsm8k_train_1963", "gsm8k_train_2785", "gsm8k_train_2544", "gsm8k_train_4309", "gsm8k_train_6810", "gsm8k_train_5327", "gsm8k_train_1774", "gsm8k_train_7049", "gsm8k_train_98", "math_train_geometry_637", "math_train_counting_and_probability_200", "math_train_prealgebra_1043", "math_train_intermediate_algebra_199", "math_train_intermediate_algebra_843", "math_train_algebra_1634", "math_train_prealgebra_507", "math_train_prealgebra_657", "math_train_prealgebra_539", "math_train_intermediate_algebra_446", "math_train_number_theory_147", "math_train_intermediate_algebra_733", "math_train_precalculus_251", "math_train_number_theory_524", "math_train_intermediate_algebra_978", "math_train_prealgebra_1186", "math_train_number_theory_211", "math_train_prealgebra_546", "math_train_algebra_157", "math_train_algebra_1481", "math_train_counting_and_probability_101", "math_train_precalculus_142", "math_train_geometry_441", "math_train_number_theory_351", "math_train_intermediate_algebra_142", "math_train_algebra_195", "math_train_intermediate_algebra_439", "math_train_counting_and_probability_225", "math_train_prealgebra_252", "math_train_geometry_355", "math_train_algebra_1114", "math_train_algebra_523", "math_train_prealgebra_1002", "math_train_algebra_1622", "math_train_prealgebra_938", "math_train_algebra_22", "math_train_prealgebra_668", "math_train_intermediate_algebra_342", "math_train_prealgebra_797", "math_train_number_theory_336", "math_train_counting_and_probability_111", "math_train_algebra_1695", "math_train_number_theory_128", "math_train_prealgebra_837", "math_train_precalculus_336", "math_train_counting_and_probability_768", "math_train_number_theory_503", "math_train_precalculus_459", "math_train_algebra_583", "math_train_intermediate_algebra_881", "math_train_number_theory_150", "math_train_counting_and_probability_570", "math_train_prealgebra_424", "math_train_counting_and_probability_680", "math_train_counting_and_probability_679", "math_train_precalculus_721", "math_train_geometry_54", "math_train_intermediate_algebra_960", "math_train_intermediate_algebra_844", "math_train_algebra_1611", "math_train_counting_and_probability_358", "math_train_prealgebra_379", "math_train_algebra_1507", "math_train_prealgebra_958"]
+AIME pooled: {'problems': 256, 'samples': 512, 'original': 0.0, 'edited': 0.0, 'gain': 0.0, 'SE': 0.0, 'cut_original': 1.0, 'cut_edited': 0.980469}
+```
+
+## Turn 119
+
+### Input
+
+````text
+OUTPUT of Python run 61 of at most 300:
+```
+Latest batch: {'problems': 128, 'samples': 256, 'original': 0.0, 'edited': 0.0, 'gain': 0.0, 'SE': 0.0, 'cut_original': 1.0, 'cut_edited': 0.976562}
+Primary aggregate: {'problems': 1408, 'samples': 2304, 'original': 0.120739, 'edited': 0.193892, 'gain': 0.073153, 'SE': 0.009478, 'cut_original': 0.889915, 'cut_edited': 0.755682}
+Primary by source: {'gsm8k': {'problems': 704, 'samples': 1152, 'original': 0.152699, 'edited': 0.260653, 'gain': 0.107955, 'SE': 0.015329, 'cut_original': 0.858665, 'cut_edited': 0.664062}, 'math': {'problems': 704, 'samples': 1152, 'original': 0.088778, 'edited': 0.127131, 'gain': 0.038352, 'SE': 0.011007, 'cut_original': 0.921165, 'cut_edited': 0.847301}}
+Next ids: ["gsm8k_train_920", "gsm8k_train_4166", "gsm8k_train_1032", "gsm8k_train_7347", "gsm8k_train_6923", "gsm8k_train_3614", "gsm8k_train_1674", "gsm8k_train_4331", "gsm8k_train_3838", "gsm8k_train_6625", "gsm8k_train_510", "gsm8k_train_3783", "gsm8k_train_3997", "gsm8k_train_358", "gsm8k_train_1961", "gsm8k_train_4255", "gsm8k_train_3434", "gsm8k_train_5326", "gsm8k_train_1210", "gsm8k_train_4564", "gsm8k_train_3526", "gsm8k_train_7234", "gsm8k_train_3980", "gsm8k_train_1310", "gsm8k_train_137", "gsm8k_train_6450", "gsm8k_train_2255", "gsm8k_train_2143", "gsm8k_train_3348", "gsm8k_train_3951", "gsm8k_train_7435", "gsm8k_train_5368", "gsm8k_train_3822", "gsm8k_train_2494", "gsm8k_train_4746", "gsm8k_train_4920", "gsm8k_train_7151", "gsm8k_train_6422", "gsm8k_train_6160", "gsm8k_train_378", "gsm8k_train_408", "gsm8k_train_6175", "gsm8k_train_1734", "gsm8k_train_5948", "gsm8k_train_1207", "gsm8k_train_4820", "gsm8k_train_3660", "gsm8k_train_7275", "gsm8k_train_3645", "gsm8k_train_3414", "gsm8k_train_1179", "gsm8k_train_2284", "gsm8k_train_3926", "gsm8k_train_11", "gsm8k_train_5433", "gsm8k_train_1963", "gsm8k_train_2785", "gsm8k_train_2544", "gsm8k_train_4309", "gsm8k_train_6810", "gsm8k_train_5327", "gsm8k_train_1774", "gsm8k_train_7049", "gsm8k_train_98", "math_train_geometry_637", "math_train_counting_and_probability_200", "math_train_prealgebra_1043", "math_train_intermediate_algebra_199", "math_train_intermediate_algebra_843", "math_train_algebra_1634", "math_train_prealgebra_507", "math_train_prealgebra_657", "math_train_prealgebra_539", "math_train_intermediate_algebra_446", "math_train_number_theory_147", "math_train_intermediate_algebra_733", "math_train_precalculus_251", "math_train_number_theory_524", "math_train_intermediate_algebra_978", "math_train_prealgebra_1186", "math_train_number_theory_211", "math_train_prealgebra_546", "math_train_algebra_157", "math_train_algebra_1481", "math_train_counting_and_probability_101", "math_train_precalculus_142", "math_train_geometry_441", "math_train_number_theory_351", "math_train_intermediate_algebra_142", "math_train_algebra_195", "math_train_intermediate_algebra_439", "math_train_counting_and_probability_225", "math_train_prealgebra_252", "math_train_geometry_355", "math_train_algebra_1114", "math_train_algebra_523", "math_train_prealgebra_1002", "math_train_algebra_1622", "math_train_prealgebra_938", "math_train_algebra_22", "math_train_prealgebra_668", "math_train_intermediate_algebra_342", "math_train_prealgebra_797", "math_train_number_theory_336", "math_train_counting_and_probability_111", "math_train_algebra_1695", "math_train_number_theory_128", "math_train_prealgebra_837", "math_train_precalculus_336", "math_train_counting_and_probability_768", "math_train_number_theory_503", "math_train_precalculus_459", "math_train_algebra_583", "math_train_intermediate_algebra_881", "math_train_number_theory_150", "math_train_counting_and_probability_570", "math_train_prealgebra_424", "math_train_counting_and_probability_680", "math_train_counting_and_probability_679", "math_train_precalculus_721", "math_train_geometry_54", "math_train_intermediate_algebra_960", "math_train_intermediate_algebra_844", "math_train_algebra_1611", "math_train_counting_and_probability_358", "math_train_prealgebra_379", "math_train_algebra_1507", "math_train_prealgebra_958"]
+AIME pooled: {'problems': 256, 'samples': 512, 'original': 0.0, 'edited': 0.0, 'gain': 0.0, 'SE': 0.0, 'cut_original': 1.0, 'cut_edited': 0.980469}
+
+
+```
+````
+
+### Editor
+
+Recovery is complete, and the active tensor still exactly matches the frozen backup. Across both AIME batches, neither model produced a correct sample, so I will make no AIME improvement claim. The next five passes return to the primary sources and complete the precommitted 2,048-problem confirmation set. I will now run its next balanced batch.
+
+```forward
+{"type":"generate","model":"both","problems":["gsm8k_train_920","gsm8k_train_4166","gsm8k_train_1032","gsm8k_train_7347","gsm8k_train_6923","gsm8k_train_3614","gsm8k_train_1674","gsm8k_train_4331","gsm8k_train_3838","gsm8k_train_6625","gsm8k_train_510","gsm8k_train_3783","gsm8k_train_3997","gsm8k_train_358","gsm8k_train_1961","gsm8k_train_4255","gsm8k_train_3434","gsm8k_train_5326","gsm8k_train_1210","gsm8k_train_4564","gsm8k_train_3526","gsm8k_train_7234","gsm8k_train_3980","gsm8k_train_1310","gsm8k_train_137","gsm8k_train_6450","gsm8k_train_2255","gsm8k_train_2143","gsm8k_train_3348","gsm8k_train_3951","gsm8k_train_7435","gsm8k_train_5368","gsm8k_train_3822","gsm8k_train_2494","gsm8k_train_4746","gsm8k_train_4920","gsm8k_train_7151","gsm8k_train_6422","gsm8k_train_6160","gsm8k_train_378","gsm8k_train_408","gsm8k_train_6175","gsm8k_train_1734","gsm8k_train_5948","gsm8k_train_1207","gsm8k_train_4820","gsm8k_train_3660","gsm8k_train_7275","gsm8k_train_3645","gsm8k_train_3414","gsm8k_train_1179","gsm8k_train_2284","gsm8k_train_3926","gsm8k_train_11","gsm8k_train_5433","gsm8k_train_1963","gsm8k_train_2785","gsm8k_train_2544","gsm8k_train_4309","gsm8k_train_6810","gsm8k_train_5327","gsm8k_train_1774","gsm8k_train_7049","gsm8k_train_98","math_train_geometry_637","math_train_counting_and_probability_200","math_train_prealgebra_1043","math_train_intermediate_algebra_199","math_train_intermediate_algebra_843","math_train_algebra_1634","math_train_prealgebra_507","math_train_prealgebra_657","math_train_prealgebra_539","math_train_intermediate_algebra_446","math_train_number_theory_147","math_train_intermediate_algebra_733","math_train_precalculus_251","math_train_number_theory_524","math_train_intermediate_algebra_978","math_train_prealgebra_1186","math_train_number_theory_211","math_train_prealgebra_546","math_train_algebra_157","math_train_algebra_1481","math_train_counting_and_probability_101","math_train_precalculus_142","math_train_geometry_441","math_train_number_theory_351","math_train_intermediate_algebra_142","math_train_algebra_195","math_train_intermediate_algebra_439","math_train_counting_and_probability_225","math_train_prealgebra_252","math_train_geometry_355","math_train_algebra_1114","math_train_algebra_523","math_train_prealgebra_1002","math_train_algebra_1622","math_train_prealgebra_938","math_train_algebra_22","math_train_prealgebra_668","math_train_intermediate_algebra_342","math_train_prealgebra_797","math_train_number_theory_336","math_train_counting_and_probability_111","math_train_algebra_1695","math_train_number_theory_128","math_train_prealgebra_837","math_train_precalculus_336","math_train_counting_and_probability_768","math_train_number_theory_503","math_train_precalculus_459","math_train_algebra_583","math_train_intermediate_algebra_881","math_train_number_theory_150","math_train_counting_and_probability_570","math_train_prealgebra_424","math_train_counting_and_probability_680","math_train_counting_and_probability_679","math_train_precalculus_721","math_train_geometry_54","math_train_intermediate_algebra_960","math_train_intermediate_algebra_844","math_train_algebra_1611","math_train_counting_and_probability_358","math_train_prealgebra_379","math_train_algebra_1507","math_train_prealgebra_958"],"n":2,"max_tokens":32768}
+```
+
+### Tool result
+
+```text
+{
+  "files": {
+    "original": "/work/gen_54_original.jsonl",
+    "edited": "/work/gen_54_edited.jsonl"
+  },
+  "activations": null,
+  "original": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.1640625,
+    "accuracy_by_source": {
+      "gsm8k": 0.1875,
+      "math": 0.140625
+    },
+    "mean_tokens": 28252.66015625,
+    "cut_share": 0.83984375,
+    "failures": {
+      "wrong_answer": 0,
+      "no_answer_finished": 0,
+      "cut_at_max_tokens": 215
+    }
+  },
+  "edited": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.20703125,
+    "accuracy_by_source": {
+      "gsm8k": 0.25,
+      "math": 0.1640625
+    },
+    "mean_tokens": 26861.296875,
+    "cut_share": 0.75390625,
+    "failures": {
+      "wrong_answer": 2,
+      "no_answer_finished": 9,
+      "cut_at_max_tokens": 193
+    }
+  },
+  "paired": {
+    "items": 128,
+    "accuracy_difference": 0.04296875,
+    "standard_error": 0.02718510643708372,
+    "samples_wrong_to_right": 33,
+    "samples_right_to_wrong": 22
+  },
+  "ok": true,
+  "type": "generate",
+  "model": "both",
+  "s": 926.645645261
+}
+```
+
+## Turn 120
+
+### Input
+
+````text
+FORWARD PASS 46 of 50:
+```json
+{"files": {"original": "/work/gen_54_original.jsonl", "edited": "/work/gen_54_edited.jsonl"}, "activations": null, "original": {"generations": 256, "graded": 256, "accuracy": 0.1640625, "accuracy_by_source": {"gsm8k": 0.1875, "math": 0.140625}, "mean_tokens": 28252.66015625, "cut_share": 0.83984375, "failures": {"wrong_answer": 0, "no_answer_finished": 0, "cut_at_max_tokens": 215}}, "edited": {"generations": 256, "graded": 256, "accuracy": 0.20703125, "accuracy_by_source": {"gsm8k": 0.25, "math": 0.1640625}, "mean_tokens": 26861.296875, "cut_share": 0.75390625, "failures": {"wrong_answer": 2, "no_answer_finished": 9, "cut_at_max_tokens": 193}}, "paired": {"items": 128, "accuracy_difference": 0.04296875, "standard_error": 0.02718510643708372, "samples_wrong_to_right": 33, "samples_right_to_wrong": 22}, "ok": true, "type": "generate", "model": "both", "s": 926.645645261}
+```
+````
+
+### Editor
+
+This batch gained 4.30 points with a standard error of 2.72 points, so it is individually inconclusive. Both source estimates were positive, but the smaller gain illustrates why the decision must rely on the full independent aggregate. I will record it without changing the candidate and prepare the next batch. All remaining problems were chosen before these results were seen.
+
+```python
+# Hypothesis: batch variability does not erase the independently replicated positive average effect.
+record_final_batch(46,54,47)
+assert edited()==[name23] and torch.equal(load(name23),best_saved)
+primary=pd.concat([getframe(k) for k in primary_gens],ignore_index=True)
+item_delta=primary.assign(delta=primary.edited-primary.original).groupby("id").delta.mean()
+print("Current approximate 95pct paired interval (pp):",
+      [round(100*x,3) for x in [item_delta.mean()-1.96*item_delta.std(ddof=1)/np.sqrt(len(item_delta)),
+                               item_delta.mean()+1.96*item_delta.std(ddof=1)/np.sqrt(len(item_delta))]])
+```
+
+### Tool result
+
+```python
+# Hypothesis: batch variability does not erase the independently replicated positive average effect.
+record_final_batch(46,54,47)
+assert edited()==[name23] and torch.equal(load(name23),best_saved)
+primary=pd.concat([getframe(k) for k in primary_gens],ignore_index=True)
+item_delta=primary.assign(delta=primary.edited-primary.original).groupby("id").delta.mean()
+print("Current approximate 95pct paired interval (pp):",
+      [round(100*x,3) for x in [item_delta.mean()-1.96*item_delta.std(ddof=1)/np.sqrt(len(item_delta)),
+                               item_delta.mean()+1.96*item_delta.std(ddof=1)/np.sqrt(len(item_delta))]])
+```
+
+```text
+Latest batch: {'problems': 128, 'samples': 256, 'original': 0.164062, 'edited': 0.207031, 'gain': 0.042969, 'SE': 0.027185, 'cut_original': 0.839844, 'cut_edited': 0.753906}
+Primary aggregate: {'problems': 1536, 'samples': 2560, 'original': 0.124349, 'edited': 0.194987, 'gain': 0.070638, 'SE': 0.008979, 'cut_original': 0.885742, 'cut_edited': 0.755534}
+Primary by source: {'gsm8k': {'problems': 768, 'samples': 1280, 'original': 0.155599, 'edited': 0.259766, 'gain': 0.104167, 'SE': 0.014489, 'cut_original': 0.855469, 'cut_edited': 0.665365}, 'math': {'problems': 768, 'samples': 1280, 'original': 0.093099, 'edited': 0.130208, 'gain': 0.037109, 'SE': 0.01048, 'cut_original': 0.916016, 'cut_edited': 0.845703}}
+Next ids: ["gsm8k_train_1272", "gsm8k_train_1089", "gsm8k_train_2625", "gsm8k_train_5647", "gsm8k_train_3908", "gsm8k_train_6785", "gsm8k_train_5741", "gsm8k_train_1810", "gsm8k_train_7276", "gsm8k_train_6649", "gsm8k_train_850", "gsm8k_train_5088", "gsm8k_train_6946", "gsm8k_train_4193", "gsm8k_train_4298", "gsm8k_train_4346", "gsm8k_train_7072", "gsm8k_train_7390", "gsm8k_train_3113", "gsm8k_train_3904", "gsm8k_train_5686", "gsm8k_train_5364", "gsm8k_train_2466", "gsm8k_train_3689", "gsm8k_train_274", "gsm8k_train_4925", "gsm8k_train_5993", "gsm8k_train_1662", "gsm8k_train_3723", "gsm8k_train_1409", "gsm8k_train_753", "gsm8k_train_5782", "gsm8k_train_2458", "gsm8k_train_4737", "gsm8k_train_7246", "gsm8k_train_2226", "gsm8k_train_5208", "gsm8k_train_1379", "gsm8k_train_4495", "gsm8k_train_5920", "gsm8k_train_4268", "gsm8k_train_4561", "gsm8k_train_6278", "gsm8k_train_7185", "gsm8k_train_4494", "gsm8k_train_7432", "gsm8k_train_4129", "gsm8k_train_6868", "gsm8k_train_4076", "gsm8k_train_3616", "gsm8k_train_4115", "gsm8k_train_3922", "gsm8k_train_5587", "gsm8k_train_6224", "gsm8k_train_6443", "gsm8k_train_6876", "gsm8k_train_4119", "gsm8k_train_3725", "gsm8k_train_1018", "gsm8k_train_1722", "gsm8k_train_901", "gsm8k_train_1987", "gsm8k_train_4872", "gsm8k_train_2373", "math_train_prealgebra_782", "math_train_algebra_660", "math_train_intermediate_algebra_358", "math_train_geometry_818", "math_train_geometry_50", "math_train_prealgebra_264", "math_train_geometry_234", "math_train_geometry_326", "math_train_algebra_302", "math_train_number_theory_654", "math_train_counting_and_probability_624", "math_train_prealgebra_202", "math_train_precalculus_396", "math_train_algebra_829", "math_train_geometry_450", "math_train_algebra_212", "math_train_algebra_659", "math_train_algebra_274", "math_train_intermediate_algebra_251", "math_train_intermediate_algebra_1032", "math_train_precalculus_167", "math_train_intermediate_algebra_393", "math_train_algebra_133", "math_train_number_theory_1", "math_train_number_theory_344", "math_train_number_theory_570", "math_train_precalculus_408", "math_train_algebra_1493", "math_train_algebra_770", "math_train_counting_and_probability_234", "math_train_number_theory_594", "math_train_number_theory_695", "math_train_intermediate_algebra_378", "math_train_prealgebra_458", "math_train_algebra_982", "math_train_algebra_763", "math_train_counting_and_probability_613", "math_train_algebra_1310", "math_train_precalculus_440", "math_train_geometry_792", "math_train_counting_and_probability_37", "math_train_number_theory_272", "math_train_number_theory_445", "math_train_geometry_594", "math_train_algebra_727", "math_train_prealgebra_214", "math_train_algebra_1214", "math_train_intermediate_algebra_479", "math_train_prealgebra_1086", "math_train_intermediate_algebra_801", "math_train_algebra_889", "math_train_algebra_1592", "math_train_prealgebra_387", "math_train_geometry_295", "math_train_geometry_247", "math_train_prealgebra_880", "math_train_algebra_950", "math_train_prealgebra_191", "math_train_number_theory_171", "math_train_algebra_983", "math_train_number_theory_102", "math_train_precalculus_319", "math_train_algebra_1567", "math_train_number_theory_261"]
+Current approximate 95pct paired interval (pp): [np.float64(5.304), np.float64(8.824)]
+```
+
+## Turn 121
+
+### Input
+
+````text
+TASK. You are given the weights of a language model, Qwen3.5-0.8B (text part: 24 layers of width 1,024; layers 3, 7, 11, 15, 19 and 23 are full-attention layers with 8 query heads and 2 key/value heads of size 256 and a gated output, the other 18 are Gated DeltaNet linear-attention layers with 16 heads of size 128; each layer has a SwiGLU MLP of width 3,584; RMSNorm; vocabulary 248,320; input embedding and output layer tied). Your job is to make it better at mathematics by EDITING ITS WEIGHTS DIRECTLY: find out what goes wrong inside the network when it fails at math problems and repair that with targeted changes.
+
+HOW IT WILL BE MEASURED. After you finish, your edited model and the unedited model are evaluated on MATH-500 and GSM8K with this fixed protocol: the chat template with thinking enabled (enable_thinking=True: the model reasons between <think> and </think>, then answers); the user message is the problem, a newline and "Please reason step by step, and put your final answer within \boxed{}."; sampling with temperature 0.6, top_p 0.95, top_k 20, presence penalty 1.5 and at most 32,768 new tokens for reasoning and answer together; the last \boxed{} answer is graded against the reference answer. The config, tokenizer, chat template and decoding settings are fixed: only weight values can change (same tensor names and shapes). You never see these benchmarks.
+
+WHAT COUNTS. We want edits that come from understanding the network: find out what goes wrong when it fails at math problems, identify the components responsible (specific neurons, heads, directions or circuits) and change them in a way you can justify with evidence. Repairing a specific failure mechanism is in scope: for example, if the model often fails because it repeats itself and never finishes, finding and fixing what drives that repetition counts. Out of scope, and refused by save_edit: the final norm (model.language_model.norm.weight), the input embedding / output layer (model.language_model.embed_tokens.weight, lm_head.weight), and any edit that only multiplies a whole tensor by a constant. Global knobs (making the whole output distribution sharper or flatter) are not what we are looking for, and neither is making the model skip its thinking or close it early regardless of the problem; repairing a specific failure inside the thinking (such as repetition) is in scope.
+
+WHAT YOU HAVE.
+1. A persistent Python kernel (no internet, no GPU): variables survive between your code blocks, like a notebook. The model's files are read-only in /model, practice problems read-only in /practice, and /work is your read-write folder. Available: numpy, scipy, scikit-learn, PyTorch (CPU), pandas, sympy, networkx, safetensors, tokenizers. Defined in advance: NAMES (all tensor names), load(name) (a float32 torch tensor: your current edit if there is one, else the original), load_original(name), save_edit(name, tensor), drop_edit(name), edited() and tok (the tokenizer). Gradients are disabled. To run code, reply with exactly one block that starts with ```python and nothing else; if its last line is an expression, its value is shown. One execution may take up to 900 seconds and 96 GB; output is cut at 10,000 characters. You may run code up to 300 times. If the kernel is restarted (time or memory limit), its variables are lost and you are told so.
+2. Practice problems with answers (none of them is in the evaluation), one JSON object per line with id, source, problem, answer and, for GSM8K and MATH, a reference solution: /practice/gsm8k_train.jsonl (7,469 grade-school problems), /practice/math_train.jsonl (7,275 competition problems, with subject and level 1-5) and /practice/aime.jsonl (714 AIME problems, 1983-2023, answers only). Choose whichever serve your experiments.
+3. A forward-pass tool with a budget of 50 forward passes in total. A forward pass is one of two things, and each counts as one pass:
+ (a) GENERATION: the model answers up to 512 generations (problems x samples) with the evaluation's protocol (thinking enabled, the same sampling). Reply with exactly one block that starts with ```forward and contains JSON:
+ {"type": "generate", "model": "original", "edited" or "both", "problems": ["<practice id>", ...], "prompts": ["<your own user message>", ...] (optional), "n": samples per item (items x n <= 512; with "both" <= 256 per model), "max_tokens": at most 32768, "activations": {"layers": [layer indices 0..24], "mlp": true or false} (optional)}
+ "original" runs the unedited weights, "edited" your current edits, and "both" runs both on the same items and returns a paired comparison (the accuracy difference edited - original over items with its standard error, and how many samples went from wrong to right and back). The sampling seed of every item is fixed by the problem, in every pass and for both models (this makes the two models' answers to a problem largely share their random numbers, though long answers drift apart once a token differs). Every answer to a practice problem is graded. You get the accuracy (overall and by source), the mean length, the share cut at max_tokens and the failure counts; texts, extracted answers and grades are in /work/gen_<k>.jsonl (with "both": /work/gen_<k>_original.jsonl and /work/gen_<k>_edited.jsonl). With "activations", for every generated answer the model's residual stream at the requested layers (0 = embeddings, l = after layer l) is saved, taken at the last token of the prompt and averaged over the answer's first 8,192 tokens (and the MLPs' down_proj inputs with "mlp": true), with each answer's grade: /work/gen_<k>_acts/ (index.json lists the files and samples; with "both" one folder per model).
+ (b) TEACHER-FORCED: the model reads up to 1,024 texts of up to 32,768 tokens each, at most 524,288 tokens in total (no generation; it takes seconds to a few minutes). Reply with a ```forward block containing JSON:
+ {"type": "teacher_forced", "model": "original" or "edited", "texts": ["raw text", ...] or "chats": [[{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."}], ...] (add "enable_thinking": true for the thinking template), "return": {"token_logprobs": true, "topk": k (at most 50), "hidden_states": [layers 0..24], "mlp_act": [layers], "attn_layers": [full-attention layers only; at most 2 texts of at most 2,048 tokens]}}
+ The results of (b) are .npy files (with meta.json) in /work/fwd_<k>/, right-padded to the longest text (at most 6 GB per pass). A request that fails does not count against the budget. A generation pass takes up to about half an hour at full size (answers can be 32,768 tokens long).
+
+HOW TO WORK.
+1. Diagnose first. Look at how the model fails on practice problems: a wrong final answer, finishing without an answer, or being cut off at the token limit (often while repeating itself in its thinking). The generation summary counts these; read some failing texts. Go after the largest category you can explain.
+2. Localize causally. That a component is more active on correct answers is not enough (correct answers come from easier and shorter problems). Before relying on a component, show that changing it changes the behaviour you predicted, and try several strengths to see a dose-response.
+3. Measure with enough power. Accuracy over n generations has a standard error of about 50/sqrt(n) percentage points: about 4.4 points at 128 generations, 2.2 at 512. Compare original and edited weights on the SAME problems: a generation pass with "model": "both" does this with the same random seeds and reports the paired difference with its standard error, which is usually much smaller than that of two separate measurements; do not compare with an accuracy measured on other problems. Keep an edit only if its gain is clearly larger than its standard error on problems that were not used to choose it. A lower share of cut-off answers does not by itself mean more correct answers: judge edits by accuracy. Dense measurements help too and are cheap: one teacher-forced pass can read the reference solutions of up to 1,024 practice problems (or the model's own good versus failing continuations) and gives a signal on every token. Edits that change a tensor by a fraction of a percent usually have effects too small to see; test strengths large enough to matter and back off if they hurt.
+4. Plan your forward passes (see the budget above): for example one diagnostic generation with activations, teacher-forced passes for dense paired measurements, and a final paired generation ("model": "both") on problems you have not used to confirm.
+5. Work efficiently: state the hypothesis of each code block in its first comment line; work through the model in parts; load things once into kernel variables; print compact summaries, never whole arrays (and never raw lists of vocabulary tokens: the vocabulary contains offensive and adult strings and printing them can get the session refused by the provider's content filter; print digits, math symbols, common math words or token ids instead; outputs are shown in ASCII only, other characters appear as '?'; likewise print short excerpts of generated texts, at most about 300 characters each, not whole transcripts); keep /work/notes.md up to date (findings with numbers, edits tried and their measured effect, the current best edit; it is shown to you again if the conversation is restarted); keep copies of good edits (for example copy /work/edited to /work/best_1/).
+
+EXPLAIN EVERY STEP. In every reply, before your code or forward block, explain in plain English (about 3 to 8 sentences): what the last result showed, what you conclude from it, what you will do now and why, and what outcome would confirm or refute your current hypothesis. In your final answer, also summarize the path that led to your edits. These explanations are read by the experimenters.
+
+RULES. Not allowed: (a) gradient descent or any other training: no backward passes, autograd or optimizers, and no iterative fitting of weights to a loss; (b) running the model other than through the forward-pass tool: do not implement or simulate the network's computation on any input in the kernel; (c) internet access or search (there is none). Allowed: any analysis of the weights and of forward-pass results, any use of the practice problems, and any direct edit of the weights that you compute and that is in scope.
+
+HOW THE SESSION RUNS. It continues until all 50 forward passes are used (replying without a code block does not end it earlier); after that, make your final choice (the tensors in /work/edited when you finish are submitted) and reply without a code block, saying what you changed, the evidence for it and why you expect it to help.
+
+THIS IS A RESTARTED CONVERSATION (to keep it short): 120 replies happened before. Forward passes used: 46 of 50; Python runs used: 62 of 300. Your kernel is still running with its variables. Tensors currently edited: ['model.language_model.layers.23.mlp.down_proj.weight']. Files in /work: ['best_subtract4/model.language_model.layers.23.mlp.down_proj.weight.npy', 'candidate_reported_gain/model.language_model.layers.23.mlp.down_proj.weight.npy', 'causal_ids.json', 'confirmation_B256.json', 'confirmation_C256.json', 'confirmation_first128.json', 'confirmation_results.csv', 'control64.json', 'diagnostic_ids.json', 'edited/model.language_model.layers.23.mlp.down_proj.weight.npy', 'eval_prompt_format.txt', 'final_confirmation_plan.json', 'final_evaluation_manifest.json', 'final_weight_audit.json', 'fwd_11/hidden_19.npy', 'fwd_11/hidden_20.npy', 'fwd_11/hidden_24.npy', 'fwd_11/input_ids.npy', 'fwd_11/meta.json', 'fwd_11/mlp_act_19.npy', 'fwd_11/mlp_act_22.npy', 'fwd_11/mlp_act_23.npy', 'fwd_11/token_logprobs.npy', 'fwd_11/topk_ids.npy', 'fwd_11/topk_logprobs.npy', 'fwd_13/hidden_23.npy', 'fwd_13/hidden_24.npy', 'fwd_13/input_ids.npy', 'fwd_13/meta.json', 'fwd_13/mlp_act_23.npy', 'fwd_13/token_logprobs.npy', 'fwd_13/topk_ids.npy', 'fwd_13/topk_logprobs.npy', 'fwd_15/hidden_12.npy', 'fwd_15/hidden_13.npy', 'fwd_15/hidden_19.npy', 'fwd_15/hidden_20.npy', 'fwd_15/hidden_22.npy', 'fwd_15/hidden_23.npy', 'fwd_15/hidden_24.npy', 'fwd_15/input_ids.npy', 'fwd_15/meta.json', 'fwd_15/mlp_act_12.npy', 'fwd_15/mlp_act_19.npy', 'fwd_15/mlp_act_22.npy', 'fwd_15/mlp_act_23.npy', 'fwd_15/token_logprobs.npy', 'fwd_15/topk_ids.npy', 'fwd_15/topk_logprobs.npy', 'fwd_16/input_ids.npy', 'fwd_16/meta.json', 'fwd_16/mlp_act_23.npy', 'fwd_16/token_logprobs.npy', 'fwd_16/topk_ids.npy', 'fwd_16/topk_logprobs.npy', 'fwd_17/input_ids.npy', 'fwd_17/meta.json', 'fwd_17/token_logprobs.npy', 'fwd_17/topk_ids.npy', 'fwd_17/topk_logprobs.npy', 'fwd_18/input_ids.npy', 'fwd_18/meta.json', 'fwd_18/token_logprobs.npy', 'fwd_18/topk_ids.npy', 'fwd_18/topk_logprobs.npy', 'fwd_19/input_ids.npy', 'fwd_19/meta.json', 'fwd_19/token_logprobs.npy', 'fwd_19/topk_ids.npy', 'fwd_19/topk_logprobs.npy', 'fwd_2/attn_11.npy', 'fwd_2/attn_15.npy', 'fwd_2/attn_19.npy', 'fwd_2/attn_23.npy', 'fwd_2/attn_3.npy', 'fwd_2/attn_7.npy', 'fwd_2/hidden_0.npy', 'fwd_2/hidden_1.npy', 'fwd_2/hidden_10.npy', 'fwd_2/hidden_11.npy', 'fwd_2/hidden_12.npy', 'fwd_2/hidden_13.npy', 'fwd_2/hidden_14.npy', 'fwd_2/hidden_15.npy', 'fwd_2/hidden_16.npy', 'fwd_2/hidden_17.npy', 'fwd_2/hidden_18.npy', 'fwd_2/hidden_19.npy', 'fwd_2/hidden_2.npy', 'fwd_2/hidden_20.npy', 'fwd_2/hidden_21.npy', 'fwd_2/hidden_22.npy', 'fwd_2/hidden_23.npy', 'fwd_2/hidden_24.npy', 'fwd_2/hidden_3.npy', 'fwd_2/hidden_4.npy', 'fwd_2/hidden_5.npy', 'fwd_2/hidden_6.npy', 'fwd_2/hidden_7.npy', 'fwd_2/hidden_8.npy', 'fwd_2/hidden_9.npy', 'fwd_2/input_ids.npy', 'fwd_2/meta.json', 'fwd_2/mlp_act_0.npy', 'fwd_2/mlp_act_1.npy', 'fwd_2/mlp_act_10.npy', 'fwd_2/mlp_act_11.npy', 'fwd_2/mlp_act_12.npy', 'fwd_2/mlp_act_13.npy', 'fwd_2/mlp_act_14.npy', 'fwd_2/mlp_act_15.npy', 'fwd_2/mlp_act_16.npy', 'fwd_2/mlp_act_17.npy', 'fwd_2/mlp_act_18.npy', 'fwd_2/mlp_act_19.npy', 'fwd_2/mlp_act_2.npy', 'fwd_2/mlp_act_20.npy', 'fwd_2/mlp_act_21.npy', 'fwd_2/mlp_act_22.npy', 'fwd_2/mlp_act_23.npy', 'fwd_2/mlp_act_3.npy', 'fwd_2/mlp_act_4.npy', 'fwd_2/mlp_act_5.npy', 'fwd_2/mlp_act_6.npy', 'fwd_2/mlp_act_7.npy', 'fwd_2/mlp_act_8.npy', 'fwd_2/mlp_act_9.npy', 'fwd_2/token_logprobs.npy', 'fwd_2/topk_ids.npy', 'fwd_2/topk_logprobs.npy', 'fwd_22/input_ids.npy', 'fwd_22/meta.json', 'fwd_22/mlp_act_23.npy', 'fwd_22/token_logprobs.npy', 'fwd_22/topk_ids.npy', 'fwd_22/topk_logprobs.npy', 'fwd_25/input_ids.npy', 'fwd_25/meta.json', 'fwd_25/token_logprobs.npy', 'fwd_25/topk_ids.npy', 'fwd_25/topk_logprobs.npy', 'fwd_27/input_ids.npy', 'fwd_27/meta.json', 'fwd_27/token_logprobs.npy', 'fwd_27/topk_ids.npy', 'fwd_27/topk_logprobs.npy', 'fwd_29/input_ids.npy', 'fwd_29/meta.json', 'fwd_29/token_logprobs.npy', 'fwd_29/topk_ids.npy', 'fwd_29/topk_logprobs.npy', 'fwd_34/input_ids.npy', 'fwd_34/meta.json', 'fwd_34/mlp_act_23.npy', 'fwd_34/token_logprobs.npy', 'fwd_34/topk_ids.npy', 'fwd_34/topk_logprobs.npy', 'fwd_35/input_ids.npy', 'fwd_35/meta.json', 'fwd_35/token_logprobs.npy', 'fwd_35/topk_ids.npy', 'fwd_35/topk_logprobs.npy', 'fwd_36/input_ids.npy', 'fwd_36/meta.json', 'fwd_36/token_logprobs.npy', 'fwd_36/topk_ids.npy', 'fwd_36/topk_logprobs.npy', 'fwd_37/input_ids.npy', 'fwd_37/meta.json', 'fwd_37/token_logprobs.npy', 'fwd_37/topk_ids.npy', 'fwd_37/topk_logprobs.npy', 'fwd_43/input_ids.npy', 'fwd_43/meta.json', 'fwd_43/mlp_act_23.npy', 'fwd_43/token_logprobs.npy', 'fwd_43/topk_ids.npy', 'fwd_43/topk_logprobs.npy', 'fwd_44/input_ids.npy', 'fwd_44/meta.json', 'fwd_44/mlp_act_23.npy', 'fwd_44/token_logprobs.npy', 'fwd_44/topk_ids.npy', 'fwd_44/topk_logprobs.npy', 'fwd_45/input_ids.npy', 'fwd_45/meta.json', 'fwd_45/token_logprobs.npy', 'fwd_45/topk_ids.npy', 'fwd_45/topk_logprobs.npy', 'fwd_6/input_ids.npy', 'fwd_6/meta.json', 'fwd_6/token_logprobs.npy', 'fwd_6/topk_ids.npy', 'fwd_6/topk_logprobs.npy', 'fwd_9/hidden_15.npy', 'fwd_9/hidden_16.npy', 'fwd_9/hidden_19.npy', 'fwd_9/hidden_20.npy', 'fwd_9/hidden_24.npy', 'fwd_9/input_ids.npy', 'fwd_9/meta.json', 'fwd_9/mlp_act_19.npy', 'fwd_9/token_logprobs.npy', 'fwd_9/topk_ids.npy', 'fwd_9/topk_logprobs.npy', 'gen_1.jsonl', 'gen_1_acts/hidden_last_prompt.npy', 'gen_1_acts/hidden_mean_answer.npy', 'gen_1_acts/index.json', 'gen_1_acts/mlp_last_prompt.npy', 'gen_1_acts/mlp_mean_answer.npy', 'gen_20_edited.jsonl', 'gen_20_original.jsonl', 'gen_21_edited.jsonl', 'gen_21_edited_acts/hidden_last_prompt.npy', 'gen_21_edited_acts/hidden_mean_answer.npy', 'gen_21_edited_acts/index.json', 'gen_21_edited_acts/mlp_last_prompt.npy', 'gen_21_edited_acts/mlp_mean_answer.npy', 'gen_21_original.jsonl', 'gen_21_original_acts/hidden_last_prompt.npy', 'gen_21_original_acts/hidden_mean_answer.npy', 'gen_21_original_acts/index.json', 'gen_21_original_acts/mlp_last_prompt.npy', 'gen_21_original_acts/mlp_mean_answer.npy', 'gen_23_edited.jsonl', 'gen_23_original.jsonl', 'gen_24_edited.jsonl', 'gen_24_original.jsonl', 'gen_26_edited.jsonl', 'gen_26_original.jsonl', 'gen_28_edited.jsonl', 'gen_28_original.jsonl', 'gen_30_edited.jsonl', 'gen_30_original.jsonl', 'gen_31_edited.jsonl', 'gen_31_original.jsonl', 'gen_32_edited.jsonl', 'gen_32_original.jsonl', 'gen_33_edited.jsonl', 'gen_33_edited_acts/hidden_last_prompt.npy', 'gen_33_edited_acts/hidden_mean_answer.npy', 'gen_33_edited_acts/index.json', 'gen_33_edited_acts/mlp_last_prompt.npy', 'gen_33_edited_acts/mlp_mean_answer.npy', 'gen_33_original.jsonl', 'gen_33_original_acts/hidden_last_prompt.npy', 'gen_33_original_acts/hidden_mean_answer.npy', 'gen_33_original_acts/index.json', 'gen_33_original_acts/mlp_last_prompt.npy', 'gen_33_original_acts/mlp_mean_answer.npy', 'gen_38_edited.jsonl', 'gen_38_original.jsonl', 'gen_39_edited.jsonl', 'gen_39_original.jsonl', 'gen_40_edited.jsonl', 'gen_40_edited_acts/hidden_last_prompt.npy', 'gen_40_edited_acts/hidden_mean_answer.npy', 'gen_40_edited_acts/index.json', 'gen_40_edited_acts/mlp_last_prompt.npy', 'gen_40_edited_acts/mlp_mean_answer.npy', 'gen_40_original.jsonl', 'gen_40_original_acts/hidden_last_prompt.npy', 'gen_40_original_acts/hidden_mean_answer.npy', 'gen_40_original_acts/index.json', 'gen_40_original_acts/mlp_last_prompt.npy', 'gen_40_original_acts/mlp_mean_answer.npy', 'gen_41_edited.jsonl', 'gen_41_edited_acts/hidden_last_prompt.npy', 'gen_41_edited_acts/hidden_mean_answer.npy', 'gen_41_edited_acts/index.json', 'gen_41_edited_acts/mlp_last_prompt.npy', 'gen_41_edited_acts/mlp_mean_answer.npy', 'gen_41_original.jsonl', 'gen_41_original_acts/hidden_last_prompt.npy', 'gen_41_original_acts/hidden_mean_answer.npy', 'gen_41_original_acts/index.json', 'gen_41_original_acts/mlp_last_prompt.npy', 'gen_41_original_acts/mlp_mean_answer.npy', 'gen_42_edited.jsonl', 'gen_42_edited_acts/hidden_last_prompt.npy', 'gen_42_edited_acts/hidden_mean_answer.npy', 'gen_42_edited_acts/index.json', 'gen_42_edited_acts/mlp_last_prompt.npy', 'gen_42_edited_acts/mlp_mean_answer.npy', 'gen_42_original.jsonl', 'gen_42_original_acts/hidden_last_prompt.npy', 'gen_42_original_acts/hidden_mean_answer.npy', 'gen_42_original_acts/index.json', 'gen_42_original_acts/mlp_last_prompt.npy', 'gen_42_original_acts/mlp_mean_answer.npy', 'gen_46_edited.jsonl', 'gen_46_original.jsonl', 'gen_47_edited.jsonl', 'gen_47_original.jsonl', 'gen_48_edited.jsonl', 'gen_48_original.jsonl', 'gen_49_edited.jsonl', 'gen_49_original.jsonl', 'gen_50_edited.jsonl', 'gen_50_original.jsonl', 'gen_51_edited.jsonl', 'gen_51_original.jsonl', 'gen_52_edited.jsonl', 'gen_52_original.jsonl', 'gen_53_edited.jsonl', 'gen_53_original.jsonl', 'gen_54_edited.jsonl', 'gen_54_original.jsonl', 'head_candidates_single.csv', 'neuron_candidates_single.csv', 'notes.md', 'novel_probe_specs.json', 'novel_probe_texts.json', 'premature_closure_texts.json', 'reader_control.pt', 'refined4/model.language_model.layers.23.mlp.down_proj.weight.npy', 'repetition_directions_single.npz', 'repetition_mlp_directions.npz', 'repetition_oblique_L23.pt', 'repetition_positions.npz', 'repetition_rank1_L22.pt', 'repetition_rank1_L23.pt', 'selecti
+[Long input omitted; see source record.]
+````
+
+### Editor
+
+```python
+# Hypothesis: the frozen repetition-circuit edit generalizes; verification must not alter it.
+import json, hashlib, pathlib, numpy as np, pandas as pd, torch
+work = pathlib.Path("/work")
+notes_text = (work / "notes.md").read_text()
+print("EARLY DIAGNOSIS AND CAUSAL RECORD:\n", notes_text[:7200])
+plan = json.loads((work / "final_confirmation_plan.json").read_text())
+print("\nPlan format:", type(plan).__name__)
+if isinstance(plan, list):
+    print("Plan entries:", [(x.get("pass"), list(x.keys())) for x in plan[-4:]])
+else:
+    print("Plan keys:", list(plan.keys()))
+edit_name = "model.language_model.layers.23.mlp.down_proj.weight"
+current_weight = load(edit_name)
+best_weight = np.load(work / "best_subtract4" / (edit_name + ".npy"))
+print("Only intended tensor edited:", edited())
+print("Exact frozen backup match:", np.array_equal(current_weight.numpy(), best_weight))
+print("Current SHA256:", hashlib.sha256(current_weight.numpy().tobytes()).hexdigest())
+print("Saved audit:", json.loads((work / "final_weight_audit.json").read_text()))
+```
+
+## Turn 122
+
+### Input
+
+```text
+EXPLAIN EVERY STEP. Your reply had no explanation, so its block was NOT run (no Python run or forward pass was used).  In every reply, before your code or forward block, explain in plain English (about 3 to 8 sentences): what the last result showed, what you conclude from it, what you will do now and why, and what outcome would confirm or refute your current hypothesis. In your final answer, also summarize the path that led to your edits. These explanations are read by the experimenters.
+```
+
+### Editor
+
+The latest batch favored the edit by 4.3 percentage points, although that batch alone is inconclusive. Across held-out GSM8K/MATH practice problems so far, the paired gain is 7.1 points with a 0.9-point standard error. I will verify the frozen weights and remaining test plan before completing the four planned comparisons, without further tuning. These batches will test whether the gain persists on additional unseen practice problems.
+
+```python
+# Hypothesis: the frozen repetition-circuit edit generalizes; verification must not alter it.
+import json, hashlib, pathlib, numpy as np, pandas as pd, torch
+work = pathlib.Path("/work")
+notes_text = (work / "notes.md").read_text()
+print("EARLY DIAGNOSIS AND CAUSAL RECORD:\n", notes_text[:7200])
+plan = json.loads((work / "final_confirmation_plan.json").read_text())
+print("\nPlan format:", type(plan).__name__)
+if isinstance(plan, list):
+    print("Plan entries:", [(x.get("pass"), list(x.keys())) for x in plan[-4:]])
+else:
+    print("Plan keys:", list(plan.keys()))
+edit_name = "model.language_model.layers.23.mlp.down_proj.weight"
+current_weight = load(edit_name)
+best_weight = np.load(work / "best_subtract4" / (edit_name + ".npy"))
+print("Only intended tensor edited:", edited())
+print("Exact frozen backup match:", np.array_equal(current_weight.numpy(), best_weight))
+print("Current SHA256:", hashlib.sha256(current_weight.numpy().tobytes()).hexdigest())
+print("Saved audit:", json.loads((work / "final_weight_audit.json").read_text()))
+```
+
+### Tool result
+
+```python
+# Hypothesis: the frozen repetition-circuit edit generalizes; verification must not alter it.
+import json, hashlib, pathlib, numpy as np, pandas as pd, torch
+work = pathlib.Path("/work")
+notes_text = (work / "notes.md").read_text()
+print("EARLY DIAGNOSIS AND CAUSAL RECORD:\n", notes_text[:7200])
+plan = json.loads((work / "final_confirmation_plan.json").read_text())
+print("\nPlan format:", type(plan).__name__)
+if isinstance(plan, list):
+    print("Plan entries:", [(x.get("pass"), list(x.keys())) for x in plan[-4:]])
+else:
+    print("Plan keys:", list(plan.keys()))
+edit_name = "model.language_model.layers.23.mlp.down_proj.weight"
+current_weight = load(edit_name)
+best_weight = np.load(work / "best_subtract4" / (edit_name + ".npy"))
+print("Only intended tensor edited:", edited())
+print("Exact frozen backup match:", np.array_equal(current_weight.numpy(), best_weight))
+print("Current SHA256:", hashlib.sha256(current_weight.numpy().tobytes()).hexdigest())
+print("Saved audit:", json.loads((work / "final_weight_audit.json").read_text()))
+```
+
+```text
+EARLY DIAGNOSIS AND CAUSAL RECORD:
+ # Weight-edit experiment
+No edits yet. Budget: 0/50 forward passes.
+Fixed randomized source-specific diagnosis/selection/confirmation splits (seed 20260401).
+Initial diagnosis: 64 GSM8K + 128 MATH, with residual and MLP summaries.
+Require causal strength tests and independent paired accuracy confirmation.
+
+Pass 1: original 192 diagnostic problems, 9.375% accuracy, 175/192 cutoffs, mean 30,277.5 tokens. No edits. Dominant failure: noncompletion.
+
+Pass 2: all-layer teacher-forcing on matched repetition/progress fraction solution; /work/fwd_2. Mean logprobs -0.697 repeated vs -1.144 progressing (descriptive, differing texts). All full-attention maps available. Kernel restarted before pass 2; splits persisted.
+
+Localization: matched-copy attention successor mass L15H7=0.909, L23H5=0.849, L11H1=0.808. L19 MLP neuron11 gives 21.85% of absolute projected MLP repetition change on one diagnostic text; unvalidated.
+Candidate A: L15H7 output columns 1792:2048 scaled to 0.5. Only one head modified; causal generation test next.
+
+Two paired generation requests for candidate A failed remotely, not counted. Investigating infrastructure; no causal result yet. Budget still 2/50.
+
+Budget: 4/50 successful passes. File numbering includes failures: pass3=/work/fwd_6; pass4=/work/fwd_9. Generation is failing for original as well as edited, even with activations. Continue dense causal localization, retry later. Current edit L15H7 half strength, not validated for submission.
+
+L15H7=0.5 dense result: first two copy clauses logprob delta -0.0109, late clauses -0.0015; progressing math -0.0020. No selective late-copy suppression. Removed head edit.
+Candidate B: ablate only layer19 MLP down_proj column11 (negative activation grows from -0.152 to -2.893 over repetitions). Test causally next.
+
+Pass5 (fwd_11) neuron19.11 ablation: full-text means barely change (-0.69750 vs -0.69709 repeated; -1.14180 vs -1.14407 progress). Restored original weights for execution-path control. Neither candidate validated.
+
+Original generation with no edit files also fails. Pass budget remains5/50. Candidate C: L23H5 output ablated, motivated by 84.9% successor-copy attention. Prior L15H7 and L19 neuron11 candidates discarded.
+
+Pass6 (fwd_13): L23H5 full ablation repeated text mean logprob -0.71423 (baseline -0.69709); progressing text -1.17063 (baseline -1.14407). Removed pending broader evidence. Custom-prompt generation also fails. Next: content-diverse repeated-check probes and low-rank activation contrasts. Budget6/50.
+
+Pass7 (fwd_15): four content-diverse matched repeated-check probes. Derived normalized average late-minus-early MLP direction, orthogonalized to mean early activation. Candidate D: remove only this direction from L22 down_proj via W'=W-(Wv)v^T, analytical rank-one edit; no loss fitting. Candidate data /work/repetition_rank1_L22.pt.
+
+Pass8 (fwd_16) L22 rank1 strength1 teacher-forced four-probe effects:
+ initial    early    late  transition  new_math    close
+ 0.01017 -0.00864 0.00104    -0.00914   0.00032 -0.00139
+ 0.00308 -0.01052 0.00107    -0.03027  -0.00742 -0.23403
+ 0.00733 -0.00240 0.00180    -0.03043  -0.00755  0.01641
+-0.00045 -0.00469 0.00316    -0.00499  -0.00774 -0.11020
+Testing strength4 of the same direction (not fitted weights).
+
+Pass9 (fwd_17) L22 subtraction strength4:
+ initial    early    late  transition  new_math    close
+ 0.01576 -0.03716 0.00274     0.00487   0.01168 -0.05281
+ 0.03019 -0.02745 0.00307    -0.00414   0.00032 -0.50037
+Now test reversed sign, amplification strength4.
+
+Pass10 (fwd_18) L22 amplification4:
+ initial   early     late  transition  new_math   close
+-0.01607 0.02893 -0.01023     0.05226   0.00942 0.15511
+-0.05861 0.01060 -0.03749     0.02736   0.00347 0.50214
+L22 direction not cleanly selective. Removed. Test L23 same analytically derived repetition direction, rank1 subtraction strength4. Budget10/50, generation unavailable since pass1; no accuracy-validated edit.
+
+Pass11 (fwd_19) L23 subtraction4:
+ initial    early     late  transition  new_math    close
+-0.01875 -0.05893 -0.51193     0.09957   -0.0338 -0.19324
+-0.06057 -0.19335 -1.20355     0.08522   -0.1051 -0.06521
+Now sign reversal to L23 amplification4. L22 amplification4 remains a provisional candidate: late-copy deltas -0.0102/-0.0375, transition +0.0523/+0.0274, new math +0.0094/+0.0035.
+
+Restart recovery: current L23 coefficient+4 means subtraction4. Applied coefficient-4 (amplification) for sign control. Delta/base norms .368/16.418. No generation validation yet.
+
+Pass12 gen20: generation infrastructure recovered. L23 amplification4 vs original on 4 selection GSM: 25% vs0%, paired+25pp SE25pp; cut75% vs100%. Tiny infrastructure test only, not evidence of gain. Need full-size tests.
+
+Pass13 gen21 full selection (128problems x2): intended L23 amplification4 26.5625% vs9.375%, gain17.1875pp SE3.20697pp, W->R52 R->W8. Cut71.09% vs92.19%. Pass14 teacher-forced summary identical to subtraction4; investigating snapshot/sign inconsistency before interpreting edit sign.
+
+Pass14 arrays exactly equal to fwd19 though local coefficient was-4 vs earlier+4; sign control unreliable. Preserved /work/candidate_reported_gain. Fresh save uses explicit W'=W-8(Wv)v^T for distinguishable check.
+
+SIGN CORRECTION: candidate delta in saved pt is +(Wv)v^T, not negative. gen20/gen21 actual edit W'=W-4(Wv)v^T (verified backup); gain17.1875pp SE3.207pp. fwd22 same as fwd19 is consistent with same subtraction4; initial post-restart weights had already been reversed by previous code. No evidence of stale tool remains.
+NEXT pass15: generation both, sel128=first64 GSM selection + first64 MATH selection, n2, max32768. Only model.language_model.layers.23.mlp.down_proj.weight changed, explicit W'=W-8(Wv)v^T, v from 4 matched late-minus-early repeated-check probes, orthogonalized to early mean. No other edits.
+
+Pass15 gen23 L23 subtraction8 selection256: edit1.5625% vs9.375%, gain-7.8125pp SE2.1073pp, 46 finished no-answer. Reject strength8.
+NEXT pass16: only model.language_model.layers.23.mlp.down_proj.weight W'=W-2(Wv)v^T; generation both on sel128 n2 max32768. Direction unchanged. Candidate sub4 preserved.
+
+Pass16 gen24 subtraction2:16.7969% vs9.375%, gain7.4219pp SE2.6066pp, cut85.55% vs92.19%. Strength4 still best exploratory candidate.
+NEXT pass17: only model.language_model.layers.23.mlp.down_proj.weight W'=W-6(Wv)v^T; teacher forced raw first two fwd15 repeated-check probes, original baseline fwd15. Strength6 dense diagnostic before generation.
+
+Pass17 /work/fwd_25 strength6 span deltas [{"initial": -0.02562, "early": -0.09688, "late": -2.54347, "transition": 0.43418, "new_math": -0.1298, "close": -0.06811}, {"initial": -0.35186, "early": -0.51045, "late": -2.66266, "transition": 0.13567, "new_math": -0.24762, "close": 0.10365}]
+NEXT pass18: unchanged single edit model.language_model.layers.23.mlp.down_proj.weight W'=W-6(Wv)v^T. Generation both, sel128 (first64 of each source selection), n2 max32768. Different test type from preceding dense diagnostic.
+
+Pass18 gen26 subtraction6:9.375% vs9.375%, gain0 SE2.8279pp, W->R20 R->W20; reject6. Dose2:+7.42pp,4:+17.19pp,6:0,8:-7.81pp.
+NEXT pass19: only model.language_model.layers.
+
+Plan format: dict
+Plan keys: ['38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50']
+Only intended tensor edited: ['model.language_model.layers.23.mlp.down_proj.weight']
+Exact frozen backup match: True
+Current SHA256: f8b38dbfbae0f98d612f57727b83ab632fb6d4b04b9264f408bf8e0aec356a00
+Saved audit: {'tensor': 'model.language_model.layers.23.mlp.down_proj.weight', 'shape': [1024, 3584], 'edited_tensors': ['model.language_model.layers.23.mlp.down_proj.weight'], 'relative_change_norm': 0.08966149389743805, 'rank_one_reconstruction_relative_error': 5.567862331190554e-07, 'best_whole_tensor_scale': 0.9979871511459351, 'non_scaling_fraction_of_change': 0.99966961145401, 'direction_neurons_for_50pct_mass': 7, 'direction_neurons_for_90pct_mass': 144, 'sha256': 'f8b38dbfbae0f98d612f57727b83ab632fb6d4b04b9264f408bf8e0aec356a00'}
+```
+
+## Turn 123
+
+### Input
+
+````text
+OUTPUT of Python run 63 of at most 300:
+```
+EARLY DIAGNOSIS AND CAUSAL RECORD:
+ # Weight-edit experiment
+No edits yet. Budget: 0/50 forward passes.
+Fixed randomized source-specific diagnosis/selection/confirmation splits (seed 20260401).
+Initial diagnosis: 64 GSM8K + 128 MATH, with residual and MLP summaries.
+Require causal strength tests and independent paired accuracy confirmation.
+
+Pass 1: original 192 diagnostic problems, 9.375% accuracy, 175/192 cutoffs, mean 30,277.5 tokens. No edits. Dominant failure: noncompletion.
+
+Pass 2: all-layer teacher-forcing on matched repetition/progress fraction solution; /work/fwd_2. Mean logprobs -0.697 repeated vs -1.144 progressing (descriptive, differing texts). All full-attention maps available. Kernel restarted before pass 2; splits persisted.
+
+Localization: matched-copy attention successor mass L15H7=0.909, L23H5=0.849, L11H1=0.808. L19 MLP neuron11 gives 21.85% of absolute projected MLP repetition change on one diagnostic text; unvalidated.
+Candidate A: L15H7 output columns 1792:2048 scaled to 0.5. Only one head modified; causal generation test next.
+
+Two paired generation requests for candidate A failed remotely, not counted. Investigating infrastructure; no causal result yet. Budget still 2/50.
+
+Budget: 4/50 successful passes. File numbering includes failures: pass3=/work/fwd_6; pass4=/work/fwd_9. Generation is failing for original as well as edited, even with activations. Continue dense causal localization, retry later. Current edit L15H7 half strength, not validated for submission.
+
+L15H7=0.5 dense result: first two copy clauses logprob delta -0.0109, late clauses -0.0015; progressing math -0.0020. No selective late-copy suppression. Removed head edit.
+Candidate B: ablate only layer19 MLP down_proj column11 (negative activation grows from -0.152 to -2.893 over repetitions). Test causally next.
+
+Pass5 (fwd_11) neuron19.11 ablation: full-text means barely change (-0.69750 vs -0.69709 repeated; -1.14180 vs -1.14407 progress). Restored original weights for execution-path control. Neither candidate validated.
+
+Original generation with no edit files also fails. Pass budget remains5/50. Candidate C: L23H5 output ablated, motivated by 84.9% successor-copy attention. Prior L15H7 and L19 neuron11 candidates discarded.
+
+Pass6 (fwd_13): L23H5 full ablation repeated text mean logprob -0.71423 (baseline -0.69709); progressing text -1.17063 (baseline -1.14407). Removed pending broader evidence. Custom-prompt generation also fails. Next: content-diverse repeated-check probes and low-rank activation contrasts. Budget6/50.
+
+Pass7 (fwd_15): four content-diverse matched repeated-check probes. Derived normalized average late-minus-early MLP direction, orthogonalized to mean early activation. Candidate D: remove only this direction from L22 down_proj via W'=W-(Wv)v^T, analytical rank-one edit; no loss fitting. Candidate data /work/repetition_rank1_L22.pt.
+
+Pass8 (fwd_16) L22 rank1 strength1 teacher-forced four-probe effects:
+ initial    early    late  transition  new_math    close
+ 0.01017 -0.00864 0.00104    -0.00914   0.00032 -0.00139
+ 0.00308 -0.01052 0.00107    -0.03027  -0.00742 -0.23403
+ 0.00733 -0.00240 0.00180    -0.03043  -0.00755  0.01641
+-0.00045 -0.00469 0.00316    -0.00499  -0.00774 -0.11020
+Testing strength4 of the same direction (not fitted weights).
+
+Pass9 (fwd_17) L22 subtraction strength4:
+ initial    early    late  transition  new_math    close
+ 0.01576 -0.03716 0.00274     0.00487   0.01168 -0.05281
+ 0.03019 -0.02745 0.00307    -0.00414   0.00032 -0.50037
+Now test reversed sign, amplification strength4.
+
+Pass10 (fwd_18) L22 amplification4:
+ initial   early     late  transition  new_math   close
+-0.01607 0.02893 -0.01023     0.05226   0.00942 0.15511
+-0.05861 0.01060 -0.03749     0.02736   0.00347 0.50214
+L22 direction not cleanly selective. Removed. Test L23 same analytically derived repetition direction, rank1 subtraction strength4. Budget10/50, generation unavailable since pass1; no accuracy-validated edit.
+
+Pass11 (fwd_19) L23 subtraction4:
+ initial    early     late  transition  new_math    close
+-0.01875 -0.05893 -0.51193     0.09957   -0.0338 -0.19324
+-0.06057 -0.19335 -1.20355     0.08522   -0.1051 -0.06521
+Now sign reversal to L23 amplification4. L22 amplification4 remains a provisional candidate: late-copy deltas -0.0102/-0.0375, transition +0.0523/+0.0274, new math +0.0094/+0.0035.
+
+Restart recovery: current L23 coefficient+4 means subtraction4. Applied coefficient-4 (amplification) for sign control. Delta/base norms .368/16.418. No generation validation yet.
+
+Pass12 gen20: generation infrastructure recovered. L23 amplification4 vs original on 4 selection GSM: 25% vs0%, paired+25pp SE25pp; cut75% vs100%. Tiny infrastructure test only, not evidence of gain. Need full-size tests.
+
+Pass13 gen21 full selection (128problems x2): intended L23 amplification4 26.5625% vs9.375%, gain17.1875pp SE3.20697pp, W->R52 R->W8. Cut71.09% vs92.19%. Pass14 teacher-forced summary identical to subtraction4; investigating snapshot/sign inconsistency before interpreting edit sign.
+
+Pass14 arrays exactly equal to fwd19 though local coefficient was-4 vs earlier+4; sign control unreliable. Preserved /work/candidate_reported_gain. Fresh save uses explicit W'=W-8(Wv)v^T for distinguishable check.
+
+SIGN CORRECTION: candidate delta in saved pt is +(Wv)v^T, not negative. gen20/gen21 actual edit W'=W-4(Wv)v^T (verified backup); gain17.1875pp SE3.207pp. fwd22 same as fwd19 is consistent with same subtraction4; initial post-restart weights had already been reversed by previous code. No evidence of stale tool remains.
+NEXT pass15: generation both, sel128=first64 GSM selection + first64 MATH selection, n2, max32768. Only model.language_model.layers.23.mlp.down_proj.weight changed, explicit W'=W-8(Wv)v^T, v from 4 matched late-minus-early repeated-check probes, orthogonalized to early mean. No other edits.
+
+Pass15 gen23 L23 subtraction8 selection256: edit1.5625% vs9.375%, gain-7.8125pp SE2.1073pp, 46 finished no-answer. Reject strength8.
+NEXT pass16: only model.language_model.layers.23.mlp.down_proj.weight W'=W-2(Wv)v^T; generation both on sel128 n2 max32768. Direction unchanged. Candidate sub4 preserved.
+
+Pass16 gen24 subtraction2:16.7969% vs9.375%, gain7.4219pp SE2.6066pp, cut85.55% vs92.19%. Strength4 still best exploratory candidate.
+NEXT pass17: only model.language_model.layers.23.mlp.down_proj.weight W'=W-6(Wv)v^T; teacher forced raw first two fwd15 repeated-check probes, original baseline fwd15. Strength6 dense diagnostic before generation.
+
+Pass17 /work/fwd_25 strength6 span deltas [{"initial": -0.02562, "early": -0.09688, "late": -2.54347, "transition": 0.43418, "new_math": -0.1298, "close": -0.06811}, {"initial": -0.35186, "early": -0.51045, "late": -2.66266, "transition": 0.13567, "new_math": -0.24762, "close": 0.10365}]
+NEXT pass18: unchanged single edit model.language_model.layers.23.mlp.down_proj.weight W'=W-6(Wv)v^T. Generation both, sel128 (first64 of each source selection), n2 max32768. Different test type from preceding dense diagnostic.
+
+Pass18 gen26 subtraction6:9.375% vs9.375%, gain0 SE2.8279pp, W->R20 R->W20; reject6. Dose2:+7.42pp,4:+17.19pp,6:0,8:-7.81pp.
+NEXT pass19: only model.language_model.layers.
+
+Plan format: dict
+Plan keys: ['38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50']
+Only intended tensor edited: ['model.language_model.layers.23.mlp.down_proj.weight']
+Exact frozen backup match: True
+Current SHA256: f8b38dbfbae0f98d612f57727b83ab632fb6d4b04b9264f408bf8e0aec356a00
+Saved audit: {'tensor': 'model.language_model.layers.23.mlp.down_proj.weight', 'shape': [1024, 3584], 'edited_tensors': ['model.language_model.layers.23.mlp.down_proj.weight'], 'relative_change_norm': 0.08966149389743805, 'rank_one_reconstruction_relative_error': 5.567862331190554e-07, 'best_whole_tensor_scale': 0.9979871511459351, 'non_scaling_fraction_of_change': 0.99966961145401, 'direction_neurons_for_50pct_mass': 7, 'direction_neurons_for_90pct_mass': 144, 'sha256': 'f8b38dbfbae0f98d612f57727b83ab632fb6d4b04b9264f408bf8e0aec356a00'}
+
+
+```
+````
+
+### Editor
+
+The saved weights exactly match the frozen candidate: a single rank-one edit to layer 23’s MLP output projection. Earlier strength tests supported a selective effect on repeated checking, but stronger edits harmed accuracy, so I am keeping the chosen strength unchanged. I will now run the next preselected 128 problems, with two samples per problem and paired original/edited seeds. Another positive paired result would strengthen the generalization evidence; a negative result will remain in the aggregate.
+
+```forward
+{"type":"generate","model":"both","problems":["gsm8k_train_1272","gsm8k_train_1089","gsm8k_train_2625","gsm8k_train_5647","gsm8k_train_3908","gsm8k_train_6785","gsm8k_train_5741","gsm8k_train_1810","gsm8k_train_7276","gsm8k_train_6649","gsm8k_train_850","gsm8k_train_5088","gsm8k_train_6946","gsm8k_train_4193","gsm8k_train_4298","gsm8k_train_4346","gsm8k_train_7072","gsm8k_train_7390","gsm8k_train_3113","gsm8k_train_3904","gsm8k_train_5686","gsm8k_train_5364","gsm8k_train_2466","gsm8k_train_3689","gsm8k_train_274","gsm8k_train_4925","gsm8k_train_5993","gsm8k_train_1662","gsm8k_train_3723","gsm8k_train_1409","gsm8k_train_753","gsm8k_train_5782","gsm8k_train_2458","gsm8k_train_4737","gsm8k_train_7246","gsm8k_train_2226","gsm8k_train_5208","gsm8k_train_1379","gsm8k_train_4495","gsm8k_train_5920","gsm8k_train_4268","gsm8k_train_4561","gsm8k_train_6278","gsm8k_train_7185","gsm8k_train_4494","gsm8k_train_7432","gsm8k_train_4129","gsm8k_train_6868","gsm8k_train_4076","gsm8k_train_3616","gsm8k_train_4115","gsm8k_train_3922","gsm8k_train_5587","gsm8k_train_6224","gsm8k_train_6443","gsm8k_train_6876","gsm8k_train_4119","gsm8k_train_3725","gsm8k_train_1018","gsm8k_train_1722","gsm8k_train_901","gsm8k_train_1987","gsm8k_train_4872","gsm8k_train_2373","math_train_prealgebra_782","math_train_algebra_660","math_train_intermediate_algebra_358","math_train_geometry_818","math_train_geometry_50","math_train_prealgebra_264","math_train_geometry_234","math_train_geometry_326","math_train_algebra_302","math_train_number_theory_654","math_train_counting_and_probability_624","math_train_prealgebra_202","math_train_precalculus_396","math_train_algebra_829","math_train_geometry_450","math_train_algebra_212","math_train_algebra_659","math_train_algebra_274","math_train_intermediate_algebra_251","math_train_intermediate_algebra_1032","math_train_precalculus_167","math_train_intermediate_algebra_393","math_train_algebra_133","math_train_number_theory_1","math_train_number_theory_344","math_train_number_theory_570","math_train_precalculus_408","math_train_algebra_1493","math_train_algebra_770","math_train_counting_and_probability_234","math_train_number_theory_594","math_train_number_theory_695","math_train_intermediate_algebra_378","math_train_prealgebra_458","math_train_algebra_982","math_train_algebra_763","math_train_counting_and_probability_613","math_train_algebra_1310","math_train_precalculus_440","math_train_geometry_792","math_train_counting_and_probability_37","math_train_number_theory_272","math_train_number_theory_445","math_train_geometry_594","math_train_algebra_727","math_train_prealgebra_214","math_train_algebra_1214","math_train_intermediate_algebra_479","math_train_prealgebra_1086","math_train_intermediate_algebra_801","math_train_algebra_889","math_train_algebra_1592","math_train_prealgebra_387","math_train_geometry_295","math_train_geometry_247","math_train_prealgebra_880","math_train_algebra_950","math_train_prealgebra_191","math_train_number_theory_171","math_train_algebra_983","math_train_number_theory_102","math_train_precalculus_319","math_train_algebra_1567","math_train_number_theory_261"],"n":2,"max_tokens":32768}
+```
+
+### Tool result
+
+```text
+{
+  "files": {
+    "original": "/work/gen_55_original.jsonl",
+    "edited": "/work/gen_55_edited.jsonl"
+  },
+  "activations": null,
+  "original": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.11328125,
+    "accuracy_by_source": {
+      "gsm8k": 0.1328125,
+      "math": 0.09375
+    },
+    "mean_tokens": 30345.875,
+    "cut_share": 0.91015625,
+    "failures": {
+      "wrong_answer": 0,
+      "no_answer_finished": 0,
+      "cut_at_max_tokens": 233
+    }
+  },
+  "edited": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.1875,
+    "accuracy_by_source": {
+      "gsm8k": 0.2421875,
+      "math": 0.1328125
+    },
+    "mean_tokens": 27843.21875,
+    "cut_share": 0.78515625,
+    "failures": {
+      "wrong_answer": 3,
+      "no_answer_finished": 7,
+      "cut_at_max_tokens": 201
+    }
+  },
+  "paired": {
+    "items": 128,
+    "accuracy_difference": 0.07421875,
+    "standard_error": 0.02485801446331872,
+    "samples_wrong_to_right": 30,
+    "samples_right_to_wrong": 11
+  },
+  "ok": true,
+  "type": "generate",
+  "model": "both",
+  "s": 898.2972550919999
+}
+```
+
+## Turn 124
+
+### Input
+
+````text
+FORWARD PASS 47 of 50:
+```json
+{"files": {"original": "/work/gen_55_original.jsonl", "edited": "/work/gen_55_edited.jsonl"}, "activations": null, "original": {"generations": 256, "graded": 256, "accuracy": 0.11328125, "accuracy_by_source": {"gsm8k": 0.1328125, "math": 0.09375}, "mean_tokens": 30345.875, "cut_share": 0.91015625, "failures": {"wrong_answer": 0, "no_answer_finished": 0, "cut_at_max_tokens": 233}}, "edited": {"generations": 256, "graded": 256, "accuracy": 0.1875, "accuracy_by_source": {"gsm8k": 0.2421875, "math": 0.1328125}, "mean_tokens": 27843.21875, "cut_share": 0.78515625, "failures": {"wrong_answer": 3, "no_answer_finished": 7, "cut_at_max_tokens": 201}}, "paired": {"items": 128, "accuracy_difference": 0.07421875, "standard_error": 0.02485801446331872, "samples_wrong_to_right": 30, "samples_right_to_wrong": 11}, "ok": true, "type": "generate", "model": "both", "s": 898.2972550919999}
+```
+````
+
+### Editor
+
+This batch improved accuracy from 11.3% to 18.8%, a paired gain of 7.4 points with a 2.5-point standard error. Both GSM8K and MATH improved, and cutoffs fell, supporting—but not proving—the repetition-repair hypothesis. I will add this batch to the held-out results and retrieve the next preselected batch. I will also review the recorded causal controls so the final explanation distinguishes repetition suppression from indiscriminate early stopping.
+
+```python
+# Hypothesis: accuracy gains persist across held-out batches rather than merely reducing output length.
+print("Confirmation table schema:")
+confirmation_path = work / "confirmation_results.csv"
+confirmation_table = pd.read_csv(confirmation_path)
+print(confirmation_table.shape, confirmation_table.columns.tolist())
+print(confirmation_table.head(2).to_dict("records"))
+manifest = json.loads((work / "final_evaluation_manifest.json").read_text())
+print("Manifest:", manifest)
+with open(work / "gen_55_original.jsonl") as f:
+    sample_schema = json.loads(next(f))
+print("Generation record keys:", list(sample_schema.keys()))
+print("Nontext fields:", {k:v for k,v in sample_schema.items()
+                          if k not in ("text","prompt","response","problem","output","completion")
+                          and len(str(v)) < 160})
+print("Next plan entry keys:", list(plan["48"].keys()))
+print("Next plan entry:", plan["48"])
+print("\nCAUSAL CONTROLS RECORD:\n", notes_text[7200:12500])
+```
+
+### Tool result
+
+```python
+# Hypothesis: accuracy gains persist across held-out batches rather than merely reducing output length.
+print("Confirmation table schema:")
+confirmation_path = work / "confirmation_results.csv"
+confirmation_table = pd.read_csv(confirmation_path)
+print(confirmation_table.shape, confirmation_table.columns.tolist())
+print(confirmation_table.head(2).to_dict("records"))
+manifest = json.loads((work / "final_evaluation_manifest.json").read_text())
+print("Manifest:", manifest)
+with open(work / "gen_55_original.jsonl") as f:
+    sample_schema = json.loads(next(f))
+print("Generation record keys:", list(sample_schema.keys()))
+print("Nontext fields:", {k:v for k,v in sample_schema.items()
+                          if k not in ("text","prompt","response","problem","output","completion")
+                          and len(str(v)) < 160})
+print("Next plan entry keys:", list(plan["48"].keys()))
+print("Next plan entry:", plan["48"])
+print("\nCAUSAL CONTROLS RECORD:\n", notes_text[7200:12500])
+```
+
+```text
+Confirmation table schema:
+(2560, 12) ['batch', 'id', 'source', 'sample', 'original', 'edited', 'cut_original', 'cut_edited', 'tokens_original', 'tokens_edited', 'noanswer_original', 'noanswer_edited']
+[{'batch': 33, 'id': 'gsm8k_train_1074', 'source': 'gsm8k', 'sample': 0, 'original': 0, 'edited': 0, 'cut_original': 1, 'cut_edited': 1, 'tokens_original': 32768, 'tokens_edited': 32768, 'noanswer_original': 0, 'noanswer_edited': 0}, {'batch': 33, 'id': 'gsm8k_train_1074', 'source': 'gsm8k', 'sample': 1, 'original': 0, 'edited': 0, 'cut_original': 1, 'cut_edited': 1, 'tokens_original': 32768, 'tokens_edited': 32768, 'noanswer_original': 0, 'noanswer_edited': 0}]
+Manifest: {'primary': [33, 38, 39, 46, 47, 49, 50, 51, 52, 54], 'aime': [48, 53], 'pass_files': {'38': 46, '39': 47, '40': 48, '41': 49, '42': 50, '43': 51, '44': 52, '45': 53, '46': 54}}
+Generation record keys: ['id', 'source', 'answer', 'samples']
+Nontext fields: {'id': 'gsm8k_train_1272', 'source': 'gsm8k', 'answer': '530'}
+```
+
+```text
+AttributeError: 'list' object has no attribute 'keys'
+```
+
+## Turn 125
+
+### Input
+
+````text
+OUTPUT of Python run 64 of at most 300:
+```
+Confirmation table schema:
+(2560, 12) ['batch', 'id', 'source', 'sample', 'original', 'edited', 'cut_original', 'cut_edited', 'tokens_original', 'tokens_edited', 'noanswer_original', 'noanswer_edited']
+[{'batch': 33, 'id': 'gsm8k_train_1074', 'source': 'gsm8k', 'sample': 0, 'original': 0, 'edited': 0, 'cut_original': 1, 'cut_edited': 1, 'tokens_original': 32768, 'tokens_edited': 32768, 'noanswer_original': 0, 'noanswer_edited': 0}, {'batch': 33, 'id': 'gsm8k_train_1074', 'source': 'gsm8k', 'sample': 1, 'original': 0, 'edited': 0, 'cut_original': 1, 'cut_edited': 1, 'tokens_original': 32768, 'tokens_edited': 32768, 'noanswer_original': 0, 'noanswer_edited': 0}]
+Manifest: {'primary': [33, 38, 39, 46, 47, 49, 50, 51, 52, 54], 'aime': [48, 53], 'pass_files': {'38': 46, '39': 47, '40': 48, '41': 49, '42': 50, '43': 51, '44': 52, '45': 53, '46': 54}}
+Generation record keys: ['id', 'source', 'answer', 'samples']
+Nontext fields: {'id': 'gsm8k_train_1272', 'source': 'gsm8k', 'answer': '530'}
+
+AttributeError: 'list' object has no attribute 'keys'
+```
+````
+
+### Editor
+
+The result files contain one record per problem, with samples nested inside it; the saved plan stores each batch directly as an ID list. My inspection code assumed a different plan format and stopped before updating the aggregate, so no weights or results were changed. I will correct that bookkeeping, then continue the fixed comparison schedule.
+
+```python
+# Hypothesis: the measured gain survives correct problem-clustered aggregation of nested samples.
+first_sample = sample_schema["samples"][0]
+print("Sample keys:", list(first_sample.keys()))
+print("Sample nontext:", {k:v for k,v in first_sample.items()
+                          if k not in ("text","prompt","response","output","completion")
+                          and len(str(v)) < 180})
+print("Plan48 items:", len(plan["48"]))
+print("Next IDs:", json.dumps(plan["48"]))
+print("\nCAUSAL CONTROLS RECORD:\n", notes_text[7200:12200])
+```
+
+### Tool result
+
+```python
+# Hypothesis: the measured gain survives correct problem-clustered aggregation of nested samples.
+first_sample = sample_schema["samples"][0]
+print("Sample keys:", list(first_sample.keys()))
+print("Sample nontext:", {k:v for k,v in first_sample.items()
+                          if k not in ("text","prompt","response","output","completion")
+                          and len(str(v)) < 180})
+print("Plan48 items:", len(plan["48"]))
+print("Next IDs:", json.dumps(plan["48"]))
+print("\nCAUSAL CONTROLS RECORD:\n", notes_text[7200:12200])
+```
+
+```text
+Sample keys: ['text', 'pred', 'correct', 'tokens', 'cut', 'finish_reason']
+Sample nontext: {'pred': '530', 'correct': True, 'tokens': 3785, 'cut': False, 'finish_reason': 'stop'}
+Plan48 items: 128
+Next IDs: ["gsm8k_train_1360", "gsm8k_train_265", "gsm8k_train_4397", "gsm8k_train_1555", "gsm8k_train_6925", "gsm8k_train_697", "gsm8k_train_7305", "gsm8k_train_5622", "gsm8k_train_896", "gsm8k_train_3927", "gsm8k_train_3885", "gsm8k_train_7083", "gsm8k_train_2384", "gsm8k_train_1363", "gsm8k_train_6967", "gsm8k_train_1895", "gsm8k_train_6640", "gsm8k_train_573", "gsm8k_train_1946", "gsm8k_train_3457", "gsm8k_train_4505", "gsm8k_train_7368", "gsm8k_train_4558", "gsm8k_train_1136", "gsm8k_train_6845", "gsm8k_train_4876", "gsm8k_train_7383", "gsm8k_train_7437", "gsm8k_train_468", "gsm8k_train_6078", "gsm8k_train_7139", "gsm8k_train_6227", "gsm8k_train_6099", "gsm8k_train_1959", "gsm8k_train_1575", "gsm8k_train_558", "gsm8k_train_4375", "gsm8k_train_1229", "gsm8k_train_1915", "gsm8k_train_6027", "gsm8k_train_4361", "gsm8k_train_5547", "gsm8k_train_6974", "gsm8k_train_5128", "gsm8k_train_2219", "gsm8k_train_4428", "gsm8k_train_2480", "gsm8k_train_134", "gsm8k_train_6918", "gsm8k_train_6917", "gsm8k_train_3073", "gsm8k_train_4929", "gsm8k_train_416", "gsm8k_train_4089", "gsm8k_train_1750", "gsm8k_train_5705", "gsm8k_train_2157", "gsm8k_train_2891", "gsm8k_train_6644", "gsm8k_train_4068", "gsm8k_train_1104", "gsm8k_train_3285", "gsm8k_train_4720", "gsm8k_train_2624", "math_train_geometry_517", "math_train_algebra_827", "math_train_intermediate_algebra_386", "math_train_algebra_1262", "math_train_intermediate_algebra_1198", "math_train_geometry_146", "math_train_intermediate_algebra_728", "math_train_precalculus_160", "math_train_prealgebra_35", "math_train_geometry_37", "math_train_prealgebra_290", "math_train_geometry_237", "math_train_counting_and_probability_205", "math_train_prealgebra_250", "math_train_intermediate_algebra_471", "math_train_algebra_387", "math_train_intermediate_algebra_12", "math_train_algebra_448", "math_train_prealgebra_626", "math_train_precalculus_97", "math_train_prealgebra_200", "math_train_intermediate_algebra_1079", "math_train_geometry_390", "math_train_prealgebra_336", "math_train_number_theory_460", "math_train_geometry_658", "math_train_algebra_1630", "math_train_counting_and_probability_388", "math_train_precalculus_148", "math_train_intermediate_algebra_216", "math_train_geometry_615", "math_train_algebra_701", "math_train_algebra_1116", "math_train_algebra_377", "math_train_prealgebra_475", "math_train_prealgebra_761", "math_train_algebra_1415", "math_train_number_theory_749", "math_train_intermediate_algebra_759", "math_train_counting_and_probability_96", "math_train_algebra_782", "math_train_prealgebra_676", "math_train_number_theory_28", "math_train_algebra_1070", "math_train_algebra_1285", "math_train_prealgebra_354", "math_train_algebra_1132", "math_train_intermediate_algebra_810", "math_train_intermediate_algebra_1234", "math_train_intermediate_algebra_569", "math_train_counting_and_probability_155", "math_train_precalculus_106", "math_train_counting_and_probability_361", "math_train_prealgebra_122", "math_train_geometry_864", "math_train_algebra_1672", "math_train_prealgebra_993", "math_train_prealgebra_106", "math_train_intermediate_algebra_150", "math_train_intermediate_algebra_1273", "math_train_precalculus_433", "math_train_prealgebra_133", "math_train_algebra_440", "math_train_geometry_762"]
+
+CAUSAL CONTROLS RECORD:
+ 23.mlp.down_proj.weight W'=W-4(Wv)q^T, q=projection of v orthogonal to 12 means (initial/early/newmath each4 probes), scaled q.v=1. Definition /work/repetition_oblique_L23.pt. TF raw first2 fwd15 probes, baseline fwd15.
+
+Pass19 /work/fwd_27 refined4 deltas [{"initial": 0.00391, "early": -0.04302, "late": -0.534, "transition": 0.33958, "new_math": -0.07726, "close": -0.03202}, {"initial": 0.04706, "early": -0.10268, "late": -0.74138, "transition": 0.04044, "new_math": -0.03611, "close": 0.01255}]
+NEXT pass20: same only model.language_model.layers.23.mlp.down_proj.weight W'=W-4(Wv)q^T, oblique detector from /work/repetition_oblique_L23.pt. Generation both on sel128 n2 max32768.
+
+Pass20 gen28 oblique4:23.4375% vs9.375%, gain14.0625pp SE3.1342pp; below simple4 exploratory result. Backup /work/refined4. Provisional best simple4.
+NEXT pass21: sign control, only model.language_model.layers.23.mlp.down_proj.weight W'=W+4(Wv)v^T (positive coefficient, amplification). Teacher forced raw first2 fwd15 probes, same original baseline.
+
+Pass21 /work/fwd_29 explicit amplification4 deltas [{"initial": -0.01798, "early": 0.00124, "late": -0.01197, "transition": 0.21057, "new_math": 0.0223, "close": 0.05659}, {"initial": -0.08823, "early": -0.0349, "late": -0.32965, "transition": -0.03796, "new_math": -0.10169, "close": -0.07902}]
+NEXT pass22: same only model.language_model.layers.23.mlp.down_proj.weight W'=W+4(Wv)v^T. Generation both on sel64=first32 each source selection, n4=256/model, max32768. This subset is exploratory, not confirmation.
+
+Pass22 gen30 amplification4:5.46875% vs7.421875%, gain-1.9531pp SE2.1059pp;191/256 finished no-answer, cut20.31%. Reject opposite sign. Shortness alone clearly not beneficial.
+NEXT pass23: only model.language_model.layers.23.mlp.down_proj.weight W'=W-3(Wv)v^T. Generation both sel64 first32 each selection, n4 max32768.
+
+Pass23 gen31 subtraction3 sel64x4:11.71875% vs7.421875%, gain4.296875pp SE2.33287pp; cut87.11%. Original4 remains best exploratory result.
+NEXT pass24: only model.language_model.layers.23.mlp.down_proj.weight W'=W-5(Wv)v^T. Generation both sel64 first32 each source selection, n4 max32768. Final scalar strength candidate.
+
+Pass24 gen32 subtraction5 sel64x4:13.671875% vs7.421875%, gain6.25pp SE2.9984pp,10 no-answer. Reject in favor of strength4.
+CANDIDATE FROZEN before confirmation: ONLY model.language_model.layers.23.mlp.down_proj.weight W'=W-4(Wv)v^T. v from 4 diagnostic repeated-check activation contrasts, independent of confirmation problems. Saved /work/best_subtract4. No other tensor edits.
+NEXT pass25: generation both, confirmation first64 each source (/work/confirmation_first128.json), n2=256/model, max32768. Completely disjoint diagnosis/selection.
+
+Pass25 gen33 independent confirmation128x2: original8.984375%, edited18.359375%, paired+9.375pp SE2.64526pp (3.54SE), W->R35 R->W11. GSM13.28125->28.125%, MATH4.6875->8.59375%. Cut92.1875->77.34375%. Candidate simple4 independently validated; remains frozen while evaluating mechanism/generalization.
+
+Held-out gen33 mechanism: original detector/repeated8word rho .768, edited .633; median repetition .540->.345, median detector6.323->4.201. All correct responses >500 thinking tokens, median5226 original/7843 edited. Existing L23H5 ablation increased detector; no justified added head edit.
+NEXT pass26: model original (saved edit remains frozen W23'=W23-4(W23v)v^T but ignored); 8 raw novel probes (/work/novel_probe_texts.json), 4 content-diverse repeated claims without 'Wait', plus4 clean counterparts. Return logprobs, topk20, mlp23.
+
+Pass26 original novel8 baseline stored /work/fwd_34.
+NEXT pass27: frozen single model.language_model.layers.23.mlp.down_proj.weight W'=W-4(Wv)v^T; model edited, same8 raw novel probes as pass26, return logprobs/topk20. No strength adjustment from these probes.
+
+Pass27 novel repetition/clean deltas [{"reasoning": -0.08501, "new_math": -0.09716, "close": -0.23755, "initial": 0.03327, "early": -0.02938, "late": -0.28133}, {"reasoning": -0.47637, "new_math": -0.07474, "close": -0.08953, "initial": -0.04132, "early": 0.01046, "late": -1.23275}, {"reasoning": -0.29087, "new_math": -0.03919, "close": -0.07739, "initial": 0.06287, "early": -0.02477, "late": -0.98561}, {"reasoning": -0.3998, "new_math": -0.05427, "close": -0.10922, "initial": 0.08151, "early": 0.04301, "late": -1.2411}, {"reasoning": -0.03164, "new_math": -0.09465, "close": -0.26906}, {"reasoning": -0.06085, "new_math": -0.06897, "close": -0.17523}, {"reasoning": -0.01173, "new_math": -0.05009, "close": -0.15826}, {"reasoning": 0.02665, "new_math": -0.03022, "close": -0.24785}].
+NEXT pass28: model original baseline on6 raw deliberately unfinished solutions ending with forced </think>, /work/premature_closure_texts.json. Saved edit unchanged frozen single W23-4W23vvT but ignored. Test premature close likelihood, not an intervention.
+
+Pass28 premature-close original baseline /work/fwd_36.
+NEXT pass29: edited, frozen ONLY model.language_mo
+```
+
+## Turn 126
+
+### Input
+
+````text
+OUTPUT of Python run 65 of at most 300:
+```
+Sample keys: ['text', 'pred', 'correct', 'tokens', 'cut', 'finish_reason']
+Sample nontext: {'pred': '530', 'correct': True, 'tokens': 3785, 'cut': False, 'finish_reason': 'stop'}
+Plan48 items: 128
+Next IDs: ["gsm8k_train_1360", "gsm8k_train_265", "gsm8k_train_4397", "gsm8k_train_1555", "gsm8k_train_6925", "gsm8k_train_697", "gsm8k_train_7305", "gsm8k_train_5622", "gsm8k_train_896", "gsm8k_train_3927", "gsm8k_train_3885", "gsm8k_train_7083", "gsm8k_train_2384", "gsm8k_train_1363", "gsm8k_train_6967", "gsm8k_train_1895", "gsm8k_train_6640", "gsm8k_train_573", "gsm8k_train_1946", "gsm8k_train_3457", "gsm8k_train_4505", "gsm8k_train_7368", "gsm8k_train_4558", "gsm8k_train_1136", "gsm8k_train_6845", "gsm8k_train_4876", "gsm8k_train_7383", "gsm8k_train_7437", "gsm8k_train_468", "gsm8k_train_6078", "gsm8k_train_7139", "gsm8k_train_6227", "gsm8k_train_6099", "gsm8k_train_1959", "gsm8k_train_1575", "gsm8k_train_558", "gsm8k_train_4375", "gsm8k_train_1229", "gsm8k_train_1915", "gsm8k_train_6027", "gsm8k_train_4361", "gsm8k_train_5547", "gsm8k_train_6974", "gsm8k_train_5128", "gsm8k_train_2219", "gsm8k_train_4428", "gsm8k_train_2480", "gsm8k_train_134", "gsm8k_train_6918", "gsm8k_train_6917", "gsm8k_train_3073", "gsm8k_train_4929", "gsm8k_train_416", "gsm8k_train_4089", "gsm8k_train_1750", "gsm8k_train_5705", "gsm8k_train_2157", "gsm8k_train_2891", "gsm8k_train_6644", "gsm8k_train_4068", "gsm8k_train_1104", "gsm8k_train_3285", "gsm8k_train_4720", "gsm8k_train_2624", "math_train_geometry_517", "math_train_algebra_827", "math_train_intermediate_algebra_386", "math_train_algebra_1262", "math_train_intermediate_algebra_1198", "math_train_geometry_146", "math_train_intermediate_algebra_728", "math_train_precalculus_160", "math_train_prealgebra_35", "math_train_geometry_37", "math_train_prealgebra_290", "math_train_geometry_237", "math_train_counting_and_probability_205", "math_train_prealgebra_250", "math_train_intermediate_algebra_471", "math_train_algebra_387", "math_train_intermediate_algebra_12", "math_train_algebra_448", "math_train_prealgebra_626", "math_train_precalculus_97", "math_train_prealgebra_200", "math_train_intermediate_algebra_1079", "math_train_geometry_390", "math_train_prealgebra_336", "math_train_number_theory_460", "math_train_geometry_658", "math_train_algebra_1630", "math_train_counting_and_probability_388", "math_train_precalculus_148", "math_train_intermediate_algebra_216", "math_train_geometry_615", "math_train_algebra_701", "math_train_algebra_1116", "math_train_algebra_377", "math_train_prealgebra_475", "math_train_prealgebra_761", "math_train_algebra_1415", "math_train_number_theory_749", "math_train_intermediate_algebra_759", "math_train_counting_and_probability_96", "math_train_algebra_782", "math_train_prealgebra_676", "math_train_number_theory_28", "math_train_algebra_1070", "math_train_algebra_1285", "math_train_prealgebra_354", "math_train_algebra_1132", "math_train_intermediate_algebra_810", "math_train_intermediate_algebra_1234", "math_train_intermediate_algebra_569", "math_train_counting_and_probability_155", "math_train_precalculus_106", "math_train_counting_and_probability_361", "math_train_prealgebra_122", "math_train_geometry_864", "math_train_algebra_1672", "math_train_prealgebra_993", "math_train_prealgebra_106", "math_train_intermediate_algebra_150", "math_train_intermediate_algebra_1273", "math_train_precalculus_433", "math_train_prealgebra_133", "math_train_algebra_440", "math_train_geometry_762"]
+
+CAUSAL CONTROLS RECORD:
+ 23.mlp.down_proj.weight W'=W-4(Wv)q^T, q=projection of v orthogonal to 12 means (initial/early/newmath each4 probes), scaled q.v=1. Definition /work/repetition_oblique_L23.pt. TF raw first2 fwd15 probes, baseline fwd15.
+
+Pass19 /work/fwd_27 refined4 deltas [{"initial": 0.00391, "early": -0.04302, "late": -0.534, "transition": 0.33958, "new_math": -0.07726, "close": -0.03202}, {"initial": 0.04706, "early": -0.10268, "late": -0.74138, "transition": 0.04044, "new_math": -0.03611, "close": 0.01255}]
+NEXT pass20: same only model.language_model.layers.23.mlp.down_proj.weight W'=W-4(Wv)q^T, oblique detector from /work/repetition_oblique_L23.pt. Generation both on sel128 n2 max32768.
+
+Pass20 gen28 oblique4:23.4375% vs9.375%, gain14.0625pp SE3.1342pp; below simple4 exploratory result. Backup /work/refined4. Provisional best simple4.
+NEXT pass21: sign control, only model.language_model.layers.23.mlp.down_proj.weight W'=W+4(Wv)v^T (positive coefficient, amplification). Teacher forced raw first2 fwd15 probes, same original baseline.
+
+Pass21 /work/fwd_29 explicit amplification4 deltas [{"initial": -0.01798, "early": 0.00124, "late": -0.01197, "transition": 0.21057, "new_math": 0.0223, "close": 0.05659}, {"initial": -0.08823, "early": -0.0349, "late": -0.32965, "transition": -0.03796, "new_math": -0.10169, "close": -0.07902}]
+NEXT pass22: same only model.language_model.layers.23.mlp.down_proj.weight W'=W+4(Wv)v^T. Generation both on sel64=first32 each source selection, n4=256/model, max32768. This subset is exploratory, not confirmation.
+
+Pass22 gen30 amplification4:5.46875% vs7.421875%, gain-1.9531pp SE2.1059pp;191/256 finished no-answer, cut20.31%. Reject opposite sign. Shortness alone clearly not beneficial.
+NEXT pass23: only model.language_model.layers.23.mlp.down_proj.weight W'=W-3(Wv)v^T. Generation both sel64 first32 each selection, n4 max32768.
+
+Pass23 gen31 subtraction3 sel64x4:11.71875% vs7.421875%, gain4.296875pp SE2.33287pp; cut87.11%. Original4 remains best exploratory result.
+NEXT pass24: only model.language_model.layers.23.mlp.down_proj.weight W'=W-5(Wv)v^T. Generation both sel64 first32 each source selection, n4 max32768. Final scalar strength candidate.
+
+Pass24 gen32 subtraction5 sel64x4:13.671875% vs7.421875%, gain6.25pp SE2.9984pp,10 no-answer. Reject in favor of strength4.
+CANDIDATE FROZEN before confirmation: ONLY model.language_model.layers.23.mlp.down_proj.weight W'=W-4(Wv)v^T. v from 4 diagnostic repeated-check activation contrasts, independent of confirmation problems. Saved /work/best_subtract4. No other tensor edits.
+NEXT pass25: generation both, confirmation first64 each source (/work/confirmation_first128.json), n2=256/model, max32768. Completely disjoint diagnosis/selection.
+
+Pass25 gen33 independent confirmation128x2: original8.984375%, edited18.359375%, paired+9.375pp SE2.64526pp (3.54SE), W->R35 R->W11. GSM13.28125->28.125%, MATH4.6875->8.59375%. Cut92.1875->77.34375%. Candidate simple4 independently validated; remains frozen while evaluating mechanism/generalization.
+
+Held-out gen33 mechanism: original detector/repeated8word rho .768, edited .633; median repetition .540->.345, median detector6.323->4.201. All correct responses >500 thinking tokens, median5226 original/7843 edited. Existing L23H5 ablation increased detector; no justified added head edit.
+NEXT pass26: model original (saved edit remains frozen W23'=W23-4(W23v)v^T but ignored); 8 raw novel probes (/work/novel_probe_texts.json), 4 content-diverse repeated claims without 'Wait', plus4 clean counterparts. Return logprobs, topk20, mlp23.
+
+Pass26 original novel8 baseline stored /work/fwd_34.
+NEXT pass27: frozen single model.language_model.layers.23.mlp.down_proj.weight W'=W-4(Wv)v^T; model edited, same8 raw novel probes as pass26, return logprobs/topk20. No strength adjustment from these probes.
+
+Pass27 novel repetition/clean deltas [{"reasoning": -0.08501, "new_math": -0.09716, "close": -0.23755, "initial": 0.03327, "early": -0.02938, "late": -0.28133}, {"reasoning": -0.47637, "new_math": -0.07474, "close": -0.08953, "initial": -0.04132, "early": 0.01046, "late": -1.23275}, {"reasoning": -0.29087, "new_math": -0.03919, "close": -0.07739, "initial": 0.06287, "early": -0.02477, "late": -0.98561}, {"reasoning": -0.3998, "new_math": -0.05427, "close": -0.10922, "initial": 0.08151, "early": 0.04301, "late": -1.2411}, {"reasoning": -0.03164, "new_math": -0.09465, "close": -0.26906}, {"reasoning": -0.06085, "new_math": -0.06897, "close": -0.17523}, {"reasoning": -0.01173, "new_math": -0.05009, "close": -0.15826}, {"reasoning": 0.02665, "new_math": -0.03022, "close": -0.24785}].
+NEXT pass28: model original baseline on6 raw deliberately unfinished solutions ending with forced </think>, /work/premature_closure_texts.json. Saved edit unchanged frozen single W23-4W23vvT but ignored. Test premature close likelihood, not an intervention.
+
+Pass28 premature-close original baseline /work/fwd_36.
+NEXT pass29: edited, frozen ONLY model.language_mo
+
+
+```
+````
+
+### Editor
+
+The causal record contains an important negative control: reversing the edit’s sign sharply reduced cutoffs but produced many unfinished-answer failures and no accuracy gain. That argues against treating shorter output as success. The chosen edit instead improved independently held-out accuracy while suppressing late repeated checks more than initial reasoning. I will now update the aggregate using equal weight per problem and a paired standard error that keeps each problem’s samples together.
+
+```python
+# Hypothesis: the held-out accuracy improvement remains clear after clustering samples by problem.
+from itertools import zip_longest
+
+def read_paired_batch(file_number):
+    rows = []
+    with open(work / f"gen_{file_number}_original.jsonl") as fo, \
+         open(work / f"gen_{file_number}_edited.jsonl") as fe:
+        for lo, le in zip_longest(fo, fe):
+            assert lo is not None and le is not None
+            ro, re = json.loads(lo), json.loads(le)
+            assert ro["id"] == re["id"] and ro["source"] == re["source"]
+            assert len(ro["samples"]) == len(re["samples"])
+            for j, (so, se) in enumerate(zip(ro["samples"], re["samples"])):
+                rows.append({
+                    "batch": file_number, "id": ro["id"], "source": ro["source"], "sample": j,
+                    "original": int(so["correct"]), "edited": int(se["correct"]),
+                    "cut_original": int(so["cut"]), "cut_edited": int(se["cut"]),
+                    "tokens_original": so["tokens"], "tokens_edited": se["tokens"],
+                    "noanswer_original": int(not so["cut"] and so.get("pred") in (None, "")),
+                    "noanswer_edited": int(not se["cut"] and se.get("pred") in (None, "")),
+                })
+    return pd.DataFrame(rows)
+
+def equal_problem_summary(table):
+    p = table.groupby(["source", "id"], sort=False)[
+        ["original","edited","cut_original","cut_edited",
+         "tokens_original","tokens_edited","noanswer_original","noanswer_edited"]].mean()
+    d = p["edited"] - p["original"]
+    result = {"problems":len(p), "samples":len(table)}
+    result.update({k:round(float(p[k].mean()), 6) for k in
+                   ["original","edited","cut_original","cut_edited"]})
+    result["gain"] = round(float(d.mean()), 6)
+    result["SE"] = round(float(d.std(ddof=1) / np.sqrt(len(d))), 6)
+    return result
+
+new_batch = read_paired_batch(55)
+assert set(new_batch["id"]) == set(plan["47"])
+assert set(new_batch["id"]).isdisjoint(confirmation_table["id"])
+confirmation_table = pd.concat([confirmation_table, new_batch], ignore_index=True)
+assert not confirmation_table.duplicated(["id","sample"]).any()
+confirmation_table.to_csv(confirmation_path, index=False)
+manifest["primary"].append(55)
+manifest["pass_files"]["47"] = 55
+(work / "final_evaluation_manifest.json").write_text(json.dumps(manifest, indent=2))
+latest_summary = equal_problem_summary(new_batch)
+aggregate_summary = equal_problem_summary(confirmation_table)
+source_summary = {s:equal_problem_summary(t) for s,t in confirmation_table.groupby("source")}
+print("Latest:", latest_summary)
+print("Primary aggregate:", aggregate_summary)
+print("By source:", source_summary)
+with open(work / "notes.md", "a") as f:
+    f.write("\nPass47 gen55 frozen simple4: " + json.dumps(latest_summary) + ".\n")
+    f.write("Primary equal-problem aggregate: " + json.dumps(aggregate_summary) + ".\n")
+    f.write("NEXT pass48: unchanged exact single L23 simple4; both on final_confirmation_plan entry48, n2 max32768. No fitting/tuning.\n")
+```
+
+### Tool result
+
+```python
+# Hypothesis: the held-out accuracy improvement remains clear after clustering samples by problem.
+from itertools import zip_longest
+
+def read_paired_batch(file_number):
+    rows = []
+    with open(work / f"gen_{file_number}_original.jsonl") as fo, \
+         open(work / f"gen_{file_number}_edited.jsonl") as fe:
+        for lo, le in zip_longest(fo, fe):
+            assert lo is not None and le is not None
+            ro, re = json.loads(lo), json.loads(le)
+            assert ro["id"] == re["id"] and ro["source"] == re["source"]
+            assert len(ro["samples"]) == len(re["samples"])
+            for j, (so, se) in enumerate(zip(ro["samples"], re["samples"])):
+                rows.append({
+                    "batch": file_number, "id": ro["id"], "source": ro["source"], "sample": j,
+                    "original": int(so["correct"]), "edited": int(se["correct"]),
+                    "cut_original": int(so["cut"]), "cut_edited": int(se["cut"]),
+                    "tokens_original": so["tokens"], "tokens_edited": se["tokens"],
+                    "noanswer_original": int(not so["cut"] and so.get("pred") in (None, "")),
+                    "noanswer_edited": int(not se["cut"] and se.get("pred") in (None, "")),
+                })
+    return pd.DataFrame(rows)
+
+def equal_problem_summary(table):
+    p = table.groupby(["source", "id"], sort=False)[
+        ["original","edited","cut_original","cut_edited",
+         "tokens_original","tokens_edited","noanswer_original","noanswer_edited"]].mean()
+    d = p["edited"] - p["original"]
+    result = {"problems":len(p), "samples":len(table)}
+    result.update({k:round(float(p[k].mean()), 6) for k in
+                   ["original","edited","cut_original","cut_edited"]})
+    result["gain"] = round(float(d.mean()), 6)
+    result["SE"] = round(float(d.std(ddof=1) / np.sqrt(len(d))), 6)
+    return result
+
+new_batch = read_paired_batch(55)
+assert set(new_batch["id"]) == set(plan["47"])
+assert set(new_batch["id"]).isdisjoint(confirmation_table["id"])
+confirmation_table = pd.concat([confirmation_table, new_batch], ignore_index=True)
+assert not confirmation_table.duplicated(["id","sample"]).any()
+confirmation_table.to_csv(confirmation_path, index=False)
+manifest["primary"].append(55)
+manifest["pass_files"]["47"] = 55
+(work / "final_evaluation_manifest.json").write_text(json.dumps(manifest, indent=2))
+latest_summary = equal_problem_summary(new_batch)
+aggregate_summary = equal_problem_summary(confirmation_table)
+source_summary = {s:equal_problem_summary(t) for s,t in confirmation_table.groupby("source")}
+print("Latest:", latest_summary)
+print("Primary aggregate:", aggregate_summary)
+print("By source:", source_summary)
+with open(work / "notes.md", "a") as f:
+    f.write("\nPass47 gen55 frozen simple4: " + json.dumps(latest_summary) + ".\n")
+    f.write("Primary equal-problem aggregate: " + json.dumps(aggregate_summary) + ".\n")
+    f.write("NEXT pass48: unchanged exact single L23 simple4; both on final_confirmation_plan entry48, n2 max32768. No fitting/tuning.\n")
+```
+
+```text
+Latest: {'problems': 128, 'samples': 256, 'original': 0.113281, 'edited': 0.1875, 'cut_original': 0.910156, 'cut_edited': 0.785156, 'gain': 0.074219, 'SE': 0.024858}
+Primary aggregate: {'problems': 1664, 'samples': 2816, 'original': 0.123498, 'edited': 0.194411, 'cut_original': 0.88762, 'cut_edited': 0.757812, 'gain': 0.070913, 'SE': 0.008504}
+By source: {'gsm8k': {'problems': 832, 'samples': 1408, 'original': 0.153846, 'edited': 0.258413, 'cut_original': 0.857572, 'cut_edited': 0.671274, 'gain': 0.104567, 'SE': 0.01376}, 'math': {'problems': 832, 'samples': 1408, 'original': 0.093149, 'edited': 0.130409, 'cut_original': 0.917668, 'cut_edited': 0.844351, 'gain': 0.03726, 'SE': 0.009869}}
+```
+
+## Turn 127
+
+### Input
+
+````text
+OUTPUT of Python run 66 of at most 300:
+```
+Latest: {'problems': 128, 'samples': 256, 'original': 0.113281, 'edited': 0.1875, 'cut_original': 0.910156, 'cut_edited': 0.785156, 'gain': 0.074219, 'SE': 0.024858}
+Primary aggregate: {'problems': 1664, 'samples': 2816, 'original': 0.123498, 'edited': 0.194411, 'cut_original': 0.88762, 'cut_edited': 0.757812, 'gain': 0.070913, 'SE': 0.008504}
+By source: {'gsm8k': {'problems': 832, 'samples': 1408, 'original': 0.153846, 'edited': 0.258413, 'cut_original': 0.857572, 'cut_edited': 0.671274, 'gain': 0.104567, 'SE': 0.01376}, 'math': {'problems': 832, 'samples': 1408, 'original': 0.093149, 'edited': 0.130409, 'cut_original': 0.917668, 'cut_edited': 0.844351, 'gain': 0.03726, 'SE': 0.009869}}
+
+
+```
+````
+
+### Editor
+
+The updated aggregate covers 1,664 distinct held-out problems and shows a 7.1-point gain with a 0.85-point standard error. Gains remain positive separately for GSM8K and MATH, though they are larger for GSM8K. I will run the next fixed batch with the same weights and full 32,768-token allowance. This continues to test answer accuracy rather than rewarding shorter reasoning.
+
+```forward
+{"type":"generate","model":"both","problems":["gsm8k_train_1360","gsm8k_train_265","gsm8k_train_4397","gsm8k_train_1555","gsm8k_train_6925","gsm8k_train_697","gsm8k_train_7305","gsm8k_train_5622","gsm8k_train_896","gsm8k_train_3927","gsm8k_train_3885","gsm8k_train_7083","gsm8k_train_2384","gsm8k_train_1363","gsm8k_train_6967","gsm8k_train_1895","gsm8k_train_6640","gsm8k_train_573","gsm8k_train_1946","gsm8k_train_3457","gsm8k_train_4505","gsm8k_train_7368","gsm8k_train_4558","gsm8k_train_1136","gsm8k_train_6845","gsm8k_train_4876","gsm8k_train_7383","gsm8k_train_7437","gsm8k_train_468","gsm8k_train_6078","gsm8k_train_7139","gsm8k_train_6227","gsm8k_train_6099","gsm8k_train_1959","gsm8k_train_1575","gsm8k_train_558","gsm8k_train_4375","gsm8k_train_1229","gsm8k_train_1915","gsm8k_train_6027","gsm8k_train_4361","gsm8k_train_5547","gsm8k_train_6974","gsm8k_train_5128","gsm8k_train_2219","gsm8k_train_4428","gsm8k_train_2480","gsm8k_train_134","gsm8k_train_6918","gsm8k_train_6917","gsm8k_train_3073","gsm8k_train_4929","gsm8k_train_416","gsm8k_train_4089","gsm8k_train_1750","gsm8k_train_5705","gsm8k_train_2157","gsm8k_train_2891","gsm8k_train_6644","gsm8k_train_4068","gsm8k_train_1104","gsm8k_train_3285","gsm8k_train_4720","gsm8k_train_2624","math_train_geometry_517","math_train_algebra_827","math_train_intermediate_algebra_386","math_train_algebra_1262","math_train_intermediate_algebra_1198","math_train_geometry_146","math_train_intermediate_algebra_728","math_train_precalculus_160","math_train_prealgebra_35","math_train_geometry_37","math_train_prealgebra_290","math_train_geometry_237","math_train_counting_and_probability_205","math_train_prealgebra_250","math_train_intermediate_algebra_471","math_train_algebra_387","math_train_intermediate_algebra_12","math_train_algebra_448","math_train_prealgebra_626","math_train_precalculus_97","math_train_prealgebra_200","math_train_intermediate_algebra_1079","math_train_geometry_390","math_train_prealgebra_336","math_train_number_theory_460","math_train_geometry_658","math_train_algebra_1630","math_train_counting_and_probability_388","math_train_precalculus_148","math_train_intermediate_algebra_216","math_train_geometry_615","math_train_algebra_701","math_train_algebra_1116","math_train_algebra_377","math_train_prealgebra_475","math_train_prealgebra_761","math_train_algebra_1415","math_train_number_theory_749","math_train_intermediate_algebra_759","math_train_counting_and_probability_96","math_train_algebra_782","math_train_prealgebra_676","math_train_number_theory_28","math_train_algebra_1070","math_train_algebra_1285","math_train_prealgebra_354","math_train_algebra_1132","math_train_intermediate_algebra_810","math_train_intermediate_algebra_1234","math_train_intermediate_algebra_569","math_train_counting_and_probability_155","math_train_precalculus_106","math_train_counting_and_probability_361","math_train_prealgebra_122","math_train_geometry_864","math_train_algebra_1672","math_train_prealgebra_993","math_train_prealgebra_106","math_train_intermediate_algebra_150","math_train_intermediate_algebra_1273","math_train_precalculus_433","math_train_prealgebra_133","math_train_algebra_440","math_train_geometry_762"],"n":2,"max_tokens":32768}
+```
+
+### Tool result
+
+```text
+{
+  "files": {
+    "original": "/work/gen_56_original.jsonl",
+    "edited": "/work/gen_56_edited.jsonl"
+  },
+  "activations": null,
+  "original": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.1328125,
+    "accuracy_by_source": {
+      "gsm8k": 0.1875,
+      "math": 0.078125
+    },
+    "mean_tokens": 29408.0,
+    "cut_share": 0.875,
+    "failures": {
+      "wrong_answer": 1,
+      "no_answer_finished": 0,
+      "cut_at_max_tokens": 224
+    }
+  },
+  "edited": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.203125,
+    "accuracy_by_source": {
+      "gsm8k": 0.2578125,
+      "math": 0.1484375
+    },
+    "mean_tokens": 26807.0390625,
+    "cut_share": 0.7421875,
+    "failures": {
+      "wrong_answer": 6,
+      "no_answer_finished": 8,
+      "cut_at_max_tokens": 190
+    }
+  },
+  "paired": {
+    "items": 128,
+    "accuracy_difference": 0.0703125,
+    "standard_error": 0.029207026759934186,
+    "samples_wrong_to_right": 36,
+    "samples_right_to_wrong": 18
+  },
+  "ok": true,
+  "type": "generate",
+  "model": "both",
+  "s": 931.9388888330004
+}
+```
+
+## Turn 128
+
+### Input
+
+````text
+FORWARD PASS 48 of 50:
+```json
+{"files": {"original": "/work/gen_56_original.jsonl", "edited": "/work/gen_56_edited.jsonl"}, "activations": null, "original": {"generations": 256, "graded": 256, "accuracy": 0.1328125, "accuracy_by_source": {"gsm8k": 0.1875, "math": 0.078125}, "mean_tokens": 29408.0, "cut_share": 0.875, "failures": {"wrong_answer": 1, "no_answer_finished": 0, "cut_at_max_tokens": 224}}, "edited": {"generations": 256, "graded": 256, "accuracy": 0.203125, "accuracy_by_source": {"gsm8k": 0.2578125, "math": 0.1484375}, "mean_tokens": 26807.0390625, "cut_share": 0.7421875, "failures": {"wrong_answer": 6, "no_answer_finished": 8, "cut_at_max_tokens": 190}}, "paired": {"items": 128, "accuracy_difference": 0.0703125, "standard_error": 0.029207026759934186, "samples_wrong_to_right": 36, "samples_right_to_wrong": 18}, "ok": true, "type": "generate", "model": "both", "s": 931.9388888330004}
+```
+````
+
+### Editor
+
+The next batch improved accuracy from 13.3% to 20.3%, with a paired gain of 7.0 points and a 2.9-point standard error. GSM8K and MATH each gained 7.0 points in this batch. I will record the result and retrieve the penultimate batch, keeping the edit unchanged. The pooled estimate will include every planned batch, including losses and no-answer failures.
+
+```python
+# Hypothesis: the frozen edit improves pooled answer accuracy despite some regressions and no-answer failures.
+def record_confirmation(pass_number, file_number):
+    global confirmation_table, manifest
+    new = read_paired_batch(file_number)
+    assert set(new["id"]) == set(plan[str(pass_number)])
+    assert set(new["id"]).isdisjoint(confirmation_table["id"])
+    confirmation_table = pd.concat([confirmation_table, new], ignore_index=True)
+    assert not confirmation_table.duplicated(["id","sample"]).any()
+    confirmation_table.to_csv(confirmation_path, index=False)
+    assert file_number not in manifest["primary"]
+    manifest["primary"].append(file_number)
+    manifest["pass_files"][str(pass_number)] = file_number
+    (work / "final_evaluation_manifest.json").write_text(json.dumps(manifest, indent=2))
+    latest = equal_problem_summary(new)
+    overall = equal_problem_summary(confirmation_table)
+    sources = {s:equal_problem_summary(t) for s,t in confirmation_table.groupby("source")}
+    print("Latest:", latest)
+    print("Primary aggregate:", overall)
+    print("By source:", sources)
+    with open(work / "notes.md", "a") as f:
+        f.write(f"\nPass{pass_number} gen{file_number} frozen simple4: " + json.dumps(latest) + ".\n")
+        f.write("Primary equal-problem aggregate: " + json.dumps(overall) + ".\n")
+        if pass_number < 50:
+            f.write(f"NEXT pass{pass_number+1}: unchanged exact single L23 simple4; both on final_confirmation_plan entry{pass_number+1}, n2 max32768. No fitting/tuning.\n")
+    return new, overall
+
+latest_batch, aggregate_summary = record_confirmation(48, 56)
+print("Next IDs:", json.dumps(plan["49"]))
+print("\nFURTHER MECHANISM CONTROLS:\n", notes_text[12200:15900])
+```
+
+### Tool result
+
+```python
+# Hypothesis: the frozen edit improves pooled answer accuracy despite some regressions and no-answer failures.
+def record_confirmation(pass_number, file_number):
+    global confirmation_table, manifest
+    new = read_paired_batch(file_number)
+    assert set(new["id"]) == set(plan[str(pass_number)])
+    assert set(new["id"]).isdisjoint(confirmation_table["id"])
+    confirmation_table = pd.concat([confirmation_table, new], ignore_index=True)
+    assert not confirmation_table.duplicated(["id","sample"]).any()
+    confirmation_table.to_csv(confirmation_path, index=False)
+    assert file_number not in manifest["primary"]
+    manifest["primary"].append(file_number)
+    manifest["pass_files"][str(pass_number)] = file_number
+    (work / "final_evaluation_manifest.json").write_text(json.dumps(manifest, indent=2))
+    latest = equal_problem_summary(new)
+    overall = equal_problem_summary(confirmation_table)
+    sources = {s:equal_problem_summary(t) for s,t in confirmation_table.groupby("source")}
+    print("Latest:", latest)
+    print("Primary aggregate:", overall)
+    print("By source:", sources)
+    with open(work / "notes.md", "a") as f:
+        f.write(f"\nPass{pass_number} gen{file_number} frozen simple4: " + json.dumps(latest) + ".\n")
+        f.write("Primary equal-problem aggregate: " + json.dumps(overall) + ".\n")
+        if pass_number < 50:
+            f.write(f"NEXT pass{pass_number+1}: unchanged exact single L23 simple4; both on final_confirmation_plan entry{pass_number+1}, n2 max32768. No fitting/tuning.\n")
+    return new, overall
+
+latest_batch, aggregate_summary = record_confirmation(48, 56)
+print("Next IDs:", json.dumps(plan["49"]))
+print("\nFURTHER MECHANISM CONTROLS:\n", notes_text[12200:15900])
+```
+
+```text
+Latest: {'problems': 128, 'samples': 256, 'original': 0.132812, 'edited': 0.203125, 'cut_original': 0.875, 'cut_edited': 0.742188, 'gain': 0.070312, 'SE': 0.029207}
+Primary aggregate: {'problems': 1792, 'samples': 3072, 'original': 0.124163, 'edited': 0.195033, 'cut_original': 0.886719, 'cut_edited': 0.756696, 'gain': 0.070871, 'SE': 0.008166}
+By source: {'gsm8k': {'problems': 896, 'samples': 1536, 'original': 0.15625, 'edited': 0.258371, 'cut_original': 0.854911, 'cut_edited': 0.669643, 'gain': 0.102121, 'SE': 0.013161}, 'math': {'problems': 896, 'samples': 1536, 'original': 0.092076, 'edited': 0.131696, 'cut_original': 0.918527, 'cut_edited': 0.84375, 'gain': 0.039621, 'SE': 0.009563}}
+Next IDs: ["gsm8k_train_1771", "gsm8k_train_4838", "gsm8k_train_5375", "gsm8k_train_7084", "gsm8k_train_5169", "gsm8k_train_6720", "gsm8k_train_5269", "gsm8k_train_4748", "gsm8k_train_5360", "gsm8k_train_1464", "gsm8k_train_2646", "gsm8k_train_2567", "gsm8k_train_2927", "gsm8k_train_3442", "gsm8k_train_2962", "gsm8k_train_5653", "gsm8k_train_3367", "gsm8k_train_2103", "gsm8k_train_2859", "gsm8k_train_4921", "gsm8k_train_2357", "gsm8k_train_5688", "gsm8k_train_3335", "gsm8k_train_4258", "gsm8k_train_3413", "gsm8k_train_5917", "gsm8k_train_5499", "gsm8k_train_2279", "gsm8k_train_218", "gsm8k_train_6068", "gsm8k_train_6669", "gsm8k_train_6239", "gsm8k_train_7202", "gsm8k_train_5801", "gsm8k_train_3942", "gsm8k_train_236", "gsm8k_train_1205", "gsm8k_train_1209", "gsm8k_train_1681", "gsm8k_train_106", "gsm8k_train_5692", "gsm8k_train_1125", "gsm8k_train_5537", "gsm8k_train_6943", "gsm8k_train_7165", "gsm8k_train_6986", "gsm8k_train_273", "gsm8k_train_703", "gsm8k_train_2234", "gsm8k_train_5602", "gsm8k_train_6775", "gsm8k_train_1270", "gsm8k_train_257", "gsm8k_train_6211", "gsm8k_train_6519", "gsm8k_train_4135", "gsm8k_train_4387", "gsm8k_train_7304", "gsm8k_train_4257", "gsm8k_train_3673", "gsm8k_train_430", "gsm8k_train_172", "gsm8k_train_4899", "gsm8k_train_2184", "math_train_intermediate_algebra_1276", "math_train_number_theory_388", "math_train_algebra_1008", "math_train_counting_and_probability_583", "math_train_prealgebra_728", "math_train_intermediate_algebra_165", "math_train_algebra_291", "math_train_number_theory_839", "math_train_prealgebra_633", "math_train_geometry_38", "math_train_geometry_861", "math_train_number_theory_737", "math_train_geometry_577", "math_train_algebra_32", "math_train_geometry_630", "math_train_precalculus_567", "math_train_intermediate_algebra_653", "math_train_intermediate_algebra_1130", "math_train_prealgebra_409", "math_train_counting_and_probability_311", "math_train_algebra_357", "math_train_intermediate_algebra_518", "math_train_prealgebra_1191", "math_train_algebra_730", "math_train_prealgebra_1129", "math_train_algebra_432", "math_train_counting_and_probability_469", "math_train_geometry_177", "math_train_precalculus_730", "math_train_intermediate_algebra_513", "math_train_algebra_1597", "math_train_number_theory_517", "math_train_number_theory_201", "math_train_prealgebra_757", "math_train_number_theory_33", "math_train_precalculus_494", "math_train_algebra_1681", "math_train_algebra_1721", "math_train_prealgebra_1029", "math_train_precalculus_159", "math_train_counting_and_probability_349", "math_train_prealgebra_793", "math_train_prealgebra_376", "math_train_intermediate_algebra_924", "math_train_intermediate_algebra_62", "math_train_geometry_710", "math_train_intermediate_algebra_889", "math_train_prealgebra_31", "math_train_number_theory_49", "math_train_algebra_1150", "math_train_intermediate_algebra_640", "math_train_intermediate_algebra_939", "math_train_algebra_653", "math_train_number_theory_506", "math_train_counting_and_probability_393", "math_train_geometry_74", "math_train_algebra_1533", "math_train_algebra_615", "math_train_algebra_324", "math_train_algebra_1649", "math_train_algebra_1673", "math_train_precalculus_442", "math_train_intermediate_algebra_1082", "math_train_intermediate_algebra_1239"]
+
+FURTHER MECHANISM CONTROLS:
+ del.layers.23.mlp.down_proj.weight W'=W-4(Wv)v^T; same6 raw premature-ending texts as pass28, token logprobs/topk20. No changes chosen from this check.
+
+Restart audit: single frozen L23 rank-one subtraction4 still active; no new edits. Next finish premature-closure check, then extend untouched confirmation.
+
+Pass29 /work/fwd_37 premature closure token scores (position,original,edit,delta): [[[85, -7.7222, -8.5829, -0.8608]], [[56, -8.5429, -9.1322, -0.5893]], [[60, -8.4546, -8.9426, -0.4879]], [[55, -10.7587, -11.2729, -0.5142]], [[41, -0.0, -0.0, -0.0]], [[55, -0.0, -0.0, -0.0]]].
+NEXT pass30: frozen only L23 down_proj subtraction4; paired generation new confirmation B256 = indices64:192 each GSM/MATH, n1 max32768. No retuning.
+
+Pass30 gen38 independent B256: original15.625%, edited21.484375%, paired+5.859375pp SE2.87934pp; W->R35 R->W20; GSM21.875->29.6875%, MATH9.375->13.28125%. Cut85.546875->73.046875%. Frozen edit unchanged.
+Pooled heldout summary {"problems": 384, "samples": 512, "original": 0.12305, "edited": 0.19922, "gain": 0.07617, "item_weighted_gain": 0.07031, "item_SE": 0.02112, "wrong_to_right": 70, "right_to_wrong": 31}.
+NEXT pass31: frozen single L23 rank-one subtraction4, confirmation indices192:320 each source, 256 unique n1 max32768.
+
+Pass31 gen39 independent C256: original14.453125%, edited20.3125%, gain5.859375pp SE2.41653pp, W->R27 R->W12; GSM17.96875->22.65625%, MATH10.9375->17.96875%. Frozen candidate independently confirmed again.
+Pooled heldout: {"problems": 640, "samples": 768, "original": 0.13021, "edited": 0.20052, "gain": 0.07031, "item_weighted_gain": 0.06562, "item_SE": 0.01593, "wrong_to_right": 97, "right_to_wrong": 43}.
+TEMPORARY CONTROL for pass32: W23'=W23-4*u*r^T, u=W23*v, r fixed Gaussian seed2026041701 unit orthogonal to v. Same rank/norm/writer, scrambled detector. gen both control64 selection n4 max32768. Candidate unchanged in /work/best_subtract4 and best_exact; must restore after controls.
+
+Pass32 gen40 random-reader control selection64x4: original7.421875%, control8.203125%, gain0.78125pp SE2.15421pp; W->R14 R->W12, cuts93.359375->92.1875%. Does not reproduce targeted gain.
+Norm clarification: complete strength4 candidate change is8.966% of W23 Frobenius norm; prior .368/16.418 values were UNIT rank-one delta, before multiplying by4.
+NEXT pass33 TEMPORARY random-WRITER control W23-4*z*v^T, z random seed2026041702 orthogonal to u=W23v and norm matched. Single tensor. Same selection64 n4 full tokens with MLP23 activations. Restore exact /work/best_subtract4 afterwards.
+
+Pass33 gen41 random-writer control selection64x4: original7.421875%, control1.5625%, gain-5.859375pp SE1.90796pp; W->R3 R->W18; cuts93.359375->98.046875%. Reject control. {"random_reader": {"problems": 64, "samples": 256, "original": 0.07422, "edited": 0.08203, "gain": 0.00781, "item_weighted_gain": 0.00781, "item_SE": 0.02154, "wrong_to_right": 14, "right_to_wrong": 12, "original_detector_median": 6.544, "edited_detector_median": 6.0248}, "random_writer": {"problems": 64, "samples": 256, "original": 0.07422, "edited": 0.01562, "gain": -0.05859, "item_weighted_gain": -0.05859, "item_SE": 0.01908, "wrong_to_right": 3, "right_to_wrong": 18, "original_detector_median": 6.544, "edited_detector_median": 6.6914}}.
+RESTORED exact frozen candidate from /work/best_subtract4. Only L23 down_proj W-4(Wv)vT. NEXT pass34 both same selection64x4, full length with activations, direct comparison against both controls.
+
+Pass34 gen42 targeted simple4 on same control64x4: original7.421875%, edited17.96875%, gain10.546875pp SE2.65893pp; W->R36 R->W9; cut93.359375->78.90625%. Both random controls inferior.
+Pass35/36 legitimate iterative math bas
+```
+
+## Turn 129
+
+### Input
+
+````text
+OUTPUT of Python run 67 of at most 300:
+```
+Latest: {'problems': 128, 'samples': 256, 'original': 0.132812, 'edited': 0.203125, 'cut_original': 0.875, 'cut_edited': 0.742188, 'gain': 0.070312, 'SE': 0.029207}
+Primary aggregate: {'problems': 1792, 'samples': 3072, 'original': 0.124163, 'edited': 0.195033, 'cut_original': 0.886719, 'cut_edited': 0.756696, 'gain': 0.070871, 'SE': 0.008166}
+By source: {'gsm8k': {'problems': 896, 'samples': 1536, 'original': 0.15625, 'edited': 0.258371, 'cut_original': 0.854911, 'cut_edited': 0.669643, 'gain': 0.102121, 'SE': 0.013161}, 'math': {'problems': 896, 'samples': 1536, 'original': 0.092076, 'edited': 0.131696, 'cut_original': 0.918527, 'cut_edited': 0.84375, 'gain': 0.039621, 'SE': 0.009563}}
+Next IDs: ["gsm8k_train_1771", "gsm8k_train_4838", "gsm8k_train_5375", "gsm8k_train_7084", "gsm8k_train_5169", "gsm8k_train_6720", "gsm8k_train_5269", "gsm8k_train_4748", "gsm8k_train_5360", "gsm8k_train_1464", "gsm8k_train_2646", "gsm8k_train_2567", "gsm8k_train_2927", "gsm8k_train_3442", "gsm8k_train_2962", "gsm8k_train_5653", "gsm8k_train_3367", "gsm8k_train_2103", "gsm8k_train_2859", "gsm8k_train_4921", "gsm8k_train_2357", "gsm8k_train_5688", "gsm8k_train_3335", "gsm8k_train_4258", "gsm8k_train_3413", "gsm8k_train_5917", "gsm8k_train_5499", "gsm8k_train_2279", "gsm8k_train_218", "gsm8k_train_6068", "gsm8k_train_6669", "gsm8k_train_6239", "gsm8k_train_7202", "gsm8k_train_5801", "gsm8k_train_3942", "gsm8k_train_236", "gsm8k_train_1205", "gsm8k_train_1209", "gsm8k_train_1681", "gsm8k_train_106", "gsm8k_train_5692", "gsm8k_train_1125", "gsm8k_train_5537", "gsm8k_train_6943", "gsm8k_train_7165", "gsm8k_train_6986", "gsm8k_train_273", "gsm8k_train_703", "gsm8k_train_2234", "gsm8k_train_5602", "gsm8k_train_6775", "gsm8k_train_1270", "gsm8k_train_257", "gsm8k_train_6211", "gsm8k_train_6519", "gsm8k_train_4135", "gsm8k_train_4387", "gsm8k_train_7304", "gsm8k_train_4257", "gsm8k_train_3673", "gsm8k_train_430", "gsm8k_train_172", "gsm8k_train_4899", "gsm8k_train_2184", "math_train_intermediate_algebra_1276", "math_train_number_theory_388", "math_train_algebra_1008", "math_train_counting_and_probability_583", "math_train_prealgebra_728", "math_train_intermediate_algebra_165", "math_train_algebra_291", "math_train_number_theory_839", "math_train_prealgebra_633", "math_train_geometry_38", "math_train_geometry_861", "math_train_number_theory_737", "math_train_geometry_577", "math_train_algebra_32", "math_train_geometry_630", "math_train_precalculus_567", "math_train_intermediate_algebra_653", "math_train_intermediate_algebra_1130", "math_train_prealgebra_409", "math_train_counting_and_probability_311", "math_train_algebra_357", "math_train_intermediate_algebra_518", "math_train_prealgebra_1191", "math_train_algebra_730", "math_train_prealgebra_1129", "math_train_algebra_432", "math_train_counting_and_probability_469", "math_train_geometry_177", "math_train_precalculus_730", "math_train_intermediate_algebra_513", "math_train_algebra_1597", "math_train_number_theory_517", "math_train_number_theory_201", "math_train_prealgebra_757", "math_train_number_theory_33", "math_train_precalculus_494", "math_train_algebra_1681", "math_train_algebra_1721", "math_train_prealgebra_1029", "math_train_precalculus_159", "math_train_counting_and_probability_349", "math_train_prealgebra_793", "math_train_prealgebra_376", "math_train_intermediate_algebra_924", "math_train_intermediate_algebra_62", "math_train_geometry_710", "math_train_intermediate_algebra_889", "math_train_prealgebra_31", "math_train_number_theory_49", "math_train_algebra_1150", "math_train_intermediate_algebra_640", "math_train_intermediate_algebra_939", "math_train_algebra_653", "math_train_number_theory_506", "math_train_counting_and_probability_393", "math_train_geometry_74", "math_train_algebra_1533", "math_train_algebra_615", "math_train_algebra_324", "math_train_algebra_1649", "math_train_algebra_1673", "math_train_precalculus_442", "math_train_intermediate_algebra_1082", "math_train_intermediate_algebra_1239"]
+
+FURTHER MECHANISM CONTROLS:
+ del.layers.23.mlp.down_proj.weight W'=W-4(Wv)v^T; same6 raw premature-ending texts as pass28, token logprobs/topk20. No changes chosen from this check.
+
+Restart audit: single frozen L23 rank-one subtraction4 still active; no new edits. Next finish premature-closure check, then extend untouched confirmation.
+
+Pass29 /work/fwd_37 premature closure token scores (position,original,edit,delta): [[[85, -7.7222, -8.5829, -0.8608]], [[56, -8.5429, -9.1322, -0.5893]], [[60, -8.4546, -8.9426, -0.4879]], [[55, -10.7587, -11.2729, -0.5142]], [[41, -0.0, -0.0, -0.0]], [[55, -0.0, -0.0, -0.0]]].
+NEXT pass30: frozen only L23 down_proj subtraction4; paired generation new confirmation B256 = indices64:192 each GSM/MATH, n1 max32768. No retuning.
+
+Pass30 gen38 independent B256: original15.625%, edited21.484375%, paired+5.859375pp SE2.87934pp; W->R35 R->W20; GSM21.875->29.6875%, MATH9.375->13.28125%. Cut85.546875->73.046875%. Frozen edit unchanged.
+Pooled heldout summary {"problems": 384, "samples": 512, "original": 0.12305, "edited": 0.19922, "gain": 0.07617, "item_weighted_gain": 0.07031, "item_SE": 0.02112, "wrong_to_right": 70, "right_to_wrong": 31}.
+NEXT pass31: frozen single L23 rank-one subtraction4, confirmation indices192:320 each source, 256 unique n1 max32768.
+
+Pass31 gen39 independent C256: original14.453125%, edited20.3125%, gain5.859375pp SE2.41653pp, W->R27 R->W12; GSM17.96875->22.65625%, MATH10.9375->17.96875%. Frozen candidate independently confirmed again.
+Pooled heldout: {"problems": 640, "samples": 768, "original": 0.13021, "edited": 0.20052, "gain": 0.07031, "item_weighted_gain": 0.06562, "item_SE": 0.01593, "wrong_to_right": 97, "right_to_wrong": 43}.
+TEMPORARY CONTROL for pass32: W23'=W23-4*u*r^T, u=W23*v, r fixed Gaussian seed2026041701 unit orthogonal to v. Same rank/norm/writer, scrambled detector. gen both control64 selection n4 max32768. Candidate unchanged in /work/best_subtract4 and best_exact; must restore after controls.
+
+Pass32 gen40 random-reader control selection64x4: original7.421875%, control8.203125%, gain0.78125pp SE2.15421pp; W->R14 R->W12, cuts93.359375->92.1875%. Does not reproduce targeted gain.
+Norm clarification: complete strength4 candidate change is8.966% of W23 Frobenius norm; prior .368/16.418 values were UNIT rank-one delta, before multiplying by4.
+NEXT pass33 TEMPORARY random-WRITER control W23-4*z*v^T, z random seed2026041702 orthogonal to u=W23v and norm matched. Single tensor. Same selection64 n4 full tokens with MLP23 activations. Restore exact /work/best_subtract4 afterwards.
+
+Pass33 gen41 random-writer control selection64x4: original7.421875%, control1.5625%, gain-5.859375pp SE1.90796pp; W->R3 R->W18; cuts93.359375->98.046875%. Reject control. {"random_reader": {"problems": 64, "samples": 256, "original": 0.07422, "edited": 0.08203, "gain": 0.00781, "item_weighted_gain": 0.00781, "item_SE": 0.02154, "wrong_to_right": 14, "right_to_wrong": 12, "original_detector_median": 6.544, "edited_detector_median": 6.0248}, "random_writer": {"problems": 64, "samples": 256, "original": 0.07422, "edited": 0.01562, "gain": -0.05859, "item_weighted_gain": -0.05859, "item_SE": 0.01908, "wrong_to_right": 3, "right_to_wrong": 18, "original_detector_median": 6.544, "edited_detector_median": 6.6914}}.
+RESTORED exact frozen candidate from /work/best_subtract4. Only L23 down_proj W-4(Wv)vT. NEXT pass34 both same selection64x4, full length with activations, direct comparison against both controls.
+
+Pass34 gen42 targeted simple4 on same control64x4: original7.421875%, edited17.96875%, gain10.546875pp SE2.65893pp; W->R36 R->W9; cut93.359375->78.90625%. Both random controls inferior.
+Pass35/36 legitimate iterative math bas
+
+
+```
+````
+
+### Editor
+
+Across 1,792 held-out problems, the gain remains 7.1 points with a 0.82-point standard error. The recorded controls also support specificity: scrambling the detected direction did not reproduce the gain, and a norm-matched random output direction harmed accuracy. I will now run the penultimate preselected batch, with no weight changes. A sustained gain would further support transferring this targeted repair beyond the diagnostic examples.
+
+```forward
+{"type":"generate","model":"both","problems":["gsm8k_train_1771","gsm8k_train_4838","gsm8k_train_5375","gsm8k_train_7084","gsm8k_train_5169","gsm8k_train_6720","gsm8k_train_5269","gsm8k_train_4748","gsm8k_train_5360","gsm8k_train_1464","gsm8k_train_2646","gsm8k_train_2567","gsm8k_train_2927","gsm8k_train_3442","gsm8k_train_2962","gsm8k_train_5653","gsm8k_train_3367","gsm8k_train_2103","gsm8k_train_2859","gsm8k_train_4921","gsm8k_train_2357","gsm8k_train_5688","gsm8k_train_3335","gsm8k_train_4258","gsm8k_train_3413","gsm8k_train_5917","gsm8k_train_5499","gsm8k_train_2279","gsm8k_train_218","gsm8k_train_6068","gsm8k_train_6669","gsm8k_train_6239","gsm8k_train_7202","gsm8k_train_5801","gsm8k_train_3942","gsm8k_train_236","gsm8k_train_1205","gsm8k_train_1209","gsm8k_train_1681","gsm8k_train_106","gsm8k_train_5692","gsm8k_train_1125","gsm8k_train_5537","gsm8k_train_6943","gsm8k_train_7165","gsm8k_train_6986","gsm8k_train_273","gsm8k_train_703","gsm8k_train_2234","gsm8k_train_5602","gsm8k_train_6775","gsm8k_train_1270","gsm8k_train_257","gsm8k_train_6211","gsm8k_train_6519","gsm8k_train_4135","gsm8k_train_4387","gsm8k_train_7304","gsm8k_train_4257","gsm8k_train_3673","gsm8k_train_430","gsm8k_train_172","gsm8k_train_4899","gsm8k_train_2184","math_train_intermediate_algebra_1276","math_train_number_theory_388","math_train_algebra_1008","math_train_counting_and_probability_583","math_train_prealgebra_728","math_train_intermediate_algebra_165","math_train_algebra_291","math_train_number_theory_839","math_train_prealgebra_633","math_train_geometry_38","math_train_geometry_861","math_train_number_theory_737","math_train_geometry_577","math_train_algebra_32","math_train_geometry_630","math_train_precalculus_567","math_train_intermediate_algebra_653","math_train_intermediate_algebra_1130","math_train_prealgebra_409","math_train_counting_and_probability_311","math_train_algebra_357","math_train_intermediate_algebra_518","math_train_prealgebra_1191","math_train_algebra_730","math_train_prealgebra_1129","math_train_algebra_432","math_train_counting_and_probability_469","math_train_geometry_177","math_train_precalculus_730","math_train_intermediate_algebra_513","math_train_algebra_1597","math_train_number_theory_517","math_train_number_theory_201","math_train_prealgebra_757","math_train_number_theory_33","math_train_precalculus_494","math_train_algebra_1681","math_train_algebra_1721","math_train_prealgebra_1029","math_train_precalculus_159","math_train_counting_and_probability_349","math_train_prealgebra_793","math_train_prealgebra_376","math_train_intermediate_algebra_924","math_train_intermediate_algebra_62","math_train_geometry_710","math_train_intermediate_algebra_889","math_train_prealgebra_31","math_train_number_theory_49","math_train_algebra_1150","math_train_intermediate_algebra_640","math_train_intermediate_algebra_939","math_train_algebra_653","math_train_number_theory_506","math_train_counting_and_probability_393","math_train_geometry_74","math_train_algebra_1533","math_train_algebra_615","math_train_algebra_324","math_train_algebra_1649","math_train_algebra_1673","math_train_precalculus_442","math_train_intermediate_algebra_1082","math_train_intermediate_algebra_1239"],"n":2,"max_tokens":32768}
+```
+
+### Tool result
+
+```text
+{
+  "files": {
+    "original": "/work/gen_57_original.jsonl",
+    "edited": "/work/gen_57_edited.jsonl"
+  },
+  "activations": null,
+  "original": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.125,
+    "accuracy_by_source": {
+      "gsm8k": 0.1171875,
+      "math": 0.1328125
+    },
+    "mean_tokens": 29727.3828125,
+    "cut_share": 0.890625,
+    "failures": {
+      "wrong_answer": 1,
+      "no_answer_finished": 0,
+      "cut_at_max_tokens": 228
+    }
+  },
+  "edited": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.1875,
+    "accuracy_by_source": {
+      "gsm8k": 0.203125,
+      "math": 0.171875
+    },
+    "mean_tokens": 28062.140625,
+    "cut_share": 0.80859375,
+    "failures": {
+      "wrong_answer": 4,
+      "no_answer_finished": 2,
+      "cut_at_max_tokens": 207
+    }
+  },
+  "paired": {
+    "items": 128,
+    "accuracy_difference": 0.0625,
+    "standard_error": 0.028279050981414647,
+    "samples_wrong_to_right": 33,
+    "samples_right_to_wrong": 17
+  },
+  "ok": true,
+  "type": "generate",
+  "model": "both",
+  "s": 918.0217117129996
+}
+```
+
+## Turn 130
+
+### Input
+
+````text
+FORWARD PASS 49 of 50:
+```json
+{"files": {"original": "/work/gen_57_original.jsonl", "edited": "/work/gen_57_edited.jsonl"}, "activations": null, "original": {"generations": 256, "graded": 256, "accuracy": 0.125, "accuracy_by_source": {"gsm8k": 0.1171875, "math": 0.1328125}, "mean_tokens": 29727.3828125, "cut_share": 0.890625, "failures": {"wrong_answer": 1, "no_answer_finished": 0, "cut_at_max_tokens": 228}}, "edited": {"generations": 256, "graded": 256, "accuracy": 0.1875, "accuracy_by_source": {"gsm8k": 0.203125, "math": 0.171875}, "mean_tokens": 28062.140625, "cut_share": 0.80859375, "failures": {"wrong_answer": 4, "no_answer_finished": 2, "cut_at_max_tokens": 207}}, "paired": {"items": 128, "accuracy_difference": 0.0625, "standard_error": 0.028279050981414647, "samples_wrong_to_right": 33, "samples_right_to_wrong": 17}, "ok": true, "type": "generate", "model": "both", "s": 918.0217117129996}
+```
+````
+
+### Editor
+
+The penultimate batch gained 6.25 percentage points, with improvements in both sources. This is consistent with the pooled result, although individual answers still regress and many generations still reach the token limit. I will record this batch, retrieve the final fixed batch, and inspect the saved direction metadata for the final audit. The last comparison will complete the planned accuracy test; it will not be used to retune the edit.
+
+```python
+# Hypothesis: the final audit will confirm one fixed, diagnostic-derived edit and disjoint confirmation data.
+latest_batch, aggregate_summary = record_confirmation(49, 57)
+print("Final batch IDs:", json.dumps(plan["50"]))
+saved_direction = torch.load(work / "repetition_rank1_L23.pt", map_location="cpu", weights_only=True)
+print("Direction metadata:", {k:(list(v.shape) if isinstance(v, torch.Tensor) else type(v).__name__)
+                              for k,v in saved_direction.items()})
+split_record = json.loads((work / "splits.json").read_text())
+print("Split structure:", {k:(list(v.keys()) if isinstance(v,dict) else len(v))
+                           for k,v in split_record.items()})
+print("\nITERATIVE-MATH LIMITATION RECORD:\n", notes_text[15900:18300])
+```
+
+### Tool result
+
+```python
+# Hypothesis: the final audit will confirm one fixed, diagnostic-derived edit and disjoint confirmation data.
+latest_batch, aggregate_summary = record_confirmation(49, 57)
+print("Final batch IDs:", json.dumps(plan["50"]))
+saved_direction = torch.load(work / "repetition_rank1_L23.pt", map_location="cpu", weights_only=True)
+print("Direction metadata:", {k:(list(v.shape) if isinstance(v, torch.Tensor) else type(v).__name__)
+                              for k,v in saved_direction.items()})
+split_record = json.loads((work / "splits.json").read_text())
+print("Split structure:", {k:(list(v.keys()) if isinstance(v,dict) else len(v))
+                           for k,v in split_record.items()})
+print("\nITERATIVE-MATH LIMITATION RECORD:\n", notes_text[15900:18300])
+```
+
+```text
+Latest: {'problems': 128, 'samples': 256, 'original': 0.125, 'edited': 0.1875, 'cut_original': 0.890625, 'cut_edited': 0.808594, 'gain': 0.0625, 'SE': 0.028279}
+Primary aggregate: {'problems': 1920, 'samples': 3328, 'original': 0.124219, 'edited': 0.194531, 'cut_original': 0.886979, 'cut_edited': 0.760156, 'gain': 0.070312, 'SE': 0.007849}
+By source: {'gsm8k': {'problems': 960, 'samples': 1664, 'original': 0.153646, 'edited': 0.254688, 'cut_original': 0.858854, 'cut_edited': 0.676042, 'gain': 0.101042, 'SE': 0.012623}, 'math': {'problems': 960, 'samples': 1664, 'original': 0.094792, 'edited': 0.134375, 'cut_original': 0.915104, 'cut_edited': 0.844271, 'gain': 0.039583, 'SE': 0.009234}}
+Final batch IDs: ["gsm8k_train_5931", "gsm8k_train_4786", "gsm8k_train_6837", "gsm8k_train_7064", "gsm8k_train_2205", "gsm8k_train_1844", "gsm8k_train_3177", "gsm8k_train_2476", "gsm8k_train_4842", "gsm8k_train_4332", "gsm8k_train_1910", "gsm8k_train_4176", "gsm8k_train_4652", "gsm8k_train_4944", "gsm8k_train_2782", "gsm8k_train_3190", "gsm8k_train_3896", "gsm8k_train_1960", "gsm8k_train_1600", "gsm8k_train_5728", "gsm8k_train_3786", "gsm8k_train_4116", "gsm8k_train_7115", "gsm8k_train_1234", "gsm8k_train_1980", "gsm8k_train_2718", "gsm8k_train_875", "gsm8k_train_6235", "gsm8k_train_1608", "gsm8k_train_5333", "gsm8k_train_6835", "gsm8k_train_1004", "gsm8k_train_888", "gsm8k_train_5336", "gsm8k_train_5080", "gsm8k_train_4222", "gsm8k_train_5074", "gsm8k_train_7073", "gsm8k_train_3156", "gsm8k_train_2361", "gsm8k_train_1783", "gsm8k_train_5644", "gsm8k_train_885", "gsm8k_train_5976", "gsm8k_train_4938", "gsm8k_train_2142", "gsm8k_train_5489", "gsm8k_train_6732", "gsm8k_train_7152", "gsm8k_train_1925", "gsm8k_train_340", "gsm8k_train_4448", "gsm8k_train_3734", "gsm8k_train_6029", "gsm8k_train_1095", "gsm8k_train_3249", "gsm8k_train_7260", "gsm8k_train_3528", "gsm8k_train_5392", "gsm8k_train_7007", "gsm8k_train_959", "gsm8k_train_5956", "gsm8k_train_7080", "gsm8k_train_621", "math_train_algebra_227", "math_train_algebra_1623", "math_train_intermediate_algebra_467", "math_train_intermediate_algebra_557", "math_train_algebra_1427", "math_train_geometry_372", "math_train_precalculus_211", "math_train_precalculus_296", "math_train_number_theory_628", "math_train_geometry_138", "math_train_intermediate_algebra_1052", "math_train_prealgebra_680", "math_train_geometry_238", "math_train_prealgebra_924", "math_train_counting_and_probability_618", "math_train_geometry_500", "math_train_prealgebra_961", "math_train_prealgebra_767", "math_train_number_theory_797", "math_train_counting_and_probability_182", "math_train_number_theory_860", "math_train_intermediate_algebra_318", "math_train_precalculus_240", "math_train_intermediate_algebra_532", "math_train_precalculus_686", "math_train_prealgebra_347", "math_train_intermediate_algebra_970", "math_train_algebra_425", "math_train_prealgebra_432", "math_train_number_theory_52", "math_train_number_theory_92", "math_train_prealgebra_430", "math_train_intermediate_algebra_872", "math_train_prealgebra_1168", "math_train_algebra_73", "math_train_geometry_349", "math_train_precalculus_143", "math_train_prealgebra_771", "math_train_number_theory_97", "math_train_geometry_121", "math_train_number_theory_635", "math_train_prealgebra_606", "math_train_intermediate_algebra_898", "math_train_algebra_681", "math_train_precalculus_520", "math_train_prealgebra_1131", "math_train_precalculus_195", "math_train_precalculus_317", "math_train_geometry_635", "math_train_number_theory_93", "math_train_intermediate_algebra_1269", "math_train_algebra_335", "math_train_geometry_732", "math_train_algebra_1739", "math_train_prealgebra_154", "math_train_prealgebra_1036", "math_train_prealgebra_136", "math_train_counting_and_probability_42", "math_train_precalculus_619", "math_train_algebra_804", "math_train_geometry_571", "math_train_precalculus_243", "math_train_number_theory_317", "math_train_algebra_1073"]
+Direction metadata: {'name': 'str', 'original': [1024, 3584], 'delta': [1024, 3584], 'direction': [3584]}
+Split structure: {'gsm8k': ['diagnosis', 'selection', 'confirmation'], 'math': ['diagnosis', 'selection', 'confirmation'], 'aime': ['diagnosis', 'selection', 'confirmation']}
+
+ITERATIVE-MATH LIMITATION RECORD:
+ eline/edit /work/fwd_43//work/fwd_44: [{"probe": 0, "reasoning_tokens": 206, "mean_delta": -0.2022, "numeric_delta": -0.3004, "other_delta": -0.1579, "late_half_delta": -0.2674, "detector_mean": 3.644}, {"probe": 1, "reasoning_tokens": 226, "mean_delta": -0.1114, "numeric_delta": -0.0045, "other_delta": -0.17, "late_half_delta": -0.1624, "detector_mean": 3.545}, {"probe": 2, "reasoning_tokens": 201, "mean_delta": -0.1302, "numeric_delta": -0.0264, "other_delta": -0.1787, "late_half_delta": -0.1915, "detector_mean": 3.453}, {"probe": 3, "reasoning_tokens": 193, "mean_delta": -0.0193, "numeric_delta": -0.0109, "other_delta": -0.027, "late_half_delta": -0.0163, "detector_mean": 1.636}, {"probe": 4, "reasoning_tokens": 224, "mean_delta": -0.0525, "numeric_delta": 0.0004, "other_delta": -0.071, "late_half_delta": -0.0937, "detector_mean": 1.122}, {"probe": 5, "reasoning_tokens": 212, "mean_delta": -0.1244, "numeric_delta": -0.0765, "other_delta": -0.1434, "late_half_delta": -0.18, "detector_mean": 2.756}, {"probe": 6, "reasoning_tokens": 226, "mean_delta": -0.2841, "numeric_delta": -0.16, "other_delta": -0.3457, "late_half_delta": -0.2942, "detector_mean": 3.389}, {"probe": 7, "reasoning_tokens": 155, "mean_delta": -0.0574, "numeric_delta": -0.0745, "other_delta": -0.0513, "late_half_delta": -0.0664, "detector_mean": 0.316}]. Selectivity imperfect: also reduces valid iterative math likelihood. Will inspect existing guarded candidate only on mechanistic/exploratory data; simple4 remains independently validated best.
+
+NEXT pass37: TEMPORARY existing guarded4 candidate from /work/refined4, only L23 down_proj W-4(Wv)qT. q orthogonal to12 clean means from original four diagnostic probes, q.v=1. No new direction fitting. Score exact eight legitimate iterative chats from passes35/36, baseline fwd43. Simple4 best backup untouched.
+
+Pass37 /work/fwd_45 existing guarded4 iterative probes: [{"probe": 0, "simple_delta": -0.2022, "guarded_delta": -0.1589}, {"probe": 1, "simple_delta": -0.1114, "guarded_delta": -0.1358}, {"probe": 2, "simple_delta": -0.1302, "guarded_delta": -0.1248}, {"probe": 3, "simple_delta": -0.0193, "guarded_delta": -0.0205}, {"probe": 4, "simple_delta": -0.0525, "guarded_delta": -0.0651}, {"probe": 5, "simple_delta": -0.1244, "guarded_delta": -0.1084}, {"probe": 6, "simple_delta": -0.2841, "guarded_delta": -0.2562}, {"probe": 7, "simple_delta": -0.0574,
+```
+
+## Turn 131
+
+### Input
+
+````text
+OUTPUT of Python run 68 of at most 300:
+```
+Latest: {'problems': 128, 'samples': 256, 'original': 0.125, 'edited': 0.1875, 'cut_original': 0.890625, 'cut_edited': 0.808594, 'gain': 0.0625, 'SE': 0.028279}
+Primary aggregate: {'problems': 1920, 'samples': 3328, 'original': 0.124219, 'edited': 0.194531, 'cut_original': 0.886979, 'cut_edited': 0.760156, 'gain': 0.070312, 'SE': 0.007849}
+By source: {'gsm8k': {'problems': 960, 'samples': 1664, 'original': 0.153646, 'edited': 0.254688, 'cut_original': 0.858854, 'cut_edited': 0.676042, 'gain': 0.101042, 'SE': 0.012623}, 'math': {'problems': 960, 'samples': 1664, 'original': 0.094792, 'edited': 0.134375, 'cut_original': 0.915104, 'cut_edited': 0.844271, 'gain': 0.039583, 'SE': 0.009234}}
+Final batch IDs: ["gsm8k_train_5931", "gsm8k_train_4786", "gsm8k_train_6837", "gsm8k_train_7064", "gsm8k_train_2205", "gsm8k_train_1844", "gsm8k_train_3177", "gsm8k_train_2476", "gsm8k_train_4842", "gsm8k_train_4332", "gsm8k_train_1910", "gsm8k_train_4176", "gsm8k_train_4652", "gsm8k_train_4944", "gsm8k_train_2782", "gsm8k_train_3190", "gsm8k_train_3896", "gsm8k_train_1960", "gsm8k_train_1600", "gsm8k_train_5728", "gsm8k_train_3786", "gsm8k_train_4116", "gsm8k_train_7115", "gsm8k_train_1234", "gsm8k_train_1980", "gsm8k_train_2718", "gsm8k_train_875", "gsm8k_train_6235", "gsm8k_train_1608", "gsm8k_train_5333", "gsm8k_train_6835", "gsm8k_train_1004", "gsm8k_train_888", "gsm8k_train_5336", "gsm8k_train_5080", "gsm8k_train_4222", "gsm8k_train_5074", "gsm8k_train_7073", "gsm8k_train_3156", "gsm8k_train_2361", "gsm8k_train_1783", "gsm8k_train_5644", "gsm8k_train_885", "gsm8k_train_5976", "gsm8k_train_4938", "gsm8k_train_2142", "gsm8k_train_5489", "gsm8k_train_6732", "gsm8k_train_7152", "gsm8k_train_1925", "gsm8k_train_340", "gsm8k_train_4448", "gsm8k_train_3734", "gsm8k_train_6029", "gsm8k_train_1095", "gsm8k_train_3249", "gsm8k_train_7260", "gsm8k_train_3528", "gsm8k_train_5392", "gsm8k_train_7007", "gsm8k_train_959", "gsm8k_train_5956", "gsm8k_train_7080", "gsm8k_train_621", "math_train_algebra_227", "math_train_algebra_1623", "math_train_intermediate_algebra_467", "math_train_intermediate_algebra_557", "math_train_algebra_1427", "math_train_geometry_372", "math_train_precalculus_211", "math_train_precalculus_296", "math_train_number_theory_628", "math_train_geometry_138", "math_train_intermediate_algebra_1052", "math_train_prealgebra_680", "math_train_geometry_238", "math_train_prealgebra_924", "math_train_counting_and_probability_618", "math_train_geometry_500", "math_train_prealgebra_961", "math_train_prealgebra_767", "math_train_number_theory_797", "math_train_counting_and_probability_182", "math_train_number_theory_860", "math_train_intermediate_algebra_318", "math_train_precalculus_240", "math_train_intermediate_algebra_532", "math_train_precalculus_686", "math_train_prealgebra_347", "math_train_intermediate_algebra_970", "math_train_algebra_425", "math_train_prealgebra_432", "math_train_number_theory_52", "math_train_number_theory_92", "math_train_prealgebra_430", "math_train_intermediate_algebra_872", "math_train_prealgebra_1168", "math_train_algebra_73", "math_train_geometry_349", "math_train_precalculus_143", "math_train_prealgebra_771", "math_train_number_theory_97", "math_train_geometry_121", "math_train_number_theory_635", "math_train_prealgebra_606", "math_train_intermediate_algebra_898", "math_train_algebra_681", "math_train_precalculus_520", "math_train_prealgebra_1131", "math_train_precalculus_195", "math_train_precalculus_317", "math_train_geometry_635", "math_train_number_theory_93", "math_train_intermediate_algebra_1269", "math_train_algebra_335", "math_train_geometry_732", "math_train_algebra_1739", "math_train_prealgebra_154", "math_train_prealgebra_1036", "math_train_prealgebra_136", "math_train_counting_and_probability_42", "math_train_precalculus_619", "math_train_algebra_804", "math_train_geometry_571", "math_train_precalculus_243", "math_train_number_theory_317", "math_train_algebra_1073"]
+Direction metadata: {'name': 'str', 'original': [1024, 3584], 'delta': [1024, 3584], 'direction': [3584]}
+Split structure: {'gsm8k': ['diagnosis', 'selection', 'confirmation'], 'math': ['diagnosis', 'selection', 'confirmation'], 'aime': ['diagnosis', 'selection', 'confirmation']}
+
+ITERATIVE-MATH LIMITATION RECORD:
+ eline/edit /work/fwd_43//work/fwd_44: [{"probe": 0, "reasoning_tokens": 206, "mean_delta": -0.2022, "numeric_delta": -0.3004, "other_delta": -0.1579, "late_half_delta": -0.2674, "detector_mean": 3.644}, {"probe": 1, "reasoning_tokens": 226, "mean_delta": -0.1114, "numeric_delta": -0.0045, "other_delta": -0.17, "late_half_delta": -0.1624, "detector_mean": 3.545}, {"probe": 2, "reasoning_tokens": 201, "mean_delta": -0.1302, "numeric_delta": -0.0264, "other_delta": -0.1787, "late_half_delta": -0.1915, "detector_mean": 3.453}, {"probe": 3, "reasoning_tokens": 193, "mean_delta": -0.0193, "numeric_delta": -0.0109, "other_delta": -0.027, "late_half_delta": -0.0163, "detector_mean": 1.636}, {"probe": 4, "reasoning_tokens": 224, "mean_delta": -0.0525, "numeric_delta": 0.0004, "other_delta": -0.071, "late_half_delta": -0.0937, "detector_mean": 1.122}, {"probe": 5, "reasoning_tokens": 212, "mean_delta": -0.1244, "numeric_delta": -0.0765, "other_delta": -0.1434, "late_half_delta": -0.18, "detector_mean": 2.756}, {"probe": 6, "reasoning_tokens": 226, "mean_delta": -0.2841, "numeric_delta": -0.16, "other_delta": -0.3457, "late_half_delta": -0.2942, "detector_mean": 3.389}, {"probe": 7, "reasoning_tokens": 155, "mean_delta": -0.0574, "numeric_delta": -0.0745, "other_delta": -0.0513, "late_half_delta": -0.0664, "detector_mean": 0.316}]. Selectivity imperfect: also reduces valid iterative math likelihood. Will inspect existing guarded candidate only on mechanistic/exploratory data; simple4 remains independently validated best.
+
+NEXT pass37: TEMPORARY existing guarded4 candidate from /work/refined4, only L23 down_proj W-4(Wv)qT. q orthogonal to12 clean means from original four diagnostic probes, q.v=1. No new direction fitting. Score exact eight legitimate iterative chats from passes35/36, baseline fwd43. Simple4 best backup untouched.
+
+Pass37 /work/fwd_45 existing guarded4 iterative probes: [{"probe": 0, "simple_delta": -0.2022, "guarded_delta": -0.1589}, {"probe": 1, "simple_delta": -0.1114, "guarded_delta": -0.1358}, {"probe": 2, "simple_delta": -0.1302, "guarded_delta": -0.1248}, {"probe": 3, "simple_delta": -0.0193, "guarded_delta": -0.0205}, {"probe": 4, "simple_delta": -0.0525, "guarded_delta": -0.0651}, {"probe": 5, "simple_delta": -0.1244, "guarded_delta": -0.1084}, {"probe": 6, "simple_delta": -0.2841, "guarded_delta": -0.2562}, {"probe": 7, "simple_delta": -0.0574,
+
+
+```
+````
+
+### Editor
+
+The aggregate now covers 1,920 distinct problems, with a 7.0-point gain and a 0.78-point standard error. The mechanism is not perfectly selective: separate probes showed some suppression of legitimate iterative mathematics, so I will retain that limitation in the final report. I will now use the last forward pass on the final preselected batch. Its result will complete the accuracy estimate for the unchanged candidate.
+
+```forward
+{"type":"generate","model":"both","problems":["gsm8k_train_5931","gsm8k_train_4786","gsm8k_train_6837","gsm8k_train_7064","gsm8k_train_2205","gsm8k_train_1844","gsm8k_train_3177","gsm8k_train_2476","gsm8k_train_4842","gsm8k_train_4332","gsm8k_train_1910","gsm8k_train_4176","gsm8k_train_4652","gsm8k_train_4944","gsm8k_train_2782","gsm8k_train_3190","gsm8k_train_3896","gsm8k_train_1960","gsm8k_train_1600","gsm8k_train_5728","gsm8k_train_3786","gsm8k_train_4116","gsm8k_train_7115","gsm8k_train_1234","gsm8k_train_1980","gsm8k_train_2718","gsm8k_train_875","gsm8k_train_6235","gsm8k_train_1608","gsm8k_train_5333","gsm8k_train_6835","gsm8k_train_1004","gsm8k_train_888","gsm8k_train_5336","gsm8k_train_5080","gsm8k_train_4222","gsm8k_train_5074","gsm8k_train_7073","gsm8k_train_3156","gsm8k_train_2361","gsm8k_train_1783","gsm8k_train_5644","gsm8k_train_885","gsm8k_train_5976","gsm8k_train_4938","gsm8k_train_2142","gsm8k_train_5489","gsm8k_train_6732","gsm8k_train_7152","gsm8k_train_1925","gsm8k_train_340","gsm8k_train_4448","gsm8k_train_3734","gsm8k_train_6029","gsm8k_train_1095","gsm8k_train_3249","gsm8k_train_7260","gsm8k_train_3528","gsm8k_train_5392","gsm8k_train_7007","gsm8k_train_959","gsm8k_train_5956","gsm8k_train_7080","gsm8k_train_621","math_train_algebra_227","math_train_algebra_1623","math_train_intermediate_algebra_467","math_train_intermediate_algebra_557","math_train_algebra_1427","math_train_geometry_372","math_train_precalculus_211","math_train_precalculus_296","math_train_number_theory_628","math_train_geometry_138","math_train_intermediate_algebra_1052","math_train_prealgebra_680","math_train_geometry_238","math_train_prealgebra_924","math_train_counting_and_probability_618","math_train_geometry_500","math_train_prealgebra_961","math_train_prealgebra_767","math_train_number_theory_797","math_train_counting_and_probability_182","math_train_number_theory_860","math_train_intermediate_algebra_318","math_train_precalculus_240","math_train_intermediate_algebra_532","math_train_precalculus_686","math_train_prealgebra_347","math_train_intermediate_algebra_970","math_train_algebra_425","math_train_prealgebra_432","math_train_number_theory_52","math_train_number_theory_92","math_train_prealgebra_430","math_train_intermediate_algebra_872","math_train_prealgebra_1168","math_train_algebra_73","math_train_geometry_349","math_train_precalculus_143","math_train_prealgebra_771","math_train_number_theory_97","math_train_geometry_121","math_train_number_theory_635","math_train_prealgebra_606","math_train_intermediate_algebra_898","math_train_algebra_681","math_train_precalculus_520","math_train_prealgebra_1131","math_train_precalculus_195","math_train_precalculus_317","math_train_geometry_635","math_train_number_theory_93","math_train_intermediate_algebra_1269","math_train_algebra_335","math_train_geometry_732","math_train_algebra_1739","math_train_prealgebra_154","math_train_prealgebra_1036","math_train_prealgebra_136","math_train_counting_and_probability_42","math_train_precalculus_619","math_train_algebra_804","math_train_geometry_571","math_train_precalculus_243","math_train_number_theory_317","math_train_algebra_1073"],"n":2,"max_tokens":32768}
+```
+
+### Tool result
+
+```text
+{
+  "files": {
+    "original": "/work/gen_58_original.jsonl",
+    "edited": "/work/gen_58_edited.jsonl"
+  },
+  "activations": null,
+  "original": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.0859375,
+    "accuracy_by_source": {
+      "gsm8k": 0.109375,
+      "math": 0.0625
+    },
+    "mean_tokens": 30738.71875,
+    "cut_share": 0.92578125,
+    "failures": {
+      "wrong_answer": 0,
+      "no_answer_finished": 0,
+      "cut_at_max_tokens": 237
+    }
+  },
+  "edited": {
+    "generations": 256,
+    "graded": 256,
+    "accuracy": 0.18359375,
+    "accuracy_by_source": {
+      "gsm8k": 0.234375,
+      "math": 0.1328125
+    },
+    "mean_tokens": 27151.19921875,
+    "cut_share": 0.75390625,
+    "failures": {
+      "wrong_answer": 8,
+      "no_answer_finished": 9,
+      "cut_at_max_tokens": 193
+    }
+  },
+  "paired": {
+    "items": 128,
+    "accuracy_difference": 0.09765625,
+    "standard_error": 0.02663143483822858,
+    "samples_wrong_to_right": 34,
+    "samples_right_to_wrong": 9
+  },
+  "ok": true,
+  "type": "generate",
+  "model": "both",
+  "s": 915.747378606
+}
+```
+
+## Turn 132
+
+### Input
+
+````text
+FORWARD PASS 50 of 50:
+```json
+{"files": {"original": "/work/gen_58_original.jsonl", "edited": "/work/gen_58_edited.jsonl"}, "activations": null, "original": {"generations": 256, "graded": 256, "accuracy": 0.0859375, "accuracy_by_source": {"gsm8k": 0.109375, "math": 0.0625}, "mean_tokens": 30738.71875, "cut_share": 0.92578125, "failures": {"wrong_answer": 0, "no_answer_finished": 0, "cut_at_max_tokens": 237}}, "edited": {"generations": 256, "graded": 256, "accuracy": 0.18359375, "accuracy_by_source": {"gsm8k": 0.234375, "math": 0.1328125}, "mean_tokens": 27151.19921875, "cut_share": 0.75390625, "failures": {"wrong_answer": 8, "no_answer_finished": 9, "cut_at_max_tokens": 193}}, "paired": {"items": 128, "accuracy_difference": 0.09765625, "standard_error": 0.02663143483822858, "samples_wrong_to_right": 34, "samples_right_to_wrong": 9}, "ok": true, "type": "generate", "model": "both", "s": 915.747378606}
+```
+````
+
+### Editor
+
+The final batch improved accuracy by 9.8 percentage points, with a paired standard error of 2.7 points. All 50 forward passes are now used, and I will retain the frozen layer-23 edit rather than make any further changes. I will finish by checking split separation and tensor integrity, and save the complete pooled results. The final report will distinguish the demonstrated practice-set gain from unmeasured benchmark performance and note the edit’s limitations.
+
+```python
+# Hypothesis: final independent accuracy evidence justifies retaining exactly the frozen rank-one repetition repair.
+latest_batch, aggregate_summary = record_confirmation(50, 58)
+primary = confirmation_table
+assert primary["id"].nunique() == 2048
+assert len(primary) == 3584
+for source, group in primary.groupby("source"):
+    ids = set(group["id"])
+    assert len(ids) == 1024
+    assert ids <= set(split_record[source]["confirmation"])
+    assert ids.isdisjoint(split_record[source]["diagnosis"])
+    assert ids.isdisjoint(split_record[source]["selection"])
+
+def detailed_final_summary(table):
+    p = table.groupby(["source","id"], sort=False)[
+        ["original","edited","cut_original","cut_edited","tokens_original",
+         "tokens_edited","noanswer_original","noanswer_edited"]].mean()
+    d = p["edited"] - p["original"]
+    se = float(d.std(ddof=1) / np.sqrt(len(d)))
+    return {
+        "problems":len(p), "generations_per_model":len(table),
+        "equal_problem_original":float(p["original"].mean()),
+        "equal_problem_edited":float(p["edited"].mean()),
+        "paired_gain":float(d.mean()), "problem_clustered_se":se,
+        "approx_95pct_interval":[float(d.mean()-1.96*se), float(d.mean()+1.96*se)],
+        "cut_original":float(p["cut_original"].mean()),
+        "cut_edited":float(p["cut_edited"].mean()),
+        "mean_tokens_original":float(p["tokens_original"].mean()),
+        "mean_tokens_edited":float(p["tokens_edited"].mean()),
+        "noanswer_finished_original":float(p["noanswer_original"].mean()),
+        "noanswer_finished_edited":float(p["noanswer_edited"].mean()),
+        "sample_wrong_to_right":int(((table["original"] == 0) & (table["edited"] == 1)).sum()),
+        "sample_right_to_wrong":int(((table["original"] == 1) & (table["edited"] == 0)).sum()),
+        "sample_weighted_original":float(table["original"].mean()),
+        "sample_weighted_edited":float(table["edited"].mean()),
+    }
+
+final_stats = {
+    "primary":detailed_final_summary(primary),
+    "by_source":{s:detailed_final_summary(t) for s,t in primary.groupby("source")},
+    "aime":detailed_final_summary(pd.concat(
+        [read_paired_batch(k) for k in manifest["aime"]], ignore_index=True)),
+    "weight_selection":"Frozen before confirmation; no tuning on confirmation outcomes",
+    "forward_passes_used":50,
+}
+final_weight = load(edit_name)
+original_weight = load_original(edit_name)
+v = saved_direction["direction"].float()
+assert list(edited()) == [edit_name]
+assert torch.isfinite(final_weight).all()
+assert final_weight.shape == original_weight.shape == (1024,3584)
+assert np.array_equal(final_weight.numpy(), best_weight)
+delta_weight = final_weight - original_weight
+rank_one_delta = -4.0 * torch.outer(original_weight @ v, v)
+rank_error = float(torch.linalg.vector_norm(delta_weight-rank_one_delta) /
+                   torch.linalg.vector_norm(delta_weight))
+assert rank_error < 1e-5
+assert abs(float(v @ v)-1) < 1e-5
+scale = float((final_weight * original_weight).sum() / original_weight.square().sum())
+mass_order = torch.argsort(v.square(), descending=True)
+audit = {
+    "tensor":edit_name, "shape":list(final_weight.shape),
+    "formula":"W' = W - 4 (W v) v^T; ||v||_2 = 1",
+    "edited_tensors":list(edited()),
+    "relative_change_norm":float(torch.linalg.vector_norm(delta_weight) /
+                                torch.linalg.vector_norm(original_weight)),
+    "rank_one_reconstruction_relative_error":rank_error,
+    "best_whole_tensor_scale":scale,
+    "non_scaling_fraction_of_change":float(
+        torch.linalg.vector_norm(final_weight-scale*original_weight) /
+        torch.linalg.vector_norm(delta_weight)),
+    "direction_top7_neurons":mass_order[:7].tolist(),
+    "direction_top7_squared_mass":float(v[mass_order[:7]].square().sum()),
+    "sha256":hashlib.sha256(final_weight.numpy().tobytes()).hexdigest(),
+    "matches_frozen_backup":True,
+    "confirmation_disjoint_from_diagnosis_and_selection":True,
+}
+final_stats["audit"] = audit
+(work / "final_results.json").write_text(json.dumps(final_stats, indent=2))
+(work / "final_weight_audit.json").write_text(json.dumps(audit, indent=2))
+
+s = final_stats["primary"]
+report_lines = [
+    "# Final submitted weight edit",
+    "",
+    f"Only `{edit_name}` is modified. Formula: W' = W - 4 (Wv) v^T.",
+    "v is the normalized mean late-minus-early repeated-check MLP activation contrast,",
+    "orthogonalized to mean early activation, from four diagnostic probes.",
+    "The edit counteracts this direction's output rather than scaling a whole tensor.",
+    "",
+    "## Diagnosis and causal evidence",
+    "- Initial diagnostic run: 175/192 generations cut off; accuracy 9.375%.",
+    "- Candidate attention-head and single-neuron edits did not validate and were removed.",
+    "- L23 repeated-check direction showed much larger effects on late repetition than early reasoning.",
+    "- Same-selection dose tests at strengths 2/4/6/8 gave gains +7.42/+17.19/0/-7.81 percentage points.",
+    "- Same control set: targeted strength4 +10.55pp, scrambled reader +0.78pp, random writer -5.86pp.",
+    "- Opposite sign reduced cutoffs but caused 191/256 finished-no-answer failures; rejected.",
+    "- Novel repeated-claim probes supported transfer beyond the original wording.",
+    "- Premature-close probes did not show increased closing probability in informative cases.",
+    "",
+    "## Independent confirmation",
+    f"- {s['problems']} unique GSM8K/MATH practice problems, {s['generations_per_model']} generations per model.",
+    "- Equal problem weighting; paired differences and SE clustered by problem.",
+    f"- Original {100*s['equal_problem_original']:.3f}%; edited {100*s['equal_problem_edited']:.3f}%.",
+    f"- Gain {100*s['paired_gain']:.3f}pp; SE {100*s['problem_clustered_se']:.3f}pp;",
+    f"  approximate 95% interval [{100*s['approx_95pct_interval'][0]:.3f}, {100*s['approx_95pct_interval'][1]:.3f}]pp.",
+    f"- Cutoffs {100*s['cut_original']:.2f}% -> {100*s['cut_edited']:.2f}%.",
+]
+for source, ss in final_stats["by_source"].items():
+    report_lines.append(
+        f"- {source}: {100*ss['equal_problem_original']:.3f}% -> "
+        f"{100*ss['equal_problem_edited']:.3f}%; gain {100*ss['paired_gain']:.3f}pp, "
+        f"SE {100*ss['problem_clustered_se']:.3f}pp.")
+report_lines += [
+    "",
+    "## Limitations and compliance",
+    "- Many generations still hit the token limit; some correct responses regress.",
+    "- Legitimate iterative math probes also lose likelihood: selectivity is imperfect.",
+    "- AIME transfer: 256 unique problems, 512 generations/model, zero correct for both.",
+    "- Evaluation benchmarks were not observed; practice-set improvement is not a benchmark result.",
+    "- No training, gradients, optimizer, config/tokenizer/decoding changes, final norm or embedding/head edits.",
+    "- Final weights exactly match the frozen candidate; no post-confirmation retuning.",
+    f"- SHA256: {audit['sha256']}",
+    "- Detailed results: /work/final_results.json; samples: /work/confirmation_results.csv.",
+]
+(work / "final_report.md").write_text("\n".join(report_lines) + "\n")
+with open(work / "notes.md", "a") as f:
+    f.write("\nFINAL: all50 passes used. Retain exact frozen simple4 single L23 down_proj edit.\n")
+    f.write("Final primary: " + json.dumps(final_stats["primary"]) + "\n")
+    f.write("Final by source: " + json.dumps(final_stats["by_source"]) + "\n")
+    f.write("Audit passed: exact backup, rank-one non-scalar, no forbidden tensors, all confirmation ids disjoint.\n")
+    f.write("Report /work/final_report.md; detailed results /work/final_results.json. AIME gain0; selectivity imperfect.\n")
+
+print("FINAL PRIMARY:", final_stats["primary"])
+print("FINAL BY SOURCE:", {k:{q:v[q] for q in
+      ["equal_problem_original","equal_problem_edited","paired_gain","problem_clustered_se"]}
+      for k,v in final_stats["by_source"].items()})
+print("FINAL AUDIT:", audit)
+print("Saved final_report.md and final_results.json. No weights changed during finalization.")
+```
+
+### Tool result
+
+```python
+# Hypothesis: final independent accuracy evidence justifies retaining exactly the frozen rank-one repetition repair.
+latest_batch, aggregate_summary = record_confirmation(50, 58)
+primary = confirmation_table
+assert primary["id"].nunique() == 2048
+assert len(primary) == 3584
+for source, group in primary.groupby("source"):
+    ids = set(group["id"])
+    assert len(ids) == 1024
+    assert ids <= set(split_record[source]["confirmation"])
+    assert ids.isdisjoint(split_record[source]["diagnosis"])
+    assert ids.isdisjoint(split_record[source]["selection"])
+
+def detailed_final_summary(table):
+    p = table.groupby(["source","id"], sort=False)[
+        ["original","edited","cut_original","cut_edited","tokens_original",
+         "tokens_edited","noanswer_original","noanswer_edited"]].mean()
+    d = p["edited"] - p["original"]
+    se = float(d.std(ddof=1) / np.sqrt(len(d)))
+    return {
+        "problems":len(p), "generations_per_model":len(table),
+        "equal_problem_original":float(p["original"].mean()),
+        "equal_problem_edited":float(p["edited"].mean()),
+        "paired_gain":float(d.mean()), "problem_clustered_se":se,
+        "approx_95pct_interval":[float(d.mean()-1.96*se), float(d.mean()+1.96*se)],
+        "cut_original":float(p["cut_original"].mean()),
+        "cut_edited":float(p["cut_edited"].mean()),
+        "mean_tokens_original":float(p["tokens_original"].mean()),
+        "mean_tokens_edited":float(p["tokens_edited"].mean()),
+        "noanswer_finished_original":float(p["noanswer_original"].mean()),
+        "noanswer_finished_edited":float(p["noanswer_edited"].mean()),
+        "sample_wrong_to_right":int(((table["original"] == 0) & (table["edited"] == 1)).sum()),
+        "sample_right_to_wrong":int(((table["original"] == 1) & (table["edited"] == 0)).sum()),
+        "sample_weighted_original":float(table["original"].mean()),
+        "sample_weighted_edited":float(table["edited"].mean()),
+    }
+
+final_stats = {
+    "primary":detailed_final_summary(primary),
+    "by_source":{s:detailed_final_summary(t) for s,t in primary.groupby("source")},
+    "aime":detailed_final_summary(pd.concat(
+        [read_paired_batch(k) for k in manifest["aime"]], ignore_index=True)),
+    "weight_selection":"Frozen before confirmation; no tuning on confirmation outcomes",
+    "forward_passes_used":50,
+}
+final_weight = load(edit_name)
+original_weight = load_original(edit_name)
+v = saved_direction["direction"].float()
+assert list(edited()) == [edit_name]
+assert torch.isfinite(final_weight).all()
+assert final_weight.shape == original_weight.shape == (1024,3584)
+assert np.array_equal(final_weight.numpy(), best_weight)
+delta_weight = final_weight - original_weight
+rank_one_delta = -4.0 * torch.outer(original_weight @ v, v)
+rank_error = float(torch.linalg.vector_norm(delta_weight-rank_one_delta) /
+                   torch.linalg.vector_norm(delta_weight))
+assert rank_error < 1e-5
+assert abs(float(v @ v)-1) < 1e-5
+scale = float((final_weight * original_weight).sum() / original_weight.square().sum())
+mass_order = torch.argsort(v.square(), descending=True)
+audit = {
+    "tensor":edit_name, "shape":list(final_weight.shape),
+    "formula":"W' = W - 4 (W v) v^T; ||v||_2 = 1",
+    "edited_tensors":list(edited()),
+    "relative_change_norm":float(torch.linalg.vector_norm(delta_weight) /
+                                torch.linalg.vector_norm(original_weight)),
+    "rank_one_reconstruction_relative_error":rank_error,
+    "best_whole_tensor_scale":scale,
+    "non_scaling_fraction_of_change":float(
+        torch.linalg.vector_norm(final_weight-scale*original_weight) /
+        torch.linalg.vector_norm(delta_weight)),
+    "direction_top7_neurons":mass_order[:7].tolist(),
+    "direction_top7_squared_mass":float(v[mass_order[:7]].square().sum()),
+    "sha256":hashlib.sha256(final_weight.numpy().tobytes()).hexdigest(),
+    "matches_frozen_backup":True,
+    "confirmation_disjoint_from_diagnosis_and_selection":True,
+}
+final_stats["audit"] = audit
+(work / "final_results.json").write_text(json.dumps(final_stats, indent=2))
+(work / "final_weight_audit.json").write_text(json.dumps(audit, indent=2))
+
+s = final_stats["primary"]
+report_lines = [
+    "# Final submitted weight edit",
+    "",
+    f"Only `{edit_name}` is modified. Formula: W' = W - 4 (Wv) v^T.",
+    "v is the normalized mean late-minus-early repeated-check MLP activation contrast,",
+    "orthogonalized to mean early activation, from four diagnostic probes.",
+    "The edit counteracts this direction's output rather than scaling a whole tensor.",
+    "",
+    "## Diagnosis and causal evidence",
+    "- Initial diagnostic run: 175/192 generations cut off; accuracy 9.375%.",
+    "- Candidate attention-head and single-neuron edits did not validate and were removed.",
+    "- L23 repeated-check direction showed much larger effects on late repetition than early reasoning.",
+    "- Same-selection dose tests at strengths 2/4/6/8 gave gains +7.42/+17.19/0/-7.81 percentage points.",
+    "- Same control set: targeted strength4 +10.55pp, scrambled reader +0.78pp, random writer -5.86pp.",
+    "- Opposite sign reduced cutoffs but caused 191/256 finished-no-answer failures; rejected.",
+    "- Novel repeated-claim probes supported transfer beyond the original wording.",
+    "- Premature-close probes did not show increased closing probability in informative cases.",
+    "",
+    "## Independent confirmation",
+    f"- {s['problems']} unique GSM8K/MATH practice problems, {s['generations_per_model']} generations per model.",
+    "- Equal problem weighting; paired differences and SE clustered by problem.",
+    f"- Original {100*s['equal_problem_original']:.3f}%; edited {100*s['equal_problem_edited']:.3f}%.",
+    f"- Gain {100*s['paired_gain']:.3f}pp; SE {100*s['problem_clustered_se']:.3f}pp;",
+    f"  approximate 95% interval [{100*s['approx_95pct_interval'][0]:.3f}, {100*s['approx_95pct_interval'][1]:.3f}]pp.",
+    f"- Cutoffs {100*s['cut_original']:.2f}% -> {100*s['cut_edited']:.2f}%.",
+]
+for source, ss in final_stats["by_source"].items():
+    report_lines.append(
+        f"- {source}: {100*ss['equal_problem_original']:.3f}% -> "
+        f"{100*ss['equal_problem_edited']:.3f}%; gain {100*ss['paired_gain']:.3f}pp, "
+        f"SE {100*ss['problem_clustered_se']:.3f}pp.")
+report_lines += [
+    "",
+    "## Limitations and compliance",
+    "- Many generations still hit the token limit; some correct responses regress.",
+    "- Legitimate iterative math probes also lose likelihood: selectivity is imperfect.",
+    "- AIME transfer: 256 unique problems, 512 generations/model, zero correct for both.",
+    "- Evaluation benchmarks were not observed; practice-set improvement is not a benchmark result.",
+    "- No training, gradients, optimizer, config/tokenizer/decoding changes, final norm or embedding/head edits.",
+    "- Final weights exactly match the frozen candidate; no post-confirmation retuning.",
+    f"- SHA256: {audit['sha256']}",
+    "- Detailed results: /work/final_results.json; samples: /work/confirmation_results.csv.",
+]
+(work / "final_report.md").write_text("\n".join(report_lines) + "\n")
+with open(work / "notes.md", "a") as f:
+    f.write("\nFINAL: all50 passes used. Retain exact frozen simple4 single L23 down_proj edit.\n")
+    f.write("Final primary: " + json.dumps(final_stats["primary"]) + "\n")
+    f.write("Final by source: " + json.dumps(final_stats["by_source"]) + "\n")
+    f.write("Audit passed: exact backup, rank-one non-scalar, no forbidden tensors, all confirmation ids disjoint.\n")
+    f.write("Report /work/final_report.md; detailed results /work/final_results.json. AIME gain0; selectivity imperfect.\n")
+
+print("FINAL PRIMARY:", final_stats["primary"])
+print("FINAL BY SOURCE:", {k:{q:v[q] for q in
+      ["equal_problem_original","equal_problem_edited","paired_gain","problem_clustered_se"]}
+      for k,v in final_stats["by_source"].items()})
+print("FINAL AUDIT:", audit)
+print("Saved final_report.md and final_results.json. No weights changed during finalization.")
+```
+
+```text
+Latest: {'problems': 128, 'samples': 256, 'original': 0.085938, 'edited': 0.183594, 'cut_original': 0.925781, 'cut_edited': 0.753906, 'gain': 0.097656, 'SE': 0.026631}
+Primary aggregate: {'problems': 2048, 'samples': 3584, 'original': 0.121826, 'edited': 0.193848, 'cut_original': 0.889404, 'cut_edited': 0.759766, 'gain': 0.072021, 'SE': 0.007545}
+By source: {'gsm8k': {'problems': 1024, 'samples': 1792, 'original': 0.150879, 'edited': 0.253418, 'cut_original': 0.861328, 'cut_edited': 0.67627, 'gain': 0.102539, 'SE': 0.012193}, 'math': {'problems': 1024, 'samples': 1792, 'original': 0.092773, 'edited': 0.134277, 'cut_original': 0.91748, 'cut_edited': 0.843262, 'gain': 0.041504, 'SE': 0.008793}}
+FINAL PRIMARY: {'problems': 2048, 'generations_per_model': 3584, 'equal_problem_original': 0.121826171875, 'equal_problem_edited': 0.19384765625, 'paired_gain': 0.072021484375, 'problem_clustered_se': 0.007544591664622569, 'approx_95pct_interval': [0.05723408471233977, 0.08680888403766024], 'cut_original': 0.889404296875, 'cut_edited': 0.759765625, 'mean_tokens_original': 29734.544921875, 'mean_tokens_edited': 27208.967529296875, 'noanswer_finished_original': 0.0, 'noanswer_finished_edited': 0.031982421875, 'sample_wrong_to_right': 467, 'sample_right_to_wrong': 202, 'sample_weighted_original': 0.11774553571428571, 'sample_weighted_edited': 0.19168526785714285}
+FINAL BY SOURCE: {'gsm8k': {'equal_problem_original': 0.15087890625, 'equal_problem_edited': 0.25341796875, 'paired_gain': 0.1025390625, 'problem_clustered_se': 0.012192789758838887}, 'math': {'equal_problem_original': 0.0927734375, 'equal_problem_edited': 0.13427734375, 'paired_gain': 0.04150390625, 'problem_clustered_se': 0.00879260178666571}}
+FINAL AUDIT: {'tensor': 'model.language_model.layers.23.mlp.down_proj.weight', 'shape': [1024, 3584], 'formula': "W' = W - 4 (W v) v^T; ||v||_2 = 1", 'edited_tensors': ['model.language_model.layers.23.mlp.down_proj.weight'], 'relative_change_norm': 0.08966149389743805, 'rank_one_reconstruction_relative_error': 2.823891236403142e-07, 'best_whole_tensor_scale': 0.9979871511459351, 'non_scaling_fraction_of_change': 0.99966961145401, 'direction_top7_neurons': [40, 22, 94, 19, 46, 0, 107], 'direction_top7_squared_mass': 0.5092606544494629, 'sha256': 'f8b38dbfbae0f98d612f57727b83ab632fb6d4b04b9264f408bf8e0aec356a00', 'matches_frozen_backup': True, 'confirmation_disjoint_from_diagnosis_and_selection': True}
+Saved final_report.md and final_results.json. No weights changed during finalization.
+```
+
+## Turn 133
+
+### Input
+
+````text
+OUTPUT of Python run 69 of at most 300:
+```
+Latest: {'problems': 128, 'samples': 256, 'original': 0.085938, 'edited': 0.183594, 'cut_original': 0.925781, 'cut_edited': 0.753906, 'gain': 0.097656, 'SE': 0.026631}
+Primary aggregate: {'problems': 2048, 'samples': 3584, 'original': 0.121826, 'edited': 0.193848, 'cut_original': 0.889404, 'cut_edited': 0.759766, 'gain': 0.072021, 'SE': 0.007545}
+By source: {'gsm8k': {'problems': 1024, 'samples': 1792, 'original': 0.150879, 'edited': 0.253418, 'cut_original': 0.861328, 'cut_edited': 0.67627, 'gain': 0.102539, 'SE': 0.012193}, 'math': {'problems': 1024, 'samples': 1792, 'original': 0.092773, 'edited': 0.134277, 'cut_original': 0.91748, 'cut_edited': 0.843262, 'gain': 0.041504, 'SE': 0.008793}}
+FINAL PRIMARY: {'problems': 2048, 'generations_per_model': 3584, 'equal_problem_original': 0.121826171875, 'equal_problem_edited': 0.19384765625, 'paired_gain': 0.072021484375, 'problem_clustered_se': 0.007544591664622569, 'approx_95pct_interval': [0.05723408471233977, 0.08680888403766024], 'cut_original': 0.889404296875, 'cut_edited': 0.759765625, 'mean_tokens_original': 29734.544921875, 'mean_tokens_edited': 27208.967529296875, 'noanswer_finished_original': 0.0, 'noanswer_finished_edited': 0.031982421875, 'sample_wrong_to_right': 467, 'sample_right_to_wrong': 202, 'sample_weighted_original': 0.11774553571428571, 'sample_weighted_edited': 0.19168526785714285}
+FINAL BY SOURCE: {'gsm8k': {'equal_problem_original': 0.15087890625, 'equal_problem_edited': 0.25341796875, 'paired_gain': 0.1025390625, 'problem_clustered_se': 0.012192789758838887}, 'math': {'equal_problem_original': 0.0927734375, 'equal_problem_edited': 0.13427734375, 'paired_gain': 0.04150390625, 'problem_clustered_se': 0.00879260178666571}}
+FINAL AUDIT: {'tensor': 'model.language_model.layers.23.mlp.down_proj.weight', 'shape': [1024, 3584], 'formula': "W' = W - 4 (W v) v^T; ||v||_2 = 1", 'edited_tensors': ['model.language_model.layers.23.mlp.down_proj.weight'], 'relative_change_norm': 0.08966149389743805, 'rank_one_reconstruction_relative_error': 2.823891236403142e-07, 'best_whole_tensor_scale': 0.9979871511459351, 'non_scaling_fraction_of_change': 0.99966961145401, 'direction_top7_neurons': [40, 22, 94, 19, 46, 0, 107], 'direction_top7_squared_mass': 0.5092606544494629, 'sha256': 'f8b38dbfbae0f98d612f57727b83ab632fb6d4b04b9264f408bf8e0aec356a00', 'matches_frozen_backup': True, 'confirmation_disjoint_from_diagnosis_and_selection': True}
+Saved final_report.md and final_results.json. No weights changed during finalization.
+
+
+```
+````
+
+### Editor
+
+Retained one edit: **`model.language_model.layers.23.mlp.down_proj.weight`**
+
+\[
+W' = W-4(Wv)v^\top
+\]
+
+Here \(v\) is a unit direction derived from late-versus-early repeated-check activations, targeting repetitive thinking rather than globally scaling outputs.
+
+**Path:** Initial diagnosis found 175/192 generations hit the token limit; attention-head and single-neuron candidates failed validation, while the layer-23 direction passed strength tests and outperformed matched random-direction controls. Stronger and opposite-sign edits were rejected.
+
+**Independent confirmation:** The frozen edit was tested on 2,048 held-out practice problems, with 3,584 generations per model and equal weighting per problem.
+
+| Practice source | Original | Edited |
+|---|---:|---:|
+| GSM8K | 15.09% | **25.34%** |
+| MATH | 9.28% | **13.43%** |
+| Combined | 12.18% | **19.38%** |
+
+The paired gain was **7.20 percentage points**, SE **0.75**, with an approximate 95% interval of **[5.72, 8.68]** points; cutoffs fell from **88.94% to 75.98%**.
+
+This supports expecting improvement through reduced repetitive noncompletion, not a general mathematical-capability repair: many failures remain, legitimate iterative reasoning can also be suppressed, and AIME accuracy did not improve. No forbidden tensors, configuration, or decoding settings changed, and no training was used.
+
+Details are saved in `/work/final_report.md` and `/work/final_results.json`; the selected weights remain in `/work/edited`.
+
+## Final submission
+
+Retained one edit: **`model.language_model.layers.23.mlp.down_proj.weight`**
+
+\[
+W' = W-4(Wv)v^\top
+\]
+
+Here \(v\) is a unit direction derived from late-versus-early repeated-check activations, targeting repetitive thinking rather than globally scaling outputs.
+
+**Path:** Initial diagnosis found 175/192 generations hit the token limit; attention-head and single-neuron candidates failed validation, while the layer-23 direction passed strength tests and outperformed matched random-direction controls. Stronger and opposite-sign edits were rejected.
+
+**Independent confirmation:** The frozen edit was tested on 2,048 held-out practice problems, with 3,584 generations per model and equal weighting per problem.
+
+| Practice source | Original | Edited |
+|---|---:|---:|
+| GSM8K | 15.09% | **25.34%** |
+| MATH | 9.28% | **13.43%** |
+| Combined | 12.18% | **19.38%** |
+
+The paired gain was **7.20 percentage points**, SE **0.75**, with an approximate 95% interval of **[5.72, 8.68]** points; cutoffs fell from **88.94% to 75.98%**.
+
+This supports expecting improvement through reduced repetitive noncompletion, not a general mathematical-capability repair: many failures remain, legitimate iterative reasoning can also be suppressed, and AIME accuracy did not improve. No forbidden tensors, configuration, or decoding settings changed, and no training was used.
+
+Details are saved in `/work/final_report.md` and `/work/final_results.json`; the selected weights remain in `/work/edited`.
