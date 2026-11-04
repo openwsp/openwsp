@@ -174,22 +174,29 @@ def _edit_identity(directory):
             "edit_sha256": address, "edit_address_format": address_format}
 
 
-def prepare_manifests(tokenizer, *, identity, submission, data=Path("/data"), practice=Path("/practice"), expected_hashes=None):
+def _source_identity(inspect, source, resolve_path):
+    """Hash local bytes while retaining the manifest's original path namespace."""
+    return {**inspect(resolve_path(source)), "path": str(source)}
+
+
+def prepare_manifests(tokenizer, *, identity, submission, data=Path("/data"), practice=Path("/practice"),
+                      expected_hashes=None, resolve_path=Path):
     data = Path(data)
     directory = data / "damage" / identity.relative
-    dataset, records = prepare_references(tokenizer, practice, expected_hashes=expected_hashes)
-    base = checkpoint_identity(data / "original")
+    dataset, records = prepare_references(tokenizer, resolve_path(practice), expected_hashes=expected_hashes)
+    base = _source_identity(checkpoint_identity, data / "original", resolve_path)
     choices = [("p50c", {"checkpoint": str(data / "p50c")}, data / "reference_edit"),
-               ("mechanical", _read(data / "controls/mechanical/submission.json"), data / "controls/mechanical/edit"),
-               ("random", _read(data / "controls/random/submission.json"), data / "controls/random/edit"),
+               ("mechanical", _read(resolve_path(data / "controls/mechanical/submission.json")), data / "controls/mechanical/edit"),
+               ("random", _read(resolve_path(data / "controls/random/submission.json")), data / "controls/random/edit"),
                ("live", submission, data / identity.relative / "edit")]
     manifests = []
     for name, selected, edit_path in choices:
-        edited = checkpoint_identity(selected["checkpoint"])
+        edited = _source_identity(checkpoint_identity, selected["checkpoint"], resolve_path)
         if _tokenizer_files(base) != _tokenizer_files(edited):
             raise ValueError("Base and edited tokenizer/template bytes differ")
         manifest = {"schema_version": 1, "stage": STAGE, "edit": name, "dataset": dataset,
-                    "base_checkpoint": base, "edited_checkpoint": edited, "edit_bundle": _edit_identity(edit_path),
+                    "base_checkpoint": base, "edited_checkpoint": edited,
+                    "edit_bundle": _source_identity(_edit_identity, edit_path, resolve_path),
                     "declared_submission_sha256": selected.get("sha256"),
                     "faithful_submission_sha256": submission["sha256"], "identity": {"editor": identity.editor, "run_id": identity.run_id},
                     "records_path": str(directory / "references.tokens.json"), "chunk_tokens": 32,
@@ -197,18 +204,19 @@ def prepare_manifests(tokenizer, *, identity, submission, data=Path("/data"), pr
         manifests.append((directory / f"{name}.manifest.json", manifest))
     # Validate every edit before creating any new immutable record.
     for path, value in [(directory / "references.tokens.json", records), (directory / "references.manifest.json", dataset), *manifests]:
+        path = resolve_path(path)
         if path.exists() and _read(path) != value:
             raise ValueError("Existing damage evidence has a conflicting immutable identity")
     for path, value in [(directory / "references.tokens.json", records), (directory / "references.manifest.json", dataset), *manifests]:
-        _immutable(path, value)
+        _immutable(resolve_path(path), value)
     return manifests
 
 
-def load_measurement_inputs(path, expected_sha256, *, base_checkpoint, tokenizer):
+def load_measurement_inputs(path, expected_sha256, *, base_checkpoint, tokenizer, resolve_path=Path):
     """Verify bytes and all 512 token masks before any teacher-forced call."""
     path = Path(path)
-    manifest = _read(path)
-    if path.is_symlink() or json_hash(manifest) != expected_sha256:
+    manifest = _read(resolve_path(path))
+    if resolve_path(path).is_symlink() or json_hash(manifest) != expected_sha256:
         raise ValueError("Damage manifest hash differs from the accounted request")
     dataset = manifest["dataset"]
     if (manifest.get("schema_version") != 1 or manifest.get("stage") != STAGE
@@ -219,16 +227,17 @@ def load_measurement_inputs(path, expected_sha256, *, base_checkpoint, tokenizer
             or str(base_checkpoint) != manifest["base_checkpoint"]["path"]):
         raise ValueError("Damage manifest protocol/tokenizer binding differs")
     for key in ("base_checkpoint", "edited_checkpoint"):
-        if checkpoint_identity(manifest[key]["path"]) != manifest[key]:
+        if _source_identity(checkpoint_identity, manifest[key]["path"], resolve_path) != manifest[key]:
             raise ValueError("Checkpoint bytes changed after damage preregistration")
     if _tokenizer_files(manifest["base_checkpoint"]) != _tokenizer_files(manifest["edited_checkpoint"]):
         raise ValueError("Damage vocabulary assets differ")
-    if _edit_identity(manifest["edit_bundle"]["path"]) != manifest["edit_bundle"]:
+    if _source_identity(_edit_identity, manifest["edit_bundle"]["path"], resolve_path) != manifest["edit_bundle"]:
         raise ValueError("Edit bytes changed after damage preregistration")
     records_path = Path(manifest["records_path"])
-    if records_path.parent != path.parent or records_path.is_symlink():
+    if (records_path.parent != path.parent or resolve_path(records_path).is_symlink()
+            or resolve_path(records_path).parent != resolve_path(path).parent):
         raise ValueError("Damage token records must stay beside the manifest")
-    records = _read(records_path)["records"]
+    records = _read(resolve_path(records_path))["records"]
     examples = dataset["examples"]
     if (len(records) != 512 or len(examples) != 512 or json_hash(records) != dataset["record_sha256"]
             or [row["source"] for row in examples] != ["gsm8k"] * 256 + ["math"] * 256
@@ -248,10 +257,12 @@ def load_measurement_inputs(path, expected_sha256, *, base_checkpoint, tokenizer
     return manifest, records
 
 
-def measure_manifest(base_model, tokenizer, path, expected_sha256, *, base_checkpoint, load_edited):
+def measure_manifest(base_model, tokenizer, path, expected_sha256, *, base_checkpoint, load_edited,
+                     resolve_path=Path):
     from openwsp.backends.damage import teacher_forced_kl
 
-    manifest, records = load_measurement_inputs(path, expected_sha256, base_checkpoint=base_checkpoint, tokenizer=tokenizer)
+    manifest, records = load_measurement_inputs(path, expected_sha256, base_checkpoint=base_checkpoint,
+                                               tokenizer=tokenizer, resolve_path=resolve_path)
     smoke = teacher_forced_kl(base_model, base_model, [records[index] for index in SMOKE_INDICES])
     if smoke["kl_sum"] != 0 or smoke["token_count"] < 4 or smoke["scored_sequence_count"] != 4:
         raise ValueError("Damage identity smoke failed; the edited measurement was not started")
@@ -280,15 +291,26 @@ def _validate_result(metrics, smoke, manifest):
         raise ValueError("Damage identity smoke is missing or included in the measurement")
 
 
-def run_damage_stage(ledger, checkpoint, *, identity, data=Path("/data"), practice=Path("/practice")):
+def prepare_damage_stage(checkpoint, *, identity, data=Path("/data"), practice=Path("/practice")):
+    """Freeze authoritative manifests on the existing CPU driver, without dispatch."""
+    submission = require_damage_priority(identity=identity, data=data)
     from transformers import AutoTokenizer
 
-    from openwsp.backends.modal_app import TransformerReader
-
-    submission = require_damage_priority(identity=identity, data=data)
     tokenizer = AutoTokenizer.from_pretrained(Path(data) / "original", local_files_only=True)
     manifests = prepare_manifests(tokenizer, identity=identity, submission=submission, data=data, practice=practice)
     checkpoint()  # All dataset/edit identities must be durable before the first job.
+    return {"status": "done", "stage": "damage_prepare", "faithful_submission_sha256": submission["sha256"],
+            "manifests": [{"edit": manifest["edit"], "path": str(path), "sha256": json_hash(manifest)}
+                          for path, manifest in manifests], "hash_algorithm": "canonical_json_sha256"}
+
+
+def run_damage_stage(ledger, checkpoint, *, identity, data=Path("/data"), practice=Path("/practice")):
+    from openwsp.backends.modal_app import TransformerReader
+
+    prepared = prepare_damage_stage(checkpoint, identity=identity, data=data, practice=practice)
+    manifests = [(Path(row["path"]), _read(row["path"])) for row in prepared["manifests"]]
+    if any(json_hash(manifest) != row["sha256"] for (_, manifest), row in zip(manifests, prepared["manifests"], strict=True)):
+        raise ValueError("Damage manifests changed after source preparation")
     runner = ProtocolGPUJobs(ledger, Path(data) / "jobs", commit=checkpoint)
     summaries = {}
     for manifest_path, manifest in manifests:
@@ -322,10 +344,10 @@ def run_damage_stage(ledger, checkpoint, *, identity, data=Path("/data"), practi
                                   "edit_bundle_sha256": manifest["edit_bundle"]["sha256"],
                                   "edit_sha256": manifest["edit_bundle"]["edit_sha256"],
                                   "edit_address_format": manifest["edit_bundle"]["edit_address_format"],
-                                  "faithful_submission_sha256": submission["sha256"], "engine_settings": manifest["engine_settings"],
+                                  "faithful_submission_sha256": prepared["faithful_submission_sha256"], "engine_settings": manifest["engine_settings"],
                                   "gpu": result["gpu"], "seconds_basis": "accounted_resource_seconds_including_smoke_and_margins",
                                   "cost_basis": "existing_job_ledger_estimate_not_provider_invoice"}}
         _immutable(target, summary)
         summaries[name] = summary
         checkpoint()
-    return {"status": "done", "edits": summaries, "faithful_submission_sha256": submission["sha256"]}
+    return {"status": "done", "edits": summaries, "faithful_submission_sha256": prepared["faithful_submission_sha256"]}

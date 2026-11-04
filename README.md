@@ -481,6 +481,8 @@ uv run openwsp --model /absolute/path/model.safetensors \
 
 The factory supplies inference for that model. Loading tensors alone does not configure a forward service. The same read, run, forward, save, diff, inspect, apply and export operations are available through the [Python SDK](docs/architecture.md) and the [MCP server](docs/mcp.md), with connection examples for Codex, Claude Code and Cursor. The [edit format](docs/edit-format.md) defines the portable diff and its verification rules.
 
+The later neutral-reference KL measurement also has a [local CPU command](docs/exp8-cpu-kl.md). It uses the same registered references and checks, requires verified checkpoint copies, and keeps the evaluation queue intact. Source preparation and file transfer have separate costs; production runtime and end-to-end savings remain unmeasured.
+
 Editors sit behind a separate `complete(messages)` interface. The [profile and transport architecture](docs/editor-architecture.md) retains the Astra subscription and Responses routes and adds a Fable profile over the [Anthropic Messages adapter](docs/anthropic-editor.md). Native API use requires explicit prices and token bounds. Fable has mocked transport tests but no live Experiment 8 comparison. OpenRouter is an extension target, not an implemented route. The current experiment continues to use Astra.
 
 ## Raw-weight experiments

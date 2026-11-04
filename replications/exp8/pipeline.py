@@ -18,7 +18,7 @@ from replications.exp8.eval_grid import STAGES as GRID_STAGES
 
 def run(stage, overrides, *, app, driver_ticket=None):
     from openwsp.backends.modal_app import prepare, data_volume, Generator
-    if stage not in {"all", "prepare", "calibration", "smoke", "kernel", "live", "evaluate", "controls", "control4", "control5", "damage", "editor_probe", "review_live", "publish", *GRID_STAGES}:
+    if stage not in {"all", "prepare", "calibration", "smoke", "kernel", "live", "evaluate", "controls", "control4", "control5", "damage", "damage_prepare", "editor_probe", "review_live", "publish", *GRID_STAGES}:
         raise ValueError("Unknown replication stage")
     if overrides:
         unknown = set(overrides) - {"publish_results", "editor", "run_id"}
@@ -33,7 +33,7 @@ def run(stage, overrides, *, app, driver_ticket=None):
     # The serialized launcher committed this invocation's ticket after any
     # predecessor finished. A warm worker must see that new Volume snapshot.
     data_volume.reload()
-    if stage in GRID_STAGES or stage == "damage":
+    if stage in GRID_STAGES or stage in ("damage", "damage_prepare"):
         from replications.exp8.eval_grid import grid_live_identity
         identity = grid_live_identity(overrides or {}, data=data)
     ledger = BudgetLedger(data / "budget.json")
@@ -67,6 +67,13 @@ def run(stage, overrides, *, app, driver_ticket=None):
     thread.start()
     try:
         checkpoint()
+        if stage == "damage_prepare":
+            from replications.exp8.damage_stage import prepare_damage_stage
+            # An explicit source-only step must never launch generic preparation
+            # to make an incomplete queue look ready for the priority gate.
+            state["stages"][stage] = prepare_damage_stage(checkpoint, identity=identity)
+            state["status"] = "stage_done"
+            return state
         if not state["stages"].get("prepare", {}).get("status") == "done" or not (data / "benchmarks/ifeval.jsonl").exists():
             jobs_runner.launch("prepare-v2", lambda: prepare.spawn(), upper_bound_usd=1,
                                cost_options={"cpu_cores": 2, "memory_gib": 8, "startup_seconds": 120, "scaledown_seconds": 2},
