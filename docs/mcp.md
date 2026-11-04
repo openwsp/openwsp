@@ -55,6 +55,7 @@ Ask the client to list the OpenWSP tensors, read `layer1.weight`, and call `forw
 | `forward` | Send a request to the configured forward backend. |
 | `save_edit` | Validate and save replacement values for one tensor. |
 | `diff` | Compare submitted edits with the immutable base. |
+| `inspect` | Inspect edit geometry and compare directions on CPU. |
 | `apply_edit` | Verify and apply an edit directory. |
 | `export_edit` | Write the versioned manifest and compact tensor diff. |
 

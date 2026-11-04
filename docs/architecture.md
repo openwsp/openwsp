@@ -30,7 +30,7 @@ flowchart LR
 | `src/openwsp/backends/public_forward.py` | Registered Qwen gateway: validates the pinned base and edits, dispatches bounded model workers and accounts for their aggregate cost. |
 | `src/openwsp/editors/` | Editor API adapters and response state. |
 | `src/openwsp/publishing.py` | Publish allowlisted result artifacts and regenerate only the README's marked tables. |
-| `replications/` | Experiment configuration, source references and results. Experiments 1–7 are layout placeholders only. |
+| `replications/` | Experiment configuration, source references and results. Experiments 1, 2, 4 and 5 include CPU replications; experiments 3, 6 and 7 remain layout placeholders. |
 | `tests/` | CPU tests, including a real MCP client driving a tiny network. |
 
 ## Weights and edits
@@ -138,6 +138,7 @@ CLI global options, such as `--model`, `--work-dir` and `--backend`, precede the
 | `forward(request)` | `forward JSON` |
 | `save_edit(name, values)` | `save NAME JSON` |
 | `diff()` | `diff` |
+| `inspect(path=None, compare=None)` | `inspect --path /absolute/path/edit --compare /absolute/path/other-edit` |
 | `apply_edit(path)` | `apply /absolute/path/edit` |
 | `export_edit(path)` | `export /absolute/path/edit` |
 
