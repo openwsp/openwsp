@@ -191,7 +191,27 @@
           " for the mechanical control under the local think35 evaluation. The control borrows p50c’s column set and derives its direction from calibration answers on this benchmark. It is not a held-out discovery experiment."
         ],
         [
-          "The agent-free 2c variant will select its own columns; its benchmark accuracy is ",
+          "The ",
+          {
+            "label": "agent-free 2c build",
+            "artifact": "repair/2c/summary.json"
+          },
+          " selects its own columns from ",
+          {
+            "label": "450 looping and 34 finished base answers",
+            "artifact": "repair/2c/verification.json"
+          },
+          ". Its mask shares ",
+          {
+            "label": "25 of 64 columns in layer 15 and 18 of 64 in layer 19",
+            "artifact": "repair/2c/column-comparison.json"
+          },
+          " with the p50c mask used by the earlier control. ",
+          {
+            "label": "All seven fixed-mask dose bundles",
+            "artifact": "repair/dose-sweep.json"
+          },
+          " are built; benchmark accuracy is ",
           {
             "summary": "repair/summary.json",
             "metric": "accuracy",

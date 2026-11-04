@@ -1,0 +1,24 @@
+{
+  "counts": {
+    "finished": 34,
+    "looping": 450
+  },
+  "estimated_total_seconds_by_example_count": 46593.624638373054,
+  "format": "openwsp.repair.input-activations.summary",
+  "format_version": 1,
+  "input_differences_sha256": "bc7ee875d0443d16fed96e7d99843975bfa085793984e1c6d75de236f37df6d3",
+  "measured_seconds": 46593.624638373054,
+  "measured_tokens": 3905829,
+  "model_inference": "CPU text decoder only, no vocabulary logits or generation",
+  "processed": 484,
+  "resources": {
+    "cpu.max": "400000 100000",
+    "memory.current": "7472328704",
+    "memory.max": "17179869184",
+    "memory.peak": "8903286784",
+    "peak_process_rss_bytes": 3870134272
+  },
+  "selected": 484,
+  "selection_sha256": "b07811afc9f310b6054e3a83a5b85a4ba322634b2e3ca060c6e7d25ddecc86aa",
+  "status": "complete"
+}

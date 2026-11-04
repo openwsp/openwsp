@@ -1,6 +1,6 @@
 {
   "base_variant": "2c",
-  "build_status": "unavailable_input_statistics",
+  "build_status": "built",
   "coefficients": [
     0,
     1,
@@ -10,8 +10,46 @@
     6,
     8
   ],
+  "edits": [
+    {
+      "alpha": 0,
+      "edit_sha256": "906cf20d041745e649880ee760500043f9c63e0f52893b4397cea268d0a1d5c8",
+      "private_bundle_path": ".openwsp/repair-build/dose/alpha_0/edit"
+    },
+    {
+      "alpha": 1,
+      "edit_sha256": "c9fc6ad91b8cf4334dc0fb247dc0922d76320a4adde519ba932fccf637a8cd29",
+      "private_bundle_path": ".openwsp/repair-build/dose/alpha_1/edit"
+    },
+    {
+      "alpha": 2,
+      "edit_sha256": "f855eb26017898b4bbc99da5c24d6f748eb8742a8e6a7cd22683d420e6de9606",
+      "private_bundle_path": ".openwsp/repair-build/dose/alpha_2/edit"
+    },
+    {
+      "alpha": 3,
+      "edit_sha256": "9deba693b21e0ca1af0ed77dea4f591e454081a3cec06ea863456ca84672f022",
+      "private_bundle_path": ".openwsp/repair-build/dose/alpha_3/edit"
+    },
+    {
+      "alpha": 4,
+      "edit_sha256": "71bb73ff88246d84a41d25274cc02453a54d53e0ebf91376ca02da2d7c0540ae",
+      "private_bundle_path": ".openwsp/repair-build/dose/alpha_4/edit"
+    },
+    {
+      "alpha": 6,
+      "edit_sha256": "8114394c5620c8d7f1f3616e927feba74130925ac57fb0574b3a5cd8b3d0e350",
+      "private_bundle_path": ".openwsp/repair-build/2c/edit"
+    },
+    {
+      "alpha": 8,
+      "edit_sha256": "54c253f014ed21ca61710b6246b3d2cdbf950276d0e503ec0c7d02c035da3669",
+      "private_bundle_path": ".openwsp/repair-build/dose/alpha_8/edit"
+    }
+  ],
   "evaluation_status": "pending",
   "fixed_directions_and_columns": true,
+  "input_statistics_sha256": "bc7ee875d0443d16fed96e7d99843975bfa085793984e1c6d75de236f37df6d3",
   "ordered_ids_sha256": "cae30deb7089c59b7fcb042dc52f8babed99cb2d929741a9367925b6f0709dde",
   "problem_ids": [
     "test/precalculus/807.json",

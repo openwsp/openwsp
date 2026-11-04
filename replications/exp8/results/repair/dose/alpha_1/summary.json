@@ -1,0 +1,29 @@
+{
+  "accuracy": null,
+  "accuracy_finished": null,
+  "alpha": 1.0,
+  "build_status": "built",
+  "changed_entries_total": 128737,
+  "changed_tensors": 2,
+  "column_rule": "topk",
+  "edit_sha256": "c9fc6ad91b8cf4334dc0fb247dc0922d76320a4adde519ba932fccf637a8cd29",
+  "evaluation_status": "pending",
+  "format": "openwsp.repair.summary",
+  "format_version": 1,
+  "input_verification": {
+    "counts": {
+      "finished": 34,
+      "looping": 450
+    },
+    "input_differences_sha256": "bc7ee875d0443d16fed96e7d99843975bfa085793984e1c6d75de236f37df6d3",
+    "ordered_activation_hashes_sha256": "f41db6863ed6b584ada25874220c4bd4afc478af0b849a3837fea6ac46dec91e",
+    "ordered_receipt_keys_sha256": "373ef8d92c46c832db1c8d1f56888f11768986c48b1417ac162a6924fda427b4",
+    "selection_sha256": "b07811afc9f310b6054e3a83a5b85a4ba322634b2e3ca060c6e7d25ddecc86aa",
+    "verified_examples": 484
+  },
+  "method_sha256": "417e1c31d7bccf55c72ef61c4c0c92483b55cbc7b0369831958833d5f241f384",
+  "private_bundle_path": ".openwsp/repair-build/dose/alpha_1/edit",
+  "provenance_sha256": "2ea5dac5cf5ecad072f10a95efa77e6666026912b199db428b9dcfdc58e86287",
+  "public_edit_manifest": "edit-manifest.json",
+  "top_k": 64
+}

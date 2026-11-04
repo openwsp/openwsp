@@ -124,7 +124,7 @@ Mechanical repair builds:
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 2a | [1.0](replications/exp8/results/repair/summary.json) | [all](replications/exp8/results/repair/summary.json) | [built](replications/exp8/results/repair/summary.json) | [6289541](replications/exp8/results/repair/summary.json) | [pending](replications/exp8/results/repair/summary.json) | pending | pending | pending | pending |
 | 2b | [6.0](replications/exp8/results/repair/summary.json) | [all](replications/exp8/results/repair/summary.json) | [built](replications/exp8/results/repair/summary.json) | [7077322](replications/exp8/results/repair/summary.json) | [pending](replications/exp8/results/repair/summary.json) | pending | pending | pending | pending |
-| 2c | [6.0](replications/exp8/results/repair/summary.json) | [topk](replications/exp8/results/repair/summary.json) | [unavailable_input_statistics](replications/exp8/results/repair/summary.json) | pending | [pending](replications/exp8/results/repair/summary.json) | pending | pending | pending | pending |
+| 2c | [6.0](replications/exp8/results/repair/summary.json) | [topk](replications/exp8/results/repair/summary.json) | [built](replications/exp8/results/repair/summary.json) | [130641](replications/exp8/results/repair/summary.json) | [pending](replications/exp8/results/repair/summary.json) | pending | pending | pending | pending |
 
 Building an edit does not establish its benchmark effect. Unavailable inputs and unrun evaluations remain explicit.
 
@@ -197,7 +197,7 @@ A capped answer can still grade correct, so finished accuracy cannot be recovere
 
 The released p50c edit reaches [50.6%](replications/exp8/results/calibration_p50c/summary.json) versus [46.0%](replications/exp8/results/control2_mechanical/math500/summary.json) for the mechanical control under the local think35 evaluation. The control borrows p50c’s column set and derives its direction from calibration answers on this benchmark. It is not a held-out discovery experiment.
 
-The agent-free 2c variant will select its own columns; its benchmark accuracy is pending. Until that comparison and the live attempt are complete, these results show that a simple directional intervention recovers much of the reported benchmark gain, not how much an agent adds over a fully independent script.
+The [agent-free 2c build](replications/exp8/results/repair/2c/summary.json) selects its own columns from [450 looping and 34 finished base answers](replications/exp8/results/repair/2c/verification.json). Its mask shares [25 of 64 columns in layer 15 and 18 of 64 in layer 19](replications/exp8/results/repair/2c/column-comparison.json) with the p50c mask used by the earlier control. [All seven fixed-mask dose bundles](replications/exp8/results/repair/dose-sweep.json) are built; benchmark accuracy is pending. Until that comparison and the live attempt are complete, these results show that a simple directional intervention recovers much of the reported benchmark gain, not how much an agent adds over a fully independent script.
 
 <!-- OPENWSP:RESULTS:END -->
 

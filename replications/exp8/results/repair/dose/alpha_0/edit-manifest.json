@@ -1,0 +1,11 @@
+{
+  "base_model": "Qwen/Qwen3.5-0.8B",
+  "base_revision": "2fc06364715b967f1860aea9cf38778875588b17",
+  "changed_entries_total": 0,
+  "changed_tensors": 0,
+  "edit_sha256": "906cf20d041745e649880ee760500043f9c63e0f52893b4397cea268d0a1d5c8",
+  "format": "openwsp.edit",
+  "format_version": 1,
+  "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "tensors": []
+}
