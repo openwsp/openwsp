@@ -1,17 +1,18 @@
 {
   "comparison_method": "Reuse the pinned existing reference report, relabel edits live/p50c/control2, call directions_from_edits then direction_cosines, select index-zero pairs involving live.",
   "comparison_report": "comparisons.json",
-  "comparison_report_sha256": "4ad0f72d1b2d0a63e93fa939a9eb8d696a3f07f6da45d85cf832044bcf9ab730",
+  "comparison_report_sha256": "d83bbbaa951054336d786f51599267fcb89f43573b9029aa2f7d478ef3696a1e",
   "edit_sha256": "a49dd3c1ddd3efdd9d42faaac9065110acf8029f43d35a6b19185a65118558a2",
   "format": "openwsp.inspect.summary",
   "format_version": 1,
   "full_report": "live.json",
-  "full_report_sha256": "3b0f04ea6c83fac8c6e95099b5ac75b206fcef8c7b73a02cb4d38bd76cee8a17",
+  "full_report_sha256": "34a02b795ac9c009e6481016dfeda82cfc8711960851f176bb0f1eb7523cb704",
   "interpretation": [
     "The final edit changes 2,485,126 evaluated BF16 entries in layer 23 down_proj, across 1,024 rows and 3,582 of 3,584 columns.",
     "The leading singular direction holds 99.9734308826% of delta squared Frobenius energy. Numerical rank is 1,024 after BF16 rounding; rank-one relative error is 1.6300036024%.",
-    "The leading-direction projection fit exceeds the inspector's fixed 1% residual tolerance. Per-column implied coefficients vary and are not evidence of a shared coefficient-six projection.",
-    "All four live-to-reference cosines compare layer 23 with layer 15 or 19. Absolute cosine is descriptive geometry, not a test of shared causal mechanism.",
+    "The generic inspector's existing left-direction projection has a 1.6300% residual and variable per-column coefficients. It tests a different formula from the submitted right projection; its consistency flag does not assess the editor's stated formula.",
+    "All four live-to-reference cosines compare the layer-23 induced output direction Wv, up to sign, with layer-15/19 output directions. They do not compare the 3584-dimensional input direction v or establish a shared causal mechanism.",
+    "A separate right-projection check fits alpha = 3.99951214 in Delta = -alpha (Wv)v.T. Fixing alpha at 4 leaves a 1.63601644% relative residual; Wv has absolute cosine 0.9999990253 with the leading left singular direction.",
     "The five named tied-embedding rows have maximum absolute cosine 0.0410554 (Hmm); the vocabulary-mean row cosine is 0.00501417. This limited lens does not search all vocabulary rows or measure contextual probabilities.",
     "These are CPU geometry measurements of the final submitted edit. Benchmark effects require the separate final evaluation records."
   ],
@@ -132,6 +133,19 @@
   "reference_report": "../../../inspection/p50c-vs-control2.json",
   "reference_report_sha256": "374c1bf7c5f1e45c0a1094dc2bc73cbf2904e910ff9f1c29b79c72648b60d29c",
   "reproduce_command": "OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 .venv/bin/openwsp --model .openwsp/research-model --work-dir /tmp/openwsp-final-inspect-codex-20261103 inspect --path replications/exp8/results/live-runs/codex-20261103/edit --top-directions 3 --embedding-name model.language_model.embed_tokens.weight --token-ids @replications/exp8/results/inspection/tokens.json --output /tmp/codex-20261103-final-inspection.json",
+  "right_projection": {
+    "absolute_cosine_induced_output_to_leading_left": 0.999999025275848,
+    "alpha_fit": 3.999512142582479,
+    "fixed_alpha": 4.0,
+    "fixed_alpha_relative_residual": 0.016360164385681122,
+    "formula": "Delta = -alpha * outer(W @ v, v)",
+    "input_dimension": 3584,
+    "input_direction_provenance": "Recovered from evaluated BF16 delta and saved left singular vector; original activation-derived vector not independently available",
+    "output_dimension": 1024,
+    "relative_residual": 0.016359709770524387
+  },
+  "right_projection_report": "right-projection.json",
+  "right_projection_report_sha256": "9fda5b418db2d8f9f187dfa783c150676acf385914952394f0c82a2d6d252c75",
   "run_id": "codex-20261103",
   "source_edits": [
     {
@@ -140,7 +154,7 @@
       "edit_sha256": "a49dd3c1ddd3efdd9d42faaac9065110acf8029f43d35a6b19185a65118558a2",
       "label": "live",
       "manifest_sha256": "2e86ef54e37c91b92b22c1f8a2edf8f06d07716f9446f82f24cb1edb044cd98d",
-      "source": ".openwsp/final-submission-codex-20261103-20261104/public/replications/exp8/results/live-runs/codex-20261103/edit",
+      "source": "replications/exp8/results/live-runs/codex-20261103/edit",
       "source_format": "openwsp.edit"
     },
     {
@@ -149,8 +163,9 @@
       "edit_sha256": null,
       "label": "p50c",
       "manifest_sha256": "83185c1db46e3dafb34af645f8c5ce033c09cc99d4512b9e1b8e3aba9d269225",
-      "source": ".openwsp/upstream/exp8_math/runs/p50c/edit",
-      "source_format": "legacy"
+      "source": "https://github.com/RikiyaT/lm_understand-logs/tree/4d09ba6d6a7e891dd8063974dfe81b3d78e3494f/exp8_math/runs/p50c/edit",
+      "source_format": "legacy",
+      "source_resolution": "Immutable upstream legacy bundle; local source and exact manifest hash are retained in the referenced existing inspection report."
     },
     {
       "base_model": "Qwen/Qwen3.5-0.8B",
@@ -191,5 +206,5 @@
     }
   ],
   "verification_report": "verification.json",
-  "verification_report_sha256": "1dcc40cf360f90faef3fae90dbfd9947948a8a12b369721ef761061c1edeecbe"
+  "verification_report_sha256": "23c1ffb6240b142282ac228c0d63de91e8506b205ea9e698d20d45f2a80e1c4d"
 }

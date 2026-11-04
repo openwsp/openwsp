@@ -1,4 +1,5 @@
 {
+  "direction_definition": "Leading left singular directions in the 1024-dimensional output/residual space. For the live right-projection edit this is the induced Wv direction up to sign, not the 3584-dimensional MLP input direction v.",
   "format": "openwsp.inspect.comparisons",
   "format_version": 1,
   "interpretation": "Every live-to-reference comparison is across different layers. Absolute cosines remove arbitrary SVD sign; alignment does not establish a shared causal mechanism.",
@@ -73,7 +74,7 @@
     }
   ],
   "live_report": "live.json",
-  "live_report_sha256": "3b0f04ea6c83fac8c6e95099b5ac75b206fcef8c7b73a02cb4d38bd76cee8a17",
+  "live_report_sha256": "34a02b795ac9c009e6481016dfeda82cfc8711960851f176bb0f1eb7523cb704",
   "method": "Existing directions_from_edits and direction_cosines; only leading left singular directions. Reference vectors reused without new SVD.",
   "reference_report": "../../../inspection/p50c-vs-control2.json",
   "reference_report_sha256": "374c1bf7c5f1e45c0a1094dc2bc73cbf2904e910ff9f1c29b79c72648b60d29c",

@@ -1,0 +1,73 @@
+{
+  "analysis_dtype": "float64",
+  "claimed_formula": "W_prime = W - 4 * outer(W @ v, v), with unit MLP input direction v",
+  "direction_recovery": {
+    "identity_limit": "The recovered v describes the evaluated BF16 delta. It is not asserted bit-identical to the original activation-derived editor vector; its activation construction is not independently verified here.",
+    "induced_Wv_dimension": 1024,
+    "induced_Wv_float64_le_sha256": "3cb62a90da84b4ee79d82d37c26a82a800052da550ce5dd8bc7df2c296e7f342",
+    "induced_Wv_l2_norm": 0.36834273138571216,
+    "method": "Recover the leading right singular direction from the saved leading left vector u and singular value sigma: v_raw = Delta.T @ u / sigma; normalize v_raw. The inspector did not persist right vectors; no new SVD is performed.",
+    "original_activation_derived_vector_available": false,
+    "residual_definition": "norm(Delta @ v - sigma * u) / norm(Delta)",
+    "right_vector_norm_before_normalization": 0.9999999999999999,
+    "saved_left_direction_index": 0,
+    "saved_singular_value": 1.4731926627656209,
+    "singular_pair_relative_residual": 7.803105155257717e-16,
+    "v_dimension": 3584,
+    "v_float64_le_sha256": "f5300bd717dda2e1c81a469e10b2668a7e3a7a2c6af05aa1b1474bab016f0b40"
+  },
+  "edit_sha256": "a49dd3c1ddd3efdd9d42faaac9065110acf8029f43d35a6b19185a65118558a2",
+  "fit": {
+    "alpha": 3.999512142582479,
+    "delta_frobenius": 1.4733884089168274,
+    "fixed_alpha": 4.0,
+    "fixed_alpha_relative_frobenius_residual": 0.016360164385681122,
+    "method": "Ordinary least squares in Frobenius norm with fixed recovered unit v: B = -outer(W @ v, v); alpha = sum(Delta * B) / sum(B * B)",
+    "rank_one_svd_relative_residual": 0.016300036023664137,
+    "relative_frobenius_residual": 0.016359709770524387,
+    "residual_definition": "norm(Delta + alpha * outer(W @ v, v)) / norm(Delta)"
+  },
+  "fitted_formula": "Delta = -alpha * outer(W @ v, v)",
+  "format": "openwsp.inspect.right_projection",
+  "format_version": 1,
+  "interpretation": [
+    "The fitted coefficient is 3.99951214; fixing it at the stated value 4 gives a 1.63601644% relative residual against the evaluated BF16 delta.",
+    "This supports an approximate right-projection description of the submitted edit. It does not assert an exact identity after BF16 rounding or independently verify the original activation-derived vector.",
+    "The input direction v has 3584 coordinates. Wv has 1024 output coordinates and absolute cosine 0.9999990253 with the saved leading left singular direction.",
+    "Existing live-to-p50c/control2 comparisons concern that induced output direction, up to sign, across layers 23 and 15/19. They do not compare the MLP input direction v.",
+    "The generic inspector projection fits delta[:,j] = -alpha[j] * u * (u.T @ W[:,j]). Its existing coefficients and 1% consistency flag concern a different formula and do not judge this right-projection fit.",
+    "No benchmark effect or shared causal mechanism follows from these geometry measurements."
+  ],
+  "output_alignment": {
+    "absolute_cosine_Wv_to_saved_left_direction": 0.999999025275848,
+    "sign_note": "The leading left singular vector follows Delta, which has a minus sign relative to Wv for positive alpha with the recovered right-vector orientation.",
+    "signed_cosine_Wv_to_saved_left_direction": -0.999999025275848
+  },
+  "run_id": "codex-20261103",
+  "scope": "Descriptive local CPU verification of the submitted weight formula; no SVD rerun, model forward, GPU job or benchmark measurement",
+  "sources": {
+    "base_tensor_sha256": "1866748ce87d32cfee34891d2fa393fdfeee77447935f6a31d036e4b80332a48",
+    "edit_archive": {
+      "path": "../edit/edit.npz",
+      "sha256": "2ef81eabb4f71caecfa409f8be6a591bfd4cd9a10e6b9fef1bb121471039acc6"
+    },
+    "edit_manifest": {
+      "path": "../edit/manifest.json",
+      "sha256": "2e86ef54e37c91b92b22c1f8a2edf8f06d07716f9446f82f24cb1edb044cd98d"
+    },
+    "evaluated_edited_tensor_sha256": "0ba3836e8fda70208ec551649d79ad5e8c75bde2ce4f1059f3faa6ba917ba01a",
+    "final_answer": {
+      "path": "../final_answer.md",
+      "sha256": "0e92ccfc63c975818afd765ff4ddf2d0d6bb9680b208e256cdd498f0c3722f46"
+    },
+    "full_base_checkpoint_sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696",
+    "saved_inspection": {
+      "path": "live.json",
+      "sha256": "34a02b795ac9c009e6481016dfeda82cfc8711960851f176bb0f1eb7523cb704"
+    }
+  },
+  "status": "measured_cpu_only",
+  "submission_sha256": "46d1f410c6f4d071a28911fec4264f0f266e7db3716a25112619cea2e9132cec",
+  "tensor": "model.language_model.layers.23.mlp.down_proj.weight",
+  "weight_semantics": "evaluated_bfloat16"
+}

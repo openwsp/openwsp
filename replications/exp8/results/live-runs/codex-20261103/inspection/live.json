@@ -51,7 +51,7 @@
       "edit_sha256": "a49dd3c1ddd3efdd9d42faaac9065110acf8029f43d35a6b19185a65118558a2",
       "label": "primary",
       "manifest_sha256": "2e86ef54e37c91b92b22c1f8a2edf8f06d07716f9446f82f24cb1edb044cd98d",
-      "source": ".openwsp/final-submission-codex-20261103-20261104/public/replications/exp8/results/live-runs/codex-20261103/edit",
+      "source": "replications/exp8/results/live-runs/codex-20261103/edit",
       "source_format": "openwsp.edit",
       "tensors": [
         {
@@ -30389,7 +30389,7 @@
     },
     "vocabulary_rows": 248320
   },
-  "public_serialization_note": "The inspector's logit_lens.token_ids map is named vocabulary_row_ids here to distinguish five named vocabulary rows from raw generation token sequences. Numeric results are unchanged.",
+  "public_serialization_note": "The inspector's logit_lens.token_ids map is named vocabulary_row_ids here to distinguish five named vocabulary rows from raw generation token sequences. The edit source now names the byte-identical public bundle. Numeric results are unchanged.",
   "rounding_note": "SVD rank includes bf16 rounding residuals; rank-one energy and projection residual quantify approximation. Base hashes validate listed tensors, not the entire checkpoint.",
   "weight_semantics": "evaluated_bfloat16"
 }
